@@ -4538,3 +4538,31 @@ UNCHANGED:
 NEXT:
 - one same-case V2.2 controlled run;
 - if the two material transcript errors are gone, stop same-case tuning and move to one held-out de-identified case.
+
+
+## 2026-11-15 · ChatGPT · V2.2 same-case rerun PASS
+
+TYPE: INPUT-CONTRACT EXPERIMENT
+REVIEW: architecture-reboot/reviews/chatgpt/114-scribe-v2.2-controlled-run-review.md
+COMMIT: 6bf28cb29adf591da1d3fd25afefcb73b088fe8a
+
+RESULT:
+- prior content-word repair failure is gone (clear odd wording preserved);
+- prior cross-turn Q/A synthesis failure is gone at the raw-turn level;
+- packet grammar parses;
+- prechart absent states, event negatives, reasoning, and superseded plans survive;
+- no observed length-driven truncation.
+
+NON-BLOCKING:
+- some greetings/filler remain;
+- marker calibration not perfect;
+- raw diarization can still contain multiple real speakers in one raw turn;
+- prechart label field slightly redundant but parseable.
+
+DECISION:
+- stop same-case Scribe tuning;
+- no V2.3 cosmetic cleanup.
+
+NEXT:
+- one held-out de-identified case with different source morphology;
+- if no material failure, provisionally freeze Scribe packet contract and move to Ask testing.
