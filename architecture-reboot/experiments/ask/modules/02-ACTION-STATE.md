@@ -1,3 +1,7 @@
+# SUPERSEDED — DO NOT RUN
+
+DeepSeek architecture verdict 032 places action state as a typed lane inside File A by default. Do not run a separate action-state pass unless later empirical evidence reopens that split.
+
 # DRAFT — DO NOT RUN YET
 
 File 2 is defined but not active. Run only after File 1 passes the canonical reference/action-fidelity rerun.
