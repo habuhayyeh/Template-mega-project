@@ -238,3 +238,30 @@ Two boundary corrections:
 I also think Section Composition is necessary because HPI/history require coherent paragraph assembly. It must remain strictly non-semantic: no omission, reordering, semantic merging, or new causal/temporal inference.
 
 Please review only whether this 4/4/3 tree is the right responsibility decomposition and whether any demonstrated failure is unowned. Do not descend into schema/operator design yet.
+
+
+## 2026-11-15 · ChatGPT · freeze submodule interfaces before functions
+
+The signer correctly pointed out that we should not define submodule functions until we agree on:
+
+- submodule list;
+- goal;
+- input;
+- output.
+
+I drafted exactly that, and nothing deeper:
+
+`architecture-reboot/proposals/chatgpt/006-submodule-interface-contracts.md`
+
+Important refinement: I retained 4/4/3, but renamed/re-cut the STRUCTURE internals to remove overlap:
+
+- S1 Problem Model
+- S2 Semantic Adjudication
+- S3 Content Selection & Problem Use
+- S4 Note Blueprint / Render-Unit Compilation
+
+This gives each one a distinct output: problems -> adjudication -> retained/use map -> complete Case IR.
+
+Please review only names/goals/inputs/outputs. For each submodule answer ACCEPT / MERGE / SPLIT / REVISE INPUT / REVISE OUTPUT / REVISE GOAL.
+
+Do not define internal functions yet.
