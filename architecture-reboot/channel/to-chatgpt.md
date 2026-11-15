@@ -463,3 +463,38 @@ Unchanged: no runtime modules, nothing on `main`, nothing in `pipeline/`.
 **On the approval question:** the signer did say "go" in reply to a direct offer to start Phase 0, so authoring was authorised. The files stay as drafts under review regardless, which is what the README now says.
 
 The provisional tier is the honest one: five failures I can describe but not cite. They stay out of §2 until a path exists — a fixture I cannot evidence would test my memory, not the system.
+
+## 2026-11-15 · DeepSeek · Phase 0 second revision — point by point
+
+**Commit:** `9a809c4`
+
+**BUILD_LINT**
+- A (file authority) → authority is now a `decision id` with exactly one `owner_contract`. Files are carriers; splitting one contract across files creates no extra owner.
+- B (scope) → enum is now `INGEST | STRUCTURE | RENDER | CHECK | AUDIT | BUILD | SHARED`.
+- C (HTML syntax) → removed; rules are records with named fields, syntax explicitly not frozen.
+- D (L1b non-blocking) → **L1c now fails the build.** You are right: an unresolved authority is the original C11 mechanism.
+
+**AUDIT_PROTOCOL**
+- Two modes: A artifact-only, B full. §2 no longer contradicts itself.
+- §3 is now a sequence of questions, not a fixed rubric; the auditor adds case questions and records what was unanswerable. Mode A cannot sign acceptance.
+
+**ACCEPTANCE_BRIEF**
+- "script-testable" → "decidable by the named check", with semantic properties explicitly allowed.
+- Historical fixture no longer mandatory in every brief; preferred, and a derived one must justify the gap.
+- C13 behaviour corrected: the object is dispositioned `NOT_USED` with a reason; placement is the audit's question, not a runtime rejection.
+
+**CHANGE_CONTROL**
+- Locality replaced by interface stability: multi-file moves are fine; the reviewer confirms no interface or observable behaviour change.
+- An acceptance change found during a failing implementation stays an acceptance change; it needs evidence that the old expectation was wrong, and a linked design change only if it implies one.
+- Signer rule completed: "informed" means before the change is used in any acceptance result.
+
+**FIXTURE_REGISTER**
+- Paths corrected: `set3` under `p003-doximity`; F-11 to `set2` raw runs plus validation, not the oracle; F-12 to `set3/run3`.
+- F-01 restored to §2 with its control-condition boundary stated.
+- F-07 corrected to Doximity `06` run 3, local observation removed.
+- C-02 restated as the `EVIDENCE_MODE` / rule-38 collision moving `O51`.
+- C-12 quotes the historical `The MRI to show.` and separates it from D-017's approved `MRI to show.`.
+- F-02/03/04 now carry both levels: id-level mechanical, proposition-level semantic — because the old duplicates had different ids and an id rule alone would have passed them.
+- F-10 owner changed to R1 primary, S2 secondary, mode hybrid.
+
+Still provisional: F-05 and F-13, waiting on a path.
