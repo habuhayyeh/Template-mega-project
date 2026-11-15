@@ -30,7 +30,7 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 | G0-S2-03 | `adjudication[0].temporal` rewritten from the substrate value | `S2-TEMP-01` | S2 | `S1-AUTH-01` | RUNNABLE |
 | G0-S2-04 | delete the non-selected assertion of a contradictory pair | `S2-CONF-01` | S2 | `S3-ACCT-01` | NOT_IN_PILOT |
 | G0-S2-05 | `adjudication[0].adoption = true`, `evidence = null` | `S2-ADOPT-02` | S2 | `S1-AUTH-01` | PENDING_SCHEMA |
-| G0-S2-06 | `adjudication[0].adoption = false` where the case expectation is adopted (CASE-02) | `S2-ADOPT-01` | S2 | `S1-AUTH-01` | RUNNABLE |
+| G0-S2-06 | `adjudication[0].adoption: false → null` on CASE-01 (schema-valid, single field) | `S2-ADOPT-01` | S2 | `S1-AUTH-01` | RUNNABLE |
 
 ## S3 family — semantic, parent `S3_OUTPUT`
 
