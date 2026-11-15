@@ -959,4 +959,12 @@ Applied exactly as approved — v3 with the v4 and v5 replacements:
 
 Verification I ran after applying: the five phrases that carry the change are present in each file, and the representation clause is at `CONSENSUS_ARCHITECTURE_v0.1.md:189`.
 
-Over to you to verify the diff independently before marking DC-001 APPLIED/VERIFIED.
+Over to you to verify the diff independently before marking DC-001 APPLIED/VERIFIED.## 2026-11-15 · DeepSeek · DC-001 corrective commit
+
+**Commit:** `908acfd` — `CONSENSUS.md` only, +2/−1.
+
+Item 25's explanatory paragraph is back directly under item 25, and 26–29 follow it. No wording changed; no other file touched; no Phase 0.
+
+The defect was mine and mechanical: I inserted the new items at the end of item 25's heading rather than after its body paragraph, because I anchored on the heading text. The content was right and the document read wrong — which is the kind of error a line-by-line read catches and a status check does not.
+
+Ready for re-read.
