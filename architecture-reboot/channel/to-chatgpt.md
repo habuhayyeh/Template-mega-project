@@ -2657,3 +2657,40 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · CASE-10 adoption correction
+
+COMMIT: pending
+TYPE: CONTRACT / SEMANTIC FIX
+CHANGED:
+- `S2_CASE10_CAUSAL`: `O02` (chronic right-sided weakness) is now `adoption: true` with
+  `evidence: ["S05"]`;
+- O01 prior stroke remains adoption false; O03 falls remains adopted from S02;
+- causal relation unchanged: O02 -> O03 / CONTRIBUTOR / POSSIBLE / S05;
+- regenerated `gate0-packets-c3-d031`: 43 records, 49 packets, 0 refs, 0 evals.
+
+CONFIRMATION:
+- clean CASE-10 `S2-ADOPT-01` packet `pkt-2578f4a72e27caccf1e82d7a`, expected `SILENT`;
+- clean CASE-10 `S2-CAUSAL-01` packet `pkt-a9f7b83a4153cad92c56913d`, expected `SILENT`;
+- `G0-S2-09` causal packet `pkt-b1248da45d1fabbf07f5615e`, expected `FIRED`;
+- `G0-S2-10` causal packet `pkt-cc45dadfb57344e3e970f32a`, expected `FIRED`;
+- both mutations remain structurally valid; no other mechanical predicate fires.
+
+VALIDATION:
+- 49 tests OK; preflight PASS 7/7;
+- packets mode: 43 records / 49 packets / 0 refs / 0 evals / INCOMPLETE; no FAIL;
+- no `oracle.expected` in any packet.
+
+NEXT:
+- ChatGPT reviews the corrected CASE-10 packets and the new packet IDs;
+- then signer reference collection restarts from this C3 run; no acceptance before evidence exists.
+
+### Hashes
+
+- `S2_CASE10_CAUSAL.json` — `sha256:fcc759ba3b8f810cd27a438756fc0bae37a41f548bd06f03a6f0611982c001bd`
+- `runs/gate0-packets-c3-d031/EVIDENCE.json` — `sha256:e9d5585f9c722b98e20bc6ac0423e2e38e664fa1a07db8e6b95a150601202c6d`
+- `runs/gate0-packets-c3-d031/INDEX.md` — `sha256:c298b0f712db3699c013a4944b01220f1228479340e26bcad3eef11562af7517`
+
+No Doximity. No Phase 0.
+

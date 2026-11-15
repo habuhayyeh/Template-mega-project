@@ -68,7 +68,7 @@
       }
     }
   },
-  "packet_id": "pkt-5bd575a6deec4fc4ed907dc4",
+  "packet_id": "pkt-b3dbc6f399b3785dd77881c0",
   "policy_version": "REVIEW-POLICY-F-2",
   "predicate": {
     "assertion": "every approved representation is semantically supported by source objects and relations, not merely by reference existence",
@@ -131,8 +131,10 @@
           "temporal": "2024-02"
         },
         {
-          "adoption": false,
-          "evidence": null,
+          "adoption": true,
+          "evidence": [
+            "S05"
+          ],
           "object": "O02",
           "temporal": "chronic"
         },
@@ -147,9 +149,9 @@
       ],
       "causal_relations": [
         {
-          "from": "O02",
+          "from": "O01",
           "relation": "CONTRIBUTOR",
-          "strength": "LIKELY",
+          "strength": "POSSIBLE",
           "support": [
             "S05"
           ],

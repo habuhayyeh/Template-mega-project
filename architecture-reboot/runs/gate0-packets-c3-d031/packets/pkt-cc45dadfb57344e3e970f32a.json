@@ -68,12 +68,12 @@
       }
     }
   },
-  "packet_id": "pkt-3b91e267388a09495ae032fd",
+  "packet_id": "pkt-cc45dadfb57344e3e970f32a",
   "policy_version": "REVIEW-POLICY-F-2",
   "predicate": {
-    "assertion": "every approved representation is semantically supported by source objects and relations, not merely by reference existence",
-    "id": "S2-REP-01",
-    "instructions": "Judge whether each approved representation is semantically supported by its members and their relations, not merely whether ids and support refs exist. The S1 problem/claim context is supplied so you can identify the claim being supported. Record FIRED or SILENT.",
+    "assertion": "every causal relation is source/current-formulation supported, with correct relation noun, strength, direction and acting subject",
+    "id": "S2-CAUSAL-01",
+    "instructions": "Judge every S2 causal relation against the current source: whether it is supported at all, whether the relation noun, strength and direction are correct, and whether the acting subject is the residual deficit/mechanism rather than merely the historical disease label. Historical coexistence alone is not a causal relation. Record FIRED or SILENT.",
     "mode": "SIGNER_REFERENCE",
     "owner": "S2"
   },
@@ -131,8 +131,10 @@
           "temporal": "2024-02"
         },
         {
-          "adoption": false,
-          "evidence": null,
+          "adoption": true,
+          "evidence": [
+            "S05"
+          ],
           "object": "O02",
           "temporal": "chronic"
         },
@@ -149,7 +151,7 @@
         {
           "from": "O02",
           "relation": "CONTRIBUTOR",
-          "strength": "POSSIBLE",
+          "strength": "LIKELY",
           "support": [
             "S05"
           ],

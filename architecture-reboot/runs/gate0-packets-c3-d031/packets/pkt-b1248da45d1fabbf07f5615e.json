@@ -68,7 +68,7 @@
       }
     }
   },
-  "packet_id": "pkt-e4cd4e0b47f60ba77708cced",
+  "packet_id": "pkt-b1248da45d1fabbf07f5615e",
   "policy_version": "REVIEW-POLICY-F-2",
   "predicate": {
     "assertion": "every causal relation is source/current-formulation supported, with correct relation noun, strength, direction and acting subject",
@@ -131,8 +131,10 @@
           "temporal": "2024-02"
         },
         {
-          "adoption": false,
-          "evidence": null,
+          "adoption": true,
+          "evidence": [
+            "S05"
+          ],
           "object": "O02",
           "temporal": "chronic"
         },
@@ -147,9 +149,9 @@
       ],
       "causal_relations": [
         {
-          "from": "O02",
+          "from": "O01",
           "relation": "CONTRIBUTOR",
-          "strength": "LIKELY",
+          "strength": "POSSIBLE",
           "support": [
             "S05"
           ],

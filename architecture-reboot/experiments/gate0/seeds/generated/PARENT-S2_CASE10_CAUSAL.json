@@ -52,8 +52,10 @@
         "temporal": "2024-02"
       },
       {
-        "adoption": false,
-        "evidence": null,
+        "adoption": true,
+        "evidence": [
+          "S05"
+        ],
         "object": "O02",
         "temporal": "chronic"
       },

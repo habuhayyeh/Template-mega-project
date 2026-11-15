@@ -1,7 +1,7 @@
 # Gate 0 semantic packet index — GATE0-C3 / SCHEMA-4 / D-031 / REVIEW-POLICY-F-2
 
 **Mode:** packets only · **acceptance:** not run
-**Run:** `20261115T180058Z-8ff28f21`
+**Run:** `20261115T180907Z-21450963`
 **Policy:** `REVIEW-POLICY-F-2`
 **Semantic packets:** 49 · **records:** 43 · **references:** 0 · **evaluators:** 0
 
@@ -14,9 +14,9 @@ objects/spans, target artifact, dependency context and predicate rule only.
 | `PARENT-S2_PARENT.json` | clean | `S2_CASE01_CLEAN` | `S2-ADOPT-01` | `pkt-a2dcf40e81302478a9d2925e` | SILENT |
 | `PARENT-S2_PARENT.json` | clean | `S2_CASE01_CLEAN` | `S2-CAUSAL-01` | `pkt-1df7181920569739d9e4a6fb` | SILENT |
 | `PARENT-S2_PARENT.json` | clean | `S2_CASE01_CLEAN` | `S2-REP-01` | `pkt-d474bb130eacbf48f5ba45f4` | SILENT |
-| `PARENT-S2_CASE10_CAUSAL.json` | clean | `S2_CASE10_CAUSAL` | `S2-ADOPT-01` | `pkt-5c48c2d656c6e5345a81fe25` | SILENT |
-| `PARENT-S2_CASE10_CAUSAL.json` | clean | `S2_CASE10_CAUSAL` | `S2-CAUSAL-01` | `pkt-1f83591fd021086d242b4c7a` | SILENT |
-| `PARENT-S2_CASE10_CAUSAL.json` | clean | `S2_CASE10_CAUSAL` | `S2-REP-01` | `pkt-3b91e267388a09495ae032fd` | SILENT |
+| `PARENT-S2_CASE10_CAUSAL.json` | clean | `S2_CASE10_CAUSAL` | `S2-ADOPT-01` | `pkt-2578f4a72e27caccf1e82d7a` | SILENT |
+| `PARENT-S2_CASE10_CAUSAL.json` | clean | `S2_CASE10_CAUSAL` | `S2-CAUSAL-01` | `pkt-a9f7b83a4153cad92c56913d` | SILENT |
+| `PARENT-S2_CASE10_CAUSAL.json` | clean | `S2_CASE10_CAUSAL` | `S2-REP-01` | `pkt-cb6cd7a8943d07cee9fdd979` | SILENT |
 | `PARENT-S3_PARENT_NOT_RENDERED.json` | clean | `S3_CASE01_NOT_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-c2d599edac147564d9336589` | SILENT |
 | `PARENT-S3_PARENT.json` | clean | `S3_CASE01_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-6dae7cba2d6a1243a2d10f7d` | SILENT |
 | `G0-S1-01.json` | seed | `S1_CASE01_CLEAN` | `S1-CAND-01` | `pkt-d38a0b056db32b7e7384a5ce` | SILENT |
@@ -42,12 +42,12 @@ objects/spans, target artifact, dependency context and predicate rule only.
 | `G0-S2-08.json` | seed | `S2_CASE01_CLEAN` | `S2-ADOPT-01` | `pkt-610460f4d65e8d3a51df7c43` | SILENT |
 | `G0-S2-08.json` | seed | `S2_CASE01_CLEAN` | `S2-CAUSAL-01` | `pkt-1abf288d40eb11102b1a3183` | SILENT |
 | `G0-S2-08.json` | seed | `S2_CASE01_CLEAN` | `S2-REP-01` | `pkt-6d86dcbd164dc132f44834e7` | SILENT |
-| `G0-S2-09.json` | seed | `S2_CASE10_CAUSAL` | `S2-ADOPT-01` | `pkt-bc30513bb9906fea16e9c499` | SILENT |
-| `G0-S2-09.json` | seed | `S2_CASE10_CAUSAL` | `S2-CAUSAL-01` | `pkt-dcd064348ef5c8f9803bf1f9` | FIRED |
-| `G0-S2-09.json` | seed | `S2_CASE10_CAUSAL` | `S2-REP-01` | `pkt-ace04632028f73476923a9c0` | SILENT |
-| `G0-S2-10.json` | seed | `S2_CASE10_CAUSAL` | `S2-ADOPT-01` | `pkt-7ecf4b38adfdb7097bddad74` | SILENT |
-| `G0-S2-10.json` | seed | `S2_CASE10_CAUSAL` | `S2-CAUSAL-01` | `pkt-e4cd4e0b47f60ba77708cced` | FIRED |
-| `G0-S2-10.json` | seed | `S2_CASE10_CAUSAL` | `S2-REP-01` | `pkt-5bd575a6deec4fc4ed907dc4` | SILENT |
+| `G0-S2-09.json` | seed | `S2_CASE10_CAUSAL` | `S2-ADOPT-01` | `pkt-937aaee9c55e1d3a6635c95d` | SILENT |
+| `G0-S2-09.json` | seed | `S2_CASE10_CAUSAL` | `S2-CAUSAL-01` | `pkt-b1248da45d1fabbf07f5615e` | FIRED |
+| `G0-S2-09.json` | seed | `S2_CASE10_CAUSAL` | `S2-REP-01` | `pkt-b3dbc6f399b3785dd77881c0` | SILENT |
+| `G0-S2-10.json` | seed | `S2_CASE10_CAUSAL` | `S2-ADOPT-01` | `pkt-c86be4c0a4d6ff5905f808ea` | SILENT |
+| `G0-S2-10.json` | seed | `S2_CASE10_CAUSAL` | `S2-CAUSAL-01` | `pkt-cc45dadfb57344e3e970f32a` | FIRED |
+| `G0-S2-10.json` | seed | `S2_CASE10_CAUSAL` | `S2-REP-01` | `pkt-c6ef29c7e658818919ae9328` | SILENT |
 | `G0-S3-01.json` | seed | `S3_CASE01_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-2ca7cb635a55fb2b903be138` | SILENT |
 | `G0-S3-02.json` | seed | `S3_CASE01_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-f78762b079d5c552a3ea898a` | SILENT |
 | `G0-S3-04.json` | seed | `S3_CASE01_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-28c1ec2556889b1c6d7fca47` | SILENT |

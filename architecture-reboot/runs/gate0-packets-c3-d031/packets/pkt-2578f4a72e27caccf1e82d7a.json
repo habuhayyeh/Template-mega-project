@@ -68,7 +68,7 @@
       }
     }
   },
-  "packet_id": "pkt-bc30513bb9906fea16e9c499",
+  "packet_id": "pkt-2578f4a72e27caccf1e82d7a",
   "policy_version": "REVIEW-POLICY-F-2",
   "predicate": {
     "assertion": "each S2 adoption verdict is supported by the supplied source/context for the current encounter",
@@ -131,8 +131,10 @@
           "temporal": "2024-02"
         },
         {
-          "adoption": false,
-          "evidence": null,
+          "adoption": true,
+          "evidence": [
+            "S05"
+          ],
           "object": "O02",
           "temporal": "chronic"
         },
@@ -147,7 +149,7 @@
       ],
       "causal_relations": [
         {
-          "from": "O01",
+          "from": "O02",
           "relation": "CONTRIBUTOR",
           "strength": "POSSIBLE",
           "support": [

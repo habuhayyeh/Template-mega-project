@@ -21,7 +21,7 @@
       "O03": {
         "text": "three falls since June",
         "provenance": "A/2026-11-14",
-        "temporal": "June\u2013November"
+        "temporal": "June–November"
       },
       "O04": {
         "text": "no new weakness or speech trouble",
@@ -54,15 +54,19 @@
       },
       {
         "object": "O02",
-        "adoption": false,
-        "evidence": null,
+        "adoption": true,
+        "evidence": [
+          "S05"
+        ],
         "temporal": "chronic"
       },
       {
         "object": "O03",
         "adoption": true,
-        "evidence": ["S02"],
-        "temporal": "June\u2013November"
+        "evidence": [
+          "S02"
+        ],
+        "temporal": "June–November"
       }
     ],
     "relations": [
@@ -78,7 +82,9 @@
         "to": "O03",
         "relation": "CONTRIBUTOR",
         "strength": "POSSIBLE",
-        "support": ["S05"]
+        "support": [
+          "S05"
+        ]
       }
     ],
     "claim_relations": [],
@@ -87,8 +93,13 @@
       {
         "id": "R1",
         "problem": "C1",
-        "members": ["O03", "O04"],
-        "support_refs": ["S02"],
+        "members": [
+          "O03",
+          "O04"
+        ],
+        "support_refs": [
+          "S02"
+        ],
         "selection_safe": true
       }
     ]

@@ -318,6 +318,9 @@ Required clean truth:
 - O03 falls: adoption true, evidence [S02];
 - causal relation unchanged: O02 -> O03 / CONTRIBUTOR / POSSIBLE / S05.
 
-**NEXT:** DeepSeek makes only this correction, regenerates C3, reruns tests/preflight/packets mode, and
-returns the exact diff + packet workload. No signer references yet.
+**Implemented:** O02 is now adopted with evidence [S05]; CASE-01 is unchanged. C3 was regenerated:
+6 clean parents, 37 seeds, 43 records, 49 packets, 0 references. 49 tests OK; preflight PASS 7/7.
+
+**NEXT:** ChatGPT reviews the corrected CASE-10 S2-ADOPT/S2-CAUSAL packets and the new packet IDs.
+No signer references yet. No Doximity. No Phase 0.
 

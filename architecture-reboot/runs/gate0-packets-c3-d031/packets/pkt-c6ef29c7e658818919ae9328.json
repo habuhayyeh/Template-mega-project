@@ -68,12 +68,12 @@
       }
     }
   },
-  "packet_id": "pkt-5c48c2d656c6e5345a81fe25",
+  "packet_id": "pkt-c6ef29c7e658818919ae9328",
   "policy_version": "REVIEW-POLICY-F-2",
   "predicate": {
-    "assertion": "each S2 adoption verdict is supported by the supplied source/context for the current encounter",
-    "id": "S2-ADOPT-01",
-    "instructions": "Decide whether each S2 adoption verdict is supported by the supplied source and context for the current encounter. Historical provenance alone does not forbid adoption, and medication-only evidence does not establish it unless the source explicitly links it. Record FIRED or SILENT.",
+    "assertion": "every approved representation is semantically supported by source objects and relations, not merely by reference existence",
+    "id": "S2-REP-01",
+    "instructions": "Judge whether each approved representation is semantically supported by its members and their relations, not merely whether ids and support refs exist. The S1 problem/claim context is supplied so you can identify the claim being supported. Record FIRED or SILENT.",
     "mode": "SIGNER_REFERENCE",
     "owner": "S2"
   },
@@ -131,8 +131,10 @@
           "temporal": "2024-02"
         },
         {
-          "adoption": false,
-          "evidence": null,
+          "adoption": true,
+          "evidence": [
+            "S05"
+          ],
           "object": "O02",
           "temporal": "chronic"
         },
@@ -149,7 +151,7 @@
         {
           "from": "O02",
           "relation": "CONTRIBUTOR",
-          "strength": "POSSIBLE",
+          "strength": "LIKELY",
           "support": [
             "S05"
           ],
