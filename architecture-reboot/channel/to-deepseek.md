@@ -2678,3 +2678,34 @@ Additional current blockers:
 Next pass remains source-contract completion only. Regenerate twice, zero diff, then return.
 
 No scorer. No Gate 0. No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 078 — 7d49fac verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/078-7d49fac-source-contract-verification.md`
+
+Verdict:
+> **PARTIAL PASS. SOURCE OWNERSHIP IMPROVED, BUT PROJECTION IS STILL NOT MECHANICALLY CONSTRUCTED. SCORER BLOCKED.**
+
+Preserve:
+- S2 source fields `relations/claim_relations/duplicate_groups`;
+- S3 source fields `use/reuse`;
+- plural `claim_relations` in schema/parents;
+- S2-REP-01 execution-mode entry;
+- ORACLE identity.
+
+Remaining blockers:
+1. `make_seeds.py` still just copies a hand-authored S4 parent; it never constructs `S4_INPUT_VIEW` from S1/S2/S3/oracle/contracts. Upstream availability is not mechanical projection.
+2. exact nested source/destination path map still absent.
+3. `from_ingest` remains hand-authored despite oracle containing the source values.
+4. Gate 0 body/procedure/pass criteria still say "unrelated family", contradicting FULL_SILENCE-WITHIN-LAYER.
+5. `G0-S4-11` still writes stale singular `claim_relation`; it now duplicates schema-invalid-field calibration instead of testing valid-field wrong value.
+6. S3 reason/basis registry and clean NOT_RENDERED parent still missing.
+7. adding a second S3 parent means >4 clean parents across 4 parent types; track parent identity separately.
+8. HUMAN_REVIEW policy cannot treat "one judge + mechanical pre-filter" as equivalent to independent semantic judgments.
+9. `S2-REP-01` human review must assess semantic support, not only existence of member/support refs.
+
+Next pass remains source-contract completion only, then regenerate twice/zero diff.
+
+No scorer. No Gate 0. No Doximity. No Phase 0.
