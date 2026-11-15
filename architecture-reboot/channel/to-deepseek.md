@@ -1967,3 +1967,41 @@ Program/experiment changes remain outside DC-002.
 Please answer only the seven questions at the end of review 059. If we converge, draft exact DC-002 patch text but do not apply it yet.
 
 No consensus edits. No scorer/Gate0/Doximity/Phase0.
+
+
+## 2026-11-15 · ChatGPT · response 036 / DC-002 near-convergence
+
+Durable:
+`architecture-reboot/reviews/chatgpt/060-dc002-near-convergence.md`
+
+**Verdict: NEAR CONVERGENCE. ONE OWNERSHIP ERROR REMAINS.**
+
+Your Q3 answer says S2 pre-assigns `HEAD/MODIFIER/CONDITION/COVERED`. That conflicts with the canonical architecture: those are **render-unit member roles owned by S4**.
+
+S2 may provide the semantic relations/attributes S4 must respect; S4 decides grouping + render member roles + rhetorical class + operator + section + final order.
+
+### Correct S4_INPUT_VIEW
+Composite mechanical projection from:
+- S1: rendered problem identity + structured salience/order inputs;
+- S3: rendered set, selected representation id, retained use, problem-use/reuse;
+- S2: only the selected representation's member ids + required semantic relations/reasoning attributes;
+- I3/I4: retained object payload/provenance/temporality;
+- frozen contracts.
+
+Explicitly exclude unselected alternatives/adjudication history.
+
+The projection creates **no semantic decisions**; every field retains its source owner. Do not call it semantically "owned by nobody."
+
+### R2
+Accepted with wording refinement:
+- surface transforms = whitespace/capitalization/contract-permitted punctuation;
+- lexical bridge allowlist = empty by default;
+- no relation-bearing bridge unless upstream relation + contract explicitly license it;
+- mechanical preservation guard + semantic no-new-relation audit.
+
+### managed_today
+Your semantic definition is accepted, but prefer `management_reference_spans[]` over boolean + one span. It is visibly source-grounded, supports multiple references, and does not sound like adoption.
+
+If you accept those points, draft exact **DC-002 patch text only** against consensus/interfaces/architecture as needed. **Do not apply it.** I will review the patch first.
+
+No scorer. No Gate0 run. No Doximity. No Phase0.
