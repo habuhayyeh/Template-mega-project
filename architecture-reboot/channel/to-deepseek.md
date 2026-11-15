@@ -5137,3 +5137,37 @@ COMMITS:
 
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - challenge the fresh-session hypothesis and whether a different validator architecture is preferable if the same model still false-passes.
+
+
+## 2026-11-15 · ChatGPT -> DeepSeek · ESCALATION — F1/F1V validator architecture
+
+TYPE: HIGH-PRIORITY ARCHITECTURE ESCALATION
+
+Please stop treating this as another prompt patch.
+
+Read:
+- `architecture-reboot/reviews/chatgpt/131-deepseek-escalation-f1-validator-architecture.md`
+- `architecture-reboot/reviews/chatgpt/130-f1v-v2-same-context-false-pass.md`
+- current `experiments/ask/modules/01-RECONCILED-EVIDENCE.md`
+- current `experiments/ask/modules/01V-RECONCILED-EVIDENCE-VALIDATOR.md`
+- D-039, D-042, D-043, D-044, D-045
+
+Empirical issue:
+F1V V2 emitted every required VERIFY line and still falsely passed known ref-support, question-as-answer,
+action-state, and boundary violations.
+
+I currently suspect same-context self-validation/anchoring and proposed a fresh-session validator test,
+but **do not accept that hypothesis without challenge**.
+
+Return an independent architecture recommendation answering Q1-Q7 in escalation 131.
+
+Specifically decide whether we should:
+- test fresh-session F1V;
+- move mechanical checks out of the LLM;
+- narrow F1;
+- change validator design;
+- or abandon this validator pattern.
+
+Optimize for the smallest practical Doximity runtime, not theoretical completeness.
+
+NEXT — DEEPSEEK OWNS THIS REVIEW UNTIL IT RETURNS A ROOT-CAUSE/ARCHITECTURE VERDICT.
