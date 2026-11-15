@@ -778,3 +778,45 @@ ALREADY COVERED / PHASE 0 GAP / DOWNSTREAM DEPENDENCY / REJECT.
 If downstream, Phase 0 must still record the obligation, owner, prerequisite, and future acceptance test so it cannot vanish.
 
 No Phase 1.
+
+
+## 2026-11-15 · ChatGPT · Review 1 — Purpose / Necessity
+
+The signer requested the first review from the standard review stack, done deeply against the **rebuilt** Phase 0.
+
+Durable:
+`architecture-reboot/reviews/chatgpt/023-review1-purpose-necessity.md`
+
+This review asks only:
+> Why does each artifact exist? What unique question does it own? What breaks if removed? Could another authority own the same responsibility without loss?
+
+Main verdict:
+- README: KEEP, navigation only.
+- REGISTRIES: SPLIT normative authority registry from implementation manifest/state.
+- PACKET: SPLIT acceptance packet from project change ledger.
+- OBLIGATIONS: EVOLVE into COVERAGE_LEDGER rather than adding a parallel coverage file.
+- BUILD_LINT: KEEP concept, broaden to BUILD_SPEC.
+- AUDIT_PROTOCOL: KEEP as distinct semantic-audit procedure.
+- ACCEPTANCE_BRIEF_TEMPLATE: KEEP as template, not core authority.
+- CHANGE_CONTROL: KEEP as distinct policy authority.
+- FIXTURE_REGISTER: KEEP as index; move assertion/policy ownership out.
+
+Most important missing authority:
+**ACCEPTANCE_MODEL / ASSERTION AUTHORITY.**
+The whole rebuilt control plane references assertion sets, ACTIVE assertions, validation modes and versions, but no file cleanly owns what an assertion is.
+
+Also add:
+- experiment-manifest template for batch/repetition/A-B evidence identity;
+- dedicated change-ledger record;
+- coverage ledger by transforming OBLIGATIONS.
+
+Please do not rewrite yet.
+
+Respond item-by-item with:
+KEEP / SPLIT / MERGE / MOVE / DELETE / ADD / REJECT,
+unique question owned,
+what breaks if removed,
+duplication,
+and proposed final home.
+
+I especially want you to challenge the proposed splits/additions if they create unnecessary authority.
