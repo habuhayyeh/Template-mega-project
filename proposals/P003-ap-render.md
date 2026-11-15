@@ -1,6 +1,6 @@
-# P003 v2 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v3 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** v2, revised after `reviews/P003-original-branch.md`. Awaiting review. Not implemented.
+**Status:** v3, revised after `reviews/P003-v2-original-branch.md`. Awaiting review. Not implemented.
 **Supersedes:** P003 v1 in this file's history.
 **Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
 **Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
@@ -28,9 +28,11 @@ Each retained `COURSE` entry is classified by what it does for the problem, not 
 | **INDEPENDENT COURSE FACT** | Bears materially on the problem, but attaching it to one factual bullet would require an inference the Handoff does not make. | Its own factual bullet, in the facts block. |
 | **IRRELEVANT** | Names nothing that bears on the claim. | Omitted. |
 
+**Relevance gate first.** Before classification, ask whether the entry bears on this problem at all: does it change the claim, add to its evidence, change its course, or change its management? If it does none of these, it is IRRELEVANT and is not rendered. Only entries that pass the gate are classified as STATUS, MODIFIER, or INDEPENDENT.
+
 **Do not use "has no subject" as the test for STATUS.** A status may be subject-bearing; what distinguishes it is that it answers *what is her condition now*, not *how long did the event last*.
 
-**Rule of doubt.** Between MODIFIER and INDEPENDENT, choose INDEPENDENT. Between INDEPENDENT and IRRELEVANT, choose INDEPENDENT whenever the entry names a clinical event, amount, or interval. IRRELEVANT is reserved for entries that name neither. A visible extra bullet is correctable; a silently dropped fact is not.
+**Rule of doubt, after the gate.** Between MODIFIER and INDEPENDENT, choose INDEPENDENT. An entry that passes the gate but cannot be folded renders as its own factual bullet. A visible extra bullet is correctable; a silently dropped relevant fact is not.
 
 **Folding is permitted only when the relationship is clear from the Handoff** — the modifier's own words name the same event or finding as the bullet. No anchor is inferred from adjacency, from a shared source letter, or from clinical plausibility.
 
@@ -43,7 +45,7 @@ Each retained `COURSE` entry is classified by what it does for the problem, not 
 | O7 + O8 | MODIFIER | `Known left MCA infarct, two years ago.` |
 | O14 + O15 | MODIFIER (trend) | `Sodium 128 on admission, now 131 after fluid restriction.` |
 | O36 | INDEPENDENT | `Daughter reports memory has been getting worse for a year.` |
-| O2 `admitted 11/12` | INDEPENDENT or IRRELEVANT | Renders only if it bears on the seizure problem; the admission date alone does not. |
+| O2 `admitted 11/12` | IRRELEVANT — fails the gate | It changes neither the seizure claim, its course, nor its management. |
 
 Where a fold is rejected, the course entry renders on its own rather than disappearing. That is the whole difference from v1.
 
@@ -97,16 +99,17 @@ Worked case: claim `post-stroke seizure from the old left MCA scar rather than a
 1. Capitalisation and terminal punctuation.
 2. Folding a verified MODIFIER into its fact, removing only the repeated subject.
 3. Suppressing a whole duplicate entry — never deleting words from inside a clinically meaningful phrase.
-4. Stripping structural speaker prefixes (`clinician:`, `daughter:`, `patient:`) while retaining material attribution already present (`per family`, `daughter reports`).
+4. Rendering a structural speaker prefix as bounded attribution: `daughter: X` → `Daughter reports X`; `patient: X` → `Patient reports X`. A `clinician:` prefix is dropped, because the note is the clinician’s voice. A third party’s statement is never rendered as unattributed fact.
 5. Rendering a provenance marker as a parenthetical using its name and date only: `(prior neurology, 2025-06)`.
 6. Date display normalisation: `2025-06` → `June 2025`.
 7. Combining compatible fragments already present — a held drug with its resume condition, one action stated twice — without adding a clinical word.
+8. Unit and number display, and only this: a written number → numeral; `minutes`/`hours` → `mins`/`hrs`; `about`/`approximately` → `~`. No other synonym or abbreviation substitution.
 
 ### Prohibited
 
 No new noun, verb, number, quantity, negation, modality, causal connective, or inference. No etiology that is not an `ETIOLOGY` entry. No status that is not a `COURSE` entry. No plan item that is not a `MANAGEMENT` entry or a `STANDING_ITEMS` trigger. **No pronoun substitution**: the Handoff carries no demographic entry, so a pronoun it does not contain would be an addition.
 
-**Test:** every word of the output is either in the Handoff or produced by transformations 1–7. Anything else is a defect.
+**Test:** every word of the output is in the Handoff, produced by transformations 1–8, or an entry from `STANDING_ITEMS.md` whose trigger the claim satisfies. Anything else is a defect.
 
 ---
 
@@ -119,7 +122,7 @@ No new noun, verb, number, quantity, negation, modality, causal connective, or i
 3. Each run scored by a reader holding the Handoff, with a line-level trace table:
 
    ```text
-   output line | source O# (one or a set) | transformation(s) | omitted retained O# + reason
+   output line | source (O# set, or STANDING_ITEM + trigger) | transformation(s) | omitted retained O# + reason
    ```
 
    Every bullet maps to at least one `O#`. A bullet that maps to nothing fails I8.
@@ -135,13 +138,13 @@ No new noun, verb, number, quantity, negation, modality, causal connective, or i
 | I5 | set of plan decisions |
 | I6 | state and conditionality of each plan decision |
 | I7 | historical attributions present |
-| I8 | zero words outside the Handoff and transformations 1–7 |
+| I8 | zero words outside the Handoff, transformations 1–8, and a `STANDING_ITEMS` entry whose trigger the claim satisfies |
 | I9 | the same `O#` pairing — entries merged in one run are merged in all |
 | I10 | the same placement class for every `O#`: line, factual bullet, reasoning bullet, or plan |
 
 ### Pass
 
-All ten invariants identical across three runs. Wording may vary only within transformations 1–7; if it does, the set is recorded as textually unstable and semantically stable, and that variance is reported, not hidden.
+All ten invariants identical across three runs. Wording may vary only within transformations 1–8; if it does, the set is recorded as textually unstable and semantically stable, and that variance is reported, not hidden.
 
 A single run is never the acceptance artifact. The artifact is the three-run set plus the invariant table.
 
