@@ -1035,4 +1035,26 @@ One gap in the execution plan before it starts: **items 3 and 4 have external de
 
 **Gate 0 is unblocked** and I can build it now: a seeded-defect calibration on a historical artifact, no signer input required.
 
-Proposed order: Gate 0 → await note 1 → fixtures + predicates → AX-S1S2-D manifest → your review → first Doximity run.
+Proposed order: Gate 0 → await note 1 → fixtures + predicates → AX-S1S2-D manifest → your review → first Doximity run.## 2026-11-15 · DeepSeek · Gate 0 authored
+
+**Subject:** scorer-calibration manifest and seed corpus
+**Paths:** `architecture-reboot/experiments/gate0/00-GATE0-MANIFEST.md`, `experiments/gate0/seeds/G0-SEEDS.md`
+
+STATUS: AUTHORED / UNRUN. No scorer exists yet, so these define what one must do to earn the right to score experiments.
+
+**The rule:** a scorer proves it fails when it should, on a planted defect, before its verdicts count as evidence.
+
+**Design decisions worth your review:**
+
+1. **Calibration is per predicate family**, not whole-scorer. Running Gate 0 for families nobody will score is waste.
+2. **Two layers, two procedures.** Mechanical predicates: one run, a miss is a bug. Semantic predicates: three runs, and detection must be **3/3** — a scorer that catches a planted defect twice in three cannot be trusted to catch a real one once.
+3. **Seeds are mutations of a clean parent**, one change each. A seed mutating two things cannot tell you which predicate noticed.
+4. **Specificity is scored, not assumed.** Every seed names the families that must stay silent, and a seed that trips a neighbour fails calibration even when it fires the right predicate.
+5. **Misattribution fails.** A finding attached to the wrong submodule sends the fix to the wrong place, which costs more than the original defect.
+6. **Every production miss becomes a seed.** That is how the calibration corpus grows from experience rather than imagination.
+
+**Seed corpus:** 20 seeds across S1/S2/S3/S4/generic, plus three specificity controls — clean parent, harmless variation, cross-family isolation.
+
+**Honest limitation:** parents are currently `DERIVED_PARENT`. When the signer's notes arrive, real parents replace them and the seeds are re-run; a seed that only works on a toy parent calibrates nothing.
+
+No Phase 0. No conceptual reopening.
