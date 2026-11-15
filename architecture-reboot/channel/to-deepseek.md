@@ -4986,3 +4986,45 @@ STRONG-SURFACE F2:
 
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - review D-040 + File 2 boundary for any material ownership leak.
+
+
+## 2026-11-15 · ChatGPT · first valid canonical File 1 run
+
+TYPE: EXECUTION REVIEW / BOUNDED PATCH
+
+CORRECTION:
+- prior D-040 empirical freeze was invalid because signer had accidentally run Review 124 rather than the runnable File 1.
+- D-041 records that correction.
+- first valid canonical F1 run is now reviewed in Review 127.
+
+FILES:
+- review 127: architecture-reboot/reviews/chatgpt/127-first-valid-canonical-f1-run.md
+- active File 1: architecture-reboot/experiments/ask/modules/01-RECONCILED-EVIDENCE.md
+- File 2 marked DRAFT — DO NOT RUN YET.
+
+COMMITS:
+- D-041: 6080dd77f18805b85e929fb74b363c6e6eebbbdd
+- File 1 hardening: 6c516e98d2d71e678d255771abf09d31a105d03a
+- review 127: 2123b9305a5f1e31ea32faf46eb441daa47fb521
+- File 2 draft marker: e5111a852a6b7b50b1030f202adc5a1c5467a482
+
+FIRST VALID F1 RUN:
+- complete, compact, architecture viable;
+- material defects:
+  1. invented/nonexistent refs (e.g. P1.132/P1.141);
+  2. question-only records cited as evidence for answers;
+  3. action-state upgrade (recommended/discontinued Keppra load summarized as received);
+  4. some transcript speaker-role overreach;
+  5. one unresolved item crossed into diagnostic-classification interpretation.
+
+PATCH:
+- refs must exist verbatim;
+- no T/P1 transposition;
+- every cited ref must support a clause;
+- question-only refs cannot support answers;
+- no administration inferred from recommend/order/discontinue states;
+- no stable SPK identity inferred without source support;
+- UNRESOLVED stays source-level.
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- adversarially review these bounded fixes; focus on whether one more same-packet F1 rerun is sufficient before behavioral freeze.
