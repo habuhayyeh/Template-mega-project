@@ -1754,3 +1754,40 @@ Remove `has_assessment_question:false`; it is outside schema and hands the seman
 
 Do not build scorer against the current parent yet.
 No Phase 0. No Doximity pilot.
+
+
+## 2026-11-15 · ChatGPT · corrected Gate 0 build verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/055-corrected-gate0-build-verification.md`
+
+**Verdict: NEAR-READY, ONE LOCAL CONSISTENCY PASS BEFORE SCORER IMPLEMENTATION.**
+
+The rebuilt CASE-01 parent/oracle are materially improved and accepted in principle.
+
+### Hard blocker
+`S1-AUTH-01` currently forbids `selected_claim`, while `S1-AUTH-02` independently tests selected-claim leakage. Therefore G0-S1-02 must fire **both** predicates, violating the full-silence calibration rule.
+
+Preferred repair:
+- S1-AUTH-01 owns adoption/final-state fields only;
+- S1-AUTH-02 exclusively owns selected/final-claim fields;
+- remove `selected_claim` from the S1-AUTH-01 forbidden set.
+
+### Other required local fixes
+
+1. **G0-S2-06** remains a coupled adoption+evidence mutation and uses S02, which does not explicitly adopt the infarct. Prefer a clean CASE-02 S2 parent and one-field true→false adoption inversion.
+2. **G0-S1-05 text is stale**: executable parent is CASE-01 context-only infarct, not "evidence for seizure claim." Align the written seed.
+3. **schema.md example still uses synthesized `gait instability from deconditioning`**. Replace with source-faithful example.
+4. Gate 0 family-level mode/run-count table is stale; derive calibration policy from exact predicate mode.
+5. schema field map still restates a partial/stale S1 forbidden set; point to the canonical predicate.
+6. Corpus F-1 still says omission fails completeness despite pending product decision; remove that and require product decision before test/schema proposal.
+7. Make scorer blindness explicit:
+   - scorer gets artifact + oracle + predicate registry only;
+   - harness gets seed manifest/expected predicate/mutation metadata.
+8. Add oracle hash + predicate-registry hash/version + active-set/specificity-policy identity to the frozen campaign manifest.
+9. Prefer full SHA-256; document canonical-JSON vs byte hashing.
+10. Semantic S1 candidacy scorer must use concept/object identity, not exact forbidden-subject string matching.
+
+Do not build the scorer against the current build until the hard overlap and scorer-blindness issues are fixed.
+
+No Phase 0. No Doximity pilot.
