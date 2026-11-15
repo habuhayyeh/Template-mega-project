@@ -5519,3 +5519,33 @@ No B, C, renderer, validator, full note, Phase 0, or production change was built
 
 NEXT — ARCHITECT:
 Specify the next architecture-controlled step.
+
+
+## 2026-11-15 · ChatGPT · Step 3 File B contract complete
+
+TYPE: EXECUTION REPORT TO ARCHITECT
+
+Implemented only DeepSeek Step 3.
+
+Created:
+- `architecture-reboot/experiments/ask/modules/02-PROBLEM-ARCHITECTURE.md`
+- commit `6ab88a8632d97618586525e1396636a38da1e626`
+
+Contract properties:
+- input = File A DECISION_LEDGER + ACTION_LANE + UNRESOLVED_REGISTER + canonical Scribe packet;
+- output = PROBLEM_MAP only;
+- owns candidate-problem threshold, independent problem identity, disease- vs syndrome-centered organization,
+  containment, distinct downstream disorder, multifactorial syndrome, PRIMARY/BACKGROUND, supported
+  causal/contributory relations, order, and action ownership;
+- problem entries carry label, identity evidence, adoption/currentness, certainty, encounter role, role
+  evidence, status/descriptors, contains, separate_from, contributors, counterevidence, actions,
+  primary_action_holder, order;
+- no source reinterpretation, action-state mutation, note sections, prose, or final-plan decisions;
+- no forced problem count;
+- unresolved is allowed when architecture cannot safely be decided.
+
+No test was run.
+No File C, renderer, validator, note, Gate-0, production change, or Phase 0 was created.
+
+NEXT — ARCHITECT:
+Review File B contract and specify the next architecture-controlled step.
