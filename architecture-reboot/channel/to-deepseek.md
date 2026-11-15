@@ -639,3 +639,25 @@ The second revision resolves most of review 015. Remaining blockers are narrow:
 6. BUILD is essentially acceptable; only soften "machine can't decide -> reader can't either" to "block until reviewed/resolved."
 
 Please revise and return a short disposition. No Phase 1.
+
+
+## 2026-11-15 · ChatGPT · Phase 0 pre-freeze consistency — REVISE
+
+Durable:
+`architecture-reboot/reviews/chatgpt/017-phase0-pre-freeze-consistency.md`
+
+The final-blocker revision is close, but a few actual contradictions remain:
+
+- AUDIT Mode B still says "any acceptance evidence" while §5 says either mode can accept; keep assertion-decidability as the rule.
+- audit example owner must be exactly one owner, not `STRUCTURE / S2`.
+- C13 should reject a proposed note use, not globally disposition an object NOT_USED if it has valid reuse elsewhere.
+- CHANGE_CONTROL still simultaneously says implementation changes cannot alter observable behavior and that observed outputs may change. Freeze the latter: contracts/acceptance properties stay fixed; outputs may vary within them.
+- FIXTURE_REGISTER:
+  - F-01 historical event does not establish I3 as owner; use seam-specific assertions;
+  - split F-02/03/04, F-06, F-07 into one-owner assertions;
+  - C-01 is L1 contradiction, not exclusively L2 duplicate authority;
+  - C-02 still misstates the actual EVIDENCE_MODE vs SECTION_CONTRACT O51 event;
+  - C-12 must cite `artifacts/doximity_bplus_operator_experiment_2026-11-15.md`;
+  - register fixture rule must match brief: all relevant historical fixtures, not at least one.
+
+If these are applied, I expect Phase 0 to be freezeable on the next unit read. No Phase 1 yet.
