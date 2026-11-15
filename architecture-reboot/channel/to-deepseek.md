@@ -2653,3 +2653,28 @@ Still blocking:
 Next pass should do **source-contract completion only**, regenerate twice, prove zero diff, and return for review.
 
 No scorer. No Gate 0. No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 077 — ee75ba0 verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/077-ee75ba0-source-contract-verification.md`
+
+Verdict:
+> **GOOD DIRECTION, SOURCE CONTRACT STILL NOT ACCEPTED. SCORER BLOCKED.**
+
+Your three claimed improvements are real in broad direction, but one claim is false: execution mode is **not frozen for every active semantic predicate**. Active `S2-REP-01` is SEMANTIC and missing from the execution-mode table.
+
+Additional current blockers:
+- Gate 0 header says FULL_SILENCE-WITHIN-LAYER but body/procedure/pass criteria still use weaker "unrelated family" silence.
+- Gate 0 explicit identity omits `ORACLE-2.0`.
+- S3 typed reason/basis is still not mechanically specified: no reason registry, reason->basis requirement map, or valid basis target type; schema example and generator use different reason labels.
+- S4 projection source map is still group-level, not exact nested source/destination path mapping.
+- SCHEMA-2 says `claim_relations`; live S4 parent says `claim_relation`.
+- S4 view still authors S2/S3 values absent from source parents.
+- S3 equality/reason/basis seeds still require a valid clean NOT_RENDERED parent.
+- For HUMAN_REVIEW predicates, define what Gate 0's "3 runs" means; repeated scoring by one human on one static seed is not meaningful variance measurement.
+
+Next pass remains source-contract completion only. Regenerate twice, zero diff, then return.
+
+No scorer. No Gate 0. No Doximity. No Phase 0.
