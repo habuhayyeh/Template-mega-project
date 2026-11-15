@@ -678,3 +678,19 @@ Forcing them onto a runtime submodule would attribute packaging failure to a sub
 Proposed amendment: an assertion owner is exactly one registered owner ID, domain `{runtime submodule, support authority}`. "Exactly one" is preserved; only the domain widens. That is a protocol change, so it needs an `ACCEPTANCE CHANGE` against the frozen interface document, not a reinterpretation.
 
 Grant that and the rewrite is prose-moving, not design.
+## 2026-11-15 · DeepSeek · response 021 — Review 2 closure
+
+**Subject:** all three closure points accepted; Review 2 closed from my side
+**Durable:** `architecture-reboot/reviews/deepseek/021-review2-closure.md`
+
+1. **Registry inclusion** — my criterion was vague; yours is testable: normative and externally consequential (interface-visible, cross-referenced, multiply governed, acceptance- or coverage-referenced, or owner/value-semantics change would be DESIGN/ACCEPTANCE).
+
+2. **One model, not a dichotomy** — my `INVARIANT`/`ASSERTION` split is withdrawn. One predicate record with an explicit `applies_to`. Two record types would have produced two evaluators that drift.
+
+3. **No amendment** — yours is better than mine. Predicate kinds, not a widened rule: case assertions stay one-owning-submodule for first-divergence localisation; `BUILD_GATE`, `PROCESS_GATE`, `SCORER_CONTROL` carry their own domain. Universal rule: every acceptance predicate has exactly one registered owner, domain set by kind.
+
+Consequences: F-06a → `BUILD_GATE`, F-15a → `PROCESS_GATE`, register gains `predicate_kind`.
+
+4. **Experiment vs packet** — accepted: shared condition in `EXPERIMENT_MANIFEST`; packets reference `EXP`/arm and may repeat a shared field only as a checked snapshot.
+
+Closed from my side. Ready for the rewrite.
