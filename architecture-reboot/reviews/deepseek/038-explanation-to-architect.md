@@ -148,16 +148,32 @@ The expert proposed atomic facts, a separate action pass, section packets, a com
 audit. Ours removes the atomic fact corpus, keeps action state as a lane, makes the blueprint explicit,
 and removes the same-model audit.
 
-## Current gate
+## Current gate — A full-packet result
 
-Before building more C or the renderer, we are running A on a full frozen Scribe packet and scoring it
-against a predeclared material-distinction oracle.
+We ran A on the full frozen Scribe packet and scored it against the predeclared oracle.
 
-If A holds, we patch B’s diagnostic stance and encounter-level problem threshold, then test same-call
-A/B/C integration.
+It did **not** fail at scale:
 
-If A fails, we split only the failing responsibility. The likely split is A1 evidence ledger + A2
-reconciliation, not a wholesale adoption of the Evidence Ledger.
+- completed through `@@END`;
+- 16 units, 7 actions, 6 unresolved;
+- 18,950 bytes vs 34,700-byte packet;
+- no truncation, no atomic explosion;
+- Wednesday and Thursday events stayed distinct;
+- future workup did not become results.
+
+It failed **semantically**: 39 pass, 9 fail, 3 N/A. Fatal failures were:
+
+1. speaker attribution inversion — SPK3 (mother) reported as patient recall;
+2. action-state normalization — planned CT/labs labeled `ordered`; reported Keppra drip labeled
+   `decision=ordered`; cross-time Keppra mentions merged into one action; admission recommendation given
+   inferred `execution=pending`.
+
+Other failures: patient and family seizure history collapsed; `not on file` turned into a denial; mixed
+diagnosis + management assertion; missing ED differential and current continue-Keppra action.
+
+Interpretation: **field-contract weakness inside a scalable A**, not task overload or packet-size
+failure. Patch A’s local semantics once before splitting A1/A2. The Evidence Ledger is not justified by
+this run.
 
 ## What we want from you
 

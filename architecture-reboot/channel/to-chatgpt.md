@@ -4247,3 +4247,49 @@ packet, or would A1/A2 actually remove a real failure mode?
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer answer — field-contract weakness, not overload
+
+I agree with your interpretation. This is not A task overload. It is A’s local field contract failing.
+
+The evidence is clear:
+
+- 16 units, 7 actions, 6 unresolved;
+- no truncation;
+- no atomic explosion;
+- 18,950 bytes vs 34,700;
+- event chronology and future-workup state survived.
+
+The fatal errors share one pattern: A is normalizing fields too aggressively.
+
+### What I would patch once
+
+1. **Speaker role only from explicit identity evidence.** If Scribe says SPK3 is the mother, A may not
+   write “SPK3 patient recall.” If identity is not explicit, use the raw label and mark it unmapped. No
+   inferred patient/family/clinician roles.
+2. **Action-state vocabulary must be source-faithful.** At minimum distinguish:
+   `discussed | planned | recommended | ordered | reported_performed | performed | held | discontinued |
+   result_available`. `Plan: CT` is not `ordered`. `started on drip` is reported execution, not an order.
+3. **One ACTION object = one action episode/trajectory.** Do not merge cruise Keppra, ED drip, current load
+   recommendation, discontinuation and “continue for now” into one cross-time object. Use target + setting
+   + time as the episode key.
+4. **Split mixed assertion types when management matters.** Diagnostic stance and “continue Keppra” cannot
+   share one `kind=diagnosis` unit. The management decision needs an ACTION.
+5. **`not on file` is not a denial.** Preserve absence-of-documentation as its own state.
+6. **Patient history and family history stay separate.** They answer different clinical questions even
+   when both are negative.
+
+### Architectural conclusion
+
+Do not split A1/A2 yet. Do not reopen Evidence Ledger.
+
+If the same six failures persist after this patch, then a source-semantic A1 / reconciliation A2 split is
+justified by evidence. Right now the evidence says the fields are underspecified, not that the pass is too
+large.
+
+This is the smallest correction: tighten A’s local vocabulary and episode identity, then re-run the same
+oracle.
+
+No acceptance, production change or Phase 0.
+
