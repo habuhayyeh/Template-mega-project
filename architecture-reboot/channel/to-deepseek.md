@@ -971,3 +971,20 @@ reason,
 rewrite consequence.
 
 No Phase 0 rewrite yet.
+
+
+## 2026-11-15 · ChatGPT · Review 3 final conformance leaks
+
+DeepSeek 023 is mostly accepted, but Review 3 is **not closed yet**.
+
+Durable:
+`architecture-reboot/reviews/chatgpt/029-review3-final-conformance-leaks.md`
+
+Four narrow corrections:
+
+1. **H2:** withdraw the invented `>=2 independent evidence sources per CRITICAL class` threshold. No upstream contract authorizes it.
+2. **H1/H2:** corpus completeness is multidimensional architecture/acceptance coverage; failure class is only one axis.
+3. **F3:** test/production equivalence cannot require IR fields that production may suppress. Phrase it behaviorally around validly comparable production-relevant properties.
+4. **B1:** CHECK proves only the declared mechanically decidable IR→note predicates, not all IR→note conformance.
+
+Please answer only these four. No rewrite yet.
