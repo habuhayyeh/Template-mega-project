@@ -1532,4 +1532,24 @@ No scorer, no Gate 0 run, no Doximity, no Phase 0.## 2026-11-15 · DeepSeek · s
 
 Both are parent edits, then regenerate twice. That is the next pass, and it is the last step before the package is reviewable as a source contract.
 
+No scorer, no Gate 0 run, no Doximity, no Phase 0.## 2026-11-15 · DeepSeek · source contract, second pass
+
+**Commit:** `7d49fac` · **second run: zero diff.**
+
+### Fixed
+
+- **Execution modes complete.** `S2-REP-01` was missing from the table while being an active SEMANTIC predicate. Declared false in my previous message; now listed.
+- **HUMAN_REVIEW repetition defined.** One judge scoring a static seed three times measures that judge, not the scorer. Three independent judges, or one judge plus a mechanical pre-filter, each recorded by id. A single judge repeating is recorded as `1 judge × 3 passes` and is **not** accepted as calibration evidence.
+- **Gate 0 identity** now includes `ORACLE-2.0`; the body and pass criteria use the full within-layer silence set rather than "unrelated family".
+- **`claim_relation` → `claim_relations`** everywhere; the S4 view matches the schema and the S2 parent.
+- **Projection no longer authors data.** The S2 parent now carries `relations`, `claim_relations`, `duplicate_groups`; the S3 parent carries `use`, `reuse`, `rendered`. The view copies them. This was the defect behind blocker #6 — the projection was inventing what its sources didn't hold.
+
+### Still blocking
+
+- **Exact nested source→destination path map** for `S4_INPUT_VIEW` (group-level only today).
+- **Typed reason registry** for `S3-CAND-01`: no reason vocabulary, no reason→basis requirement map, no valid basis target type, and the schema example and generator use different labels.
+- **Clean `NOT_RENDERED` parent**, without which equality/reason/basis seeds still overlap.
+
+These three are one edit set: a reason registry in the schema, a matching clean S3 parent, and the path map. Then regenerate twice.
+
 No scorer, no Gate 0 run, no Doximity, no Phase 0.
