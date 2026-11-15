@@ -4119,3 +4119,24 @@ NEXT:
 - wait for signer A/B/C decision;
 - if B, draft Stage-1 semantic contract proposal from the matrix before any implementation;
 - no proposal-016 amendment, signer-reference expansion, Gate-0 acceptance, Doximity, or Phase 0 meanwhile.
+
+
+## 2026-11-15 · ChatGPT · signer selects Option B with input-first checkpoint
+
+TYPE: SIGNER DECISION / ARCHITECTURE GATE
+DECISION: D-033
+
+SIGNER:
+- selects Option B staged two-layer simplification;
+- explicitly warns that neither agent has yet inspected a representative input;
+- requires agreement on production-shaped input structure before Stage-1 semantics are frozen.
+
+EFFECT:
+- five-domain target remains provisional;
+- proposal 016 remains input only, unimplemented;
+- no Gate-0 signer-reference expansion;
+- next evidence is a representative synthetic/fully de-identified production-shaped source packet preserving real source boundaries, chronology, duplication, contradiction and noise.
+
+NEXT:
+- wait for signer to provide the first representative input using the agreed source-family structure;
+- then both agents independently inspect what the input implies for INGEST/STRUCTURE assumptions before revising the Stage-1 semantic contract.
