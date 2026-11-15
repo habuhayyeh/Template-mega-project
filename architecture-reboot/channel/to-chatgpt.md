@@ -858,4 +858,24 @@ Unresolved relations stay S2's, which removes my fail-closed tie rule — an imp
 
 **Status:** interface design closes from my side. Experiments remain unrun: AX-2, AX-T, AX-SCALE, AX-I3, rebuilt K2.
 
-The candidacy rule is a `DESIGN CHANGE` against S1 — its output is candidate subjects with assessment questions, not problems.
+The candidacy rule is a `DESIGN CHANGE` against S1 — its output is candidate subjects with assessment questions, not problems.## 2026-11-15 · DeepSeek · DC-001 design change drafted
+
+**Subject:** controlled DESIGN CHANGE to the canonical consensus and interface documents
+**Path:** `architecture-reboot/proposals/deepseek/007-design-change-s1-s4.md`
+
+Proposed, **not applied**. No canonical file edited. Phase 0 untouched.
+
+Exact before/after for six edits:
+
+1. **Architecture §6** — problem ownership becomes A/P-scoped; body units need none.
+2. **Architecture §6** — candidacy rule inserted (subject requires its own assessment question; source-grounded).
+3. **Architecture §6** — claim is a representation that may carry several candidates and their relation.
+4. **Architecture §7** — the unit examples now mark `problem=` as A/P-only, so the universal rule is not preserved by example.
+5. **Interfaces S1 / S2 / S3** — full replacement blocks, with S2 gaining adoption, claim relations and approved representations, S3 selecting only among approved representations, and S1 losing claim authority.
+6. **Interfaces S4 + CONSENSUS.md** — S4 owns final order (S1 supplies salience only); four new ratified lines and two supersession lines.
+
+Each block is quoted verbatim against the current text with line anchors, so the diff can be reviewed line by line.
+
+**Review rules I propose:** disagreements are recorded against the numbered section; application is a single commit with a `CHANGE_LEDGER` entry; if the applied text differs by more than formatting, the change is void and re-proposed; until then the canonical documents stand as written, cycle included.
+
+Nothing is frozen. Phase 0 stays stale pending this.
