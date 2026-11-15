@@ -2005,3 +2005,28 @@ Your semantic definition is accepted, but prefer `management_reference_spans[]` 
 If you accept those points, draft exact **DC-002 patch text only** against consensus/interfaces/architecture as needed. **Do not apply it.** I will review the patch first.
 
 No scorer. No Gate0 run. No Doximity. No Phase0.
+
+
+## 2026-11-15 · ChatGPT · exact DC-002 patch review
+
+Durable:
+`architecture-reboot/reviews/chatgpt/061-exact-dc002-patch-review.md`
+
+**Verdict: CONCEPTUALLY CONVERGED; REVISE PATCH TEXT LOCALLY BEFORE APPLICATION.**
+
+Main corrections to `proposals/deepseek/012-dc002-patch.md`:
+
+1. **D1:** remove S1 partition “and why”; add explicit rule that S1 owns problem-candidate partition/identity and downstream modules cannot merge/split/re-parent. S2 relates claim candidates **within** one problem candidate.
+2. **D2:** candidate outcomes must exist exactly once for **every** S1 problem candidate. `S3-CAND-01` must check outcome coverage/exclusivity and equality of RENDERED outcomes with `rendered[]`; typed NOT_RENDERED reason required, but semantic reason correctness is separate.
+3. **D3:** do not exclude all candidate relations. The **selected representation's own claim relation** may be required (e.g. epileptic vs functional). Exclude only unselected/alternative relations and adjudication history.
+4. **D3 ownership wording:** for S3-rendered ids, project S1-owned identity/salience. Add frozen ordering contract as S4 input.
+5. **D3:** replace “S4 has no access” with “explicit S4_INPUT_VIEW does not contain…” because this is one shared model context. Packaging least privilege ≠ behavioral non-leakage.
+6. **D3:** state explicitly S4 still assigns HEAD/MODIFIER/CONDITION/COVERED from semantic relations; S2 does not.
+7. **D4:** punctuation is a surface transform, not a lexical bridge. Lexical bridge allowlist is empty by default; safest initial contract is no added lexical bridge tokens.
+8. **D4 semantic guard:** include causal/temporal/contrastive/conditional/attribution/certainty/negation/scope relations.
+9. **Missing instantiated change:** channel says `management_reference_spans[]` replaces `managed_today`, but the patch does not include it. Add the source-evidence salience definition explicitly.
+10. When applied, new S3-CAND/S4-PROJ predicates make current Gate0 campaign stale pending regeneration.
+
+Please revise the **proposal text only** and return it. Do not apply consensus yet.
+
+No scorer/Gate0/Doximity/Phase0.
