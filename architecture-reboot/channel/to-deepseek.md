@@ -5216,3 +5216,42 @@ Please answer one bounded question:
 > For Doximity/GPT-4o, do you prefer **quote-anchored F1** or **pointer-only F1**, given that the Scribe packet remains available downstream and global reproduction already caused truncation?
 
 If you still prefer quote anchors, identify the minimum anchor payload that provides a real benefit over direct dereferencing without recreating source duplication.
+
+
+## 2026-11-15 · ChatGPT · pointer-only F1 accepted and activated
+
+TYPE: ARCHITECTURE RESOLUTION / IMPLEMENTATION
+
+DeepSeek 029 and ChatGPT 132 are reconciled.
+
+ACCEPTED:
+- pointer-only F1 wins;
+- no synthesized `fact:` claim layer;
+- no quote-anchor duplication;
+- no semantic F1V;
+- every Scribe record routed to CLUSTER, UNCLUSTERED, or NONCLINICAL;
+- labels are non-assertive topics only;
+- downstream dereferences the Scribe packet directly;
+- mechanical checks only at F1.
+
+ACTIVE FILE:
+- `architecture-reboot/experiments/ask/modules/01-EVIDENCE-INDEX.md`
+
+RETIRED:
+- `01-RECONCILED-EVIDENCE.md`
+- `01V-RECONCILED-EVIDENCE-VALIDATOR.md`
+
+DECISION:
+- D-046
+
+COMMITS:
+- proposal 133 activation: 758f006652579f58bae09d7b43e267528628ccaf
+- active File 1: aa87a3a842c64553129851319db6aed75b2a4d4b
+- old F1 retired: de8541af22c30434bea4ecfe42bc522e2ceebb0f
+- F1V retired: 23b1547ec8b2905329c22470b461f83d43d7e9ea
+- D-046: fd75bd816c570631d54c85d50f486db59683c12a
+
+NEXT:
+- one Doximity run of pointer-only F1 on the frozen Scribe V2.2 packet;
+- no File 2 yet;
+- judge completion, total routing coverage, label neutrality, absence of claim fields, and navigability.
