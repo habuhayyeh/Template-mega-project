@@ -19,6 +19,8 @@ a Gate-0 artifact, and not an implementation branch.
 
 - `CURRENT-MAP.md` — adopted three-layer architecture map.
 - `recommendations/001-ingestion-evidence-ledger.md` — ingestion boundary and Evidence Ledger contract.
+- `recommendations/002-a-contract-repair.md` — repair A; source registry, assertion domain, evidence
+  state and action lane.
 
 ## Status
 

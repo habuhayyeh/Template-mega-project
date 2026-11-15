@@ -40,19 +40,38 @@ Record classes:
 - `C` — context / exposure / social / family
 - `Q` — question / unresolved query
 
+Source registry:
+
+```text
+@@SOURCE_REGISTRY
+T/SPK1 = current Neurology clinician
+T/SPK2 = fiance / witness
+T/SPK3 = mother / caregiver
+T/SPK0 = role varies by segment; preserve local identification
+@@END
+```
+
+Registry roles are assigned only when the packet explicitly supports them. `SPK#` is not a global
+identity.
+
 Record shape:
 
 ```text
 @@U04
 CLASS=E
 LABEL=Thursday recurrent episodes
-TIME=Thursday evening; SCOPE=current episode
 SUBJECT=patient
+ASSERTION_DOMAIN=current Thursday event
+TIME=Thursday evening; SCOPE=current episode
 CORE=one-line non-authoritative orientation
 SOURCE_VIEWS=
-- FIANCE [T099-T140; selector=event description]: short fragment
-- PARAMEDIC [T228-T253; selector=witness description]: short fragment
-- ED SUMMARY [P1.013-P1.017; selector=derivative summary]: short fragment
+- SOURCE=T SPEAKER=SPK2 SPEAKER_ROLE=fiance MODE=witness report
+  REF=T099-T140; selector=event description; CONTENT=short fragment
+- SOURCE=T SPEAKER=SPK0 SPEAKER_ROLE=paramedic MODE=witness report
+  REF=T228-T253; selector=witness description; CONTENT=short fragment
+- SOURCE=P1 SPEAKER=P1 MODE=derivative chart summary
+  REF=P1.013-P1.017; selector=derivative summary; CONTENT=short fragment
+EVIDENCE_STATE=reported_present
 UNCERTAINTY=count and duration differ; classification not established
 REFS=T089-T140,T227-T253,P1.013-P1.017
 @@END
@@ -60,15 +79,45 @@ REFS=T089-T140,T227-T253,P1.013-P1.017
 
 Rules:
 
+- one unit answers one clinical question about one subject/entity, one event or longitudinal state, and
+  one semantic type;
 - create a new record only at a material semantic boundary: event/entity, time/scope, semantic role,
-  attribution, certainty/state, action state, result state;
+  subject/domain, attribution, certainty/state, action state, result state;
 - do not atomize every sentence;
 - preserve competing source views;
 - `CORE` is navigation only; source views and refs win;
 - `SOURCE_VIEWS` are short fragments plus IDs/selectors, not copied transcript blocks;
-- actions preserve decision / execution / response / result separately;
+- `SUBJECT` and `SPEAKER_ROLE` are separate; attribution belongs on the source view;
+- `ASSERTION_DOMAIN` is a non-assertive question/domain label, not a diagnosis;
+- `EVIDENCE_STATE` is first-class: `reported_present`, `denied`, `not_on_file`, `not_asked`,
+  `not_performed`, `unavailable`, `unknown`;
+- `not_on_file != denied`; `not_performed != negative result`;
+- no mixed semantic types: split formulation from management, patient history from family history;
+- actions preserve decision / execution / response / result separately in the action lane;
 - relations limited to `SAME_EVENT_AS`, `PART_OF`, `BEFORE`, `AFTER`, `SOURCE_VIEW_OF`, `SUPERSEDES`;
 - ingestion does not decide problems, roles, sections, diagnosis, causality or reconciliation.
+
+## Action lane
+
+```text
+@@A02
+CLASS=A
+TARGET=levetiracetam 1500 mg load
+OPERATION=administration
+ACTOR=ED/Neurology
+TIME_SETTING=current ED encounter
+DECISION=initially requested
+EXECUTION=
+RESPONSE=
+RESULT_STATE=
+CONDITION=
+REFS=P1.054,P1.055
+@@END
+```
+
+One action record per actor + target + operation + time/setting/episode. A drug's whole history is
+several actions, not one. Empty fields are correct. Never infer `recommended -> ordered -> performed ->
+resulted` or `pending`.
 
 ## Processing
 
