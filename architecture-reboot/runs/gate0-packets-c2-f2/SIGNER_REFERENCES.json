@@ -9,7 +9,18 @@
       "role": "REFERENCE",
       "authority": "SIGNER_CLINICIAN",
       "verdict": "SILENT",
-      "rationale": "Signer judged both 'falls since June' and prior left MCA infarct to deserve separate neurology A/P slots, with unequal prominence: falls as the more active/current problem and the inactive infarct as a shorter/condensed problem.",
+      "rationale": "Signer judged both 'falls since June' and prior left MCA infarct to deserve A/P representation, but on different encounter-role tiers: falls are PRIMARY/current; the prior infarct is BACKGROUND unless independently evaluated/managed. Background status does not eliminate its compact A/P representation.",
+      "policy_version": "REVIEW-POLICY-F-2"
+    },
+    {
+      "packet_id": "pkt-73f5f57e86a8a3ebde9254d9",
+      "predicate_id": "S2-ADOPT-01",
+      "judge_id": "signer",
+      "judge_type": "HUMAN",
+      "role": "REFERENCE",
+      "authority": "SIGNER_CLINICIAN",
+      "verdict": "SILENT",
+      "rationale": "Signer established the source-state rule: prior documentation supports historical established stroke and residual weakness, while the current encounter supports adoption of the falls problem. Historical presence alone does not create a newly adopted current-encounter claim or a causal relation. Thus the clean S2 adoption distinctions are clinically valid.",
       "policy_version": "REVIEW-POLICY-F-2"
     }
   ]

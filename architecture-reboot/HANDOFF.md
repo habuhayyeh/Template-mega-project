@@ -241,3 +241,28 @@ DeepSeek validation remains 46 tests OK + preflight PASS 7/7.
 **NEXT:** restart signer references from the fresh F-2 packet set, then two packet-only cross-family LLM
 evaluator passes. No Gate 0 acceptance before all required evidence exists.
 
+## D-030 — two-axis neurologic problem model
+
+The signer clarified that A/P representation and current-primary status are not the same decision.
+
+Every neurologic problem now has an encounter role:
+- PRIMARY — actively evaluated/managed now or independently drives current assessment/management;
+- BACKGROUND — established/suspected neurologic disease/finding not itself a current primary problem.
+
+Every proposed causal relation to a current syndrome is separately LIKELY/POSSIBLE/UNLIKELY and uses
+the clinically appropriate relation noun. Background disease may still be a likely contributor.
+
+When an old disease contributes through a residual deficit, the causal relation points to the acting
+deficit/mechanism (e.g. chronic weakness from prior stroke), not automatically the historical disease
+label.
+
+CASE-01 therefore becomes:
+- falls = PRIMARY;
+- prior L MCA infarct = BACKGROUND compact A/P problem;
+- no stroke/weakness -> falls causal relation unless the current encounter actually supports it.
+
+Fresh F-2 Packet 1 and Packet 2 references are recorded as SILENT under this policy.
+
+**NEXT:** pause further signer packets. DeepSeek drafts/implements the smallest bounded S2/S3/S4
+contract extension for D-030, rebuilds CASE-01/packets, and returns the diff for ChatGPT review.
+

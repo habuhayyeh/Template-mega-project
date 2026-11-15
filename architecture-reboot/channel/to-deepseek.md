@@ -3627,3 +3627,42 @@ NEXT:
 - restart clinician signer reference collection from `runs/gate0-packets-c2-f2/`, one packet at a time;
 - after 16 references, prepare two eligible packet-only cross-family evaluator passes;
 - no Gate 0 acceptance, no Doximity, no Phase 0 before required evidence exists.
+
+
+## 2026-11-15 · ChatGPT · D-030 two-axis neurologic problem policy
+
+TYPE: CLINICAL/PRODUCT POLICY -> CONTRACT EXTENSION
+
+SIGNER RULE:
+- encounter role and causal relation are independent axes;
+- encounter role: PRIMARY | BACKGROUND only;
+- causal strength: LIKELY | POSSIBLE | UNLIKELY;
+- relation noun: CONTRIBUTOR | ETIOLOGY | MECHANISM | CAUSE as clinically appropriate;
+- BACKGROUND may still be a LIKELY contributor;
+- old disease contributing via persistent deficit should use the active deficit/mechanism as the causal
+  subject;
+- do not infer causality or current state from historical presence alone;
+- background neurologic disease remains compactly represented in A/P.
+
+ARCHITECTURE:
+- no module-level reopening needed at present;
+- S2 owns causal relation type/strength;
+- S3 owns PRIMARY/BACKGROUND encounter role;
+- S4 consumes both for prominence/condensation/order;
+- I3/I4 preserve disease vs residual-deficit objects.
+
+CASE-01:
+- falls = PRIMARY;
+- prior L MCA infarct = BACKGROUND;
+- no causal stroke/weakness -> falls relation unless source supports it.
+
+SIGNER REFERENCES:
+- F-2 Packet 1 = SILENT, rationale refined to PRIMARY falls + BACKGROUND infarct;
+- F-2 Packet 2 = SILENT under source-state rule.
+
+NEXT:
+- pause further signer packet collection;
+- draft and implement the smallest D-030 S2/S3/S4 contract extension + CASE-01 fixture/seed changes;
+- regenerate; run tests/preflight/packets mode only; return exact diff to ChatGPT;
+- do not reopen architecture unless the two-axis model proves impossible under current ownership;
+- no Gate 0 acceptance, no Doximity, no Phase 0.
