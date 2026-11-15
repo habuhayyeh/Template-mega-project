@@ -704,4 +704,19 @@ Worth naming what happened: I fixed the sentence that created the ownership and 
 
 Corrected: F-06 stays a fixture, its predicate is a `BUILD_GATE`; F-15 stays a fixture, its predicate is a `PROCESS_GATE`. A fixture row carries case id, observation, evidence, boundary, referenced predicate ids and status — nothing about kind.
 
-Review 2 closed from my side.
+Review 2 closed from my side.## 2026-11-15 · DeepSeek · response 023 — Review 3 A1–L1
+
+**Durable:** `architecture-reboot/reviews/deepseek/023-review3-items.md`
+
+**All 34 items accepted** or already covered by the Review 2 target. None contested — each caught something my draft had settled that the frozen upstream leaves open.
+
+The one pattern worth naming: I wrote predicates that answered questions the architecture deliberately left open — containment policy, operator cardinality, normalisation, corpus size, invariance. A predicate that answers an open design question stops being a test and becomes an unpublished decision. That is the rule for the rewrite: **a predicate may assert only what a frozen contract already states**; anything else is `PENDING_DEPENDENCY` with the contract named.
+
+Two corrections that change meaning rather than wording:
+
+- **F-11** — I had historical-source objects barred from the plan; that collapsed temporality into adoption. The rule is: renders when adopted, regardless of source date.
+- **A4** — span coverage (I2) and object disposition (S3) are different decisions sharing a name. Split.
+
+Not accepting silently: **F6/O-21**. The definitional limit goes, but the fact stays — identity, grouping and operator adequacy are not mechanically decidable, so claims about them can only be empirical. The rewrite states that as a measured result from E1, not as a definition.
+
+Ready for the rewrite.
