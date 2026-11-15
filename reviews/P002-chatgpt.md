@@ -160,3 +160,144 @@ P002 v2 should:
 No change is needed to the six-kind taxonomy, substrate, `01`, `02`, `06`, or `07`.
 
 **Status:** revise proposal, then return for architectural review. Do not implement P002 v1.
+
+
+---
+
+# P002 v2 architectural review — ChatGPT
+
+**Verdict:** REVISE — narrow corrections only  
+**Proposal reviewed:** `proposals/P002-ap-corrections.md` at `3654a08`
+
+P002 v2 resolves the major architectural objections from the first review. In particular, moving all semantic compression out of `04` is approved. A fidelity assembly stage should fail by over-retention, not by silently deleting meaning.
+
+Three issues remain before implementation.
+
+## 1. The validator path is still not executable as written
+
+P002 v2 says:
+
+`python tools/check_ledger.py oracles/ap_ledger_v3.txt substrate/acceptance_v2.txt`
+
+There are two problems.
+
+First, the argument order is reversed. The tool's own usage is:
+
+`python check_ledger.py objects.txt ledger.txt`
+
+Second, and more importantly, `check_ledger.py` does not parse the six-kind substrate at all. It expects the A/P allocation representation. The current `allocate.py` emits rows of the form:
+
+`O# | BUCKET | KIND | text | [provenance]`
+
+while `check_ledger.py` still expects an older heading-based format:
+
+`O# | text | [provenance]`
+
+under CLAIM/ETIOLOGY/EVIDENCE/COURSE/MANAGEMENT headings.
+
+So the validator and the current deterministic allocator are themselves out of sync.
+
+P002 v2 should explicitly fix this mechanical contract before claiming an end-to-end validation path.
+
+Preferred correction:
+
+1. run `allocate.py` on `substrate/acceptance_v2.txt`;
+2. make `check_ledger.py` accept the canonical `allocate.py` output format directly;
+3. have it ignore/validate the `NOT_ALLOCATED` demographic row appropriately and expect the 59 A/P ledger assignments;
+4. then validate `ap_ledger_v3.txt`.
+
+The acceptance path should therefore begin approximately:
+
+```text
+substrate/acceptance_v2.txt
+  -> tools/allocate.py
+  -> recorded allocation.txt
+  -> tools/check_ledger.py allocation.txt oracles/ap_ledger_v3.txt
+  -> 04 using object table + validated ledger
+  -> 05 using 04 Handoff
+```
+
+This is a tooling repair to match already-approved architecture, not a new semantic stage.
+
+## 2. O53/O54 should not be called exact duplicates or discarded under the current closed reasons
+
+P002 v2 proposes:
+
+- O53 `left MCA infarct` -> DISCARD, duplicate of O7 `known left MCA infarct`
+- O54 `residual mild expressive aphasia` -> DISCARD, duplicate of O9 `mild residual expressive aphasia`
+
+But `03` currently permits only:
+
+- `EXACT_DUPLICATE_OF: O#`
+- `IRRELEVANT_TO_RETAINED_PROBLEMS`
+
+and the validator defines exact duplicate as identical normalized text.
+
+O53/O7 and O54/O9 are semantic restatements, not exact duplicates under that rule. They are also not truly irrelevant to P1.
+
+Do not weaken the discard semantics just to remove them.
+
+Preferred v3 disposition:
+
+- O53 -> `P1.EVIDENCE`
+- O54 -> `P1.EVIDENCE`
+
+They are wrongly attached to the memory problem in v2, but they are relevant historical restatements of P1 facts. With `04` now lossless, `05` is exactly where those near-duplicates should be compressed to one rendered fact.
+
+If DeepSeek instead wants a semantic-restatement discard reason in `03`, that is a separate contract change and should be proposed explicitly; P002 does not need it.
+
+## 3. Doximity acceptance and STATUS need two states, not a stale repo
+
+The proposal correctly says that local/agent execution is an engineering mock and Doximity is canonical runtime acceptance.
+
+However, §10 says to request the Doximity run before the status update. That can leave `STATUS.md` factually stale after implementation has already changed the repository.
+
+After implementation + mock validation + architectural diff review, `STATUS.md` should be allowed to say something like:
+
+```text
+P002 implementation: engineering/mock validated
+Doximity acceptance: PENDING
+Canonical production acceptance: NOT YET ESTABLISHED
+```
+
+Then the user's raw Doximity run advances it to PASS or FAIL.
+
+The rule should be:
+
+> Mock validation may establish engineering coherence, never Doximity acceptance. STATUS records both states explicitly.
+
+This preserves GitHub as the source of truth without conflating local validation with production behavior.
+
+## Approved parts of P002 v2
+
+The following are approved:
+
+- D-011 ratification of the three inherited pre-governance edits;
+- the narrow MANAGEMENT -> CLAIM_QUALIFIER validator exception for diagnostic adjudication;
+- append-only A/P oracle versioning;
+- `04` becoming fully lossless;
+- no duplicate reasoning / no lost distinct reasoning as the acceptance criterion;
+- O38 and MRI-adjudication logic remaining distinct;
+- current-plan semantic selection instead of longest-string selection;
+- prior-record management entering today's plan only through explicit current re-adoption;
+- capitalization after `//`;
+- real `04 -> 05` testing rather than calling the legacy Handoff fixture end-to-end;
+- explicit separation of engineering mocks from Doximity runtime testing.
+
+## About the `05` compression burden
+
+Approved as a deliberate trade.
+
+Moving seizure/sodium/CT near-duplicates into `05` increases the writer's compression burden, but that is preferable to semantic deletion in `04`. Under-compression is visible and testable; silent upstream loss is not.
+
+Do not add more `05` rules pre-emptively. Implement the minimal rules in P002, mock-test them, then use the first canonical Doximity run to determine whether further compression guidance is actually needed.
+
+## Required P002 v3 changes before implementation
+
+1. Correct the validator/input path so `allocate.py` output and `check_ledger.py` have one real shared format, and fix the argument order.
+2. Route O53/O54 to P1 evidence rather than falsely treating them as exact duplicates/irrelevant; leave their near-duplicate compression to `05`.
+3. Define explicit STATUS states for engineering/mock validation versus canonical Doximity acceptance.
+
+Everything else in P002 v2 is architecturally approved.
+
+**Status:** revise narrowly to P002 v3; no implementation yet.
