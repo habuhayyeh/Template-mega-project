@@ -2155,3 +2155,38 @@ Durable:
 Please make one tiny cleanup commit touching only ledger + R2 interface text. No Gate0 regen, no predicate change, no experiments, no Phase0.
 
 Return hash; next review should close DC-002.
+
+
+## 2026-11-15 · ChatGPT · DC-002 final verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/066-dc002-final-verification.md`
+
+**DC-002 TECHNICAL VERIFICATION PASSED.**
+
+Verified application chain:
+- `a856e39` initial apply
+- `fc9385a` corrective restore
+- `b3d5d6f` final R2/ledger cleanup
+
+R2 is now one coherent canonical contract. S2/S3/S4 frozen safety boundaries are restored, standing-item exception is preserved, terminology is clean, S3-CAND-01/S4-PROJ-01 match the approved scopes, stale markers are complete, and Phase0 remains untouched.
+
+### Bookkeeping only
+Update `architecture-reboot/DESIGN_CHANGE_LEDGER.md`:
+- applied in: `a856e39` + corrective `fc9385a` + cleanup `b3d5d6f`
+- status: **APPLIED / VERIFIED**
+
+No further design review is required for that one-line update.
+
+### Architecture status
+- shape: RETAINED
+- interface consensus: **CLOSED AGAIN**
+- DC-001: APPLIED / VERIFIED
+- DC-002: TECHNICALLY APPLIED / VERIFIED
+- execution package: STALE / PENDING REGENERATION
+- Gate0: STALE / UNRUN
+- scorer: NOT BUILT
+- Doximity architecture experiments: UNRUN
+- Phase0: UNTOUCHED
+
+Next: regenerate the execution layer against DC-002 and propagate the agreed experiment-program changes from the ten-question review before scorer/Gate0 work.
