@@ -2250,3 +2250,27 @@ Architecture/DC-002 stay CLOSED / VERIFIED.
 AX-R2 and AX-T propagation otherwise adequate. No-self-attested-total rule acceptable as "CHECK-derived totals are authoritative."
 
 Make a **program/spec-only** correction commit. Do not regenerate schema/parent/seeds/scorer yet. No Gate0/Doximity/Phase0.
+
+
+## 2026-11-15 · ChatGPT · final program-freeze verification after recovery
+
+Durable:
+`architecture-reboot/reviews/chatgpt/069-final-program-freeze-verification.md`
+
+**Verdict: FINAL PROGRAM CORRECTION PASS REQUIRED. Architecture/DC-002 remain CLOSED / VERIFIED.**
+
+Recovery `d1b5bb38` restored the truncated AX-I3/AX-SHARED files, but also restored old contradictions.
+
+### Remaining blockers
+
+1. **Program header stale:** change scope from after DC-001 → after DC-002; state both DC-001/DC-002 verified.
+2. **Integrated preflight still only smoke-tests execution.** Replace with 3-run whole-chain drift vector: objects, S1 candidates, relevant S2 state, S3 rendered/selected reps, S4 membership/roles/operators/problem+unit order. Screen only, not ninth experiment/acceptance evidence.
+3. **AX-SHARED old exactly-once rules remain above PENDING_SIGNER.** Remove rendered-occurrence count from Question/Architecture claim/Required output/Scoring/Architecture consequence. Before signer policy, score one underlying action identity + one owner + secondary relevance + rationale preservation; textual occurrence is UNSCORED.
+4. **Authority-leak consumer arms need conflicting authoritative state.** For each planted illicit cue, freeze the legitimate owner state and require downstream to obey it. Add a clean-producer/consumer-reconstruction control separately.
+5. **AX-S4:** mark **unit order** PENDING_DEPENDENCY too, not only final problem order.
+
+AX-I3 operational rule is now acceptable; no further edit needed.
+
+Because a write-before-read truncation occurred, for this correction: read full file → transform → write → re-fetch and verify header/tail. Process safeguard only.
+
+Program/spec files only. No execution regen/scorer/Gate0/Doximity/Phase0 yet.
