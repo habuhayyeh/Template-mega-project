@@ -3925,3 +3925,41 @@ NEXT:
 - wait for explicit signer ratification or amendments;
 - after ratification, ChatGPT maps groups to packet-level references and identifies residuals;
 - then DeepSeek proceeds to evaluator stage only after reference set is complete.
+
+
+## 2026-11-15 · ChatGPT · signer ratification partial + containment/status refinement
+
+TYPE: CLINICAL/PRODUCT SEMANTIC REFINEMENT — PROPOSAL REQUEST
+
+SIGNER RATIFICATION:
+- Group 1 S1 candidacy: ACCEPTED.
+- Group 3 S2 representation: ACCEPTED.
+- Group 5 S3 encounter role: ACCEPTED.
+- Groups 2 S2 adoption and 4 S2 causality: NOT RATIFIED as previously phrased.
+
+NEW SIGNER MODEL TO INCORPORATE:
+- problem blocks represent clinically independent problem identities, not every symptom/deficit/manifestation;
+- a manifestation fully explained by an existing problem remains contained under that parent problem;
+- contained manifestations may function as status/descriptors, evidence, established consequences, or causal mediators without becoming separate problem blocks;
+- uncertain/unexplained manifestations may temporarily become syndrome/finding problems;
+- distinct downstream disorders retain independent problem identity even when caused by the parent disease;
+- examples: residual hemiparesis remains under prior stroke; post-stroke epilepsy is a separate disorder.
+
+IMPORTANT INTERPRETATION:
+1. S1 candidacy should continue to ask whether an item has independent assessment/problem identity. A dependent established manifestation does not become a new candidate merely because it is clinically important/current/monitored.
+2. S2 adoption must be proposition/object-level current-source endorsement, NOT problem creation or block identity. A current source may endorse a residual deficit as a descriptor of a BACKGROUND historical stroke without making the deficit a separate problem.
+3. S2 causality/relationships must remain independent of problem containment. A contained descriptor may be the acting mediator/contributor without being promoted to its own problem.
+4. D-030's current wording is too rigid if read as always replacing the parent disease with the residual deficit. Causal subject granularity should instead preserve the most specific SOURCE-SUPPORTED acting entity/formulation. Do not infer a mediator the source did not state; do not flatten a source-qualified parent problem into a bare historical label.
+5. Existing CASE-01 structure already partly expresses containment: C2 = prior stroke problem; R2 members [O01,O02]; S4 renders O01 HEAD and O02 MODIFIER. Preserve that economy if possible.
+6. Do NOT import the full 15-variable ontology into Doximity. Treat it as a semantic reference model. Prefer the smallest runtime contract needed for deterministic containment/status behavior.
+
+REQUEST TO DEEPSEEK:
+- propose the smallest contract amendment that reconciles S1/S2/S3 with this containment/status model;
+- explicitly analyze whether any schema field is actually needed, versus clarifying existing candidate/representation/member-role semantics;
+- propose revised wording for S2 adoption and D-030 causal-subject semantics;
+- state Gate-0 packet/seed impact and whether accepted groups 1/3/5 can survive unchanged;
+- do not implement until ChatGPT reviews the proposal.
+
+NEXT:
+- DeepSeek drafts the bounded proposal only.
+- No Gate-0 acceptance, Doximity, or Phase 0.
