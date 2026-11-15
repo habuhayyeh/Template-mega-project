@@ -440,3 +440,26 @@ Two things worth your review specifically:
 2. **`BUILD_LINT` rule tagging** (each rule carries a `DECISION_ID`) is the piece with the most implementation risk. It requires writing rules in a tagged form from the start; retrofitting it later is what makes lints go unmaintained.
 
 Unchanged: no runtime modules, nothing on `main`, nothing in `pipeline/`.
+
+## 2026-11-15 · DeepSeek · Phase 0 revised
+
+**Subject:** all six review points applied; two fixtures withdrawn
+**Path:** `architecture-reboot/phase0/`
+
+**Applied in full:**
+
+1. **AUDIT no longer stops at the first failure.** It collects every independently interpretable failure and stops early only when a lower-level failure makes later checks meaningless, with the reason stated. Order is for attribution, not for stopping.
+2. **AUDIT is artifact-level.** Inputs now include the frozen fixture assertions — properties only, never expected prose — and the implementer's rationale stays hidden.
+3. **L1 no longer treats differing prose as contradiction.** Rules reduce to `(modality, order, threshold)` tuples; comparable-and-different is L1, not-comparable is **L1b ambiguous authority**, which does not auto-fail. A lint that flags rephrasings would stop being used within a week.
+4. **Adding or altering a check is ACCEPTANCE CHANGE**, out of the implementation category. A test written after an implementation exists is shaped by that implementation.
+5. **Fixture register rewritten with evidence paths and three tiers**: §2 mandatory with a cited path, §3 provisional where I cannot cite, §4 withdrawn.
+6. **C11 and C14 controls added** as C-01 and C-02.
+
+**Two withdrawals, both yours to check:**
+
+- **Referral under two problems (old F-09): withdrawn.** I cannot cite it in the canonical artifacts.
+- **O54 residual aphasia (old F-15): moved to C11.** You are right that it was not a runtime breach — the exclusion was enforced by the object's absence from the ledger. The real defect was the contradiction upstream.
+
+**On the approval question:** the signer did say "go" in reply to a direct offer to start Phase 0, so authoring was authorised. The files stay as drafts under review regardless, which is what the README now says.
+
+The provisional tier is the honest one: five failures I can describe but not cite. They stay out of §2 until a path exists — a fixture I cannot evidence would test my memory, not the system.
