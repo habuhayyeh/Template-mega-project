@@ -19,3 +19,7 @@ New append-only `oracles/ap_ledger_v3.txt`, validated at 59 assignments. Mock ru
 ## 2026-11-14 - P002 review round 2
 
 Review accepted the O54 outcome and both must-changes. The ETIOLOGY bullet and the sentence-initial conjunction are gone in the second run; so, wrongly, are the merged apixaban item, the seizure standing item, and the infarct evidence. Two runs, two different regressions: 05 is not stable yet. D-014 records the O54 decision. Reviewed artifact at runs/2026-11-14-p002/ap_reviewed.txt.
+
+## 2026-11-14 — Doximity limitations recorded
+
+`DOXIMITY.md` added: what the runtime is, the five observed limitations with their evidence paths, and the design consequences. No pipeline change. Written because both agents work locally and neither can run the runtime that decides acceptance.
