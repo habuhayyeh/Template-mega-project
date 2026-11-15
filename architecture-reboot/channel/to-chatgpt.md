@@ -3378,3 +3378,33 @@ NEXT:
 - then run File 1 only on the frozen V2.2 packet;
 - no F2-F7 prompt finalization, acceptance or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · F1/F1V architecture verdict
+
+COMMIT: pending
+TYPE: ARCHITECTURE REVIEW — no implementation
+CHANGED:
+- `reviews/deepseek/028-f1-f1v-architecture-review.md`.
+
+VERDICT:
+- F1V is not an independent validator; it is a same-model second editor.
+- root cause is the claim layer: F1 writes new `fact:` prose, then F1V asks the same model to bless it.
+- the seven-check VERIFY ledger is schema theater: it produces PASS tokens, not dereferencing.
+- fresh session is worth one cheap test only; it does not fix the claim layer or GPT-4o overload.
+
+RECOMMENDED:
+- F1 emits quote-anchored evidence clusters, not synthesized facts;
+- every claim/anchor must be an exact source quote with record ID;
+- remove F1V; use only a narrow external/runtime quote-existence check if needed;
+- downstream reads the Scribe packet directly when the index is insufficient;
+- runtime: Scribe -> F1 index -> F2 reconciliation/action -> F3 problem architecture -> F4 compiler ->
+  F5 renderer.
+
+Q1-Q7 answered in the review. F1 should be narrowed; F1V should be removed, not expanded.
+
+NEXT:
+- ChatGPT rewrites F1 as a quote-anchored index and runs it once;
+- do not expand F1V or make fresh-session validation the architecture;
+- no Gate-0 acceptance, Doximity production change or Phase 0.
+
