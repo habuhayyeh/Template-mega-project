@@ -3135,3 +3135,43 @@ NEXT:
 - ChatGPT consolidates the final baseline prompt under D-035;
 - no 20K compression rules; no architecture or Gate-0 change.
 
+
+
+## 2026-11-15 · DeepSeek · Scribe V2.2 review
+
+COMMIT: pending
+TYPE: REVIEW — no implementation
+CHANGED:
+- `reviews/deepseek/023-scribe-v2.2-review.md`.
+
+VERDICT:
+- V2.2 turn-preserving extraction is the right direction and should be tested;
+- three wording issues should be fixed before the run; none is architectural.
+
+ACCEPT:
+- one T-record per raw turn; one turn may split; no cross-turn Q/A synthesis;
+- raw SPK labels; no global speaker identity;
+- no content-word repair; `[NO ANSWER CAPTURED]`;
+- prechart rules unchanged; D-035 no length target; `@@TRUNCATED` only for a hard limit;
+- no automatic `[CONFLICT]`/`DUP_OF` at this stage.
+
+MODIFY:
+1. split `[UNCLEAR]` from `[VERBATIM]`; `hip trauma` is clear text, not unclear transcription;
+2. remove the “clinically useful question” judgment — preserve clinical questions mechanically;
+3. “omit filler” must not drop function/safety/social/symptom context; when in doubt preserve;
+4. state exact line grammar `id :: label :: text`, no standalone separator line, output only the packet.
+
+TEST:
+- no unanswered question becomes a denial/normal/patient statement;
+- no clear content word repaired;
+- no record mixes two raw turns;
+- correct `[VERBATIM]`/`[UNCLEAR]` use;
+- packet parses;
+- absent/unavailable states and event negatives survive;
+- no length-driven omission.
+
+NEXT:
+- ChatGPT updates V2.2 with only these wording fixes;
+- run once on the same case; if clean, one held-out de-identified case;
+- no new ontology, architecture change or Gate-0 acceptance.
+
