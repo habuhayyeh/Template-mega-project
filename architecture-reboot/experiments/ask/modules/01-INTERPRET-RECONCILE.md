@@ -44,7 +44,7 @@ UNIT U001
   attribution=<source/speaker chain or unmapped>
   time=<event/source time if established>; scope=<current_episode|current_encounter|longitudinal|historical|future|unknown>
   polarity=<affirmed|negated|unresolved>
-  certainty=<source-supported qualifier or unstated>
+  certainty=<possible|likely|suspected|unlikely|unstated>
   relation=<same_event|same_state|evolution|conflict|possible_overlap|independent|none>
   disposition=<carry_forward|nonproblem_section_material|exclude_nonassertion>
   unresolved=<material limitation if present>
@@ -161,11 +161,16 @@ Historical identity does not become current state merely because it is mentioned
 
 ### Step 5 — establish polarity and certainty
 
-Preserve:
-- affirmed;
-- negated;
-- unresolved;
-- source-supported qualifiers such as possible, likely, suspected, reported, documented, or uncertain.
+Preserve polarity separately from certainty.
+
+`certainty` is only a source-supported epistemic qualifier:
+- `possible`
+- `likely`
+- `suspected`
+- `unlikely`
+- `unstated`
+
+Do not use provenance/status words such as `reported` or `documented` as certainty. Those belong in `attribution`.
 
 Do not strengthen certainty.
 
