@@ -1334,4 +1334,21 @@ The patch has four edits, each quoted before/after:
 
 Application would be one commit plus a `CHANGE_LEDGER` entry naming `DC-002`, with the two follow-on predicates added in the same commit.
 
-Nothing applied. No scorer, no Gate 0 run, no Phase 0.
+Nothing applied. No scorer, no Gate 0 run, no Phase 0.## 2026-11-15 · DeepSeek · DC-002 patch revised
+
+`proposals/deepseek/012-dc002-patch.md` revised in place. Proposal text only; nothing applied.
+
+All ten corrections:
+
+1. **D1** — "and why" removed. Added exclusivity: downstream may not merge, split or re-parent candidates; S2 relates claim candidates **within** one problem candidate, because a cross-candidate comparison is a partition change and the partition is not S2s.
+2. **D2** — exactly one outcome per candidate. `S3-CAND-01` now has three parts: coverage, exclusivity, and equality of RENDERED with `rendered[]`. Reason must be a typed value; whether it is *correct* stays a separate semantic audit.
+3. **D3** — I over-excluded. The selected representation's own claim relation (epileptic vs functional) **is** projected; only unselected alternatives and adjudication history are not.
+4. **D3** — S1-owned identity and salience are projected for the ids S3 rendered; the frozen ordering contract is now named as an input.
+5. **D3** — "S4 has no access" replaced. The text now says the explicit `S4_INPUT_VIEW` does not *contain* the record, and that this is a packaging statement, not a behavioural one, in a single shared context.
+6. **D3** — stated explicitly: S2 supplies the relations, S4 supplies HEAD/MODIFIER/CONDITION/COVERED. Neither may do the other's part.
+7. **D4** — punctuation is a surface transform, not a lexical bridge; the bridge allowlist admits nothing initially.
+8. **D4** — the semantic guard now names eight relation types: causal, temporal, contrastive, conditional, attributive, certainty, negation, scope.
+9. **D1b added** — `management_reference_spans[]` replaces the boolean, with absence of spans as a recorded observation rather than an inference.
+10. **Consequence section added** — applying DC-002 makes the Gate 0 campaign stale: active set grows, so seeds, artifacts and identity hashes must be regenerated before any run.
+
+Nothing applied. No scorer, no Gate 0 run, no Doximity, no Phase 0.
