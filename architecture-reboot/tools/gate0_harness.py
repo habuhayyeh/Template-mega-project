@@ -363,6 +363,8 @@ def evaluate_artifact(target, context, oracle, rules, judgments=None, packet_dir
 
 
 def clean_verdict(findings):
+    if any(f.get('calibration_failure') for f in findings):
+        return 'FAIL'
     statuses = [f['status'] for f in findings]
     if FIRED in statuses:
         return 'FAIL'

@@ -62,9 +62,11 @@ are written to `EVIDENCE.json`.
 ## Run
 
 ```text
+python architecture-reboot/tools/preflight.py
 python architecture-reboot/tools/gate0_harness.py --mode packets --out <dir>
 python architecture-reboot/tools/gate0_harness.py --mode acceptance --out <dir> --judgments <file>
 ```
 
-The `acceptance` mode is not run by the build, tests, or this source pass. Building the scorer is not
-Gate 0 execution.
+Preflight is the single mechanical entry point for frozen-zone, freshness, hash, registry, dependency,
+seed-integrity, stale-marker and unit-test checks. The `acceptance` mode is not run by the build, tests,
+or this source pass. Building the scorer is not Gate 0 execution.

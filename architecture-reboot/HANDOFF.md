@@ -63,7 +63,7 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 
 ## 5. Exact position
 
-HEAD at handoff: see `git log -1`. Last substantive commit: review-082 scorer implementation.
+HEAD at handoff: see `git log -1`. Last substantive commit: review-083 fixes plus the D-019 preflight.
 
 `python architecture-reboot/tools/make_seeds.py` builds:
 5 clean parents across 4 parent types → 28 seeds → `MANIFEST.json`. **A second run must produce zero
@@ -71,6 +71,11 @@ diff**; that is a build failure condition, not a warning. The build also checks 
 non-noop mutation and differs from its parent at exactly one declared path; 28/28 are checked, with 0
 no-op and 0 multi-diff seeds. The manifest records the checked before/after values and the
 dependency-context map.
+
+`python architecture-reboot/tools/preflight.py` is the single mechanical entry point. It checks frozen
+architecture/Phase-0 drift, source/generated freshness and determinism, governing hashes and
+identities, active registry, dependency-context integrity, seed mutation integrity, stale source
+markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 41 tests.
 
 Current counts: 5 clean calibration parents · 4 parent types · 28 seeds · 16 active predicates ·
 campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
@@ -82,7 +87,7 @@ Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLE
 Scorer: 13 mechanical predicates + 3 human-review predicates; 41 synthetic tests; no Gate 0 acceptance
 run.
 
-## 6. Review 083 scorer/harness integrity pass
+## 6. Review 083 fixes and D-019 preflight
 
 **Input boundary.** Scorer input is target artifact + read-only dependency context + oracle + frozen
 predicate/contract rules. `00-GATE0-MANIFEST.md` fixes the dependency matrix; the manifest hash-pins the
@@ -99,6 +104,11 @@ and campaign verdicts are written to `EVIDENCE.json`.
 projection adapter. `architecture-reboot/tools/gate0_harness.py` owns the answer key, packet generation,
 specificity, human-judgment aggregation and immutable evidence. The scorer does not open files or read
 the manifest; a test patches `builtins.open` to prove it.
+
+**D-019 preflight.** `architecture-reboot/tools/preflight.py` consolidates the recurring mechanical
+checks without adding acceptance criteria: frozen zones, regeneration/freshness/determinism, governing
+hashes/identities/registry, dependency context, seed mutation integrity, stale markers and unit tests.
+It exits non-zero on any failure and does not run Gate 0.
 
 **Gate 0 remains unrun.** 41 synthetic tests pass. No `acceptance` harness run was executed, no
 judgments were fabricated, and the three-independent-human-review prerequisite is outstanding.

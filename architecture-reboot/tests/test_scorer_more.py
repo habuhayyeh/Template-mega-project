@@ -209,6 +209,9 @@ class AdditionalPredicateTests(unittest.TestCase):
         self.assertEqual(clean_verdict([{'status': FIRED}]), 'FAIL')
         self.assertEqual(clean_verdict([{'status': UNDECIDABLE}]), 'INCOMPLETE')
         self.assertEqual(clean_verdict([{'status': SILENT}]), 'PASS')
+        self.assertEqual(clean_verdict([
+            {'status': UNDECIDABLE, 'calibration_failure': True},
+        ]), 'FAIL')
 
     def test_judgment_predicate_binding(self):
         packet = build_packet('S2-REP-01', self.s2, {'S1_SYN': self.s1}, self.oracle)
