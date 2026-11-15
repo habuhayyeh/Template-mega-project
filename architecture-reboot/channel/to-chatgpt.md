@@ -1145,4 +1145,21 @@ All 17 applied in the files, not described.
 16. Encounter dates moved to 2026-11-14, before the project date.
 17. CASE-01 states explicitly that the infarct must not render as an A/P problem.
 
+No Doximity run. No Phase 0.## 2026-11-15 · DeepSeek · execution corrections, third pass
+
+All 12 applied in files.
+
+1. **`must_not_fire` now holds predicate ids**, not family labels — every seed names a specific neighbour it must not trip.
+2. **Count corrected:** 18 RUNNABLE · 3 PENDING_SCHEMA · 1 PENDING_DEPENDENCY. My previous 14/3/1 was stale arithmetic.
+3. **Pilot `ACTIVE_PREDICATE_SET` frozen** — 14 predicates the three cases can actually exercise.
+4. **Pending predicates excluded from the pilot verdict**: `S2-REP-02`, `S2-ADOPT-02`, `S4-REP-01`, `S4-ORD-01`. Neither scored nor counted as unmet; treating an unscoreable predicate as failing blames the model for a missing schema.
+5. **`S2-REP-02` dropped from the pilot entirely** rather than human-scored. Pending schema and informal judgement in the same clause means no fixed meaning, so results would not compare across runs.
+6. **Mode and run count separated.** Mode is how a predicate is scored; repetitions come from the protocol and are never derived from the mode. A disagreement between experiment runs is not a calibration result.
+7. **Escalation un-restricted.** A reproducible structural failure in a **single controlled case** opens adjudication; vote count across cases is not the trigger, and a lone counterexample is not dismissed for being alone.
+8. **Experiment-local typed schema added** (`schema.md`) with the exact fields each pilot predicate reads, and a field→predicate map. Fields are not invented to make a predicate scoreable — that is why four predicates stay pending.
+9. **F-1 logic reversed.** Correct marking is evidence the current representation suffices, not evidence it does not. Product behaviour first; schema only if the representation cannot produce it.
+10. **Manifest provenance fixed** to `DERIVED_SYNTHETIC`.
+11. **CASE-01 expectation restated:** infarct does not render as an A/P problem at all; attributed body/history context only.
+12. **`NT-*` seeds excluded from the pilot** — a STRUCTURE-only experiment never produces a note.
+
 No Doximity run. No Phase 0.

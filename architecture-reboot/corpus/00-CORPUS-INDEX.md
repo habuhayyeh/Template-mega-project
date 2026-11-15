@@ -21,7 +21,7 @@ BASELINE-03 and BASELINE-04 contain unresolved slots: `[date]`, `[confirm]`, `[t
 
 These are not defects in the note; they are the note marking what it does not know. The current Case IR has no way to express this. Its only options are to omit or to invent, and inventing is the failure we have spent weeks removing.
 
-**Status: observation, not a design change.** I proposed schema too early. The architecture may already be enough: if the renderer omits an unsupported value and the note records the gap without inventing, nothing needs adding. Evidence required before any proposal — run one placeholder-bearing case and record which of three things happens: the model invents a value, omits the slot silently, or marks the absence. Only the third sustained across cases argues for a schema addition.
+**Status: observation, and the logic runs the other way.** A model that correctly marks an unknown value is not evidence that new schema is needed — it is evidence the current representation is sufficient for that behaviour. The sequence is: decide product behaviour first (should a note show markers, or omit?), then test whether the current representation can produce that behaviour. Schema is proposed only if it cannot.
 
 It also settles a scoring question: a run that invents a value where the target has `[date]` fails fidelity; a run that omits the slot entirely fails completeness. Both are checkable.
 

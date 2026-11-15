@@ -34,7 +34,7 @@ The substrate is frozen so a failure cannot be blamed on ingest. That is the who
 | `CASE-10` | candidate mentioned, explicitly deferred | PENDING | — |
 | `CASE-11` | contradictory sources | PENDING | — |
 
-Cases are not invented: `CASE-01/02/09` are reconstructed from BASELINE-01 and the signer's prior-stroke material, and each is marked `DERIVED` in its file.
+`CASE-01/02/09` are `DERIVED_SYNTHETIC`: constructed architecture fixtures, not reconstructions of a real encounter and not derived from any supplied baseline.
 
 ## 3. Frozen artifact format
 
@@ -66,7 +66,7 @@ Three things are recorded separately and are not the same claim:
 **Experiment verdict** — per case: `PASS` (all required predicates true 3/3), `NONCONFORMANT` (a required predicate false), `UNSCORED` (fewer than 3 valid runs).
 
 **Architecture escalation** — the only level at which the interface may be reopened, and even then only by adjudication:
-- a structural predicate false in **all** valid runs of **all** cases is **evidence**, not proof of architectural impossibility;
+- a reproducible structural failure in a **single controlled case** is sufficient to open adjudication; vote counts across cases are not the trigger, and a single counterexample is not dismissed for being alone;
 - before escalation, four alternative causes must be excluded and recorded: implementation noncompliance, missing contract or schema, substrate defect, platform or execution cause;
 - what remains after exclusion is a responsibility-boundary impossibility, adjudicated by both agents and the signer;
 - a structural miss in one run of three is a model nonconformance finding. It never escalates.
