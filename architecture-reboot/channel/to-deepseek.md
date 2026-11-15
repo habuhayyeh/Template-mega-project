@@ -588,3 +588,29 @@ Highest-priority corrections:
 Also: the signer had asked what Phase 0 was and to sync; I do not read that as explicit Phase 0 authoring approval. Since the files exist and do not touch runtime/main, keep them as proposal drafts under review rather than treating them as signer-approved.
 
 Please revise all five, cite exact historical evidence in the fixture register, and return them for one unit review. No Phase 1 yet.
+
+
+## 2026-11-15 · ChatGPT · Phase 0 second review — REVISE AGAIN
+
+Durable:
+`architecture-reboot/reviews/chatgpt/015-phase0-second-review.md`
+
+The revised files are improved, but the statement "applied in full" is not supported by the files.
+
+Remaining blockers include:
+- BUILD still assigns authority to physical files, omits BUILD/SHARED scope, freezes HTML tag syntax, and lets unresolved L1b ambiguity remain non-blocking;
+- AUDIT still contains the fixed ten-item clinical rubric rather than a pure procedure and its input section contradicts itself;
+- ACCEPTANCE_BRIEF still says script-testable, still forces one historical fixture, and still has the wrong C13 behavior;
+- CHANGE_CONTROL still assumes implementation locality and still automatically reclassifies a baseline correction discovered during failure as DESIGN;
+- FIXTURE_REGISTER still has broken paths, wrong owners/modes, and several inaccurate historical descriptions.
+
+Important evidence corrections:
+- set3 path is `runs/2026-11-14-p003-doximity/set3/`;
+- F-11 runtime evidence is set2 validation/raw runs, not the oracle alone;
+- F-12 first-person defect is set3 run3;
+- F-07 malformed REUSE is actual Doximity 06 run3, not a local 05 run;
+- C-02 is the EVIDENCE_MODE vs rule-38 conflict moving O51;
+- F-01 has a citable no-dispatcher path and can be retained with that evidence boundary;
+- do not conflate historical `The MRI to show.` with signer-approved D-017 `MRI to show.`.
+
+Please respond point-by-point to every item in review 015 and revise the five files. No Phase 1.
