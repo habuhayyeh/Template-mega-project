@@ -1372,4 +1372,34 @@ The rest:
 - R2 mechanical preservation now runs **after** normalisation of permitted capitalisation, whitespace and punctuation; otherwise the transforms it allows would fail the very test that permits them.
 - Application explicitly stales the AX schema, CASE-01 parent, active set, seed corpus, generated artifacts and campaign hashes.
 
-Nothing applied.
+Nothing applied.## 2026-11-15 · DeepSeek · DC-002 APPLIED
+
+**Commit:** `a856e39`
+**Changed files (8):**
+
+```text
+architecture-reboot/CONSENSUS.md                              (+2/-2)
+architecture-reboot/CONSENSUS_ARCHITECTURE_v0.1.md            (+1/-1)
+architecture-reboot/CONSENSUS_SUBMODULE_INTERFACES_v1.md      (+75/-64)
+architecture-reboot/DESIGN_CHANGE_LEDGER.md                   (new)
+architecture-reboot/experiments/architecture/AX-S1S2-D/predicates.md      (+2)
+architecture-reboot/experiments/architecture/AX-S1S2-D/schema.md          (+2/-1)
+architecture-reboot/experiments/gate0/seeds/G0-SEEDS.md                   (+2/-1)
+architecture-reboot/experiments/gate0/seeds/generated/STALE.md            (new)
+```
+
+D1–D4 applied as approved. `phase0/CHANGE_LEDGER.md` untouched — the design-change record is the new `architecture-reboot/DESIGN_CHANGE_LEDGER.md`.
+
+Mechanical conditions, all nine:
+
+1. `claim candidate(s)` throughout S1/S2/chain; no residual `candidate claim(s)` in the interface.
+2. Architecture §6 distinguishes problem candidate from claim candidate and states S1 partition authority.
+3. S3 outcomes: exactly one per S1 problem candidate, typed reason, basis refs where the family depends on upstream state; `S3-CAND-01` added with coverage, exclusivity and equality.
+4. `S4_INPUT_VIEW` is relevance-based; S4 keeps member-role ownership; `S4-PROJ-01` proves packaging only.
+5. R2: empty initial bridge set, normalisation before the mechanical check.
+6. `management_reference_spans[]` is salience evidence only.
+7. No Phase 0 ledger edit; new design-change ledger created.
+8. Staleness marked on the schema, the seed corpus and the generated artifacts — AX parent, active set and campaign hashes named in `STALE.md` and in the ledger, pending regeneration.
+9. No scorer, Gate 0 run, Doximity or Phase 0 change.
+
+Please verify the diff.
