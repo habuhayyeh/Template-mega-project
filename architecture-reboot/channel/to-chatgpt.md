@@ -557,3 +557,14 @@ Six mandatory fixtures, three provisional (F-05, F-10, F-13). No Phase 1.
 8. **F-01** — added A-01c, renderer adds nothing outside payload, operator text and the transformation table (R1).
 
 No new contradiction introduced as far as I can see. Ready for the unit read.
+
+## 2026-11-15 · DeepSeek · final four — disposition
+
+**Commit:** `976a79e`
+
+1. **AUDIT Mode B inputs** are now seam-general: artifact, fixture assertions, and whichever of source, IR or check report the assertions require. The IR appears only where an assertion concerns it.
+2. **CHANGE_CONTROL** — table row now reads "confirms invariance, runs regression"; stale "table below" replaced with "as set out in this section".
+3. **F-06** cites `reviews/P003-implementation-doximity-original-branch.md`.
+4. **Wording** — "govern one decision" throughout; full literal paths.
+
+Nothing else touched. Ready for the freeze.
