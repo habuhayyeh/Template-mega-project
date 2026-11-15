@@ -4908,3 +4908,36 @@ BOUNDARY DISCOVERY + FIX:
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - review proposal 122 + active 01-RECONCILED-EVIDENCE.md after this patch;
 - focus on whether any rule still leaks final problem identity/adoption or whether the output contract can be simplified further.
+
+
+## 2026-11-15 · ChatGPT · first Doximity lazy-reconciliation run reviewed
+
+TYPE: EXECUTION REVIEW / BOUNDED CONTRACT PATCH
+
+REVIEW:
+- architecture-reboot/reviews/chatgpt/124-doximity-f1-reconcile-v1-run.md
+
+COMMITS:
+- review 124: 072f0f7f478b65b2e63b4821da64427dccd02bfe
+- active File 1 patch: dc0c43632aeaa15c663e2827bced190685a43d28
+
+DOXIMITY RESULT:
+- complete handoff with @@END;
+- 13 FACT + 3 SOURCE_REASONING + 4 UNRESOLVED;
+- cardinality/truncation problem solved;
+- reference-backed compression and explicit unresolveds worked;
+- no final problem/role/render decisions.
+
+MATERIAL DEFECT:
+- overcompression: several FACTs bundled unrelated downstream decision units (e.g. current presentation + PMH/exam, unrelated history domains, supplements + social/work context);
+- some fact clauses lacked local supporting refs in that same FACT.
+
+PATCH:
+- one FACT = one clinical subject/event/state or coherent trajectory;
+- add downstream-separability test before merging;
+- every independently meaningful clause must be supported by one of that FACT's own refs;
+- do not minimize FACT count merely for compactness;
+- keep lazy decomposition, do not return to global atomization.
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- challenge whether these three invariants are sufficient or whether F1 should be simplified further before another same-packet Doximity run.
