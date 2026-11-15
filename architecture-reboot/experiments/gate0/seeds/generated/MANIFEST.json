@@ -2,20 +2,39 @@
   "active_set": "ACTIVE-PILOT-2",
   "campaign": "GATE0-C1",
   "clean_parents": {
-    "S1_PARENT.json": {
-      "hash": "sha256:5d954e861da55170b53591f593e565d0e9e5003f3ca010ea38bdd5cdc72f39f5",
+    "S1_CASE01_CLEAN": {
+      "artifact": "PARENT-S1_PARENT.json",
+      "file": "S1_PARENT.json",
+      "hash": "sha256:dc361b6fbdb56ebacf78184ca4be0d6b6dfea3bac5d6a579f1c65676233ad038",
+      "parent_id": "S1_CASE01_CLEAN",
       "parent_type": "S1_OUTPUT"
     },
-    "S2_PARENT.json": {
-      "hash": "sha256:2c4ce5bf6f4b960188bad52ce58bb537c4fe79fa80c68d6ba1696e74d6da9790",
+    "S2_CASE01_CLEAN": {
+      "artifact": "PARENT-S2_PARENT.json",
+      "file": "S2_PARENT.json",
+      "hash": "sha256:7a9dc00baaa148d30520d40f59159a23623336c22a5463aef104c059d09d18d3",
+      "parent_id": "S2_CASE01_CLEAN",
       "parent_type": "S2_OUTPUT"
     },
-    "S3_PARENT.json": {
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+    "S3_CASE01_NOT_RENDERED_CLEAN": {
+      "artifact": "PARENT-S3_PARENT_NOT_RENDERED.json",
+      "file": "S3_PARENT_NOT_RENDERED.json",
+      "hash": "sha256:e9646544deba49350c85cd9c4369bee5ccf7dc31421bb78470df54e1c796055f",
+      "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
-    "S4_PARENT.json": {
-      "hash": "sha256:b7fa7a429478c73c8665369d1812b5b9abe79d832d5107f658291494f3699080",
+    "S3_CASE01_RENDERED_CLEAN": {
+      "artifact": "PARENT-S3_PARENT.json",
+      "file": "S3_PARENT.json",
+      "hash": "sha256:0d2cbeb0443d51e9ea4bde381071a7f46cdd1402930cc22b77f0ee2e6948d784",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT"
+    },
+    "S4_CASE01_CLEAN": {
+      "artifact": "PARENT-S4_PARENT.json",
+      "file": "S4_PARENT.json",
+      "hash": "sha256:20e3fae0517b143090a8bfeb48031aa9b01163362873b7d30a62b0e0377ba998",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     }
   },
@@ -39,604 +58,518 @@
       "S4-PROJ-01": 5,
       "S4-REP-01": 1
     },
-    "clean_parents": 4,
+    "clean_parents": 5,
+    "parent_types": 4,
+    "pending_predicates": [
+      "S2-ADOPT-02",
+      "S4-ORD-01"
+    ],
+    "seed_mutations_checked": 27,
     "seeds": 27
-  },
-  "generated_parents": {
-    "S1_PARENT.json": {
-      "case": "CASE-01",
-      "parent_type": "S1_OUTPUT",
-      "registry": "PILOT-2",
-      "s1": {
-        "candidates": [
-          {
-            "anchors": [
-              "S02"
-            ],
-            "claim_candidates": [
-              {
-                "id": "CC1",
-                "support": [
-                  "S02"
-                ],
-                "text": "three falls since June"
-              }
-            ],
-            "id": "C1",
-            "salience": {
-              "acuity": "MODERATE",
-              "management_reference_spans": [
-                "S03"
-              ]
-            },
-            "subject": "falls since June"
-          }
-        ]
-      },
-      "schema": "SCHEMA-2"
-    },
-    "S2_PARENT.json": {
-      "case": "CASE-01",
-      "parent_type": "S2_OUTPUT",
-      "registry": "PILOT-2",
-      "s2": {
-        "adjudication": [
-          {
-            "adoption": false,
-            "evidence": null,
-            "object": "O01",
-            "temporal": "2024-02 documented"
-          },
-          {
-            "adoption": true,
-            "evidence": [
-              "S02"
-            ],
-            "object": "O03",
-            "temporal": "June\u2013November"
-          }
-        ],
-        "claim_relations": [],
-        "duplicate_groups": [],
-        "relations": [
-          {
-            "from": "O04",
-            "to": "O03",
-            "type": "SUPPORTS"
-          }
-        ],
-        "representations": [
-          {
-            "id": "R1",
-            "members": [
-              "O03",
-              "O04"
-            ],
-            "problem": "C1",
-            "selection_safe": true,
-            "support_refs": [
-              "S02"
-            ]
-          }
-        ]
-      },
-      "schema": "SCHEMA-2"
-    },
-    "S3_PARENT.json": {
-      "case": "CASE-01",
-      "parent_type": "S3_OUTPUT",
-      "registry": "PILOT-2",
-      "s3": {
-        "candidate_outcomes": [
-          {
-            "candidate": "C1",
-            "outcome": "RENDERED"
-          }
-        ],
-        "dispositions": [
-          {
-            "disposition": "HISTORICAL_CONTEXT",
-            "object": "O01"
-          },
-          {
-            "disposition": "HISTORICAL_CONTEXT",
-            "object": "O02"
-          },
-          {
-            "disposition": "MEDICATION_RECORD",
-            "object": "O07"
-          }
-        ],
-        "rendered": [
-          {
-            "approved_representation": "R1",
-            "problem": "C1",
-            "selected_rep": "R1"
-          }
-        ],
-        "retained": [
-          "O03",
-          "O04",
-          "O05",
-          "O06"
-        ],
-        "reuse": [],
-        "use": {
-          "O03": "C1",
-          "O04": "C1",
-          "O05": "C1",
-          "O06": "C1"
-        }
-      },
-      "schema": "SCHEMA-2"
-    },
-    "S4_PARENT.json": {
-      "case": "CASE-01",
-      "parent_type": "S4_BLUEPRINT",
-      "registry": "PILOT-2",
-      "s4": {
-        "problems": [
-          {
-            "id": "P1",
-            "order": 1,
-            "source": "C1"
-          }
-        ],
-        "sections": [
-          "AP"
-        ],
-        "units": [
-          {
-            "id": "U1",
-            "members": [
-              "O03",
-              "O04"
-            ],
-            "operator": "FACT",
-            "order": 10,
-            "problem": "P1",
-            "representation": "R1",
-            "roles": {
-              "O03": "HEAD",
-              "O04": "MODIFIER"
-            }
-          },
-          {
-            "id": "U2",
-            "members": [
-              "O05"
-            ],
-            "operator": "PLAN",
-            "order": 20,
-            "problem": "P1",
-            "representation": "R1",
-            "roles": {
-              "O05": "HEAD"
-            }
-          },
-          {
-            "id": "U3",
-            "members": [
-              "O06"
-            ],
-            "operator": "PLAN",
-            "order": 30,
-            "problem": "P1",
-            "representation": "R1",
-            "roles": {
-              "O06": "HEAD"
-            }
-          }
-        ]
-      },
-      "schema": "SCHEMA-2"
-    }
   },
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:60b8b725e1279f607ad5e525157e7060d34aade209aa1529669fc2a052846c37",
+    "00-GATE0-MANIFEST.md": "sha256:ec157ef28be3ac1da6d1fee782670d2b3ccd2da82616109c59926e8f370399d5",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
-    "G0-SEEDS.md": "sha256:19c830ebd4b9f8c7a12bba919c6c9fe8e91028e150e8b239c340a5ab64ffad52",
-    "make_seeds.py": "sha256:9b914998c0e375bc91bcdfbe3989e53330fce7f2b10a0e4b85ce6bf3341c36d9",
+    "G0-SEEDS.md": "sha256:89abcf934f18f99daaf2eabe8c14c36c7bc951339b925a1f9ebc40651a7e8a05",
+    "make_seeds.py": "sha256:6bbfe43682bc606ed4e39a0db0506598e4e0c478b299edcac8eacbd645b06a54",
     "oracle.json": "sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927",
-    "predicates.md": "sha256:4f074738abb0db48bebc8f4bb636edff3f4009d1a00079adb9a921768551f983",
-    "schema.md": "sha256:054ef0253da50474ceae8c098718d14264c71e54f4aa4ce83f2c095b53a083a9"
+    "predicates.md": "sha256:3d92a334bd4b0fe3d5b65b38c15d3f6510991b9477d9b0ca27c7ed676dc47d08",
+    "schema.md": "sha256:c3e1100c7d2dfca19d10e45b21a5854a3abaec1a91abb840e3d7a8d2ffa790c8"
   },
   "hash_methods": {
     "artifacts": "sha256 over canonical JSON (sorted keys, compact separators)",
     "governing_source": "sha256 over file bytes"
   },
   "oracle": "ORACLE-2.0",
+  "parent_model": {
+    "clean_parents": 5,
+    "parent_types": [
+      "S1_OUTPUT",
+      "S2_OUTPUT",
+      "S3_OUTPUT",
+      "S4_BLUEPRINT"
+    ],
+    "s3_parent_ids": [
+      "S3_CASE01_NOT_RENDERED_CLEAN",
+      "S3_CASE01_RENDERED_CLEAN"
+    ]
+  },
+  "projection": {
+    "map_block": "PROJECTION_MAP",
+    "map_sha256": "sha256:3cdcea61e9d77ceeb6db0a7e80678c466362cceaffb1ca3a3524c163a2ae5497",
+    "map_source": "experiments/architecture/AX-S1S2-D/schema.md",
+    "name": "S4_INPUT_VIEW",
+    "retained": [
+      "O03",
+      "O04",
+      "O05",
+      "O06"
+    ],
+    "rule_count": 14,
+    "selected_problem": "C1",
+    "selected_rep": "R1",
+    "view_sha256": "sha256:e3f84f9708f10691d2dedf37cdfdc67f2166caa4a85155827120c49f872d93f9"
+  },
+  "reason_registry": {
+    "codes": [
+      "NO_APPROVED_REPRESENTATION",
+      "NOT_CLINICAL"
+    ],
+    "hash": "sha256:cc9b61341631077f831f9932c131f43a6a8119980de4d42863096f7dfee479df",
+    "name": "REASON-1"
+  },
   "registry": "PILOT-2",
   "schema": "SCHEMA-2",
+  "seed_integrity": {
+    "checked": 27,
+    "multi_diff": 0,
+    "noop": 0,
+    "rule": "each seed differs from its parent at exactly the declared path; manifest values are the checked diff"
+  },
   "seeds": [
     {
       "artifact": "G0-S1-01.json",
-      "hash": "sha256:5d954e861da55170b53591f593e565d0e9e5003f3ca010ea38bdd5cdc72f39f5",
+      "hash": "sha256:5a8d230031c62ea97dfe7f19807864feb9c94eb00d6c2ee1396e95775ab411ea",
       "must_fire": "S1-AUTH-01",
       "mutations": [
         {
           "after": "true",
           "before": "<absent>",
+          "label": "<absent> -> true",
           "path": "/s1/candidates/0/adopted"
         }
       ],
       "parent": "PARENT-S1_PARENT.json",
+      "parent_id": "S1_CASE01_CLEAN",
       "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S1-02.json",
-      "hash": "sha256:5d954e861da55170b53591f593e565d0e9e5003f3ca010ea38bdd5cdc72f39f5",
+      "hash": "sha256:c5b76b40069145d8eb03f7b6f6aecddff428cce2351c31ff23809eac4a3ac568",
       "must_fire": "S1-AUTH-02",
       "mutations": [
         {
-          "after": "CC1",
+          "after": "\"CC1\"",
           "before": "<absent>",
+          "label": "<absent> -> CC1",
           "path": "/s1/candidates/0/selected_claim"
         }
       ],
       "parent": "PARENT-S1_PARENT.json",
+      "parent_id": "S1_CASE01_CLEAN",
       "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S1-04.json",
-      "hash": "sha256:5d954e861da55170b53591f593e565d0e9e5003f3ca010ea38bdd5cdc72f39f5",
+      "hash": "sha256:c88ce6e6d18544febce1a6d6adfe1ebb63224d6f133828f1e555316bca125db9",
       "must_fire": "S1-CAND-02",
       "mutations": [
         {
           "after": "[]",
           "before": "[\"S02\"]",
+          "label": "[\"S02\"] -> []",
           "path": "/s1/candidates/0/anchors"
         }
       ],
       "parent": "PARENT-S1_PARENT.json",
+      "parent_id": "S1_CASE01_CLEAN",
       "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S1-05.json",
-      "hash": "sha256:5d954e861da55170b53591f593e565d0e9e5003f3ca010ea38bdd5cdc72f39f5",
+      "hash": "sha256:a1ba7fb4e4e3411955c07b8fff53261cdf32716a51c1c152087c938c9d327d96",
       "must_fire": "S1-CAND-01",
       "mutations": [
         {
-          "after": "C2 context-only",
-          "before": "<absent>",
-          "path": "/s1/candidates/-"
+          "after": "[{\"anchors\":[\"S02\"],\"claim_candidates\":[{\"id\":\"CC1\",\"support\":[\"S02\"],\"text\":\"three falls since June\"}],\"id\":\"C1\",\"salience\":{\"acuity\":\"MODERATE\",\"management_reference_spans\":[\"S03\"]},\"subject\":\"falls since June\"},{\"anchors\":[\"S01\"],\"claim_candidates\":[{\"id\":\"CC2\",\"support\":[\"S01\"],\"text\":\"known left MCA infarct\"}],\"id\":\"C2\",\"salience\":{\"acuity\":\"LOW\",\"management_reference_spans\":[]},\"subject\":\"old left MCA infarct\"}]",
+          "before": "[{\"anchors\":[\"S02\"],\"claim_candidates\":[{\"id\":\"CC1\",\"support\":[\"S02\"],\"text\":\"three falls since June\"}],\"id\":\"C1\",\"salience\":{\"acuity\":\"MODERATE\",\"management_reference_spans\":[\"S03\"]},\"subject\":\"falls since June\"}]",
+          "label": "<absent> -> C2 context-only",
+          "path": "/s1/candidates"
         }
       ],
       "parent": "PARENT-S1_PARENT.json",
+      "parent_id": "S1_CASE01_CLEAN",
       "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S1-06.json",
-      "hash": "sha256:5d954e861da55170b53591f593e565d0e9e5003f3ca010ea38bdd5cdc72f39f5",
+      "hash": "sha256:51c93933378baed8812c71ee56b40af53fbc75c87373352faec8d1456a6aefe2",
       "must_fire": "S1-AUTH-01",
       "mutations": [
         {
           "after": "true",
           "before": "<absent>",
+          "label": "<absent> -> true",
           "path": "/s1/candidates/0/status_current"
         }
       ],
       "parent": "PARENT-S1_PARENT.json",
+      "parent_id": "S1_CASE01_CLEAN",
       "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S2-01.json",
-      "hash": "sha256:2c4ce5bf6f4b960188bad52ce58bb537c4fe79fa80c68d6ba1696e74d6da9790",
+      "hash": "sha256:9767edff1ee42fb85b59621af80f81a0d55d5d71846b431935486c744e3455d9",
       "must_fire": "S2-REP-01",
       "mutations": [
         {
           "after": "[]",
           "before": "[\"S02\"]",
+          "label": "[\"S02\"] -> []",
           "path": "/s2/representations/0/support_refs"
         }
       ],
       "parent": "PARENT-S2_PARENT.json",
+      "parent_id": "S2_CASE01_CLEAN",
       "parent_type": "S2_OUTPUT"
     },
     {
       "artifact": "G0-S2-03.json",
-      "hash": "sha256:2c4ce5bf6f4b960188bad52ce58bb537c4fe79fa80c68d6ba1696e74d6da9790",
+      "hash": "sha256:dccd599db94a890158468e631a48047a1faab98abd930af0fc5d133b1c7444cd",
       "must_fire": "S2-TEMP-01",
       "mutations": [
         {
-          "after": "now",
-          "before": "2024-02 documented",
+          "after": "\"now\"",
+          "before": "\"2024-02 documented\"",
+          "label": "2024-02 documented -> now",
           "path": "/s2/adjudication/0/temporal"
         }
       ],
       "parent": "PARENT-S2_PARENT.json",
+      "parent_id": "S2_CASE01_CLEAN",
       "parent_type": "S2_OUTPUT"
     },
     {
       "artifact": "G0-S2-06.json",
-      "hash": "sha256:2c4ce5bf6f4b960188bad52ce58bb537c4fe79fa80c68d6ba1696e74d6da9790",
+      "hash": "sha256:e8ddbdce657d5e00530849bea2dc9ad662fc1933a911653f8fab52ec13ae3207",
       "must_fire": "S2-ADOPT-01",
       "mutations": [
         {
           "after": "null",
           "before": "false",
+          "label": "false -> null",
           "path": "/s2/adjudication/0/adoption"
         }
       ],
       "parent": "PARENT-S2_PARENT.json",
+      "parent_id": "S2_CASE01_CLEAN",
       "parent_type": "S2_OUTPUT"
     },
     {
       "artifact": "G0-S3-01.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:29f693ddcc63fc140c2c66a880967c28e47a8c598df0987709e310569d93238d",
       "must_fire": "S3-INC-01",
       "mutations": [
         {
           "after": "null",
-          "before": "R1",
+          "before": "\"R1\"",
+          "label": "R1 -> null",
           "path": "/s3/rendered/0/approved_representation"
         }
       ],
       "parent": "PARENT-S3_PARENT.json",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-02.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:30d319a0919f17aae41d1df0545c815d142824ad9a68a8b29acc36bfe6c9eb5d",
       "must_fire": "S3-SEL-01",
       "mutations": [
         {
-          "after": "R-999",
-          "before": "R1",
+          "after": "\"R-999\"",
+          "before": "\"R1\"",
+          "label": "R1 -> R-999",
           "path": "/s3/rendered/0/selected_rep"
         }
       ],
       "parent": "PARENT-S3_PARENT.json",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-04.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:b63a2bcf26ace3d31262ae427b00ecbedce1852b3b5b87cff50b6a50e0ea7cd1",
       "must_fire": "S3-ACCT-01",
       "mutations": [
         {
-          "after": "O07 unaccounted",
-          "before": "O07 recorded",
+          "after": "[{\"disposition\":\"HISTORICAL_CONTEXT\",\"object\":\"O01\"},{\"disposition\":\"HISTORICAL_CONTEXT\",\"object\":\"O02\"}]",
+          "before": "[{\"disposition\":\"HISTORICAL_CONTEXT\",\"object\":\"O01\"},{\"disposition\":\"HISTORICAL_CONTEXT\",\"object\":\"O02\"},{\"disposition\":\"MEDICATION_RECORD\",\"object\":\"O07\"}]",
+          "label": "O07 recorded -> O07 unaccounted",
           "path": "/s3/dispositions"
         }
       ],
       "parent": "PARENT-S3_PARENT.json",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-05.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:1718698a2e79cd6c244bf099fbfbf472344bf319567cec3150da1586cbf76de3",
       "must_fire": "S3-CAND-01",
       "mutations": [
         {
-          "after": "[] coverage",
-          "before": "C1 RENDERED",
+          "after": "[]",
+          "before": "[{\"candidate\":\"C1\",\"outcome\":\"RENDERED\"}]",
+          "label": "C1 RENDERED -> [] coverage",
           "path": "/s3/candidate_outcomes"
         }
       ],
       "parent": "PARENT-S3_PARENT.json",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-06.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:35ef0ab9798f4ec8708e65ea33e95e611472dbd0afa7b0eef7d7794531aa71b6",
       "must_fire": "S3-CAND-01",
       "mutations": [
         {
-          "after": "two exclusivity",
-          "before": "one outcome",
+          "after": "[{\"candidate\":\"C1\",\"outcome\":\"RENDERED\"},{\"basis\":[\"O03\"],\"candidate\":\"C1\",\"outcome\":\"NOT_RENDERED\",\"reason\":\"NO_APPROVED_REPRESENTATION\"}]",
+          "before": "[{\"candidate\":\"C1\",\"outcome\":\"RENDERED\"}]",
+          "label": "one outcome -> two exclusivity",
           "path": "/s3/candidate_outcomes"
         }
       ],
       "parent": "PARENT-S3_PARENT.json",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-07.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:9476c71676124f30444df87480c938ed61215033f553463df9d32003f9dd2075",
       "must_fire": "S3-CAND-01",
       "mutations": [
         {
-          "after": "unknown id C9",
-          "before": "<absent>",
-          "path": "/s3/candidate_outcomes/-"
+          "after": "[{\"candidate\":\"C1\",\"outcome\":\"RENDERED\"},{\"basis\":[\"O03\"],\"candidate\":\"C9\",\"outcome\":\"NOT_RENDERED\",\"reason\":\"NO_APPROVED_REPRESENTATION\"}]",
+          "before": "[{\"candidate\":\"C1\",\"outcome\":\"RENDERED\"}]",
+          "label": "<absent> -> unknown id C9",
+          "path": "/s3/candidate_outcomes"
         }
       ],
       "parent": "PARENT-S3_PARENT.json",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-08.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:7bad3e986f5ea1bd0ccc414b8288f8d012a3567859a22cac147c32d2e1835108",
       "must_fire": "S3-CAND-01",
       "mutations": [
         {
-          "after": "NOT_RENDERED equality",
-          "before": "RENDERED",
-          "path": "/s3/candidate_outcomes/0/outcome"
+          "after": "[{\"approved_representation\":\"R1\",\"problem\":\"C1\",\"selected_rep\":\"R1\"}]",
+          "before": "[]",
+          "label": "[] -> C1 rendered while outcome is NOT_RENDERED",
+          "path": "/s3/rendered"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json",
+      "parent": "PARENT-S3_PARENT_NOT_RENDERED.json",
+      "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-09.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:c83cf362e3a3e55dfb0af8395d7d48f99b47672c01dc8635b4759b2e9c88681a",
       "must_fire": "S3-CAND-01",
       "mutations": [
         {
-          "after": "missing reason",
-          "before": "<absent>",
-          "path": "/s3/candidate_outcomes/-"
+          "after": "null",
+          "before": "\"NO_APPROVED_REPRESENTATION\"",
+          "label": "NO_APPROVED_REPRESENTATION -> null",
+          "path": "/s3/candidate_outcomes/0/reason"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json",
+      "parent": "PARENT-S3_PARENT_NOT_RENDERED.json",
+      "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-10.json",
-      "hash": "sha256:fcb35ea606ddc4222a0c51414582960722a188e0f361550d7d25a6fe92bf49bd",
+      "hash": "sha256:af0ee84eddef7bb6210eee755fa8c3c9ce50df8326b16aa754892d4d8245bd8a",
       "must_fire": "S3-CAND-01",
       "mutations": [
         {
-          "after": "[] missing basis",
-          "before": "<absent>",
+          "after": "[]",
+          "before": "[\"O03\",\"O04\"]",
+          "label": "[\"O03\",\"O04\"] -> []",
           "path": "/s3/candidate_outcomes/0/basis"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json",
+      "parent": "PARENT-S3_PARENT_NOT_RENDERED.json",
+      "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S4-01.json",
-      "hash": "sha256:8f51a8a4dc4170102c59498d8945c0b9ebb8ba094970a824222de9e2a7efbbfc",
+      "hash": "sha256:18d2c054baeeb3bd3e0a8c1c46914e1fb5b25226b8ea1fa8487a41552ef15674",
       "must_fire": "S4-INC-01",
       "mutations": [
         {
-          "after": "0 problems",
-          "before": "1 problem",
+          "after": "[]",
+          "before": "[{\"id\":\"P1\",\"order\":1,\"source\":\"C1\"}]",
+          "label": "1 problem -> 0 problems",
           "path": "/s4/problems"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-02.json",
-      "hash": "sha256:f22e99be9a052ae4365874f87036cbd3c750e827765ff8e78002ee45cb7be17d",
+      "hash": "sha256:1b57746b4b4dbea3232e579f955c2a375965eb68e315b32520b53b5609511402",
       "must_fire": "S4-INC-01",
       "mutations": [
         {
-          "after": "P2 not rendered",
-          "before": "<absent>",
-          "path": "/s4/problems/-"
+          "after": "[{\"id\":\"P1\",\"order\":1,\"source\":\"C1\"},{\"id\":\"P2\",\"order\":2,\"source\":\"C9\"}]",
+          "before": "[{\"id\":\"P1\",\"order\":1,\"source\":\"C1\"}]",
+          "label": "<absent> -> P2 not rendered",
+          "path": "/s4/problems"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-04.json",
-      "hash": "sha256:fa82e586c7e5ed3722a5b6a9c2e74fcf1b206b68dfaf2b1a895711422f983fa7",
+      "hash": "sha256:f40521c1c28d173583f7f223fe66c48be30db6bad165e924c43a8895cbdbee78",
       "must_fire": "S4-MEM-01",
       "mutations": [
         {
-          "after": "O99",
-          "before": "<absent>",
-          "path": "/s4/units/0/members/-"
+          "after": "[\"O03\",\"O04\",\"O99\"]",
+          "before": "[\"O03\",\"O04\"]",
+          "label": "<absent> -> O99",
+          "path": "/s4/units/0/members"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-05.json",
-      "hash": "sha256:1b6f79ae67e49268a494ac8a58bde05ee110834d9972448ff3dcfede11637ca6",
+      "hash": "sha256:729d72bb6e510d85985945c9956d952d6d5f414d35a3c7545822c217d054ca10",
       "must_fire": "S4-REP-01",
       "mutations": [
         {
-          "after": "R-999",
-          "before": "R1",
+          "after": "\"R-999\"",
+          "before": "\"R1\"",
+          "label": "R1 -> R-999",
           "path": "/s4/units/0/representation"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-06.json",
-      "hash": "sha256:bd8c00c058148e29507ca2cd2947ca8608e9b9f3ba42ab7687766e6cb84c5331",
+      "hash": "sha256:cf63d7a95849f71b9b3c8f75d6b339dd94429845ff2401a85e388f5d7ed0198b",
       "must_fire": "S4-COMP-01",
       "mutations": [
         {
-          "after": "U2 removed",
-          "before": "U2 present",
+          "after": "[{\"id\":\"U1\",\"members\":[\"O03\",\"O04\"],\"operator\":\"FACT\",\"order\":10,\"problem\":\"P1\",\"representation\":\"R1\",\"roles\":{\"O03\":\"HEAD\",\"O04\":\"MODIFIER\"}},{\"id\":\"U3\",\"members\":[\"O06\"],\"operator\":\"PLAN\",\"order\":30,\"problem\":\"P1\",\"representation\":\"R1\",\"roles\":{\"O06\":\"HEAD\"}}]",
+          "before": "[{\"id\":\"U1\",\"members\":[\"O03\",\"O04\"],\"operator\":\"FACT\",\"order\":10,\"problem\":\"P1\",\"representation\":\"R1\",\"roles\":{\"O03\":\"HEAD\",\"O04\":\"MODIFIER\"}},{\"id\":\"U2\",\"members\":[\"O05\"],\"operator\":\"PLAN\",\"order\":20,\"problem\":\"P1\",\"representation\":\"R1\",\"roles\":{\"O05\":\"HEAD\"}},{\"id\":\"U3\",\"members\":[\"O06\"],\"operator\":\"PLAN\",\"order\":30,\"problem\":\"P1\",\"representation\":\"R1\",\"roles\":{\"O06\":\"HEAD\"}}]",
+          "label": "U2 present -> U2 removed",
           "path": "/s4/units"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-07.json",
-      "hash": "sha256:0cb6519297cb70980274cf8534db93fcbb2a88eb37358f6ecca9fe8bc3281941",
+      "hash": "sha256:6ef550549cabb03f74222d61b7ce7e48a5993fe5ad334d893dd75868797a2f64",
       "must_fire": "S4-PROJ-01",
       "mutations": [
         {
-          "after": "adoption schema",
+          "after": "true",
           "before": "<absent>",
-          "path": "/s4_input_view/-"
+          "label": "<absent> -> adoption schema",
+          "path": "/s4_input_view/adoption"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-08.json",
-      "hash": "sha256:b647b5883d4bf54e2e746ef43c5fd28bd0aa2a7bcf47914f780b7061036f4800",
+      "hash": "sha256:72c02676f6054a4dc2b4f00d897ea58e86663dcf410f46014a40df3c5fa7e9e1",
       "must_fire": "S4-PROJ-01",
       "mutations": [
         {
-          "after": "adds O05 invented",
+          "after": "[\"O03\",\"O04\",\"O05\"]",
           "before": "[\"O03\",\"O04\"]",
+          "label": "[\"O03\",\"O04\"] -> adds O05 invented",
           "path": "/s4_input_view/from_s2/members"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-09.json",
-      "hash": "sha256:7b902e8cd1e2198ff6ac07cf24b99f98b1d5d54cf26746f74de652e9e2c3b1c6",
+      "hash": "sha256:21824833f113a7b7a3dc72275dbead31be5b9f59e7ff4b5e94aaa1e34b4cf7ce",
       "must_fire": "S4-PROJ-01",
       "mutations": [
         {
-          "after": "S3-owned field under S2 wrong-owner group",
+          "after": "\"R-999\"",
           "before": "<absent>",
+          "label": "<absent> -> S3-owned field under S2 wrong-owner group",
           "path": "/s4_input_view/from_s2/selected_rep"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-10.json",
-      "hash": "sha256:391da6b535bc4659051d9f56f6843b5159f2d6298fcd457e56d7a38513cf27bf",
+      "hash": "sha256:130b1fe1e7bab880ecd7212c81781f7d8f0f7fce6fc0ff522dc6175b0b1f7d31",
       "must_fire": "S4-PROJ-01",
       "mutations": [
         {
-          "after": "fabricated payload",
-          "before": "S03 payload",
-          "path": "/s4_input_view/from_ingest/O05"
+          "after": "\"vitamin D\"",
+          "before": "\"check vitamin D\"",
+          "label": "S03 payload -> fabricated payload",
+          "path": "/s4_input_view/from_ingest/O05/payload"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-11.json",
-      "hash": "sha256:307938288790cf89abe111cd47fbc2905098fd3afe84e69de0f6e3433482dd2b",
+      "hash": "sha256:b47379ae02e55fe5e6ac1dc13bb80ea0e19ec4ba8ced0b11136e3eab895eb5bd",
       "must_fire": "S4-PROJ-01",
       "mutations": [
         {
-          "after": "[[O03,O04]] authored",
+          "after": "[[\"O03\",\"O04\"]]",
           "before": "[]",
+          "label": "[] -> [[O03,O04]] authored",
           "path": "/s4_input_view/from_s2/duplicate_groups"
         }
       ],
       "parent": "PARENT-S4_PARENT.json",
+      "parent_id": "S4_CASE01_CLEAN",
       "parent_type": "S4_BLUEPRINT"
     }
   ],
   "specificity_policy": "FULL_SILENCE-WITHIN-LAYER",
   "variation": {
     "artifact": "VARIATION.json",
-    "basis": "identical semantics, all ids renamed",
+    "basis": "identical semantics, all content ids renamed",
     "expect": "zero findings",
-    "hash": "sha256:0dbb07a3d220a6741218728f221371936cde8462e9115f044e2f2c8b6d80562f",
-    "parent": "PARENT-S3_PARENT.json"
+    "hash": "sha256:24d6f27a91f5f6671118195676f86591b6cf12f277a88db47058e84a4636069f",
+    "parent": "PARENT-S3_PARENT.json",
+    "parent_id": "S3_CASE01_RENDERED_VARIATION"
   }
 }

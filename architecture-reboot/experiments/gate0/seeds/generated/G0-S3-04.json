@@ -1,5 +1,6 @@
 {
   "case": "CASE-01",
+  "parent_id": "S3_CASE01_RENDERED_CLEAN",
   "parent_type": "S3_OUTPUT",
   "registry": "PILOT-2",
   "s3": {
@@ -17,10 +18,6 @@
       {
         "disposition": "HISTORICAL_CONTEXT",
         "object": "O02"
-      },
-      {
-        "disposition": "MEDICATION_RECORD",
-        "object": "O07"
       }
     ],
     "rendered": [

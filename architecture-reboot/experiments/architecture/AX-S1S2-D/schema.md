@@ -33,7 +33,8 @@ adjudication:
     evidence: [S02]                  # non-empty when adoption is true, else null
 relations:                            # object-level, source-grounded
   - { type: SUPPORTS, from: O04, to: O03 }
-claim_relations: []                   # among claim candidates; [] when none
+claim_relations:                      # per selected representation; [] when none
+  - { problem: C1, representation: R1, relation: COMPETING, claims: [CC1, CC2] }
 duplicate_groups: []                  # [[O03, O04]] when equivalence holds
 representations:
   - id: R1
@@ -44,7 +45,9 @@ representations:
 ```
 
 `representations[]` is the approved set. `selection_safe` describes whether an entry may coexist with
-another approved entry for the same problem.
+another approved entry for the same problem. `claim_relations[].problem` and
+`claim_relations[].representation` are the selectors used by the S4 projection; an entry without
+either is a schema violation.
 
 ## S3 output
 
@@ -53,7 +56,7 @@ rendered:
   - { problem: C1, approved_representation: R1, selected_rep: R1 }
 candidate_outcomes:                   # exactly one per S1 problem candidate
   - { candidate: C1, outcome: RENDERED }
-  - { candidate: C2, outcome: NOT_RENDERED, reason: NO_APPROVED_REPRESENTATION, basis: [S02] }
+  - { candidate: C2, outcome: NOT_RENDERED, reason: NO_APPROVED_REPRESENTATION, basis: [O01, O02] }
 retained: [O03, O04, O05, O06]
 use: { O03: C1, O04: C1, O05: C1, O06: C1 }
 reuse: []                             # [{object: O04, problems: [C1, C7]}] when reused
@@ -61,24 +64,258 @@ dispositions:
   - { object: O01, disposition: HISTORICAL_CONTEXT }
 ```
 
-`NOT_RENDERED` requires a typed `reason`. `basis` is required when the reason family depends on
-upstream state. `retained ∪ dispositions` equals the substrate object set.
+`NOT_RENDERED` requires a typed `reason` from `REASON-1` below. A null or absent reason is a missing
+typed reason; `basis` is not evaluated in that case. `basis` is a set of source object ids required
+only when the reason's registry entry says it is required. `retained ∪ dispositions` equals the
+substrate object set.
 
-## S4 input view — observable
+### S3 reason registry — REASON-1
 
-Recorded as an artifact so `S4-PROJ-01` is scored, not asserted. Every field is **copied** from its
-source; the projection authors nothing.
+This is the experiment-local registry for Gate 0. It is not a production taxonomy. `S3-CAND-01` checks
+membership, the reason→basis requirement, non-emptiness when required, uniqueness, and target
+existence. It does not check whether the reason is semantically correct; that is the separate semantic
+audit named in `predicates.md`.
 
-| group | fields | copied from |
-|---|---|---|
-| `from_s1` | `problem`, `salience` | S1 candidate |
-| `from_s3` | `selected_rep`, `rendered`, `retained`, `use`, `reuse` | S3 output |
-| `from_s2` | `members`, `relations`, `claim_relations`, `duplicate_groups` | S2 output |
-| `from_ingest` | per object: `payload`, `provenance`, `temporal` or `status` | I3/I4 |
-| `from_contracts` | `section`, `operator_set` | frozen contracts |
+<!-- BEGIN:REASON_REGISTRY -->
+```json
+{
+  "registry": "REASON-1",
+  "scope": "GATE0-C1, S3-CAND-01 only; experiment-local, not a production taxonomy",
+  "outcomes": ["RENDERED", "NOT_RENDERED"],
+  "reasons": [
+    {
+      "code": "NO_APPROVED_REPRESENTATION",
+      "requires_basis": true,
+      "basis_target": "object",
+      "basis_min_items": 1,
+      "basis_must_exist_in": "oracle.objects",
+      "basis_unique": true,
+      "meaning": "S2 approved no representation for the candidate; basis lists the source object ids whose adjudication state establishes the absence."
+    },
+    {
+      "code": "NOT_CLINICAL",
+      "requires_basis": false,
+      "basis_target": null,
+      "basis_min_items": 0,
+      "basis_must_exist_in": null,
+      "basis_unique": false,
+      "meaning": "The candidate is outside the clinical scope of the note; no upstream state reference is required."
+    }
+  ],
+  "rules": [
+    "RENDERED carries no reason and no basis.",
+    "NOT_RENDERED carries exactly one reason from this registry.",
+    "a null or absent reason is a missing typed reason; basis is not evaluated when the reason is missing.",
+    "when the reason is present, basis is required when requires_basis is true and must be absent otherwise.",
+    "every basis item is an object id present in oracle.objects.",
+    "basis is a set: duplicate entries are a violation.",
+    "unknown candidate ids are a violation.",
+    "reason correctness is a separate semantic audit, not an S3-CAND-01 finding."
+  ]
+}
+```
+<!-- END:REASON_REGISTRY -->
 
-Any key outside these groups is a packaging violation. Ordering is absent: no ordering contract exists
-yet, and `S4-ORD-01` is `PENDING_DEPENDENCY`.
+The clean NOT_RENDERED calibration parent `S3_CASE01_NOT_RENDERED_CLEAN` is the reference valid
+output: one `C1` outcome, `rendered: []`, reason `NO_APPROVED_REPRESENTATION`, basis `[O03, O04]`, and
+otherwise unchanged object accounting. "Clean" means it yields no `S3-CAND-01` finding; it does not
+assert that C1 should clinically fail to render. Semantic correctness of the reason is the separate
+audit named in `predicates.md`, not a Gate 0 structural check.
+
+## S4 input view — exact source map
+
+`S4_INPUT_VIEW` is assembled at the seam. Every value is copied from the source named below. The
+projection authors nothing. The map is executable: `make_seeds.py` reads this block, applies one `op`
+per destination, and fails if a rule is missing, duplicated, or unknown.
+
+**Gate 0 shape:** exactly one rendered problem. The frozen shape is singular; a case with zero or more
+than one rendered problem needs a new schema identity, not an improvised shape. `P`, `R`, `M`, and `T`
+below are the only selection variables.
+
+- `P` = `S3_PARENT.s3.rendered[0].problem`
+- `R` = `S3_PARENT.s3.rendered[0].selected_rep`
+- `M` = `S2_PARENT.s2.representations[id=R].members`
+- `T` = `S3_PARENT.s3.retained`
+
+<!-- BEGIN:PROJECTION_MAP -->
+```json
+{
+  "schema": "SCHEMA-2",
+  "view": "S4_INPUT_VIEW",
+  "scope": "GATE0-C1: exactly one rendered problem. If S3.rendered has zero or more than one entry, generation fails.",
+  "variables": {
+    "P": "S3_PARENT.s3.rendered[0].problem",
+    "R": "S3_PARENT.s3.rendered[0].selected_rep",
+    "M": "S2_PARENT.s2.representations[id=R].members",
+    "T": "S3_PARENT.s3.retained"
+  },
+  "groups": ["from_s1", "from_s3", "from_s2", "from_ingest", "from_contracts"],
+  "contracts": {
+    "section": "AP",
+    "sections": ["AP"],
+    "operator_set": "PILOT-OPERATORS-1",
+    "operators": ["FACT", "REASONING", "CLAIM", "PLAN"]
+  },
+  "rules": [
+    {
+      "dst": "/from_s1/problem",
+      "op": "s1_problem",
+      "owner": "S1",
+      "source": "S1_PARENT.json",
+      "source_path": "/s1/candidates[id=P]/id",
+      "condition": "P is the unique rendered problem",
+      "required": "required",
+      "transform": "copy id"
+    },
+    {
+      "dst": "/from_s1/salience",
+      "op": "s1_salience",
+      "owner": "S1",
+      "source": "S1_PARENT.json",
+      "source_path": "/s1/candidates[id=P]/salience",
+      "condition": "same candidate as /from_s1/problem",
+      "required": "required",
+      "transform": "copy object"
+    },
+    {
+      "dst": "/from_s3/selected_rep",
+      "op": "s3_selected_rep",
+      "owner": "S3",
+      "source": "S3_PARENT.json",
+      "source_path": "/s3/rendered[problem=P]/selected_rep",
+      "condition": "exactly one rendered entry for P",
+      "required": "required",
+      "transform": "copy id"
+    },
+    {
+      "dst": "/from_s3/rendered",
+      "op": "s3_rendered",
+      "owner": "S3",
+      "source": "S3_PARENT.json",
+      "source_path": "/s3/rendered[i]/problem",
+      "condition": "all i, source order",
+      "required": "required",
+      "transform": "collect problem ids"
+    },
+    {
+      "dst": "/from_s3/retained",
+      "op": "s3_retained",
+      "owner": "S3",
+      "source": "S3_PARENT.json",
+      "source_path": "/s3/retained[i]",
+      "condition": "all i, source order",
+      "required": "required",
+      "transform": "collect ids"
+    },
+    {
+      "dst": "/from_s3/use",
+      "op": "s3_use",
+      "owner": "S3",
+      "source": "S3_PARENT.json",
+      "source_path": "/s3/use/{object}",
+      "condition": "object keys must be a subset of T",
+      "required": "required",
+      "transform": "copy map"
+    },
+    {
+      "dst": "/from_s3/reuse",
+      "op": "s3_reuse",
+      "owner": "S3",
+      "source": "S3_PARENT.json",
+      "source_path": "/s3/reuse[i]",
+      "condition": "all i, source order",
+      "required": "required",
+      "transform": "copy list"
+    },
+    {
+      "dst": "/from_s2/members",
+      "op": "s2_members",
+      "owner": "S2",
+      "source": "S2_PARENT.json",
+      "source_path": "/s2/representations[id=R]/members[i]",
+      "condition": "R is from_s3.selected_rep; all i, source order",
+      "required": "required",
+      "transform": "copy ids"
+    },
+    {
+      "dst": "/from_s2/relations",
+      "op": "s2_relations",
+      "owner": "S2",
+      "source": "S2_PARENT.json",
+      "source_path": "/s2/relations[i]",
+      "condition": "from in M and to in M; source order",
+      "required": "required",
+      "transform": "filter and copy"
+    },
+    {
+      "dst": "/from_s2/claim_relations",
+      "op": "s2_claim_relations",
+      "owner": "S2",
+      "source": "S2_PARENT.json",
+      "source_path": "/s2/claim_relations[i]",
+      "condition": "problem == P and representation == R; source order",
+      "required": "required",
+      "transform": "filter and copy"
+    },
+    {
+      "dst": "/from_s2/duplicate_groups",
+      "op": "s2_duplicate_groups",
+      "owner": "S2",
+      "source": "S2_PARENT.json",
+      "source_path": "/s2/duplicate_groups[i]",
+      "condition": "set(group) intersects M; source order",
+      "required": "required",
+      "transform": "filter and copy"
+    },
+    {
+      "dst": "/from_ingest",
+      "op": "oracle_ingest",
+      "owner": "I3/I4",
+      "source": "fixtures/CASE-01/oracle.json",
+      "source_path": "/objects[{object in T}]/{text,provenance,temporal|status}",
+      "condition": "one entry per T; exactly one of temporal/status",
+      "required": "payload and provenance required; exactly one of temporal/status",
+      "transform": "text→payload; copy provenance; copy temporal or status",
+      "expands": {
+        "/from_ingest/{object}/payload": "/objects[{object in T}]/text",
+        "/from_ingest/{object}/provenance": "/objects[{object in T}]/provenance",
+        "/from_ingest/{object}/temporal": "/objects[{object in T}]/temporal when present",
+        "/from_ingest/{object}/status": "/objects[{object in T}]/status when temporal is absent"
+      }
+    },
+    {
+      "dst": "/from_contracts/section",
+      "op": "contract_section",
+      "owner": "frozen contracts",
+      "source": "SCHEMA-2 contracts block",
+      "source_path": "#/contracts/section",
+      "condition": "always",
+      "required": "required",
+      "transform": "copy constant"
+    },
+    {
+      "dst": "/from_contracts/operator_set",
+      "op": "contract_operator_set",
+      "owner": "frozen contracts",
+      "source": "SCHEMA-2 contracts block",
+      "source_path": "#/contracts/operator_set",
+      "condition": "always",
+      "required": "required",
+      "transform": "copy constant"
+    }
+  ]
+}
+```
+<!-- END:PROJECTION_MAP -->
+
+`from_contracts` is deliberately narrow for Gate 0: section `AP` and operator set
+`PILOT-OPERATORS-1 = {FACT, REASONING, CLAIM, PLAN}`. No style contract is projected because this
+campaign freezes none.
+No ordering contract is projected because `S4-ORD-01` is `PENDING_DEPENDENCY`. `PILOT-2` is the
+predicate registry identity and is not used as an operator contract.
+
+Any key outside the five mapped groups is a packaging violation. Any value that does not match its
+mapped source path is a packaging violation. Ordering is absent from S4's input view.
 
 ## S4 blueprint
 
@@ -107,7 +344,7 @@ units:
 | `S2-REP-01` | `representations[*].support_refs` non-empty |
 | `S2-TEMP-01` | `adjudication[*].temporal` vs substrate |
 | `S2-ADOPT-01` | `adjudication[*].adoption` vs oracle |
-| `S3-CAND-01` | `candidate_outcomes` coverage, exclusivity, unknown ids, reason, basis, equality with `rendered` |
+| `S3-CAND-01` | `candidate_outcomes` coverage, exclusivity, unknown ids, REASON-1 reason/basis, equality with `rendered` |
 | `S3-INC-01` | `rendered[*]` with null `approved_representation` |
 | `S3-SEL-01` | `selected_rep` in the approved set |
 | `S3-ACCT-01` | `retained` ∪ `dispositions` = substrate set |
@@ -115,4 +352,4 @@ units:
 | `S4-MEM-01` | `units[*].members` subset of `retained` |
 | `S4-COMP-01` | every problem in S4 ∩ S3 has a claim-bearing unit; every retained plan item has a plan unit |
 | `S4-REP-01` | `units[*].representation` = S3 `selected_rep` |
-| `S4-PROJ-01` | `s4_input_view` keys within the five groups; values trace to their source |
+| `S4-PROJ-01` | `s4_input_view` against the exact PROJECTION_MAP above |

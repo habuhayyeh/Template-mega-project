@@ -1,11 +1,12 @@
 {
   "case": "CASE-01",
+  "parent_id": "S2_CASE01_CLEAN",
   "parent_type": "S2_OUTPUT",
   "registry": "PILOT-2",
   "s2": {
     "adjudication": [
       {
-        "adoption": false,
+        "adoption": null,
         "evidence": null,
         "object": "O01",
         "temporal": "2024-02 documented"

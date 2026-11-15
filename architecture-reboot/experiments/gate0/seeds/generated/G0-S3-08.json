@@ -1,12 +1,18 @@
 {
   "case": "CASE-01",
+  "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
   "parent_type": "S3_OUTPUT",
   "registry": "PILOT-2",
   "s3": {
     "candidate_outcomes": [
       {
+        "basis": [
+          "O03",
+          "O04"
+        ],
         "candidate": "C1",
-        "outcome": "RENDERED"
+        "outcome": "NOT_RENDERED",
+        "reason": "NO_APPROVED_REPRESENTATION"
       }
     ],
     "dispositions": [

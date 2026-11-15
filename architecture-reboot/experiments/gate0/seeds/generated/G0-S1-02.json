@@ -1,5 +1,6 @@
 {
   "case": "CASE-01",
+  "parent_id": "S1_CASE01_CLEAN",
   "parent_type": "S1_OUTPUT",
   "registry": "PILOT-2",
   "s1": {
@@ -24,6 +25,7 @@
             "S03"
           ]
         },
+        "selected_claim": "CC1",
         "subject": "falls since June"
       }
     ]

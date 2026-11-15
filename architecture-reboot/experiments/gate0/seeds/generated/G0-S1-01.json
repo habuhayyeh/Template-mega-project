@@ -1,10 +1,12 @@
 {
   "case": "CASE-01",
+  "parent_id": "S1_CASE01_CLEAN",
   "parent_type": "S1_OUTPUT",
   "registry": "PILOT-2",
   "s1": {
     "candidates": [
       {
+        "adopted": true,
         "anchors": [
           "S02"
         ],

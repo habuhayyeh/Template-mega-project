@@ -1,0 +1,48 @@
+{
+  "case": "CASE-01",
+  "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
+  "parent_type": "S3_OUTPUT",
+  "registry": "PILOT-2",
+  "s3": {
+    "candidate_outcomes": [
+      {
+        "basis": [
+          "O03",
+          "O04"
+        ],
+        "candidate": "C1",
+        "outcome": "NOT_RENDERED",
+        "reason": "NO_APPROVED_REPRESENTATION"
+      }
+    ],
+    "dispositions": [
+      {
+        "disposition": "HISTORICAL_CONTEXT",
+        "object": "O01"
+      },
+      {
+        "disposition": "HISTORICAL_CONTEXT",
+        "object": "O02"
+      },
+      {
+        "disposition": "MEDICATION_RECORD",
+        "object": "O07"
+      }
+    ],
+    "rendered": [],
+    "retained": [
+      "O03",
+      "O04",
+      "O05",
+      "O06"
+    ],
+    "reuse": [],
+    "use": {
+      "O03": "C1",
+      "O04": "C1",
+      "O05": "C1",
+      "O06": "C1"
+    }
+  },
+  "schema": "SCHEMA-2"
+}

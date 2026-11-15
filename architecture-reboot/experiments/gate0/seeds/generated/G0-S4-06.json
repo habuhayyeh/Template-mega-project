@@ -1,5 +1,6 @@
 {
   "case": "CASE-01",
+  "parent_id": "S4_CASE01_CLEAN",
   "parent_type": "S4_BLUEPRINT",
   "registry": "PILOT-2",
   "s4": {
@@ -46,7 +47,7 @@
   },
   "s4_input_view": {
     "from_contracts": {
-      "operator_set": "PILOT-2",
+      "operator_set": "PILOT-OPERATORS-1",
       "section": "AP"
     },
     "from_ingest": {

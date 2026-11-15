@@ -46,31 +46,46 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 
 ## 4. What is stale / unbuilt
 
-- **Execution package:** rebuilt, source-first, but the source contract is **not accepted** by review.
+- **Execution package:** source-first rebuild now carries an executable projection map, a frozen
+  experiment-local reason registry, and a clean NOT_RENDERED S3 parent. The source contract is
+  **pending independent review**; do not call it accepted.
 - **Scorer:** not built. **Gate 0:** unrun. **Doximity:** unrun. **Phase 0:** untouched and stale.
 
 ## 5. Exact position
 
-HEAD at handoff: see `git log -1`. Last substantive commit: generator constructs `S4_INPUT_VIEW`.
+HEAD at handoff: see `git log -1`. Last substantive commit: review-078 four-blocker source pass.
 
-`python architecture-reboot/tools/make_seeds.py` builds the package:
-4 layer-specific parents → 27 seeds → `MANIFEST.json`. **A second run must produce zero diff**; that is
-a build failure condition, not a warning.
+`python architecture-reboot/tools/make_seeds.py` builds:
+5 clean parents across 4 parent types → 27 seeds → `MANIFEST.json`. **A second run must produce zero
+diff**; that is a build failure condition, not a warning. The build also checks every seed is a real
+non-noop mutation and differs from its parent at exactly one declared path; 27/27 are checked, with 0
+no-op and 0 multi-diff seeds. The manifest records the checked before/after values.
 
-Current counts: 4 clean parents · 27 seeds · 16 active predicates · campaign `GATE0-C1` ·
-registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle `ORACLE-2.0`.
+Current counts: 5 clean calibration parents · 4 parent types · 27 seeds · 16 active predicates ·
+campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
+`ORACLE-2.0` · reason registry `REASON-1` · operator set `PILOT-OPERATORS-1`.
 
-## 6. The four open blockers (review 078)
+Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
+`S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-1. **Exact nested source→destination path map** for `S4_INPUT_VIEW`. Group-level only today; the
-   reviewer wants per-field provenance, e.g. `from_s2.members[i] ← S2.representations[0].members[i]`.
-2. **Gate 0 procedure still says "unrelated family"** in body/pass-criteria while the header says
-   `FULL_SILENCE-WITHIN-LAYER`. Align every occurrence.
-3. **S3 reason registry missing**: no `reason` vocabulary, no reason→basis requirement map, no valid
-   basis target type. Schema example and generator use different labels. Needs a clean `NOT_RENDERED`
-   parent so equality / reason / basis seeds stop overlapping.
-4. **Parent identity tracking**: adding a second S3 parent means more than four parents across four
-   types; track parent identity separately from parent type.
+## 6. Review 078 four-blocker pass — addressed, pending review
+
+**Review 079 regression is closed.** The mutation function now runs for every parent type; the build
+rejects a no-op copy and any seed whose actual diff does not match exactly one declared path. The
+manifest mutation record is derived from the checked diff.
+
+1. **Exact S4 source map.** `schema.md::PROJECTION_MAP` freezes destination, owner, source path,
+   selector, requirement and transform for all 14 mapped rules. `make_seeds.py` reads the block and
+   constructs `S4_INPUT_VIEW`; `S4_PARENT.json` carries no projection.
+2. **Gate 0 specificity.** `00-GATE0-MANIFEST.md` now uses `FULL_SILENCE-WITHIN-LAYER` in the model,
+   seed requirement, procedure and pass criteria.
+3. **S3 reason registry.** `schema.md::REASON_REGISTRY` freezes `REASON-1`, the reason→basis map, the
+   `object` basis target type, non-empty and reference-existence rules. `S3_CASE01_NOT_RENDERED_CLEAN`
+   is the valid reference; equality/reason/basis seeds derive from it.
+4. **Parent identity.** Every parent carries `parent_id`; the manifest keys `clean_parents` by identity
+   and counts types separately from parents.
+
+No scorer, no Gate 0 run, no Doximity, no Phase 0.
 
 ## 7. Working rules that matter
 
@@ -88,11 +103,7 @@ registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
 - Do not edit `phase0/CHANGE_LEDGER.md` — Phase 0 is a stale control plane and does not govern the
   architecture. Design changes go in `DESIGN_CHANGE_LEDGER.md`.
 
-## 8. Your task
+## 8. Next
 
-Close blockers 1–4 as source edits, regenerate twice with zero diff, and hand off in
-`channel/to-chatgpt.md` with: commit hash, changed-file list, parent count by type, active predicate
-count, seed count per predicate, pending predicates, identities, governing hashes, and explicit
-confirmation that no scorer exists.
-
-Then stop. The reviewer inspects the source contract before any scorer is written.
+The reviewer inspects the source contract before any scorer is written. Do not build the scorer, run
+Gate 0, or touch Doximity/Phase 0 in this pass.

@@ -41,7 +41,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S3-SEL-02` | SEMANTIC | S3 | S3 synthesises no representation and merges none | 05,06 |
 | `S3-INC-01` | MECHANICAL | S3 | no A/P problem is rendered without an approved representation — applies to **every rendered A/P problem in every case**, not only the cases expected to trip it | all |
 | `S3-ACCT-01` | MECHANICAL | S3 | every substrate object is either used or carries a disposition entry | all |
-| `S3-CAND-01` | MECHANICAL | S3 | coverage: every S1 problem-candidate id has an outcome; exclusivity: exactly one outcome per candidate; equality: the RENDERED set equals `rendered[]`. Typed reason required on NOT_RENDERED, with basis refs where the reason family depends on upstream state; unknown candidate ids are a violation; the correctness of a reason is a separate semantic audit | all |
+| `S3-CAND-01` | MECHANICAL | S3 | coverage: every S1 problem-candidate id has an outcome; exclusivity: exactly one outcome per candidate; equality: the RENDERED set equals `rendered[]`. NOT_RENDERED requires a reason from `REASON-1`; basis is required exactly when the registry says so, must be non-empty, unique, and target object ids present in the oracle; unknown candidate ids are a violation; the correctness of a reason is a separate semantic audit | all |
 | `S3-BODY-01` | MECHANICAL | S3 | body-only objects are retained without being promoted to A/P problems | 07,08,10 |
 
 ## S4 family
@@ -52,7 +52,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S4-REP-01` | MECHANICAL | S4 | every `units[].representation` equals the S3 `selected_rep` for that problem, compared by id | all |
 | `S4-ORD-01` | MECHANICAL · `PENDING_DEPENDENCY` | S4 | problem and unit order follow the ordering contract using S1 salience inputs. No frozen ordering oracle or salience value set exists yet; not scoreable until both are frozen | all |
 | `S4-MEM-01` | MECHANICAL | S4 | every unit member exists in the retained-use map | all |
-| `S4-PROJ-01` | MECHANICAL | S4 | every field S4 reads is in the frozen `S4_INPUT_VIEW` projection for selected/retained content; the projection schema is frozen; every field must trace to an allowed source interface; no unselected or non-required state; no semantic value may be introduced by the projection. Proves packaging only, not runtime non-leakage | all |
+| `S4-PROJ-01` | MECHANICAL | S4 | every field S4 reads is in the frozen `S4_INPUT_VIEW` projection for selected/retained content; the projection schema and exact source map are frozen in `schema.md::PROJECTION_MAP`; every field must match its mapped source path and owner; no unselected or non-required state; no semantic value may be introduced by the projection. Proves packaging only, not runtime non-leakage | all |
 | `S4-COMP-01` | MECHANICAL | S4 | domain is **S4.problems ∩ S3.rendered** — the intersection, not either set alone. Within it, every problem has a unit whose operator is a claim-bearing operator (`FACT`, `REASONING`, `CLAIM`); every plan item S3 retained has a `PLAN` unit. S4 completeness is measured against S3's retained set, not against the source — otherwise the predicate re-decides retention and steals S3's authority | all |
 
 ---
@@ -87,7 +87,7 @@ Not active: `S1-BODY-01`, `S2-REP-02`, `S2-CONF-01` (no pilot case produces the 
 1. A predicate is scored per case, per repetition.
 2. `MECHANICAL` disagreement between repetitions is a defect, not variance.
 3. `SEMANTIC` predicates require 3/3 agreement. Two of three is **`NONCONFORMANT` with a reproducibility disagreement** recorded alongside it — the model's answer is wrong in at least one run and unstable across runs. `UNSCORED` is reserved for insufficient valid runs or a pending prerequisite, never for disagreement. Calibration is a separate artifact and is not re-run here.
-4. A false positive on an unrelated family voids that predicate's result — over-firing is not evidence.
+4. A false positive on any other active predicate in the same layer voids that predicate's result — over-firing is not evidence.
 5. First divergence is recorded by predicate id and owner; a run with two divergences reports both.
 
 ## Not yet scoreable

@@ -1,5 +1,6 @@
 {
   "case": "CASE-01",
+  "parent_id": "S1_CASE01_CLEAN",
   "parent_type": "S1_OUTPUT",
   "registry": "PILOT-2",
   "s1": {
@@ -25,6 +26,26 @@
           ]
         },
         "subject": "falls since June"
+      },
+      {
+        "anchors": [
+          "S01"
+        ],
+        "claim_candidates": [
+          {
+            "id": "CC2",
+            "support": [
+              "S01"
+            ],
+            "text": "known left MCA infarct"
+          }
+        ],
+        "id": "C2",
+        "salience": {
+          "acuity": "LOW",
+          "management_reference_spans": []
+        },
+        "subject": "old left MCA infarct"
       }
     ]
   },
