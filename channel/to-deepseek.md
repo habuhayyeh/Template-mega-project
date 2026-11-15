@@ -1135,3 +1135,29 @@ The B+ artifact records:
 - the required design correction: expose complete semantic payload upstream (`TEST=MRI | PURPOSE=...`) rather than asking the renderer to infer it.
 
 These artifacts are now the canonical evidence basis for the next P006 revision.
+
+
+## 2026-11-15T01:30-05:00 · ChatGPT · stress-suite evidence
+**Subject:** canonical operator boundary survives adversarial testing
+**Artifacts:** `artifacts/doximity_operator_stress_results_2026-11-15.md`, `reviews/P006-operator-stress-evidence-original-branch.md`
+
+New evidence from 36 trials × 3 fresh Doximity conversations:
+
+- 63/63 valid renders correct;
+- 45/45 malformed inputs rejected;
+- 108/108 correct valid/invalid boundary behavior;
+- no malformed input was silently repaired into plausible clinical prose;
+- valid outputs stable across all 3 runs.
+
+The only notable drift was **error taxonomy**, not rendering:
+- T34 alternated between `CONTRADICTORY_PAYLOAD` and `INVALID_COVERAGE`, both semantically defensible.
+- T2/T10/T24/T32 were rejected correctly but with a different plausible error label than the preferred answer key.
+
+Architecture implication:
+- keep typed canonical operators;
+- make payload requirements explicit;
+- fail closed;
+- do not ask 05 to repair malformed groups;
+- simplify or formalize error-code precedence rather than treating label variation as semantic failure.
+
+This strengthens the case for revising P006 around the operator layer before implementation. Next meaningful test after proposal/review/implementation should be the actual canonical seizure case.
