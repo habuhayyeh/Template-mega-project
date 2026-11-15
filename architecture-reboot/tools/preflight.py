@@ -45,13 +45,20 @@ STALE_MARKERS = [
     '27/27',
     'unrelated family',
 ]
-FORBIDDEN_PATHS = [
-    'architecture-reboot/CONSENSUS.md',
-    'architecture-reboot/CONSENSUS_ARCHITECTURE_v0.1.md',
-    'architecture-reboot/CONSENSUS_SUBMODULE_INTERFACES_v1.md',
-    'architecture-reboot/experiments/architecture/00-ARCHITECTURE-EXPERIMENT-PROGRAM.md',
-    'architecture-reboot/phase0',
-]
+FROZEN_GIT_OBJECTS = {
+    'architecture-reboot/CONSENSUS.md':
+        '2d433fe021dbccee727255c4237f8eda5aff90c1',
+    'architecture-reboot/CONSENSUS_ARCHITECTURE_v0.1.md':
+        'cf097f93eee27ca48f45ac5a319d29287a738aee',
+    'architecture-reboot/CONSENSUS_SUBMODULE_INTERFACES_v1.md':
+        '897d08521fabcd6bf028e301edbdf96b1fd54baf',
+    'architecture-reboot/experiments/architecture/00-ARCHITECTURE-EXPERIMENT-PROGRAM.md':
+        '277e4f7f39e9e068140192439f6815dfd453a8c8',
+    # Tree object pins the entire Phase-0 directory, not just one file.
+    'architecture-reboot/phase0':
+        '056793cbbded76bea1b13a3a4fe2fd20be04570d',
+}
+FORBIDDEN_PATHS = sorted(FROZEN_GIT_OBJECTS)
 
 
 def check(name, fn):
@@ -93,15 +100,30 @@ def regenerate(mod, directory):
         mod.GEN = old
 
 
-def check_frozen_zones():
+def check_frozen_zones(expected=None):
+    expected = expected or FROZEN_GIT_OBJECTS
+    for path, pinned in expected.items():
+        proc = subprocess.run(
+            ['git', 'rev-parse', 'HEAD:' + path],
+            cwd=REPO, capture_output=True, text=True)
+        if proc.returncode != 0:
+            raise RuntimeError(
+                'cannot resolve frozen path %s: %s'
+                % (path, proc.stderr.strip() or 'git rev-parse failed'))
+        observed = proc.stdout.strip()
+        if observed != pinned:
+            raise RuntimeError(
+                'committed frozen-zone drift at %s: %s != pinned %s'
+                % (path, observed, pinned))
+
     proc = subprocess.run(
-        ['git', 'status', '--porcelain', '--'] + FORBIDDEN_PATHS,
+        ['git', 'status', '--porcelain', '--'] + sorted(expected),
         cwd=REPO, capture_output=True, text=True)
     if proc.returncode != 0:
         raise RuntimeError(proc.stderr.strip() or 'git status failed')
     if proc.stdout.strip():
-        raise RuntimeError('frozen paths modified:\n' + proc.stdout.strip())
-    return 'consensus, experiment program and phase0 unchanged'
+        raise RuntimeError('uncommitted frozen-zone drift:\n' + proc.stdout.strip())
+    return 'pinned consensus/program/phase0 git objects and working tree unchanged'
 
 
 def check_generation():

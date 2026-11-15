@@ -17,6 +17,7 @@ from scorer import FIRED, SILENT, UNDECIDABLE, score  # noqa: E402
 from scorer import projection, registry  # noqa: E402
 from scorer.projection import ProjectionError  # noqa: E402
 import gate0_harness  # noqa: E402
+import preflight  # noqa: E402
 from gate0_harness import (  # noqa: E402
     InputIntegrityError,
     aggregate_campaign,
@@ -167,6 +168,12 @@ class AdditionalPredicateTests(unittest.TestCase):
                 text,
                 r'\|\s*`' + re.escape(pid) + r'`\s*\|\s*SEMANTIC / HUMAN_REVIEW\s*\|')
 
+
+    def test_frozen_zone_pin_detects_committed_drift(self):
+        with self.assertRaises(RuntimeError):
+            preflight.check_frozen_zones({
+                'architecture-reboot/CONSENSUS.md': '0' * 40,
+            })
 
     def test_governing_hash_mismatch_fails(self):
         with tempfile.NamedTemporaryFile(delete=False) as fh:

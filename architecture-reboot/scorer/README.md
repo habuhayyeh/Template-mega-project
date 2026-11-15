@@ -49,15 +49,18 @@ does not contain the seed id, expected predicate, mutation or answer key.
 
 A judgment record carries `packet_id`, `predicate_id`, `judge_id`, `judge_type: HUMAN`, `verdict` and
 `rationale`. The harness rejects unknown packet ids and a `predicate_id` that does not match the packet.
-Aggregation requires exactly three unique human judges with the same verdict. Fewer, duplicate judges,
-disagreement, or `UNDECIDABLE` keeps the predicate `UNDECIDABLE`; `UNDECIDABLE` never becomes a pass.
+Aggregation requires exactly three unique human judges. Three matching `FIRED` or `SILENT`
+judgments resolve the predicate to that verdict. A completed FIRED/SILENT split is a **calibration
+failure** and makes the artifact fail Gate 0; fewer/duplicate judges or any genuinely `UNDECIDABLE`
+judgment remain `INCOMPLETE`. `UNDECIDABLE` never becomes a pass.
 
 ## Verdicts
 
-Clean parents are `FAIL` on any `FIRED`, `INCOMPLETE` on `UNDECIDABLE`, otherwise `PASS`. Parent types
-aggregate their clean and seed records: any `FAIL` -> `FAIL`; otherwise any `INCOMPLETE` -> `INCOMPLETE`;
-all `PASS` -> `PASS`. The campaign aggregates the four required parent types the same way. Both objects
-are written to `EVIDENCE.json`.
+Clean parents are `FAIL` on any `FIRED` **or completed human calibration split**,
+`INCOMPLETE` on unresolved `UNDECIDABLE`, otherwise `PASS`. Parent types aggregate their clean and
+seed records: any `FAIL` -> `FAIL`; otherwise any `INCOMPLETE` -> `INCOMPLETE`; all `PASS` ->
+`PASS`. The campaign aggregates the four required parent types the same way. Both objects are written
+to `EVIDENCE.json`.
 
 ## Run
 
