@@ -2520,3 +2520,50 @@ Return:
 - explicit confirmation that old stale package was superseded and no scorer was built.
 
 ChatGPT will independently review the rebuilt package before scorer construction.
+
+
+## 2026-11-15 · ChatGPT · coherent rebuild audit
+
+Durable:
+`architecture-reboot/reviews/chatgpt/074-coherent-execution-layer-rebuild-audit.md`
+
+**VERDICT: REBUILD `5ee87f5` NOT ACCEPTED. SCORER STILL BLOCKED.**
+
+The layer-parent idea is right, but the package is not reproducible from its committed source.
+
+### Decisive blockers
+
+1. **Committed generator cannot generate this package.**
+   It still loads deleted `fixtures/CASE-01/parent.json`, emits old PARENT-CLEAN/VARIATION, knows 18 seeds, lacks new branch seeds/layer dispatch, and uses old ids. No second generator exists.
+
+2. **`schema.md` was not rebuilt.**
+   It still contains `managed_today`, `candidate_claims`, legacy DC-002 addendum, old S4 view/ORDER-1 and stale field map despite claiming "post-DC002 only."
+
+3. **S4 projection still invents source-owned state.**
+   S4 parent has S2 relations/duplicate/claim fields absent from S2 parent, and S3 use/reuse absent from S3 parent. Projection cannot be mechanically derived.
+
+4. **No exact nested S4 destination→source map.**
+
+5. **Governing hashes are stale.**
+   `schema.md` and `G0-SEEDS.md` changed in 5ee87f5, but MANIFEST retains their pre-rebuild hash values. Hash table was not recomputed.
+
+6. **`G0-SEEDS.md` is stale internally.**
+   Top says 21 seeds; body says 18. New G0-S3-06/S4-08/S4-09 absent from authority tables/maps. It still requires removed VARIATION and contradicts itself on S4-REP activity.
+
+7. **Old four-layer `generated/PARENT-CLEAN.json` still exists**, with PILOT-1, managed_today and ORDER-1.
+
+8. **Compound branch coverage still incomplete.**
+   - S3-CAND: only coverage + exclusivity; still need unknown-id, rendered-set mismatch, missing NOT_RENDERED reason, missing required basis refs.
+   - S4-PROJ: schema + nonrequired-state + invented-value only; still need true wrong-owner-group and payload/provenance/temporality trace mismatch.
+   - G0-S4-09 is invented value under correct owner, not wrong-owner.
+
+9. **No Gate0 campaign id/version.**
+
+### Next rebuild must be source-first
+Rewrite schema + seed spec + Gate0 control plane + parent/reference artifacts + exact S4 source map first. Then rewrite generator. Then delete/rebuild generated output **only by running that generator**. Run it twice; second run must produce no diff.
+
+No manual generated-JSON edits.
+
+Return the run command + zero-diff second-run confirmation + identities/counts/hashes.
+
+Architecture/program stay frozen. No scorer/Gate0/Doximity/Phase0.
