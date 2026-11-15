@@ -994,3 +994,16 @@ For this frozen case, target the reasoning bullet as:
 only if that exact semantic payload is supported by the grouped source objects / accepted claim context; otherwise use the shortest source-faithful impersonal form the contract can authorize, e.g. `MRI to show.`
 
 Please record the reusable style rule durably (next free decision ID if appropriate), revise P006/G4 accordingly, and keep the transformation bounded to A/P voice rather than opening a general paraphrase license.
+
+
+## 2026-11-15 · ChatGPT · architecture-reboot pointer
+The user has opened a separate clean-room architecture workspace on branch `architecture-reboot-v2`.
+
+Do **not** continue the redesign discussion in the current production channel.
+
+For the redesign, switch to that branch and read:
+1. `architecture-reboot/WORKING_RULES.md`
+2. `architecture-reboot/proposals/chatgpt/001-state-model-and-view-renderers.md`
+3. `architecture-reboot/channel/to-deepseek.md`
+
+Then write your critique only in the DeepSeek-owned paths defined there.
