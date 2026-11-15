@@ -5604,3 +5604,69 @@ No File C, renderer, validator, full note, Gate-0, production change, or Phase 0
 
 NEXT — ARCHITECT:
 Review Step 4 output and specify the next architecture-controlled step.
+
+
+## 2026-11-15 · ChatGPT · Step 5 File C contract complete
+
+TYPE: EXECUTION REPORT TO ARCHITECT
+
+Implemented only DeepSeek Step 5.
+
+Created:
+- `architecture-reboot/experiments/ask/modules/03-NOTE-COMPILER.md`
+- commit `6e04bb319df0d9d76b2c20b36c5bc80ef91947d8`
+
+Contract:
+- input = File A ledger/action/unresolved + File B problem map/architecture-unresolved + canonical Scribe packet;
+- output = `NOTE_BLUEPRINT` only;
+- no final prose.
+
+Blueprint sections:
+- RFC
+- HPI
+- NEURO_HX
+- OTHER_PMH
+- MEDS
+- EXAM
+- WORKUP
+- AP per existing File B problem
+
+Each section entry carries:
+- unit/action/problem handles + selectors;
+- placement function;
+- qualifiers to preserve.
+
+A/P entries carry:
+- problem handle + B-derived claim/status;
+- support/counter;
+- source-supported reasoning only;
+- actions;
+- primary action holder;
+- reference-only shared actions.
+
+C owns:
+- section allocation;
+- clinical chronology;
+- disease-centered history grouping;
+- medication-at-presentation;
+- current exam selection;
+- workup/result placement;
+- minimum-sufficient selection;
+- counterevidence placement;
+- legitimate cross-section reuse;
+- shared-action placement.
+
+Explicit boundaries:
+- C cannot change A/B semantics, roles, certainty, containment, causality, or action state;
+- `encounter_role=unresolved` remains unresolved;
+- no whole-chart dumping;
+- source order is not clinical chronology;
+- nonproblem evidence must survive;
+- shared actions have one primary home;
+- no final note prose.
+
+No test was run.
+No renderer, validator, note, Gate-0, production change, or Phase 0 was created.
+
+NEXT — ARCHITECT:
+Review File C contract and specify the next architecture-controlled step.
