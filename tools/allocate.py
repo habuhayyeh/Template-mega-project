@@ -36,7 +36,7 @@ KIND_TO_BUCKET = {
 }
 
 RECORD_RE = re.compile(
-    r"^(O\d+)\s*\|\s*([A-Z_]+)\s*\|\s*(.*?)\s*\|\s*\[([A-D])\s*,\s*([^,]*?)\s*,\s*([^\]]*)\]\s*$"
+    r"^(O\d+)\s*\|\s*([A-Z_]+)\s*\|\s*(.*?)\s*\|\s*\[([A-D])\s*,\s*([^,]*?)\s*,\s*([^\]]*)\]\s*(?:\|\s*([A-Z_]+)\s*)?$"
 )
 
 failures = []
@@ -76,7 +76,7 @@ def main():
             if not match:
                 fail("malformed input record: " + raw[:90])
                 continue
-            oid, kind, text, letter, name, date = match.groups()
+            oid, kind, text, letter, name, date, mode = match.groups()
             if oid in seen:
                 fail("duplicate ID in input: " + oid)
                 continue
@@ -85,8 +85,11 @@ def main():
                 continue
             seen.append(oid)
             bucket = KIND_TO_BUCKET[kind]
-            rows.append(oid + " | " + bucket + " | " + kind + " | " + text.strip()
-                        + " | [" + letter + ", " + name.strip() + ", " + date.strip() + "]")
+            row = (oid + " | " + bucket + " | " + kind + " | " + text.strip()
+                   + " | [" + letter + ", " + name.strip() + ", " + date.strip() + "]")
+            if mode:
+                row += " | " + mode
+            rows.append(row)
 
     if failures:
         for message in failures:

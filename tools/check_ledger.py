@@ -24,6 +24,9 @@ import sys
 BUCKETS = ("CLAIM", "ETIOLOGY", "EVIDENCE", "COURSE", "MANAGEMENT")
 
 OBJECT_RE = re.compile(r"^(O\d+)\s*\|\s*(.*?)\s*\|\s*\[([A-D])\s*,\s*([^,]*?)\s*,\s*([^\]]*)\]\s*$")
+ALLOC_RE = re.compile(
+    r"^(O\d+)\s*\|\s*([A-Z_]+)\s*\|\s*([A-Z_]+)\s*\|\s*(.*?)\s*\|\s*\[([A-D])\s*,\s*([^,]*?)\s*,\s*([^\]]*)\]\s*(?:\|\s*([A-Z_]+)\s*)?$"
+)
 ASSIGN_RE = re.compile(r"^(O\d+)\s*(?:\u2192|->)\s*(.+)$")
 REUSE_RE = re.compile(r"^REUSE:\s*(O\d+)\s*(?:\u2192|->)\s*(P\d+\.\w+)")
 FOOTER_RE = re.compile(r"^(UNACCOUNTED_IDS|MULTIPLY_ASSIGNED_IDS|ACCOUNTING):\s*(.*)$", re.I)
@@ -33,7 +36,10 @@ ALLOWED_ROLES = {
     "ETIOLOGY": {"ETIOLOGY"},
     "EVIDENCE": {"EVIDENCE", "PROBLEM_LABEL"},
     "COURSE": {"COURSE", "PROBLEM_LABEL"},
-    "MANAGEMENT": {"MANAGEMENT"},
+    # The one named exception: diagnostic adjudication is MANAGEMENT by kind and
+    # CLAIM_QUALIFIER by rhetorical role (03, "ATTACH EVIDENCE"). Every other
+    # MANAGEMENT role stays rejected.
+    "MANAGEMENT": {"MANAGEMENT", "CLAIM_QUALIFIER"},
 }
 
 REASON_PATTERNS = (
@@ -68,12 +74,37 @@ def normalise(text):
 
 
 def parse_objects(path):
+    """Read the allocation file.
+
+    Canonical form, produced by allocate.py:
+        O# | BUCKET | KIND | text | [letter, name, date] | MODE?
+
+    NOT_ALLOCATED rows (the demographic object) are excluded from the ledger
+    population. The legacy heading-based form is still accepted so old fixtures
+    keep working.
+    """
     objects = {}
     order = []
+    excluded = []
     bucket = None
     with open(path, encoding="utf-8-sig") as handle:
         for line in handle:
             stripped = line.strip()
+            if not stripped:
+                continue
+            alloc = ALLOC_RE.match(stripped)
+            if alloc:
+                oid, row_bucket, _kind, text, source, name, date, _mode = alloc.groups()
+                if row_bucket == "NOT_ALLOCATED":
+                    excluded.append(oid)
+                    continue
+                if oid in objects:
+                    fail(3, oid, "duplicate object line in input")
+                    continue
+                objects[oid] = {"bucket": row_bucket, "text": text, "source": source,
+                                "name": name.strip(), "date": date.strip()}
+                order.append(oid)
+                continue
             if stripped in BUCKETS:
                 bucket = stripped
                 continue
@@ -82,8 +113,11 @@ def parse_objects(path):
                 oid, text, source, name, date = match.groups()
                 if oid in objects:
                     fail(3, oid, "duplicate object line in input")
-                objects[oid] = {"bucket": bucket, "text": text, "source": source, "name": name.strip(), "date": date.strip()}
+                objects[oid] = {"bucket": bucket, "text": text, "source": source,
+                                "name": name.strip(), "date": date.strip()}
                 order.append(oid)
+    if excluded:
+        print("check_ledger: excluded NOT_ALLOCATED: " + ", ".join(excluded))
     return objects, order
 
 

@@ -1,0 +1,50 @@
+# Mock run, P002 — 2026-11-14
+
+Engineering run, not Doximity.
+
+## 1. Allocate
+
+```text
+python tools/allocate.py substrate/acceptance_v2.txt --out runs/2026-11-14-p002/allocation.txt
+allocated 60 objects, each exactly once
+exit 0
+```
+
+## 2. Validate the ledger
+
+```text
+python tools/check_ledger.py runs/2026-11-14-p002/allocation.txt oracles/ap_ledger_v3.txt
+check_ledger: excluded NOT_ALLOCATED: O1
+check_ledger: 59 objects, 59 assignment lines
+PASS: all mechanical checks clean
+exit 0
+```
+
+O1 is outside the A/P population by design: `DEMOGRAPHIC → NOT_ALLOCATED`. The ledger's 59/59 is correct.
+
+## 3. Assemble
+
+`04` on `substrate/acceptance_v2.txt` + `oracles/ap_ledger_v3.txt` → `handoff.txt`.
+
+Lossless check: 59 ledger objects, 44 retained, 15 discarded, 44 retained texts all present in the Handoff, 42 bullet entries plus `PRIMARY_CLAIM` and `PROBLEM_LABEL`. No discarded text present. No entry deleted.
+
+## 4. Write the A/P
+
+`05` on `handoff.txt` → `ap.txt`.
+
+Passes: capitalisation after `//`; reasoning rendered after evidence; MRI adjudication rendered once (O23/O39 merged), O38 separate; plan carries one decision per fact (apixaban held + resume merged; `fluid restriction` over `fluid restriction started`; one driving item); prior-record `no further workup` dropped; PVC attribution preserved; `Seizure precautions` is a legitimate standing item, trigger satisfied by a seizure working diagnosis.
+
+## 5. Open defect — one
+
+`residual mild expressive aphasia [D, 2024-02]` (O54) is retained by the ledger and present in the Handoff, and does not appear in the A/P. The writer's stated reason was that its current-encounter twin O9 had been discarded as baseline deficit — an entry that is not in the Handoff at all.
+
+This is over-compression, not deduplication: the "one fact, one bullet" rule was applied against an absent entry, so the fact now appears nowhere. Two readings, for review:
+
+- **defect** — the rule should select among entries present in the Handoff and never drop a retained entry because a discarded one would have said it better;
+- **acceptable** — a residual deficit of the old infarct is context, and `known left MCA infarct` already carries the stroke.
+
+Held open rather than patched, per the review's instruction not to add `05` compression guidance pre-emptively.
+
+## 6. Not established
+
+Doximity behaviour. Nothing here speaks to it.

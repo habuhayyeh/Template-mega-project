@@ -27,6 +27,7 @@ One per problem, comma-joined, terminal period, starting at `//`.
 ```
 
 - Copy `PRIMARY_CLAIM` as recorded. Add nothing to it — no laterality, severity, or subtype that lives only in `EVIDENCE`.
+- **Capitalise the first word after `//`.** `//Post-stroke seizure…`, not `//post-stroke seizure…`.
 - A block with `PROBLEM_LABEL` and no `PRIMARY_CLAIM` uses the label for the line, verbatim, **without** its provenance. The label is a symptom-level proposition, not a current formulation. A historical diagnosis in that block is attributed evidence, not part of the line, unless the current clinician explicitly adopted it.
 - Append `ETIOLOGY` only when it adds a cause the claim does not already state. Do not repeat a cause.
 - The status is one short phrase from `COURSE`: `improved`, `resolved`, `unchanged`, `returned to baseline` — but only if `COURSE` says it. The status is the patient's condition. If `COURSE` holds a description, a duration, or a study's state, the line ends without a status. Never fill that slot with management (`pending MRI`), with a duration, or with a restatement of the finding. If the record states the condition as its own sentence, that sentence stays a bullet and the line ends at the cause.
@@ -40,7 +41,9 @@ From `CLAIM_QUALIFIER`, then `EVIDENCE`, in the order the Handoff gives. Same `-
 
 - A `CLAIM_QUALIFIER` entry becomes a reasoning or interpretation bullet beneath the line: an excluded alternative, an additional formulation, a stated clarification. Do not delete it, and do not rewrite it as a second problem line.
 - **Evidence eligibility.** A bullet from `EVIDENCE` survives only if it materially supports, refutes, discriminates, or qualifies the problem line. Context, unrelated normals, preferences, and facts the line already carries are dropped.
+- **One fact, one bullet.** Where two evidence entries state the same fact — one study reported in two notes, one value recorded twice — render it once, using the entry that best represents the encounter.
 - **Reasoning renders last**, after the decisive factual evidence and before `Plan:`, in the clinician's own words. `ETIOLOGY` and `CLAIM_QUALIFIER` survive even when they partially restate evidence.
+- **No duplicated reasoning, no lost reasoning.** Every distinct reasoning proposition survives as its own bullet. Where two entries state the same proposition, render it once. Never merge distinct propositions to reduce a count.
 - **Strip structural speaker prefixes** — `clinician:`, `daughter:`, `patient:` — from prose. Keep the attribution itself where it is clinically material (`per family`, `daughter reports`).
 - Delete words. Do not add, substitute, or reorder them.
 - Never restate the line. The claim appears once, on the line.
@@ -66,6 +69,8 @@ From `MANAGEMENT`. Four buckets, this order, Handoff order inside each:
 - `Not starting` stays `not starting`. It does not become `not indicated`, and `not indicated` does not become `not ordered`.
 - A conditional stays conditional.
 - A patient preference stays attributed to the patient.
+- **One decision, one bullet.** Where two entries describe the same action, keep the one that represents the current clinician's plan. A later or longer statement is not automatically better. Never merge distinct conditions, rationales, or incompatible states.
+- **A prior-record entry is not a current plan item.** It appears only when a current-encounter entry re-adopts, continues, or restates it. Never infer that an old recommendation is still in force.
 - Omit `Plan:` entirely when the block has no management. Never leave it empty.
 
 ---

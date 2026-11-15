@@ -2,9 +2,9 @@
 
 ## PURPOSE
 
-Take the problem blocks from `03_SELECT_ORGANIZE.md` and produce the Handoff.
+Turn the routing ledger into the Handoff.
 
-This module selects, orders, and deletes. It does not write. It does not reword, compress, merge, or summarise — that is `05`.
+This module dereferences. It selects nothing, deletes nothing, rewords nothing, merges nothing, compresses nothing. Every retained ID becomes one entry carrying its own words and its own provenance.
 
 The Handoff is a working artifact, not a note section. It is read by `05` and not printed. Its only virtue is fidelity: every line it carries is a line the record contains.
 
@@ -14,14 +14,22 @@ The Handoff is a working artifact, not a note section. It is read by `05` and no
 
 Two parts, both supplied:
 
-1. **Object table** — every object with its ID, bucket, text, and provenance marker.
-2. **Routing ledger** — one assignment line per object ID, produced by `03V`: `O# → P#.ROLE` or `O# → DISCARD: <reason>`.
+1. **Object table** — every object with its ID, kind, text, and provenance marker.
+2. **Routing ledger** — one assignment line per object ID, produced by `03`: `O# → P#.ROLE` or `O# → DISCARD: <reason>`.
 
 Dereference every retained ID back to its object text, word for word, and append that object's provenance marker verbatim — `probable vascular dementia [D, 2025-06]`, `MMSE 24 [D, 2025-06]`, `left MCA infarct [D, 2024-02]`. Do not rewrite, normalise, or expand the marker, and do not add one the table does not contain. A `DISCARD` line means the object is dropped; a `REUSE` line means the object also appears in the listed second block. The ledger decides membership and role; `04` does not re-route.
 
 ---
 
-## 1. COPY, DO NOT COMPOSE
+## 1. NO DELETION
+
+Every retained entry appears in the Handoff. None is dropped for being short, obvious, repetitive, already implied, or a completion statement whose result follows.
+
+Removing an exact duplicate is `03`'s job under its one-fact-one-entry rule. Compressing near-duplicates into one sentence is `05`'s job. `04` cannot tell a harmless repetition from a lost meaning, so it keeps both.
+
+---
+
+## 2. COPY, DO NOT COMPOSE
 
 Every entry in the Handoff is an entry from the block, word for word.
 
@@ -31,19 +39,6 @@ Every entry in the Handoff is an entry from the block, word for word.
 - You may **not** turn a sentence into a noun phrase or a heading.
 
 If a sentence needs a word that is not in it, the Handoff goes without the sentence.
-
----
-
-## 2. DELETE, DO NOT TIDY
-
-Remove a whole entry when it adds nothing:
-
-- a completion statement whose result is already recorded (`MRI was completed` when `MRI confirmed infarct` follows)
-- an entry duplicated by another
-
-Never remove: a state word, a condition, a reason, a date, a laterality, a negation, or a number.
-
-`ETIOLOGY` and `CLAIM_QUALIFIER` entries are exempt from the duplicate rule. A reasoning entry is never deleted because the facts it interprets already appear under `EVIDENCE` — the overlap is expected, and that entry is the one `05` renders last.
 
 ---
 
@@ -57,7 +52,9 @@ None of these may be dropped to make a line read better. A conditional that lose
 
 ## 4. ONE ENTRY, ONE FIELD
 
-Do not split an entry across two fields. Do not move an entry to another field — allocation made that decision in `02`.
+Do not split an entry across two fields. Do not move an entry to another field — the ledger made that decision.
+
+An entry whose role is `CLAIM_QUALIFIER` sits under `CLAIM_QUALIFIER` even when it is a `MANAGEMENT` object by kind. That is the adjudication exception, and the ledger has already applied it.
 
 ---
 
@@ -84,7 +81,7 @@ MANAGEMENT:
 - …
 ```
 
-`PRIMARY_CLAIM` is the one current formulation the A/P problem line is built from. `PROBLEM_LABEL` is a distinct field for a block that has no current formulation but is named by a prior or symptom-level proposition; it goes under its own heading and is never written as `PRIMARY_CLAIM`. `CLAIM_QUALIFIER` holds the additional formulations, exclusions, and interpretation that `05` renders as reasoning or evidence bullets. All three come from the ledger; none may be dropped here.
+`PRIMARY_CLAIM` is the one current formulation the A/P problem line is built from. `PROBLEM_LABEL` is a distinct field for a block that has no current formulation but is named by a prior or symptom-level proposition; it goes under its own heading and is never written as `PRIMARY_CLAIM`. `CLAIM_QUALIFIER` holds the additional formulations, exclusions, interpretations, and adjudication logic that `05` renders as reasoning bullets. All three come from the ledger; none may be dropped here.
 
 Omit a field with no entry — do not print an empty header. Number problems in the order the ledger set. Do not reorder.
 
@@ -94,8 +91,11 @@ The number of problems in your output equals the number in the input. Never drop
 
 ## 7. BEFORE YOU RETURN
 
-Read every line and ask one question: *is this a sentence the source contains, with words removed?*
+Read every line and ask two questions:
 
-If a line contains a word no source sentence contains, delete the line. That test is the whole module.
+1. *Is this the object's text, with its marker, unaltered?*
+2. *Is every retained ID present exactly once?*
 
-Then: a block with no `MANAGEMENT` entry is not a problem. Delete it.
+If a line contains a word no object contains, or if an ID the ledger retains is absent, the assembly is wrong. Fix the assembly; do not fix the ledger here.
+
+A block with no `MANAGEMENT` entry is not a valid problem and `03` guarantees none exists. If one appears, report it — do not delete the block.
