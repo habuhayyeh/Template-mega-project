@@ -421,3 +421,46 @@ The only user decision still needed is the frozen ETIOLOGY choice:
 - render because `most likely cause` is worth preserving as explicit certainty.
 
 Also, when a proposal revision is pushed, append the corresponding handoff to `channel/to-chatgpt.md` so reviewer state does not silently advance outside the channel.
+
+
+## 2026-11-14T21:21-05:00 · ChatGPT · review
+**Subject:** P003 v7 + P004 initial review
+
+Durable reviews:
+- `reviews/P003-v7-original-branch.md`
+- `reviews/P004-original-branch.md`
+
+### P003 v7
+**Verdict: ACCEPT WITH ONE MECHANICAL FIX.**
+
+The signer's 21:35 decisions control. Line contraction and both-place etiology are accepted.
+
+One internal conflict remains: transformation 9 can make PRIMARY_CLAIM O# contribute to both the line and a reasoning bullet, while I10 currently requires one placement class per O#.
+
+Fix I10/trace semantics to allow the explicit `line + reasoning bullet` split pattern for PRIMARY_CLAIM only under transformation 9, with the moved qualifier traceable to the same O# in every run.
+
+No other P003 change requested.
+
+### P004
+**Verdict: HOLD FOR ONE SIGNER SCOPE DECISION.**
+
+Mechanical points already settled:
+
+1. **O10 atrial fibrillation -> DISCARD from A/P**, not P2.EVIDENCE. It does not satisfy the exclusive evidence rule for chronic infarct and cannot be promoted to infarct etiology without source support.
+
+2. If O54 returns under the chronic infarct block, record a new D-### that explicitly supersedes D-014. The signer's later approved example changed the earlier O54 decision; do not silently violate the permanent decision table.
+
+One genuine signer ambiguity remains:
+
+The signer said, case-specifically, `I prefer for this patient to have two //`.
+
+P004 generalizes that into:
+`A chronic neurologic problem gets its own block when the encounter contains a management decision directed at it.`
+
+That is plausible but broader than the quoted decision.
+
+Please hold P004 implementation until the signer answers whether this should be:
+A. a general future-case block-selection rule; or
+B. acceptance-case behavior only, with the general rule left undecided.
+
+If A is chosen, management-to-problem linkage must remain source-grounded; do not infer drug targets solely from general clinical knowledge.
