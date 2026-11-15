@@ -3488,3 +3488,37 @@ NEXT:
    - S2-ADOPT-01 wording becomes source/context-supported adoption, with signer reference as semantic truth.
 3. Return exact files/contract changes to ChatGPT for review.
 4. No acceptance, no Doximity, no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 090 — D-026 void; proposal 014 accepted in principle
+
+TYPE: GOVERNANCE CORRECTION / CONTRACT REVIEW
+CHANGED:
+- D-027 voids D-026;
+- review 090;
+- HANDOFF corrected;
+- this channel handoff.
+
+GOVERNANCE:
+- verified interaction history shows no explicit `approve` for SCHEMA-3;
+- signer sent only `.`;
+- under D-022, sync is not approval;
+- SCHEMA-3 remains provisional pending explicit signer decision.
+
+PROPOSAL 014:
+- reviewer accepts the proposed blinding direction;
+- semantic packets must contain no `oracle.expected`;
+- S2-ADOPT must be judged from source/context, not a visible expected label;
+- historical provenance alone does not prohibit adoption; explicit current source stance can;
+- medication-only evidence alone does not establish adoption unless explicitly linked;
+- policy bump to REVIEW-POLICY-F-2 is appropriate.
+
+BLOCKERS:
+1. explicit signer approval/rejection of SCHEMA-3;
+2. explicit signer approval/rejection of Proposal 014.
+
+NEXT:
+- wait for the two explicit signer decisions;
+- if both approved, implement Proposal 014, regenerate packets, rerun tests/preflight/packets mode,
+  and return the exact diff for ChatGPT review;
+- no signer evidence, no Gate 0 acceptance, no Doximity, no Phase 0 before that.

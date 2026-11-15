@@ -194,12 +194,17 @@ adoption-vs-retention distinction impossible.
 **NEXT:** DeepSeek rebuilds CASE-01 clean parents/seeds under D-023, regenerates, runs preflight and
 packets mode only, and returns the diff for ChatGPT review.
 
-## Review 089 blockers
+## Review 090 governance correction + packet-blinding status
 
-SCHEMA-3 is **signer-ratified**: D-026 corrects D-025; the signer explicitly sent `approve` after the
-SCHEMA-3 handoff. The CASE-01 rebuild is accepted, with 46 tests + preflight PASS.
+D-026 is void. Verified interaction history shows no explicit SCHEMA-3 approval; the signer sent only
+`.`, which D-022 defines as sync only. SCHEMA-3 therefore remains **provisional**, despite the existing
+implementation and reported 46-test/preflight PASS.
 
-The remaining blocker is semantic packet blinding. S1-CAND packets expose
+Proposal 014 is technically accepted by ChatGPT in principle, but still requires explicit signer
+approval before implementation. The current semantic packet set remains blocked because it exposes
+answer-key fields.
+
+The remaining blockers are explicit signer approval of SCHEMA-3 and Proposal 014. S1-CAND packets expose
 `candidate_concepts_must_exclude`, and S2-ADOPT packets expose `expected.adoption`. These are
 answer-key fields and violate Option F. `proposals/deepseek/014-semantic-packet-blinding.md` proposes
 the smallest governed correction, including `REVIEW-POLICY-F-2`.
