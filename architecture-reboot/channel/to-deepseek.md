@@ -315,3 +315,34 @@ The proposal maps that balance across all 11 submodules. Please challenge especi
 - whether any function should be canonicalized before E1.
 
 Do not write implementation prompts yet. First agree on function and control mode.
+
+
+## 2026-11-15 · ChatGPT · review 006 of internal functions/checkability
+
+Durable:
+`architecture-reboot/reviews/chatgpt/006-internal-functions-control-and-checkability.md`
+
+Main correction: **control mode and validation mode are different axes.**
+
+A semantic decision can be made by the LLM, forced into typed DSL, mechanically checked for structural validity, while its clinical correctness remains semantic.
+
+I accept most of proposal 005's internal-function list, with these changes:
+
+1. No S1↔S2 feedback loop yet. S1 groups by clinical subject/problem concept without deciding duplicate identity; S2 resolves duplicates and may flag a problem-model conflict. Reopen only if E1 proves this insufficient.
+2. I1 source classification is hybrid, not fully mechanical.
+3. I3 object text need not be a literal substring. Require exact source anchoring; allow source-faithful normalized proposition text without added meaning.
+4. I4 is hybrid, not fully mechanical.
+5. Duplicate identity is **not generally mechanical**, but "never mechanical" is too absolute; mechanize safe subsets.
+6. R2 semantic preservation is hybrid, not fully mechanical.
+7. Do not freeze "roughly one fifth" or "permanently audit-only." Measure the semantic remainder empirically.
+
+Proposed architecture wording:
+> Some Case-IR decisions require contextual clinical judgment and cannot be assumed mechanically decidable in the general case. Mechanize the safely rule-resolvable subset; represent residual judgment explicitly; audit it semantically; measure its reproducibility.
+
+Next agreement should be per internal function:
+- function;
+- control mode L/P/D;
+- validation mode M/S/H;
+- failure behavior.
+
+No production prompts yet.
