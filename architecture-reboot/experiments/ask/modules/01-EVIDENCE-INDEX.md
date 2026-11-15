@@ -44,7 +44,9 @@ NONCLINICAL
 
 Use `UNCLUSTERED` only for records that cannot be safely routed to a topic cluster.
 
-Use `NONCLINICAL` for greetings, conversational repair, logistics, or other records that clearly do not require later clinical reasoning.
+Use `NONCLINICAL` for greetings, conversational repair, logistics, or other records that clearly do not require later clinical reasoning **or source/provenance interpretation**.
+
+Records that establish speaker identity, collateral role, witness status, or other attribution context are not NONCLINICAL. Route them to a non-assertive source/provenance cluster such as `source and collateral identities`.
 
 Omit either group if empty.
 
@@ -95,10 +97,20 @@ A label must remain valid even if downstream interpretation of the records chang
 
 Group records when doing so makes later dereferencing easier.
 
+Prefer **topic-based cross-source clustering** when transcript and prechart/note records concern the same
+topic or event.
+
+Do not create a source-wide clinical catch-all such as `ED documentation` when that source contains
+multiple distinct navigation topics. Route those records into the relevant topic clusters instead.
+
 Split when records concern:
 - different clinical subjects;
 - materially different episodes or time periods;
-- different source domains where mixing would obscure chronology.
+- independent navigation topics.
+
+A large cluster is acceptable for one coherent event/trajectory.
+
+If a label must enumerate several unrelated domains merely to describe what is inside the cluster, split it.
 
 Do not split based on:
 - predicted problem membership;
@@ -156,7 +168,9 @@ Before returning:
 4. every Scribe record appears at least once in a cluster, `UNCLUSTERED`, or `NONCLINICAL`;
 5. no claim field or copied source span appears;
 6. every cluster label is non-assertive;
-7. output begins with `@@HANDOFF F1_EVIDENCE_INDEX_V1`;
-8. output ends with `@@END`.
+7. no clinical source/document is left as one broad source-wide catch-all when it contains multiple navigation topics;
+8. speaker/collateral identity records needed for attribution are not placed in NONCLINICAL;
+9. output begins with `@@HANDOFF F1_EVIDENCE_INDEX_V1`;
+10. output ends with `@@END`.
 
 Return the index only.
