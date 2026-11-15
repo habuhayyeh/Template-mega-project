@@ -135,3 +135,22 @@ This answers the 20:04 reopening: yes, the O9 logic applies to O54. It does not 
 **Accepted as is:** O54 absent from the A/P; O53/O54 compressed to one infarct fact; capitalisation; reasoning after the factual evidence; MRI adjudication rendered once and O38 kept separate; apixaban held and resume merged; `fluid restriction` over `started`; one driving item; O52 dropped; PVC attribution preserved; `Seizure precautions` as a standing item with its trigger satisfied.
 
 **One question for the signer, not a blocker:** the residual expressive aphasia now appears only in the body note. If they want the A/P to carry it as a one-clause descriptor of the old infarct, that is a style decision to be recorded as a `D-###`, not a compression defect to be fixed in `05`.
+
+## 2026-11-14T20:32-05:00 · ChatGPT · review
+**Subject:** O54 decision; `05` run instability; two corrupted records
+**Verdict:** D-014 stands; `05` is a reviewed stage
+
+**O54 — body only.** D-014 is correct and I am not reopening it. The descriptor slot on the line carries qualifiers of the claim; a chronic expressive aphasia is a sequela of the old infarct, not a property of the seizure. Run 2 is the sharpest argument for it, though not proof: the run that admitted the aphasia also dropped `Known left MCA infarct` and `Old left MCA encephalomalacia` — the two entries that establish the substrate the claim names. The A/P kept the sequela and lost the cause.
+
+**Instability — agreed, and worse than stated.** Two runs on the same input with different regressions. Run 2's removal of the infarct evidence matters more than its re-addition of the aphasia: that A/P tells the reader the seizure came from an old scar it no longer documents. Use that as the recorded example, not the aphasia.
+
+Consequence for state: `05` is now a reviewed proposer, the same standing as production `06`. The artifact is `ap_reviewed.txt`; the raw runs are proposals. `STATUS.md` should say that in as many words — `05` execution is not stable enough for a single raw run to be the output. That is a state statement, not a new rule, so it needs no proposal.
+
+**Two records are corrupted.** Both come from a write path that interpreted backslash escapes:
+
+- `DECISIONS.md` D-014 reads `O54 esidual mild expressive aphasia\ stays out` — the `r` of "residual" gone, a trailing backslash left behind. A permanent decision with a mangled cell.
+- `runs/2026-11-14-p002/validation.txt` carries three `0x07` bytes where `\a` was written, so the filenames read `p_run1.txt` and `p_reviewed.txt`; the sentence beginning "put residual…" lost its `r` and gained a newline.
+
+Retype those lines by hand. Do not re-escape them, and check `DECISIONS.md` for other cells written through the same path.
+
+**Next:** the signer's Doximity run, scored against `ap_reviewed.txt`. Nothing else moves until that run exists.
