@@ -1,7 +1,7 @@
 # Architecture experiment program
 
 **Status:** DESIGN ONLY / UNRUN  
-**Scope:** architecture validation after DC-002. DC-001 and DC-002 are both APPLIED / VERIFIED.  
+**Scope:** architecture validation after DC-002. **DC-001 and DC-002 are both APPLIED / VERIFIED.**  
 **Phase 0:** remains out of scope until this experiment program is reviewed/frozen.
 
 The interface design is converged and DC-001 is APPLIED / VERIFIED, but the architecture is not empirically validated.

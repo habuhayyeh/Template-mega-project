@@ -4,11 +4,11 @@
 
 ## Question
 
-Can the architecture represent one real clinical action that serves multiple neurologic problems without duplicating the action, losing a rationale, or violating one-owner A/P semantics?
+Can the architecture represent one real clinical action that serves multiple neurologic problems with one underlying action identity, losing a rationale, or violating one-owner A/P semantics?
 
 ## Architecture claim under test
 
-A/P units can retain exactly one owning problem while preserving clinically meaningful secondary cross-problem relevance through a downstream schema that does not duplicate rendered actions.
+A/P units can retain exactly one owning problem while preserving clinically meaningful secondary cross-problem relevance through a downstream schema that does not create a second action identity.
 
 ## Core fixture design
 
@@ -53,7 +53,7 @@ Both distinct problem-specific rationales must remain recoverable in the structu
 
 Final-note prose is governed by the signer-approved target and section contract:
 - any rationale designated clinically material to communicate must remain represented in the final note;
-- the note need not duplicate the action or separately restate both rationales when one concise combined realization or permitted cross-reference preserves the required meaning;
+- the note needs no second action identity and need not separately restate both rationales when one concise combined realization or permitted cross-reference preserves the required meaning;
 - concision is not permission to erase a clinically material secondary rationale.
 
 ## Required output behavior
@@ -98,7 +98,7 @@ The experiment should determine the minimal sufficient representation; it should
 If a minimal downstream schema preserves one action identity, one owner and both rationales reproducibly:
 > keep one-owner A/P architecture.
 
-If all reasonable one-owner representations either duplicate the action or lose clinically necessary linkage:
+If all reasonable one-owner representations either create a second action identity or lose clinically necessary linkage:
 > reopen the one-owner assumption for shared actions.
 
 This is a focused schema/architecture boundary test, not a general multi-problem test.
@@ -113,5 +113,5 @@ One-owner A/P semantics entail one *owner*, not one *mention*. This experiment m
 
 How many times the action appears in the final note is **UNSCORED** until signer policy is frozen. The
 scored invariants are: one action identity, one owning problem, both clinically material rationales
-preserved, and no duplicated *action*. Textual occurrence is a product decision and must not appear as
+preserved, and no second action identity. Textual occurrence is a product decision and must not appear as
 an architecture invariant anywhere in this spec.

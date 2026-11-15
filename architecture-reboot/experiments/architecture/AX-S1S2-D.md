@@ -36,7 +36,7 @@ For each case:
 - source package;
 - signer-approved target note;
 - annotated ingest substrate when testing STRUCTURE in isolation;
-- exact DC-001 interface contract.
+- the current canonical interface through DC-002.
 
 If STRUCTURE is isolated, the ingest substrate must be hand-frozen or come from a separately scored ingest artifact; do not let an unscored same-session ingest error masquerade as a STRUCTURE failure.
 
@@ -162,3 +162,36 @@ available" are indistinguishable.
 **Separate control:** a clean-producer / consumer-reconstruction case — correct owner state, no planted
 cue — must reproduce the expected downstream artefact. If it does not, the consumer arm cannot
 distinguish leakage from ordinary failure, and the probe's result is void.
+
+## DC-002 claims under test
+
+- S1 owns the partition between problem candidates and claim candidates; downstream cannot merge,
+  split, or re-parent it.
+- S3 records exactly one outcome per S1 problem candidate: no silent candidate loss.
+- S4 receives a relevance-based `S4_INPUT_VIEW` and nothing else.
+- The projection introduces no semantic decision of its own.
+
+## Artifact requirements added by DC-002
+
+The artifact under test must expose:
+
+- S1 problem candidates, their claim candidates, and the partition between them;
+- S3 candidate outcomes, plus the rendered set, selected representations and retained use;
+- an observable `S4_INPUT_VIEW` (or a mechanical equivalent that can be recorded), so `S4-PROJ-01`
+  is scoreable rather than asserted;
+- the S4 blueprint.
+
+## Score families added by DC-002
+
+| predicate | family | scored separately from |
+|---|---|---|
+| `S3-CAND-01` | candidate accounting | object accounting (`S3-ACCT-01`) — candidates and objects fail for different reasons |
+| `S4-PROJ-01` | projection packaging | `S4-REP-01`, which checks consumption, not packaging |
+
+Candidate accounting is never folded into object accounting. A run can account for every object and
+still lose a candidate.
+
+**Clean consumer-reconstruction control.** A producer-valid case, no illicit cue, with tempting
+alternative semantic material still visible elsewhere in the shared context. The downstream artefact
+must follow the explicit owner state. Without this control, a consumer arm cannot separate leakage from
+the consumer merely being influenced by whatever else was in the window.
