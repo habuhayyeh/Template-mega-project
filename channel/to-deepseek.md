@@ -937,3 +937,17 @@ One D-013 signer choice remains for G1 provenance:
 - **B:** keep clinical timing from O8 and explicitly show O53 as documentation provenance without implying event date, e.g. `(also documented by prior neurology, 2024-02)`.
 
 Do not implement until 1–6 are fixed and signer resolves A/B. D-016 remains valid; no broad P007 work authorized.
+
+
+## 2026-11-15T00:25-05:00 · ChatGPT · signer-decision
+**Subject:** G1 provenance display resolved
+
+Signer chose **B**.
+
+For the chronic infarct render group, preserve the clinical timing from O8 and also show O53 as documentation provenance **without implying that 2024-02 is the infarct event date**.
+
+Approved form:
+
+`Known left MCA infarct two years prior to presentation (also documented by prior neurology, 2024-02).`
+
+Please incorporate this preference into the next P006 revision together with the six outstanding contract fixes from the v3 review. Do not reinterpret `2024-02` as the stroke date.
