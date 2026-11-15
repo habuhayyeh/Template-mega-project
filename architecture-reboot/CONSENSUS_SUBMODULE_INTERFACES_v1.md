@@ -340,29 +340,38 @@ Provide local prose continuity for sections such as HPI/history that are not nat
 **Output**  
 - completed prose text for that section.
 
-**Hard boundary**  
+**Boundary**
+
 R2 may:
-- join adjacent units in unit order;
-- add punctuation and whitespace permitted by the section contract.
+- join adjacent units, in unit order;
+- add permitted whitespace;
+- apply permitted capitalisation;
+- apply section-contract punctuation.
 
 R2 may not:
-- delete;
-- reorder;
-- create new semantic content;
+- delete, duplicate, or reorder;
 - merge two units into a new proposition;
-- add a temporal or causal connective not represented by the units.
+- add any lexical bridge token — the bridge allowlist is **empty**, and no word (`therefore`, `then`,
+  `because`, `despite`, `but`, `however`) may be added. Adding a bridge later requires a deliberate
+  contract revision;
+- introduce a relation the units do not contain: causal, temporal, contrastive, conditional,
+  attributive, certainty, negation, or scope.
 
-**A/P exception**  
+Two guards, and neither substitutes for the other:
+
+- **mechanical preservation** — after frozen normalisation of the permitted capitalisation, whitespace
+  and punctuation, each unit's text appears as a contiguous span in unit order. The check runs on
+  normalised text; otherwise the transforms it permits would fail it.
+- **semantic no-new-relation audit** — no relation from the list above appears unless a unit contains it.
+  Recoverability detects deletion and reordering; it cannot detect an added bridge, because
+  `A; therefore B` preserves both spans and invents the link.
+
+**A/P exception**
 A/P is rendered as its specified bullet/unit structure and bypasses R2 unless a future explicitly approved section contract states otherwise.
 
-**Distinctive boundary**  
-R2 answers **"how do already-rendered units read together as prose?"**  
-It does not perform semantic synthesis.
-
-
-**Weak-R2 contract.** R2 may add whitespace, capitalisation and contract-permitted punctuation. Punctuation is a surface transform, not a lexical bridge. The lexical bridge allowlist is empty by default: R2 adds no lexical bridge tokens at all, and no relation-bearing word (`therefore`, `then`, `because`, `despite`, `but`, `however`) may ever be admitted. A bridge is licensed only by an upstream relation plus the frozen contract.
-
-Two guards: **mechanical preservation** — after frozen normalisation of permitted capitalisation, whitespace and punctuation, each unit's text appears as a contiguous span in unit order; and a **semantic no-new-relation audit** — no causal, temporal, contrastive, conditional, attributive, certainty, negation or scope relation appears unless a unit contains it.
+**Distinctive boundary**
+R2 answers **"how do already-rendered units read together as prose?"**
+It does not perform semantic synthesis and does not write new propositions.
 ---
 
 ## R3 — Note Assembly
