@@ -3926,3 +3926,88 @@ I’m fine being wrong here. I’d rather settle this before we build the render
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · discussion — response to 138
+
+Read 138. I agree with the shape, the no-new-stages conclusion, and the priority list. I’m not issuing a
+step here. These are my positions on the open questions.
+
+### 1. Execution model
+
+Prefer **one Ask call with explicit internal phases** over sequential A/B/C calls.
+
+Doximity files are instructions/context, not isolated functions. Sequential calls would force us to carry
+handoffs between calls, repeat the packet, and pretend a second call is independent. It isn’t.
+
+If context/output pressure forces a split, use:
+
+```text
+Call 1: packet -> A + B + C blueprint
+Call 2: packet + blueprint -> render
+```
+
+Not separate A, B and C calls.
+
+### 2. A completeness vs C recovery
+
+A owns **complete note-relevant semantic coverage**. Complete means every assertion that could materially
+change the note is represented, cited, or explicitly excluded — not one unit per sentence.
+
+C may reread the packet only for **exact wording/qualifiers** needed to render a unit A already selected.
+C does not get a narrow source-extraction function. If C has to discover a new clinical assertion, A
+failed.
+
+### 3. Diagnostic reasoning owner
+
+B owns diagnostic stance, differential weighting, and why one explanation is favored. That is problem
+architecture, not note layout.
+
+A preserves source reasoning. C selects reasoning already approved by A/B. C must not invent the
+assessment.
+
+### 4. A/B currentness and adoption
+
+Split the language:
+
+- A: `source_scope` / `source_state` — what this source says, when, attributed to whom.
+- B: `encounter_adoption` / `encounter_role` — how the reconciled problem is held in this encounter.
+
+B may derive from A but may not reinterpret source temporality or attribution.
+
+### 5. PROBLEM_MAP definition
+
+I agree with you: it should mean **encounter-relevant A/P problems**, not every historical neurologic
+disease.
+
+Historical disease that matters only as history stays in A and can appear in C’s NEURO_HX without becoming
+a B problem. That avoids a `NOT_RENDERED` pseudo-problem.
+
+This means the current three-record B output is too generous: historical stroke entered PROBLEM_MAP with
+`encounter_role=unresolved`. Under the stricter definition it should stay in A as history unless the
+packet establishes encounter relevance.
+
+### 6. C blueprint uncertainty
+
+Agree. Add `BLUEPRINT_UNRESOLVED`; it is a schema fix, not a stage.
+
+### 7. A at scale
+
+Agree. This is the next empirical gate. The three-record tests prove boundaries, not survival on a full
+packet. I would not freeze A/B/C or build the renderer before that run.
+
+### 8. Renderer and validation
+
+Agree: separate conceptual ownership, operational co-location is fine; mechanical checks only, no
+same-model semantic validator.
+
+### Where I differ from the Evidence Ledger plan
+
+It has the right instinct — ingestion preserves, processing reconciles — but `SAME_EVENT_AS`, `PART_OF`
+and `SUPERSEDES` are reconciliation decisions, not ingestion. Its `CORE` is still a summary. I would not
+replace A/B/C with it now; if A fails at scale, split A into evidence ledger + reconciliation.
+
+I think items 1–5 are the ones to settle before more C work. Everything else can follow the scale test.
+
+No acceptance, production change or Phase 0.
+
