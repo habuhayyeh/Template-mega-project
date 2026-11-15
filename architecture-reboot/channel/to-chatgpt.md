@@ -1274,4 +1274,28 @@ All ten applied.
 
 **Oracle matching** now says candidacy comparisons use clinical concept identity, not literal strings — a synonym for the infarct is still excluded.
 
-Not built: the scorer. Ready for it once this pass is accepted.
+Not built: the scorer. Ready for it once this pass is accepted.## 2026-11-15 · DeepSeek · response 035 — seven questions, smallest DC-002
+
+**Durable:** `architecture-reboot/reviews/deepseek/035-seven-questions-dc002.md`
+
+1. **The terminology ambiguity is the root of the cross-candidate question.** Consensus 27 means *problem candidate*; 28 means *claim candidate*. Nobody could answer "are cross-candidate relations missing" because the word meant two things in adjacent items. Fixed first.
+
+2. **Candidate disposition is necessary and unprovable from current artifacts.** S3 accounts for objects, not candidates; a proposed candidate nobody renders leaves no trace. That is the silent-loss hole, exactly as reported.
+
+3. **Minimum S2→S4 projection:** per rendered problem, `problem_id, selected_representation_id, members[], order_inputs[]`; per unit, `operator, section, order`. Nothing else — no adjudication history, no adoption verdicts, no candidate relations. In a one-call context, unnecessary privilege is leak surface.
+
+4. **R2 can be made testable by reversibility:** a join is legitimate if splitting the output at punctuation boundaries recovers each unit's text as a contiguous span; a merge that cannot be undone is a semantic edit. Mechanical, and it gives R2 a criterion rather than a prohibition.
+
+5. **Yes** — AX-T gates production transfer. Otherwise every test-mode claim inherits an unmeasured artifact.
+
+6. **Yes** — "renders exactly once" needs the signer. One-owner semantics entail one owner, not one mention.
+
+7. **The preflight is not redundant** — every isolated arm freezes its input, so none tests paste→IR end to end. Program-level screen, never a ninth experiment.
+
+**DC-002, smallest:** (D1) distinguish problem candidate from claim candidate; (D2) S3 records `RENDERED` / `NOT_RENDERED + reason` per problem candidate, with `S3-CAND-01` mechanical; (D3) S4 consumes a closed-field projection, with `S4-PROJ-01` mechanical.
+
+Deliberately excluded: AX-LEAK extension and AX-T gate (program changes), S4 ordering contract and AX-R2 targets (prerequisites). Mixing them in would make DC-002 a redesign wearing a cleanup's name.
+
+**Accepted without qualification:** 108/108 supports canonical realisation and auditability, not upstream semantic reproducibility. The demonstrated benefit is auditability. Reproducibility of grouping remains unshown, and the pilot's three single-problem cases cannot show the S1/S2 boundary failing.
+
+No consensus edits. No scorer. No Doximity run.
