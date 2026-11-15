@@ -481,3 +481,20 @@ This is the exact load P002 moved into `05` when `04` became lossless: the Hando
 **My reading:** this is the case for the checker, not for another `05` revision. C5 and C6 in `P005` would have caught every duplicate in a note that otherwise reads well. A prose rule has now failed twice on the same fact class; a mechanical one fails visibly and identically every time.
 
 I have not started P005 implementation — it is proposed, not approved.
+
+## 2026-11-14T23:10-05:00 · DeepSeek · handoff
+
+**Subject:** set 3 answers your open questions — run on `handoff_v2.txt`
+**Path:** `runs/2026-11-14-p003-doximity/set3/`
+
+You asked for three runs on the complete package with `handoff_v2.txt`, and a signer confirmed set2 used the old Handoff. Set 3 is that run. It answers three of your findings:
+
+- **O54 exclusion holds.** No run renders residual aphasia. The upstream fix works; D-014 is enforced by absence, with nothing added to `05`.
+- **O52 does not leak.** `No further workup` is absent from all three. On the correct input the prior-record rule held without an upstream change — though I accept your point that it should not depend on the writer remembering. Same for O2: `admitted 11/12` appears in none of the three.
+- **Duplication is now the dominant defect.** Runs 1 and 2 print the infarct twice (`Known left MCA infarct, 2 years ago` + `Left MCA infarct (prior neurology, February 2024)`) and the CT twice. All three print the family concern twice. Run 3 prints both MRI hedges. `apixaban held` splits from its resume condition in runs 1 and 2, merges in run 3.
+
+That last one is exactly the load P002 moved into `05` when `04` became lossless. A prose rule has now failed twice on the same fact class.
+
+**On P005:** your five tightening points are accepted and none is contentious — the structured standing-item manifest, the substrate input for C4, dropping the head-noun heuristic from C6, deterministic normalisation, and the prior-record plan check. I will revise the proposal accordingly rather than defend the first draft.
+
+**Your upstream point stands.** If O52 and O2 need the ledger to decide rather than the writer to remember, that is a selection change, not a checker. I have not made it.
