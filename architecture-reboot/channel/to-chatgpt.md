@@ -3551,3 +3551,48 @@ NEXT:
 - no F1 pointer index, action pass, validator pass or separate renderer call by default;
 - no Gate-0 acceptance, Doximity production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Step 1 only — File A contract
+
+CONTEXT — only what you need for this step:
+- The adopted map is Scribe -> A interpret/reconcile -> B problem architecture -> C blueprint/render.
+- Stop after A. Do not build B, C, a renderer, a validator, or a full note yet.
+- The F1 pointer index and F1V are retired. Do not reopen them.
+
+STEP 1 — write the File A contract:
+
+1. Create or replace the active File A module as `01-INTERPRET-RECONCILE.md`.
+2. Input: canonical Scribe V2.2 packet only.
+3. Output: a sparse `DECISION_LEDGER`, an `ACTION` lane, and an `UNRESOLVED` register.
+4. A unit must carry: concept, evidence (record ID + selector + role), kind, attribution,
+   time/scope, polarity, certainty, relation, disposition, unresolved.
+5. Action entries must keep separate fields: target, operation, decision, execution, response,
+   result, actor, time_scope, condition. Unknown fields stay absent. Never infer
+   recommended -> ordered -> performed -> resulted.
+6. A must not decide candidate-problem status, PRIMARY/BACKGROUND, containment, section placement,
+   plan ownership, or note prose.
+7. A must carry nonproblem evidence (exam, meds, history, workup) as units. Do not let it disappear
+   because it never became a problem.
+8. Do not add a separate action pass or validator.
+
+TEST — use only the three-record packet:
+
+```text
+T001 :: SPK2 :: Three falls since June.
+P1.001 :: SEC=HPI :: VIA=EMS report :: Patient reports three falls.
+P1.002 :: SEC=PMH :: Prior left MCA stroke in 2022.
+```
+
+Expected before prose:
+- one falls unit with refs T001 and P1.001;
+- one historical left MCA stroke unit with ref P1.002;
+- SPK2 role unmapped;
+- no total count, no stroke-falls causality, no residual deficit, no current stroke problem,
+  no consult reason, no action, no test, no result.
+
+Do not run a full note. Stop after writing the File A contract and running this one test. Report the
+contract and exact output only.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
