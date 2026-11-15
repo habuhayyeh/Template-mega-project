@@ -153,11 +153,13 @@ briefly and continue with the already-authorized next action rather than stoppin
 
 For semantic reference collection, do not lead with scorer jargon. Present each packet as:
 
-1. **Case summary** — 2–5 clinician-readable sentences using only information actually present in the blinded packet.
-2. **Rule being tested** — translate the predicate into plain clinical language without changing its meaning.
-3. **Question** — **Is there a violation?**
-4. **Example** — one short hypothetical example of a violation when it helps disambiguate the rule. The example must not reveal whether the current packet is clean/seeded or what answer is expected.
+1. **Case** — one concise line using only packet-visible facts.
+2. **Rule** — one concise line in plain clinical language.
+3. **Example** — at most one short line, only if needed.
+4. **Question** — **Is there a violation?**
 5. **Response choices** — `Yes`, `No`, `Cannot determine`.
+
+Default presentation: about 4–6 short lines total. Avoid repetition and do not explain scorer mechanics unless asked.
 
 Map only after the signer answers:
 - Yes -> `FIRED`
