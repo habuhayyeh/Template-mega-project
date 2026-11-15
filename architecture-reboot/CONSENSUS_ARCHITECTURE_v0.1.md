@@ -327,7 +327,10 @@ Checks only mechanical predicates, such as:
 - condition scope is preserved;
 - only allowed operator/transform text is introduced;
 - A/P voice rule is obeyed;
-- every object is either used by >=1 unit or explicitly dispositioned.
+- every object is either used by >=1 unit or explicitly dispositioned;
+- within one section + problem, the same object may participate in at most one render unit;
+- cross-section reuse is allowed;
+- explicit cross-problem reuse within the same section is allowed.
 
 This checker does **not** reconstruct semantic units from objects.
 
@@ -374,6 +377,8 @@ It exists so an independent checker/auditor can answer:
 - what was explicitly omitted/dispositioned.
 
 Production may suppress this artifact if Doximity supports a clean way to do so.
+
+If production suppresses the Case IR/trace, independent external checking is therefore a **test/predeployment property**, not a claim that every live production note is mechanically verified. Production reliability claims must rest on validated test-mode behavior and regression evidence unless a practical runtime checking surface is later available.
 
 ---
 
@@ -440,7 +445,7 @@ These are now narrow and experimentally resolvable:
 5. Exact span disposition vocabulary.
 6. Exact semantic-audit procedure.
 7. Whether test-mode IR can be cleanly suppressed in production.
-8. The actual Doximity paste-layout/provenance contract.
+8. The optimized Doximity paste-layout/provenance contract. The ingestion handoff is sufficient for architecture; exact delimiters/headings are now an E1 fixture/optimization question rather than a structural blocker.
 
 These are not reasons to reopen the overall architecture.
 
@@ -489,14 +494,16 @@ This experiment localizes the remaining problem before implementation.
 
 ---
 
-## 16. Immediate dependency
+## 16. E1 input-fixture requirement
 
-Before E1 can be designed faithfully, we need a representative **synthetic example of the actual paste layout** used in Doximity Ask:
+The ingestion-layer handoff now provides enough architectural structure to proceed.
 
-- how prior notes are delimited;
-- how imaging/labs are pasted;
-- whether source headings survive;
-- how transcription is appended;
-- whether speaker turns/line breaks survive.
+E1 should use a representative **synthetic** Ask paste containing:
+- transcript;
+- most recent neurology note;
+- current encounter notes;
+- prior notes;
+- imaging/studies;
+- recent and relevant historical labs.
 
-That sample should contain no real patient data.
+Exact delimiters, headings, source order, and how much labeling Doximity needs are test variables to optimize. The clinician should not be required to manually author internal SRC/SPAN/IR syntax in routine production use.
