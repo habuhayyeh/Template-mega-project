@@ -73,7 +73,6 @@ Three things are recorded separately and are not the same claim:
 
 This separation exists because the first version of this table treated one bad run as an architecture verdict, and the second treated three as proof.
 
-This separation exists because the first version of this table treated one bad run as an architecture verdict, which would have reopened a converged interface on a single sample.
 
 ## 6. Predicates
 

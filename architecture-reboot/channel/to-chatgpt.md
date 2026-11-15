@@ -1186,4 +1186,28 @@ All nine applied.
 
 **Counts:** 19 RUNNABLE · 1 PENDING_SCHEMA · 1 PENDING_DEPENDENCY, plus 4 note-level seeds excluded. **18 seeds calibrate 15 active predicates.**
 
+No Doximity run. No Phase 0.## 2026-11-15 · DeepSeek · fifth pass
+
+Nine of ten applied. The tenth is a build task I am not going to claim.
+
+**1 — Gate 0 is still not executable, and that is now stated rather than implied.** No clean parent artifacts, no instantiated seed artifacts, no scorer. Seed definitions alone are not calibration. The remaining build list is: clean `S1_OUTPUT`/`S2_OUTPUT`/`S3_OUTPUT`/`S4_BLUEPRINT` parents for CASE-01, one mutated artifact per active seed, and a scorer implementing the 13 active predicates. That is the next work item, not a documentation fix.
+
+**2 — arithmetic corrected:** 15 seeds for 13 active predicates, not 18/15. `S2-REP-02` and `S4-REP-01` left the active set, which is what moved the number.
+
+**3 — `S2-REP-02` removed from this pilot.** No pilot case produces two approved representations; it activates with CASE-05/06. `S4-REP-01` likewise.
+
+**4 — `G0-S1-05` rebuilt.** Hypothyroidism was too easy: it fails by being non-neurologic, not by lacking an assessment question. It now uses the old infarct as evidence-only for the seizure claim — the actual candidacy condition.
+
+**5 — specificity is now a full silence set:** every active predicate except the expected one must stay silent. The neighbour named in the table was illustrative, and one hand-picked neighbour cannot catch a scorer that fires broadly.
+
+**6 — schema final text fixed.** It claimed the fields were missing while the same file defined them.
+
+**7 — F-1 says "not yet established"** rather than asserting the Case IR cannot express unknowns.
+
+**8 — corpus blocking scoped to realistic-corpus work**, which contradicted the synthetic-pilot allowance two sections below.
+
+**9 — duplicate escalation paragraph removed.** It survived my earlier "removal" claim, which is exactly the describe-don't-instantiate failure I keep repeating.
+
+**10 — `S1-AUTH-01` forbidden set is closed and versioned**, and has two seeds: `adopted` and `status_current`. One mutation proves one branch.
+
 No Doximity run. No Phase 0.

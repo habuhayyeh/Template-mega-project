@@ -86,4 +86,4 @@ Checks: every `P*` maps to an S3-rendered problem; no extra or missing problem; 
 | `S4-MEM-01` | `units[*].members` ⊆ `retained` |
 | `S4-COMP-01` | every rendered problem has a claim-bearing unit; every S3-retained plan item has a plan unit |
 
-Predicates marked `PENDING_SCHEMA` in `predicates.md` are absent here on purpose: the schema does not yet expose `selection_safe` and `representation id` well enough for those checks, and inventing fields to make a predicate pass is how a schema stops meaning anything.
+`selection_safe` and `representation.id` are present, which is why `S2-REP-02` and `S4-REP-01` are mechanical. Both are **inactive in this pilot** — `S2-REP-02` because no pilot case produces two approved representations, `S4-REP-01` because it is scored under the S4 family only once CASE-05/06 exist. The fields are defined now so those predicates need no schema change later.

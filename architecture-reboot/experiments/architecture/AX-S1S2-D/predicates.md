@@ -16,7 +16,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 |---|---|---|---|---|
 | `S1-CAND-01` | SEMANTIC | S1 | every candidate names a neurologic subject for which the encounter poses its own assessment question | 01,02,03,04,05,06,07,08,09,10,11 |
 | `S1-CAND-02` | MECHANICAL | S1 | every candidate carries ≥1 source anchor | all |
-| `S1-AUTH-01` | HYBRID | S1 | S1 output contains no adoption **field** — no `adopted`, no adoption verdict, no resolved/current status. A candidate may still carry candidate claims and any canonical candidate-level explicit relationships. Scored on schema presence, not vocabulary; a lexical ban on words like `current` would fail on legitimate uses | all |
+| `S1-AUTH-01` | MECHANICAL | S1 | no candidate carries any field in the forbidden set `{adopted, adoption, adoption_verdict, selected_claim, resolved, status_current}`. The set is closed and versioned; a field outside it is permitted until added by acceptance change. Scored on field presence, never on vocabulary | all |
 | `S1-AUTH-02` | MECHANICAL | S1 | S1 emits no single selected claim; claims appear as candidates only | all |
 | `S1-BODY-01` | SEMANTIC | S1 | a subject that only contextualises another problem does not become a candidate | 07,08,10 |
 
@@ -71,16 +71,14 @@ Only these predicates are calibrated and scored in the three-case pilot. They ar
 
 ```text
 S1-CAND-01, S1-CAND-02, S1-AUTH-01, S1-AUTH-02
-S2-REP-01, S2-REP-02, S2-TEMP-01, S2-ADOPT-01
+S2-REP-01, S2-TEMP-01, S2-ADOPT-01
 S3-INC-01, S3-SEL-01, S3-ACCT-01
-S4-INC-01, S4-MEM-01, S4-COMP-01, S4-REP-01
+S4-INC-01, S4-MEM-01, S4-COMP-01
 ```
 
 `S1-BODY-01` (body-only subject) and `S2-CONF-01` (contradictory sources) are **not** active: the pilot cases do not exercise them. They belong to CASE-07/08/10 and CASE-11.
 
-**Excluded from the pilot verdict:** `S2-ADOPT-02` (late `PENDING_SCHEMA`) and `S4-ORD-01` (`PENDING_DEPENDENCY`). Neither is scored nor counted as unmet.
-
-`S2-REP-02` and `S4-REP-01` are now **active**: the test schema defines `representations[]` as the approved set, with `selection_safe` on each entry, and carries `representation.id` and `unit.representation`. That is the field set both predicates need, so keeping them pending would have meant claiming a missing dependency that no longer exists.
+**Excluded from the pilot verdict**, and not counted as unmet: `S2-ADOPT-02` (PENDING_SCHEMA), `S4-ORD-01` (PENDING_DEPENDENCY), and three predicates whose condition no pilot case produces — `S2-REP-02` (two approved representations), `S4-REP-01` (representation-id mismatch, scored once CASE-05/06 exist), `S1-BODY-01` and `S2-CONF-01`. Their schemas are defined now so they activate without a schema change later.
 
 ## Scoring rules
 

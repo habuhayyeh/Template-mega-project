@@ -16,7 +16,8 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 | G0-S1-02 | `candidates[0].selected_claim = "…"` | `S1-AUTH-02` | S1 | `S2-REP-01` | RUNNABLE |
 | G0-S1-03 | append a candidate for a body-only historical fact | `S1-BODY-01` | S1 | `S3-BODY-01` | RUNNABLE |
 | G0-S1-04 | `candidates[0].anchors = []` | `S1-CAND-02` | S1 | `S2-REP-01` | RUNNABLE |
-| G0-S1-05 | append a candidate for a PMHx item with no assessment question ("hypothyroidism") | `S1-CAND-01` | S1 | `S2-REP-01` | RUNNABLE |
+| G0-S1-05 | append a candidate for the old infarct used only as evidence for the seizure claim, with no assessment question of its own | `S1-CAND-01` | S1 | `S2-REP-01` | RUNNABLE |
+| G0-S1-06 | `candidates[0].status_current = true` (a field in the forbidden set, not `adopted`) | `S1-AUTH-01` | S1 | `S2-REP-01` | RUNNABLE |
 
 ## S2 family — semantic, parent `S2_OUTPUT`
 
@@ -59,7 +60,9 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 
 1. **Clean parent** per layer — zero findings, run first.
 2. **Harmless variation** — same content, different valid wording — zero findings.
-3. **Cross-family silence** — the `must not fire` ids stay silent; tripping one fails calibration.
+3. **Full silence set** — the silence requirement is *every active predicate except the expected one*, not the single neighbour named in the table. A seed passes specificity only if no other active predicate fires. The `must not fire` column is an illustrative neighbour, not the requirement.
+
+That is a stricter rule than one hand-picked neighbour, and it catches a scorer that fires broadly for reasons nobody anticipated.
 
 ## Attribution
 
@@ -67,7 +70,7 @@ Wrong-submodule attribution is a calibration failure.
 
 ## Current state
 
-**19 RUNNABLE · 1 PENDING_SCHEMA · 1 PENDING_DEPENDENCY**, plus 4 note-level seeds excluded from this pilot.
+**20 RUNNABLE · 1 PENDING_SCHEMA · 1 PENDING_DEPENDENCY**, plus 4 note-level seeds excluded from this pilot.
 
 ## ACTIVE_PREDICATE → SEED map
 
@@ -77,10 +80,9 @@ Every active predicate has at least one seed. A predicate in the active set with
 |---|---|
 | `S1-CAND-01` | G0-S1-05 |
 | `S1-CAND-02` | G0-S1-04 |
-| `S1-AUTH-01` | G0-S1-01 |
+| `S1-AUTH-01` | G0-S1-01, G0-S1-06 |
 | `S1-AUTH-02` | G0-S1-02 |
 | `S2-REP-01` | G0-S2-01 |
-| `S2-REP-02` | G0-S2-02 |
 | `S2-TEMP-01` | G0-S2-03 |
 | `S2-ADOPT-01` | G0-S2-06 |
 | `S3-INC-01` | G0-S3-01 |
@@ -89,8 +91,9 @@ Every active predicate has at least one seed. A predicate in the active set with
 | `S4-INC-01` | G0-S4-01, G0-S4-02 |
 | `S4-MEM-01` | G0-S4-04 |
 | `S4-COMP-01` | G0-S4-06 |
-| `S4-REP-01` | G0-S4-05 |
 
-**18 seeds calibrate the 15 active predicates** used by CASE-01/02/09.
+**15 seeds calibrate 13 active predicates** for CASE-01/02/09.
 
-Inactive predicates keep their seeds: `S1-BODY-01` (G0-S1-03), `S2-CONF-01` (G0-S2-04) and `S4-ORD-01` (G0-S4-03) are not scored in this pilot because the cases do not exercise them or their oracle is unfrozen.
+`S1-AUTH-01` has two seeds because one mutation proves one forbidden field is detected, not that the forbidden set is. The set itself is closed and versioned in `predicates.md`.
+
+Predicates with seeds but not active in this pilot: `S1-BODY-01` (G0-S1-03), `S2-REP-02` (G0-S2-02), `S2-CONF-01` (G0-S2-04), `S4-ORD-01` (G0-S4-03), `S4-REP-01` (G0-S4-05). They are not scored here; the cases that would exercise them are CASE-05/06/07/11.

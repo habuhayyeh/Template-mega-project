@@ -19,7 +19,7 @@
 
 BASELINE-03 and BASELINE-04 contain unresolved slots: `[date]`, `[confirm]`, `[titer/date]`, `[Add details here]`, `[x]`, `"[Insert radiology impression verbatim]"`.
 
-These are not defects in the note; they are the note marking what it does not know. The current Case IR has no way to express this. Its only options are to omit or to invent, and inventing is the failure we have spent weeks removing.
+These are not defects in the note; they are the note marking what it does not know. Whether the current Case IR can express this is **not yet established** — it has not been tested, and I asserted it could not.
 
 **Status: observation, and the logic runs the other way.** A model that correctly marks an unknown value is not evidence that new schema is needed — it is evidence the current representation is sufficient for that behaviour. The sequence is: decide product behaviour first (should a note show markers, or omit?), then test whether the current representation can produce that behaviour. Schema is proposed only if it cannot.
 
@@ -68,16 +68,15 @@ Two things the contract must **not** do: standardise the signer's abbreviations 
 
 | class | members | may proceed now? | claim it supports |
 |---|---|---|---|
-| realistic signer corpus | BASELINE-01…04 | **blocked** — needs source packages | statements about real clinical input |
+| realistic signer corpus | BASELINE-01…04 | **blocked** — needs source packages before any run or calibration on real input | statements about real clinical input |
 | derived synthetic architecture fixtures | `CASE-01/02/09`, Gate 0 `DERIVED_PARENT` artifacts | **yes** | statements about interface conformance only, never about clinical quality |
 
 A pass on a derived synthetic fixture says the interfaces can be honoured. It says nothing about how the system behaves on a real encounter, and no result report may blur the two.
 
-## 6. What is still blocked
+## 6. What is blocked, and what is not
 
-- **Fixtures** need source packages. Without them, a case has a target and no input, so nothing can be run.
-- **Gate 0 parents** stay `DERIVED_PARENT` until at least one case has a source package.
-- **Scorer predicates** can be drafted from §3 now, but cannot be calibrated without seeds built on real parents.
+- **Realistic-corpus work is blocked**: fixtures, calibration on real parents, and any claim about clinical quality all need source packages.
+- **Not blocked**: the derived synthetic pilot. It may run with `DERIVED_PARENT` artifacts and supports interface-conformance claims only. The earlier version of this section said all fixtures were blocked, which contradicted §5.
 
 ## 6. Proposed next actions
 
