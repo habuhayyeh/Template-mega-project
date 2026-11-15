@@ -1402,4 +1402,51 @@ Mechanical conditions, all nine:
 8. Staleness marked on the schema, the seed corpus and the generated artifacts — AX parent, active set and campaign hashes named in `STALE.md` and in the ledger, pending regeneration.
 9. No scorer, Gate 0 run, Doximity or Phase 0 change.
 
-Please verify the diff.
+Please verify the diff.## 2026-11-15 · DeepSeek · execution-layer rebuild complete
+
+**Commit:** `5ee87f5`
+**Supersedes:** `b96d4cf3` and the `f47e47a` package — both non-authoritative.
+
+### Changed files (38)
+
+**Added — layer parents (4):** `AX-S1S2-D/parents/S1_PARENT.json`, `S2_PARENT.json`, `S3_PARENT.json`, `S4_PARENT.json`. Each carries `parent_type` and only its own layer.
+
+**Added — seeds (3 new):** `G0-S3-06` (CAND exclusivity), `G0-S4-08` (PROJ invented member), `G0-S4-09` (PROJ wrong-owner salience).
+
+**Added — generated parents (4):** `PARENT-S1_PARENT.json` … `PARENT-S4_PARENT.json`.
+
+**Rewritten:** `schema.md` (SCHEMA-2, post-DC-002 only), `predicates.md` (ACTIVE-PILOT-2), `G0-SEEDS.md` (layer-scoped), `seeds/generated/MANIFEST.json`, 18 regenerated seed artifacts, `oracle.json` (ORACLE-2.0).
+
+**Deleted:** `fixtures/CASE-01/parent.json` (four-layer artifact), `VARIATION.json`, both `STALE.md` markers, and the stale banner lines.
+
+### Counts
+
+| item | value |
+|---|---|
+| clean parents | **4**, one per parent_type (S1_OUTPUT, S2_OUTPUT, S3_OUTPUT, S4_BLUEPRINT) |
+| active predicates | **16** |
+| seeds | **21** |
+| seeds by predicate | S1-AUTH-01 ×2 · S1-AUTH-02 ×1 · S1-CAND-01 ×1 · S1-CAND-02 ×1 · S2-ADOPT-01 ×1 · S2-REP-01 ×1 · S2-TEMP-01 ×1 · S3-ACCT-01 ×1 · **S3-CAND-01 ×2** · S3-INC-01 ×1 · S3-SEL-01 ×1 · S4-COMP-01 ×1 · S4-INC-01 ×2 · S4-MEM-01 ×1 · **S4-PROJ-01 ×3** · S4-REP-01 ×1 |
+| pending predicates | `S2-ADOPT-02` (PENDING_SCHEMA) · `S4-ORD-01` (PENDING_DEPENDENCY) · `S1-BODY-01`, `S2-REP-02`, `S2-CONF-01` (no pilot case produces the condition) |
+
+### Identities
+
+`PILOT-2` registry · `ACTIVE-PILOT-2` active set · `SCHEMA-2` · `ORACLE-2.0`. One set, no drift.
+
+### Governing hashes
+
+Recorded in `MANIFEST.json`: canonical interface, architecture consensus, frozen program, AX-S1S2-D spec, schema, predicates, seed spec, generator, oracle. Plus per-parent and per-seed canonical-JSON hashes.
+
+### Fixed from the audit
+
+- **Layer-specific parents** end the full-silence impossibility: a seed is scored against its own layer, never a four-layer artifact.
+- **No invented salience.** `S4_INPUT_VIEW` is built from the S1 parent's own `management_reference_spans`; `G0-S4-09` plants the invention so the predicate can catch it.
+- **No `managed_today`, no `candidate_claims`** anywhere; `claim_candidates` and provenance/temporality in `from_ingest`.
+- **Ordering dropped** from `from_contracts` — `ORDER-1` was a fabricated contract while ordering is `PENDING_DEPENDENCY`.
+- **Branch coverage**: CAND has coverage and exclusivity seeds; PROJ has schema, invented-value and wrong-owner seeds.
+
+### Confirmed
+
+Old stale package superseded and non-authoritative. **No scorer built. No Gate 0 run. No Doximity. No Phase 0.**
+
+Ready for independent review as a fresh build.
