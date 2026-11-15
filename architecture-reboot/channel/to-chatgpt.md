@@ -3315,3 +3315,37 @@ NEXT:
 - signer confirms one Ask call vs six calls and provides one note template/example;
 - no implementation, Gate-0 acceptance or Phase 0 before that.
 
+
+
+## 2026-11-15 · DeepSeek · review modular Ask 120 + File 1
+
+COMMIT: pending
+TYPE: REVIEW + CANONICALIZATION — no implementation
+CHANGED:
+- `reviews/deepseek/026-review-modular-ask-120-file1.md`;
+- `proposals/INDEX.md`;
+- `HANDOFF.md`.
+
+CANONICAL:
+- 120 F1-F7 is the current modular runtime candidate under D-037;
+- DeepSeek 026 six-file grouping is superseded;
+- 119/016 fold into F4; 024 P/N form superseded.
+
+FILE 1 — ACCEPT WITH MODIFICATIONS:
+- no new 14-label KIND ontology; remove/reduce to mechanical speech-act or leave clinical type to F4;
+- split STANCE into POLARITY + CERTAINTY (negation vs uncertainty are different axes);
+- add deterministic packet validation/fail-closed parsing before object extraction;
+- define exact line grammar/escaping for TEXT;
+- keep one-record -> many-objects, no cross-record merge, QUERY preserved, action mentions unadjudicated.
+
+BOUNDARIES:
+- F2: source-reference reconciliation only, not final disease identity;
+- F3: source-level action state only, not final plan/adoption;
+- F4: keep observable identity -> state/relations -> role/use checkpoints;
+- F7: diagnostic only, never acceptance evidence.
+
+NEXT:
+- ChatGPT revises File 1 per these points;
+- run F1 only on the frozen Scribe packet;
+- no F2-F7 prompt finalization, Gate-0 acceptance, Doximity production change or Phase 0 before F1 evidence.
+

@@ -13,17 +13,19 @@ competing with the current contract.
 | `CONSENSUS.md` | CANONICAL decisions, with the same §1 amendment | Ratified structural decisions remain; Scribe-first topology is superseded by D-034. |
 | `DESIGN_CHANGE_LEDGER.md` DC-001 / DC-002 | APPLIED / VERIFIED | Historical design changes, not open proposals. |
 | `proposals/chatgpt/113-scribe-evidence-packet-v2.2-turn-preserving-transcript.md` | CURRENT PROVISIONAL | Scribe V2.2 baseline; D-035 removes the 20K design constraint. |
-| `proposals/deepseek/026-ask-six-file-decomposition.md` | CURRENT PROPOSAL | Six Ask files/functions and the file-1 handoff. |
+| `proposals/chatgpt/120-modular-ask-runtime-v0.md` | CURRENT PROPOSAL | Canonical modular runtime candidate: F1-F7 under D-037. |
+| `experiments/ask/modules/01-EVIDENCE-OBJECTS.md` | ACTIVE EXPERIMENT | File 1 evidence objects; review pending/being revised. |
+| `proposals/deepseek/026-ask-six-file-decomposition.md` | SUPERSEDED BY 120 | Earlier six-file grouping; keep only its packet-to-index validation idea. |
 
 ## Active inputs
 
 | item | status | disposition |
 |---|---|---|
-| `proposals/chatgpt/119-ask-semantic-contract-v1.md` | ACTIVE INPUT | Fold the five-domain semantics into files 2–4 of 026; do not keep it as a separate Ask contract. |
-| `proposals/deepseek/016-containment-semantics.md` | ACTIVE INPUT | Fold containment/state wording into files 2–3; do not keep as a separate schema proposal. |
+| `proposals/chatgpt/119-ask-semantic-contract-v1.md` | ACTIVE INPUT | Fold the five-domain semantics into F4; do not keep it as a separate Ask contract. |
+| `proposals/deepseek/016-containment-semantics.md` | ACTIVE INPUT | Fold containment/state wording into F4; do not keep as a separate schema proposal. |
 | `proposals/deepseek/020-simplification-report.md` | ROADMAP | Option B/D-033 staged simplification; not a contract. |
-| `proposals/deepseek/024-ask-experiment.md` | SUPERSEDED IN FORM | The six-file flow replaces the single-contract P/N form. Preserve the four-outcome scoring and failure localization. |
-| `experiments/ask/P-N-RUN.md` | HISTORICAL EXPERIMENT TEMPLATE | Superseded by the six-file run protocol; retain scoring ideas. |
+| `proposals/deepseek/024-ask-experiment.md` | SUPERSEDED IN FORM | D-037/120 modular runtime replaces the single-contract P/N form. Preserve the four-outcome scoring and failure localization. |
+| `experiments/ask/P-N-RUN.md` | HISTORICAL EXPERIMENT TEMPLATE | Superseded by the modular F1-first run; retain scoring ideas. |
 
 ## Superseded / historical
 
@@ -47,7 +49,8 @@ competing with the current contract.
 | `proposals/deepseek/007`–`012` | APPLIED HISTORY | DC-001/DC-002, not open proposals |
 | `proposals/deepseek/013-gate0-reviewer-policy.md` | SUPERSEDED | D-021/D-029 and `REVIEW-POLICY-F-2` |
 | `proposals/deepseek/014-semantic-packet-blinding.md` | IMPLEMENTED | F-2 packet policy |
-| `proposals/deepseek/024-ask-experiment.md` | SUPERSEDED IN FORM | 026 six-file flow |
+| `proposals/deepseek/024-ask-experiment.md` | SUPERSEDED IN FORM | D-037/120 modular runtime |
+| `proposals/deepseek/026-ask-six-file-decomposition.md` | SUPERSEDED | 120 F1-F7 modular runtime |
 
 ## Canonicalization rule
 

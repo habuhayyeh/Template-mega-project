@@ -1,6 +1,7 @@
 # Proposal 026 — six Ask files, and the first handoff
 
-**Status:** PROPOSED — decomposition and handoff contract only. No implementation, no patient data.
+**Status:** SUPERSEDED by ChatGPT Proposal 120 / D-037. The canonical modular runtime is F1-F7.
+This document is retained only for its packet-to-index validation idea.
 
 ## Assumption to confirm
 

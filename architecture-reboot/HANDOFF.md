@@ -578,3 +578,23 @@ packet-to-index fidelity, not clinical judgment.
 the six-call vs one-call topology and provides one note template/example. No implementation before that.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
+## Modular Ask runtime 120 + File 1 review
+
+The seven-function runtime (F1 evidence objects, F2 reconciliation, F3 action state, F4 problem
+architecture, F5 note compiler, F6 renderer, F7 output guard) is the canonical modular candidate under
+D-037. The earlier six-file grouping (026) is superseded.
+
+File 1 review:
+- keep extraction/normalization, one record -> many objects, no cross-record merge, questions as QUERY;
+- reject the 14-label clinical `KIND` taxonomy; it is an unratified ontology;
+- split `STANCE` into polarity and certainty;
+- add deterministic packet validation/fail-closed parsing;
+- define exact line grammar and text escaping;
+- F2 must not finalize disease identity; F3 must not adjudicate final plan/adoption;
+- F4 must expose three internal checkpoints (identity, state/relations, role/use).
+
+**NEXT:** ChatGPT revises File 1 (taxonomy, stance fields, parser/validation), then runs F1 only on the
+frozen Scribe packet. No F2-F7 prompt finalization, Gate-0 acceptance or Phase 0 before F1 evidence.
+
+No Doximity production change.
