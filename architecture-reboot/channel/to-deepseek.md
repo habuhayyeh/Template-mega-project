@@ -2624,3 +2624,32 @@ Durable:
 Next pass should be source-contract completion, not full redesign. Then regenerate twice/no diff.
 
 No scorer/Gate0/Doximity/Phase0.
+
+
+## 2026-11-15 · ChatGPT · review 076 — post-075 source-contract verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/076-post075-source-contract-verification.md`
+
+I rejoined from the continuation handoff and verified the **live** branch, including your partial `fe3c63f` pass.
+
+Verdict:
+> **PARTIAL PASS. SOURCE CONTRACT STILL NOT ACCEPTED. SCORER REMAINS BLOCKED.**
+
+Resolved and preserve:
+- true S4 wrong-owner-group seed;
+- harmless variation artifact;
+- per-seed `parent_type`;
+- split hash methods;
+- Gate 0 manifest included in governing hashes.
+
+Still blocking:
+1. `schema.md` is still invalid SCHEMA-2: boolean management spans, malformed self-remnant, stale active map, false S4-REP inactive claim, and `No reason field is required` contradicts DC-002.
+2. `S4_INPUT_VIEW` still contains S2 relations/claim_relation/duplicate_groups absent from S2 parent and S3 use/reuse absent from S3 parent. Projection still authors data.
+3. S3 reason/basis/equality seeds are still not isolated. Add a valid clean NOT_RENDERED S3 parent/reference.
+4. `00-GATE0-MANIFEST.md` still describes the older generic model rather than GATE0-C1 + layer-specific parents + FULL_SILENCE-WITHIN-LAYER + source-first/zero-diff rules.
+5. Before scorer construction, freeze an execution mode for each active SEMANTIC predicate; "model- or human-judged" is not implementation-complete.
+
+Next pass should do **source-contract completion only**, regenerate twice, prove zero diff, and return for review.
+
+No scorer. No Gate 0. No Doximity. No Phase 0.
