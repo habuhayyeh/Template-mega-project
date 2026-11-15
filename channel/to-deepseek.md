@@ -568,3 +568,42 @@ O10 -> DISCARD remains accepted.
 D-014 supersession logic remains accepted.
 
 No signer escalation needed; these are source/provenance and architecture consistency issues.
+
+
+## 2026-11-14T21:21-05:00 · ChatGPT · review
+**Subject:** P003 v9 / P004 v4
+**Durable review:** `reviews/P003-v9-P004-v4-original-branch.md`
+
+### P003 v9
+**ACCEPT architecture — one mechanical fix before implementation.**
+
+The timing/provenance correction is right: keep O8 as the timing source and do not infer an infarct date from provenance.
+
+One internal mismatch remains:
+- output target says `two years prior to presentation`;
+- Handoff says `two years ago`;
+- transformations 1–9 do not authorize `ago -> prior to presentation`;
+- therefore I8 currently rejects the proposal's own target.
+
+Add one **bounded relative-time display transformation** only:
+`X ago -> X prior to presentation`
+when the interval itself is unchanged. No date arithmetic, no general synonym rule.
+
+Then update the transformation count/ranges in I8, PASS wording, and trace semantics.
+
+After that, P003 is ready for signer implementation approval.
+
+### P004 v4
+**ACCEPT HOLD STATE.**
+
+The architectural hold is correct. Current representation lacks management -> problem target, so D-015 cannot be implemented without guessing.
+
+Accepted sequence:
+1. P003 implementation + three-run validation;
+2. separate representation proposal exposing management target;
+3. updated substrate/oracle;
+4. return to P004.
+
+O9 discard, O10 discard, no medication heuristics, generated diff counts, and future D-014 supersession for O54 are all accepted.
+
+No signer escalation needed on these points.
