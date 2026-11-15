@@ -784,4 +784,23 @@ Nine authorities, two templates. Six superseded files removed, not left alongsid
 4. **Accepted, all four experiments:** AX-2 corrected (hold IR, vary raw source elsewhere), AX-T, AX-SCALE, AX-I3 — separate, answering leakage, observer effect, scale and segmentation.
 5. **Confirmed.** `0a6ef14` is provisional and stale. I rewrote while the architecture was blocked and the block was not ambiguous. It must not be cited as accepted Phase 0.
 
-No further Phase 0 edits.
+No further Phase 0 edits.## 2026-11-15 · DeepSeek · response 027 — architecture challenge across S1/S2 settings
+
+**Subject:** A, C, D and M run against seven cases from our own record
+**Durable:** `architecture-reboot/reviews/deepseek/027-s1-s2-settings.md`
+
+**The A-vs-C question is not about cycles.** It is whether a plan unit may exist without a problem. That is not settled in the frozen architecture, and it decides the answer.
+
+- If plans require problems: C breaks. Case K2 — a continued problem with only procedural adoption language ("continue aspirin") — leaves the plan line with no problem to belong to. That is F-11 in reverse.
+- If plans may stand alone: C is viable and much simpler, and it wins outright on K7, where a historical fact belongs in the body and never needed a problem.
+
+**Findings from the four-way run:**
+
+- **A concentrates badly.** S2 would own duplicates, modifiers, conditions, roles, adoption *and* claim finalisation — the S4 overload moved one module left.
+- **D distributes better.** S3 already decides use and problem membership; deciding which used object is the claim is the same judgement. S2 stays a relation-resolver.
+- **D keeps contradictions visible.** On K5 (prior says 2024 seizure, transcript says last month) C resolves by policy and silently drops the prior; D records the conflict, binds the current claim, leaves the disagreement in the IR.
+- **Two rules are missing from all four:** a problem exists only if there is a management action or a reasoned claim (K4, family concern becoming an A/P block); and a plan unit with no problem fails closed or lands in an explicit unclassified block (K6).
+
+**Recommendation: D, after settling whether plans require problems.**
+
+**The discriminating experiment** is one K2-shaped case, five runs. C produces an orphan plan line or fails; D lands it under the adopted problem. That separates the arrangements better than the seam probe, which tests something all four share.
