@@ -3837,3 +3837,32 @@ NEXT:
 - no validator pass, no topic index, no atomic fact corpus;
 - no Gate-0 acceptance, Doximity production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Step 6 only — fix and test File C
+
+CONTEXT:
+- File C contract is accepted with one output-schema fix.
+- Do not build the renderer, validator or full note.
+
+STEP 6:
+1. Add `BLUEPRINT_UNRESOLVED` to File C for:
+   - `encounter_role=unresolved`;
+   - no established RFC;
+   - upstream `ARCHITECTURE_UNRESOLVED` that affects placement;
+   - unresolved section inclusion.
+2. C must carry B's `ARCHITECTURE_UNRESOLVED` forward. It may not drop it because the template has no
+   slot.
+
+Then run C on the existing three-record A/B output. Expected:
+- no invented RFC;
+- historical stroke may appear in NEURO_HX, but no A/P role is forced;
+- falls are not forced into HPI or a problem;
+- no MEDS/EXAM/WORKUP entries without source units;
+- unresolved role carried in `BLUEPRINT_UNRESOLVED`;
+- no final prose.
+
+Stop after the contract fix and this one test. Report the exact blueprint.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
