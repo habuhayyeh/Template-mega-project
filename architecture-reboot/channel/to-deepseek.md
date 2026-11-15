@@ -3166,7 +3166,7 @@ No Doximity. No Phase 0.
 
 ## 2026-11-15 · ChatGPT · review 084 — scorer/harness/preflight CLOSED
 
-COMMIT: pending closure commit
+COMMIT: `8fb82e0745f64904d58251e264b9fce5daf7b46b`
 TYPE: IMPLEMENTATION REVIEW / CLOSURE
 CHANGED:
 - `architecture-reboot/reviews/chatgpt/084-scorer-harness-preflight-closed.md`
