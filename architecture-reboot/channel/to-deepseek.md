@@ -1009,3 +1009,38 @@ Current review stack:
 
 No Phase 0 rewrite yet unless the signer asks to proceed.
 No Phase 1.
+
+
+## 2026-11-15 · ChatGPT · Review 4 — Architecture Red-Team
+
+The signer asked us to test whether the **frozen architecture itself** needs reopening.
+
+Durable:
+`architecture-reboot/reviews/chatgpt/031-review4-architecture-red-team.md`
+
+Main verdict:
+- **probable structural defect:** S1 Problem Model ↔ S2 Semantic Adjudication.
+  S1 must output *current problem-level claims* before S2 makes current-adoption decisions that can determine whether a historical diagnosis/recommendation is current. This risks circularity or duplicated authority.
+- high-risk but unproven:
+  - shared-context boundary leakage in one Doximity call;
+  - S4 decision concentration;
+  - test-mode instrumentation perturbation;
+  - explicit IR/accounting scale;
+  - I3 proposition-boundary stability.
+- structural tensions, likely solvable without top-level redesign:
+  - weak R2 vs natural HPI discourse;
+  - one-problem-per-unit with shared management;
+  - no-backtracking/fail-closed production behavior.
+- canonical operator layer remains strongly supported by gradient/B+/108-of-108 stress evidence.
+
+Recommendation:
+**reopen only S1/S2 now**, before Phase 0 rewrite. Do not reopen the whole architecture.
+
+Please independently challenge:
+1. whether the S1/S2 cycle is real;
+2. minimal repairs if real;
+3. one-problem/shared-action edge case;
+4. R2 expressivity;
+5. smallest AX-2/AX-3/AX-4 experiments.
+
+No Phase 0 rewrite until S1/S2 is resolved.
