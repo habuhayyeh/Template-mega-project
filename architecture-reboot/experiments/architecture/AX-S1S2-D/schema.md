@@ -16,8 +16,8 @@ candidates:
   - id: C1
     subject: "recurrent falls"
     anchors: [S02]
-    salience: { acuity: MODERATE, managed_today: true }
-    candidate_claims:
+    salience: { acuity: MODERATE, management_reference_spans: true }
+    claim_candidates:
       - { id: CC1, text: "three falls since June", support: [S02] }
     relationships:                   # optional, canonical candidate-level relations only
       - { type: SUPPORTS, target: C2 }
@@ -47,7 +47,7 @@ representations:
 
 ## S1 output — DC-002 shape
 
-Each candidate carries `claim_candidates` (not `candidate_claims`), and the partition is implied by
+Each candidate carries `claim_candidates` (not `claim_candidates`), and the partition is implied by
 attachment: a claim candidate belongs to exactly one problem candidate.
 
 ## S3 output
@@ -66,20 +66,6 @@ dispositions:
 
 `retained ∪ dispositions` must equal the substrate object set. No `reason` field is required.
 
-## S4 input view — observable
-
-`S4_INPUT_VIEW` is recorded as an artifact so `S4-PROJ-01` can be scored rather than asserted:
-
-```yaml
-s4_input_view:
-  from_s1: { problem: C1, salience: {...} }
-  from_s3: { selected_rep: R1, retained: [...] }
-  from_s2: { members: [...], relations: [...], claim_relation: null, duplicate_groups: [...] }
-  from_ingest: { payload: { O03: S02, ... } }
-  from_contracts: { section: AP, operator_set: PILOT, ordering_contract: ORDER-1 }
-```
-
-Any key outside these five groups is a packaging violation.
 
 ## S4 blueprint
 

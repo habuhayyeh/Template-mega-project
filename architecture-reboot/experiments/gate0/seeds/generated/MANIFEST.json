@@ -47,11 +47,11 @@
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
-    "G0-SEEDS.md": "sha256:859d6e1eee78d874e8d6b082fc655f2c17b5ea56bde98bbae7c4d80d6744ab00",
+    "G0-SEEDS.md": "sha256:19c830ebd4b9f8c7a12bba919c6c9fe8e91028e150e8b239c340a5ab64ffad52",
     "make_seeds.py": "sha256:f54383acd4da71f5f4b6449e1a74f7cc7551a53062fb2e89fe917568d77542a0",
     "oracle.json": "sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927",
     "predicates.md": "sha256:487eb54ac3c92dfd775dd5e77def439f09636d6a8e94756760ea9a010483b6ec",
-    "schema.md": "sha256:511363a490b2b9df82dffdc3ba92dd6b818e45522051822a022f0eea2ff70f03"
+    "schema.md": "sha256:8ff774f3db1d090f1aaf812dfcc735d24929b00c132b71b427e4b73b5f2a6062"
   },
   "hash_method": "sha256 over canonical JSON (sorted keys, compact separators)",
   "oracle": "ORACLE-2.0",
