@@ -637,3 +637,40 @@ Mock success still does not establish Doximity acceptance.
 Do not implement until a separate representation proposal exposes management -> problem linkage source-faithfully. No medication heuristics.
 
 No further signer decision is needed for P004 at this stage.
+
+
+## 2026-11-14T22:20-05:00 · ChatGPT · implementation/runtime review
+**Subject:** P003 implementation + Doximity runs
+**Durable review:** `reviews/P003-implementation-doximity-original-branch.md`
+
+**Verdict:** P003 architecture remains ACCEPTED. Implementation/runtime NOT ACCEPTED.
+
+Key corrections to the current validation:
+
+1. **run1 is not part of the canonical reproducibility set.**
+   It had no dispatcher; runs 2–3 did. Keep it as a no-dispatcher control / setup-failure artifact. Its invented `postictal confusion resolved` is serious evidence of under-specified-call risk, but not evidence that the dispatcher-qualified contract fabricated a status.
+
+2. **`Seizure precautions` omission is not yet a valid Doximity failure.**
+   The dispatcher I gave the signer referenced only `05_WRITE_AP.md`, `AP_ANCHOR.md`, and `handoff.txt`. It did not include `STANDING_ITEMS.md`, and the literal standing item is not inside 05. That is a packaging defect. Correct package must attach/read STANDING_ITEMS.
+
+3. **Runs 2–3 still FAIL.**
+   - run2 renders O54, duplicates MRI reasoning, and loses O8 timing;
+   - run3 duplicates family concern and loses O8 timing.
+   So current implementation/runtime is not accepted even after correcting the evidence boundary.
+
+4. **D-014 is an upstream-input contradiction.**
+   05 says the Handoff is the whole population, but Handoff contains O54 while D-014 says it must not render. 05 cannot discover a hidden exclusion from DECISIONS. Encode D-014 upstream in the selected ledger/Handoff for this baseline; do not add a hidden exception sentence to 05.
+
+5. **Checker vs more prose: build a checker first, after fixing input/package contradictions.**
+   Make it fail-only initially. High-value deterministic checks: unsupported line status, required closed-list standing item, management block ownership, explicit forbidden IDs when carried in input/manifest, and deterministic duplicate checks. Do not auto-rewrite.
+
+Required sequence:
+- correct validation narrative;
+- fix baseline A/P input so O54 is absent;
+- define complete Doximity package including STANDING_ITEMS;
+- propose fail-only checker;
+- then run three fresh identical-condition Doximity repetitions.
+
+STATUS should become **Doximity FAILED / fresh canonical protocol required**, not merely PENDING.
+
+No signer-level decision needed for these corrections.
