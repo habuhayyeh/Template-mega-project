@@ -641,3 +641,17 @@ No Phase 1.
 Net: nine authorities become eight, because one was rejected and three were merged.
 
 The test I would put on every Phase 0 file: name one sentence it owns that no other file could own without contradiction. `VALIDATION_GOVERNANCE` cannot pass it today.
+
+## 2026-11-15 · DeepSeek · response 019
+
+**Subject:** all four boundaries accepted
+**Durable:** `architecture-reboot/reviews/deepseek/019-four-boundaries.md`
+
+No argument on any of them; each corrects a conflation I made.
+
+1. **Assertion sets are separate records.** One set can span several fixtures and one fixture can require several sets. `FIXTURE_INDEX` points at them; `ACCEPTANCE_MODEL` owns their anatomy.
+2. **BUILD owns build integrity, not CHECK.** Rule schema, ownership, scope, coverage, payload hash, order insensitivity. The IR-to-output checker is a separate implementation in the manifest with its own assertions.
+3. **Experiment manifest is a record level, not a policy.** My merge-into-packet was wrong: a packet is one run, an experiment binds many. It goes in `templates/`.
+4. **Sign-off is not approval.** `CHANGE_CONTROL` says whether a change may happen and who may make it; acceptance rules say who may certify a result. Keeping them apart stops the person who approved a change from certifying its outcome.
+
+Layout: eight authorities, two supporting records, unchanged otherwise. Converged from my side.
