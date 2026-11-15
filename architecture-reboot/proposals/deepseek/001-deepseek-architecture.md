@@ -140,7 +140,8 @@ Checks, all mechanical:
 5. voice rule (no first-person in the A/P);
 6. every spec line accounted for; every state object accounted for exactly once;
 7. `HISTORICAL` objects absent from the plan;
-8. duplicate lines absent by head identity.
+8. duplicate lines absent by head identity;
+9. **source fidelity** — every proposition in the ledger appears in the source, and every source sentence is accounted for as used, merged, or explicitly not used. This is the check that separates a note from a well-formed hallucination.
 
 **The ledger is recomputed, not trusted.** The renderer may also emit one; the checker derives its own from (state, spec, output). Where they disagree is the bug. A self-reported ledger alone is a claim, and claims are what we have been unable to verify.
 
@@ -185,17 +186,23 @@ It is the projection's output plus the checker's reconciliation. It answers: was
 - the ledger;
 - every check in §2.4.
 
-## 4. Doximity topology
+## 4. Doximity topology — declared, not assumed
 
-The architecture is stateless by design: state in, note out.
+The signer has now stated the operating workflow:
 
-Default topology, and the one to test first: **one call**. The template receives the source, emits the note and, in test mode, the ledger. The ledger is then checked outside Doximity, because Doximity cannot run our code.
+> copy chart material (imaging, labs, prior notes) into the ask field, add the scribe transcription, run the template.
 
-This is not a compromise of the architecture; it is the architecture. A stateless call fits an environment with no state.
+That is **one call, one paste, all material inline**. It is not a multi-pass workflow, and it does not include a human carrying artifacts between stages. The architecture must fit that, not hope it changes.
 
-Two-pass is available and costs one human paste: pass 1 emits the state, pass 2 renders from it. That is worth doing only if measurement shows the single call's state is unstable — which is exactly experiment E1.
+Three consequences, and they are not small.
 
-**What we must not do** is design a state that only exists if someone carries it between calls, and then describe that as one architecture. It is two: the semantic design, and an operational protocol with a human in it.
+1. **"Deterministic" means "mechanically checkable afterwards", not "computed by code during generation".** Inside Doximity there is no code. The projection rules are executed by the model and verified by our checker outside. That is weaker than a real compiler pass, and pretending otherwise would be the same error as assuming Doximity behaves like a program.
+2. **The state must be emitted, or there is nothing to check.** One call therefore produces two artifacts: the note, and the case state / execution ledger. The note is what the clinician sees; the ledger is what the engineer checks. Production can discard the ledger; testing keeps it.
+3. **The checker must compare against the source, not only against the ledger's self-consistency.** A model can emit a ledger that agrees with its own output and disagrees with the encounter. So the checks are: every ledger proposition appears in the source, every source sentence is accounted for (entered, merged, or explicitly not used), every note line maps to a ledger line, and every ledger line maps to a source span.
+
+That is what makes a single-call design auditable: the ledger is not evidence of correctness, it is the thing the checker tests against the source.
+
+Two-pass remains possible as a *manual* option — pass 1 emits the state, the user pastes it back for pass 2. It is not the default, it is not required, and it costs the signer a paste per encounter. It becomes worth doing only if measurement shows the single call cannot hold state and note together.
 
 ## 5. Packaging
 
@@ -250,4 +257,4 @@ These are cheap. E1 and E2 are ten model calls between them and answer the quest
 Two things here are not mine to decide:
 
 1. **Whether a two-pass workflow is acceptable** — it requires a human paste per encounter. That is a product decision, not an architecture one.
-2. **The A/P voice** is already settled by D-017 and is assumed here; if it should extend to the body note, that changes the transformation table, not the architecture.
+2. **Voice is section-scoped, and the signer has now settled it:** the body note may be personal, the A/P must be impersonal (D-017). So the transformation table is not global — it carries a scope column, and the impersonal-voice transform applies to the A/P only. The body renderer may keep first person where the source does.

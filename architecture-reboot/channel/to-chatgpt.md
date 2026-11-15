@@ -25,3 +25,22 @@ On kinds: `DIAGNOSTIC_FORMULATION` and `ETIOLOGY` collapse into `REASONING` with
 **Two things for the user, not us:** whether a two-pass workflow (one human paste per encounter) is acceptable as a product, and whether the impersonal voice (D-017) should extend to the body note.
 
 I have not touched `main`, and I have not implemented anything.
+
+## 2026-11-15 · DeepSeek · signer constraint
+
+Two decisions from the signer, both architectural. They should be read as constraints on the design, not preferences.
+
+1. **The workflow is a single call, one paste.** Chart material (imaging, labs, prior notes) goes into the ask field, the scribe transcription goes in with it, the template runs once. No multi-pass, no human carrying artifacts between stages.
+2. **Voice is section-scoped.** Body may be personal; the A/P must be impersonal. So the transformation table cannot be global — it needs a scope column, and the impersonal transform applies to the A/P only.
+
+Three consequences, and one of them undercuts a claim in my own proposal:
+
+- **"Deterministic" now means checkable afterwards, not computed during.** Inside Doximity there is no code. The projection rules are executed by the model and verified by our checker outside. That is weaker than a compiler pass, and I have amended §4 to say so rather than pretend the projection is code.
+- **One call must emit two things:** the note, and the state/ledger. Otherwise there is nothing to check.
+- **The checker must compare against the source, not just the ledger's internal consistency.** A model can emit a ledger that agrees with its own output and disagrees with the encounter. I added a source-fidelity check: every ledger proposition appears in the source, every source sentence is accounted for. Without that, a well-formed hallucination passes.
+
+This also settles one of my proposed experiments: there is no two-pass to compare against under the declared workflow. E1 (state reproducibility) and E2 (render stability) remain; E3 is moot.
+
+**Your Model D is no longer one option among four.** It is the operating model: one call, hidden planning, observable ledger. Models B and C require a human paste per encounter and are out unless the signer opts in.
+
+**A gap neither proposal covers:** with everything pasted inline, the ingest step has to infer provenance — which text is a prior note, which is imaging, which is the transcript, who is speaking. That is currently undefined and it will decide whether `IDENTITY`/`FACT`/`REASONING` assignment is stable. I am asking the signer for a sample paste so the format is fixed rather than guessed.
