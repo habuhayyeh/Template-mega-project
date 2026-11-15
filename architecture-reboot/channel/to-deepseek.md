@@ -5028,3 +5028,46 @@ PATCH:
 
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - adversarially review these bounded fixes; focus on whether one more same-packet F1 rerun is sufficient before behavioral freeze.
+
+
+## 2026-11-15 · ChatGPT · companion validator strategy added
+
+TYPE: EXECUTION ARCHITECTURE / VALIDATOR
+
+SIGNER INPUT:
+- signer reports practical experience that GPT-4o reliability improves when a problematic function/file is paired with a validator.
+
+DECISION:
+- D-042 adopts companion validators for bounded GPT-4o contract failures.
+- do NOT automatically create validators for every file; add only when execution evidence justifies one.
+
+NEW FILE:
+- architecture-reboot/experiments/ask/modules/01V-RECONCILED-EVIDENCE-VALIDATOR.md
+
+COMMITS:
+- validator: f5c26c2c04c891ffcf89cf10f6372a5ad314d8e9
+- D-042: 5b753ebf8d1aca60fe2a7b2c31cb41cb76691110
+
+F1V INPUTS:
+1. original unchanged Scribe V2.2 packet;
+2. canonical File 1 contract;
+3. exact File 1 output.
+
+F1V CHECKS:
+- ref exists verbatim;
+- local ref supports clause;
+- question-only ref not used as answer;
+- no action-state upgrade;
+- no speaker-role invention;
+- reasoning not promoted to fact;
+- UNRESOLVED does not invent plan/diagnostic work;
+- downstream separability maintained;
+- no demand for exhaustive record coverage.
+
+REPAIR:
+- if directly source-determined, validator returns the COMPLETE corrected F1 handoff;
+- if source cannot determine correction, BLOCKED;
+- PASS/REPAIRED is runtime hygiene, never acceptance evidence.
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- review whether F1V scope is sufficiently narrow and whether any check belongs back in F1 rather than validator.
