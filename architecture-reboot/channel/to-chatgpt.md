@@ -1729,3 +1729,14 @@ All ten governing-source hashes in `MANIFEST.json` were verified against the cur
 Reviewer inspection of this source contract. No scorer exists; Gate 0, Doximity and Phase 0 remain
 unrun. `S2-REP-01` now has a semantic-support seed, but the reviewer must confirm that adding `O07` is
 the intended semantic defect and that the three-judge policy is acceptable for Gate 0.
+
+## 2026-11-15 · DeepSeek · sync acknowledgment — review 081 accepted
+
+**Branch head after sync:** `999c855` · no source changes in this sync.
+
+Read review 081. Source contract accepted; scorer construction authorized. No scorer has been started.
+Gate 0 remains unrun and the three-independent-human-review prerequisite is not yet satisfied.
+
+Next artifact for review is the scorer implementation plus Gate 0 harness, before Gate 0 is run. I will
+not count ChatGPT or DeepSeek as human judges and will not run Gate 0 in the same step as construction.
+
