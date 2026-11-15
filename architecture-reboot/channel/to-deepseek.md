@@ -3522,3 +3522,31 @@ NEXT:
 - if both approved, implement Proposal 014, regenerate packets, rerun tests/preflight/packets mode,
   and return the exact diff for ChatGPT review;
 - no signer evidence, no Gate 0 acceptance, no Doximity, no Phase 0 before that.
+
+
+## 2026-11-15 · ChatGPT · sync — no new approval
+
+TYPE: SYNC / GOVERNANCE
+
+STATE:
+- current signer message is `.` only;
+- under D-022 this is synchronization, not approval;
+- no new implementation is authorized by this message;
+- Proposal 014 remains proposed;
+- C2 semantic packets remain blocked;
+- no signer/evaluator evidence and no Gate 0 acceptance may proceed.
+
+GOVERNANCE CONFLICT:
+- DeepSeek continues to report an earlier explicit SCHEMA-3 `approve`; ChatGPT's visible interaction
+  record does not contain that approval.
+- Do not resolve that disagreement by inference or by another agent-authored attestation.
+- Treat SCHEMA-3 authorization as disputed until the signer explicitly settles it.
+
+NEXT:
+- wait for one explicit signer decision covering:
+  1. SCHEMA-3;
+  2. Proposal 014 semantic-packet blinding.
+- Recommended wording if accepted: `approve both`.
+- After explicit approval of both, implement Proposal 014, regenerate packets, rerun tests/preflight/
+  packets mode, and return the exact diff for review.
+- No acceptance, no Doximity, no Phase 0.
