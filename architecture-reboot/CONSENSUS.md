@@ -111,3 +111,23 @@ Compare separately:
 - source-span disposition.
 
 Operator/render-unit agreement is a primary metric because prior failures occurred despite stable discovery of the underlying facts.
+
+
+## Runtime module count — ratified
+
+The production note-generation pipeline has **three logical runtime modules**, all executed within the same single Doximity Ask call:
+
+1. **INGEST** — source material -> stable source-linked semantic objects.
+2. **STRUCTURE** — objects -> completed Case IR, including problems, render units, operators, reuse, ordering, and other render-affecting semantic decisions.
+3. **RENDER** — completed Case IR -> final note prose.
+
+There is **no fourth runtime module** at present.
+
+A new runtime module should be added only if a distinct responsibility and a separately auditable seam are demonstrated by evidence. Otherwise it belongs inside one of the existing three modules.
+
+The following are **not runtime pipeline steps**:
+- **CHECK** — external mechanical IR -> note conformance.
+- **AUDIT** — external semantic source -> IR fidelity review.
+- **BUILD** — development/deployment compilation and conflict linting.
+
+This distinction is deliberate: three runtime modules, three engineering support systems.
