@@ -69,18 +69,32 @@ These points have been explicitly proposed and accepted by both ChatGPT and Deep
 - The earlier large relation wish-list is not adopted.
 - The Scribe-primary execution topology in ChatGPT Proposal 002 is void under the user's actual Ask-based one-call workflow.
 
+21. **Mechanical checking is Case-IR-to-note only.**
+    A deterministic checker verifies unit references, operator validity, unit↔line mapping, allowed transformations, voice, ordering, and accounting. It does not reconstruct semantic units from objects.
+
+22. **Source-to-Case-IR correctness is a separate semantic audit.**
+    Kind, role, problem use, operator selection, duplicate/condition/modifier judgments, and other clinical-semantic choices require semantic review unless a specific predicate is genuinely mechanical.
+
+23. **One source proposition keeps one stable object identity.**
+    The same object may be reused explicitly by multiple render units/problems. Do not clone a proposition solely to give it multiple problem homes. An optional primary problem may exist for accounting only.
+
+24. **Object accounting is usage/disposition based.**
+    Every object must appear in at least one render unit or carry an explicit disposition. Coverage is not defined as assignment to exactly one problem.
+
+25. **Source spans are mechanically bounded, not semantically atomized.**
+    A span is a line, utterance, speaker turn, or equivalent boundary preserved by the paste format. One span may yield multiple objects. Every span has at least one disposition, and every object points back to its source span.
+
 ## Still open
 
 The following are not yet consensus:
 
 - exact top-level kind taxonomy;
 - whether `COURSE` remains a separate kind;
-- exact Case IR schema;
 - exact canonical operator vocabulary;
-- exact source-unit/span representation;
-- single-owner vs explicit multi-problem reuse of one object;
-- exact semantic-audit design;
-- whether Case IR is visible only in test mode or can be hidden/suppressed in production.
+- exact field-level Case IR schema;
+- exact semantic-audit instrument/test protocol;
+- whether Case IR is visible only in test mode or can be hidden/suppressed in production;
+- the concrete paste-layout/provenance contract, which depends on an actual example of how chart material + transcript are pasted into Doximity Ask.
 
 ## Next decisive experiment
 
