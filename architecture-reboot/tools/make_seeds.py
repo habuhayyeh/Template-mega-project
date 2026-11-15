@@ -1,229 +1,183 @@
 #!/usr/bin/env python3
-"""Generate Gate 0 seed artifacts from a clean parent.
+"""Build the DC-002 execution package from source artifacts.
 
-The seed specification lives in G0-SEEDS.md; this script implements it and
-records, per artifact, the mutation path with before/after values and a content
-hash. The manifest is evidence about what changed, not a second authority over
-what should change.
+Source (hand-authored, authoritative):
+  AX-S1S2-D/parents/S{1,2,3,4}_PARENT.json
+  AX-S1S2-D/fixtures/CASE-01/oracle.json
+  AX-S1S2-D/schema.md, predicates.md
+  gate0/seeds/G0-SEEDS.md
+  this file's SEEDS table
 
-Usage: python make_seeds.py
+Generated (never hand-edited):
+  gate0/seeds/generated/PARENT-*.json, G0-*.json, MANIFEST.json
+
+Run: python architecture-reboot/tools/make_seeds.py
+Idempotent: a second run must produce no diff.
 """
 import copy
 import hashlib
+import io
 import json
 import os
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-CASE = os.path.join(HERE, "..", "experiments", "architecture",
-                    "AX-S1S2-D", "fixtures", "CASE-01")
-OUT = os.path.join(HERE, "..", "experiments", "gate0", "seeds", "generated")
-PREDICATE_SET = "PILOT-2"
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+AX = os.path.join(ROOT, 'experiments/architecture/AX-S1S2-D')
+G0 = os.path.join(ROOT, 'experiments/gate0')
+GEN = os.path.join(G0, 'seeds/generated')
+PAR = os.path.join(AX, 'parents')
+
+REG, ACTIVE, SCHEMA, ORACLE_VER = 'PILOT-2', 'ACTIVE-PILOT-2', 'SCHEMA-2', 'ORACLE-2.0'
+CAMPAIGN = 'GATE0-C1'
 
 
-def load():
-    with open(os.path.join(CASE, "parent.json"), encoding="utf-8") as fh:
-        return json.load(fh)
+def canon(o):
+    return 'sha256:' + hashlib.sha256(
+        json.dumps(o, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
-def file_sha(path):
-    with open(path, "rb") as fh:
-        return "sha256:" + hashlib.sha256(fh.read()).hexdigest()
+def fsha(p):
+    return 'sha256:' + hashlib.sha256(io.open(p, 'rb').read()).hexdigest()
 
 
-def sha(obj):
-    # Canonical JSON: sorted keys, fixed separators. Hashing bytes would make
-    # the digest depend on formatting; hashing canonical JSON makes it depend
-    # only on content.
-    canon = json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    return "sha256:" + hashlib.sha256(canon).hexdigest()
+def load(name):
+    return json.load(io.open(os.path.join(PAR, name), encoding='utf-8'))
 
 
-def m_s1_01(a):
-    a["s1"]["candidates"][0]["adopted"] = True
-    return [("/s1/candidates/0", "<no adopted key>", "adopted=true")]
+def s1_01(a): a['s1']['candidates'][0]['adopted'] = True
+def s1_02(a): a['s1']['candidates'][0]['selected_claim'] = 'CC1'
+def s1_04(a): a['s1']['candidates'][0]['anchors'] = []
+def s1_05(a):
+    a['s1']['candidates'].append({
+        'id': 'C2', 'subject': 'old left MCA infarct', 'anchors': ['S01'],
+        'salience': {'acuity': 'LOW', 'management_reference_spans': []},
+        'claim_candidates': [{'id': 'CC2', 'text': 'known left MCA infarct', 'support': ['S01']}]})
+def s1_06(a): a['s1']['candidates'][0]['status_current'] = True
 
+def s2_01(a): a['s2']['representations'][0]['support_refs'] = []
+def s2_03(a): a['s2']['adjudication'][0]['temporal'] = 'now'
+def s2_06(a): a['s2']['adjudication'][0]['adoption'] = None
 
-def m_s1_02(a):
-    a["s1"]["candidates"][0]["selected_claim"] = "CC1"
-    return [("/s1/candidates/0", "<no selected_claim>", "selected_claim=CC1")]
+def s3_01(a): a['s3']['rendered'][0]['approved_representation'] = None
+def s3_02(a): a['s3']['rendered'][0]['selected_rep'] = 'R-999'
+def s3_04(a):
+    a['s3']['dispositions'] = [d for d in a['s3']['dispositions'] if d['object'] != 'O07']
+def s3_05(a): a['s3']['candidate_outcomes'] = []
+def s3_06(a):
+    a['s3']['candidate_outcomes'].append({'candidate': 'C1', 'outcome': 'NOT_RENDERED',
+                                          'reason': 'NO_PROPOSAL'})
+def s3_07(a):
+    a['s3']['candidate_outcomes'].append({'candidate': 'C9', 'outcome': 'NOT_RENDERED',
+                                          'reason': 'NO_PROPOSAL'})
+def s3_08(a): a['s3']['candidate_outcomes'][0]['outcome'] = 'NOT_RENDERED'
+def s3_09(a): a['s3']['candidate_outcomes'].append({'candidate': 'C1', 'outcome': 'NOT_RENDERED'})
+def s3_10(a):
+    a['s3']['candidate_outcomes'][0] = {'candidate': 'C1', 'outcome': 'NOT_RENDERED',
+                                        'reason': 'NO_PROPOSAL', 'basis': []}
 
-
-def m_s1_04(a):
-    before = list(a["s1"]["candidates"][0]["anchors"])
-    a["s1"]["candidates"][0]["anchors"] = []
-    return [("/s1/candidates/0/anchors", before, [])]
-
-
-def m_s1_05(a):
-    a["s1"]["candidates"].append({
-        "id": "C2", "subject": "old left MCA infarct", "anchors": ["S01"],
-        "salience": {"acuity": "LOW", "managed_today": False},
-        "candidate_claims": [
-            {"id": "CC2", "text": "known left MCA infarct", "support": ["S01"]}
-        ],
-    })
-    return [("/s1/candidates/-", "<absent>", "C2 substrate-only subject")]
-
-
-def m_s1_06(a):
-    a["s1"]["candidates"][0]["status_current"] = True
-    return [("/s1/candidates/0", "<no status_current>", "status_current=true")]
-
-
-def m_s2_01(a):
-    before = list(a["s2"]["representations"][0]["support_refs"])
-    a["s2"]["representations"][0]["support_refs"] = []
-    return [("/s2/representations/0/support_refs", before, [])]
-
-
-def m_s2_03(a):
-    before = a["s2"]["adjudication"][0]["temporal"]
-    a["s2"]["adjudication"][0]["temporal"] = "now"
-    return [("/s2/adjudication/0/temporal", before, "now")]
-
-
-def m_s2_06(a):
-    rec = a["s2"]["adjudication"][0]
-    before = rec["adoption"]
-    rec["adoption"] = None
-    return [("/s2/adjudication/0/adoption", before, None)]
-
-
-def m_s3_01(a):
-    a["s3"]["rendered"][0]["approved_representation"] = None
-    return [("/s3/rendered/0/approved_representation", "R1", None)]
-
-
-def m_s3_02(a):
-    a["s3"]["rendered"][0]["selected_rep"] = "R-999"
-    return [("/s3/rendered/0/selected_rep", "R1", "R-999")]
-
-
-def m_s3_05(a):
-    a["s3"]["candidate_outcomes"] = [x for x in a["s3"]["candidate_outcomes"]
-                                     if x["candidate"] != "C1"]
-    return [("/s3/candidate_outcomes", "C1 RENDERED", "C1 outcome absent")]
-
-
-def m_s3_04(a):
-    a["s3"]["dispositions"] = [d for d in a["s3"]["dispositions"]
-                              if d["object"] != "O07"]
-    return [("/s3/dispositions", "O07 dispositioned MEDICATION_RECORD",
-             "O07 unaccounted")]
-
-
-def m_s4_01(a):
-    a["s4"]["problems"].pop()
-    return [("/s4/problems", "1 problem", "0 problems while S3 rendered 1")]
-
-
-def m_s4_02(a):
-    a["s4"]["problems"].append({"id": "P2", "source": "C9", "order": 2})
-    return [("/s4/problems/-", "<absent>", "P2 not in S3 rendered set")]
-
-
-def m_s4_04(a):
-    a["s4"]["units"][0]["members"].append("O99")
-    return [("/s4/units/0/members/-", "<absent>", "O99 not in retained")]
-
-
-def m_s4_05(a):
-    a["s4"]["units"][0]["representation"] = "R-999"
-    return [("/s4/units/0/representation", "R1", "R-999 against S3 selected_rep R1")]
-
-
-def m_s4_07(a):
-    a["s4_input_view"]["adoption"] = True
-    return [("/s4_input_view/-", "<absent>", "adoption: true injected")]
-
-
-def m_s4_06(a):
-    a["s4"]["units"] = [u for u in a["s4"]["units"] if u["id"] != "U2"]
-    return [("/s4/units", "U2 present", "U2 removed for retained O05")]
+def s4_01(a): a['s4']['problems'].pop()
+def s4_02(a): a['s4']['problems'].append({'id': 'P2', 'source': 'C9', 'order': 2})
+def s4_04(a): a['s4']['units'][0]['members'].append('O99')
+def s4_05(a): a['s4']['units'][0]['representation'] = 'R-999'
+def s4_06(a): a['s4']['units'] = [u for u in a['s4']['units'] if u['id'] != 'U2']
+def s4_07(a): a['s4_input_view']['adoption'] = True
+def s4_08(a): a['s4_input_view']['from_s2']['members'] = ['O03', 'O04', 'O05']
+def s4_09(a): a['s4_input_view']['from_s1']['salience']['acuity'] = 'SEVERE'
+def s4_10(a):
+    a['s4_input_view']['from_ingest']['O05'] = {'payload': 'vitamin D', 'provenance': 'A',
+                                                'temporal': None}
+def s4_11(a): a['s4_input_view']['from_s2']['claim_relation'] = 'COMPETING'
 
 
 SEEDS = [
-    ("G0-S1-01", "S1-AUTH-01", m_s1_01),
-    ("G0-S1-02", "S1-AUTH-02", m_s1_02),
-    ("G0-S1-04", "S1-CAND-02", m_s1_04),
-    ("G0-S1-05", "S1-CAND-01", m_s1_05),
-    ("G0-S1-06", "S1-AUTH-01", m_s1_06),
-    ("G0-S2-01", "S2-REP-01", m_s2_01),
-    ("G0-S2-03", "S2-TEMP-01", m_s2_03),
-    ("G0-S2-06", "S2-ADOPT-01", m_s2_06),
-    ("G0-S3-01", "S3-INC-01", m_s3_01),
-    ("G0-S3-02", "S3-SEL-01", m_s3_02),
-    ("G0-S3-04", "S3-ACCT-01", m_s3_04),
-    ("G0-S4-01", "S4-INC-01", m_s4_01),
-    ("G0-S4-02", "S4-INC-01", m_s4_02),
-    ("G0-S4-04", "S4-MEM-01", m_s4_04),
-    ("G0-S4-06", "S4-COMP-01", m_s4_06),
-    ("G0-S3-05", "S3-CAND-01", m_s3_05),
-    ("G0-S4-07", "S4-PROJ-01", m_s4_07),
-    ("G0-S4-05", "S4-REP-01", m_s4_05),
+ ('S1_PARENT.json', 'G0-S1-01', 'S1-AUTH-01', s1_01, '/s1/candidates/0/adopted', '<absent>', 'true'),
+ ('S1_PARENT.json', 'G0-S1-02', 'S1-AUTH-02', s1_02, '/s1/candidates/0/selected_claim', '<absent>', 'CC1'),
+ ('S1_PARENT.json', 'G0-S1-04', 'S1-CAND-02', s1_04, '/s1/candidates/0/anchors', '["S02"]', '[]'),
+ ('S1_PARENT.json', 'G0-S1-05', 'S1-CAND-01', s1_05, '/s1/candidates/-', '<absent>', 'C2 context-only'),
+ ('S1_PARENT.json', 'G0-S1-06', 'S1-AUTH-01', s1_06, '/s1/candidates/0/status_current', '<absent>', 'true'),
+ ('S2_PARENT.json', 'G0-S2-01', 'S2-REP-01', s2_01, '/s2/representations/0/support_refs', '["S02"]', '[]'),
+ ('S2_PARENT.json', 'G0-S2-03', 'S2-TEMP-01', s2_03, '/s2/adjudication/0/temporal', '2024-02 documented', 'now'),
+ ('S2_PARENT.json', 'G0-S2-06', 'S2-ADOPT-01', s2_06, '/s2/adjudication/0/adoption', 'false', 'null'),
+ ('S3_PARENT.json', 'G0-S3-01', 'S3-INC-01', s3_01, '/s3/rendered/0/approved_representation', 'R1', 'null'),
+ ('S3_PARENT.json', 'G0-S3-02', 'S3-SEL-01', s3_02, '/s3/rendered/0/selected_rep', 'R1', 'R-999'),
+ ('S3_PARENT.json', 'G0-S3-04', 'S3-ACCT-01', s3_04, '/s3/dispositions', 'O07 recorded', 'O07 unaccounted'),
+ ('S3_PARENT.json', 'G0-S3-05', 'S3-CAND-01', s3_05, '/s3/candidate_outcomes', 'C1 RENDERED', '[] coverage'),
+ ('S3_PARENT.json', 'G0-S3-06', 'S3-CAND-01', s3_06, '/s3/candidate_outcomes', 'one outcome', 'two exclusivity'),
+ ('S3_PARENT.json', 'G0-S3-07', 'S3-CAND-01', s3_07, '/s3/candidate_outcomes/-', '<absent>', 'unknown id C9'),
+ ('S3_PARENT.json', 'G0-S3-08', 'S3-CAND-01', s3_08, '/s3/candidate_outcomes/0/outcome', 'RENDERED', 'NOT_RENDERED equality'),
+ ('S3_PARENT.json', 'G0-S3-09', 'S3-CAND-01', s3_09, '/s3/candidate_outcomes/-', '<absent>', 'missing reason'),
+ ('S3_PARENT.json', 'G0-S3-10', 'S3-CAND-01', s3_10, '/s3/candidate_outcomes/0/basis', '<absent>', '[] missing basis'),
+ ('S4_PARENT.json', 'G0-S4-01', 'S4-INC-01', s4_01, '/s4/problems', '1 problem', '0 problems'),
+ ('S4_PARENT.json', 'G0-S4-02', 'S4-INC-01', s4_02, '/s4/problems/-', '<absent>', 'P2 not rendered'),
+ ('S4_PARENT.json', 'G0-S4-04', 'S4-MEM-01', s4_04, '/s4/units/0/members/-', '<absent>', 'O99'),
+ ('S4_PARENT.json', 'G0-S4-05', 'S4-REP-01', s4_05, '/s4/units/0/representation', 'R1', 'R-999'),
+ ('S4_PARENT.json', 'G0-S4-06', 'S4-COMP-01', s4_06, '/s4/units', 'U2 present', 'U2 removed'),
+ ('S4_PARENT.json', 'G0-S4-07', 'S4-PROJ-01', s4_07, '/s4_input_view/-', '<absent>', 'adoption schema'),
+ ('S4_PARENT.json', 'G0-S4-08', 'S4-PROJ-01', s4_08, '/s4_input_view/from_s2/members', '["O03","O04"]', 'adds O05 invented'),
+ ('S4_PARENT.json', 'G0-S4-09', 'S4-PROJ-01', s4_09, '/s4_input_view/from_s1/salience/acuity', 'MODERATE', 'SEVERE wrong value'),
+ ('S4_PARENT.json', 'G0-S4-10', 'S4-PROJ-01', s4_10, '/s4_input_view/from_ingest/O05', 'S03 payload', 'fabricated payload'),
+ ('S4_PARENT.json', 'G0-S4-11', 'S4-PROJ-01', s4_11, '/s4_input_view/from_s2/claim_relation', 'null', 'COMPETING wrong owner'),
 ]
 
 
 def main():
-    os.makedirs(OUT, exist_ok=True)
-    parent = load()
-    with open(os.path.join(CASE, "oracle.json"), encoding="utf-8") as fh:
-        oracle = json.load(fh)
-    base = os.path.join(HERE, "..", "experiments", "architecture", "AX-S1S2-D")
-    spec = os.path.join(HERE, "..", "experiments", "gate0", "seeds", "G0-SEEDS.md")
+    os.makedirs(GEN, exist_ok=True)
+    for f in os.listdir(GEN):
+        if f.endswith('.json'):
+            os.remove(os.path.join(GEN, f))
+
     manifest = {
-        "governing_hashes": {
-            "predicates.md": file_sha(os.path.join(base, "predicates.md")),
-            "schema.md": file_sha(os.path.join(base, "schema.md")),
-            "G0-SEEDS.md": file_sha(spec),
-            "make_seeds.py": file_sha(os.path.abspath(__file__)),
+        'campaign': CAMPAIGN, 'registry': REG, 'active_set': ACTIVE,
+        'schema': SCHEMA, 'oracle': ORACLE_VER,
+        'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
+        'hash_method': 'sha256 over canonical JSON (sorted keys, compact separators)',
+        'governing_hashes': {
+            'CONSENSUS_SUBMODULE_INTERFACES_v1.md': fsha(os.path.join(ROOT, 'CONSENSUS_SUBMODULE_INTERFACES_v1.md')),
+            'CONSENSUS_ARCHITECTURE_v0.1.md': fsha(os.path.join(ROOT, 'CONSENSUS_ARCHITECTURE_v0.1.md')),
+            '00-ARCHITECTURE-EXPERIMENT-PROGRAM.md': fsha(os.path.join(ROOT, 'experiments/architecture/00-ARCHITECTURE-EXPERIMENT-PROGRAM.md')),
+            'AX-S1S2-D.md': fsha(os.path.join(ROOT, 'experiments/architecture/AX-S1S2-D.md')),
+            'schema.md': fsha(os.path.join(AX, 'schema.md')),
+            'predicates.md': fsha(os.path.join(AX, 'predicates.md')),
+            'G0-SEEDS.md': fsha(os.path.join(G0, 'seeds/G0-SEEDS.md')),
+            'make_seeds.py': fsha(os.path.abspath(__file__)),
+            'oracle.json': fsha(os.path.join(AX, 'fixtures/CASE-01/oracle.json')),
         },
-        "governing_hash_method": "sha256 over file bytes (source text, not JSON)",
-        "case": parent["case"],
-        "predicate_registry": {"id": PREDICATE_SET, "version": "1"},
-        "active_set": "PILOT-ACTIVE-1",
-        "specificity_policy": "FULL_SILENCE-1",
-        "hash_method": "sha256 over canonical JSON (sorted keys, compact separators)",
-        "parent_hash": sha(parent),
-        "oracle_hash": sha(oracle),
-        "clean_parent": {"artifact": "PARENT-CLEAN.json", "expect": "zero findings"},
-        "seeds": [],
+        'clean_parents': {}, 'seeds': [],
     }
 
-    with open(os.path.join(OUT, "PARENT-CLEAN.json"), "w",
-              encoding="utf-8", newline="\n") as fh:
-        json.dump(parent, fh, indent=2)
+    parents = {}
+    for f in ['S1_PARENT.json', 'S2_PARENT.json', 'S3_PARENT.json', 'S4_PARENT.json']:
+        p = load(f)
+        parents[f] = p
+        manifest['clean_parents'][f] = {'parent_type': p['parent_type'], 'hash': canon(p)}
+        with io.open(os.path.join(GEN, 'PARENT-' + f), 'w', encoding='utf-8', newline='\n') as fh:
+            json.dump(p, fh, indent=2, sort_keys=True)
+            fh.write('\n')
 
-    for seed_id, predicate, fn in SEEDS:
-        art = copy.deepcopy(parent)
-        mutations = fn(art)
-        name = seed_id + ".json"
-        with open(os.path.join(OUT, name), "w", encoding="utf-8", newline="\n") as fh:
-            json.dump(art, fh, indent=2)
-        manifest["seeds"].append({
-            "artifact": name,
-            "must_fire": predicate,
-            "mutations": [{"path": p, "before": b, "after": a} for p, b, a in mutations],
-            "hash": sha(art),
-        })
+    for pfile, sid, pred, fn, path, before, after in SEEDS:
+        art = copy.deepcopy(parents[pfile])
+        fn(art)
+        name = sid + '.json'
+        with io.open(os.path.join(GEN, name), 'w', encoding='utf-8', newline='\n') as fh:
+            json.dump(art, fh, indent=2, sort_keys=True)
+            fh.write('\n')
+        manifest['seeds'].append({
+            'artifact': name, 'parent': 'PARENT-' + pfile, 'must_fire': pred,
+            'mutations': [{'path': path, 'before': before, 'after': after}],
+            'hash': canon(art)})
 
-    # Harmless variation: identical semantics, every id renamed consistently.
-    text = json.dumps(parent, sort_keys=True)
-    for a, b in (('"C1"', '"CX"'), ('"R1"', '"RX"'), ('"P1"', '"PX"'),
-                 ('"U1"', '"UX1"'), ('"U2"', '"UX2"'), ('"U3"', '"UX3"'),
-                 ('"CC1"', '"CCX"')):
-        text = text.replace(a, b)
-    with open(os.path.join(OUT, "VARIATION.json"), "w", encoding="utf-8", newline="\n") as fh:
-        fh.write(json.dumps(json.loads(text), indent=2))
-    manifest["variation"] = {"artifact": "VARIATION.json", "expect": "zero findings",
-                             "basis": "identical semantics, all ids renamed"}
-
-    with open(os.path.join(OUT, "MANIFEST.json"), "w",
-              encoding="utf-8", newline="\n") as fh:
-        json.dump(manifest, fh, indent=2)
-
-    print("wrote %d artifacts (predicate set %s)" % (len(SEEDS) + 2, PREDICATE_SET))
+    from collections import Counter
+    by = Counter(s['must_fire'] for s in manifest['seeds'])
+    manifest['counts'] = {
+        'clean_parents': len(manifest['clean_parents']),
+        'seeds': len(manifest['seeds']),
+        'active_predicates': 16,
+        'by_predicate': dict(sorted(by.items())),
+    }
+    with io.open(os.path.join(GEN, 'MANIFEST.json'), 'w', encoding='utf-8', newline='\n') as fh:
+        json.dump(manifest, fh, indent=2, sort_keys=True)
+        fh.write('\n')
+    print('built:', manifest['counts'])
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

@@ -1,0 +1,43 @@
+{
+  "case": "CASE-01",
+  "parent_type": "S3_OUTPUT",
+  "registry": "PILOT-2",
+  "s3": {
+    "candidate_outcomes": [
+      {
+        "basis": [],
+        "candidate": "C1",
+        "outcome": "NOT_RENDERED",
+        "reason": "NO_PROPOSAL"
+      }
+    ],
+    "dispositions": [
+      {
+        "disposition": "HISTORICAL_CONTEXT",
+        "object": "O01"
+      },
+      {
+        "disposition": "HISTORICAL_CONTEXT",
+        "object": "O02"
+      },
+      {
+        "disposition": "MEDICATION_RECORD",
+        "object": "O07"
+      }
+    ],
+    "rendered": [
+      {
+        "approved_representation": "R1",
+        "problem": "C1",
+        "selected_rep": "R1"
+      }
+    ],
+    "retained": [
+      "O03",
+      "O04",
+      "O05",
+      "O06"
+    ]
+  },
+  "schema": "SCHEMA-2"
+}
