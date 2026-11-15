@@ -5,7 +5,7 @@
   "evaluators": [],
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:b8d1180ceaba947e0cf1d3398830fb048e9a1fd241adabb2f78ce98f0e5ea2c7",
+    "00-GATE0-MANIFEST.md": "sha256:f2f819a43ab4c813705745ba713183c1ca3ae9c0a151934a532c0f18d0e3e1aa",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
@@ -4312,6 +4312,6 @@
   "reference_count": 0,
   "references": [],
   "review_policy": "REVIEW-POLICY-F-2",
-  "run_id": "20261115T193906Z-2a9c3508",
+  "run_id": "20261115T194025Z-2a9c3508",
   "scorer_version": "GATE0-SCORER-1"
 }

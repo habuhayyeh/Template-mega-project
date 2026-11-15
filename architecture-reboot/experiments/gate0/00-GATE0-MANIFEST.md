@@ -18,8 +18,8 @@ mutation record is the checked parent→seed diff, not a hand-written claim.
 **Status: SCORER/HARNESS IMPLEMENTED / SCHEMA-4 + D-023 + D-030 + D-031 REBUILT / F-2 PACKETS PREPARED / GATE 0 UNRUN.** The
 scorer and harness exist at `architecture-reboot/scorer/` and
 `architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 44 semantic packet
-instances. No signer reference or evaluator evidence exists yet; no Gate 0 acceptance run has been
-executed.
+instances. One signer reference is recorded; no evaluator evidence exists yet. No Gate 0 acceptance run has
+been executed.
 
 ---
 

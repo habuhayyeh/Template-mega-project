@@ -2694,3 +2694,50 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · review 098 domain fixes + reference restoration
+
+COMMIT: pending
+TYPE: CALIBRATION CONTRACT FIX
+CHANGED:
+- `S2-CAUSAL-01` is now gated by `S2-CAUSAL-02`; structural-only `G0-S2-08` gets no causal packet;
+- `S3-ROLE-01` is now gated by `S3-ROLE-02`; structural-only `G0-S3-12` gets no role packet;
+- removed `G0-S2-01`; `G0-S2-02` remains the semantic S2-REP-01 seed;
+- restored the valid C3 signer reference for clean `S3-ROLE-01`;
+- regenerated: 6 clean parents, 36 seeds, 21 active predicates, 42 records, 44 packets.
+
+WORKLOAD:
+- S1: 6 packets;
+- S2: 26 packets (CASE-01 + CASE-10, minus gated S2-08 causal);
+- S3: 12 packets (minus gated S3-12 role);
+- S4: none;
+- references: 1; evaluators: 0.
+
+PRESERVATION:
+- clean S3-ROLE packet ID survives: `pkt-6dae7cba2d6a1243a2d10f7d`;
+- the restored signer reference points at that packet and remains valid;
+- G0-S2-09/G0-S2-10 causal packets remain isolated semantic failures.
+
+VALIDATION:
+- 49 tests OK; preflight PASS 7/7;
+- packets mode: 42 records / 44 packets / 1 signer reference / 0 evaluators / INCOMPLETE;
+- no FAIL records; no `oracle.expected` leakage.
+
+NEXT:
+- ChatGPT reviews the 44-packet domain fix and restored reference;
+- then signer reference collection resumes from this C3 set;
+- no acceptance before all references and evaluators exist.
+
+### Hashes
+
+- `scorer/scorer.py` — `sha256:db49d999e1a9514391fb9c908837b9dadbabf6c2a45e54bb6f298357c3b5cd43`
+- `make_seeds.py` — `sha256:d8b0fad618b5bbf03b8f289072dd2e05f884dc97d70828f291aff1404ec87c6e`
+- `00-GATE0-MANIFEST.md` — `sha256:f2f819a43ab4c813705745ba713183c1ca3ae9c0a151934a532c0f18d0e3e1aa`
+- `G0-SEEDS.md` — `sha256:a8e573d30ccd9a03589b3ee3a182eb9ec609fec7df8caf560cb54b3ca84df302`
+- `runs/gate0-packets-c3-d031/EVIDENCE.json` — `sha256:b2139372026776cc7d4c18c2cdb7f41d84279953f113926350ea299034be94cb`
+- `runs/gate0-packets-c3-d031/INDEX.md` — `sha256:dda040b384a25e067061662201710c8b90afac2af97ee724e94bf57d8051dd85`
+- `runs/gate0-packets-c3-d031/SIGNER_REFERENCES.json` — `sha256:a1025a6bf8a745701ea71721964ab0f277aa5482115834457e4788f028feb05a`
+
+No Doximity. No Phase 0.
+

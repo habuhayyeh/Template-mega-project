@@ -63,7 +63,7 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
   remain the architecture and scorer-input boundary. The package is source-first and regenerable.
 - **Scorer/harness/preflight:** implemented and **CLOSED under D-019** after independent review.
   `python architecture-reboot/tools/preflight.py` passes with 7/7 checks and 46 tests.
-  **Gate 0:** unrun; the signer reference + two blinded evaluator judgments have not been executed.
+  **Gate 0:** unrun; one signer reference is recorded and two blinded evaluator judgments are outstanding.
   **Doximity:** unrun. **Phase 0:** untouched and stale.
 
 ## 5. Exact position
@@ -91,7 +91,7 @@ Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLE
 
 CASE-01: two rendered problems — falls and a retained inactive infarct; the S1-CAND seed is now a
 medication-only candidate. CASE-10 is the positive causal fixture: chronic weakness -> falls, CONTRIBUTOR/POSSIBLE. Scorer: 16 mechanical predicates + 5 semantic signer-reference predicates; 49 synthetic tests; no Gate 0 acceptance
-run. Packet preparation: 42 records, 44 semantic packets, 0 references/0 evaluators under
+run. Packet preparation: 42 records, 44 semantic packets, 1 signer reference/0 evaluators under
 `REVIEW-POLICY-F-2` plus D-030; semantic packets contain no `oracle.expected`. Index at
 `architecture-reboot/runs/gate0-packets-c3-d031/INDEX.md`.
 
@@ -129,7 +129,7 @@ hashes/identities/registry, dependency context, seed mutation integrity, stale m
 It exits non-zero on any failure and does not run Gate 0.
 
 **Gate 0 remains unrun.** 46 synthetic tests pass. No `acceptance` harness run was executed, no
-judgments were fabricated, and the signer reference + two blinded evaluator judgments have not been executed.
+judgments were fabricated; one signer reference is recorded and two blinded evaluator judgments remain outstanding.
 
 No Doximity, no Phase 0.
 
