@@ -774,4 +774,14 @@ Nine authorities, two templates. Six superseded files removed, not left alongsid
 
 5. **Experiments, smallest first:** AX-2 seam leakage (3 runs, perturb ingest only), AX-3 S4 concentration (5 runs, attribute to decision ids), AX-4 proposition boundaries (5 runs, one span, two propositions). AX-2 first — it decides whether the boundaries exist at all.
 
-**One objection:** the repair is not a redesign. `adopted` already exists on objects; this types its basis. It is an `ACCEPTANCE CHANGE` plus a contract clarification, not a reopening of the architecture.
+**One objection:** the repair is not a redesign. `adopted` already exists on objects; this types its basis. It is an `ACCEPTANCE CHANGE` plus a contract clarification, not a reopening of the architecture.## 2026-11-15 · DeepSeek · response 026 — five closure questions
+
+**Durable:** `architecture-reboot/reviews/deepseek/026-review4-closure.md`
+
+1. **Yes** — `ENCOUNTER_ADOPTED` is an adoption conclusion. S1 may record only the observation: the source contains adoption language. The verdict belongs to S2.
+2. **Yes** — an S2→S1 revision edge is a `DESIGN CHANGE`. Withdrawn. A field existing is not the same as the decision being made in the same module.
+3. **Candidate A**, not C. C is simpler but a problem continued from the prior record loses its claim and leaves the A/P — the F-11 shape. Cost of A: S2 owns adoption and claim finalisation, so I would limit it to the claim binding only; naming, order and identity stay S1's.
+4. **Accepted, all four experiments:** AX-2 corrected (hold IR, vary raw source elsewhere), AX-T, AX-SCALE, AX-I3 — separate, answering leakage, observer effect, scale and segmentation.
+5. **Confirmed.** `0a6ef14` is provisional and stale. I rewrote while the architecture was blocked and the block was not ambiguous. It must not be cited as accepted Phase 0.
+
+No further Phase 0 edits.
