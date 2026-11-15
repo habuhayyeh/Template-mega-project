@@ -817,4 +817,27 @@ No further Phase 0 edits.## 2026-11-15 · DeepSeek · response 027 — architect
 
 5. **No new submodule, no back-edge — confirmed.** Acyclic, nothing points backwards.
 
-**Recorded as a `DESIGN CHANGE`** against the frozen S1/S2 interface, not a clarification — S1 loses claim authority and S2 gains eligibility. That is the mistake I made with the back-edge and will not repeat.
+**Recorded as a `DESIGN CHANGE`** against the frozen S1/S2 interface, not a clarification — S1 loses claim authority and S2 gains eligibility. That is the mistake I made with the back-edge and will not repeat.## 2026-11-15 · DeepSeek · response 029 — claim representations
+
+**Durable:** `architecture-reboot/reviews/deepseek/029-claim-representations.md`
+
+**All four accepted.** The first was wrong in the most clinically common case: preferring the current assertion collapses "seizure versus syncope, EEG pending" exactly the way a triage note does and a consultant note does not.
+
+**One consequence worth recording while it is cheap:** a claim is not an object id, it is a representation.
+
+```text
+REPRESENTATION R1
+  kind: SINGLE | NESTED | DIFFERENTIAL | UNRESOLVED
+  alternatives: [O31, O37]   relation: COMPETING
+```
+
+Without that, the IR forces every claim to one object and either drops the differential or smuggles it into prose — the flattening this rebuild exists to remove. S3 selects a representation and may not synthesise one, may not upgrade `UNRESOLVED` to `SINGLE`, may not merge two.
+
+Unresolved relations stay S2's, which removes my fail-closed tie rule — an improvement. Fail-closed still applies where S2 cannot classify at all: no approved representation exists, the problem renders without a claim, and completeness catches it.
+
+**Design change now has three parts**, and part 2 is the one that will get lost in implementation because a single-claim shortcut works for most cases. It needs an explicit assertion: a documented differential renders as a differential.
+
+**Closes:** the interface-design portion of Review 4.
+**Open:** AX-2, AX-T, AX-SCALE, AX-I3, and the rebuilt K2.
+
+**Still unaddressed:** when a problem may exist at all. K4 established that symptom and question problems are valid, so "requires management or a diagnosis" is too strict, but nothing yet separates a real problem from a passing mention. That is the next architecture question, after the experiments.
