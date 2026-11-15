@@ -16,6 +16,8 @@ Problem blocks, in order, each with `PRIMARY_CLAIM` or `PROBLEM_LABEL`, plus `CL
 
 The Handoff is the entire clinical input. Do not return to the sources.
 
+The Handoff is also the whole population. An object the ledger discarded is not in it, is not available to you, and its absence is not a reason to keep, drop, rename or explain anything. Select only among the entries you were given. If the eligibility test excludes a retained entry, drop it and say nothing.
+
 ---
 
 ## THE LINE

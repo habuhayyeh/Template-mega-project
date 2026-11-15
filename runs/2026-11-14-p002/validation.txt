@@ -34,17 +34,29 @@ Lossless check: 59 ledger objects, 44 retained, 15 discarded, 44 retained texts 
 
 Passes: capitalisation after `//`; reasoning rendered after evidence; MRI adjudication rendered once (O23/O39 merged), O38 separate; plan carries one decision per fact (apixaban held + resume merged; `fluid restriction` over `fluid restriction started`; one driving item); prior-record `no further workup` dropped; PVC attribution preserved; `Seizure precautions` is a legitimate standing item, trigger satisfied by a seizure working diagnosis.
 
-## 5. Open defect — one
+## 5. O54 — resolved
 
-`residual mild expressive aphasia [D, 2024-02]` (O54) is retained by the ledger and present in the Handoff, and does not appear in the A/P. The writer's stated reason was that its current-encounter twin O9 had been discarded as baseline deficit — an entry that is not in the Handoff at all.
+Observed: O54 `residual mild expressive aphasia [D, 2024-02]` is retained by the ledger, present in the Handoff, and absent from the A/P.
 
-This is over-compression, not deduplication: the "one fact, one bullet" rule was applied against an absent entry, so the fact now appears nowhere. Two readings, for review:
+The output does not show why. It cannot distinguish the eligibility test from an absent-entry comparison, and this file previously asserted the second as fact. That assertion is withdrawn.
 
-- **defect** — the rule should select among entries present in the Handoff and never drop a retained entry because a discarded one would have said it better;
-- **acceptable** — a residual deficit of the old infarct is context, and `known left MCA infarct` already carries the stroke.
+Review `2026-11-14T20:35` accepted the outcome — O54 is sequela context for the old infarct, and O7/O18 carry the substrate — and rejected the clause that would have presumed every retained entry must render. A boundary statement was added to `05`'s INPUT: the Handoff is the whole population, discarded objects are invisible, and their absence is not a reason for anything.
 
-Held open rather than patched, per the review's instruction not to add `05` compression guidance pre-emptively.
+No compression rule was added.
 
 ## 6. Not established
 
 Doximity behaviour. Nothing here speaks to it.
+
+## 4b. Second 05 run — over-correction
+
+Run after the review's two must-changes were added to the contract. It applied one correctly (ETIOLOGY bullet dropped), applied the conjunction fix (The MRI will tell us), and then undid three things the review had accepted as is:
+
+- put 
+esidual mild expressive aphasia (prior neurology, 2024-02) back, contrary to the accepted O54 outcome;
+- unmerged apixaban held from its resume condition, which the review had accepted as merged;
+- dropped Seizure precautions, a standing item the review had accepted, and dropped the infarct evidence entries as restating the line.
+
+Two runs of the same stage on the same input produced different regression sets. That is the finding: the eligibility and selection judgments are not stable, and a re-run cannot be used to fix a previous run.
+
+p_run1.txt and p_run2.txt are the raw outputs. p_reviewed.txt is run 1 with the two mandated changes applied by hand and nothing else — labelled reviewed, not generated. The generated stage cannot yet be relied on to produce it.

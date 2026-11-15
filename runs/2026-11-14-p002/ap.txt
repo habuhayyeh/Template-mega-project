@@ -2,27 +2,25 @@
 
 - Witnessed generalized tonic-clonic seizure at home.
 - Postictal confusion.
-- Known left MCA infarct.
 - No prior seizures.
 - Sodium 128 on admission.
+- Residual mild expressive aphasia (prior neurology, 2024-02).
 - CT head no hemorrhage.
-- Old left MCA encephalomalacia.
 - No new focal lesion.
-- But the MRI will tell us.
+- The MRI will tell us.
 - Confusion today is not dementia — it's postictal.
-- Scar from your old stroke is the most likely cause of the seizure.
 
 Plan:
 
 - MRI brain with and without contrast ordered, not yet done
 - EEG requested, pending
-- Apixaban held since admission, to resume once MRI excludes hemorrhage
+- Apixaban held since admission
 - Not starting an antiseizure medication unless she has another event
+- Apixaban to resume once MRI excludes hemorrhage
 - Continue amlodipine 10 mg daily
 - Continue atorvastatin 80 mg
 - Fluid restriction
 - Not driving until six months seizure-free
-- Seizure precautions
 
 //Progressive memory difficulty.
 
@@ -33,4 +31,4 @@ Plan:
 
 Plan:
 
-- Refer her to the memory clinic after discharge
+- Refer to memory clinic after discharge
