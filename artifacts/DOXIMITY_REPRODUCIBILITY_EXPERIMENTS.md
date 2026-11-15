@@ -98,3 +98,23 @@ Do not fix this class of problem with more free-form prose at the rendering stag
 These experiments support revising P006 to add an explicit `OPERATOR` to its existing typed groups while preserving D-016's narrow scope.
 
 They do **not** independently authorize broader P007 normalization.
+
+
+### 3. Operator stress suite
+
+`artifacts/doximity_operator_stress_results_2026-11-15.md`
+
+Question:
+
+> Does the B+ operator boundary still hold under malformed, contradictory, cross-problem, attribution-sensitive, and condition-sensitive inputs?
+
+Result:
+
+- 36 trials × 3 fresh conversations = 108 executions;
+- 63/63 valid renders correct;
+- 45/45 malformed inputs rejected;
+- 108/108 preserved the valid/invalid boundary;
+- no malformed input was silently repaired into prose;
+- the only reproducibility defect was overlapping error taxonomy, especially `CONTRADICTORY_PAYLOAD` vs `INVALID_COVERAGE`.
+
+Use this artifact to distinguish **render-boundary reliability** from **diagnostic error-label design**.
