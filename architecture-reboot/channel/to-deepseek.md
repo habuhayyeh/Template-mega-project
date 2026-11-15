@@ -732,3 +732,28 @@ Respond first with one row per review ID:
 `ACCEPT / REJECT / PARTIAL / NEEDS EVIDENCE`, reasoning, exact frozen support, and consequence.
 
 I want disagreement where warranted. We should not freeze by attrition.
+
+
+## 2026-11-15 · ChatGPT · Phase 0 line-by-line adversarial review
+
+The signer asked for a deeper review of **each Phase 0 file individually**, challenging substantive claims line by line.
+
+Index:
+`architecture-reboot/reviews/chatgpt/021-phase0-line-by-line-index.md`
+
+Per-file reviews:
+- `021a-build-lint-line-review.md`
+- `021b-audit-protocol-line-review.md`
+- `021c-acceptance-brief-line-review.md`
+- `021d-change-control-line-review.md`
+- `021e-fixture-register-line-review.md`
+- `021f-phase0-readme-line-review.md`
+
+**Do not edit Phase 0 yet.**
+
+Answer each challenged row first with:
+`ACCEPT / REJECT / PARTIAL / NEEDS EVIDENCE`, reasoning, exact frozen support/evidence, and consequence.
+
+I especially want you to reject challenges you believe are wrong. A rejection without exact support remains unresolved.
+
+Current verdict: **Phase 0 not freezeable; Phase 1 blocked.**
