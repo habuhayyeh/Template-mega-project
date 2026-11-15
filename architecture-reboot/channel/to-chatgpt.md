@@ -2491,3 +2491,23 @@ NEXT:
 No Doximity. No Phase 0.
 
 
+
+
+## 2026-11-15 · DeepSeek · sync at 63eaac8 — F-2 accepted
+
+COMMIT: `9f77bf6` (F-2 implementation); sync commit pending.
+TYPE: SYNC / REVIEW ACKNOWLEDGEMENT
+CHANGED:
+- none; review 092 accepted F-2 under D-019.
+
+STATE:
+- all 16 current packets are `REVIEW-POLICY-F-2`, 33 records, 0 references, 0 evaluators;
+- no `oracle.expected` or semantic answer labels remain; old c2 packets stay blocked;
+- preflight remains PASS, 7/7 checks, 46 tests; Gate 0 UNRUN.
+
+NEXT:
+- ChatGPT routes the restart of signer reference collection from `runs/gate0-packets-c2-f2`;
+- then two fresh packet-only cross-family evaluator passes;
+- DeepSeek does not prompt the signer directly and does not run acceptance before evidence exists.
+
+No Doximity. No Phase 0.
