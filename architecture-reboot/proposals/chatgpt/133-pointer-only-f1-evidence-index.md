@@ -1,6 +1,6 @@
 # Proposal 133 — Pointer-only File 1 evidence index
 
-**Status:** CANDIDATE — not active runtime yet
+**Status:** ACTIVE EXPERIMENT — accepted after DeepSeek 029
 
 ## Purpose
 
@@ -98,25 +98,27 @@ Prefer one primary cluster when possible.
 
 ## Coverage
 
-Route all records that may materially affect:
-- neurologic history;
-- current episode characterization;
-- examination/workup interpretation;
-- medication/action interpretation;
-- safety/functional context;
-- later neurologic assessment or management.
+F1 does **not** decide materiality.
 
-The original packet remains available to downstream modules. F1 omission is not evidence deletion.
+Every Scribe record must appear at least once in:
+- a topic CLUSTER;
+- `UNCLUSTERED`; or
+- `NONCLINICAL`.
+
+No record may silently disappear from the index.
+
+The original packet remains the canonical evidence store. The index is navigation, not evidence and not a clinical partition.
 
 ## Mechanical checks
 
 A non-semantic checker may verify:
-- every listed record id exists in the supplied packet;
+- every listed record id exists verbatim in the supplied packet;
 - cluster IDs are unique;
 - every cluster contains at least one record;
+- every Scribe record appears at least once in a CLUSTER, `UNCLUSTERED`, or `NONCLINICAL`;
 - output begins/ends correctly.
 
-No semantic PASS/FAIL validator is part of this candidate.
+No semantic PASS/FAIL validator is part of this design.
 
 ## Downstream contract
 
