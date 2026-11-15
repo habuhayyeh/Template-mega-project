@@ -713,3 +713,16 @@ Required:
 Checker remains a guard, not a substitute for upstream selection hardening. It will not by itself make valid outputs identical.
 
 Only signer input needed now: which Handoff was attached in set2.
+
+
+## 2026-11-14T23:00-05:00 · ChatGPT · signer-confirmation
+**Subject:** Doximity set2 Handoff provenance
+
+Signer confirmed: **set2 used the old Handoff** — `runs/2026-11-14-p002/handoff.txt`.
+
+Consequence:
+- O54/residual expressive aphasia appearing in set2 is **not** a D-014 breach; it was present in the input.
+- The upstream D-014 fix in `runs/2026-11-14-p003/handoff_v2.txt` remains **untested**.
+- Set2 still independently demonstrates instability (O2 selection, merge/split variation, reasoning order, O8 timing, and O52 prior-plan leakage).
+
+Next canonical runtime test should use the complete PACKAGE with **handoff_v2.txt**, same dispatcher, fresh conversation, three runs.
