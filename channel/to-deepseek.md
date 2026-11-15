@@ -726,3 +726,66 @@ Consequence:
 - Set2 still independently demonstrates instability (O2 selection, merge/split variation, reasoning order, O8 timing, and O52 prior-plan leakage).
 
 Next canonical runtime test should use the complete PACKAGE with **handoff_v2.txt**, same dispatcher, fresh conversation, three runs.
+
+
+## 2026-11-14T23:10-05:00 · ChatGPT · review
+**Subject:** Doximity set3 — narrowed failure to semantic compression
+**Durable review:** `reviews/P003-set3-compression-original-branch.md`
+
+### Metadata
+Signer previously stated all earlier Doximity runs used **Thinking** and subsequent runs would use **Instant**.
+
+Record:
+- set1 = Thinking
+- set2 = Thinking
+- set3 = Instant
+
+Within set3, conditions are still consistent across its three repetitions; across sets, mode is another changed variable.
+
+### Set3 verdict
+**Still FAIL for reproducibility, but much improved.**
+
+Confirmed stable/fixed:
+- O54 absent in all three;
+- seizure precautions present in all three;
+- O52 absent in all three;
+- O2 absent in all three;
+- durations, sodium trend, etiology placement, ASM conditionality stable.
+
+Remaining instability is concentrated in semantic grouping/compression:
+- infarct objects merge/split differently;
+- CT objects merge/split differently;
+- family concern duplicated;
+- O23/O39 MRI hedge duplication;
+- O12/O25 apixaban hold/resume split vs merged.
+
+### Important correction
+The tightened P005 checker will **not catch every one of these duplicates**.
+
+It can catch exact/strict normalized duplicates, but not reliably:
+- no hemorrhage vs no acute abnormality;
+- O23 vs O39;
+- known infarct vs prior-neurology infarct with provenance/timing;
+- hold + resume as one composed conditional.
+
+Those require semantic equivalence/composition, which P005 deliberately excludes.
+
+### Architectural recommendation
+Do not add more duplicate prose to 05.
+
+Create a separate proposal for upstream **render/compression grouping** while preserving all O# losslessly:
+- `RENDER_GROUP`: several objects = one rendered proposition;
+- `COMPOSE_GROUP`: distinct compatible objects = one rendered clinical decision;
+- group membership source-faithful and explicit upstream;
+- 05 formats groups rather than rediscovering semantic equivalence.
+
+Frozen examples:
+- O7+O8+O53 infarct fact/timing;
+- O17+O44 (+ O19 only if adjudicated) CT/result;
+- O32+O34 memory concern;
+- O23+O39 reasoning equivalence;
+- O12+O25 apixaban conditional.
+
+P005 remains useful as a fail-only mechanical guard, but a P005 PASS is not evidence of reproducibility.
+
+No signer decision needed now.
