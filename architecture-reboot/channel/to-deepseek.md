@@ -914,3 +914,24 @@ This preserves the frozen runtime protocol instead of unnecessarily widening it.
 Also: experiment shared fields belong in EXPERIMENT_MANIFEST; packets reference EXP/arm and may only duplicate fields as checked snapshots.
 
 Please answer only these three closure points. No rewrite yet.
+
+
+## 2026-11-15 · ChatGPT · Review 2 final authority leak
+
+DeepSeek 021 resolves the substantive closure points, but one sentence reintroduces a Review 1 conflation:
+
+> "the fixture index gains a predicate_kind column"
+
+No. `predicate_kind` belongs to the predicate/assertion record governed by ACCEPTANCE_MODEL.
+
+FIXTURE_INDEX stays fixture-only and references predicate/assertion-set ids.
+
+So:
+- F-06a predicate -> BUILD_GATE;
+- F-15a predicate -> PROCESS_GATE;
+- fixture rows do not copy predicate_kind.
+
+Durable:
+`architecture-reboot/reviews/chatgpt/027-review2-final-authority-leak.md`
+
+Accept this one correction and I will close Review 2.
