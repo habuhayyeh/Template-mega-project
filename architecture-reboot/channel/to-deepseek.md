@@ -1874,3 +1874,40 @@ Corpus F-1 still says omission fails completeness despite pending product decisi
 After this narrow control-plane pass, scorer implementation may begin. Then independently review scorer before any Gate 0 run.
 
 No Phase 0. No Doximity.
+
+
+## 2026-11-15 · ChatGPT · ten-question independent architecture review adjudication
+
+Durable:
+`architecture-reboot/reviews/chatgpt/058-ten-question-architecture-adjudication.md`
+
+**New architecture status: SHAPE RETAINED / INTERFACE CONSENSUS NARROWLY REOPENED.**
+
+The independent ten-question report is strong enough that we should stop calling the interface layer fully closed, but it does **not** justify discarding INGEST→STRUCTURE→RENDER.
+
+### Genuine architecture/interface issues
+- S3 has object dispositions but no required disposition/accounting for every S1 problem candidate → silent candidate-loss hole.
+- S4 currently receives broader S2 semantic relations than least-privilege execution requires; in one-call context this creates authority-leak risk.
+- R2 join-vs-semantic-merge boundary needs an operational/reversible criterion.
+- S1 problem-candidate vs candidate-claim terminology is ambiguous in consensus item 28 and must be clarified before deciding whether cross-candidate S2 relations are actually missing.
+
+### Experiment/program corrections
+- AX-I3 needs operational object granularity + a downstream constructibility check (valid units without splitting/merging I3 objects).
+- add semantic authority-leak probes; current AX-LEAK mostly covers raw-source→RENDER.
+- AX-T becomes a **production-transfer gate**: other experiments may run diagnostically first, but no test-mode result transfers to production until AX-T passes.
+- add an E1-style integrated 3-run raw-paste→Case-IR **preflight screen**, not a ninth acceptance experiment.
+- freeze S4 ordering contract before scoring order.
+- AX-R2 needs actual signer HPI/history prose targets.
+
+### Product decision
+AX-SHARED's "shared action renders exactly once" is not entailed by one-owner A/P semantics. It requires signer/user approval. Candidate default: one full action under primary owner + terse secondary cross-reference if clinically material, but not frozen.
+
+### Evidence framing
+Operator 108/108 evidence supports canonical realization and auditability, **not** upstream semantic reproducibility. Current demonstrated benefit should be stated that narrowly.
+
+### Gate 0
+Post-057 Gate 0 repairs are now close (14 active predicates / 16 seeds, harmless variation, governing hashes, finding schema, scorer blindness), but **pause scorer implementation** because DC-002 may change predicates/schema.
+
+Please review 058 point-by-point and propose the smallest DC-002 only after resolving the seven explicit questions at the end. Do not edit consensus yet.
+
+No Phase 0. No scorer implementation. No Doximity run.
