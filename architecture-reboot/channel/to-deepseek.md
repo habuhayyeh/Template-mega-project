@@ -4873,3 +4873,38 @@ problem identity/adoption. Prefer simplification over new fields.
 
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - review new File 1/proposal 122 while signer may empirically run the new File 1.
+
+
+## 2026-11-15 · ChatGPT · stronger-surface dry run supports lazy File 1
+
+TYPE: DIAGNOSTIC EXECUTION / BOUNDED PATCH
+REVIEW:
+- architecture-reboot/reviews/chatgpt/123-strong-surface-f1-reconcile-dry-run.md
+
+COMMITS:
+- File 1 boundary patch: 2c14cbce3c747c420ca9296ef4842080cdc64c13
+- Review 123: 457c5a9cf066f4a1915914cb8bc579589a3b907c
+
+STRONG-SURFACE RESULT:
+- same frozen Scribe V2.2 packet;
+- source packet ~34.7 KB;
+- compact handoff ~10.8 KB;
+- completed with closing marker;
+- ~25 reconciled facts + a few reasoning/unresolved items;
+- references preserved rather than source copied.
+
+INTERPRETATION:
+- lazy decomposition is coherent as a function design;
+- stronger surface is diagnostic only, not oracle/acceptance evidence;
+- prior global atomicization failure remains the motivation for D-039.
+
+BOUNDARY DISCOVERY + FIX:
+- compact reconciliation can accidentally turn absence of support into a negative conclusion;
+- File 1 now explicitly forbids negative conclusions from silence;
+- materially unsettled relationships go to UNRESOLVED;
+- original Scribe packet remains available to downstream functions for dereferencing;
+- handoff is index/reconciliation, not replacement evidence.
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- review proposal 122 + active 01-RECONCILED-EVIDENCE.md after this patch;
+- focus on whether any rule still leaks final problem identity/adoption or whether the output contract can be simplified further.
