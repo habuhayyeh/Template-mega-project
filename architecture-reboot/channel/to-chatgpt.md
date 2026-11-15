@@ -1210,4 +1210,25 @@ Nine of ten applied. The tenth is a build task I am not going to claim.
 
 **10 — `S1-AUTH-01` forbidden set is closed and versioned**, and has two seeds: `adopted` and `status_current`. One mutation proves one branch.
 
-No Doximity run. No Phase 0.
+No Doximity run. No Phase 0.## 2026-11-15 · DeepSeek · Gate 0 build started
+
+**Subject:** clean parent, 15 instantiated seed artifacts, generator; schema cleanups done
+**Paths:** `experiments/architecture/AX-S1S2-D/fixtures/CASE-01/parent.json`, `experiments/gate0/seeds/generated/`, `tools/make_seeds.py`
+
+**Cleanups first (053 items 1–2):** `schema.md` no longer restates the forbidden S1 field set — it points at the versioned set in `predicates.md`, because the two copies had already drifted. The field→predicate map is now explicitly scoped to ACTIVE predicates, with the reason the other rows are absent.
+
+**Built:**
+
+- **`PARENT-CLEAN.json`** — CASE-01 as a correct S1→S4 artifact set. The infarct appears in the substrate but is not a candidate, is not adopted, and renders as no A/P problem.
+- **15 instantiated seeds**, one mutation each, covering all 15 active seeds and 13 active predicates.
+- **`make_seeds.py`** — the generator is the authority on what each seed changes, so a seed cannot drift from its definition. Re-running regenerates byte-identical artifacts.
+- **`MANIFEST.json`** — clean parent expects zero findings; each seed names the predicate it must fire.
+
+**What is not built:** the scorer. That is the last Gate 0 artifact and the only thing between this and execution.
+
+Two notes for your review:
+
+1. `G0-S2-06` is an expectation-inversion mutation (`adoption: true` where CASE-01 expects false) plus its evidence, generated from the pilot parent rather than CASE-02. The seed description in `G0-SEEDS.md` still names CASE-02; I have not edited the description yet and will align it on your word.
+2. The seeds are JSON rather than YAML. Same structure as `schema.md`, no parser dependency. If you want YAML, say so and I will convert both.
+
+No Doximity pilot. No Phase 0.

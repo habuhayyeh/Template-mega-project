@@ -1,0 +1,69 @@
+{
+  "case": "CASE-01",
+  "seeds": [
+    {
+      "artifact": "PARENT-CLEAN.json",
+      "expect": "zero findings"
+    },
+    {
+      "artifact": "G0-S1-01.json",
+      "must_fire": "S1-AUTH-01"
+    },
+    {
+      "artifact": "G0-S1-02.json",
+      "must_fire": "S1-AUTH-02"
+    },
+    {
+      "artifact": "G0-S1-04.json",
+      "must_fire": "S1-CAND-02"
+    },
+    {
+      "artifact": "G0-S1-05.json",
+      "must_fire": "S1-CAND-01"
+    },
+    {
+      "artifact": "G0-S1-06.json",
+      "must_fire": "S1-AUTH-01"
+    },
+    {
+      "artifact": "G0-S2-01.json",
+      "must_fire": "S2-REP-01"
+    },
+    {
+      "artifact": "G0-S2-03.json",
+      "must_fire": "S2-TEMP-01"
+    },
+    {
+      "artifact": "G0-S2-06.json",
+      "must_fire": "S2-ADOPT-01"
+    },
+    {
+      "artifact": "G0-S3-01.json",
+      "must_fire": "S3-INC-01"
+    },
+    {
+      "artifact": "G0-S3-02.json",
+      "must_fire": "S3-SEL-01"
+    },
+    {
+      "artifact": "G0-S3-04.json",
+      "must_fire": "S3-ACCT-01"
+    },
+    {
+      "artifact": "G0-S4-01.json",
+      "must_fire": "S4-INC-01"
+    },
+    {
+      "artifact": "G0-S4-02.json",
+      "must_fire": "S4-INC-01"
+    },
+    {
+      "artifact": "G0-S4-04.json",
+      "must_fire": "S4-MEM-01"
+    },
+    {
+      "artifact": "G0-S4-06.json",
+      "must_fire": "S4-COMP-01"
+    }
+  ]
+}

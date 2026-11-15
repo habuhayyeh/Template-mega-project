@@ -1,0 +1,135 @@
+{
+  "case": "CASE-01",
+  "status": "DERIVED_PARENT",
+  "substrate_objects": [
+    "O01",
+    "O02",
+    "O03",
+    "O04",
+    "O05",
+    "O06",
+    "O07"
+  ],
+  "s1": {
+    "candidates": [
+      {
+        "id": "C1",
+        "subject": "recurrent falls since June",
+        "anchors": [
+          "S02"
+        ],
+        "salience": {
+          "acuity": "MODERATE",
+          "managed_today": true
+        },
+        "candidate_claims": [
+          {
+            "id": "CC1",
+            "text": "gait instability, cause undetermined",
+            "support": [
+              "S02",
+              "S03"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "s2": {
+    "adjudication": [
+      {
+        "object": "O01",
+        "temporal": "2024-02 documented",
+        "adoption": false,
+        "evidence": null
+      },
+      {
+        "object": "O03",
+        "temporal": "June-November",
+        "adoption": true,
+        "evidence": [
+          "S02"
+        ]
+      }
+    ],
+    "representations": [
+      {
+        "id": "R1",
+        "problem": "C1",
+        "members": [
+          "O03",
+          "O04"
+        ],
+        "support_refs": [
+          "S02",
+          "S03"
+        ],
+        "selection_safe": true
+      }
+    ]
+  },
+  "s3": {
+    "rendered": [
+      {
+        "problem": "C1",
+        "approved_representation": null,
+        "selected_rep": "R1"
+      }
+    ],
+    "retained": [
+      "O01",
+      "O02",
+      "O03",
+      "O04",
+      "O05",
+      "O06",
+      "O07"
+    ],
+    "dispositions": []
+  },
+  "s4": {
+    "sections": [
+      "AP"
+    ],
+    "problems": [
+      {
+        "id": "P1",
+        "source": "C1",
+        "order": 1
+      }
+    ],
+    "units": [
+      {
+        "id": "U1",
+        "problem": "P1",
+        "representation": "R1",
+        "members": [
+          "O03",
+          "O04"
+        ],
+        "operator": "FACT",
+        "order": 10
+      },
+      {
+        "id": "U2",
+        "problem": "P1",
+        "representation": "R1",
+        "members": [
+          "O05"
+        ],
+        "operator": "PLAN",
+        "order": 20
+      },
+      {
+        "id": "U3",
+        "problem": "P1",
+        "representation": "R1",
+        "members": [
+          "O06"
+        ],
+        "operator": "PLAN",
+        "order": 30
+      }
+    ]
+  }
+}

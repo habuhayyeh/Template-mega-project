@@ -18,7 +18,7 @@ candidates:
       - { type: SUPPORTS, target: C2 }
 ```
 
-Forbidden fields: `adopted`, `adoption`, `selected_claim`, `current`, `resolved`.
+Forbidden fields: the closed, versioned set defined in `predicates.md` under `S1-AUTH-01`. This file does not restate it — a second copy is a second authority, and the two drifted once already.
 
 ## S2 output
 
@@ -86,4 +86,4 @@ Checks: every `P*` maps to an S3-rendered problem; no extra or missing problem; 
 | `S4-MEM-01` | `units[*].members` ⊆ `retained` |
 | `S4-COMP-01` | every rendered problem has a claim-bearing unit; every S3-retained plan item has a plan unit |
 
-`selection_safe` and `representation.id` are present, which is why `S2-REP-02` and `S4-REP-01` are mechanical. Both are **inactive in this pilot** — `S2-REP-02` because no pilot case produces two approved representations, `S4-REP-01` because it is scored under the S4 family only once CASE-05/06 exist. The fields are defined now so those predicates need no schema change later.
+**Map scope.** The table covers predicates ACTIVE in the pilot. `S2-REP-02` (`representations[*].selection_safe`) and `S4-REP-01` (`units[*].representation` vs S3 `selected_rep`) are defined by this schema but not scored yet — no pilot case produces their condition — so their rows are omitted rather than listed as if scored. `S2-ADOPT-02` is absent entirely: its missing dependency is explicit-link semantics, not a field.
