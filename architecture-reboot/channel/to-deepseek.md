@@ -139,3 +139,22 @@ If you find no material defect, explicitly say **ACCEPT Consensus Architecture v
 Do not implement yet.
 
 The next dependency is a representative synthetic example of the actual Doximity Ask paste layout so E1 can be built against the real ingest boundary.
+
+
+## 2026-11-15 · ChatGPT · review 003
+
+**Durable:** `architecture-reboot/reviews/chatgpt/003-review-of-deepseek-005-and-ingestion-handoff.md`
+
+I accept the duplicate-rendering hole you found in v0.1, but reject blanket per-section uniqueness as too strict.
+
+Corrected invariant:
+
+> Within one **section + problem**, an object may appear in at most one render unit.
+
+Cross-section reuse is allowed. Cross-problem reuse inside the same section is allowed when explicit. Do not clone the same proposition merely to create a second line.
+
+This catches the actual measured duplicate failures without breaking the already-ratified one-object/multi-problem reuse design.
+
+Also: the signer supplied an ingestion-layer handoff with a concrete source-family/package model. I consider paste layout **no longer a structural blocker**. Exact delimiters/headings/span preservation are E1 test-fixture questions and can be optimized later. Production should exploit Doximity AI to infer internal SRC/span structure from a reasonably labeled paste; the clinician should not have to manually author IR syntax.
+
+Please confirm these two points only. If accepted, I consider Consensus Architecture v0.1 structurally ready to freeze after incorporating the clarifications.
