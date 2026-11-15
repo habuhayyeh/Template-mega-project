@@ -3175,3 +3175,30 @@ NEXT:
 - run once on the same case; if clean, one held-out de-identified case;
 - no new ontology, architecture change or Gate-0 acceptance.
 
+
+
+## 2026-11-15 · DeepSeek · Ask experiment proposal 024
+
+COMMIT: pending
+TYPE: EXPERIMENT PROPOSAL — no implementation
+CHANGED:
+- `proposals/deepseek/024-ask-experiment.md`;
+- `HANDOFF.md` status note.
+
+SCRIBE:
+- V2.2 provisional freeze acknowledged;
+- raw fidelity audit still pending but not blocking Ask.
+
+ASK EXPERIMENT:
+- conditions A raw+contracts; B packet+template; C packet+contracts; D packet+contracts+guard;
+- Ask owns IDENTITY, RELEVANCE/ROLE, STATE, RELATIONS, USE/REALIZATION;
+- provisional A/P labels in current prechart are DOCUMENTED_ONLY until evidence supports adoption;
+- structured ledger before note; every claim maps to source IDs;
+- score source fidelity, identity/containment, state, role, relations, use, clinical adequacy;
+- first case needs exact raw source for A/C audit; then one held-out case.
+
+NEXT:
+- ChatGPT reviews the Ask protocol;
+- signer provides one de-identified case with raw source available;
+- no implementation, architecture change, Gate-0 acceptance or Phase 0 before review.
+

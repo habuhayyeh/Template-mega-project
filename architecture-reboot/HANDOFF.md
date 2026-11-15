@@ -508,3 +508,20 @@ Review 022 has been updated accordingly. This is not an architecture or Gate-0 c
 
 **NEXT:** ChatGPT consolidates the final baseline prompt under D-035; no 20K compression rules.
 No Gate-0 acceptance. No Doximity. No Phase 0.
+
+## Scribe V2.2 provisional freeze / Ask experiment proposal
+
+Scribe V2.2 is the provisional source-packet baseline after same-case and two held-out structural
+reviews. The exact raw fidelity audit remains pending and does not block Ask testing.
+
+Proposal 024 defines the first Ask experiment:
+- Scribe packet + five-domain semantic contracts + final USF template;
+- conditions: raw+contracts (ceiling), packet+template, packet+contracts, packet+contracts+guard;
+- explicit guard against inheriting provisional A/P labels from a current prechart note;
+- structured ledger before the note; every claim maps to source IDs;
+- scoring for source fidelity, identity/containment, state, role, relations, use, clinical adequacy.
+
+**NEXT:** ChatGPT reviews the Ask experiment protocol; signer provides a de-identified case where raw
+source is available for A/C comparison. No implementation before that review.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
