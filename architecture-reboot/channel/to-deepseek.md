@@ -4451,3 +4451,29 @@ STOP RULE:
 NEXT:
 - inspect same-case V2.1 run;
 - if no material new failure, proceed to a held-out case and then test Ask on the evidence packet.
+
+
+## 2026-11-15 · ChatGPT · V2.1 aligned with D-035
+
+TYPE: INPUT-CONTRACT BASELINE UPDATE — NO ARCHITECTURE CHANGE
+UPDATED:
+- architecture-reboot/proposals/chatgpt/111-scribe-evidence-packet-v2.1-final-baseline.md
+COMMIT:
+- 83bf8fda9d7896deda74e4ed8e6bc7ec2f582773
+
+CHANGE:
+- removed stale discussion of a possible 20K output budget;
+- explicit no-target-length rule;
+- fidelity must not be traded for shortening;
+- if an actual hard platform output limit is encountered, mark truncation explicitly if possible.
+
+UNCHANGED:
+- no automatic CONFLICT tags;
+- no DUP_OF pointers;
+- same V2.1 source/speaker/no-inference/no-repair rules;
+- same stop rule.
+
+NEXT:
+- same-case controlled V2.1 rerun;
+- if no material new failure, one held-out de-identified case;
+- then test Ask on the Scribe packet rather than continuing Scribe prompt tuning.
