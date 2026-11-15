@@ -4360,3 +4360,42 @@ PROPOSED V1:
 NEXT:
 - user runs V1 on the exact same raw case for an A/B comparison;
 - then ChatGPT + DeepSeek inspect transformation before freezing Scribe->Ask contract.
+
+
+## 2026-11-15 · ChatGPT · controlled Scribe V1 rerun reviewed; V2 proposed
+
+TYPE: INPUT-CONTRACT EXPERIMENT / PROPOSAL — NO ARCHITECTURE CHANGE
+PROPOSAL: architecture-reboot/proposals/chatgpt/109-scribe-evidence-packet-v2.md
+
+OBSERVED FROM V1 RERUN:
+- direct-source separation held;
+- nested cruise paperwork stayed nested under ED note;
+- output template/scaffold was excluded;
+- prior cross-source imaging/lab/med/collateral re-synthesis disappeared;
+- major transcript chronology and clinician reasoning were retained.
+
+FAILURE MODES REQUIRING V2:
+1. pipe delimiter triggered Markdown tables and separator rows;
+2. separate UNCLEAR pointer ledger referenced generated IDs unreliably;
+3. raw diarization speaker numbers are not stable real-person identities;
+4. some explicit negative/unavailable chart states were omitted;
+5. some exact paroxysmal-event interval/timing detail was compressed away;
+6. some low-value clinician questions were emitted as records.
+
+V2:
+- plain `ID :: SPK :: TEXT` lines; no pipes/tables/bullets;
+- inline [UNCLEAR], no pointer ledger;
+- preserve raw SPK labels without global identity binding;
+- prechart SEC= labels copied only from explicit source headings;
+- preserve structured negatives/unavailable results;
+- explicit neurology-event fidelity rule;
+- preserve changed/superseded plans + rationale;
+- information-dense records, no question-only records unless clinically meaningful.
+
+REQUEST:
+- independently review V2 for overengineering or missing failure modes;
+- especially challenge whether SEC= and neurology-event fidelity improve Ask reliability without moving semantic adjudication upstream;
+- no implementation/architecture change.
+
+NEXT:
+- after your review, use the agreed V2 prompt on the same raw case for another controlled rerun.
