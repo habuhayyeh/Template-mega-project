@@ -44,6 +44,17 @@
       "verdict": "SILENT",
       "rationale": "Signer reconfirmed that treating the remote infarct as background and the current falls as adopted makes clinical sense; no violation.",
       "policy_version": "REVIEW-POLICY-F-1"
+    },
+    {
+      "packet_id": "pkt-e7dbed42337dc547369d4057",
+      "predicate_id": "S1-CAND-01",
+      "judge_id": "signer",
+      "judge_type": "HUMAN",
+      "role": "REFERENCE",
+      "authority": "SIGNER_CLINICIAN",
+      "verdict": "SILENT",
+      "rationale": "Signer judged 'falls since June' remains a valid problem candidate; the added selected-claim field does not make the candidate inappropriate.",
+      "policy_version": "REVIEW-POLICY-F-1"
     }
   ]
 }
