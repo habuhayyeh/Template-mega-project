@@ -1,6 +1,6 @@
-# P003 v6 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v7 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** v6, revised after `reviews/P003-v3-original-branch.md`. Two additions only: line contraction and absolute dates. Every other stylistic preference is left for the signer’s review of the output. Awaiting review. Not implemented.
+**Status:** v7, revised after review d7b2615 and after the signer’s decision. Line contraction only; transformation 10 withdrawn; invariants back in sync. Awaiting review. Not implemented.
 **Supersedes:** P003 v1 in this file's history.
 **Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
 **Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
@@ -73,7 +73,9 @@ The sentence "From `CLAIM_QUALIFIER`, then `EVIDENCE`" is deleted.
 2. **The bullet** renders the etiology as reasoning, under the same problem, whenever it adds something the line does not say: degree of certainty, mechanism, a date, a rationale, a contrast, or an uncertainty.
 3. **Suppressed** only when the etiology adds nothing at all — when the line already carries its full content. Duplication of the bare cause alone is what is forbidden, not the coexistence of a short cause and a fuller reason.
 
-The judgment in branch 3 is narrow and it is the one place in `05` where two readers can differ. That is deliberate: D-004 protects the clinician's reasoning, so a redundant etiology is cheaper than a deleted one. The guard is I4 — if one run renders an etiology and another suppresses it, the run set fails acceptance, and that failure is the signal that the boundary is set wrong.
+The judgment in branch 3 is narrow. D-004 protects the clinician’s reasoning, so a redundant etiology is cheaper than a deleted one. The guard is I4 — if one run renders an etiology and another suppresses it, the run set fails acceptance.
+
+**Signer decision, 2026-11-14:** for the frozen case the etiology renders. The line keeps the short cause; the bullet carries the reason. Verbatim in `channel/to-chatgpt.md`, entry of 2026-11-14T21:35. No longer pending.
 
 `pipeline/AP_ANCHOR.md` currently says a separate `ETIOLOGY` contributes to the line. Under this rule it does not: the line's cause comes from the claim, and the etiology is reasoning. Proposed edit:
 
@@ -110,14 +112,14 @@ Frozen case: claim `post-stroke seizure from the old left MCA scar rather than a
 6. Date display normalisation: `2025-06` → `June 2025`.
 7. Combining compatible fragments already present — a held drug with its resume condition, one action stated twice — without adding a clinical word.
 8. Unit and number display, and only this: a written number → numeral; `minutes`/`hours` → `mins`/`hrs`; `about`/`approximately` → `~`. No other synonym or abbreviation substitution.
-9. **Line contraction.** The problem line may drop a trailing qualifier when that qualifier is rendered as a bullet in the same problem. The dropped words must appear in that bullet. No other word-level deletion from a claim is permitted.
-10. **Absolute dates.** Where an object says `two years ago` and its provenance carries a date, render the provenance year. `Ago` does not appear in output; every date has a reference point.
+9. **Line contraction.** The problem line may drop a trailing qualifier when that qualifier is rendered as a bullet in the same problem. The dropped words must appear in that bullet. No other word-level deletion from a claim is permitted. **Approved by the signer in the example of 2026-11-14**, where the line reads `from chronic L MCA infarct` and the comparator lives in the etiology bullet.
+Transformation 10 of v6 is withdrawn. It rendered a provenance year as an event year — arithmetic on a record date, not a fact in the object. The infarct’s date reaches the note only as attribution, `(prior neurology, 2024-02)`, under transformation 5.
 
 ### Prohibited
 
 No new noun, verb, number, quantity, negation, modality, causal connective, or inference. No etiology that is not an `ETIOLOGY` entry. No status that is not a `COURSE` entry. No plan item that is not a `MANAGEMENT` entry or a `STANDING_ITEMS` trigger. **No pronoun substitution**: the Handoff carries no demographic entry, so a pronoun it does not contain would be an addition.
 
-**Test:** every word of the output is in the Handoff, produced by transformations 1–8, or an entry from `STANDING_ITEMS.md` whose trigger the claim satisfies. Anything else is a defect.
+**Test:** every word of the output is in the Handoff, produced by transformations 1–9, or an entry from `STANDING_ITEMS.md` whose trigger the claim satisfies. Anything else is a defect.
 
 ---
 
@@ -146,13 +148,13 @@ No new noun, verb, number, quantity, negation, modality, causal connective, or i
 | I5 | set of plan decisions |
 | I6 | state and conditionality of each plan decision |
 | I7 | historical attributions present |
-| I8 | zero words outside the Handoff, transformations 1–8, and a `STANDING_ITEMS` entry whose trigger the claim satisfies |
+| I8 | zero words outside the Handoff, transformations 1–9, and a `STANDING_ITEMS` entry whose trigger the claim satisfies |
 | I9 | the same `O#` pairing — entries merged in one run are merged in all |
 | I10 | the same placement class for every `O#`: line, factual bullet, reasoning bullet, or plan |
 
 ### Pass
 
-All ten invariants identical across three runs. Wording may vary only within transformations 1–8; if it does, the set is recorded as textually unstable and semantically stable, and that variance is reported, not hidden.
+All ten invariants identical across three runs. Wording may vary only within transformations 1–9; if it does, the set is recorded as textually unstable and semantically stable, and that variance is reported, not hidden.
 
 A single run is never the acceptance artifact. The artifact is the three-run set plus the invariant table.
 
@@ -160,7 +162,7 @@ A single run is never the acceptance artifact. The artifact is the three-run set
 
 ## 7. Acceptance target
 
-Present after P003: witnessed seizure with `~2 mins`; postictal confusion with `~1 hr`; no prior seizures; known left MCA infarct (2024) and encephalomalacia; CT without hemorrhage or new lesion; sodium 128 → 131 after fluid restriction; distinct reasoning (postictal, not dementia; MRI adjudicates); MRI and EEG; apixaban held with resume condition; no antiseizure medication unless another event; driving restriction; amlodipine, atorvastatin, fluid restriction, seizure precautions; probable vascular dementia attributed to prior neurology 2025-06; daughter-reported memory decline over a year.
+Present after P003: witnessed seizure with `~2 mins`; postictal confusion with `~1 hr`; no prior seizures; known left MCA infarct, recorded 2024-02 (prior neurology), and encephalomalacia; CT without hemorrhage or new lesion; sodium 128 → 131 after fluid restriction; distinct reasoning (postictal, not dementia; MRI adjudicates); MRI and EEG; apixaban held with resume condition; no antiseizure medication unless another event; driving restriction; amlodipine, atorvastatin, fluid restriction, seizure precautions; probable vascular dementia attributed to prior neurology 2025-06; daughter-reported memory decline over a year.
 
 Absent: O54 as a seizure bullet; duplicate seizure, sodium, or CT statements; duplicate reasoning; O52 promoted into today's plan; invented linkage, etiology, or status.
 
