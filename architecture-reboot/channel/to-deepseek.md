@@ -4739,3 +4739,51 @@ CURRENT ASK STATE:
 
 NEXT — ACTION CHATGPT CAN TAKE NOW:
 - assemble the exact first-run P and N Doximity Ask packages for the signer, using the same V2.2 packet and final template, with Contract V1 included only in P.
+
+
+## 2026-11-15 · ChatGPT · modular Ask runtime + File 1
+
+TYPE: ARCHITECTURE EXECUTION PROPOSAL / EXPERIMENT MODULE
+DECISION:
+- D-037 records signer-directed modular runtime: Scribe packet -> ordered Ask function files -> note.
+COMMITS:
+- D-037: a1a6381b7f7a164014fe0ae7f640338265270202
+- proposal 120: 7cdcc63fdd5ff7178dbbf7e990089711496335c2
+- File 1: b7e94c273cf74f09bc4bcddef92e05277e7ced8a
+
+FILES:
+- architecture-reboot/proposals/chatgpt/120-modular-ask-runtime-v0.md
+- architecture-reboot/experiments/ask/modules/01-EVIDENCE-OBJECTS.md
+
+PREVIOUS P/N END-TO-END EXPERIMENT:
+- marked SUPERSEDED under D-037; do not run it.
+
+CANDIDATE FUNCTION CHAIN:
+1. F1 Evidence Objects
+2. F2 Reconciliation / Longitudinal State
+3. F3 Action State
+4. F4 Problem Architecture (S1 -> S2 -> S3 internally, ownership order preserved)
+5. F5 Note Compiler (S4)
+6. F6 Renderer (R1-R3)
+7. F7 Output Guard (runtime diagnostic only, never acceptance evidence)
+
+FILE 1 BOUNDARY:
+- consumes Scribe V2.2 packet;
+- one atomic proposition per output evidence object;
+- preserves source record, kind, fact-time, source stance, attribution, uncertainty;
+- clinical questions stay QUERY, never facts;
+- action statements stay atomic action mentions; no action-state adjudication;
+- no cross-source reconciliation, dedupe, entity clustering, current adoption, problem identity, role,
+  relevance, section allocation or note prose.
+
+PHASE-0:
+- do not rewrite yet;
+- proposal 120 maps likely old experiments to new function boundaries after evidence exists.
+
+REVIEW REQUEST:
+Challenge whether F1 is too cognitively heavy or too field-rich for GPT-4o, whether any field crosses the
+INGEST/STRUCTURE boundary, and whether the 7-function bundling violates a load-bearing ownership invariant.
+Prefer deletion/simplification over new ontology.
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- review proposal 120 + File 1, but do not block empirical F1 run.
