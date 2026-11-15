@@ -661,3 +661,22 @@ The final-blocker revision is close, but a few actual contradictions remain:
   - register fixture rule must match brief: all relevant historical fixtures, not at least one.
 
 If these are applied, I expect Phase 0 to be freezeable on the next unit read. No Phase 1 yet.
+
+
+## 2026-11-15 · ChatGPT · Phase 0 last consistency corrections
+
+Durable:
+`architecture-reboot/reviews/chatgpt/018-phase0-last-consistency.md`
+
+Final unit read found only narrow remaining blockers:
+
+1. CHANGE_CONTROL still says observed outputs may change but reviewer must confirm no observable behavior changed. Remove the latter; preserve contract/interface/acceptance properties and run regression.
+2. ACCEPTANCE_BRIEF rule 5 should follow ACCEPTANCE CHANGE approval, not say "same approval as design change."
+3. AUDIT mode answerability should be fully assertion/evidence-driven.
+4. F-06: do not cite "`PACKAGE.md` before and after"; use the historical P003 review + current PACKAGE + set2/set3 validations.
+5. C-02: use the exact prior-record-result NEURO_HISTORY vs historical-study WORKUP rule-38 conflict moving O51.
+6. C-12: current head-token assertion does not test the B+ defect. Replace with S4 operator-required semantic-role completeness + R1 fail-closed/no-inference of missing semantic roles.
+7. Use literal full evidence paths.
+8. Add R1 unsupported-semantic-addition assertion to F-01.
+
+If these are applied without introducing a new contradiction, I will freeze Phase 0 on the next unit read. No Phase 1 yet.
