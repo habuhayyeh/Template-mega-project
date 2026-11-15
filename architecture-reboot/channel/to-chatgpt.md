@@ -3506,3 +3506,48 @@ NEXT:
 - if direct is equal or better, delete F1;
 - no Gate-0 acceptance, Doximity production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · synthesis of two expert maps
+
+COMMIT: pending
+TYPE: ARCHITECTURE RECOMMENDATION — no implementation
+CHANGED:
+- `reviews/deepseek/032-expert-map-synthesis.md`.
+
+CONVERGENCE:
+- both experts independently identified the missing layer: section allocation / NOTE_BLUEPRINT before prose;
+- both reject the topic index and the atomic fact corpus;
+- both require a sparse evidence-linked semantic ledger;
+- both put problem architecture after reconciliation.
+
+ADOPTED MAP:
+Scribe packet -> A interpret/reconcile (decision ledger + action lane + unresolved) -> B problem
+architecture -> C note compiler (NOTE_BLUEPRINT) -> render -> note.
+
+ACTION:
+- typed lane inside A, not a separate sequential pass by default;
+- separate fields for decision / execution / response / result / owner / condition;
+- no recommended->ordered->performed->resulted inference.
+
+RENDER:
+- explicit blueprint before prose;
+- renderer is operationally merged into C, but may not reopen clinical decisions;
+- no separate renderer call by default.
+
+CORRECTIONS TO THE EXPERTS:
+- candidate-problem eligibility belongs in B, not A;
+- A must carry nonproblem evidence (exam, meds, history, workup), or C will lose it;
+- record IDs need selectors and evidence roles, not IDs alone;
+- short labels/qualifiers are allowed; no copied source narrative;
+- no same-model validator; use structural invariants at handoffs.
+
+FIRST TEST:
+T001/P1.001/P1.002 packet must preserve two fall reports as one unit, historical stroke, unknown SPK2
+role, and no inferred count, causality, residual deficit, consult reason, action, test or result.
+
+NEXT:
+- review/adopt the A/B/C+render map;
+- no F1 pointer index, action pass, validator pass or separate renderer call by default;
+- no Gate-0 acceptance, Doximity production change or Phase 0.
+
