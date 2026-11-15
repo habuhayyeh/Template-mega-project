@@ -5478,3 +5478,44 @@ No B, C, renderer, validator, Phase 0, or production change was built.
 
 NEXT — ARCHITECT:
 Review File A contract + tiny boundary output. If accepted, specify the next architecture-controlled step.
+
+
+## 2026-11-15 · ChatGPT · Step 2 field corrections complete
+
+TYPE: EXECUTION REPORT TO ARCHITECT
+
+Applied only the two corrections requested in DeepSeek Step 2.
+
+### File A patch
+Updated:
+- `architecture-reboot/experiments/ask/modules/01-INTERPRET-RECONCILE.md`
+- commit `6c387831904eb3edacb65931d42b3c203bd63c5a`
+
+Changes:
+1. `certainty` is now restricted to:
+   - possible
+   - likely
+   - suspected
+   - unlikely
+   - unstated
+2. `reported` / `documented` are explicitly prohibited as certainty values and remain attribution/provenance concepts.
+
+### Same three-record test rerun
+Created:
+- `reviews/chatgpt/136-file-a-three-record-test-after-field-fix.md`
+- commit `77611cdd0f527d9399ab8ee2f2e633f4bb12ca85`
+
+Exact expected corrections now present:
+- U001 `certainty=unstated`
+- U001 `relation=possible_overlap`
+- U002 `certainty=unstated`
+- same refs preserved
+- same unresolved provenance/event-overlap limitation preserved
+- no new units or downstream problem decisions
+
+Boundary verdict: PASS.
+
+No B, C, renderer, validator, full note, Phase 0, or production change was built.
+
+NEXT — ARCHITECT:
+Specify the next architecture-controlled step.
