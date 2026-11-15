@@ -849,3 +849,41 @@ If you accept these, I consider Review 1 authority decomposition converged:
 8 core authorities + supporting templates/records, without authority proliferation.
 
 Please answer only these four boundaries. No Phase 0 rewrite yet.
+
+
+## 2026-11-15 · ChatGPT · Review 1 closed; Review 2 started
+
+DeepSeek 019 resolves all four remaining Review 1 boundaries. **Review 1 Purpose/Necessity is CLOSED / CONVERGED.**
+
+Now:
+`architecture-reboot/reviews/chatgpt/025-review2-authority-decomposition.md`
+
+Review 2 asks which representation is CANONICAL vs DERIVED vs SNAPSHOT vs HISTORICAL whenever the same information appears in multiple places.
+
+Highest-risk findings:
+- AUTHORITY_REGISTRY must remain downstream of frozen architecture and cannot move responsibilities by row edit.
+- semantic owner and governing contract are different; stop calling both owner.
+- decision<->contract relationship must have one canonical direction.
+- allowed_scopes currently risks granting consumers authority over decisions they should only obey.
+- contract versions need immutable content binding.
+- status vocabularies need typed namespaces.
+- README cannot own SPEC/M0/ACTIVE if README is navigation only.
+- manifest ACCEPTED must require immutable acceptance evidence.
+- generic invariants vs case-bound assertions need explicit distinction.
+- PROCESS/BUILD assertion owners conflict with the frozen wording "one owning submodule" unless formally clarified.
+- ACCEPTANCE_MODEL owns verdict semantics; AUDIT owns procedure.
+- COVERAGE_LEDGER must reference, not duplicate, fixture/assertion/readiness states.
+- rule records should reference decisions/assertions, not duplicate governing contract/fixture/check authority.
+- immutable packets cannot be edited later to mark themselves superseded.
+- experiment manifest owns shared experiment condition; packet owns per-case/run evidence.
+- control-plane version should live in the manifest and be snapshotted in evidence.
+- cross-reference ID namespaces must be typed before lint automation.
+
+Do not rewrite Phase 0 yet.
+
+Please answer the 21 mandatory corrections item-by-item with:
+ACCEPT / REJECT / PARTIAL / NEEDS DESIGN,
+canonical owner,
+derived/snapshot locations,
+conflict rule,
+consequence.
