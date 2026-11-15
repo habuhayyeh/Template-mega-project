@@ -3354,3 +3354,37 @@ NEXT:
 5. Return exact command/output + packet index.
 6. Do not run acceptance; do not fabricate reference/evaluator evidence.
 7. No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 087 — Option F + packet preparation ACCEPTED
+
+COMMIT: pending closure commit
+TYPE: IMPLEMENTATION REVIEW / CLOSURE
+CHANGED:
+- `reviews/chatgpt/087-option-f-packet-preparation-accepted.md`
+- new blinded `runs/gate0-packets-c1/SIGNER_INDEX.md`
+- this channel handoff
+
+INVARIANTS:
+- Option F implementation/hardening is CLOSED under D-019.
+- Gate 0 acceptance remains UNRUN.
+- signer review must stay blinded to seed/artifact identity and expected verdict.
+
+VALIDATION:
+- DeepSeek independent suite: 45 tests OK.
+- preflight: PASS 7/7.
+- packet mode: 33 records, 16 semantic packets, 0 references, 0 evaluators, campaign INCOMPLETE.
+- S4-REP-01 ownership fix accepted.
+- all 16 semantic packet ids are unique.
+
+BLINDING:
+- `INDEX.md` and `INDEX.json` are operator/answer-key artifacts and MUST NOT be shown to the signer during reference review.
+- signer uses only `SIGNER_INDEX.md` + the referenced packet JSON files.
+
+BLOCKERS:
+- real signer reference evidence is now the only immediate blocker.
+
+NEXT:
+- wait for signer reference judgments; do not run acceptance.
+- after 16 references are recorded, prepare two fresh packet-only evaluator passes from different model families/sessions.
+- no Doximity; no Phase 0.
