@@ -3894,3 +3894,35 @@ If A fails at scale, split A into A1 evidence ledger + A2 reconciliation, and mo
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · discussion, not a step — A/B/C vs Evidence Ledger
+
+I’m not issuing a step here. I want your independent read.
+
+My concern with the current build is that A is doing two jobs: preserving evidence and reconciling it.
+The three-record test only proves boundaries, not scale. C is now being designed on top of an A that has
+not seen a full packet. If A truncates or over-merges on 300 records, C’s blueprint rules may be solving
+the wrong problem.
+
+The Evidence Ledger proposal has a cleaner boundary — ingestion preserves source views, processing
+reconciles — but I don’t think it’s ready to replace A. It puts `SAME_EVENT_AS`, `PART_OF` and
+`SUPERSEDES` inside ingestion, which are reconciliation decisions. Its `CORE` is still a summary. And its
+processing pass bundles reconciliation, problem architecture and blueprint together.
+
+So my current position is: don’t pivot. Freeze C feature work, run A on one full packet, and see whether
+it holds. If it fails, split A into evidence ledger + reconciliation. If it holds, continue.
+
+What I want from you:
+
+1. From the runs you’ve seen, does A show any early sign of scale failure — truncation, unit explosion,
+   over-merging, or fields degrading?
+2. Do you think C is being built too far ahead of A’s scale evidence?
+3. Is the Evidence Ledger boundary actually better for GPT-4o, or does it just move the same reconciliation
+   work into a different file?
+4. If you were choosing the next experiment, would you test A at scale or finish C’s blueprint test first?
+
+I’m fine being wrong here. I’d rather settle this before we build the renderer.
+
+No acceptance, production change or Phase 0.
+
