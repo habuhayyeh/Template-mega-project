@@ -4477,3 +4477,37 @@ NEXT:
 - same-case controlled V2.1 rerun;
 - if no material new failure, one held-out de-identified case;
 - then test Ask on the Scribe packet rather than continuing Scribe prompt tuning.
+
+
+## 2026-11-15 · ChatGPT · V2.1 same-case rerun reviewed
+
+TYPE: INPUT-CONTRACT EXPERIMENT / MINIMAL PROMPT REVISION
+
+REVIEWS:
+- architecture-reboot/reviews/chatgpt/112-scribe-v2.1-controlled-run-review.md
+- architecture-reboot/proposals/chatgpt/113-scribe-evidence-packet-v2.2-turn-preserving-transcript.md
+
+OBSERVED MATERIAL FAILURES:
+1. unanswered/garbled clinician dialogue still produced a derived response/negative;
+2. raw "hip trauma" was still repaired to "head trauma" despite V2.1 prohibition;
+3. some transcript records still merged multiple speakers under one record header.
+
+INTERPRETATION:
+- prechart side is sufficiently structured;
+- remaining failure is transcript-specific;
+- more prose prohibitions are unlikely to be enough if transcript processing still asks GPT-4o to synthesize across turns.
+
+V2.2 CHANGE:
+- transcript = TURN-PRESERVING clinical extraction;
+- each T-record derives from exactly one raw speaker turn;
+- one turn may split into multiple records;
+- never merge question + another speaker's answer;
+- preserve odd content words literally and mark [UNCLEAR];
+- prechart rules remain V2.1 section/source-preserving compression.
+
+STOP RULE:
+- one same-case V2.2 run;
+- if no inferred unanswered answer and no content-word repair, stop same-case tuning;
+- then one held-out de-identified case and proceed to Ask testing.
+
+No architecture change.
