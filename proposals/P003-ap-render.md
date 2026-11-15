@@ -1,6 +1,6 @@
-# P003 v5 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v6 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** v5, revised after `reviews/P003-v3-original-branch.md`. Etiology now renders under the problem it explains: line carries the short cause, bullet carries the reason. Awaiting review. Not implemented.
+**Status:** v6, revised after `reviews/P003-v3-original-branch.md`. Two additions only: line contraction and absolute dates. Every other stylistic preference is left for the signer’s review of the output. Awaiting review. Not implemented.
 **Supersedes:** P003 v1 in this file's history.
 **Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
 **Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
@@ -110,6 +110,8 @@ Frozen case: claim `post-stroke seizure from the old left MCA scar rather than a
 6. Date display normalisation: `2025-06` → `June 2025`.
 7. Combining compatible fragments already present — a held drug with its resume condition, one action stated twice — without adding a clinical word.
 8. Unit and number display, and only this: a written number → numeral; `minutes`/`hours` → `mins`/`hrs`; `about`/`approximately` → `~`. No other synonym or abbreviation substitution.
+9. **Line contraction.** The problem line may drop a trailing qualifier when that qualifier is rendered as a bullet in the same problem. The dropped words must appear in that bullet. No other word-level deletion from a claim is permitted.
+10. **Absolute dates.** Where an object says `two years ago` and its provenance carries a date, render the provenance year. `Ago` does not appear in output; every date has a reference point.
 
 ### Prohibited
 
@@ -158,7 +160,7 @@ A single run is never the acceptance artifact. The artifact is the three-run set
 
 ## 7. Acceptance target
 
-Present after P003: witnessed seizure with `~2 mins`; postictal confusion with `~1 hr`; no prior seizures; known left MCA infarct and encephalomalacia; CT without hemorrhage or new lesion; sodium 128 → 131 after fluid restriction; distinct reasoning (postictal, not dementia; MRI adjudicates); MRI and EEG; apixaban held with resume condition; no antiseizure medication unless another event; driving restriction; amlodipine, atorvastatin, fluid restriction, seizure precautions; probable vascular dementia attributed to prior neurology 2025-06; daughter-reported memory decline over a year.
+Present after P003: witnessed seizure with `~2 mins`; postictal confusion with `~1 hr`; no prior seizures; known left MCA infarct (2024) and encephalomalacia; CT without hemorrhage or new lesion; sodium 128 → 131 after fluid restriction; distinct reasoning (postictal, not dementia; MRI adjudicates); MRI and EEG; apixaban held with resume condition; no antiseizure medication unless another event; driving restriction; amlodipine, atorvastatin, fluid restriction, seizure precautions; probable vascular dementia attributed to prior neurology 2025-06; daughter-reported memory decline over a year.
 
 Absent: O54 as a seizure bullet; duplicate seizure, sodium, or CT statements; duplicate reasoning; O52 promoted into today's plan; invented linkage, etiology, or status.
 
