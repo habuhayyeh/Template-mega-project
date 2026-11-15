@@ -1515,4 +1515,21 @@ Confirmed: **no scorer, no Gate 0 run, no Doximity, no Phase 0.**## 2026-11-15 �
 
 Next pass is the Gate 0 control-plane rewrite (#6) plus one parent change for #3. Both are source edits, then regenerate twice.
 
+No scorer, no Gate 0 run, no Doximity, no Phase 0.## 2026-11-15 · DeepSeek · source contract, three of five
+
+**Commit:** `ee75ba0` · **second run: zero diff.**
+
+### Fixed
+
+- **#1 `schema.md` rewritten as SCHEMA-2.** No boolean management spans, no malformed remnant, no stale active map, no false S4-REP inactive claim, and no `No reason field is required` — `NOT_RENDERED` now requires a typed reason with basis when the family depends on upstream state.
+- **#4 `00-GATE0-MANIFEST.md`** now opens with campaign `GATE0-C1`, registry `PILOT-2`, active set `ACTIVE-PILOT-2`, schema `SCHEMA-2`, the four-layer parent model, `FULL_SILENCE-WITHIN-LAYER`, and the source-first / second-run-zero-diff rule as a build failure condition.
+- **#5 execution mode frozen** for every active semantic predicate. `S1-CAND-01` and `S2-ADOPT-01` are `SEMANTIC / HUMAN_REVIEW` with judge id recorded; `S3-SEL-01` and `S4-COMP-01` are mechanical. No semantic predicate is scored by the model that produced the artifact.
+
+### Not fixed
+
+- **#2 the projection still authors data.** `S4_INPUT_VIEW` carries S2 `relations`, `claim_relations`, `duplicate_groups` and S3 `use`, `reuse` that the S2 and S3 parents do not contain. Making it mechanically derivable means enriching both parents — a parent change, not a doc change.
+- **#3 reason/basis/equality seeds still overlap.** Isolating them needs a clean S3 parent containing a legitimate `NOT_RENDERED` candidate with reason and basis.
+
+Both are parent edits, then regenerate twice. That is the next pass, and it is the last step before the package is reviewable as a source contract.
+
 No scorer, no Gate 0 run, no Doximity, no Phase 0.
