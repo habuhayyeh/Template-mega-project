@@ -1,6 +1,6 @@
 # Gate 0 — scorer calibration manifest
 
-**Campaign:** `GATE0-C1` · **registry** `PILOT-2` · **active set** `ACTIVE-PILOT-2` · **schema** `SCHEMA-2` · **oracle** `ORACLE-2.0`
+**Campaign:** `GATE0-C2` · **registry** `PILOT-2` · **active set** `ACTIVE-PILOT-2` · **schema** `SCHEMA-3` · **oracle** `ORACLE-3.0`
 
 **Model:** **five clean calibration parents across four parent types.** `S1_OUTPUT`
 (`S1_CASE01_CLEAN`), `S2_OUTPUT` (`S2_CASE01_CLEAN`), `S3_OUTPUT` (`S3_CASE01_RENDERED_CLEAN`,
@@ -15,7 +15,7 @@ run must produce **zero diff**; a run that does not is a build failure, not a wa
 rejects a seed that is a no-op copy of its parent, or that differs at more than one path. The manifest
 mutation record is the checked parent→seed diff, not a hand-written claim.
 
-**Status: SCORER/HARNESS IMPLEMENTED / OPTION F HARDENED / PACKETS PREPARED / GATE 0 UNRUN.** The
+**Status: SCORER/HARNESS IMPLEMENTED / SCHEMA-3 + D-023 REBUILT / PACKETS PREPARED / GATE 0 UNRUN.** The
 scorer and harness exist at `architecture-reboot/scorer/` and
 `architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 16 semantic packet
 instances. No signer reference or evaluator evidence exists yet; no Gate 0 acceptance run has been
@@ -159,7 +159,7 @@ The last trigger matters most: every miss in production should become a seed, so
 The scorer receives **target artifact + read-only dependency context + case oracle + frozen
 predicate/contract rules**. The dependency context is evidence, not another target.
 
-The dependency-context matrix is fixed for `GATE0-C1`:
+The dependency-context matrix is fixed for `GATE0-C2`:
 
 | target | read-only dependency context |
 |---|---|
@@ -205,7 +205,7 @@ specificity answer key. The same packet feeds one `HUMAN / REFERENCE` judgment a
 - `architecture-reboot/scorer/` — scorer implementation and predicate registry.
 - `architecture-reboot/tools/gate0_harness.py` — harness, packets, judgments and evidence.
 - `architecture-reboot/tools/preflight.py` — the D-019 mechanical preflight.
-- `architecture-reboot/runs/gate0-packets-c1/` — packets-mode preparation: 33 artifact records,
+- `architecture-reboot/runs/gate0-packets-c2/` — packets-mode preparation: 33 artifact records,
   16 semantic packets, `EVIDENCE.json`, `INDEX.md` and `INDEX.json`. No acceptance verdict.
 - Per-run records: scorer version, predicate set version, control-plane version, case ids, findings,
   verdict.

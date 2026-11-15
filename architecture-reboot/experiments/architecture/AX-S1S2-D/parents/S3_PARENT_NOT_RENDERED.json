@@ -3,46 +3,55 @@
   "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
   "parent_type": "S3_OUTPUT",
   "registry": "PILOT-2",
+  "schema": "SCHEMA-3",
   "s3": {
+    "rendered": [],
     "candidate_outcomes": [
       {
+        "candidate": "C1",
+        "outcome": "NOT_RENDERED",
+        "reason": "NO_APPROVED_REPRESENTATION",
         "basis": [
           "O03",
           "O04"
-        ],
-        "candidate": "C1",
+        ]
+      },
+      {
+        "candidate": "C2",
         "outcome": "NOT_RENDERED",
-        "reason": "NO_APPROVED_REPRESENTATION"
+        "reason": "NO_APPROVED_REPRESENTATION",
+        "basis": [
+          "O01",
+          "O02"
+        ]
       }
     ],
-    "dispositions": [
-      {
-        "disposition": "HISTORICAL_CONTEXT",
-        "object": "O01"
-      },
-      {
-        "disposition": "HISTORICAL_CONTEXT",
-        "object": "O02"
-      },
-      {
-        "disposition": "MEDICATION_RECORD",
-        "object": "O07"
-      }
-    ],
-    "rendered": [],
     "retained": [
       "O03",
       "O04",
       "O05",
       "O06"
     ],
-    "reuse": [],
     "use": {
       "O03": "C1",
       "O04": "C1",
       "O05": "C1",
       "O06": "C1"
-    }
-  },
-  "schema": "SCHEMA-2"
+    },
+    "reuse": [],
+    "dispositions": [
+      {
+        "object": "O01",
+        "disposition": "HISTORICAL_CONTEXT"
+      },
+      {
+        "object": "O02",
+        "disposition": "HISTORICAL_CONTEXT"
+      },
+      {
+        "object": "O07",
+        "disposition": "MEDICATION_RECORD"
+      }
+    ]
+  }
 }

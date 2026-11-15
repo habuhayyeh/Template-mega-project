@@ -10,6 +10,15 @@
         "candidate": "C1",
         "outcome": "NOT_RENDERED",
         "reason": "NO_APPROVED_REPRESENTATION"
+      },
+      {
+        "basis": [
+          "O01",
+          "O02"
+        ],
+        "candidate": "C2",
+        "outcome": "NOT_RENDERED",
+        "reason": "NO_APPROVED_REPRESENTATION"
       }
     ],
     "dispositions": [
@@ -41,5 +50,5 @@
       "O06": "C1"
     }
   },
-  "schema": "SCHEMA-2"
+  "schema": "SCHEMA-3"
 }

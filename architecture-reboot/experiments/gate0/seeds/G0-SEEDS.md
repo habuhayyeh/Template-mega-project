@@ -1,6 +1,6 @@
 # Gate 0 — seed corpus (source spec)
 
-**Identities:** registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · campaign `GATE0-C1`.
+**Identities:** registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-3` · oracle `ORACLE-3.0` · campaign `GATE0-C2`.
 
 Seeds are generated from **five clean parents across four parent types** by
 `architecture-reboot/tools/make_seeds.py`. S3 has two identities: `S3_CASE01_RENDERED_CLEAN` and
@@ -44,7 +44,7 @@ exclusivity, unknown-id, rendered-set equality, missing reason and missing basis
 missing-reason and missing-basis seeds are single mutations of the clean `NOT_RENDERED` parent, so they
 no longer overlap. `S4-PROJ-01` has schema injection (`G0-S4-07`), invented member (`G0-S4-08`), true
 wrong-owner group (`G0-S4-09`), fabricated payload (`G0-S4-10`) and a valid-field fabricated duplicate
-group (`G0-S4-11`).
+group (`G0-S4-11`). Under D-023 the `S1-CAND-01` seed `G0-S1-05` adds an aspirin medication candidate, not the retained infarct problem.
 
 Pending: `S2-ADOPT-02` (schema), `S4-ORD-01` (ordering oracle). Not produced by any pilot case:
 `S1-BODY-01`, `S2-REP-02`, `S2-CONF-01`.

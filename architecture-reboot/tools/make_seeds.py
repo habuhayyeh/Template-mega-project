@@ -37,8 +37,8 @@ PAR = os.path.join(AX, 'parents')
 SCHEMA_PATH = os.path.join(AX, 'schema.md')
 PREDICATES_PATH = os.path.join(AX, 'predicates.md')
 
-REG, ACTIVE, SCHEMA, ORACLE_VER = 'PILOT-2', 'ACTIVE-PILOT-2', 'SCHEMA-2', 'ORACLE-2.0'
-CAMPAIGN = 'GATE0-C1'
+REG, ACTIVE, SCHEMA, ORACLE_VER = 'PILOT-2', 'ACTIVE-PILOT-2', 'SCHEMA-3', 'ORACLE-3.0'
+CAMPAIGN = 'GATE0-C2'
 
 PARENT_FILES = [
     'S1_PARENT.json',
@@ -268,9 +268,9 @@ def s1_02(a): a['s1']['candidates'][0]['selected_claim'] = 'CC1'
 def s1_04(a): a['s1']['candidates'][0]['anchors'] = []
 def s1_05(a):
     a['s1']['candidates'].append({
-        'id': 'C2', 'subject': 'old left MCA infarct', 'anchors': ['S01'],
+        'id': 'C3', 'subject': 'aspirin 81 daily', 'anchors': ['S04'],
         'salience': {'acuity': 'LOW', 'management_reference_spans': []},
-        'claim_candidates': [{'id': 'CC2', 'text': 'known left MCA infarct', 'support': ['S01']}]})
+        'claim_candidates': [{'id': 'CC3', 'text': 'aspirin 81 daily', 'support': ['S04']}]})
 def s1_06(a): a['s1']['candidates'][0]['status_current'] = True
 
 def s2_01(a): a['s2']['representations'][0]['support_refs'] = []
@@ -299,24 +299,24 @@ def s3_09(a):
 def s3_10(a):
     a['s3']['candidate_outcomes'][0]['basis'] = []
 
-def s4_01(a): a['s4']['problems'].pop()
-def s4_02(a): a['s4']['problems'].append({'id': 'P2', 'source': 'C9', 'order': 2})
+def s4_01(a): a['s4']['problems'] = []
+def s4_02(a): a['s4']['problems'].append({'id': 'P3', 'source': 'C9', 'order': 3})
 def s4_04(a): a['s4']['units'][0]['members'].append('O99')
 def s4_05(a): a['s4']['units'][0]['representation'] = 'R-999'
 def s4_06(a): a['s4']['units'] = [u for u in a['s4']['units'] if u['id'] != 'U2']
 def s4_07(a): a['s4_input_view']['adoption'] = True
-def s4_08(a): a['s4_input_view']['from_s2']['members'] = ['O03', 'O04', 'O05']
+def s4_08(a): a['s4_input_view']['from_s2']['selections'][0]['members'] = ['O03', 'O04', 'O05']
 def s4_09(a): a['s4_input_view']['from_s2']['selected_rep'] = 'R-999'
 def s4_10(a):
     a['s4_input_view']['from_ingest']['O05']['payload'] = 'vitamin D'
-def s4_11(a): a['s4_input_view']['from_s2']['duplicate_groups'] = [['O03', 'O04']]
+def s4_11(a): a['s4_input_view']['from_s2']['selections'][0]['duplicate_groups'] = [['O03', 'O04']]
 
 
 SEEDS = [
  ('S1_PARENT.json', 'G0-S1-01', 'S1-AUTH-01', s1_01, '/s1/candidates/0/adopted', '<absent>', 'true'),
  ('S1_PARENT.json', 'G0-S1-02', 'S1-AUTH-02', s1_02, '/s1/candidates/0/selected_claim', '<absent>', 'CC1'),
  ('S1_PARENT.json', 'G0-S1-04', 'S1-CAND-02', s1_04, '/s1/candidates/0/anchors', '["S02"]', '[]'),
- ('S1_PARENT.json', 'G0-S1-05', 'S1-CAND-01', s1_05, '/s1/candidates', '<absent>', 'C2 context-only'),
+ ('S1_PARENT.json', 'G0-S1-05', 'S1-CAND-01', s1_05, '/s1/candidates', '<absent>', 'C3 medication-only'),
  ('S1_PARENT.json', 'G0-S1-06', 'S1-AUTH-01', s1_06, '/s1/candidates/0/status_current', '<absent>', 'true'),
  ('S2_PARENT.json', 'G0-S2-01', 'S2-REP-01', s2_01, '/s2/representations/0/support_refs', '["S02"]', '[]'),
  ('S2_PARENT.json', 'G0-S2-02', 'S2-REP-01', s2_02, '/s2/representations/0/members', '["O03","O04"]', 'adds O07 medication'),
@@ -331,16 +331,16 @@ SEEDS = [
  ('S3_PARENT_NOT_RENDERED.json', 'G0-S3-08', 'S3-CAND-01', s3_08, '/s3/rendered', '[]', 'C1 rendered while outcome is NOT_RENDERED'),
  ('S3_PARENT_NOT_RENDERED.json', 'G0-S3-09', 'S3-CAND-01', s3_09, '/s3/candidate_outcomes/0/reason', 'NO_APPROVED_REPRESENTATION', 'null'),
  ('S3_PARENT_NOT_RENDERED.json', 'G0-S3-10', 'S3-CAND-01', s3_10, '/s3/candidate_outcomes/0/basis', '["O03","O04"]', '[]'),
- ('S4_PARENT.json', 'G0-S4-01', 'S4-INC-01', s4_01, '/s4/problems', '1 problem', '0 problems'),
- ('S4_PARENT.json', 'G0-S4-02', 'S4-INC-01', s4_02, '/s4/problems', '<absent>', 'P2 not rendered'),
+ ('S4_PARENT.json', 'G0-S4-01', 'S4-INC-01', s4_01, '/s4/problems', '2 problems', '0 problems'),
+ ('S4_PARENT.json', 'G0-S4-02', 'S4-INC-01', s4_02, '/s4/problems', '<absent>', 'P3 not rendered'),
  ('S4_PARENT.json', 'G0-S4-04', 'S4-MEM-01', s4_04, '/s4/units/0/members', '<absent>', 'O99'),
  ('S4_PARENT.json', 'G0-S4-05', 'S4-REP-01', s4_05, '/s4/units/0/representation', 'R1', 'R-999'),
  ('S4_PARENT.json', 'G0-S4-06', 'S4-COMP-01', s4_06, '/s4/units', 'U2 present', 'U2 removed'),
  ('S4_PARENT.json', 'G0-S4-07', 'S4-PROJ-01', s4_07, '/s4_input_view/adoption', '<absent>', 'adoption schema'),
- ('S4_PARENT.json', 'G0-S4-08', 'S4-PROJ-01', s4_08, '/s4_input_view/from_s2/members', '["O03","O04"]', 'adds O05 invented'),
+ ('S4_PARENT.json', 'G0-S4-08', 'S4-PROJ-01', s4_08, '/s4_input_view/from_s2/selections/0/members', '["O03","O04"]', 'adds O05 invented'),
  ('S4_PARENT.json', 'G0-S4-09', 'S4-PROJ-01', s4_09, '/s4_input_view/from_s2/selected_rep', '<absent>', 'S3-owned field under S2 wrong-owner group'),
  ('S4_PARENT.json', 'G0-S4-10', 'S4-PROJ-01', s4_10, '/s4_input_view/from_ingest/O05/payload', 'S03 payload', 'fabricated payload'),
- ('S4_PARENT.json', 'G0-S4-11', 'S4-PROJ-01', s4_11, '/s4_input_view/from_s2/duplicate_groups', '[]', '[[O03,O04]] authored'),
+ ('S4_PARENT.json', 'G0-S4-11', 'S4-PROJ-01', s4_11, '/s4_input_view/from_s2/selections/0/duplicate_groups', '[]', '[[O03,O04]] authored'),
 ]
 
 
@@ -356,7 +356,7 @@ def main():
     active = load_active_predicates()
 
     if pmap.get('schema') != SCHEMA or pmap.get('view') != 'S4_INPUT_VIEW':
-        fail('projection map identity does not match SCHEMA-2/S4_INPUT_VIEW')
+        fail('projection map identity does not match SCHEMA-3/S4_INPUT_VIEW')
 
     parents = {f: load_parent(f) for f in PARENT_FILES}
     parent_ids = [p['parent_id'] for p in parents.values()]
@@ -446,8 +446,8 @@ def main():
             'map_source': 'experiments/architecture/AX-S1S2-D/schema.md',
             'map_sha256': canon(pmap),
             'view_sha256': canon(built_view),
-            'selected_problem': built_view['from_s1']['problem'],
-            'selected_rep': built_view['from_s3']['selected_rep'],
+            'problems': [p['problem'] for p in built_view['from_s1']['problems']],
+            'selected_reps': built_view['from_s3']['selected_reps'],
             'retained': built_view['from_s3']['retained'],
             'rule_count': len(pmap['rules']),
         },
@@ -512,8 +512,10 @@ def main():
 
     var = copy.deepcopy(clean['S3_PARENT.json'])
     text = json.dumps(var, sort_keys=True)
-    for a, b in (('"C1"', '"CX"'), ('"R1"', '"RX"'), ('"O03"', '"OX3"'),
-                 ('"O04"', '"OX4"'), ('"O05"', '"OX5"'), ('"O06"', '"OX6"')):
+    for a, b in (('"C1"', '"CX"'), ('"C2"', '"CY"'), ('"R1"', '"RX"'),
+                 ('"R2"', '"RY"'), ('"O01"', '"OX1"'), ('"O02"', '"OX2"'),
+                 ('"O03"', '"OX3"'), ('"O04"', '"OX4"'), ('"O05"', '"OX5"'),
+                 ('"O06"', '"OX6"')):
         text = text.replace(a, b)
     var = json.loads(text)
     var['parent_id'] = 'S3_CASE01_RENDERED_VARIATION'

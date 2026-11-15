@@ -141,8 +141,8 @@ class AdditionalPredicateTests(unittest.TestCase):
             'campaign': 'SYN-CAMPAIGN',
             'registry': 'PILOT-2',
             'active_set': 'ACTIVE-PILOT-2',
-            'schema': 'SCHEMA-2',
-            'oracle': 'ORACLE-2.0',
+            'schema': 'SCHEMA-3',
+            'oracle': 'ORACLE-3.0',
             'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
             'governing_hashes': {},
             'clean_parents': {'S1_SYN': clean_parent},
@@ -188,8 +188,8 @@ class AdditionalPredicateTests(unittest.TestCase):
             'campaign': 'SYN-CAMPAIGN',
             'registry': 'PILOT-2',
             'active_set': 'ACTIVE-PILOT-2',
-            'schema': 'SCHEMA-2',
-            'oracle': 'ORACLE-2.0',
+            'schema': 'SCHEMA-3',
+            'oracle': 'ORACLE-3.0',
             'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
             'governing_hashes': {},
             'clean_parents': {
@@ -288,7 +288,7 @@ class AdditionalPredicateTests(unittest.TestCase):
     def test_projection_map_drift_fails(self):
         bad = copy.deepcopy(self.rules['projection_map'])
         for rule in bad['rules']:
-            if rule['op'] == 's2_relations':
+            if rule['op'] == 's2_selections':
                 rule['source_path'] = '/s2/nope'
         deps = {'S1_SYN': self.s1, 'S2_SYN': self.s2, 'S3_SYN': self.s3}
         with self.assertRaises(ProjectionError):

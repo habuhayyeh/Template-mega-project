@@ -12,17 +12,13 @@ class ProjectionError(Exception):
 
 
 OPS = {
-    's1_problem': lambda c: c['cand']['id'],
-    's1_salience': lambda c: copy.deepcopy(c['cand']['salience']),
-    's3_selected_rep': lambda c: c['rendered'][0]['selected_rep'],
+    's1_problems': lambda c: copy.deepcopy(c['problems']),
+    's3_selected_reps': lambda c: copy.deepcopy(c['selected_reps']),
     's3_rendered': lambda c: [r['problem'] for r in c['rendered']],
     's3_retained': lambda c: list(c['retained']),
     's3_use': lambda c: copy.deepcopy(c['use']),
     's3_reuse': lambda c: copy.deepcopy(c['reuse']),
-    's2_members': lambda c: list(c['members']),
-    's2_relations': lambda c: copy.deepcopy(c['relations']),
-    's2_claim_relations': lambda c: copy.deepcopy(c['claim_relations']),
-    's2_duplicate_groups': lambda c: copy.deepcopy(c['duplicate_groups']),
+    's2_selections': lambda c: copy.deepcopy(c['selections']),
     'oracle_ingest': lambda c: copy.deepcopy(c['ingest']),
     'contract_section': lambda c: c['contracts']['section'],
     'contract_operator_set': lambda c: c['contracts']['operator_set'],
@@ -32,32 +28,23 @@ OPS = {
 # source path, condition, requirement or transform fails instead of silently
 # running old code.
 OP_CONTRACTS = {
-    's1_problem': {
-        'dst': '/from_s1/problem',
+    's1_problems': {
+        'dst': '/from_s1/problems',
         'owner': 'S1',
         'source': 'S1_PARENT.json',
-        'source_path': '/s1/candidates[id=P]/id',
-        'condition': 'P is the unique rendered problem',
+        'source_path': '/s1/candidates[id in rendered]/{id,salience}',
+        'condition': 'one entry per rendered problem, S3 order',
         'required': 'required',
-        'transform': 'copy id',
+        'transform': 'collect objects',
     },
-    's1_salience': {
-        'dst': '/from_s1/salience',
-        'owner': 'S1',
-        'source': 'S1_PARENT.json',
-        'source_path': '/s1/candidates[id=P]/salience',
-        'condition': 'same candidate as /from_s1/problem',
-        'required': 'required',
-        'transform': 'copy object',
-    },
-    's3_selected_rep': {
-        'dst': '/from_s3/selected_rep',
+    's3_selected_reps': {
+        'dst': '/from_s3/selected_reps',
         'owner': 'S3',
         'source': 'S3_PARENT.json',
-        'source_path': '/s3/rendered[problem=P]/selected_rep',
-        'condition': 'exactly one rendered entry for P',
+        'source_path': '/s3/rendered[i]/{problem,selected_rep}',
+        'condition': 'all i, source order',
         'required': 'required',
-        'transform': 'copy id',
+        'transform': 'collect problem->rep map',
     },
     's3_rendered': {
         'dst': '/from_s3/rendered',
@@ -95,41 +82,14 @@ OP_CONTRACTS = {
         'required': 'required',
         'transform': 'copy list',
     },
-    's2_members': {
-        'dst': '/from_s2/members',
+    's2_selections': {
+        'dst': '/from_s2/selections',
         'owner': 'S2',
         'source': 'S2_PARENT.json',
-        'source_path': '/s2/representations[id=R]/members[i]',
-        'condition': 'R is from_s3.selected_rep; all i, source order',
+        'source_path': '/s2/representations[id=R]/members + /s2/relations + /s2/claim_relations + /s2/duplicate_groups',
+        'condition': 'one per rendered problem; R = selected_reps[P]; relations filtered to members; claim relations filtered P/R; duplicate groups intersect members',
         'required': 'required',
-        'transform': 'copy ids',
-    },
-    's2_relations': {
-        'dst': '/from_s2/relations',
-        'owner': 'S2',
-        'source': 'S2_PARENT.json',
-        'source_path': '/s2/relations[i]',
-        'condition': 'from in M and to in M; source order',
-        'required': 'required',
-        'transform': 'filter and copy',
-    },
-    's2_claim_relations': {
-        'dst': '/from_s2/claim_relations',
-        'owner': 'S2',
-        'source': 'S2_PARENT.json',
-        'source_path': '/s2/claim_relations[i]',
-        'condition': 'problem == P and representation == R; source order',
-        'required': 'required',
-        'transform': 'filter and copy',
-    },
-    's2_duplicate_groups': {
-        'dst': '/from_s2/duplicate_groups',
-        'owner': 'S2',
-        'source': 'S2_PARENT.json',
-        'source_path': '/s2/duplicate_groups[i]',
-        'condition': 'set(group) intersects M; source order',
-        'required': 'required',
-        'transform': 'filter and copy',
+        'transform': 'collect objects',
     },
     'oracle_ingest': {
         'dst': '/from_ingest',
@@ -149,7 +109,7 @@ OP_CONTRACTS = {
     'contract_section': {
         'dst': '/from_contracts/section',
         'owner': 'frozen contracts',
-        'source': 'SCHEMA-2 contracts block',
+        'source': 'SCHEMA-3 contracts block',
         'source_path': '#/contracts/section',
         'condition': 'always',
         'required': 'required',
@@ -158,7 +118,7 @@ OP_CONTRACTS = {
     'contract_operator_set': {
         'dst': '/from_contracts/operator_set',
         'owner': 'frozen contracts',
-        'source': 'SCHEMA-2 contracts block',
+        'source': 'SCHEMA-3 contracts block',
         'source_path': '#/contracts/operator_set',
         'condition': 'always',
         'required': 'required',
@@ -226,50 +186,67 @@ def validate_projection_map(pmap):
 
 
 def build_view(s1p, s2p, s3p, oracle, pmap):
-    """Construct S4_INPUT_VIEW from upstream artifacts and the accepted map."""
+    """Construct the multi-problem S4_INPUT_VIEW from upstream artifacts."""
     validate_projection_map(pmap)
     try:
         rendered = s3p['s3']['rendered']
-        if len(rendered) != 1:
-            raise ProjectionError(
-                'S4_INPUT_VIEW scope requires exactly one rendered problem, found %d'
-                % len(rendered))
-        problem_id = rendered[0]['problem']
-        candidates = [c for c in s1p['s1']['candidates'] if c.get('id') == problem_id]
-        if len(candidates) != 1:
-            raise ProjectionError('expected one S1 candidate for problem %s, found %d'
-                                  % (problem_id, len(candidates)))
-        cand = candidates[0]
-
-        selected_rep = rendered[0]['selected_rep']
-        reps = [r for r in s2p['s2']['representations'] if r.get('id') == selected_rep]
-        if len(reps) != 1:
-            raise ProjectionError(
-                'expected one S2 representation for selected_rep %s, found %d'
-                % (selected_rep, len(reps)))
-        rep = reps[0]
-        if rep.get('problem') != problem_id:
-            raise ProjectionError(
-                'selected representation %s belongs to %r, not rendered problem %s'
-                % (selected_rep, rep.get('problem'), problem_id))
-        members = list(rep['members'])
-        if not members:
-            raise ProjectionError('selected representation %s has no members' % selected_rep)
-
-        relations = [
-            copy.deepcopy(r) for r in s2p['s2'].get('relations', [])
-            if r.get('from') in members and r.get('to') in members
-        ]
-        claim_relations = []
-        for r in s2p['s2'].get('claim_relations', []):
-            if 'problem' not in r or 'representation' not in r:
-                raise ProjectionError('S2 claim_relation lacks problem/representation selectors')
-            if r['problem'] == problem_id and r['representation'] == selected_rep:
-                claim_relations.append(copy.deepcopy(r))
-        duplicate_groups = [
-            list(g) for g in s2p['s2'].get('duplicate_groups', [])
-            if set(g) & set(members)
-        ]
+        if not isinstance(rendered, list) or not rendered:
+            raise ProjectionError('S4_INPUT_VIEW requires at least one rendered problem')
+        s1_by_id = {c.get('id'): c for c in s1p['s1']['candidates']}
+        s2_by_id = {r.get('id'): r for r in s2p['s2']['representations']}
+        problems = []
+        selected_reps = {}
+        selections = []
+        seen = set()
+        for entry in rendered:
+            problem_id = entry.get('problem')
+            selected_rep = entry.get('selected_rep')
+            if problem_id in seen:
+                raise ProjectionError('duplicate rendered problem %s' % problem_id)
+            seen.add(problem_id)
+            cand = s1_by_id.get(problem_id)
+            if not isinstance(cand, dict):
+                raise ProjectionError('rendered problem %s has no S1 candidate' % problem_id)
+            rep = s2_by_id.get(selected_rep)
+            if not isinstance(rep, dict):
+                raise ProjectionError(
+                    'selected_rep %s has no S2 representation' % selected_rep)
+            if rep.get('problem') != problem_id:
+                raise ProjectionError(
+                    'selected representation %s belongs to %r, not rendered problem %s'
+                    % (selected_rep, rep.get('problem'), problem_id))
+            members = list(rep.get('members') or [])
+            if not members:
+                raise ProjectionError('selected representation %s has no members'
+                                      % selected_rep)
+            relations = [
+                copy.deepcopy(r) for r in s2p['s2'].get('relations', [])
+                if r.get('from') in members and r.get('to') in members
+            ]
+            claim_relations = []
+            for r in s2p['s2'].get('claim_relations', []):
+                if 'problem' not in r or 'representation' not in r:
+                    raise ProjectionError(
+                        'S2 claim_relation lacks problem/representation selectors')
+                if r['problem'] == problem_id and r['representation'] == selected_rep:
+                    claim_relations.append(copy.deepcopy(r))
+            duplicate_groups = [
+                list(g) for g in s2p['s2'].get('duplicate_groups', [])
+                if set(g) & set(members)
+            ]
+            problems.append({
+                'problem': cand['id'],
+                'salience': copy.deepcopy(cand.get('salience')),
+            })
+            selected_reps[problem_id] = selected_rep
+            selections.append({
+                'problem': problem_id,
+                'representation': selected_rep,
+                'members': members,
+                'relations': relations,
+                'claim_relations': claim_relations,
+                'duplicate_groups': duplicate_groups,
+            })
 
         retained = list(s3p['s3']['retained'])
         use = copy.deepcopy(s3p['s3']['use'])
@@ -299,15 +276,13 @@ def build_view(s1p, s2p, s3p, oracle, pmap):
         raise ProjectionError('malformed projection dependency: %s' % exc)
 
     ctx = {
-        'cand': cand,
+        'problems': problems,
         'rendered': rendered,
+        'selected_reps': selected_reps,
+        'selections': selections,
         'retained': retained,
         'use': use,
         'reuse': copy.deepcopy(s3p['s3']['reuse']),
-        'members': members,
-        'relations': relations,
-        'claim_relations': claim_relations,
-        'duplicate_groups': duplicate_groups,
         'ingest': ingest,
         'contracts': pmap['contracts'],
     }

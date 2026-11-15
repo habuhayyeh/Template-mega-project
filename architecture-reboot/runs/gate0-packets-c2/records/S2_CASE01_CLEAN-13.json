@@ -1,0 +1,81 @@
+{
+  "artifact_hash": "sha256:bd183e9f908337e4c77b23436f8db005d4fc6d1507a689bfb7121c768f343372",
+  "artifact_name": "G0-S2-03.json",
+  "dependency_context": [
+    {
+      "hash": "sha256:cf6b6d89980eefaf677daf42ab7f751ca176c7933bd43ef74a388a953bab5d68",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT"
+    }
+  ],
+  "findings": [
+    {
+      "detail": "SIGNER_REFERENCE_MISSING",
+      "evidence": [],
+      "expected": null,
+      "human_review": {
+        "packet_kind": "S2-ADOPT-01",
+        "reason": "HUMAN_JUDGMENT_REQUIRED",
+        "required": true
+      },
+      "observed": null,
+      "owner": "S2",
+      "packet_id": "pkt-cf75782ba71b30d4a518d5e0",
+      "path": null,
+      "predicate_id": "S2-ADOPT-01",
+      "status": "UNDECIDABLE"
+    },
+    {
+      "detail": "SIGNER_REFERENCE_MISSING",
+      "evidence": [],
+      "expected": null,
+      "human_review": {
+        "packet_kind": "S2-REP-01",
+        "reason": "HUMAN_JUDGMENT_REQUIRED",
+        "required": true
+      },
+      "observed": null,
+      "owner": "S2",
+      "packet_id": "pkt-cf60d20bbc04e461e5555326",
+      "path": null,
+      "predicate_id": "S2-REP-01",
+      "status": "UNDECIDABLE"
+    },
+    {
+      "detail": "S2 altered substrate temporality for O01",
+      "evidence": [
+        {
+          "object": "O01"
+        }
+      ],
+      "expected": "2024-02 documented",
+      "observed": "now",
+      "owner": "S2",
+      "path": "/s2/adjudication/0/temporal",
+      "predicate_id": "S2-TEMP-01",
+      "status": "FIRED"
+    }
+  ],
+  "kind": "seed",
+  "packets": [
+    "S2-ADOPT-01",
+    "S2-REP-01"
+  ],
+  "parent_id": "S2_CASE01_CLEAN",
+  "parent_type": "S2_OUTPUT",
+  "scorer_version": "GATE0-SCORER-1",
+  "specificity": {
+    "expected": "S2-TEMP-01",
+    "expected_status": "FIRED",
+    "non_silent_other": [
+      "S2-ADOPT-01",
+      "S2-REP-01"
+    ],
+    "other_active": [
+      "S2-ADOPT-01",
+      "S2-REP-01"
+    ],
+    "pass": false
+  },
+  "verdict": "INCOMPLETE"
+}

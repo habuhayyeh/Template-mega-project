@@ -54,16 +54,16 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 
 ## 4. What is stale / unbuilt
 
-- **Execution package:** source contract accepted after review 081; review 082 corrected only the
-  scorer-input boundary. The package is source-first and regenerable.
+- **Execution package:** source contract rebuilt under D-023/D-024 as `SCHEMA-3`; review 081/082
+  remain the architecture and scorer-input boundary. The package is source-first and regenerable.
 - **Scorer/harness/preflight:** implemented and **CLOSED under D-019** after independent review.
-  `python architecture-reboot/tools/preflight.py` passes with 7/7 checks and 45 tests.
+  `python architecture-reboot/tools/preflight.py` passes with 7/7 checks and 46 tests.
   **Gate 0:** unrun; the signer reference + two blinded evaluator judgments have not been executed.
   **Doximity:** unrun. **Phase 0:** untouched and stale.
 
 ## 5. Exact position
 
-HEAD at handoff: see `git log -1`. Last substantive commit: Option F semantic calibration policy implementation.
+HEAD at handoff: see `git log -1`. Last substantive commit: CASE-01 SCHEMA-3 rebuild under D-023/D-024.
 
 `python architecture-reboot/tools/make_seeds.py` builds:
 5 clean parents across 4 parent types → 28 seeds → `MANIFEST.json`. **A second run must produce zero
@@ -75,18 +75,19 @@ dependency-context map.
 `python architecture-reboot/tools/preflight.py` is the single mechanical entry point. It checks frozen
 architecture/Phase-0 drift, source/generated freshness and determinism, governing hashes and
 identities, active registry, dependency-context integrity, seed mutation integrity, stale source
-markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 45 tests.
+markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 46 tests.
 
 Current counts: 5 clean calibration parents · 4 parent types · 28 seeds · 16 active predicates ·
-campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
-`ORACLE-2.0` · reason registry `REASON-1` · operator set `PILOT-OPERATORS-1`.
+campaign `GATE0-C2` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-3` · oracle
+`ORACLE-3.0` · reason registry `REASON-1` · operator set `PILOT-OPERATORS-1`.
 
 Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 45 synthetic tests; no Gate 0 acceptance
+CASE-01: two rendered problems — falls and a retained inactive infarct; the S1-CAND seed is now a
+medication-only candidate. Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 46 synthetic tests; no Gate 0 acceptance
 run. Packet preparation: 33 records, 16 semantic packets, 0 references/0 evaluators; index at
-`architecture-reboot/runs/gate0-packets-c1/INDEX.md`.
+`architecture-reboot/runs/gate0-packets-c2/INDEX.md`.
 
 ## 6. Review 084 closure: scorer/harness/preflight
 
@@ -97,7 +98,8 @@ reopen it without a failing test, counterexample, implementation result or genui
 judgment followed by two blinded LLM evaluator judgments. The signer reference is the accepted verdict;
 both evaluators must match it and within-layer specificity. Mismatch is FAIL; missing, duplicate or UNDECIDABLE evidence is INCOMPLETE. References are reusable while packet/policy/oracle/context identity is
 unchanged; evaluator evidence is reusable only for the same model family/version. Project-context agents
-are ineligible. The harness records `REFERENCE` and `EVALUATOR` roles separately.
+are ineligible. The harness records `REFERENCE` and `EVALUATOR` roles separately. All pre-D-023
+references from `gate0-packets-c1` are invalid after the SCHEMA-3 rebuild.
 
 **Input boundary.** Scorer input is target artifact + read-only dependency context + oracle + frozen
 predicate/contract rules. `00-GATE0-MANIFEST.md` fixes the dependency matrix; the manifest hash-pins the
@@ -120,7 +122,7 @@ checks without adding acceptance criteria: frozen zones, regeneration/freshness/
 hashes/identities/registry, dependency context, seed mutation integrity, stale markers and unit tests.
 It exits non-zero on any failure and does not run Gate 0.
 
-**Gate 0 remains unrun.** 45 synthetic tests pass. No `acceptance` harness run was executed, no
+**Gate 0 remains unrun.** 46 synthetic tests pass. No `acceptance` harness run was executed, no
 judgments were fabricated, and the signer reference + two blinded evaluator judgments have not been executed.
 
 No Doximity, no Phase 0.

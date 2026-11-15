@@ -8,17 +8,13 @@
       {
         "candidate": "CX",
         "outcome": "RENDERED"
+      },
+      {
+        "candidate": "CY",
+        "outcome": "RENDERED"
       }
     ],
     "dispositions": [
-      {
-        "disposition": "HISTORICAL_CONTEXT",
-        "object": "O01"
-      },
-      {
-        "disposition": "HISTORICAL_CONTEXT",
-        "object": "O02"
-      },
       {
         "disposition": "MEDICATION_RECORD",
         "object": "O07"
@@ -29,9 +25,16 @@
         "approved_representation": "RX",
         "problem": "CX",
         "selected_rep": "RX"
+      },
+      {
+        "approved_representation": "RY",
+        "problem": "CY",
+        "selected_rep": "RY"
       }
     ],
     "retained": [
+      "OX1",
+      "OX2",
       "OX3",
       "OX4",
       "OX5",
@@ -39,11 +42,13 @@
     ],
     "reuse": [],
     "use": {
+      "OX1": "CY",
+      "OX2": "CY",
       "OX3": "CX",
       "OX4": "CX",
       "OX5": "CX",
       "OX6": "CX"
     }
   },
-  "schema": "SCHEMA-2"
+  "schema": "SCHEMA-3"
 }

@@ -3,31 +3,51 @@
   "parent_id": "S1_CASE01_CLEAN",
   "parent_type": "S1_OUTPUT",
   "registry": "PILOT-2",
+  "schema": "SCHEMA-3",
   "s1": {
     "candidates": [
       {
+        "id": "C1",
+        "subject": "falls since June",
         "anchors": [
           "S02"
         ],
-        "claim_candidates": [
-          {
-            "id": "CC1",
-            "support": [
-              "S02"
-            ],
-            "text": "three falls since June"
-          }
-        ],
-        "id": "C1",
         "salience": {
           "acuity": "MODERATE",
           "management_reference_spans": [
             "S03"
           ]
         },
-        "subject": "falls since June"
+        "claim_candidates": [
+          {
+            "id": "CC1",
+            "text": "three falls since June",
+            "support": [
+              "S02"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "C2",
+        "subject": "prior left MCA infarct",
+        "anchors": [
+          "S01"
+        ],
+        "salience": {
+          "acuity": "LOW",
+          "management_reference_spans": []
+        },
+        "claim_candidates": [
+          {
+            "id": "CC2",
+            "text": "known left MCA infarct",
+            "support": [
+              "S01"
+            ]
+          }
+        ]
       }
     ]
-  },
-  "schema": "SCHEMA-2"
+  }
 }

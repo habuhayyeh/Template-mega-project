@@ -9,6 +9,11 @@
         "id": "P1",
         "order": 1,
         "source": "C1"
+      },
+      {
+        "id": "P2",
+        "order": 2,
+        "source": "C2"
       }
     ],
     "sections": [
@@ -55,6 +60,21 @@
         "roles": {
           "O06": "HEAD"
         }
+      },
+      {
+        "id": "U4",
+        "members": [
+          "O01",
+          "O02"
+        ],
+        "operator": "FACT",
+        "order": 40,
+        "problem": "P2",
+        "representation": "R2",
+        "roles": {
+          "O01": "HEAD",
+          "O02": "MODIFIER"
+        }
       }
     ]
   },
@@ -64,6 +84,16 @@
       "section": "AP"
     },
     "from_ingest": {
+      "O01": {
+        "payload": "known left MCA infarct",
+        "provenance": "B/2024-02",
+        "temporal": "2024-02 documented"
+      },
+      "O02": {
+        "payload": "mild residual right faciobrachial weakness",
+        "provenance": "B/2024-02",
+        "temporal": "2024-02"
+      },
       "O03": {
         "payload": "three falls since June",
         "provenance": "A/2026-11-14",
@@ -86,43 +116,85 @@
       }
     },
     "from_s1": {
-      "problem": "C1",
-      "salience": {
-        "acuity": "MODERATE",
-        "management_reference_spans": [
-          "S03"
-        ]
-      }
+      "problems": [
+        {
+          "problem": "C1",
+          "salience": {
+            "acuity": "MODERATE",
+            "management_reference_spans": [
+              "S03"
+            ]
+          }
+        },
+        {
+          "problem": "C2",
+          "salience": {
+            "acuity": "LOW",
+            "management_reference_spans": []
+          }
+        }
+      ]
     },
     "from_s2": {
-      "claim_relations": [],
-      "duplicate_groups": [],
-      "members": [
-        "O03",
-        "O04",
-        "O05"
-      ],
-      "relations": [
+      "selections": [
         {
-          "from": "O04",
-          "to": "O03",
-          "type": "SUPPORTS"
+          "claim_relations": [],
+          "duplicate_groups": [],
+          "members": [
+            "O03",
+            "O04",
+            "O05"
+          ],
+          "problem": "C1",
+          "relations": [
+            {
+              "from": "O04",
+              "to": "O03",
+              "type": "SUPPORTS"
+            }
+          ],
+          "representation": "R1"
+        },
+        {
+          "claim_relations": [],
+          "duplicate_groups": [],
+          "members": [
+            "O01",
+            "O02"
+          ],
+          "problem": "C2",
+          "relations": [
+            {
+              "from": "O02",
+              "to": "O01",
+              "type": "SUPPORTS"
+            }
+          ],
+          "representation": "R2"
         }
       ]
     },
     "from_s3": {
       "rendered": [
-        "C1"
+        "C1",
+        "C2"
       ],
       "retained": [
+        "O01",
+        "O02",
         "O03",
         "O04",
         "O05",
         "O06"
       ],
       "reuse": [],
-      "selected_rep": "R1",
+      "selected_reps": {
+        "C1": "R1",
+        "C2": "R2"
+      },
       "use": {
+        "O01": "C2",
+        "O02": "C2",
         "O03": "C1",
         "O04": "C1",
         "O05": "C1",
@@ -130,5 +202,5 @@
       }
     }
   },
-  "schema": "SCHEMA-2"
+  "schema": "SCHEMA-3"
 }

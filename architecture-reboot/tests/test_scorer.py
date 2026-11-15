@@ -55,7 +55,7 @@ def base_fixtures():
     }
     s1 = {
         'case': 'SYN-1', 'parent_id': 'S1_SYN', 'parent_type': 'S1_OUTPUT',
-        'registry': 'PILOT-2', 'schema': 'SCHEMA-2',
+        'registry': 'PILOT-2', 'schema': 'SCHEMA-3',
         's1': {'candidates': [{
             'id': 'C1', 'subject': 'falls since June', 'anchors': ['S1'],
             'salience': {'acuity': 'MODERATE', 'management_reference_spans': ['S1']},
@@ -65,7 +65,7 @@ def base_fixtures():
     }
     s2 = {
         'case': 'SYN-1', 'parent_id': 'S2_SYN', 'parent_type': 'S2_OUTPUT',
-        'registry': 'PILOT-2', 'schema': 'SCHEMA-2',
+        'registry': 'PILOT-2', 'schema': 'SCHEMA-3',
         's2': {
             'adjudication': [{'object': 'O1', 'temporal': 'June', 'adoption': True,
                               'evidence': ['S1']}],
@@ -78,7 +78,7 @@ def base_fixtures():
     }
     s3 = {
         'case': 'SYN-1', 'parent_id': 'S3_SYN', 'parent_type': 'S3_OUTPUT',
-        'registry': 'PILOT-2', 'schema': 'SCHEMA-2',
+        'registry': 'PILOT-2', 'schema': 'SCHEMA-3',
         's3': {
             'rendered': [{'problem': 'C1', 'approved_representation': 'R1',
                           'selected_rep': 'R1'}],
@@ -90,15 +90,20 @@ def base_fixtures():
         },
     }
     view = {
-        'from_s1': {'problem': 'C1',
-                    'salience': {'acuity': 'MODERATE',
-                                 'management_reference_spans': ['S1']}},
-        'from_s3': {'selected_rep': 'R1', 'rendered': ['C1'],
+        'from_s1': {'problems': [{
+            'problem': 'C1',
+            'salience': {'acuity': 'MODERATE',
+                         'management_reference_spans': ['S1']},
+        }]},
+        'from_s3': {'selected_reps': {'C1': 'R1'}, 'rendered': ['C1'],
                     'retained': ['O1', 'O2'],
                     'use': {'O1': 'C1', 'O2': 'C1'}, 'reuse': []},
-        'from_s2': {'members': ['O1', 'O2'],
-                    'relations': [{'type': 'SUPPORTS', 'from': 'O2', 'to': 'O1'}],
-                    'claim_relations': [], 'duplicate_groups': []},
+        'from_s2': {'selections': [{
+            'problem': 'C1', 'representation': 'R1',
+            'members': ['O1', 'O2'],
+            'relations': [{'type': 'SUPPORTS', 'from': 'O2', 'to': 'O1'}],
+            'claim_relations': [], 'duplicate_groups': [],
+        }]},
         'from_ingest': {
             'O1': {'payload': 'three falls since June', 'provenance': 'A',
                    'temporal': 'June'},
@@ -109,7 +114,7 @@ def base_fixtures():
     }
     s4 = {
         'case': 'SYN-1', 'parent_id': 'S4_SYN', 'parent_type': 'S4_BLUEPRINT',
-        'registry': 'PILOT-2', 'schema': 'SCHEMA-2',
+        'registry': 'PILOT-2', 'schema': 'SCHEMA-3',
         's4_input_view': view,
         's4': {
             'sections': ['AP'],
@@ -239,11 +244,11 @@ class ScorerTests(unittest.TestCase):
         self.assertEqual(find(result, 'S4-REP-01')['status'], FIRED)
 
     def test_s4_projection_uses_upstream_sources(self):
-        self.s4['s4_input_view']['from_s2']['members'].append('O3')
+        self.s4['s4_input_view']['from_s2']['selections'][0]['members'].append('O3')
         result = score(self.s4, self.deps_s4, self.oracle, self.rules)
         finding = find(result, 'S4-PROJ-01')
         self.assertEqual(finding['status'], FIRED)
-        self.assertIn('/from_s2/members', finding['path'])
+        self.assertIn('/from_s2/selections/0/members', finding['path'])
 
     def test_s4_projection_rejects_extra_key(self):
         self.s4['s4_input_view']['adoption'] = True
@@ -387,6 +392,57 @@ class HarnessTests(unittest.TestCase):
             {'S1_SYN': self.s1, 'S2_SYN': self.s2, 'S3_SYN': self.s3},
             self.oracle, self.rules['projection_map'])
         self.assertEqual(built, self.s4['s4_input_view'])
+
+    def test_schema3_multi_problem_projection_and_representation(self):
+        s1 = copy.deepcopy(self.s1)
+        s1['s1']['candidates'].append({
+            'id': 'C2', 'subject': 'prior infarct', 'anchors': ['S1'],
+            'salience': {'acuity': 'LOW', 'management_reference_spans': []},
+            'claim_candidates': [{'id': 'CC2', 'text': 'prior infarct',
+                                  'support': ['S1']}],
+        })
+        s2 = copy.deepcopy(self.s2)
+        s2['s2']['representations'].append({
+            'id': 'R2', 'problem': 'C2', 'members': ['O4', 'O5'],
+            'support_refs': ['S1'], 'selection_safe': True,
+        })
+        s3 = copy.deepcopy(self.s3)
+        s3['s3']['rendered'].append({
+            'problem': 'C2', 'approved_representation': 'R2',
+            'selected_rep': 'R2',
+        })
+        s3['s3']['candidate_outcomes'].append(
+            {'candidate': 'C2', 'outcome': 'RENDERED'})
+        s3['s3']['retained'] = ['O1', 'O2', 'O4', 'O5']
+        s3['s3']['use'] = {'O1': 'C1', 'O2': 'C1', 'O4': 'C2', 'O5': 'C2'}
+        oracle = copy.deepcopy(self.oracle)
+        oracle['objects']['O4'] = {'text': 'prior infarct', 'provenance': 'A',
+                                   'temporal': '2024-02'}
+        oracle['objects']['O5'] = {'text': 'residual weakness', 'provenance': 'A',
+                                   'temporal': '2024-02'}
+        deps = {'S1_SYN': s1, 'S2_SYN': s2, 'S3_SYN': s3}
+        built = projection.build_expected_view(
+            deps, oracle, self.rules['projection_map'])
+        self.assertEqual([p['problem'] for p in built['from_s1']['problems']],
+                         ['C1', 'C2'])
+        self.assertEqual(built['from_s3']['selected_reps'],
+                         {'C1': 'R1', 'C2': 'R2'})
+        self.assertEqual([s['problem'] for s in built['from_s2']['selections']],
+                         ['C1', 'C2'])
+
+        s4 = copy.deepcopy(self.s4)
+        s4['s4_input_view'] = built
+        s4['s4']['problems'].append({'id': 'P2', 'source': 'C2', 'order': 2})
+        s4['s4']['units'].append({
+            'id': 'U3', 'problem': 'P2', 'representation': 'R2',
+            'members': ['O4', 'O5'], 'operator': 'FACT', 'order': 30,
+            'roles': {'O4': 'HEAD', 'O5': 'MODIFIER'},
+        })
+        result = score(s4, deps, oracle, self.rules)
+        for pid in ('S4-INC-01', 'S4-MEM-01', 'S4-COMP-01',
+                    'S4-REP-01', 'S4-PROJ-01'):
+            self.assertEqual(find(result, pid)['status'], SILENT, pid)
+
 
 
 if __name__ == '__main__':

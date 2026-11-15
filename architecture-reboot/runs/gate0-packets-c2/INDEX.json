@@ -1,0 +1,188 @@
+{
+  "campaign": "GATE0-C2",
+  "campaign_verdict": "INCOMPLETE",
+  "evaluator_count": 0,
+  "mode": "packets",
+  "packets": [
+    {
+      "artifact": "PARENT-S1_PARENT.json",
+      "expected_reference": "SILENT",
+      "kind": "clean",
+      "packet_id": "pkt-6b9b268bb32bce703f0e3926",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "predicate_id": "S1-CAND-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "PARENT-S2_PARENT.json",
+      "expected_reference": "SILENT",
+      "kind": "clean",
+      "packet_id": "pkt-ee3539a55fb7ebb415f1606c",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-ADOPT-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "PARENT-S2_PARENT.json",
+      "expected_reference": "SILENT",
+      "kind": "clean",
+      "packet_id": "pkt-228ca942cb5c1bfd995b4ee7",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-REP-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S1-01.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-1f944ac2b3d79d1b182cb92e",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "predicate_id": "S1-CAND-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S1-02.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-bcdabc8aac3e7f9a19eff713",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "predicate_id": "S1-CAND-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S1-04.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-20dde3bf4ff348c80002dc2b",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "predicate_id": "S1-CAND-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S1-05.json",
+      "expected_reference": "FIRED",
+      "kind": "seed",
+      "packet_id": "pkt-48eae69089c80e9c52cbd72d",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "predicate_id": "S1-CAND-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S1-06.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-0746d6c306171bafdc73694f",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "predicate_id": "S1-CAND-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S2-01.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-3c5d39014637d286b3afed86",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-ADOPT-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S2-01.json",
+      "expected_reference": "FIRED",
+      "kind": "seed",
+      "packet_id": "pkt-d871e4c6d7e1ca897c133c39",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-REP-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S2-02.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-7ef4ae977f6b9f0bef90dee6",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-ADOPT-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S2-02.json",
+      "expected_reference": "FIRED",
+      "kind": "seed",
+      "packet_id": "pkt-3c46bb83894cdbc5c06cacba",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-REP-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S2-03.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-cf75782ba71b30d4a518d5e0",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-ADOPT-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S2-03.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-cf60d20bbc04e461e5555326",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-REP-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S2-06.json",
+      "expected_reference": "FIRED",
+      "kind": "seed",
+      "packet_id": "pkt-b09b26c7ff4d52e275cdb321",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-ADOPT-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    },
+    {
+      "artifact": "G0-S2-06.json",
+      "expected_reference": "SILENT",
+      "kind": "seed",
+      "packet_id": "pkt-0e4b09cad044a2f67889b0de",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "predicate_id": "S2-REP-01",
+      "scorer_detail": "SIGNER_REFERENCE_MISSING",
+      "scorer_status": "UNDECIDABLE"
+    }
+  ],
+  "reference_count": 0,
+  "review_policy": "REVIEW-POLICY-F-1",
+  "run_id": "20261115T120629Z-2d6284b7",
+  "semantic_packets": 16
+}

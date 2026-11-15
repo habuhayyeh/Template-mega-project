@@ -1,0 +1,164 @@
+{
+  "dependency_context": {},
+  "judgment_schema": {
+    "evaluators": "two independent LLM / EVALUATOR judgments, different model families and sessions",
+    "judge_types": [
+      "HUMAN",
+      "LLM"
+    ],
+    "policy_version": "REVIEW-POLICY-F-1",
+    "reference": "one HUMAN / REFERENCE judgment with authority SIGNER_CLINICIAN",
+    "reference_authority": "SIGNER_CLINICIAN",
+    "required": [
+      "packet_id",
+      "predicate_id",
+      "judge_id",
+      "judge_type",
+      "role",
+      "verdict",
+      "rationale",
+      "policy_version"
+    ],
+    "roles": [
+      "REFERENCE",
+      "EVALUATOR"
+    ],
+    "verdict_values": [
+      "FIRED",
+      "SILENT",
+      "UNDECIDABLE"
+    ]
+  },
+  "oracle": {
+    "expected": {
+      "candidate_concepts_must_exclude": [
+        "aspirin"
+      ]
+    },
+    "matching": "Concept identity, not literal strings.",
+    "objects": {
+      "O01": {
+        "provenance": "B/2024-02",
+        "span": "S01",
+        "temporal": "2024-02 documented",
+        "text": "known left MCA infarct"
+      },
+      "O02": {
+        "provenance": "B/2024-02",
+        "span": "S01",
+        "temporal": "2024-02",
+        "text": "mild residual right faciobrachial weakness"
+      },
+      "O03": {
+        "provenance": "A/2026-11-14",
+        "span": "S02",
+        "temporal": "June\u2013November",
+        "text": "three falls since June"
+      },
+      "O04": {
+        "provenance": "A/2026-11-14",
+        "span": "S02",
+        "temporal": "now",
+        "text": "no new weakness or speech trouble"
+      },
+      "O05": {
+        "provenance": "A/2026-11-14",
+        "span": "S03",
+        "status": "current",
+        "text": "check vitamin D"
+      },
+      "O06": {
+        "provenance": "A/2026-11-14",
+        "span": "S03",
+        "status": "current",
+        "text": "refer to PT for gait training"
+      },
+      "O07": {
+        "provenance": "A/2026-11-14",
+        "span": "S04",
+        "status": "current",
+        "text": "aspirin 81 daily, unchanged"
+      }
+    },
+    "spans": {
+      "S01": {
+        "source": "B prior neurology 2024-02",
+        "text": "Known left MCA infarct with mild residual right faciobrachial weakness."
+      },
+      "S02": {
+        "source": "A transcript 2026-11-14",
+        "text": "Three falls since June. No new weakness or speech trouble."
+      },
+      "S03": {
+        "source": "A transcript 2026-11-14",
+        "text": "We should check her vitamin D and refer to PT for gait training."
+      },
+      "S04": {
+        "source": "A transcript 2026-11-14",
+        "text": "Aspirin 81 daily, unchanged."
+      }
+    }
+  },
+  "packet_id": "pkt-1f944ac2b3d79d1b182cb92e",
+  "predicate": {
+    "assertion": "every candidate names a neurologic subject for which the encounter poses its own assessment question",
+    "id": "S1-CAND-01",
+    "instructions": "Decide whether every S1 candidate names a neurologic subject for which the encounter poses its own assessment question. Use only the target artifact, the supplied oracle material and the rule. Record FIRED or SILENT.",
+    "mode": "SIGNER_REFERENCE",
+    "owner": "S1"
+  },
+  "target_artifact": {
+    "case": "CASE-01",
+    "parent_id": "S1_CASE01_CLEAN",
+    "parent_type": "S1_OUTPUT",
+    "registry": "PILOT-2",
+    "s1": {
+      "candidates": [
+        {
+          "adopted": true,
+          "anchors": [
+            "S02"
+          ],
+          "claim_candidates": [
+            {
+              "id": "CC1",
+              "support": [
+                "S02"
+              ],
+              "text": "three falls since June"
+            }
+          ],
+          "id": "C1",
+          "salience": {
+            "acuity": "MODERATE",
+            "management_reference_spans": [
+              "S03"
+            ]
+          },
+          "subject": "falls since June"
+        },
+        {
+          "anchors": [
+            "S01"
+          ],
+          "claim_candidates": [
+            {
+              "id": "CC2",
+              "support": [
+                "S01"
+              ],
+              "text": "known left MCA infarct"
+            }
+          ],
+          "id": "C2",
+          "salience": {
+            "acuity": "LOW",
+            "management_reference_spans": []
+          },
+          "subject": "prior left MCA infarct"
+        }
+      ]
+    },
+    "schema": "SCHEMA-3"
+  }
+}

@@ -45,9 +45,29 @@
           "acuity": "LOW",
           "management_reference_spans": []
         },
-        "subject": "old left MCA infarct"
+        "subject": "prior left MCA infarct"
+      },
+      {
+        "anchors": [
+          "S04"
+        ],
+        "claim_candidates": [
+          {
+            "id": "CC3",
+            "support": [
+              "S04"
+            ],
+            "text": "aspirin 81 daily"
+          }
+        ],
+        "id": "C3",
+        "salience": {
+          "acuity": "LOW",
+          "management_reference_spans": []
+        },
+        "subject": "aspirin 81 daily"
       }
     ]
   },
-  "schema": "SCHEMA-2"
+  "schema": "SCHEMA-3"
 }

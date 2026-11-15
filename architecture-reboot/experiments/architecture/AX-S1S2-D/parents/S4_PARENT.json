@@ -3,12 +3,18 @@
   "parent_id": "S4_CASE01_CLEAN",
   "parent_type": "S4_BLUEPRINT",
   "registry": "PILOT-2",
+  "schema": "SCHEMA-3",
   "s4": {
     "problems": [
       {
         "id": "P1",
-        "order": 1,
-        "source": "C1"
+        "source": "C1",
+        "order": 1
+      },
+      {
+        "id": "P2",
+        "source": "C2",
+        "order": 2
       }
     ],
     "sections": [
@@ -17,46 +23,60 @@
     "units": [
       {
         "id": "U1",
+        "problem": "P1",
+        "representation": "R1",
         "members": [
           "O03",
           "O04"
         ],
-        "operator": "FACT",
-        "order": 10,
-        "problem": "P1",
-        "representation": "R1",
         "roles": {
           "O03": "HEAD",
           "O04": "MODIFIER"
-        }
+        },
+        "operator": "FACT",
+        "order": 10
       },
       {
         "id": "U2",
+        "problem": "P1",
+        "representation": "R1",
         "members": [
           "O05"
         ],
-        "operator": "PLAN",
-        "order": 20,
-        "problem": "P1",
-        "representation": "R1",
         "roles": {
           "O05": "HEAD"
-        }
+        },
+        "operator": "PLAN",
+        "order": 20
       },
       {
         "id": "U3",
+        "problem": "P1",
+        "representation": "R1",
         "members": [
           "O06"
         ],
-        "operator": "PLAN",
-        "order": 30,
-        "problem": "P1",
-        "representation": "R1",
         "roles": {
           "O06": "HEAD"
-        }
+        },
+        "operator": "PLAN",
+        "order": 30
+      },
+      {
+        "id": "U4",
+        "problem": "P2",
+        "representation": "R2",
+        "members": [
+          "O01",
+          "O02"
+        ],
+        "roles": {
+          "O01": "HEAD",
+          "O02": "MODIFIER"
+        },
+        "operator": "FACT",
+        "order": 40
       }
     ]
-  },
-  "schema": "SCHEMA-2"
+  }
 }

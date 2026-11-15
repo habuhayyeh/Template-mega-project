@@ -53,11 +53,11 @@ GOVERNING_PATHS = {
     'oracle.json': ORACLE,
 }
 EXPECTED_IDENTITIES = {
-    'campaign': 'GATE0-C1',
+    'campaign': 'GATE0-C2',
     'registry': 'PILOT-2',
     'active_set': 'ACTIVE-PILOT-2',
-    'schema': 'SCHEMA-2',
-    'oracle': 'ORACLE-2.0',
+    'schema': 'SCHEMA-3',
+    'oracle': 'ORACLE-3.0',
     'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
 }
 REVIEW_POLICY = 'REVIEW-POLICY-F-1'

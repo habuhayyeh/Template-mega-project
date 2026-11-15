@@ -8,17 +8,13 @@
       {
         "candidate": "C1",
         "outcome": "RENDERED"
+      },
+      {
+        "candidate": "C2",
+        "outcome": "RENDERED"
       }
     ],
     "dispositions": [
-      {
-        "disposition": "HISTORICAL_CONTEXT",
-        "object": "O01"
-      },
-      {
-        "disposition": "HISTORICAL_CONTEXT",
-        "object": "O02"
-      },
       {
         "disposition": "MEDICATION_RECORD",
         "object": "O07"
@@ -29,9 +25,16 @@
         "approved_representation": null,
         "problem": "C1",
         "selected_rep": "R1"
+      },
+      {
+        "approved_representation": "R2",
+        "problem": "C2",
+        "selected_rep": "R2"
       }
     ],
     "retained": [
+      "O01",
+      "O02",
       "O03",
       "O04",
       "O05",
@@ -39,11 +42,13 @@
     ],
     "reuse": [],
     "use": {
+      "O01": "C2",
+      "O02": "C2",
       "O03": "C1",
       "O04": "C1",
       "O05": "C1",
       "O06": "C1"
     }
   },
-  "schema": "SCHEMA-2"
+  "schema": "SCHEMA-3"
 }

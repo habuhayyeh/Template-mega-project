@@ -1,77 +1,9 @@
 {
   "case": "CASE-01",
-  "expected": {
-    "adoption": {
-      "O01": false,
-      "O03": true
-    },
-    "candidate_concepts_must_exclude": [
-      "infarct"
-    ],
-    "candidate_outcomes": {
-      "C1": "RENDERED"
-    },
-    "plan_items_requiring_units": [
-      "O05",
-      "O06"
-    ],
-    "rendered_problems": 1,
-    "s4_input_view_groups": [
-      "from_s1",
-      "from_s3",
-      "from_s2",
-      "from_ingest",
-      "from_contracts"
-    ]
-  },
-  "matching": "Concept identity, not literal strings.",
-  "objects": {
-    "O01": {
-      "provenance": "B/2024-02",
-      "span": "S01",
-      "temporal": "2024-02 documented",
-      "text": "known left MCA infarct"
-    },
-    "O02": {
-      "provenance": "B/2024-02",
-      "span": "S01",
-      "temporal": "2024-02",
-      "text": "mild residual right faciobrachial weakness"
-    },
-    "O03": {
-      "provenance": "A/2026-11-14",
-      "span": "S02",
-      "temporal": "June\u2013November",
-      "text": "three falls since June"
-    },
-    "O04": {
-      "provenance": "A/2026-11-14",
-      "span": "S02",
-      "temporal": "now",
-      "text": "no new weakness or speech trouble"
-    },
-    "O05": {
-      "provenance": "A/2026-11-14",
-      "span": "S03",
-      "status": "current",
-      "text": "check vitamin D"
-    },
-    "O06": {
-      "provenance": "A/2026-11-14",
-      "span": "S03",
-      "status": "current",
-      "text": "refer to PT for gait training"
-    },
-    "O07": {
-      "provenance": "A/2026-11-14",
-      "span": "S04",
-      "status": "current",
-      "text": "aspirin 81 daily, unchanged"
-    }
-  },
-  "oracle": "ORACLE-2.0",
+  "oracle": "ORACLE-3.0",
   "registry": "PILOT-2",
-  "schema": "SCHEMA-2",
+  "schema": "SCHEMA-3",
+  "matching": "Concept identity, not literal strings.",
   "source_of_truth": "Temporal and text values copied verbatim from FROZEN-SUBSTRATES.md.",
   "spans": {
     "S01": {
@@ -90,5 +22,75 @@
       "source": "A transcript 2026-11-14",
       "text": "Aspirin 81 daily, unchanged."
     }
+  },
+  "objects": {
+    "O01": {
+      "text": "known left MCA infarct",
+      "provenance": "B/2024-02",
+      "span": "S01",
+      "temporal": "2024-02 documented"
+    },
+    "O02": {
+      "text": "mild residual right faciobrachial weakness",
+      "provenance": "B/2024-02",
+      "span": "S01",
+      "temporal": "2024-02"
+    },
+    "O03": {
+      "text": "three falls since June",
+      "provenance": "A/2026-11-14",
+      "span": "S02",
+      "temporal": "June–November"
+    },
+    "O04": {
+      "text": "no new weakness or speech trouble",
+      "provenance": "A/2026-11-14",
+      "span": "S02",
+      "temporal": "now"
+    },
+    "O05": {
+      "text": "check vitamin D",
+      "provenance": "A/2026-11-14",
+      "span": "S03",
+      "status": "current"
+    },
+    "O06": {
+      "text": "refer to PT for gait training",
+      "provenance": "A/2026-11-14",
+      "span": "S03",
+      "status": "current"
+    },
+    "O07": {
+      "text": "aspirin 81 daily, unchanged",
+      "provenance": "A/2026-11-14",
+      "span": "S04",
+      "status": "current"
+    }
+  },
+  "expected": {
+    "candidate_concepts_must_exclude": [
+      "aspirin"
+    ],
+    "candidate_outcomes": {
+      "C1": "RENDERED",
+      "C2": "RENDERED"
+    },
+    "adoption": {
+      "O01": false,
+      "O02": false,
+      "O03": true
+    },
+    "rendered_problems": 2,
+    "plan_items_requiring_units": [
+      "O05",
+      "O06"
+    ],
+    "s4_input_view_groups": [
+      "from_s1",
+      "from_s3",
+      "from_s2",
+      "from_ingest",
+      "from_contracts"
+    ]
   }
 }

@@ -1,6 +1,6 @@
 # AX-S1S2-D — experiment-local typed test schema
 
-**Identities:** schema `SCHEMA-2` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · oracle `ORACLE-2.0`
+**Identities:** schema `SCHEMA-3` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · oracle `ORACLE-3.0`
 **Scope:** post-DC-002 only. No legacy fields, no dual schema.
 
 ---
@@ -18,6 +18,12 @@ candidates:
     claim_candidates:
       - { id: CC1, text: "three falls since June", support: [S02] }
     relationships: []                        # optional, canonical candidate-level only
+  - id: C2
+    subject: "prior left MCA infarct"
+    anchors: [S01]
+    salience: { acuity: LOW, management_reference_spans: [] }
+    claim_candidates:
+      - { id: CC2, text: "known left MCA infarct", support: [S01] }
 ```
 
 Forbidden fields are a closed set defined only in `predicates.md`: adoption and final-state fields
@@ -42,6 +48,11 @@ representations:
     members: [O03, O04]
     support_refs: [S02]
     selection_safe: true
+  - id: R2
+    problem: C2
+    members: [O01, O02]
+    support_refs: [S01]
+    selection_safe: true
 ```
 
 `representations[]` is the approved set. `selection_safe` describes whether an entry may coexist with
@@ -58,14 +69,15 @@ refs are necessary but not sufficient. `S2-REP-01` assesses that semantic suppor
 ```yaml
 rendered:
   - { problem: C1, approved_representation: R1, selected_rep: R1 }
+  - { problem: C2, approved_representation: R2, selected_rep: R2 }
 candidate_outcomes:                   # exactly one per S1 problem candidate
   - { candidate: C1, outcome: RENDERED }
-  - { candidate: C2, outcome: NOT_RENDERED, reason: NO_APPROVED_REPRESENTATION, basis: [O01, O02] }
-retained: [O03, O04, O05, O06]
-use: { O03: C1, O04: C1, O05: C1, O06: C1 }
+  - { candidate: C2, outcome: RENDERED }
+retained: [O01, O02, O03, O04, O05, O06]
+use: { O01: C2, O02: C2, O03: C1, O04: C1, O05: C1, O06: C1 }
 reuse: []                             # [{object: O04, problems: [C1, C7]}] when reused
 dispositions:
-  - { object: O01, disposition: HISTORICAL_CONTEXT }
+  - { object: O07, disposition: MEDICATION_RECORD }
 ```
 
 `NOT_RENDERED` requires a typed `reason` from `REASON-1` below. A null or absent reason is a missing
@@ -84,7 +96,7 @@ audit named in `predicates.md`.
 ```json
 {
   "registry": "REASON-1",
-  "scope": "GATE0-C1, S3-CAND-01 only; experiment-local, not a production taxonomy",
+  "scope": "GATE0-C2, S3-CAND-01 only; experiment-local, not a production taxonomy",
   "outcomes": ["RENDERED", "NOT_RENDERED"],
   "reasons": [
     {
@@ -121,8 +133,8 @@ audit named in `predicates.md`.
 <!-- END:REASON_REGISTRY -->
 
 The clean NOT_RENDERED calibration parent `S3_CASE01_NOT_RENDERED_CLEAN` is the reference valid
-output: one `C1` outcome, `rendered: []`, reason `NO_APPROVED_REPRESENTATION`, basis `[O03, O04]`, and
-otherwise unchanged object accounting. "Clean" means it yields no `S3-CAND-01` finding; it does not
+output: `C1` and `C2` outcomes, `rendered: []`, reason `NO_APPROVED_REPRESENTATION`, bases
+`[O03, O04]` and `[O01, O02]`, and otherwise unchanged object accounting. "Clean" means it yields no `S3-CAND-01` finding; it does not
 assert that C1 should clinically fail to render. Semantic correctness of the reason is the separate
 audit named in `predicates.md`, not a Gate 0 structural check.
 
@@ -137,64 +149,65 @@ Each `op` also has a frozen contract in `make_seeds.py::OP_CONTRACTS`. The build
 rule field — destination, owner, source, source path, condition, requirement and transform — exactly
 against that contract and fails on any mismatch. The map and code cannot drift on declared metadata.
 
-**Gate 0 shape:** exactly one rendered problem. The frozen shape is singular; a case with zero or more
-than one rendered problem needs a new schema identity, not an improvised shape. `P`, `R`, `M`, and `T`
-below are the only selection variables.
+**Gate 0 shape:** one or more rendered problems. `SCHEMA-3` makes the S4 view multi-problem: it carries
+all rendered problems, their S1 salience, their S3 selected representations and their S2 approved
+selections. A problem with no rendered entry is not in this view; it is an S3 outcome, not an S4 input.
+`P` and `R` are per-rendered-problem variables.
 
-- `P` = `S3_PARENT.s3.rendered[0].problem`
-- `R` = `S3_PARENT.s3.rendered[0].selected_rep`
-- `M` = `S2_PARENT.s2.representations[id=R].members`
+- `P` = `S3_PARENT.s3.rendered[i].problem`
+- `R` = `S3_PARENT.s3.rendered[i].selected_rep`
 - `T` = `S3_PARENT.s3.retained`
 
 <!-- BEGIN:PROJECTION_MAP -->
 ```json
 {
-  "schema": "SCHEMA-2",
+  "schema": "SCHEMA-3",
   "view": "S4_INPUT_VIEW",
-  "scope": "GATE0-C1: exactly one rendered problem. If S3.rendered has zero or more than one entry, generation fails.",
+  "scope": "GATE0-C2: one or more rendered problems. Each rendered problem must have one S1 candidate, one S2 approved representation and one S3 selected representation.",
   "variables": {
-    "P": "S3_PARENT.s3.rendered[0].problem",
-    "R": "S3_PARENT.s3.rendered[0].selected_rep",
-    "M": "S2_PARENT.s2.representations[id=R].members",
-    "T": "S3_PARENT.s3.retained"
+    "P": "S3_PARENT.s3.rendered[i].problem",
+    "R": "S3_PARENT.s3.rendered[i].selected_rep"
   },
-  "groups": ["from_s1", "from_s3", "from_s2", "from_ingest", "from_contracts"],
+  "groups": [
+    "from_s1",
+    "from_s3",
+    "from_s2",
+    "from_ingest",
+    "from_contracts"
+  ],
   "contracts": {
     "section": "AP",
-    "sections": ["AP"],
+    "sections": [
+      "AP"
+    ],
     "operator_set": "PILOT-OPERATORS-1",
-    "operators": ["FACT", "REASONING", "CLAIM", "PLAN"]
+    "operators": [
+      "FACT",
+      "REASONING",
+      "CLAIM",
+      "PLAN"
+    ]
   },
   "rules": [
     {
-      "dst": "/from_s1/problem",
-      "op": "s1_problem",
+      "dst": "/from_s1/problems",
+      "op": "s1_problems",
       "owner": "S1",
       "source": "S1_PARENT.json",
-      "source_path": "/s1/candidates[id=P]/id",
-      "condition": "P is the unique rendered problem",
+      "source_path": "/s1/candidates[id in rendered]/{id,salience}",
+      "condition": "one entry per rendered problem, S3 order",
       "required": "required",
-      "transform": "copy id"
+      "transform": "collect objects"
     },
     {
-      "dst": "/from_s1/salience",
-      "op": "s1_salience",
-      "owner": "S1",
-      "source": "S1_PARENT.json",
-      "source_path": "/s1/candidates[id=P]/salience",
-      "condition": "same candidate as /from_s1/problem",
-      "required": "required",
-      "transform": "copy object"
-    },
-    {
-      "dst": "/from_s3/selected_rep",
-      "op": "s3_selected_rep",
+      "dst": "/from_s3/selected_reps",
+      "op": "s3_selected_reps",
       "owner": "S3",
       "source": "S3_PARENT.json",
-      "source_path": "/s3/rendered[problem=P]/selected_rep",
-      "condition": "exactly one rendered entry for P",
+      "source_path": "/s3/rendered[i]/{problem,selected_rep}",
+      "condition": "all i, source order",
       "required": "required",
-      "transform": "copy id"
+      "transform": "collect problem->rep map"
     },
     {
       "dst": "/from_s3/rendered",
@@ -237,44 +250,14 @@ below are the only selection variables.
       "transform": "copy list"
     },
     {
-      "dst": "/from_s2/members",
-      "op": "s2_members",
+      "dst": "/from_s2/selections",
+      "op": "s2_selections",
       "owner": "S2",
       "source": "S2_PARENT.json",
-      "source_path": "/s2/representations[id=R]/members[i]",
-      "condition": "R is from_s3.selected_rep; all i, source order",
+      "source_path": "/s2/representations[id=R]/members + /s2/relations + /s2/claim_relations + /s2/duplicate_groups",
+      "condition": "one per rendered problem; R = selected_reps[P]; relations filtered to members; claim relations filtered P/R; duplicate groups intersect members",
       "required": "required",
-      "transform": "copy ids"
-    },
-    {
-      "dst": "/from_s2/relations",
-      "op": "s2_relations",
-      "owner": "S2",
-      "source": "S2_PARENT.json",
-      "source_path": "/s2/relations[i]",
-      "condition": "from in M and to in M; source order",
-      "required": "required",
-      "transform": "filter and copy"
-    },
-    {
-      "dst": "/from_s2/claim_relations",
-      "op": "s2_claim_relations",
-      "owner": "S2",
-      "source": "S2_PARENT.json",
-      "source_path": "/s2/claim_relations[i]",
-      "condition": "problem == P and representation == R; source order",
-      "required": "required",
-      "transform": "filter and copy"
-    },
-    {
-      "dst": "/from_s2/duplicate_groups",
-      "op": "s2_duplicate_groups",
-      "owner": "S2",
-      "source": "S2_PARENT.json",
-      "source_path": "/s2/duplicate_groups[i]",
-      "condition": "set(group) intersects M; source order",
-      "required": "required",
-      "transform": "filter and copy"
+      "transform": "collect objects"
     },
     {
       "dst": "/from_ingest",
@@ -296,7 +279,7 @@ below are the only selection variables.
       "dst": "/from_contracts/section",
       "op": "contract_section",
       "owner": "frozen contracts",
-      "source": "SCHEMA-2 contracts block",
+      "source": "SCHEMA-3 contracts block",
       "source_path": "#/contracts/section",
       "condition": "always",
       "required": "required",
@@ -306,7 +289,7 @@ below are the only selection variables.
       "dst": "/from_contracts/operator_set",
       "op": "contract_operator_set",
       "owner": "frozen contracts",
-      "source": "SCHEMA-2 contracts block",
+      "source": "SCHEMA-3 contracts block",
       "source_path": "#/contracts/operator_set",
       "condition": "always",
       "required": "required",
@@ -319,9 +302,8 @@ below are the only selection variables.
 
 `from_contracts` is deliberately narrow for Gate 0: section `AP` and operator set
 `PILOT-OPERATORS-1 = {FACT, REASONING, CLAIM, PLAN}`. No style contract is projected because this
-campaign freezes none.
-No ordering contract is projected because `S4-ORD-01` is `PENDING_DEPENDENCY`. `PILOT-2` is the
-predicate registry identity and is not used as an operator contract.
+campaign freezes none. No ordering contract is projected because `S4-ORD-01` is `PENDING_DEPENDENCY`.
+`PILOT-2` is the predicate registry identity and is not used as an operator contract.
 
 Any key outside the five mapped groups is a packaging violation. Any value that does not match its
 mapped source path is a packaging violation. Ordering is absent from S4's input view.
@@ -332,6 +314,7 @@ mapped source path is a packaging violation. Ordering is absent from S4's input 
 sections: [AP]
 problems:
   - { id: P1, source: C1, order: 1 }
+  - { id: P2, source: C2, order: 2 }
 units:
   - id: U1
     problem: P1
@@ -340,6 +323,27 @@ units:
     roles: { O03: HEAD, O04: MODIFIER }
     operator: FACT
     order: 10
+  - id: U2
+    problem: P1
+    representation: R1
+    members: [O05]
+    roles: { O05: HEAD }
+    operator: PLAN
+    order: 20
+  - id: U3
+    problem: P1
+    representation: R1
+    members: [O06]
+    roles: { O06: HEAD }
+    operator: PLAN
+    order: 30
+  - id: U4
+    problem: P2
+    representation: R2
+    members: [O01, O02]
+    roles: { O01: HEAD, O02: MODIFIER }
+    operator: FACT
+    order: 40
 ```
 
 ## Field → predicate map
@@ -360,5 +364,5 @@ units:
 | `S4-INC-01` | `problems[]` vs S3 rendered set |
 | `S4-MEM-01` | `units[*].members` subset of `retained` |
 | `S4-COMP-01` | every problem in S4 ∩ S3 has a claim-bearing unit; every retained plan item has a plan unit |
-| `S4-REP-01` | `units[*].representation` = S3 `selected_rep` |
+| `S4-REP-01` | `units[*].representation` = `selected_reps[unit.problem→source]` |
 | `S4-PROJ-01` | `s4_input_view` against the exact PROJECTION_MAP above |

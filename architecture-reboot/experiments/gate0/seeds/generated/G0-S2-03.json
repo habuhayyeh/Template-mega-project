@@ -12,6 +12,12 @@
         "temporal": "now"
       },
       {
+        "adoption": false,
+        "evidence": null,
+        "object": "O02",
+        "temporal": "2024-02"
+      },
+      {
         "adoption": true,
         "evidence": [
           "S02"
@@ -27,6 +33,11 @@
         "from": "O04",
         "to": "O03",
         "type": "SUPPORTS"
+      },
+      {
+        "from": "O02",
+        "to": "O01",
+        "type": "SUPPORTS"
       }
     ],
     "representations": [
@@ -41,8 +52,20 @@
         "support_refs": [
           "S02"
         ]
+      },
+      {
+        "id": "R2",
+        "members": [
+          "O01",
+          "O02"
+        ],
+        "problem": "C2",
+        "selection_safe": true,
+        "support_refs": [
+          "S01"
+        ]
       }
     ]
   },
-  "schema": "SCHEMA-2"
+  "schema": "SCHEMA-3"
 }

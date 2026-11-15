@@ -474,28 +474,27 @@ def _s4_rep_01(target, dependencies, oracle, rules):
     if view is None or not isinstance(units, list) or not isinstance(problems, list):
         return _undecidable(pid, "S4 view/units/problems missing")
     rendered = view.get("from_s3", {}).get("rendered")
-    selected = view.get("from_s3", {}).get("selected_rep")
-    if not isinstance(rendered, list) or len(rendered) != 1:
-        return _undecidable(pid, "S4_INPUT_VIEW shape is not one rendered problem")
-    source_to_problem = {
-        p.get("source"): p.get("id") for p in problems if isinstance(p, dict)
+    selected_reps = view.get("from_s3", {}).get("selected_reps")
+    if not isinstance(rendered, list) or not isinstance(selected_reps, dict):
+        return _undecidable(pid, "from_s3 rendered/selected_reps missing")
+    source_by_problem = {
+        p.get("id"): p.get("source") for p in problems if isinstance(p, dict)
     }
-    source = rendered[0]
-    problem_id = source_to_problem.get(source)
-    if problem_id is None:
-        # Missing problem membership is S4-INC-01's finding; there is no
-        # in-domain unit to compare for representation equality.
-        return _silent(pid, "no in-domain problem; inclusion is scored by S4-INC-01")
     for i, unit in enumerate(units):
         if not isinstance(unit, dict):
             return _undecidable(pid, "unit %d is not an object" % i)
-        if unit.get("problem") != problem_id:
+        source = source_by_problem.get(unit.get("problem"))
+        if source is None or source not in rendered:
+            # Missing problem membership is S4-INC-01's finding.
             continue
+        selected = selected_reps.get(source)
+        if selected is None:
+            return _undecidable(pid, "from_s3.selected_reps lacks %s" % source)
         if unit.get("representation") != selected:
             return _fired(
                 pid, "/s4/units/%d/representation" % i, selected,
                 unit.get("representation"),
-                "unit representation differs from S3 selected_rep",
+                "unit representation differs from selected_reps for %s" % source,
             )
     return _silent(pid)
 

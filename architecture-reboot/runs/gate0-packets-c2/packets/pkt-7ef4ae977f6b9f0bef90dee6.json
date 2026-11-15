@@ -1,0 +1,184 @@
+{
+  "dependency_context": {},
+  "judgment_schema": {
+    "evaluators": "two independent LLM / EVALUATOR judgments, different model families and sessions",
+    "judge_types": [
+      "HUMAN",
+      "LLM"
+    ],
+    "policy_version": "REVIEW-POLICY-F-1",
+    "reference": "one HUMAN / REFERENCE judgment with authority SIGNER_CLINICIAN",
+    "reference_authority": "SIGNER_CLINICIAN",
+    "required": [
+      "packet_id",
+      "predicate_id",
+      "judge_id",
+      "judge_type",
+      "role",
+      "verdict",
+      "rationale",
+      "policy_version"
+    ],
+    "roles": [
+      "REFERENCE",
+      "EVALUATOR"
+    ],
+    "verdict_values": [
+      "FIRED",
+      "SILENT",
+      "UNDECIDABLE"
+    ]
+  },
+  "oracle": {
+    "expected": {
+      "adoption": {
+        "O01": false,
+        "O02": false,
+        "O03": true
+      }
+    },
+    "matching": "Concept identity, not literal strings.",
+    "objects": {
+      "O01": {
+        "provenance": "B/2024-02",
+        "span": "S01",
+        "temporal": "2024-02 documented",
+        "text": "known left MCA infarct"
+      },
+      "O02": {
+        "provenance": "B/2024-02",
+        "span": "S01",
+        "temporal": "2024-02",
+        "text": "mild residual right faciobrachial weakness"
+      },
+      "O03": {
+        "provenance": "A/2026-11-14",
+        "span": "S02",
+        "temporal": "June\u2013November",
+        "text": "three falls since June"
+      },
+      "O04": {
+        "provenance": "A/2026-11-14",
+        "span": "S02",
+        "temporal": "now",
+        "text": "no new weakness or speech trouble"
+      },
+      "O05": {
+        "provenance": "A/2026-11-14",
+        "span": "S03",
+        "status": "current",
+        "text": "check vitamin D"
+      },
+      "O06": {
+        "provenance": "A/2026-11-14",
+        "span": "S03",
+        "status": "current",
+        "text": "refer to PT for gait training"
+      },
+      "O07": {
+        "provenance": "A/2026-11-14",
+        "span": "S04",
+        "status": "current",
+        "text": "aspirin 81 daily, unchanged"
+      }
+    },
+    "spans": {
+      "S01": {
+        "source": "B prior neurology 2024-02",
+        "text": "Known left MCA infarct with mild residual right faciobrachial weakness."
+      },
+      "S02": {
+        "source": "A transcript 2026-11-14",
+        "text": "Three falls since June. No new weakness or speech trouble."
+      },
+      "S03": {
+        "source": "A transcript 2026-11-14",
+        "text": "We should check her vitamin D and refer to PT for gait training."
+      },
+      "S04": {
+        "source": "A transcript 2026-11-14",
+        "text": "Aspirin 81 daily, unchanged."
+      }
+    }
+  },
+  "packet_id": "pkt-7ef4ae977f6b9f0bef90dee6",
+  "predicate": {
+    "assertion": "for objects the oracle names in expected.adoption, the verdict matches",
+    "id": "S2-ADOPT-01",
+    "instructions": "Compare S2 adoption verdicts with the oracle expected.adoption entries. Objects not named in the oracle are not scored. Record FIRED or SILENT.",
+    "mode": "SIGNER_REFERENCE",
+    "owner": "S2"
+  },
+  "target_artifact": {
+    "case": "CASE-01",
+    "parent_id": "S2_CASE01_CLEAN",
+    "parent_type": "S2_OUTPUT",
+    "registry": "PILOT-2",
+    "s2": {
+      "adjudication": [
+        {
+          "adoption": false,
+          "evidence": null,
+          "object": "O01",
+          "temporal": "2024-02 documented"
+        },
+        {
+          "adoption": false,
+          "evidence": null,
+          "object": "O02",
+          "temporal": "2024-02"
+        },
+        {
+          "adoption": true,
+          "evidence": [
+            "S02"
+          ],
+          "object": "O03",
+          "temporal": "June\u2013November"
+        }
+      ],
+      "claim_relations": [],
+      "duplicate_groups": [],
+      "relations": [
+        {
+          "from": "O04",
+          "to": "O03",
+          "type": "SUPPORTS"
+        },
+        {
+          "from": "O02",
+          "to": "O01",
+          "type": "SUPPORTS"
+        }
+      ],
+      "representations": [
+        {
+          "id": "R1",
+          "members": [
+            "O03",
+            "O04",
+            "O07"
+          ],
+          "problem": "C1",
+          "selection_safe": true,
+          "support_refs": [
+            "S02"
+          ]
+        },
+        {
+          "id": "R2",
+          "members": [
+            "O01",
+            "O02"
+          ],
+          "problem": "C2",
+          "selection_safe": true,
+          "support_refs": [
+            "S01"
+          ]
+        }
+      ]
+    },
+    "schema": "SCHEMA-3"
+  }
+}

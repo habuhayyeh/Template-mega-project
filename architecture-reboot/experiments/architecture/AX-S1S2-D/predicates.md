@@ -20,7 +20,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S1-AUTH-02` | MECHANICAL | S1 | no candidate carries a **selected/final-claim** field: `{selected_claim, final_claim, chosen_claim}`; claims appear as candidates only. Owns this field family exclusively | all |
 | `S1-BODY-01` | SEMANTIC | S1 | a subject that only contextualises another problem does not become a candidate | 07,08,10 |
 
-`S1-CAND-01` is the one predicate here that is genuinely judgemental. It is also the one that carries the candidacy rule, so it must not be softened into a vocabulary check.
+`S1-CAND-01` is the one predicate here that is genuinely judgemental. It is also the one that carries the candidacy rule, so it must not be softened into a vocabulary check. Under D-023, a major established primary neurologic diagnosis is a valid candidate even when inactive; the seed violation is a medication-only candidate, not the infarct.
 
 ## S2 family
 
@@ -61,7 +61,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 
 | case | must be true | must be false |
 |---|---|---|
-| `CASE-01` | infarct **not** adopted and **not rendered as an A/P problem**; it may appear only as attributed body/history context if S3 selects it; the medication line does **not** create an infarct claim | adoption of the infarct, in any form, including a rendered A/P problem for it |
+| `CASE-01` | infarct is **not currently adopted**, but it is retained as a **condensed A/P problem** because it is a major established primary neurologic diagnosis; the medication line does **not** create an infarct claim | adoption inferred from the medication line or convention, or failure to retain the established infarct problem |
 | `CASE-02` | infarct adopted on the explicit statement; claim representation carries attribution | adoption from anything other than the statement |
 | `CASE-09` | infarct adopted on the explicit secondary-prevention linkage in `O02`; the plan line names the infarct as its indication | adoption inferred from drug class alone |
 
