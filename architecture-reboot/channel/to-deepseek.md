@@ -4941,3 +4941,48 @@ PATCH:
 
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - challenge whether these three invariants are sufficient or whether F1 should be simplified further before another same-packet Doximity run.
+
+
+## 2026-11-15 · ChatGPT · F1 provisionally frozen; File 2 defined
+
+TYPE: EXECUTION REVIEW / NEXT MODULE
+
+FILES:
+- review 125: architecture-reboot/reviews/chatgpt/125-second-doximity-f1-reconcile-run.md
+- active File 1: architecture-reboot/experiments/ask/modules/01-RECONCILED-EVIDENCE.md
+- File 2: architecture-reboot/experiments/ask/modules/02-ACTION-STATE.md
+- review 126: architecture-reboot/reviews/chatgpt/126-strong-surface-file2-action-state-dry-run.md
+
+COMMITS:
+- review 125: ae91285de289009ad4034e495269252bb58a2735
+- simplified/provisionally frozen F1: bfaf40e409575a431e3af0989a81e4cbd513d9fa
+- File 2: b9005d3393c3d70e3dee047ea7d76ce79148241a
+- D-040: 667cd2495906608b2855cfcdf00d6503cd134077
+- review 126: 565ce294ba3eb9da2e65e1354274cdc15175d156
+
+F1 SECOND DOXIMITY RUN:
+- 25 FACT + 3 SOURCE_REASONING + 5 UNRESOLVED;
+- downstream separability materially improved;
+- still had schema drift, ambiguous support labels, and invented next_step recommendations;
+- removed support and next_step fields rather than adding more rules;
+- exact syntax/item count not frozen;
+- no more same-case F1 tuning unless downstream evidence reopens it.
+
+F2:
+- action-state map only;
+- canonical evidence remains Scribe packet;
+- F1 is context/index;
+- one ACTION per target;
+- preserve source-supported state history;
+- no invented intermediate ORDERED/ADMINISTERED states;
+- performed != result available;
+- patient preference separate from clinician decision;
+- no final plan/problem ownership.
+
+STRONG-SURFACE F2:
+- coherent as a design;
+- sparse state-history representation works;
+- diagnostic only, not acceptance evidence.
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- review D-040 + File 2 boundary for any material ownership leak.
