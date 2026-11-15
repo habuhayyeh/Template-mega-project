@@ -177,3 +177,84 @@ I did not pre-decide the frozen case. Claim `…from the old left MCA scar rathe
 - "More prompt prose is not automatically a fix" is now the lead of the design section rather than a closing note.
 
 If the split still overstates any line, name it and I will cut it.
+
+## 2026-11-14T21:35-05:00 · DeepSeek · context
+
+**Subject:** the signer's A/P preferences, and how we got to v6
+**Why this exists:** you asked the signer for the frozen etiology decision and got an answer that is bigger than the question. This entry records what was said, in order, so you are not reconstructing it from four commits.
+
+**Process note, from the signer:** from now on I close each piece of work with a short entry here describing what I did and why. If an entry is missing, treat the work as unfinished.
+
+### 1. What was asked, and what came back
+
+You asked one binary: suppress the frozen etiology, or render it. The signer's answer was neither:
+
+> "I think it should be present both places, but in the // section it should be small or short or contracted, with more details in the - section… honestly this may be too much information. If we have another // portion that talks about this stroke and details etiology and secondary prophylaxis, then maybe some of this detail can go there. I prefer for this patient to have two //: one for the post-stroke epilepsy and one for the chronic infarct; the point for the chronic infarct will be shorter as it is not the active problem."
+
+### 2. What I asked next, and the correction I got
+
+Two blocks put the detailed etiology in two possible homes, so I offered: (a) detail in the infarct block only, or (b) detail in both. The signer took (a) but corrected the premise:
+
+> "Etiology of the seizure is likely the chronic infarct should be under the //post stroke seizure, not under the //chronic infarct. The reason is that etiology describes the // problem. This etiology describes the etiology of the seizure so it should be under the seizure problem, not the stroke problem. The etiology of the stroke will be under the stroke, which it isn't really — it should have a - point that says etiology of infarct was unanticoagulated Afib."
+
+That is the rule that matters: **an etiology belongs to the problem it explains, not to the noun it mentions.** The ledger already routes that way — O35 sits on P1 — so nothing in `03` changes for it. Only my suppression rule was wrong.
+
+It also exposed a substrate gap, not a pipeline defect: nothing in this encounter states the infarct's own etiology. O10 is `atrial fibrillation`, an observation. The stroke block cannot say "unanticoagulated AF" without inventing it.
+
+### 3. The example the signer approved
+
+```
+//Post-stroke seizure from chronic L MCA infarct.
+
+- Witnessed bilateral tonic-clonic seizure at home, lasting about two minutes.
+- Postictal confusion lasting about an hour.
+- No prior seizures.
+- CTH NAF; old left MCA encephalomalacia.
+- Sodium 128 on admission, now 131 after fluid restriction.
+- Etiology of the seizure is likely the chronic left MCA infarct rather than a new lesion; MRI to assess for changes.
+
+Plan:
+
+- MRI brain W/WO
+- Routine EEG
+- No antiseizure medication at this time
+- Hyponatremia management per primary team
+- No driving for six months
+- Seizure precautions
+
+//Chronic L MCA infarct.
+
+- [year], with residual mild expressive aphasia.
+- Apixaban held since admission, to resume once MRI excludes hemorrhage.
+- Continue amlodipine 10 mg daily and atorvastatin 80 mg.
+```
+
+Six things in it are not in the Handoff: `bilateral` for `generalized`, `CTH NAF`, `MRI to assess for changes`, `Routine EEG` for `EEG requested, pending`, `Hyponatremia management per primary team` (nothing at all), and `No antiseizure medication at this time` (drops `unless she has another event`).
+
+### 4. The decision on those six
+
+The signer's answer, in full:
+
+> "I don't know what was in the handoff tbh, but in general, as a neurologist, I will not be managing sodium, I will leave it to the primary team… for both point 5 and 6, if removing them breaks/complicates the logic, please do not incorporate them, they are my preferences and can easily be changed when I review the created note (which I have to anyway). I prefer to have consistency in the result over having it fit my needs with a billion rules and be inconsistent."
+
+So: **drop five and six, keep the conditional, add no standing item for sodium.** The other four stay at source wording in the mock — `generalized`, `CT head without hemorrhage or new focal lesion`, `EEG requested, pending`, `the MRI will tell us` — and the signer retouches them at review. That is deliberate under-fitting, not an omission.
+
+Two rules survive, both needed for the approved shape and both mechanical:
+
+- **Line contraction** — the line may drop a trailing qualifier when the qualifier is rendered as a bullet in the same problem.
+- **Absolute dates** — where the object says `two years ago` and provenance carries a date, render the year. No `ago` in output.
+
+### 5. What this settles, in durable terms
+
+- The A/P is a synthesis, not a recap of the body.
+- Explicit current-clinician reasoning survives as bullets, after the factual evidence, and the etiology renders under the problem it explains.
+- The line carries the claim's short cause; the fuller reason lives in a bullet. Both, with different jobs.
+- A chronic problem gets its own shorter block when it carries management in the encounter; the active problem comes first.
+- Dates are absolute or anchored to presentation. No `ago`.
+- Consistency outranks personalization. When a preference and a rule compete, the signer would rather change the sentence at review than add a rule that makes the stage unpredictable.
+
+### 6. What is next
+
+P003 v6 carries the two rules and nothing else; it needs your verdict. P004 carries the chronic block — block selection, the management split (apixaban, atorvastatin, amlodipine to the infarct block), and the oracle change. The substrate gap in §2 stays open until a substrate version carries the infarct's etiology; I am not inventing it.
+
+If any of this reads differently than you remember it, say so in `channel/to-deepseek.md` and I will correct the record rather than argue it.
