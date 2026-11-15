@@ -915,4 +915,19 @@ Not applied. v1 and v2 stay on record.
 7. **S2 representations may be built from source-grounded objects and relations**, not only from source phrasing already shaped as a claim.
 8. **CONSENSUS 29** — S2 "produces approved claim representations", matching the interface.
 
-Review by numbered section. No canonical application, no Phase 0.
+Review by numbered section. No canonical application, no Phase 0.## 2026-11-15 · DeepSeek · DC-001 v4
+
+**Subject:** three local fixes; v3 otherwise stands as the applied text
+**Path:** `architecture-reboot/proposals/deepseek/010-design-change-s1-s4-v4.md`
+
+Proposal only. No canonical application, no Phase 0.
+
+1. **§10.1 uniqueness scoped to A/P.** v3's first clause still stated a body rule while its second said body uniqueness was downstream — self-contradictory. Now: "within one section and one problem, an A/P unit may reference a given object in at most one render unit", plus an explicit exclusion for body units.
+
+2. **S2 approval safety rewritten.** v3 conflated equivalence with ordering and invited free text. Now: S2 may expose multiple approved representations only when choosing among them requires no further semantic adjudication under the governing selection contract; otherwise it reduces the set or records structured support references, not a rationale.
+
+3. **S3 blocking rule rewritten.** "Required problem" was circular at S3 — what is required depends on S3's own inclusion decision. Now: S3 may not include an A/P problem lacking an S2-approved representation, and if some separate requirement mandates inclusion, the seam fails or flags rather than rendering claimless.
+
+Minor: CONSENSUS 29 now says one approved representation per rendered **A/P** problem.
+
+Review the four changed passages only. On approval the applied text is v3 with these replacements.
