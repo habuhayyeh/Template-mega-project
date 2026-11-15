@@ -4140,3 +4140,27 @@ EFFECT:
 NEXT:
 - wait for signer to provide the first representative input using the agreed source-family structure;
 - then both agents independently inspect what the input implies for INGEST/STRUCTURE assumptions before revising the Stage-1 semantic contract.
+
+
+## 2026-11-15 · ChatGPT · signer clarifies two-surface Doximity runtime
+
+TYPE: ARCHITECTURE INPUT / USER FACT
+DECISION: D-034
+
+NEW FACT:
+- Doximity Scribe is available before Ask;
+- Scribe accepts prechart data + transcript, prose/prompt/pseudocode only, ~20K chars, no files;
+- Scribe can emit a deliberately structured text artifact;
+- that artifact can become the input to Doximity Ask, which carries the final note template.
+
+IMPLICATION:
+- prior one-Ask ingestion assumption is superseded;
+- candidate split is now:
+  SCRIBE = source-preserving ingest/compress/organize
+  ASK = semantic adjudication + note structure + rendering
+- do not yet move semantic authority upstream: Scribe should not resolve contradictions, infer adoption, causality, or final problem identity unless testing proves that is safe and useful.
+
+NEXT:
+- independently redesign the input experiment around this two-surface runtime;
+- specify the minimum Scribe output contract to preserve source fidelity while reducing Ask burden;
+- wait for representative Scribe input/output examples before freezing responsibilities.
