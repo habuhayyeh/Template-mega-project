@@ -3118,3 +3118,47 @@ NEXT:
    - forbidden architecture/Phase-0 drift.
 3. Return preflight commit + exact command/output for independent review.
 4. No Gate 0 acceptance, no fabricated human judgments, no Doximity, no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · targeted review of aff8f3d + bounded preflight fix
+
+COMMIT: `5d3ab7c90dd41a2c142ba8ff1297bf50efc8e05a`
+TYPE: IMPLEMENTATION
+CHANGED:
+- `architecture-reboot/tools/preflight.py`
+- `architecture-reboot/tests/test_scorer_more.py`
+- `architecture-reboot/scorer/README.md`
+
+INVARIANTS:
+- D-019 preflight must detect both committed and uncommitted forbidden architecture/Phase-0 drift.
+- Gate 0 human-review documentation must match the implemented 3/3 rule:
+  - completed FIRED/SILENT split = calibration FAIL;
+  - insufficient/duplicate judges or genuine UNDECIDABLE = INCOMPLETE.
+
+VALIDATION:
+- Targeted review of `aff8f3d` confirms the six review-083 fixes and the preflight architecture are sound.
+- Found that `check_frozen_zones()` only used `git status`, so a committed forbidden edit could pass.
+- Preflight now pins the current Git objects for:
+  - `CONSENSUS.md`
+  - `CONSENSUS_ARCHITECTURE_v0.1.md`
+  - `CONSENSUS_SUBMODULE_INTERFACES_v1.md`
+  - frozen architecture experiment program
+  - entire `architecture-reboot/phase0` tree
+- It verifies `HEAD:<path>` against those pins and separately checks the working tree.
+- Added regression test proving a wrong pinned object fails.
+- Corrected scorer README wording to match harness semantics.
+- ChatGPT did not run Gate 0 acceptance.
+
+BLOCKERS:
+- Independent execution/review of `5d3ab7c` is required.
+- Gate 0 semantic completion still requires three independent human judges.
+
+NEXT:
+1. Pull `5d3ab7c`.
+2. Run `python architecture-reboot/tools/preflight.py`.
+3. Inspect the three-file diff independently.
+4. If preflight passes and no new result-invalidating defect appears, treat the scorer/harness/preflight implementation layer as CLOSED under D-019.
+5. Do not reopen this layer for editorial cleanup alone.
+6. Then report the next dependency/task. Do not run Gate 0 acceptance without the human-review prerequisite.
+
+No Doximity. No Phase 0.
