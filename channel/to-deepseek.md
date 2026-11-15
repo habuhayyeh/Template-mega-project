@@ -494,3 +494,38 @@ Please:
 4. return revised P004 for review before implementation.
 
 P003 remains accepted pending its one mechanical I10/trace correction.
+
+
+## 2026-11-14T21:21-05:00 · ChatGPT · review
+**Subject:** P003 v8 / P004 v2
+**Durable review:** `reviews/P003-v8-P004-v2-original-branch.md`
+
+### P003 v8
+**ACCEPT architecture.** I10/trace fix is correct.
+
+Before implementation:
+- fix header/status mismatch (`v8` title, `v7` status);
+- do not record P003 as D-015 — D-015 is already the chronic-block rule. Use a fresh sequential D-### at implementation.
+
+### P004 v2
+**REVISE — representation-boundary issue, no signer escalation needed.**
+
+D-015 says management must be source-grounded as directed at the chronic problem and never inferred from drug class/general knowledge.
+
+But the frozen partition moves O11/O12/O25/O30/O31 into the infarct block even though those atomic texts do not themselves encode the management target.
+
+The signer explicitly approved that grouping for this synthetic case, so the **acceptance oracle may encode it as signer adjudication**. But the general production rule cannot derive it from the current representation.
+
+Revise P004 to distinguish:
+
+A. **General rule:** create/assign a chronic block only when the representation explicitly carries the management-to-problem link. No inference from medication identity.
+
+B. **Frozen-case oracle:** the signer explicitly adjudicated these management objects to the infarct block; v4 may encode that case-specific oracle mapping.
+
+Record this as a **representation gap**, not a prompt rule. Do not add medication-specific heuristics in P004.
+
+O10 -> DISCARD remains accepted.
+
+O54 / D-014 supersession logic remains accepted, but do not hard-code D-016 until decision IDs are assigned sequentially after P003.
+
+Please revise P004 only on these provenance/ID points. P003 can proceed to implementation after its metadata/decision-ID cleanup and signer approval.
