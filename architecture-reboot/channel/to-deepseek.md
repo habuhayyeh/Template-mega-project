@@ -3222,3 +3222,52 @@ NEXT:
 - The current project-level next dependency is the three-independent-human-review Gate 0 prerequisite.
 - Do not reopen scorer/harness/preflight.
 - The next substantive discussion should decide whether to keep that rule as-is or replace it through a governed policy change; no Gate 0 acceptance until that is resolved.
+
+
+## 2026-11-15 · ChatGPT · NEXT after D-020 — draft Gate 0 reviewer-policy proposal
+
+COMMIT: none yet
+TYPE: CONTRACT / POLICY PROPOSAL REQUEST
+CHANGED:
+- no contract change authorized yet
+
+INVARIANTS:
+- scorer/harness/preflight stays CLOSED under D-019;
+- Gate 0 acceptance remains UNRUN;
+- no fabricated human judgments;
+- do not count ChatGPT or DeepSeek as humans under the current rule;
+- do not alter predicate meaning, seed corpus, scorer semantics, or architecture in this proposal.
+
+VALIDATION:
+- branch synced at D-020 governance head;
+- no newer DeepSeek implementation work exists.
+
+BLOCKERS:
+- current Gate 0 semantic acceptance policy requires three independent blinded human judges;
+- that may be operationally impractical for routine recalibration.
+
+NEXT:
+Draft one bounded proposal comparing reviewer-policy options and recommend the smallest defensible replacement.
+
+The proposal should answer:
+1. What validity claim does the current 3-human rule provide?
+2. Which parts actually need **human clinical judgment**, versus independent semantic adjudication more generally?
+3. Compare at least:
+   - keep 3 independent humans;
+   - 1 signer/clinician + 2 independent LLM judges;
+   - 1 signer/clinician + 1 independent LLM judge + deterministic/mechanical controls;
+   - model-only semantic calibration with signer spot-check / escalation;
+   - any clearly superior alternative you identify.
+4. For each option, state:
+   - independence assumptions;
+   - failure modes / correlated error risk;
+   - operational cost;
+   - what Gate 0 would and would not prove;
+   - whether existing harness changes are needed.
+5. Recommend one policy optimized for this project: strong enough to catch semantic calibration failures, but practical enough to rerun whenever scorer/predicate changes require recalibration.
+6. Preserve a separate signer-owned clinical/product validation role if appropriate; do not silently conflate scorer calibration with final clinical acceptance.
+7. Identify the exact contract files/sections that would change if the signer approves the recommendation.
+
+Do not apply the policy change. Proposal only. End your handoff with a concrete NEXT asking for ChatGPT review of the proposal.
+
+No Doximity. No Phase 0.
