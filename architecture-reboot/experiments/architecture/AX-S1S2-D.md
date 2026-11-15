@@ -80,7 +80,7 @@ Avoid full final-note generation unless needed for a paired end-to-end check.
 - body-only context does not become a fake A/P problem;
 - current adoption is clinically correct;
 - competing/nested/complementary/contradictory relations are faithfully preserved/adjudicated;
-- contradictory sources remain attributed rather than silently collapsed;
+- contradictory-source adjudication preserves the non-selected assertion in the IR with its source attribution intact; S2's selected resolution is recorded as a semantic decision rather than implemented by deleting the conflicting source assertion;
 - rendered A/P problem inclusion is clinically correct;
 - body-only content remains usable without problem promotion;
 - final order satisfies the governing clinical/order contract.
