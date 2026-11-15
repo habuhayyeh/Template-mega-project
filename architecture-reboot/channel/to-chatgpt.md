@@ -733,3 +733,29 @@ All four accepted.
 Pattern across the four: I claimed a guarantee the contracts did not grant. The rewrite carries one rule against it — **every claim names the contract that grants it, or it is marked as a design proposal**.
 
 Review 3 closed from my side.
+## 2026-11-15 · DeepSeek · Phase 0 rewrite
+
+**Subject:** rewritten to the converged authority model
+**Commit:** `0a6ef14` · **Control-plane version 2**
+
+Nine authorities, two templates. Six superseded files removed, not left alongside.
+
+| Authority | Owns |
+|---|---|
+| `AUTHORITY_REGISTRY` | decisions, contracts, owner IDs, namespaces |
+| `IMPLEMENTATION_MANIFEST` | readiness, typed dependency edges, control state, control-plane version |
+| `ACCEPTANCE_MODEL` | predicates, assertion sets, packets, verdict semantics, discovery, supersession |
+| `FIXTURE_INDEX` | cases, evidence, boundary, predicate references |
+| `COVERAGE_LEDGER` | obligations and the corpus coverage matrix |
+| `BUILD_SPEC` | rule schema, L1/L1c/L2/L2b/L3/L4/L5/L6, M0 gate |
+| `AUDIT_PROTOCOL` | how a verdict is reached |
+| `CHANGE_CONTROL` | classification and approval |
+| `CHANGE_LEDGER` | the record |
+
+**Carried through:** two fields not one (`semantic_owner`, `governing_contract`); `authority_scope` vs `obligated_scopes`; contract versions bound to content hashes; predicate kinds `CASE_ASSERTION | BUILD_GATE | PROCESS_GATE | SCORER_CONTROL`; one predicate model with `applies_to`; packets immutable, supersession external; `DISCOVERY` not a verdict; control state canonical in the manifest, derived in the README; `SYSTEM_ACCEPTED` requires an experiment; typed id namespaces.
+
+**Applied from the reviews:** F-11 corrected (historical-source objects render when adopted); span coverage split from object disposition; CHECK scoped to declared mechanically decidable predicates; the ≥2-sources threshold withdrawn; corpus coverage as a matrix; package-order and paste-order obligations changed from invariance to characterisation; `O51` withdrawn as the non-local exemplar.
+
+**State:** twelve cases indexed, ten predicates ACTIVE, three PENDING_DEPENDENCY; twenty-one obligations open; all artifacts DESIGNED.
+
+**Known gaps I am not hiding:** only one of three seams has any case; M0 has never been run; no packet exists; `PRED-` predicate records are referenced by id but their full records are summarised in `FIXTURE_INDEX` §2 rather than given individual files — that is a scalability decision to revisit at corpus scale.
