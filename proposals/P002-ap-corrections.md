@@ -1,45 +1,120 @@
-# P002 — A/P assembly and rendering corrections
+# P002 v2 — A/P assembly and rendering corrections
 
-**Status:** proposed. Awaiting architectural review.
-**Affects:** `pipeline/04_ASSEMBLE.md`, `pipeline/05_WRITE_AP.md`.
-**Does not affect:** the substrate, either oracle, `01`, `02`, `03`, `06`, `07`, or the six kinds.
+**Status:** revised after review `db20d6b`. Awaiting review.
+**Supersedes:** P002 v1 at `caccf81`.
+**Affects:** `tools/check_ledger.py`, `oracles/` (new append-only version), `pipeline/04_ASSEMBLE.md`, `pipeline/05_WRITE_AP.md`, `DECISIONS.md`, `tests/acceptance/`.
+**Does not affect:** substrate, `01`, `02`, `03` semantics, `06`, `07`, the six kinds.
 
-## Problem
+## What changed from v1
 
-The last full run (`runs/2026-11-14-04-05/`) produced an A/P that is better attributed than the previous one and still wrong in five specific ways, all inside `04` and `05`.
-
-## Evidence
-
-| # | Observed | Cause |
+| # | v1 | v2 |
 |---|---|---|
-| 1 | O32 `family's concern about her memory` was deleted as a subset of O34 `… is not today's issue`; the A/P now names a concern it never states | `04` §2 treats a subset as a duplicate |
-| 2 | O16 `fluid restriction` was deleted as a subset of O46 `fluid restriction started`; the plan kept the completion statement and lost the order | same |
-| 3 | both problem lines begin lowercase (`//post-…`) | `05` has no capitalisation rule |
-| 4 | one piece of reasoning rendered as three bullets, two of them saying the MRI will tell us | `05` renders `CLAIM_QUALIFIER` entries one per bullet |
-| 5 | `not driving until six months` and `not driving for six months — not negotiable` appear as two plan bullets | no plan-deduplication rule |
-| 6 | `no further workup (prior neurology, 2025-06)` sits in today's plan | prior-record management rendered as a current plan item |
+| 1 | imports unratified | D-011 ratifies them before anything else |
+| 2 | not noticed | `check_ledger.py` contradicts `03` on MANAGEMENT → CLAIM_QUALIFIER; fixed first |
+| 3 | "oracle unaffected" | oracle is stale; new append-only `ap_ledger_v3.txt` required |
+| 4 | narrower `04` duplicate rule | `04` performs no semantic deletion at all |
+| 5 | one reasoning bullet | no duplicated reasoning, no lost distinct reasoning |
+| 6 | "keep the fuller" plan entry | current-plan semantic selection |
+| 7 | standing-instruction exception | explicit current re-adoption only |
+| 8 | validation used the legacy Handoff | real `04 → 05` from substrate + ledger |
+| 9 | capitalisation | unchanged, approved |
 
-## Proposed change
+## 1. Ratify the inherited baseline
 
-**`04` §2 — duplicate means the same assertion, not a contained one.** Delete an entry only when it asserts the same fact as another retained entry. A subset that adds a distinct proposition (`fluid restriction` versus `fluid restriction started`; a concern versus a statement about that concern) is retained.
+D-011 records that the three imported contract edits are accepted as baseline, not re-proposed: `03` exclusive evidence eligibility and reasoning protection, `04` reasoning exemption from duplicate deletion, `05` reasoning rendering rules.
 
-**`05` — four rendering rules:**
+## 2. Reconcile `03` with `check_ledger.py`
 
-1. Capitalise the first word of each problem line after `//`.
-2. `CLAIM_QUALIFIER` entries that overlap are merged into one reasoning bullet, placed last before `Plan:`. Distinct qualifiers stay separate.
-3. One plan bullet per fact. Where two entries state the same decision, keep the fuller and drop the other.
-4. A management entry dated to a prior record is not a current plan item. It is not rendered at all unless it is a standing instruction still in force.
+`03` says adjudication is MANAGEMENT by kind and CLAIM_QUALIFIER by role. `tools/check_ledger.py` line 36 allows `MANAGEMENT → MANAGEMENT` only and rejects the approved exception.
 
-## Validation plan
+Correction: permit `MANAGEMENT → CLAIM_QUALIFIER` as the single named exception, and nothing else. `MANAGEMENT → EVIDENCE`, `→ PRIMARY_CLAIM`, `→ COURSE` stay rejected. The validator gains one role, not a relaxation.
 
-1. `python tools/check_sections.py substrate/acceptance_v2.txt oracles/section_ledger_v2.txt` — unchanged, must stay PASS.
-2. Rerun `04` → `05` on `tests/acceptance/seizure_case/ap_handoff_input.txt` with the corrected ledger; record both outputs under `runs/`.
-3. Score the A/P against `pipeline/AP_ANCHOR.md`: lowercase gone, one reasoning bullet, no duplicated plan fact, no prior-record plan item, O32 and O16 present.
+This is a task, not a design change: the contract already states the rule.
 
-## Risk
+## 3. Corrected A/P oracle, append-only
 
-Merging qualifiers can lose a distinct proposition. Mitigation: merge only entries that assert the same thing; the rule is overlap, not co-location. The rerun is scored against the anchor, and any lost proposition is recorded rather than accepted.
+`oracles/ap_ledger_v2.txt` implements the superseded evidence rule: O28 still `P1.EVIDENCE`, O53/O54 on P2, O23 still `P1.MANAGEMENT`, and further context objects still in P1 evidence. The `04/05` run that produced the current Handoff used a corrected ledger that was never committed.
+
+Create `oracles/ap_ledger_v3.txt` — v2 is left untouched — applying the imported `03` rule:
+
+| Object | v2 | v3 | Why |
+|---|---|---|---|
+| O9, O10, O26, O27, O41, O47, O48 | P1.EVIDENCE | DISCARD | context, unrelated normals, preference, baseline deficit |
+| O28 | P1.EVIDENCE | DISCARD | preference; the plan carries the restriction |
+| O53, O54 | P2.EVIDENCE | DISCARD | duplicates of O7 and O9 |
+| O23, O39 | P1.MANAGEMENT | P1.CLAIM_QUALIFIER | adjudication language |
+
+Then `python tools/check_ledger.py oracles/ap_ledger_v3.txt substrate/acceptance_v2.txt` must pass, and the result is recorded under `runs/`.
+
+## 4. `04` stops deleting
+
+`04` becomes a lossless dereference: every retained ID, its object text word for word, its provenance verbatim, in the field the ledger assigned. No completion-statement deletion, no duplicate deletion, no reasoning exemption needed because there is no deletion at all.
+
+Rationale, accepted from the review: exact-duplicate removal already has a home in `03`'s one-fact-one-entry rule; rhetorical compression belongs in `05`. Retaining a narrowed dedup rule keeps OD-2 alive at the fidelity stage, where a deletion cannot be distinguished from a drop.
+
+Consequence to be handled in `05`: near-duplicate entries now arrive there — `witnessed GTC` from [A] and [C], sodium twice, CT twice. `05` renders each fact once.
+
+## 5. Reasoning criterion
+
+Replace "one reasoning bullet" with:
+
+> No duplicated reasoning; every distinct clinician-reasoning proposition survives; reasoning bullets appear after the factual evidence and before `Plan:`.
+
+Two distinct propositions — confusion is postictal, and the MRI will adjudicate — are two bullets. O23 and O39 say the same thing and compress to one. Merging distinct propositions to hit a bullet count is forbidden.
+
+## 6. Plan compression
+
+Replace "keep the fuller" with:
+
+> When entries describe the same action, retain the one that best represents the current clinician's plan. A later plan statement is not improved by being longer. Distinct conditions, rationales, or incompatible states are never merged.
+
+`fluid restriction` (current consult) therefore beats `fluid restriction started` (earlier ED note), even though the second is longer.
+
+## 7. Prior-record management
+
+> A prior-record MANAGEMENT object does not become today's plan. It enters the plan only through a separate current-encounter MANAGEMENT object that re-adopts, continues, or restates it.
+
+O52 `no further workup [D, 2025-06]` is dropped unless a current object re-adopts it. The system never infers that an old recommendation is still in force.
+
+## 8. Validation through the real path
+
+The legacy Handoff fixture cannot test `04` — it contains no O# ledger and no provenance flow. It is retained for isolated `05` tests only, and relabelled as such.
+
+End-to-end acceptance path:
+
+```text
+inputs   substrate/acceptance_v2.txt
+         oracles/ap_ledger_v3.txt
+stage 1  python tools/check_ledger.py oracles/ap_ledger_v3.txt substrate/acceptance_v2.txt
+stage 2  run 04_ASSEMBLE on both inputs        → runs/<date>-p002/handoff.txt
+stage 3  run 05_WRITE_AP on that Handoff       → runs/<date>-p002/ap.txt
+check    every generated sentence traces to a Handoff entry
+score    against pipeline/AP_ANCHOR.md
+```
+
+Recorded for each stage: the exact input, the command, the exit code, the output.
+
+**Execution reality, stated plainly.** Both agents are LLMs without Doximity access. Stages 2 and 3 above are engineering mocks executed in isolation, not the production platform. They can show whether the contract is coherent and whether the output regresses; they cannot establish that Doximity will produce it. The acceptance decision requires a Doximity run by the user, and P002 does not claim one.
+
+## 9. Capitalisation
+
+Approved as proposed: first word after `//` is capitalised.
+
+## 10. Implementation order
+
+1. D-011 ratification.
+2. `check_ledger.py` management-role exception; fixture proving it rejects the other three roles.
+3. `oracles/ap_ledger_v3.txt`; validator PASS recorded.
+4. `04` rewrite to lossless assembly.
+5. `05` rules: capitalisation, reasoning criterion, plan selection, prior-record management, per-fact evidence.
+6. Mock run end to end; record outputs and the traceability check.
+7. Subject to §8, request a Doximity acceptance run by the user before the status update.
+
+## 11. Risks
+
+- Removing `04` deletion moves all compression into `05`, which is already the most rule-dense stage. If `05` under-compresses, the A/P lengthens rather than loses facts — the safer direction.
+- `ap_ledger_v3.txt` discards eight evidence objects. Each was tested against the exclusive rule and each discard is listed above; none is a fact the note body loses, since the body branch carries them independently.
 
 ## Out of scope
 
-The 14-bullet problem is already fixed by the `03` evidence rule imported in `import/v2`. This proposal does not revisit it.
+The 14-bullet problem is resolved by the `03` rule and the new oracle, not by `05`. Nothing here touches the substrate, `06`, the section branch, or the six kinds.
