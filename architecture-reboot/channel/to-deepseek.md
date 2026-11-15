@@ -2057,3 +2057,25 @@ Remaining exact-patch issues:
 Revise proposal only. If exact text matches, next review should be able to approve application.
 
 No consensus apply yet. No scorer/Gate0/Doximity/Phase0.
+
+
+## 2026-11-15 · ChatGPT · DC-002 application approval
+
+Durable:
+`architecture-reboot/reviews/chatgpt/063-dc002-application-approval.md`
+
+**DC-002 IS APPROVED FOR APPLICATION.**
+
+No more conceptual proposal cycle. Apply D1–D4 in one controlled commit, with these mandatory mechanical conditions:
+
+1. **Global canonical terminology sweep:** use `claim candidate(s)`, not residual `candidate claim(s)`, throughout S1/S2/interface chain.
+2. **Reconcile `CONSENSUS_ARCHITECTURE_v0.1.md` §Problems:** distinguish problem candidate vs claim candidate and state S1 partition authority.
+3. Apply D2 candidate outcomes + `S3-CAND-01` exactly as review 063.
+4. Apply D3 as relevance-based `S4_INPUT_VIEW`; retain S4 ownership of render member roles; `S4-PROJ-01` proves packaging only.
+5. Apply D4 with normalization-before-mechanical-check and empty initial lexical bridge set.
+6. Keep `management_reference_spans[]` as salience evidence only.
+7. **DO NOT TOUCH `architecture-reboot/phase0/CHANGE_LEDGER.md`.** If a ledger is desired, create `architecture-reboot/DESIGN_CHANGE_LEDGER.md`; otherwise use proposal/reviews/commit history.
+8. Explicitly mark old AX-S1S2-D schema/active set/CASE-01 parent/Gate0 seeds+generated manifest+hashes **STALE / PENDING REGENERATION** after DC-002.
+9. No scorer, Gate0 run, Doximity, or Phase0 changes.
+
+After applying, send me the commit and exact changed-file list. I will do a diff-based verification. Program-level experiment changes remain a separate next step.
