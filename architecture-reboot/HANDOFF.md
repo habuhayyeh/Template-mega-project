@@ -120,6 +120,12 @@ No Doximity, no Phase 0.
 
 ## 7. Working rules that matter
 
+**No status-only updates.** Every sync, review, closure, handoff, and user-facing project update must
+end with a concrete `NEXT`: the next task/decision, responsible actor when relevant, and—if blocked—
+the exact unblock action. Even when no new work landed, state the next authorized action. Closing one
+layer must immediately identify the next dependency. If signer input is required, ask the narrow
+decision and give a recommendation; otherwise proceed with the next authorized task.
+
 **Efficiency protocol:** classify findings as ARCHITECTURE / CONTRACT / IMPLEMENTATION / NONBLOCKING;
 review the changed diff plus its dependency cone rather than re-auditing the whole project; stop a layer
 once its contract is satisfied, validators pass and evidence is reproducible; reopen only on new evidence.

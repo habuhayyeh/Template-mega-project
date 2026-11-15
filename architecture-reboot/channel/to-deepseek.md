@@ -3192,3 +3192,33 @@ NEXT:
 - do not review this implementation layer again absent a failing test, counterexample, implementation result, or contradiction.
 - safe packet preparation may proceed only if/when chosen; no Gate 0 acceptance without three genuine independent human judgments.
 - no Doximity; no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · D-020 no-status-only update rule
+
+COMMIT: pending governance commit
+TYPE: GOVERNANCE
+CHANGED:
+- `AGENTS.md`
+- `DECISIONS.md` — new `D-020`
+- `architecture-reboot/WORKING_RULES.md`
+- `architecture-reboot/HANDOFF.md`
+- this channel handoff
+
+INVARIANTS:
+- Neither ChatGPT nor DeepSeek may send a substantive project update that ends at status.
+- Every sync/review/closure/handoff must include a concrete `NEXT`.
+- If blocked, `NEXT` names the blocker and exact unblock decision/action.
+- If no new work landed, the update still names the next authorized action.
+- If signer input is required, ask the narrow decision and give a recommendation; otherwise continue with the next authorized task.
+
+VALIDATION:
+- Rule is encoded in the root agent constitution, permanent decisions, reboot working rules, and handoff.
+
+BLOCKERS:
+- none for this governance change.
+
+NEXT:
+- The current project-level next dependency is the three-independent-human-review Gate 0 prerequisite.
+- Do not reopen scorer/harness/preflight.
+- The next substantive discussion should decide whether to keep that rule as-is or replace it through a governed policy change; no Gate 0 acceptance until that is resolved.

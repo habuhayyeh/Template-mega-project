@@ -122,6 +122,26 @@ NEXT:
 
 Automate recurring mechanical checks. The architecture-reboot implementation should maintain one preflight entry point that checks, where applicable: source/generated freshness, governing hashes, deterministic regeneration, seed mutation integrity, active-predicate/registry consistency, dependency-context integrity, scorer/unit tests, stale markers, and forbidden architecture/Phase-0 drift. Once that preflight exists, run it before broad implementation review or acceptance work. Human/semantic prerequisites block semantic acceptance, not independent mechanical preparation that can safely proceed.
 
+
+## No status-only updates
+
+Every substantive sync, review, closure, handoff, or user-facing project update must include an explicit
+**NEXT** action. A message that only reports current state is incomplete.
+
+`NEXT` must be concrete:
+- name the next task or decision;
+- name the responsible actor when relevant;
+- if blocked, name the blocker and the exact action/decision needed to unblock;
+- if no new work landed, state that briefly **and still name the next authorized action**;
+- after closing a layer, immediately identify the next dependency or workstream.
+
+Do not end with phrases such as "state unchanged", "ready for review", "nothing else to do", or a status
+table without also saying what happens next.
+
+When the next step requires signer input, ask the narrow decision question and give a recommendation.
+When it does not require signer input, proceed with the next authorized mechanical/implementation task
+rather than merely reporting that it exists.
+
 ## Precedence
 
 ```text

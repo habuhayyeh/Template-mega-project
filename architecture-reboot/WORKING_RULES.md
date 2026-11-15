@@ -118,6 +118,37 @@ Reopen only for new evidence: a failing test, counterexample, implementation res
 - ChatGPT: architecture/contract adjudication, adversarial review, invariant/test design, bounded direct fixes.
 - The non-authoring agent reviews the actual diff and evidence.
 
+
+### Never stop at status
+
+Every sync/review/handoff must end with **NEXT**.
+
+A valid `NEXT` is an action, not a label:
+- what happens next;
+- who does it;
+- what evidence or decision completes it;
+- if blocked, what exact blocker must be resolved.
+
+Examples:
+
+```text
+NEXT: DeepSeek runs preflight on <commit> and reviews only the three-file diff.
+NEXT: Signer chooses whether to keep the three-human Gate 0 rule; recommendation: <x>.
+NEXT: ChatGPT patches the bounded harness bug, adds regression tests, commits, then DeepSeek reviews.
+```
+
+Invalid:
+
+```text
+NEXT: pending.
+NEXT: ready.
+State unchanged.
+No further work.
+```
+
+A closure message must name the next dependency immediately. If no new commit exists on sync, report that
+briefly and continue with the already-authorized next action rather than stopping at the status report.
+
 ### Preflight first
 
 Consolidate recurring mechanical checks behind one architecture-reboot preflight entry point. It should cover, where applicable:
