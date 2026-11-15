@@ -121,3 +121,17 @@ It does not test:
 - scale;
 - R2 prose expressivity;
 - shared-action rendering.
+
+## Semantic authority-leak probes
+
+AX-LEAK tests raw-source influence on RENDER. It does not test whether a module encodes a decision it
+does not own. These probes do, and they run inside this experiment:
+
+| probe | what is planted | what it catches |
+|---|---|---|
+| `LEAK-S1-ADOPT` | a candidate whose **subject text** implies adoption ("known infarct, continuing") with no adoption field | S1 encoding an adoption verdict in content rather than a field |
+| `LEAK-S2-SELECT` | an adjudication record where one approved representation is pre-marked preferred | S2 making the S3 selection decision |
+| `LEAK-S3-SYNTH` | a rendered representation whose text is not composed of its members | S3 synthesising content |
+| `LEAK-S4-RESELECT` | a unit whose representation differs from S3's selection but is semantically equivalent | S4 re-selecting |
+
+Each probe is scored structurally: the module owning the decision must be the only one expressing it.

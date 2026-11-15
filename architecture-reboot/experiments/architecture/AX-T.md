@@ -74,3 +74,13 @@ If observer effect is material:
 - consider reducing emitted telemetry.
 
 This experiment does not test diagnostic-trace equivalence; traces remain diagnostic-only by rule.
+
+## Production-transfer gate
+
+AX-T is a **gate**, not only an experiment. Other experiments may run first as diagnostics, but no
+test-mode result transfers to a production claim until AX-T has passed for the same package and mode.
+
+The gate exists because instrumentation that perturbs output means every test-mode result carries an
+unmeasured artifact. A production claim built on an ungated test result inherits it silently.
+
+Gate status is recorded per package version. A package change reopens the gate.

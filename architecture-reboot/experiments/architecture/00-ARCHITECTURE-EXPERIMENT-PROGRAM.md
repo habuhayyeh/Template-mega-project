@@ -99,3 +99,28 @@ Before production-shaped claims depend on I1/I2 source boundaries, run a separat
 - source ordering/layout variations.
 
 This is a prerequisite/characterization obligation, not currently a ninth architecture experiment.
+
+## Integrated preflight screen (not a ninth experiment)
+
+A single 3-run screen over the **raw paste → Case IR** path, as a program-level gate rather than an
+acceptance experiment.
+
+It is not redundant: every isolated experiment freezes its input, so none exercises ingest and its
+boundaries together. The preflight is the only screen that sees the whole path.
+
+It never counts as an experiment, never replaces one, and a pass states only that the pipeline runs end
+to end under the tested condition.
+
+## Program dependencies before scoring
+
+- **S4 ordering.** No ordering predicate may be scored until the ordering contract and its salience
+  values are frozen. Until then `S4-ORD-01` and its seed stay `PENDING_DEPENDENCY`.
+- **AX-R2 targets.** AX-R2 cannot start without signer-quality HPI/history prose targets. Synthetic
+  specimens are not a substitute: the experiment measures representation burden against real targets.
+- **AX-SHARED occurrence policy.** Once versus once-plus-reference is a product decision and stays
+  `PENDING_SIGNER`.
+
+## No self-attested totals
+
+Artifacts must not carry aggregate counts they are also asserting. Where a count matters, CHECK derives
+it; a self-declared total is a claim the scorer cannot verify and will eventually contradict.

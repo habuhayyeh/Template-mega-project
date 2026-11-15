@@ -91,3 +91,17 @@ Likely responses before changing topology:
 4. avoid forcing I3 to solve semantic equivalence.
 
 Only reopen INGEST topology if those measures cannot produce a usable stable substrate.
+
+## Operational granularity and downstream constructibility
+
+Two questions, scored separately:
+
+1. **Granularity** — is the object set stable and at an operationally useful size? Report objects per
+   span, split rate, merge rate. A boundary that is stable but produces unusable granularity has failed
+   for a different reason than one that is unstable.
+2. **Constructibility** — can valid units be built from the I3 objects **without splitting or merging
+   them downstream**? If S4 must re-split an I3 object to build a correct unit, the granularity is wrong
+   even when it is stable.
+
+Constructibility is the check that matters: stability alone is achievable by emitting one object per
+sentence, which no downstream module can use.
