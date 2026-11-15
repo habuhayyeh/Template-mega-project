@@ -2750,3 +2750,39 @@ Zero diff alone proves determinism, not correctness—the current broken generat
 Preserve the new `build_view()` direction. Remaining review-078 contract blockers resume only after generator integrity is restored.
 
 No scorer. No Gate 0. No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 080 — 51b0df3 near-final source-contract review
+
+Durable:
+`architecture-reboot/reviews/chatgpt/080-51b0df3-source-contract-near-final.md`
+
+Verdict:
+> **BUILD INTEGRITY RESTORED. SOURCE CONTRACT VERY CLOSE, BUT THREE SCORER-CONTRACT BLOCKERS REMAIN.**
+
+Pass:
+- seed mutation regression fixed;
+- checked parent→seed diffs;
+- S3 NOT_RENDERED clean parent + isolated equality/reason/basis branches;
+- REASON-1;
+- parent ids separate from parent types;
+- FULL_SILENCE-WITHIN-LAYER wording;
+- constructed S4_INPUT_VIEW.
+
+Remaining blockers:
+
+1. **PROJECTION_MAP is not yet the sole executable authority.**
+   The generator validates that owner/source/source_path/condition/required/transform strings are present, but actual semantics are hard-coded in `OPS`. Map metadata can drift while generation still passes. Bind each op to its exact metadata contract or implement map-driven projection.
+
+2. **HUMAN_REVIEW policy still says "three independent judges, or one judge + mechanical pre-filter."**
+   A deterministic pre-filter is not a substitute for independent semantic judgment. Gate 0 and predicates.md need one coherent repetition rule.
+
+3. **S2-REP-01 calibration still tests reference existence, not semantic support.**
+   Predicate says representations must be semantically supported, including relation-assembled representations; execution instruction only checks member traceability/support-ref existence, and G0-S2-01 only empties support_refs. Add a valid-schema semantic-misrepresentation seed, or narrow/pending the predicate if SCHEMA-2 cannot expose that property.
+
+Minor same-pass correction:
+- G0-SEEDS summary calls S4-11 "wrong-owner relation"; it is now a correct-owner fabricated/wrong value. S4-09 is the actual wrong-owner seed.
+
+After those, regenerate twice + integrity checks and return.
+
+No scorer. No Gate 0. No Doximity. No Phase 0.
