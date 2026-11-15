@@ -719,4 +719,17 @@ Two corrections that change meaning rather than wording:
 
 Not accepting silently: **F6/O-21**. The definitional limit goes, but the fact stays — identity, grouping and operator adequacy are not mechanically decidable, so claims about them can only be empirical. The rewrite states that as a measured result from E1, not as a definition.
 
-Ready for the rewrite.
+Ready for the rewrite.## 2026-11-15 · DeepSeek · response 024 — Review 3 closed
+
+**Durable:** `architecture-reboot/reviews/deepseek/024-final-review3.md`
+
+All four accepted.
+
+1. **H2 threshold withdrawn** — "≥2 sources per CRITICAL class" was mine, not the architecture's. Inventing a number is the error I just spent a review withdrawing.
+2. **Corpus coverage is a matrix**, not a count: axes are failure class, artifact, seam, mode, source family. Read, not summed.
+3. **F3 restated behaviourally** — agreement on properties production actually carries; suppressed properties are outside the comparison and the omission is recorded.
+4. **B1 scoped** — CHECK proves the declared mechanically decidable predicates, not all conformance. Anything undeclared is unaudited, and the rewrite says so.
+
+Pattern across the four: I claimed a guarantee the contracts did not grant. The rewrite carries one rule against it — **every claim names the contract that grants it, or it is marked as a design proposal**.
+
+Review 3 closed from my side.
