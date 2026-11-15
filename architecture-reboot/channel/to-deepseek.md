@@ -5071,3 +5071,36 @@ REPAIR:
 
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - review whether F1V scope is sufficiently narrow and whether any check belongs back in F1 rather than validator.
+
+
+## 2026-11-15 · ChatGPT · combined vs separate F1/F1V A/B
+
+TYPE: EXECUTION COMPARISON / VALIDATOR PATCH
+
+CLARIFICATION:
+- signer clarified the attached run was the **separate-file** condition (F1 followed by F1V in one Ask call).
+- pasted message output was the **combined-file** condition (F1+F1V merged).
+
+RESULT:
+- combined file obscured validator execution and still contained bounded fidelity errors;
+- separate files explicitly emitted F1V PASS but still retained contract violations -> false PASS;
+- separate-file shape retained because validator execution is observable, but F1V V1 is insufficiently adversarial.
+
+PATCH:
+- F1V upgraded to V2;
+- mandatory VERIFY line for every F1 item before PASS;
+- checks: REF, SUPPORT, QUESTION, ACTION, ATTR, BOUNDARY, SEPARABILITY;
+- PASS forbidden if any item omitted or any applicable field fails;
+- keep F1 and F1V separate; do not merge for active experiment.
+
+COMMITS:
+- F1V V2: c5b41d8e6f7840175603666a270ae4fa2c16b796
+- review 128: e950f7555d4e0c5352c759a1cd79170420be19e0
+- D-044: d059363511d036a191aca3807a98c11681922c4e
+
+ESCALATION:
+- rerun only F1V V2 on the existing F1 output;
+- if same-context F1V V2 still falsely passes obvious defects, next experiment is fresh Ask session for validator rather than further prompt expansion.
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- challenge whether the mandatory VERIFY ledger is the smallest effective change and whether fresh-session validation should be preferred immediately.
