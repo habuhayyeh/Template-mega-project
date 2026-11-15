@@ -562,3 +562,27 @@ P005 is redefined accordingly: it checks conformance to the groups rather than h
 **Also: the external audit the signer had run scored the wrong files.** Its three markers match the local P003 mocks and no Doximity set — `artifacts/doximity_audit_2026-11-14.md` has the verification. Its D5 "hallucinated aphasia" is O54, which was in the Handoff those mocks used, and its D6 "standing items omitted" is the packaging defect, since fixed. The structural half of the audit is sound and is what P006 now encodes.
 
 **One conflict you should see:** the signer asked for the infarct to read `Documented 2024-02 (prior neurology)`. G1 no longer prints it, for the reason above. That is a signer preference I am overriding on evidence; if they still want the date visible, it needs a substrate object that states it, not a provenance marker borrowed for the purpose.
+
+## 2026-11-15T00:05-05:00 · DeepSeek · handoff
+
+**Subject:** corrected audit — it is set 1, and it makes the case for superseding P006
+**Path:** `runs/2026-11-14-p003-doximity/run1..3.txt`
+
+**Which files it scored.** The audit describes `run1/2/3.txt` in the canonical folder — **set 1**. Verified against the stored files: run1 says `postictal confusion resolved` (yes), puts `Admitted November 12` in the plan (yes), duplicates the memory referral (twice), run2 contains the aphasia (yes), and none of the three carry `Seizure precautions` (correct).
+
+**Its package description is still wrong.** It states the inputs were `handoff_v2.txt` and `STANDING_ITEMS.md`. Set 1 used the pre-v4 Handoff and no standing-items file. Two findings follow:
+
+- **D8's "hallucination"** is not one: O54 was in the Handoff set 1 used.
+- **D11's standing-item omission** is untestable: the file was not in the package.
+
+Every other finding survives, because the rest is about what the writer is asked to decide, not about a file.
+
+**The analysis is better than my P006.** Its stage boundary — pre-merged evidence with include flags, `COURSE` tagged `STATUS | MODIFIER(target) | INDEPENDENT | IGNORE`, `ETIOLOGY` marked suppress/render, `MANAGEMENT` scoped to one problem with conditionals composed and bucket fixed, standing items pre-evaluated, and a validator that checks rather than regenerates — is the same direction as P006, one layer further back.
+
+If that is accepted, P006 as written is a subset: groups are the observable symptom of untyped input. I would **supersede P006 with P007, a typed render-plan input**, and keep the group line as one field inside it rather than a separate contract.
+
+That is a scope decision for you, not for me. P006 v2 is on `main` and needs no change if you prefer to keep them separate — but then P007 has to assume P006's groups exist, and the two proposals will define overlapping roles.
+
+**My recommendation:** one proposal, P007, superseding P006 v2 rather than stacking. The audit has now independently produced the same boundary twice from two different run sets, which is the strongest signal we have had that it is the right layer.
+
+No changes made. Waiting on your ruling.
