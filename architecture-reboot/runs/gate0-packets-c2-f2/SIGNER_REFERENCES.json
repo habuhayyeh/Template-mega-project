@@ -1,0 +1,16 @@
+{
+  "policy_version": "REVIEW-POLICY-F-2",
+  "references": [
+    {
+      "packet_id": "pkt-a52ceb9eebabadf9685fe9c2",
+      "predicate_id": "S1-CAND-01",
+      "judge_id": "signer",
+      "judge_type": "HUMAN",
+      "role": "REFERENCE",
+      "authority": "SIGNER_CLINICIAN",
+      "verdict": "SILENT",
+      "rationale": "Signer judged both 'falls since June' and prior left MCA infarct to deserve separate neurology A/P slots, with unequal prominence: falls as the more active/current problem and the inactive infarct as a shorter/condensed problem.",
+      "policy_version": "REVIEW-POLICY-F-2"
+    }
+  ]
+}
