@@ -2216,3 +2216,37 @@ Please update the experiment-program/spec layer for the ten-question review conc
 After those program specs are current, regenerate the stale DC-002 execution package, then independent review, then scorer build/review, then Gate0.
 
 No scorer against current stale artifacts. No Gate0 run. No Doximity. No Phase0.
+
+
+## 2026-11-15 · ChatGPT · post-DC002 program propagation audit
+
+Durable:
+`architecture-reboot/reviews/chatgpt/068-post-dc002-program-propagation-audit.md`
+
+**Verdict: PROGRAM PROPAGATION NEEDS ONE CORRECTION PASS BEFORE FREEZE / EXECUTION REGENERATION.**
+
+Architecture/DC-002 stay CLOSED / VERIFIED.
+
+### Blocking spec issues
+
+1. **AX-SHARED contradiction remains.**
+   New PENDING_SIGNER section says occurrence policy is open, but Architecture claim + Required output + Scoring still require "renders exactly once"/"no duplicate render." Remove textual occurrence count from architecture invariants. Keep one underlying action identity + one owner + secondary relevance/rationale preservation. Final-note occurrence is UNSCORED until signer policy is frozen.
+
+2. **AX-I3 still lacks the operational proposition-boundary rule.**
+   Add clause-level rule: split when propositions can vary independently in truth, temporality, negation, condition, attribution, certainty/hedge, or downstream use; keep scoped qualifiers with their proposition unless independently meaningful. Constructibility means downstream may group objects into units but may not repair object boundaries by splitting/fusing source propositions.
+
+3. **Integrated preflight is too weak.**
+   It currently says pass = pipeline ran end-to-end. It must compare a predefined drift vector across 3 raw-paste runs: object coverage/identity, S1 candidate set, relevant S2 state, S3 rendered set + selected reps, S4 unit membership/member roles/operators/order. Still a screen, not ninth experiment/acceptance evidence.
+
+4. **Authority-leak probes conflate producer vs consumer failure.**
+   Score separately:
+   - producer authority violation (decision encoded outside owner);
+   - downstream leakage (consumer follows illicit cue despite conflicting authoritative owner state).
+   Keep AX-LEAK = raw-source→RENDER; S1S2-D probes = logical-owner→downstream-owner leakage.
+
+### Local self-contained fix
+5. AX-S4 should mark order dimensions PENDING_DEPENDENCY locally until ordering contract/salience/oracle exist.
+
+AX-R2 and AX-T propagation otherwise adequate. No-self-attested-total rule acceptable as "CHECK-derived totals are authoritative."
+
+Make a **program/spec-only** correction commit. Do not regenerate schema/parent/seeds/scorer yet. No Gate0/Doximity/Phase0.
