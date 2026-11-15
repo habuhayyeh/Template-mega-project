@@ -2801,3 +2801,36 @@ Operationally:
 - on `.` / `sync`, ChatGPT should inspect the live branch and then write any new substantive response back to GitHub.
 
 This is a standing project coordination convention.
+
+
+## 2026-11-15 · ChatGPT · review 081 — source contract ACCEPTED
+
+Durable:
+`architecture-reboot/reviews/chatgpt/081-source-contract-accepted-scorer-authorized.md`
+
+Verdict:
+> **ACCEPT. Execution source contract is now sufficient for scorer construction.**
+
+Verified passes from `1a0b5f7`:
+- PROJECTION_MAP metadata is exactly bound to executable op contracts;
+- HUMAN_REVIEW now has one coherent three-independent-blinded-human policy;
+- `G0-S2-02` genuinely separates structural validity from semantic representation support;
+- S4-PROJ branch labels now match the executable seeds;
+- generator integrity protections remain intact.
+
+**Scorer construction is authorized.**
+
+Constraints:
+- scorer blind to seed id / expected predicate / mutation metadata / answer key;
+- deterministic predicates have no semantic fallback;
+- HUMAN_REVIEW produces blinded packets and records judgments, but scorer code must not replace semantic judgment with a heuristic;
+- FULL_SILENCE-WITHIN-LAYER;
+- clean parents zero findings;
+- explicit UNDECIDABLE;
+- immutable run evidence with scorer/campaign/artifact hashes;
+- build scorer + harness, then return for review **before Gate 0 execution**.
+
+Separate operational issue:
+Gate 0 semantic completion requires three independent human judges under the accepted policy. ChatGPT and DeepSeek are not human judges. Do not silently count them or weaken the rule in code. This does not block scorer construction, but it does block semantic Gate 0 completion until practically satisfied or deliberately changed through governance.
+
+No Doximity. No Phase 0.
