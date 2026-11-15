@@ -1,3 +1,7 @@
+# SUPERSEDED — DO NOT RUN
+
+Superseded by D-037 modular Ask-function design. Retained only as design history.
+
 # First Doximity Ask P/N run
 
 ## Case
