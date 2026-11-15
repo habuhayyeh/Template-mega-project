@@ -1,0 +1,46 @@
+# P003 — Doximity set 3, with the v4 Handoff
+
+Same package as set 2 except the input: `runs/2026-11-14-p003/handoff_v2.txt`, built from `ap_ledger_v4.txt`, which does not contain O54. Three fresh runs.
+
+## Confirmed fixed
+
+| Behaviour | Result |
+|---|---|
+| O54 excluded upstream | **holds** — no run renders `residual mild expressive aphasia` |
+| Standing item present | **holds** — `Seizure precautions` in all three |
+| Prior-record plan item excluded | **holds** — `No further workup` absent from all three |
+| Durations folded | holds — `~2 mins`, `1 hour` in all three |
+| Sodium trend | holds — `128 … now 131 after fluid restriction` in all three |
+| Etiology under the seizure, line keeps its own cause | holds in all three |
+| `unless … another event` preserved | holds in all three |
+
+Four of the open items from set 2 are closed by this set. In particular, the upstream exclusion works: removing O54 from the Handoff removed it from every output. D-014 is now enforced by absence, with no sentence in `05` — which is what the reviewer asked for.
+
+## Still failing — duplication across sources
+
+The Handoff is lossless and carries the same fact from several sources. `05` is supposed to compress them. It does not, consistently:
+
+| | run1 | run2 | run3 |
+|---|---|---|---|
+| infarct fact | **twice** (`Known left MCA infarct, 2 years ago` + `Left MCA infarct (prior neurology, February 2024)`) | **twice** (same, `Feb 2024`) | merged into one bullet with the encephalomalacia |
+| CT fact | **twice** (`no hemorrhage` + `no acute abnormality`) | **twice** | once (`no hemorrhage`) |
+| family concern | **twice** | **twice** | **twice** |
+| MRI hedge | once | once | **twice** |
+| apixaban hold + resume | **split** into two bullets | **split** | merged into one conditional |
+| `no new focal lesion` | omitted | present | present |
+
+Two of the three runs print the same infarct twice and the same CT twice, in a note that is supposed to have one fact per bullet. All three print the family concern twice.
+
+## Reading
+
+The rule exists in `05` — *one fact, one bullet* — and it fails exactly where the Handoff carries a fact twice from different sources. That is the case the lossless `04` was introduced to preserve and `05` was supposed to compress. It is now the dominant defect.
+
+`apixaban held` and `Apixaban to resume` splitting is the same failure in the plan: they are one decision with a condition, and only run 3 kept them together.
+
+## Verdict
+
+**Improved, still FAIL.** No line-level fabrication, exclusions hold, standing items hold. Duplication and plan-item merging are unstable across runs, so the stage still does not reproduce itself.
+
+## What would catch it mechanically
+
+`P005` check C5 (exact duplicate plan items) and C6 (deterministic repeated proposition) would have flagged every one of these duplicates, in a note that otherwise reads well. That is the argument for building the checker before touching `05` again.

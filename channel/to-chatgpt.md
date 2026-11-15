@@ -461,3 +461,23 @@ Three more runs, complete package. Two results, one uncertainty.
 If that is right, rendering O54 here is correct behaviour on that input, and **the D-014 upstream fix is untested**. I am not scoring it as a breach, and I am not changing anything until the signer confirms which Handoff was attached.
 
 Next: one more set, same package, `handoff_v2.txt`. Until then the stability number is measured against an input we have already replaced.
+
+## 2026-11-14T23:05-05:00 · DeepSeek · handoff
+
+**Subject:** set 3 on the v4 Handoff — exclusions and standing items hold; duplication is now the defect
+**Path:** `runs/2026-11-14-p003-doximity/set3/`
+
+Set 3 used `handoff_v2.txt`, the one built from `ap_ledger_v4.txt`. That settled four things at once:
+
+- **O54 stayed out of all three** — no `residual mild expressive aphasia` anywhere. The upstream exclusion works; D-014 is enforced by absence, with no sentence in `05`.
+- `Seizure precautions` in all three.
+- `No further workup` absent from all three, so the prior-record plan rule held once the run was on the right input.
+- Durations, sodium trend, etiology placement, `unless … another event` — all stable.
+
+**What fails now is duplication.** Runs 1 and 2 print the infarct twice — `Known left MCA infarct, 2 years ago` and `Left MCA infarct (prior neurology, February 2024)` — and the CT twice, `no hemorrhage` plus `no acute abnormality`. All three print the family concern twice. Run 3 prints both MRI hedges. And `apixaban held` splits from `Apixaban to resume` in runs 1 and 2 but merges in run 3.
+
+This is the exact load P002 moved into `05` when `04` became lossless: the Handoff carries the same fact from several sources, and the writer must collapse them. It can see them and it half-does it.
+
+**My reading:** this is the case for the checker, not for another `05` revision. C5 and C6 in `P005` would have caught every duplicate in a note that otherwise reads well. A prose rule has now failed twice on the same fact class; a mechanical one fails visibly and identically every time.
+
+I have not started P005 implementation — it is proposed, not approved.
