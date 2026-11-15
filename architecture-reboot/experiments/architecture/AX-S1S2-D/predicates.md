@@ -55,6 +55,23 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S4-PROJ-01` | MECHANICAL | S4 | every field S4 reads is in the frozen `S4_INPUT_VIEW` projection for selected/retained content; the projection schema and exact source map are frozen in `schema.md::PROJECTION_MAP`; every field must match its mapped source path and owner; no unselected or non-required state; no semantic value may be introduced by the projection. Proves packaging only, not runtime non-leakage | all |
 | `S4-COMP-01` | MECHANICAL | S4 | domain is **S4.problems ∩ S3.rendered** — the intersection, not either set alone. Within it, every problem has a unit whose operator is a claim-bearing operator (`FACT`, `REASONING`, `CLAIM`); every plan item S3 retained has a `PLAN` unit. S4 completeness is measured against S3's retained set, not against the source — otherwise the predicate re-decides retention and steals S3's authority | all |
 
+### D-030 two-axis neurologic model
+
+Encounter role and causal relation are independent. Every rendered S3 problem carries
+`encounter_role: PRIMARY | BACKGROUND`. `PRIMARY` means actively evaluated/managed now or an active
+neurologic disorder independently driving current assessment; `BACKGROUND` means established or
+suspected disease/finding that is not itself a primary current problem. Background problems keep a
+compact A/P representation; historical relevance alone does not promote them.
+
+S2 separately carries `causal_relations[]` with `relation` in `CONTRIBUTOR | ETIOLOGY | MECHANISM |
+CAUSE`, `strength` in `LIKELY | POSSIBLE | UNLIKELY`, source-grounded `support`, and a `from`/`to`
+object pair. A background disease may have a likely causal contribution. When the acting contributor is
+a residual deficit, `from` names that deficit, not the historical disease label. No causal relation is
+inferred from historical presence alone.
+
+S4 projects both axes as `from_s3.selected_roles` and `from_s2.causal_relations`; a background problem
+may be condensed by using fewer units, not by deleting the problem.
+
 ---
 
 ## Expected outcomes per frozen case

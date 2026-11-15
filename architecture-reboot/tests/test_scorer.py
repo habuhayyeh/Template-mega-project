@@ -70,6 +70,7 @@ def base_fixtures():
             'adjudication': [{'object': 'O1', 'temporal': 'June', 'adoption': True,
                               'evidence': ['S1']}],
             'relations': [{'type': 'SUPPORTS', 'from': 'O2', 'to': 'O1'}],
+            'causal_relations': [],
             'claim_relations': [],
             'duplicate_groups': [],
             'representations': [{'id': 'R1', 'problem': 'C1', 'members': ['O1', 'O2'],
@@ -81,7 +82,7 @@ def base_fixtures():
         'registry': 'PILOT-2', 'schema': 'SCHEMA-3',
         's3': {
             'rendered': [{'problem': 'C1', 'approved_representation': 'R1',
-                          'selected_rep': 'R1'}],
+                          'selected_rep': 'R1', 'encounter_role': 'PRIMARY'}],
             'candidate_outcomes': [{'candidate': 'C1', 'outcome': 'RENDERED'}],
             'retained': ['O1', 'O2'],
             'use': {'O1': 'C1', 'O2': 'C1'},
@@ -95,7 +96,9 @@ def base_fixtures():
             'salience': {'acuity': 'MODERATE',
                          'management_reference_spans': ['S1']},
         }]},
-        'from_s3': {'selected_reps': {'C1': 'R1'}, 'rendered': ['C1'],
+        'from_s3': {'selected_reps': {'C1': 'R1'},
+                    'selected_roles': {'C1': 'PRIMARY'},
+                    'rendered': ['C1'],
                     'retained': ['O1', 'O2'],
                     'use': {'O1': 'C1', 'O2': 'C1'}, 'reuse': []},
         'from_s2': {'selections': [{
@@ -103,7 +106,8 @@ def base_fixtures():
             'members': ['O1', 'O2'],
             'relations': [{'type': 'SUPPORTS', 'from': 'O2', 'to': 'O1'}],
             'claim_relations': [], 'duplicate_groups': [],
-        }]},
+        }],
+            'causal_relations': []},
         'from_ingest': {
             'O1': {'payload': 'three falls since June', 'provenance': 'A',
                    'temporal': 'June'},
@@ -118,7 +122,7 @@ def base_fixtures():
         's4_input_view': view,
         's4': {
             'sections': ['AP'],
-            'problems': [{'id': 'P1', 'source': 'C1', 'order': 1}],
+            'problems': [{'id': 'P1', 'source': 'C1', 'order': 1, 'encounter_role': 'PRIMARY'}],
             'units': [
                 {'id': 'U1', 'problem': 'P1', 'representation': 'R1',
                  'members': ['O1', 'O2'], 'operator': 'FACT', 'order': 10,
@@ -406,10 +410,14 @@ class HarnessTests(unittest.TestCase):
             'id': 'R2', 'problem': 'C2', 'members': ['O4', 'O5'],
             'support_refs': ['S1'], 'selection_safe': True,
         })
+        s2['s2']['causal_relations'] = [{
+            'from': 'O5', 'to': 'O1', 'relation': 'CONTRIBUTOR',
+            'strength': 'POSSIBLE', 'support': ['S1'],
+        }]
         s3 = copy.deepcopy(self.s3)
         s3['s3']['rendered'].append({
             'problem': 'C2', 'approved_representation': 'R2',
-            'selected_rep': 'R2',
+            'selected_rep': 'R2', 'encounter_role': 'BACKGROUND',
         })
         s3['s3']['candidate_outcomes'].append(
             {'candidate': 'C2', 'outcome': 'RENDERED'})
@@ -427,12 +435,18 @@ class HarnessTests(unittest.TestCase):
                          ['C1', 'C2'])
         self.assertEqual(built['from_s3']['selected_reps'],
                          {'C1': 'R1', 'C2': 'R2'})
+        self.assertEqual(built['from_s3']['selected_roles'],
+                         {'C1': 'PRIMARY', 'C2': 'BACKGROUND'})
+        self.assertEqual(built['from_s2']['causal_relations'], [{
+            'from': 'O5', 'to': 'O1', 'relation': 'CONTRIBUTOR',
+            'strength': 'POSSIBLE', 'support': ['S1'],
+        }])
         self.assertEqual([s['problem'] for s in built['from_s2']['selections']],
                          ['C1', 'C2'])
 
         s4 = copy.deepcopy(self.s4)
         s4['s4_input_view'] = built
-        s4['s4']['problems'].append({'id': 'P2', 'source': 'C2', 'order': 2})
+        s4['s4']['problems'].append({'id': 'P2', 'source': 'C2', 'order': 2, 'encounter_role': 'BACKGROUND'})
         s4['s4']['units'].append({
             'id': 'U3', 'problem': 'P2', 'representation': 'R2',
             'members': ['O4', 'O5'], 'operator': 'FACT', 'order': 30,

@@ -9,12 +9,14 @@
       {
         "problem": "C1",
         "approved_representation": "R1",
-        "selected_rep": "R1"
+        "selected_rep": "R1",
+        "encounter_role": "PRIMARY"
       },
       {
         "problem": "C2",
         "approved_representation": "R2",
-        "selected_rep": "R2"
+        "selected_rep": "R2",
+        "encounter_role": "BACKGROUND"
       }
     ],
     "candidate_outcomes": [

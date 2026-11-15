@@ -1,0 +1,223 @@
+{
+  "case": "CASE-01",
+  "parent_id": "S4_CASE01_CLEAN",
+  "parent_type": "S4_BLUEPRINT",
+  "registry": "PILOT-2",
+  "s4": {
+    "problems": [
+      {
+        "encounter_role": "PRIMARY",
+        "id": "P1",
+        "order": 1,
+        "source": "C1"
+      },
+      {
+        "encounter_role": "BACKGROUND",
+        "id": "P2",
+        "order": 2,
+        "source": "C2"
+      }
+    ],
+    "sections": [
+      "AP"
+    ],
+    "units": [
+      {
+        "id": "U1",
+        "members": [
+          "O03",
+          "O04"
+        ],
+        "operator": "FACT",
+        "order": 10,
+        "problem": "P1",
+        "representation": "R1",
+        "roles": {
+          "O03": "HEAD",
+          "O04": "MODIFIER"
+        }
+      },
+      {
+        "id": "U2",
+        "members": [
+          "O05"
+        ],
+        "operator": "PLAN",
+        "order": 20,
+        "problem": "P1",
+        "representation": "R1",
+        "roles": {
+          "O05": "HEAD"
+        }
+      },
+      {
+        "id": "U3",
+        "members": [
+          "O06"
+        ],
+        "operator": "PLAN",
+        "order": 30,
+        "problem": "P1",
+        "representation": "R1",
+        "roles": {
+          "O06": "HEAD"
+        }
+      },
+      {
+        "id": "U4",
+        "members": [
+          "O01",
+          "O02"
+        ],
+        "operator": "FACT",
+        "order": 40,
+        "problem": "P2",
+        "representation": "R2",
+        "roles": {
+          "O01": "HEAD",
+          "O02": "MODIFIER"
+        }
+      }
+    ]
+  },
+  "s4_input_view": {
+    "from_contracts": {
+      "operator_set": "PILOT-OPERATORS-1",
+      "section": "AP"
+    },
+    "from_ingest": {
+      "O01": {
+        "payload": "known left MCA infarct",
+        "provenance": "B/2024-02",
+        "temporal": "2024-02 documented"
+      },
+      "O02": {
+        "payload": "mild residual right faciobrachial weakness",
+        "provenance": "B/2024-02",
+        "temporal": "2024-02"
+      },
+      "O03": {
+        "payload": "three falls since June",
+        "provenance": "A/2026-11-14",
+        "temporal": "June\u2013November"
+      },
+      "O04": {
+        "payload": "no new weakness or speech trouble",
+        "provenance": "A/2026-11-14",
+        "temporal": "now"
+      },
+      "O05": {
+        "payload": "check vitamin D",
+        "provenance": "A/2026-11-14",
+        "status": "current"
+      },
+      "O06": {
+        "payload": "refer to PT for gait training",
+        "provenance": "A/2026-11-14",
+        "status": "current"
+      }
+    },
+    "from_s1": {
+      "problems": [
+        {
+          "problem": "C1",
+          "salience": {
+            "acuity": "MODERATE",
+            "management_reference_spans": [
+              "S03"
+            ]
+          }
+        },
+        {
+          "problem": "C2",
+          "salience": {
+            "acuity": "LOW",
+            "management_reference_spans": []
+          }
+        }
+      ]
+    },
+    "from_s2": {
+      "causal_relations": [
+        {
+          "from": "O02",
+          "relation": "CONTRIBUTOR",
+          "strength": "POSSIBLE",
+          "support": [
+            "S01",
+            "S02"
+          ],
+          "to": "O03"
+        }
+      ],
+      "selections": [
+        {
+          "claim_relations": [],
+          "duplicate_groups": [],
+          "members": [
+            "O03",
+            "O04"
+          ],
+          "problem": "C1",
+          "relations": [
+            {
+              "from": "O04",
+              "to": "O03",
+              "type": "SUPPORTS"
+            }
+          ],
+          "representation": "R1"
+        },
+        {
+          "claim_relations": [],
+          "duplicate_groups": [],
+          "members": [
+            "O01",
+            "O02"
+          ],
+          "problem": "C2",
+          "relations": [
+            {
+              "from": "O02",
+              "to": "O01",
+              "type": "SUPPORTS"
+            }
+          ],
+          "representation": "R2"
+        }
+      ]
+    },
+    "from_s3": {
+      "rendered": [
+        "C1",
+        "C2"
+      ],
+      "retained": [
+        "O01",
+        "O02",
+        "O03",
+        "O04",
+        "O05",
+        "O06"
+      ],
+      "reuse": [],
+      "selected_reps": {
+        "C1": "R1",
+        "C2": "R2"
+      },
+      "selected_roles": {
+        "C1": "PRIMARY",
+        "C2": "BACKGROUND"
+      },
+      "use": {
+        "O01": "C2",
+        "O02": "C2",
+        "O03": "C1",
+        "O04": "C1",
+        "O05": "C1",
+        "O06": "C1"
+      }
+    }
+  },
+  "schema": "SCHEMA-3"
+}

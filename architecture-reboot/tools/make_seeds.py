@@ -243,6 +243,10 @@ def validate_s3_clean(name, parent, s1p, oracle, reason_reg):
     if rendered_from_outcomes != rendered_set:
         fail('%s RENDERED outcomes %s do not equal rendered[] %s'
              % (name, sorted(rendered_from_outcomes), sorted(rendered_set)))
+    for entry in s3.get('rendered', []):
+        if entry.get('encounter_role') not in ('PRIMARY', 'BACKGROUND'):
+            fail('%s rendered problem %s has invalid encounter_role %r'
+                 % (name, entry.get('problem'), entry.get('encounter_role')))
 
     objects = set(oracle['objects'])
     retained = s3.get('retained', [])
@@ -293,7 +297,8 @@ def s3_07(a):
         'reason': 'NO_APPROVED_REPRESENTATION', 'basis': ['O03']})
 def s3_08(a):
     a['s3']['rendered'].append({
-        'problem': 'C1', 'approved_representation': 'R1', 'selected_rep': 'R1'})
+        'problem': 'C1', 'approved_representation': 'R1', 'selected_rep': 'R1',
+        'encounter_role': 'PRIMARY'})
 def s3_09(a):
     a['s3']['candidate_outcomes'][0]['reason'] = None
 def s3_10(a):
@@ -310,6 +315,11 @@ def s4_09(a): a['s4_input_view']['from_s2']['selected_rep'] = 'R-999'
 def s4_10(a):
     a['s4_input_view']['from_ingest']['O05']['payload'] = 'vitamin D'
 def s4_11(a): a['s4_input_view']['from_s2']['selections'][0]['duplicate_groups'] = [['O03', 'O04']]
+def s4_12(a): a['s4_input_view']['from_s3']['selected_roles']['C1'] = 'BACKGROUND'
+def s4_13(a):
+    a['s4_input_view']['from_s2']['causal_relations'] = [{
+        'from': 'O02', 'to': 'O03', 'relation': 'CONTRIBUTOR',
+        'strength': 'POSSIBLE', 'support': ['S01', 'S02']}]
 
 
 SEEDS = [
@@ -341,6 +351,8 @@ SEEDS = [
  ('S4_PARENT.json', 'G0-S4-09', 'S4-PROJ-01', s4_09, '/s4_input_view/from_s2/selected_rep', '<absent>', 'S3-owned field under S2 wrong-owner group'),
  ('S4_PARENT.json', 'G0-S4-10', 'S4-PROJ-01', s4_10, '/s4_input_view/from_ingest/O05/payload', 'S03 payload', 'fabricated payload'),
  ('S4_PARENT.json', 'G0-S4-11', 'S4-PROJ-01', s4_11, '/s4_input_view/from_s2/selections/0/duplicate_groups', '[]', '[[O03,O04]] authored'),
+ ('S4_PARENT.json', 'G0-S4-12', 'S4-PROJ-01', s4_12, '/s4_input_view/from_s3/selected_roles/C1', 'PRIMARY', 'BACKGROUND'),
+ ('S4_PARENT.json', 'G0-S4-13', 'S4-PROJ-01', s4_13, '/s4_input_view/from_s2/causal_relations', '[]', 'causal relation authored'),
 ]
 
 
@@ -448,6 +460,7 @@ def main():
             'view_sha256': canon(built_view),
             'problems': [p['problem'] for p in built_view['from_s1']['problems']],
             'selected_reps': built_view['from_s3']['selected_reps'],
+            'selected_roles': built_view['from_s3']['selected_roles'],
             'retained': built_view['from_s3']['retained'],
             'rule_count': len(pmap['rules']),
         },

@@ -1,0 +1,95 @@
+{
+  "artifact_hash": "sha256:a588dc273be693be8f7b5412b6fa1af651ec767c0f3fcc8fa217857b56902ad2",
+  "artifact_name": "G0-S4-07.json",
+  "dependency_context": [
+    {
+      "hash": "sha256:cf6b6d89980eefaf677daf42ab7f751ca176c7933bd43ef74a388a953bab5d68",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT"
+    },
+    {
+      "hash": "sha256:65a3c31e910af2f7b3e947b636d11bf1b090c62df09f4d3f5d43e585e9a66f88",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT"
+    },
+    {
+      "hash": "sha256:c3c4bb095ab5b57b8f5cfecab72d6afcf38cc3d5e39a44f25f5b15b7dd464376",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT"
+    }
+  ],
+  "findings": [
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-COMP-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-INC-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-MEM-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "S4 input view does not match the mapped source projection",
+      "evidence": [
+        {
+          "first_diff": "/adoption"
+        }
+      ],
+      "expected": "<absent>",
+      "observed": true,
+      "owner": "S4",
+      "path": "/s4_input_view/adoption",
+      "predicate_id": "S4-PROJ-01",
+      "status": "FIRED"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-REP-01",
+      "status": "SILENT"
+    }
+  ],
+  "kind": "seed",
+  "packets": [],
+  "parent_id": "S4_CASE01_CLEAN",
+  "parent_type": "S4_BLUEPRINT",
+  "scorer_version": "GATE0-SCORER-1",
+  "specificity": {
+    "expected": "S4-PROJ-01",
+    "expected_status": "FIRED",
+    "non_silent_other": [],
+    "other_active": [
+      "S4-COMP-01",
+      "S4-INC-01",
+      "S4-MEM-01",
+      "S4-REP-01"
+    ],
+    "pass": true
+  },
+  "verdict": "PASS"
+}

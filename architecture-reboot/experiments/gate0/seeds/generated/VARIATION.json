@@ -23,11 +23,13 @@
     "rendered": [
       {
         "approved_representation": "RX",
+        "encounter_role": "PRIMARY",
         "problem": "CX",
         "selected_rep": "RX"
       },
       {
         "approved_representation": "RY",
+        "encounter_role": "BACKGROUND",
         "problem": "CY",
         "selected_rep": "RY"
       }

@@ -1,0 +1,84 @@
+{
+  "artifact_hash": "sha256:f33446c214cef5b83e37510f9ae1c30fa8414e257fdcbcaaea0056be66988646",
+  "artifact_name": "G0-S3-08.json",
+  "dependency_context": [
+    {
+      "hash": "sha256:cf6b6d89980eefaf677daf42ab7f751ca176c7933bd43ef74a388a953bab5d68",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT"
+    },
+    {
+      "hash": "sha256:65a3c31e910af2f7b3e947b636d11bf1b090c62df09f4d3f5d43e585e9a66f88",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT"
+    }
+  ],
+  "findings": [
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-ACCT-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "1 S3-CAND-01 violation(s)",
+      "evidence": [
+        {
+          "from_outcomes": [],
+          "kind": "RENDERED_SET_EQUALITY",
+          "path": "/s3/rendered",
+          "rendered": [
+            "C1"
+          ]
+        }
+      ],
+      "expected": "S3-CAND-01 constraints satisfied",
+      "observed": "RENDERED_SET_EQUALITY",
+      "owner": "S3",
+      "path": "/s3/rendered",
+      "predicate_id": "S3-CAND-01",
+      "status": "FIRED"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-INC-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-SEL-01",
+      "status": "SILENT"
+    }
+  ],
+  "kind": "seed",
+  "packets": [],
+  "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
+  "parent_type": "S3_OUTPUT",
+  "scorer_version": "GATE0-SCORER-1",
+  "specificity": {
+    "expected": "S3-CAND-01",
+    "expected_status": "FIRED",
+    "non_silent_other": [],
+    "other_active": [
+      "S3-ACCT-01",
+      "S3-INC-01",
+      "S3-SEL-01"
+    ],
+    "pass": true
+  },
+  "verdict": "PASS"
+}

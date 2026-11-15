@@ -1,0 +1,65 @@
+{
+  "artifact_hash": "sha256:c3c4bb095ab5b57b8f5cfecab72d6afcf38cc3d5e39a44f25f5b15b7dd464376",
+  "artifact_name": "PARENT-S3_PARENT.json",
+  "dependency_context": [
+    {
+      "hash": "sha256:cf6b6d89980eefaf677daf42ab7f751ca176c7933bd43ef74a388a953bab5d68",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT"
+    },
+    {
+      "hash": "sha256:65a3c31e910af2f7b3e947b636d11bf1b090c62df09f4d3f5d43e585e9a66f88",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT"
+    }
+  ],
+  "findings": [
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-ACCT-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-CAND-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-INC-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-SEL-01",
+      "status": "SILENT"
+    }
+  ],
+  "kind": "clean",
+  "packets": [],
+  "parent_id": "S3_CASE01_RENDERED_CLEAN",
+  "parent_type": "S3_OUTPUT",
+  "scorer_version": "GATE0-SCORER-1",
+  "specificity": null,
+  "verdict": "PASS"
+}

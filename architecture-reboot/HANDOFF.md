@@ -71,9 +71,9 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 HEAD at handoff: see `git log -1`. Last substantive commit: CASE-01 SCHEMA-3 rebuild under D-023/D-024.
 
 `python architecture-reboot/tools/make_seeds.py` builds:
-5 clean parents across 4 parent types → 28 seeds → `MANIFEST.json`. **A second run must produce zero
+5 clean parents across 4 parent types → 30 seeds → `MANIFEST.json`. **A second run must produce zero
 diff**; that is a build failure condition, not a warning. The build also checks every seed is a real
-non-noop mutation and differs from its parent at exactly one declared path; 28/28 are checked, with 0
+non-noop mutation and differs from its parent at exactly one declared path; 30/30 are checked, with 0
 no-op and 0 multi-diff seeds. The manifest records the checked before/after values and the
 dependency-context map.
 
@@ -82,7 +82,7 @@ architecture/Phase-0 drift, source/generated freshness and determinism, governin
 identities, active registry, dependency-context integrity, seed mutation integrity, stale source
 markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 46 tests.
 
-Current counts: 5 clean calibration parents · 4 parent types · 28 seeds · 16 active predicates ·
+Current counts: 5 clean calibration parents · 4 parent types · 30 seeds · 16 active predicates ·
 campaign `GATE0-C2` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-3` · oracle
 `ORACLE-3.0` · reason registry `REASON-1` · operator set `PILOT-OPERATORS-1`.
 
@@ -91,9 +91,9 @@ Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLE
 
 CASE-01: two rendered problems — falls and a retained inactive infarct; the S1-CAND seed is now a
 medication-only candidate. Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 46 synthetic tests; no Gate 0 acceptance
-run. Packet preparation: 33 records, 16 semantic packets, 0 references/0 evaluators under
-`REVIEW-POLICY-F-2`; semantic packets contain no `oracle.expected`. Index at
-`architecture-reboot/runs/gate0-packets-c2-f2/INDEX.md`.
+run. Packet preparation: 35 records, 16 semantic packets, 0 references/0 evaluators under
+`REVIEW-POLICY-F-2` plus D-030; semantic packets contain no `oracle.expected`. Index at
+`architecture-reboot/runs/gate0-packets-c2-f2-d030/INDEX.md`.
 
 ## 6. Review 084 closure: scorer/harness/preflight
 
@@ -203,7 +203,7 @@ packets mode only, and returns the diff for ChatGPT review.
 
 D-029 accepts SCHEMA-3 and Proposal 014 under delegated reviewer authority. The F-2 harness removes
 `oracle.expected` from every semantic packet, rewrites S2-ADOPT-01 as source/context-supported adoption,
-and changes all packet IDs. Current run: `gate0-packets-c2-f2` (16 packets, 0 references, 0 evaluators).
+and changes all packet IDs. Current run: `gate0-packets-c2-f2-d030` (35 records, 16 packets, 0 references, 0 evaluators).
 
 **NEXT:** ChatGPT reviews the F-2 diff and packet index; signer reference collection restarts from zero
 under `REVIEW-POLICY-F-2`. No references or Gate-0 acceptance from older packet sets.
@@ -261,8 +261,11 @@ CASE-01 therefore becomes:
 - prior L MCA infarct = BACKGROUND compact A/P problem;
 - no stroke/weakness -> falls causal relation unless the current encounter actually supports it.
 
-Fresh F-2 Packet 1 and Packet 2 references are recorded as SILENT under this policy.
+Fresh F-2 Packet 1 and Packet 2 references are recorded as SILENT under this policy. They are
+pre-D-030 packet identities and become invalid once the D-030 fields change the artifacts; do not reuse
+them.
 
-**NEXT:** pause further signer packets. DeepSeek drafts/implements the smallest bounded S2/S3/S4
-contract extension for D-030, rebuilds CASE-01/packets, and returns the diff for ChatGPT review.
+**NEXT:** ChatGPT reviews the D-030 field extension (S2 `causal_relations`, S3 `encounter_role`,
+S4 `selected_roles`/`causal_relations`, 30 seeds) and the new packet index. Signer collection restarts
+from the D-030 packet set only after that review.
 

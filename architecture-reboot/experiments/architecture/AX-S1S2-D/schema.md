@@ -42,6 +42,8 @@ relations:                            # object-level, source-grounded
 claim_relations:                      # per selected representation; [] when none
   - { problem: C1, representation: R1, relation: COMPETING, claims: [CC1, CC2] }
 duplicate_groups: []                  # [[O03, O04]] when equivalence holds
+causal_relations:                     # separate from epistemic SUPPORTS
+  - { from: O02, to: O03, relation: CONTRIBUTOR, strength: POSSIBLE, support: [S01, S02] }
 representations:
   - id: R1
     problem: C1
@@ -68,8 +70,8 @@ refs are necessary but not sufficient. `S2-REP-01` assesses that semantic suppor
 
 ```yaml
 rendered:
-  - { problem: C1, approved_representation: R1, selected_rep: R1 }
-  - { problem: C2, approved_representation: R2, selected_rep: R2 }
+  - { problem: C1, approved_representation: R1, selected_rep: R1, encounter_role: PRIMARY }
+  - { problem: C2, approved_representation: R2, selected_rep: R2, encounter_role: BACKGROUND }
 candidate_outcomes:                   # exactly one per S1 problem candidate
   - { candidate: C1, outcome: RENDERED }
   - { candidate: C2, outcome: RENDERED }
@@ -210,6 +212,16 @@ selections. A problem with no rendered entry is not in this view; it is an S3 ou
       "transform": "collect problem->rep map"
     },
     {
+      "dst": "/from_s3/selected_roles",
+      "op": "s3_selected_roles",
+      "owner": "S3",
+      "source": "S3_PARENT.json",
+      "source_path": "/s3/rendered[i]/{problem,encounter_role}",
+      "condition": "all i, source order",
+      "required": "required",
+      "transform": "collect problem->role map"
+    },
+    {
       "dst": "/from_s3/rendered",
       "op": "s3_rendered",
       "owner": "S3",
@@ -258,6 +270,16 @@ selections. A problem with no rendered entry is not in this view; it is an S3 ou
       "condition": "one per rendered problem; R = selected_reps[P]; relations filtered to members; claim relations filtered P/R; duplicate groups intersect members",
       "required": "required",
       "transform": "collect objects"
+    },
+    {
+      "dst": "/from_s2/causal_relations",
+      "op": "s2_causal_relations",
+      "owner": "S2",
+      "source": "S2_PARENT.json",
+      "source_path": "/s2/causal_relations[i]",
+      "condition": "from or to in T; source order",
+      "required": "required",
+      "transform": "filter and copy"
     },
     {
       "dst": "/from_ingest",
@@ -313,8 +335,8 @@ mapped source path is a packaging violation. Ordering is absent from S4's input 
 ```yaml
 sections: [AP]
 problems:
-  - { id: P1, source: C1, order: 1 }
-  - { id: P2, source: C2, order: 2 }
+  - { id: P1, source: C1, order: 1, encounter_role: PRIMARY }
+  - { id: P2, source: C2, order: 2, encounter_role: BACKGROUND }
 units:
   - id: U1
     problem: P1
@@ -365,4 +387,4 @@ units:
 | `S4-MEM-01` | `units[*].members` subset of `retained` |
 | `S4-COMP-01` | every problem in S4 ∩ S3 has a claim-bearing unit; every retained plan item has a plan unit |
 | `S4-REP-01` | `units[*].representation` = `selected_reps[unit.problem→source]` |
-| `S4-PROJ-01` | `s4_input_view` against the exact PROJECTION_MAP above |
+| `S4-PROJ-01` | `s4_input_view`, including `selected_roles` and selected causal relations, against the exact PROJECTION_MAP above |

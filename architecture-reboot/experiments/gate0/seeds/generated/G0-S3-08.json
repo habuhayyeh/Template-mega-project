@@ -41,6 +41,7 @@
     "rendered": [
       {
         "approved_representation": "R1",
+        "encounter_role": "PRIMARY",
         "problem": "C1",
         "selected_rep": "R1"
       }

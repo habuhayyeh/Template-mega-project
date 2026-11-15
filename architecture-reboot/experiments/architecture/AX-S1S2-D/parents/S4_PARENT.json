@@ -9,12 +9,14 @@
       {
         "id": "P1",
         "source": "C1",
-        "order": 1
+        "order": 1,
+        "encounter_role": "PRIMARY"
       },
       {
         "id": "P2",
         "source": "C2",
-        "order": 2
+        "order": 2,
+        "encounter_role": "BACKGROUND"
       }
     ],
     "sections": [

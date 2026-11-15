@@ -6,11 +6,13 @@
   "s4": {
     "problems": [
       {
+        "encounter_role": "PRIMARY",
         "id": "P1",
         "order": 1,
         "source": "C1"
       },
       {
+        "encounter_role": "BACKGROUND",
         "id": "P2",
         "order": 2,
         "source": "C2"
@@ -136,6 +138,7 @@
       ]
     },
     "from_s2": {
+      "causal_relations": [],
       "selections": [
         {
           "claim_relations": [],
@@ -191,6 +194,10 @@
       "selected_reps": {
         "C1": "R1",
         "C2": "R2"
+      },
+      "selected_roles": {
+        "C1": "PRIMARY",
+        "C2": "BACKGROUND"
       },
       "use": {
         "O01": "C2",

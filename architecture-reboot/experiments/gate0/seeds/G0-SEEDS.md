@@ -29,10 +29,10 @@ The authoritative inventory is `seeds/generated/MANIFEST.json`. This table is a 
 | `S4-COMP-01` | `G0-S4-06` |
 | `S4-INC-01` | `G0-S4-01`, `G0-S4-02` |
 | `S4-MEM-01` | `G0-S4-04` |
-| `S4-PROJ-01` | `G0-S4-07`, `G0-S4-08`, `G0-S4-09`, `G0-S4-10`, `G0-S4-11` |
+| `S4-PROJ-01` | `G0-S4-07`, `G0-S4-08`, `G0-S4-09`, `G0-S4-10`, `G0-S4-11`, `G0-S4-12`, `G0-S4-13` |
 | `S4-REP-01` | `G0-S4-05` |
 
-**Counts:** 5 clean parents across 4 parent types · 28 seeds · 16 active predicates.
+**Counts:** 5 clean parents across 4 parent types · 30 seeds · 16 active predicates.
 
 Clean parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
@@ -44,7 +44,7 @@ exclusivity, unknown-id, rendered-set equality, missing reason and missing basis
 missing-reason and missing-basis seeds are single mutations of the clean `NOT_RENDERED` parent, so they
 no longer overlap. `S4-PROJ-01` has schema injection (`G0-S4-07`), invented member (`G0-S4-08`), true
 wrong-owner group (`G0-S4-09`), fabricated payload (`G0-S4-10`) and a valid-field fabricated duplicate
-group (`G0-S4-11`). Under D-023 the `S1-CAND-01` seed `G0-S1-05` adds an aspirin medication candidate, not the retained infarct problem.
+group (`G0-S4-11`), `G0-S4-12` changes an S3 encounter role in the view, and `G0-S4-13` injects a causal relation. Under D-023 the `S1-CAND-01` seed `G0-S1-05` adds an aspirin medication candidate, not the retained infarct problem.
 
 Pending: `S2-ADOPT-02` (schema), `S4-ORD-01` (ordering oracle). Not produced by any pilot case:
 `S1-BODY-01`, `S2-REP-02`, `S2-CONF-01`.

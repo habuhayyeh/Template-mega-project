@@ -14,11 +14,13 @@ class ProjectionError(Exception):
 OPS = {
     's1_problems': lambda c: copy.deepcopy(c['problems']),
     's3_selected_reps': lambda c: copy.deepcopy(c['selected_reps']),
+    's3_selected_roles': lambda c: copy.deepcopy(c['selected_roles']),
     's3_rendered': lambda c: [r['problem'] for r in c['rendered']],
     's3_retained': lambda c: list(c['retained']),
     's3_use': lambda c: copy.deepcopy(c['use']),
     's3_reuse': lambda c: copy.deepcopy(c['reuse']),
     's2_selections': lambda c: copy.deepcopy(c['selections']),
+    's2_causal_relations': lambda c: copy.deepcopy(c['causal_relations']),
     'oracle_ingest': lambda c: copy.deepcopy(c['ingest']),
     'contract_section': lambda c: c['contracts']['section'],
     'contract_operator_set': lambda c: c['contracts']['operator_set'],
@@ -45,6 +47,15 @@ OP_CONTRACTS = {
         'condition': 'all i, source order',
         'required': 'required',
         'transform': 'collect problem->rep map',
+    },
+    's3_selected_roles': {
+        'dst': '/from_s3/selected_roles',
+        'owner': 'S3',
+        'source': 'S3_PARENT.json',
+        'source_path': '/s3/rendered[i]/{problem,encounter_role}',
+        'condition': 'all i, source order',
+        'required': 'required',
+        'transform': 'collect problem->role map',
     },
     's3_rendered': {
         'dst': '/from_s3/rendered',
@@ -90,6 +101,15 @@ OP_CONTRACTS = {
         'condition': 'one per rendered problem; R = selected_reps[P]; relations filtered to members; claim relations filtered P/R; duplicate groups intersect members',
         'required': 'required',
         'transform': 'collect objects',
+    },
+    's2_causal_relations': {
+        'dst': '/from_s2/causal_relations',
+        'owner': 'S2',
+        'source': 'S2_PARENT.json',
+        'source_path': '/s2/causal_relations[i]',
+        'condition': 'from or to in T; source order',
+        'required': 'required',
+        'transform': 'filter and copy',
     },
     'oracle_ingest': {
         'dst': '/from_ingest',
@@ -196,13 +216,19 @@ def build_view(s1p, s2p, s3p, oracle, pmap):
         s2_by_id = {r.get('id'): r for r in s2p['s2']['representations']}
         problems = []
         selected_reps = {}
+        selected_roles = {}
         selections = []
         seen = set()
         for entry in rendered:
             problem_id = entry.get('problem')
             selected_rep = entry.get('selected_rep')
+            role = entry.get('encounter_role')
             if problem_id in seen:
                 raise ProjectionError('duplicate rendered problem %s' % problem_id)
+            if role not in ('PRIMARY', 'BACKGROUND'):
+                raise ProjectionError(
+                    'rendered problem %s has invalid encounter_role %r'
+                    % (problem_id, role))
             seen.add(problem_id)
             cand = s1_by_id.get(problem_id)
             if not isinstance(cand, dict):
@@ -239,6 +265,7 @@ def build_view(s1p, s2p, s3p, oracle, pmap):
                 'salience': copy.deepcopy(cand.get('salience')),
             })
             selected_reps[problem_id] = selected_rep
+            selected_roles[problem_id] = role
             selections.append({
                 'problem': problem_id,
                 'representation': selected_rep,
@@ -249,6 +276,24 @@ def build_view(s1p, s2p, s3p, oracle, pmap):
             })
 
         retained = list(s3p['s3']['retained'])
+        causal_relations = []
+        for rel in s2p['s2'].get('causal_relations', []):
+            if not isinstance(rel, dict):
+                raise ProjectionError('S2 causal_relation is not an object')
+            if rel.get('relation') not in ('CONTRIBUTOR', 'ETIOLOGY', 'MECHANISM', 'CAUSE'):
+                raise ProjectionError('S2 causal_relation has invalid type %r'
+                                      % rel.get('relation'))
+            if rel.get('strength') not in ('LIKELY', 'POSSIBLE', 'UNLIKELY'):
+                raise ProjectionError('S2 causal_relation has invalid strength %r'
+                                      % rel.get('strength'))
+            if not isinstance(rel.get('support'), list) or not rel.get('support'):
+                raise ProjectionError('S2 causal_relation lacks support spans')
+            if rel.get('from') not in oracle.get('objects', {}):
+                raise ProjectionError('S2 causal_relation from is not an oracle object')
+            if rel.get('to') not in oracle.get('objects', {}):
+                raise ProjectionError('S2 causal_relation to is not an oracle object')
+            if rel.get('from') in retained or rel.get('to') in retained:
+                causal_relations.append(copy.deepcopy(rel))
         use = copy.deepcopy(s3p['s3']['use'])
         if set(use) - set(retained):
             raise ProjectionError('S3 use map references objects outside retained: %s'
@@ -279,7 +324,9 @@ def build_view(s1p, s2p, s3p, oracle, pmap):
         'problems': problems,
         'rendered': rendered,
         'selected_reps': selected_reps,
+        'selected_roles': selected_roles,
         'selections': selections,
+        'causal_relations': causal_relations,
         'retained': retained,
         'use': use,
         'reuse': copy.deepcopy(s3p['s3']['reuse']),
