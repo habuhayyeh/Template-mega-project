@@ -14,15 +14,19 @@ The one-call architecture can carry enough explicit structure for real neurology
 
 Hold the decisive clinical core constant.
 
-Create a controlled ladder that progressively adds:
-- irrelevant chart context;
-- relevant-but-nondecisive historical context;
-- additional source documents;
-- longer transcript context;
-- more source spans/objects;
-- more accounting records.
+Characterize burden variables separately where feasible rather than increasing everything at once:
+- raw source volume;
+- number of source spans;
+- number of semantic objects;
+- Case-IR/accounting size;
+- number of source documents;
+- transcript length;
+- cases per batch;
+- requested output/telemetry burden.
 
 Do not change the correct final clinical conclusion.
+
+After single-variable characterization, selected combined levels may be tested.
 
 ## Levels
 
@@ -33,7 +37,7 @@ Use empirically defined levels such as:
 - realistic-large;
 - stress.
 
-Record actual input/output size for each run.
+Record actual input/output size and relevant count variables for each run.
 
 ## Scoring
 
@@ -63,16 +67,43 @@ By layer:
 
 ## Run design
 
-Use same core case across scale levels.
-Where practical, include more than one clinical core to avoid overfitting to one case shape.
-Repeat each frozen level in fresh conversations.
+- Gate 0 scorer calibration first;
+- use the same core case across scale levels;
+- where practical, include more than one clinical core to avoid overfitting to one case shape;
+- freeze exact level definition, case IDs, package/scorer versions;
+- repeat each frozen level in fresh conversations.
 
-## Interpretation
+## Failure attribution
 
-If failure rises sharply before realistic source volume:
-- compress IR representation;
-- derive some bookkeeping mechanically;
+Do not classify every scale failure the same way.
+
+### 1. Hard platform/output limit
+Examples: truncation or a Doximity-specific capacity ceiling.
+
+Interpretation:
+> deployment/platform constraint first.
+
+### 2. Representation/schema burden
+Behavior degrades because the explicit schema/accounting is unnecessarily verbose.
+
+Responses first:
+- compress IR;
+- derive bookkeeping mechanically;
 - reduce emitted telemetry;
-- use sparse refs instead of verbose repeated payloads.
+- use sparse references.
 
-Only reopen module topology if representation/schema compression cannot make realistic cases tractable.
+Interpretation:
+> schema/build problem first.
+
+### 3. Unavoidable realistic-volume failure intrinsic to the representation strategy
+If realistic required source volume remains unreliable after reasonable prompt/schema/telemetry mitigation:
+
+> representation architecture may need reopening.
+
+Do not reopen module topology merely because a stress level exceeds the platform.
+
+## Interaction follow-up
+
+After AX-LEAK and AX-SCALE individually pass, repeat the high-risk AX-LEAK omitted-fact condition under a high but realistic scale condition.
+
+That result supports only that interaction.
