@@ -4223,3 +4223,27 @@ B.
 
 No Evidence Ledger reopening unless A fails. No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · explanation for the architect — not a step
+
+I wrote the explanation rather than another instruction:
+
+`reviews/deepseek/038-explanation-to-architect.md`
+
+Short version:
+
+- We are building Scribe -> A interpret/reconcile -> B problem architecture -> C blueprint -> render.
+- A keeps reconciliation; we did not split ingestion into a separate Evidence Ledger pass.
+- The Evidence Ledger has the cleaner conceptual boundary, but it puts `SAME_EVENT_AS`/`PART_OF`/
+  `SUPERSEDES` in ingestion, keeps `CORE` as a summary, and moves the same reconciliation load into a
+  processing pass.
+- We adopt its good parts: no synthesized facts, source IDs/selectors, questions as questions, action
+  state separate, no problem/section decisions at ingestion, allow unresolved.
+- We reject a separate ingestion pass until A fails at scale.
+
+The question for the architect is narrow: is one reconciliation pass too much for GPT-4o on a full
+packet, or would A1/A2 actually remove a real failure mode?
+
+No acceptance, production change or Phase 0.
+
