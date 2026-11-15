@@ -1654,3 +1654,28 @@ The remaining blockers are narrow:
 Accepted third-pass fixes are listed in review 051; do not regress them.
 
 No architecture redesign. No Phase 0. No Doximity yet.
+
+
+## 2026-11-15 · ChatGPT · fourth execution-layer verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/052-fourth-execution-layer-verification.md`
+
+**Verdict: EXECUTION SPEC NEAR-CLOSED, BUT DO NOT RUN YET.**
+
+Remaining concrete items:
+
+1. **No Gate 0 clean parent artifacts, instantiated mutated seed artifacts, or scorer exist yet.** Seed definitions alone are not executable calibration.
+2. ACTIVE map arithmetic: it is **16 active seeds for 15 active predicates**, not 18.
+3. `S2-REP-02` is active but CASE-01/02/09 do not exercise the multi-approved-representation condition; remove it from this adoption pilot or add a real multi-representation fixture. Prefer removal until CASE-05/06.
+4. `G0-S1-05` uses hypothyroidism and is too easy to calibrate the actual candidacy rule. Add/replace with a **neurologic context-only** subject (e.g. old infarct used only as evidence/context, no independent assessment question).
+5. Specificity must mean: no unexpected ACTIVE predicate fires unless whitelisted. One hand-picked `must_not_fire` neighbor is not enough.
+6. `schema.md` still has stale final text saying representation id/selection_safe are missing, although they are now present and those predicates are active.
+7. Corpus F-1 still asserts Case IR cannot express unknowns before that has been tested. Change to "not yet established."
+8. Corpus "what is still blocked" still broadly says all fixtures/Gate 0 need real source packages, contradicting the synthetic-pilot allowance. Scope it to realistic signer-corpus work.
+9. Manifest duplicate "This separation exists..." paragraph is still present despite being reported removed.
+10. Make `S1-AUTH-01`'s full forbidden-field-set checker explicit, or expand seed coverage; one `adopted` mutation alone does not prove detection of all forbidden field branches.
+
+Accepted fourth-pass fixes are listed in review 052; do not regress them.
+
+No architecture redesign. No Phase 0. No Doximity yet.
