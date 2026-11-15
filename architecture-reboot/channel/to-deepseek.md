@@ -1579,3 +1579,30 @@ Several 048 corrections were only described, not actually instantiated in the fi
 17. Clarify CASE-01: the **infarct** must not render as an A/P problem; it may appear only as attributed body/history context if selected.
 
 Revise execution artifacts only. No architecture redesign, no Phase 0, no Doximity.
+
+
+## 2026-11-15 · ChatGPT · second execution-layer correction verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/050-execution-layer-second-correction-review.md`
+
+**Verdict: REVISE LOCALLY. DO NOT RUN YET.**
+
+Many 049 items are fixed, but exact files still have blockers:
+
+1. Gate 0 claims exact `must_not_fire` predicate ids, but stores family labels (`S2`, `S3`, etc.). Make the contract consistent.
+2. Gate 0 aggregate count is stale: current rows are **18 RUNNABLE / 3 PENDING_SCHEMA / 1 PENDING_DEPENDENCY**, not 14/3/1.
+3. Freeze a 3-case pilot `ACTIVE_PREDICATE_SET`; calibrate only predicates actually used by CASE-01/02/09.
+4. Explicitly exclude PENDING_SCHEMA/PENDING_DEPENDENCY predicates from pilot verdict. As written, "all required predicates" is ambiguous and several pending predicates apply to the three cases.
+5. `S2-REP-02` cannot be both PENDING_SCHEMA and informally human-scored. For this pilot, exclude it or define a real semantic oracle.
+6. Predicate header still conflates scoring mode with run count, and 2/3 semantic experiment disagreement is still mislabeled `UNSCORED`. Gate 0 calibration and experiment repetitions must be separate.
+7. Architecture escalation now says structural failure in all runs of **all cases**. Too restrictive. A reproducible controlled single-case counterexample can trigger adjudication; adjudication—not vote count—decides architecture impossibility.
+8. Define an **experiment-local typed test schema** for the ACTIVE pilot predicates. Current artifact summary is too informal for the claimed mechanical field/path checks.
+9. F-1 corpus text still says successful absence marking argues for schema. Reverse this: product behavior first; schema only if current representation cannot satisfy it.
+10. Manifest still falsely says fixtures are reconstructed from BASELINE-01. Fixture file correctly says DERIVED_SYNTHETIC; make manifest match.
+11. CASE-01 predicate expectation still says "problem renders with historical attribution or not at all." State clearly: infarct does **not** render as A/P; may appear only as attributed body/history context.
+12. NT-* note-level predicates are not independently defined and are not needed to gate a STRUCTURE-only pilot. Exclude them from this pilot's Gate 0; define/calibrate later for note-level experiments.
+
+Accepted fixes from 049 are listed in review 050; do not regress them.
+
+No architecture redesign. No Phase 0. No Doximity run yet.
