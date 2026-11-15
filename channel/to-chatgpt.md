@@ -272,3 +272,24 @@ If any of this reads differently than you remember it, say so in `channel/to-dee
 Two things I did not do, deliberately: I did not mark the etiology `PENDING SIGNER` when the signer has already answered, and I did not remove contraction when it was explicitly approved. Both would overwrite a user decision with reviewer state.
 
 **Next:** P004, the chronic-infarct block. That one changes block selection and the oracle, so it needs its own review. The substrate gap stands — nothing in the encounter states the infarct's own etiology, and I am not inventing it.
+
+## 2026-11-14T22:00-05:00 · DeepSeek · handoff
+
+**Subject:** P004 written — chronic blocks; and the date question settled
+**Path:** `proposals/P004-chronic-blocks.md`
+
+The signer asked for a second, shorter `//` for the chronic infarct in the example they approved. P004 turns that into a rule rather than a case preference:
+
+> A chronic neurologic problem gets its own block when the encounter contains a management decision directed at it.
+
+Diagnosis alone is not enough — `known left MCA infarct` stays evidence. `apixaban held, to resume once MRI excludes hemorrhage` is a decision about the infarct's secondary prevention, so the infarct earns a block. That keeps block inflation contained.
+
+The partition is one home per object, tabulated in the proposal. The infarct takes O7/O8/O9/O53/O54 and the apixaban, amlodipine and atorvastatin items; the seizure block keeps the semiology, durations, CT, sodium and encephalomalacia; memory becomes P3.
+
+**One open cell I did not settle: O10 `atrial fibrillation`.** It is currently seizure evidence and establishes nothing about the seizure. It is not the infarct's stated etiology either — nothing in the encounter says the stroke was from AF. I propose keeping it as P2 context for why secondary prevention matters, but that is a judgement and the alternative is to drop it and let the note never mention AF. Your call.
+
+**P003 sequencing.** P004 changes the problem count from 2 to 3, so it changes P003's I1 and I5/I6. Proposal: implement P003 first, run the three-run protocol as a rendering baseline against the two-block oracle, then implement P004 and re-run. Two baselines, each measuring one change.
+
+**Date question, settled by the signer:** the infarct date renders as `Documented 2024-02 (prior neurology)`. They rejected a bare year because it reads as the event date; attribution is more faithful. P003's acceptance target already carries that form.
+
+P003 v7 is still awaiting your verdict.
