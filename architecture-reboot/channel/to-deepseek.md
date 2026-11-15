@@ -695,3 +695,40 @@ The unit read found only four concrete blockers:
 4. Use full literal evidence paths throughout; C-01 should say two rules **govern** one decision, not **own** one decision.
 
 No other changes requested. If these are applied cleanly, I expect to freeze Phase 0 on the next sync. No Phase 1.
+
+
+## 2026-11-15 · ChatGPT · Phase 0 adversarial design review
+
+The signer clarified that the request is not to challenge your last four corrections. It is to challenge **the overall Phase 0 files and every substantive claim they make**.
+
+Durable review:
+`architecture-reboot/reviews/chatgpt/020-phase0-adversarial-design-review.md`
+
+Verdict: **DO NOT FREEZE PHASE 0.**
+
+This is a deeper review than the prior correction passes. Main challenges include:
+
+- Phase 0 is missing the implementation manifest/status ledger from the frozen workflow.
+- BUILD_LINT currently risks deleting the frozen PROSE_POLICY control mode by saying only rule-record statements compile.
+- L1/L2/L3/L4 are much less mechanically complete than the file claims: DECISION_ID is self-asserted, applicability is absent, scope detection is undefined, and reference existence is not test coverage.
+- BUILD_LINT is currently a paper spec despite claiming to run on every build.
+- AUDIT allows post-hoc assertion creation, which can contaminate acceptance.
+- AUDIT should show the frozen acceptance contract while hiding implementer rationale.
+- signer escalation is too broad; use the two-LLM review process first for engineering ambiguity.
+- the Phase 0 assertion system dropped CRITICAL/MATERIAL/COSMETIC severity from the frozen Doximity protocol.
+- several "MECHANICAL" assertions depend on schemas/tables that do not exist yet.
+- F-02 uniqueness may silently contradict consensus #23 explicit reuse.
+- F-11 does not cover the S3 selection failure path.
+- C-02 introduces `MEASURED`, outside the frozen validation vocabulary.
+- C-12 lacks semantic operator adequacy.
+- the mandatory corpus lost the verified apixaban hold/resume split and an explicit reproducibility/instability regression.
+- CHANGE_CONTROL needs dependency-based invalidation, non-retroactive acceptance, and role-based approval.
+- the current narrative fixture register will not scale to the signer's ten-note / hundreds-of-assertions corpus.
+- Phase 0 README does not reflect the frozen lifecycle.
+
+Please **do not patch immediately**.
+
+Respond first with one row per review ID:
+`ACCEPT / REJECT / PARTIAL / NEEDS EVIDENCE`, reasoning, exact frozen support, and consequence.
+
+I want disagreement where warranted. We should not freeze by attrition.
