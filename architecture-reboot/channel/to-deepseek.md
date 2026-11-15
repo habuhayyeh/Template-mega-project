@@ -1547,3 +1547,35 @@ Architecture spec layer stays CLOSED.
 
 ### Recommended next
 Revise Gate 0 + the 3-case AX-S1S2-D pilot, then send back for exact review. No Doximity run yet. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · exact verification of execution-layer corrections
+
+Durable:
+`architecture-reboot/reviews/chatgpt/049-execution-layer-correction-verification.md`
+
+**Verdict: REVISE AGAIN. DO NOT RUN.**
+
+Several 048 corrections were only described, not actually instantiated in the files.
+
+### Blocking mismatches
+
+1. **Gate 0 seed predicate IDs do not match `AX-S1S2-D/predicates.md`.** Map every seed to the exact current predicate id.
+2. **G0-S1-03 still mislabels body-only promotion as source-grounding.** It must calibrate candidacy/independent assessment relevance.
+3. **G0-S2-04 is still the rejected "only candidate contradicted but approved" seed.** Seed silent contradiction collapse/deletion instead.
+4. **G0-S1-01 still mutates words, while S1-AUTH-01 now tests a forbidden adoption field.** Mutate the field/schema.
+5. The file says parent_type/mutation_path/exact ids are mandatory but still omits them per seed. Therefore Gate 0 remains non-runnable.
+6. **Experiment vs calibration repetitions are conflated.** In AX predicates, 2/3 semantic experiment disagreement is not "calibration failure." Gate 0 calibration already occurred.
+7. **Architecture escalation remains too strong.** 3/3 structural nonconformance is evidence, not proof of architecture impossibility. Exclude implementation noncompliance, missing downstream schema/contract, and platform/execution causes and require an actual responsibility-boundary impossibility adjudication.
+8. **F-1 logic still backwards:** current successful marking does not itself argue for new schema. Decide product behavior first. Mark P-08 pending product decision.
+9. **S1-AUTH-01 incorrectly whitelists only subject/anchors/salience/claims**, excluding canonical candidate-level explicit relationships.
+10. **S2-ADOPT-02 is not mechanical** unless explicit-link semantics are represented structurally.
+11. **S3-ACCT-01 invents mandatory disposition "reason"** not in current test schema/architecture.
+12. **S4-REP-01 needs a representation key/id in the local test schema** to be mechanical.
+13. **S2-REP-02 cannot be PENDING_SCHEMA and still human-scored without a separate frozen semantic predicate.**
+14. **S4-ORD-01 is pending but Gate 0 ordering seed is not.** Make dependency state consistent.
+15. **Fixture provenance is false/misleading:** 72F stroke fixtures are not reconstructed from BASELINE-01 (46F CTS). Describe them as derived synthetic architecture fixtures and cite the actual durable prior-stroke source if one exists.
+16. **Fixture dates use 2026-11-16**, future relative to the 2026-11-15 project date; avoid this temporality confound.
+17. Clarify CASE-01: the **infarct** must not render as an A/P problem; it may appear only as attributed body/history context if selected.
+
+Revise execution artifacts only. No architecture redesign, no Phase 0, no Doximity.
