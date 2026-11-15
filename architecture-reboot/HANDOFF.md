@@ -444,3 +444,13 @@ ratification rather than one packet at a time.
 S2 causality and S3 encounter role. After explicit signer ratification, map those decisions to
 packet-level references; ask separately only for any packet that does not map unambiguously.
 
+## Sync after review 100 — no signer ratification yet
+
+The signer sent `.`, which remains sync-only under D-022.
+
+No grouped ratification has been given for the five semantic families. No packet-level references may
+be expanded from the preference map yet.
+
+**NEXT:** wait for explicit signer ratification (e.g. `approve all five`) or amendments to any group;
+then map approved groups to packet-level signer references and identify any residual unmatched packet.
+
