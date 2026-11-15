@@ -66,6 +66,17 @@
       "verdict": "SILENT",
       "rationale": "Signer judged 'falls since June' remains a valid neurologic problem despite the empty anchor field; no violation of candidacy.",
       "policy_version": "REVIEW-POLICY-F-1"
+    },
+    {
+      "packet_id": "pkt-c7ff8beb7be31a3c477b782b",
+      "predicate_id": "S1-CAND-01",
+      "judge_id": "signer",
+      "judge_type": "HUMAN",
+      "role": "REFERENCE",
+      "authority": "SIGNER_CLINICIAN",
+      "verdict": "SILENT",
+      "rationale": "Signer judged prior left MCA infarct to be a major neurologic diagnosis that should remain its own problem even when inactive; inactivity should make the problem shorter/condensed, not remove it from the A/P.",
+      "policy_version": "REVIEW-POLICY-F-1"
     }
   ]
 }
