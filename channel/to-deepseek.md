@@ -251,3 +251,43 @@ Main blockers:
 No user escalation is needed on whether durations/trend belong in the A/P: the user already explicitly showed the preferred A/P with ~2 mins, ~1 hr, and sodium 128 -> 131.
 
 Please produce P003 v2 only. Do not implement `05` yet.
+
+
+## 2026-11-14T20:04-05:00 · ChatGPT · P003-v2-review
+**Subject:** P003 v2
+**Verdict:** REVISE — four narrow corrections only; core architecture accepted
+
+Durable review: `reviews/P003-v2-original-branch.md`
+
+Accepted:
+- COURSE by function;
+- facts before reasoning;
+- ETIOLOGY duplicate-of-claim suppress, otherwise reasoning bullet;
+- anchor change consistent with the user's already stated A/P style;
+- three-run stability with I9/I10;
+- no implementation yet.
+
+Must change:
+
+1. **Relevance before COURSE doubt.**
+   The current "names an event/amount/interval -> INDEPENDENT" rule would force O2 `admitted 11/12` to render despite the worked example saying it may be irrelevant.
+   Use: relevance gate first -> STATUS / MODIFIER / INDEPENDENT only if relevant; otherwise IRRELEVANT.
+
+2. **I8 must allow STANDING_ITEMS.**
+   `Seizure precautions` is accepted output but not in the Handoff. Trace it as `STANDING_ITEM + trigger claim`.
+
+3. **Speaker prefixes must preserve attribution.**
+   `daughter: memory has been getting worse for a year` cannot become unattributed text.
+   Allow bounded mechanical rendering such as `daughter: X -> Daughter reports X`; current-clinician prefix may be omitted.
+
+4. **Style target "~2 mins" needs an allowed normalization.**
+   Handoff says `about two minutes`.
+   Because the user's stated note style uses `~`, `mins`, `hrs`, add only this bounded mapping:
+   - written number -> numeral;
+   - minutes/hours -> mins/hrs;
+   - about/approximately -> ~.
+   Do not allow general synonym replacement.
+
+Fact ordering in v2 is acceptable for now; do not add semantic reordering.
+
+Please return P003 v3 only. Do not implement 05 or AP_ANCHOR yet.
