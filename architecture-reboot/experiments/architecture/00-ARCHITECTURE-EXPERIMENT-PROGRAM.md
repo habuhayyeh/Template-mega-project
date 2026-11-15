@@ -2,9 +2,9 @@
 
 **Status:** DESIGN ONLY / UNRUN  
 **Scope:** architecture validation after DC-001  
-**Phase 0:** not required to define these experiments; Phase 0 remains out of scope until this program is reviewed.
+**Phase 0:** remains out of scope until this experiment program is reviewed/frozen.
 
-The interface design is converged, but the architecture is not empirically validated.
+The interface design is converged and DC-001 is APPLIED / VERIFIED, but the architecture is not empirically validated.
 
 The eight architecture experiments are:
 
@@ -19,12 +19,24 @@ The eight architecture experiments are:
 
 The rebuilt K2 case is a fixture inside AX-S1S2-D, not a ninth experiment.
 
+## Gate 0 — scorer calibration
+
+Before any scored architecture experiment produces acceptance evidence, the relevant CHECK/AUDIT scorer must pass a known-bad seeded-defect calibration for the predicates it will score.
+
+- scorer calibration is offline unless the runtime contract itself is under test;
+- runtime invalid probes are separate;
+- one calibration may serve a campaign while scorer logic and predicate definitions are unchanged;
+- a materially changed scorer or predicate family requires recalibration.
+
+Gate 0 is a prerequisite, not a ninth architecture experiment.
+
 ## Common protocol
 
 Use the frozen Doximity protocol:
 - artifact-level batches rather than full traces by default;
 - exact same frozen batch/order repeated in fresh conversations;
 - default reproducibility gate = 3 fresh repetitions;
+- claims are scoped as "passed/agreed under this frozen condition", not population stability estimates;
 - diagnostic trace runs are localization-only and never acceptance evidence;
 - no Doximity self-scoring;
 - external CHECK/AUDIT scoring;
@@ -32,6 +44,21 @@ Use the frozen Doximity protocol:
 - source package + signer-approved target note are the realistic-case baseline;
 - raw outputs are immutable;
 - order/position robustness is tested only after same-order variance is characterized.
+
+Each executable experiment manifest must freeze:
+- case IDs and case count;
+- exact fixture content;
+- case order;
+- package/instruction version;
+- control-plane version when one governs the scorer/run;
+- predefined assertions;
+- scorer/version;
+- run type.
+
+Batch size is empirical, not globally fixed:
+- start small for a new artifact shape;
+- escalate only if output completeness/schema stability remain intact;
+- realistic signer cases and purpose-built micro-fixtures may both be used where appropriate.
 
 Each experiment must preserve:
 - frozen input fixture(s);
@@ -46,3 +73,29 @@ A pass means only:
 > passed under the tested frozen condition.
 
 No experiment may be used to claim a broader property than it actually tests.
+
+## Program-level interaction check
+
+Eight independent passes do not prove that all eight properties compose.
+
+After the relevant component experiments pass, run targeted crossed conditions for high-risk interactions. At minimum:
+- repeat the high-risk AX-LEAK omitted-fact condition under a high but realistic AX-SCALE condition.
+
+Any crossed condition supports only that interaction.
+
+A later integrated end-to-end campaign is still required before claiming whole-system composition.
+
+## Paste-layout prerequisite
+
+AX-I3 intentionally begins from fixed source spans and therefore does not test whether the production paste is parsed into those boundaries correctly.
+
+Before production-shaped claims depend on I1/I2 source boundaries, run a separate ingestion/deployment paste-layout characterization covering the production layouts actually contemplated:
+- transcript;
+- last neurology note;
+- other current notes;
+- imaging;
+- recent labs;
+- relevant historical labs;
+- source ordering/layout variations.
+
+This is a prerequisite/characterization obligation, not currently a ninth architecture experiment.
