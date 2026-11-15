@@ -48,8 +48,8 @@ Ask should not redo those from raw text.
 **Does:**
 - split composite Scribe records into atomic clinical propositions;
 - retain the originating Scribe record id;
-- assign a small source-level semantic kind;
-- preserve fact-time, explicit source stance/certainty, attribution and uncertainty;
+- assign only a mechanical speech-act class (statement, question, action mention, reasoning), not a clinical ontology;
+- preserve fact-time, polarity, explicit source certainty, attribution and uncertainty;
 - represent clinical questions as questions, never facts;
 - preserve action mentions without adjudicating their final state.
 
@@ -73,11 +73,11 @@ Architecture mapping: completes the useful I3/I4 substrate after Scribe.
 **Owns:** source-level identity/reconciliation before problem reasoning.
 
 **Does:**
-- identify records referring to the same disease/event/finding;
-- distinguish duplicates from longitudinal evolution and true conflict;
+- propose source-reference links among mentions that may refer to the same disease/event/finding;
+- distinguish explicit duplicates from longitudinal source evolution and true source conflict where supported;
 - preserve patient report vs objective finding;
-- separate durable disease/event identity from source-specific state;
-- prevent historical status from silently becoming current.
+- preserve candidate longitudinal linkage without declaring final disease/problem identity;
+- prevent historical source status from silently becoming current.
 
 **Does not:**
 - decide independent neurologic problem structure;
@@ -85,7 +85,9 @@ Architecture mapping: completes the useful I3/I4 substrate after Scribe.
 - infer causality;
 - select note content.
 
-**Output:** reconciled fact/entity set with conflicts/evolution preserved.
+**Output:** source-reconciliation candidates/links with conflicts and evolution preserved.
+
+F2 may suggest that mentions refer to the same underlying entity/event, but may not make the final neurologic problem-identity decision. That remains F4 step 1.
 
 This is normalization, not final encounter adjudication.
 
@@ -101,7 +103,8 @@ This is normalization, not final encounter adjudication.
 - distinguish considered/recommended/planned/ordered/started/performed/completed/held/stopped where source supports it;
 - preserve action owner, timing, condition, patient response and result state when supplied;
 - distinguish test performed from result available;
-- reconcile repeated action statements without upgrading state.
+- reconcile repeated source action statements without upgrading state;
+- preserve source-level action state only; final encounter plan/adoption remains F4.
 
 **Does not:**
 - decide which problem owns the action;
@@ -140,7 +143,12 @@ It executes three internal steps in fixed order:
 
 Later internal steps may not merge/split/re-parent the identity partition chosen in step 1.
 
-**Output:** problem graph + retained content/problem-use map.
+F4 diagnostic/test output must keep these three checkpoints observable rather than collapsing them into one prose explanation:
+- identity partition;
+- state/relations;
+- role/use.
+
+**Output:** problem graph + retained content/problem-use map + the three observable checkpoints.
 
 This bundles S1/S2/S3 for GPT-4o execution while preserving ownership order.
 
