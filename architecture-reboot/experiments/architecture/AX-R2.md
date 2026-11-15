@@ -26,18 +26,36 @@ Use 5–10 realistic signer-quality HPI/history targets containing combinations 
 - competing explanations;
 - transitions from symptom onset to presentation.
 
+The executable manifest freezes the actual selected cases and count.
+
+Before testing, the signer marks:
+- clinically mandatory content/relations;
+- material chronology/attribution requirements;
+- acceptable stylistic variation where needed.
+
+Do not require signer approval of every wording difference.
+
+## Independent upstream constructors
+
+The "minimum sufficient upstream representation" is not objective if one experimenter constructs it.
+
+For each case:
+1. two independent constructors, preferably the two LLMs, receive the same source + signer-approved target;
+2. each proposes the minimum upstream representation believed sufficient for weak R2;
+3. neither sees the other's representation before freezing its own;
+4. both representations are tested;
+5. differences are analyzed rather than silently reconciled before the experiment.
+
 ## Experimental method
 
-For each target:
-1. freeze source package + signer-approved HPI/target note;
-2. construct the **minimum upstream representation** believed sufficient for weak R2;
-3. render with R1/R2 under frozen contracts;
-4. identify every discourse feature in the target:
+For each frozen representation:
+1. render with R1/R2 under frozen contracts;
+2. identify every discourse feature in the target:
    - already represented upstream;
    - safely mechanical/stylistic in R2;
    - would require R2 to invent semantics.
 
-Iteratively test candidate minimal representations, but do not use post-hoc additions to claim the original representation passed.
+Iterative redesign may follow a failed representation, but post-hoc additions cannot be used to claim the original representation passed.
 
 ## Primary metrics
 
@@ -50,7 +68,14 @@ Iteratively test candidate minimal representations, but do not use post-hoc addi
 - no dropped uncertainty;
 - representation burden:
   - number/type of upstream relations or unit constraints needed;
-  - amount of upstream structure relative to source clinical content.
+  - amount of upstream structure relative to source clinical content;
+  - constructor-to-constructor difference in required representation.
+
+## Run design
+
+- Gate 0 scorer calibration first;
+- freeze exact cases, constructor artifacts, package/scorer versions;
+- use the default repeated-run protocol for each frozen representation.
 
 ## Interpretation
 
