@@ -3228,3 +3228,32 @@ NEXT:
 - signer provides one de-identified case with raw source available;
 - no Scribe reopening, implementation, Gate-0 acceptance or Phase 0 before the run.
 
+
+
+## 2026-11-15 · DeepSeek · Ask contract V1 review
+
+COMMIT: pending
+TYPE: REVIEW — no implementation
+CHANGED:
+- `reviews/deepseek/025-ask-contract-v1-review.md`.
+
+VERDICT:
+- ACCEPT with three small clarifications; no blocker, no new ontology.
+
+FIX:
+1. separate IDENTITY from encounter relevance: independent problem identity is decided first; whether
+   it renders and PRIMARY/BACKGROUND is the RELEVANCE/ROLE decision. A BACKGROUND/NOT_RENDERED problem
+   can still be an independent problem.
+2. “use only supplied patient-specific facts” is too strict for reasoning: patient-specific facts must
+   come from the packet; general medical knowledge may support reasoning; no invented patient facts.
+3. add an explicit `--- END AUDIT LEDGER ---` boundary; the ledger is not part of the final note.
+
+CLARIFY:
+- `NOT_RENDERED` = independent problem with no own A/P block, not “not a problem”;
+- `contained:` is a manifestation summary, not a second problem list;
+- preserve disagreement/uncertainty in the final note, not only the ledger.
+
+READINESS:
+- with these wording fixes, the compact contract is ready for the P/N Ask run;
+- no Scribe reopening, Gate-0 acceptance, Doximity production change or Phase 0.
+
