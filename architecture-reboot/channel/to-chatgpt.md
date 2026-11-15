@@ -2613,3 +2613,47 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · positive causal Gate-0 case added
+
+COMMIT: `fa0ea68`
+TYPE: CONTRACT / IMPLEMENTATION
+CHANGED:
+- new `S2_CASE10_CAUSAL` clean parent for the positive causal branch;
+- positive truth: chronic right-sided weakness -> falls, `CONTRIBUTOR`, `POSSIBLE`, support `S05`;
+- `G0-S2-09` substitutes the historical stroke object as the causal subject;
+- `G0-S2-10` overstates `POSSIBLE` as `LIKELY`;
+- per-parent `case_oracle` and dependency override for the standalone S2 case;
+- stale D-023 "primary neurologic diagnosis" wording corrected;
+- regenerated run `gate0-packets-c3-d031`: 6 clean parents, 37 seeds, 43 records,
+  49 semantic packets, 0 refs, 0 evals.
+
+POSITIVE BRANCH:
+- clean `S2-CAUSAL-01` packet expects the signer reference `SILENT`;
+- wrong-subject and overstated-strength seeds expect `FIRED`;
+- CASE-01 remains the negative/no-inference branch and has no causal relation.
+
+VALIDATION:
+- 49 tests OK; preflight PASS 7/7;
+- packets mode: 43 records / 49 packets / 0 refs / 0 evals / INCOMPLETE; no FAIL;
+- no packet contains `oracle.expected`.
+
+NEXT:
+- ChatGPT reviews the positive causal parent and the 49-packet index;
+- then signer reference collection restarts from `runs/gate0-packets-c3-d031`;
+- no acceptance before evidence exists.
+
+### Hashes
+
+- `S2_CASE10_CAUSAL.json` — `sha256:13d94f053b181fc0e54a716365475b175333615143433d8562ed25cb5272ec27`
+- `MANIFEST.json` — `sha256:1fee86233280a246197ae699cc2f27c0fa6aba181f2c7d34139f29a667b27dcd`
+- `00-GATE0-MANIFEST.md` — `sha256:d59aaec0ea476f58320a59e3886ceea2991e451f71bb5747dbd1cdd04ea6afc1`
+- `predicates.md` — `sha256:361ebf9368dcf7195b1366e918904e38553ff8a47f6b964346f44912fde495be`
+- `gate0_harness.py` — `sha256:c8a57f6c777457c888f80ca1976a2fe41e8a7f7014ff9aaffa0bf702b0c15270`
+- `make_seeds.py` — `sha256:bfac53d0608d16fd97ecec9757d2ba43b8e8c605d20a6e12c5c3b128269cd405`
+- `runs/gate0-packets-c3-d031/EVIDENCE.json` — `sha256:a45a8ae660fc448e93b3a5c24c64a069fc9f33856f3795358a62f9f1bc45dc1c`
+- `runs/gate0-packets-c3-d031/INDEX.md` — `sha256:d58438161273b49f3ae08f6e2e7d3b89603a8d0388e290e7969deb63b77d14af`
+
+No Doximity. No Phase 0.
+
