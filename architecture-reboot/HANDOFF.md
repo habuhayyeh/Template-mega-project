@@ -87,7 +87,10 @@ Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLE
 Scorer: 13 mechanical predicates + 3 human-review predicates; 42 synthetic tests; no Gate 0 acceptance
 run.
 
-## 6. Review 083 fixes and D-019 preflight
+## 6. Review 084 closure: scorer/harness/preflight
+
+**Review 084 closes the implementation layer under D-019.** No implementation blocker remains. Do not
+reopen it without a failing test, counterexample, implementation result or genuine contradiction.
 
 **Input boundary.** Scorer input is target artifact + read-only dependency context + oracle + frozen
 predicate/contract rules. `00-GATE0-MANIFEST.md` fixes the dependency matrix; the manifest hash-pins the
