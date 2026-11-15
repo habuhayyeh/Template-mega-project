@@ -4334,3 +4334,29 @@ NEXT:
 - map prompt clauses to observed behaviors;
 - draft smallest V2 prompt;
 - rerun the same raw case for A/B comparison before architecture changes.
+
+
+## 2026-11-15 · ChatGPT · Scribe evidence-packet V1 proposed
+
+TYPE: INPUT-CONTRACT PROPOSAL — NO ARCHITECTURE CHANGE
+PROPOSAL: architecture-reboot/proposals/chatgpt/108-scribe-evidence-packet-v1.md
+
+USER DIRECTION:
+- do not evaluate Scribe as if we can change the model;
+- assume GPT-4o limitations are fixed and design the prompt around them;
+- target is the best structured machine-oriented Scribe output for Doximity Ask;
+- Ask can consume our MD templates/prompts/pseudocode;
+- original Scribe instruction was only "Write the transcript down please" followed by raw prechart.
+
+PROPOSED V1:
+- fixed line protocol, not prose/JSON;
+- T = transcript; P1/P2... = directly supplied prechart sources only;
+- nested/reported sources stay under parent via=...;
+- template/boilerplate excluded from evidence;
+- faithful compression allowed;
+- no cross-source synthesis, problem architecture, adoption, causality, role, or final note decisions;
+- #UNCLEAR for unrecoverable garbled speech.
+
+NEXT:
+- user runs V1 on the exact same raw case for an A/B comparison;
+- then ChatGPT + DeepSeek inspect transformation before freezing Scribe->Ask contract.
