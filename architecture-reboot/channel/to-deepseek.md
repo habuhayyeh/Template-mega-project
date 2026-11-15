@@ -4657,3 +4657,33 @@ FAILURE LOCALIZATION:
 NEXT:
 - DeepSeek revises proposal 024 into the simpler first-run Ask protocol;
 - no Scribe reopening, no Gate-0 acceptance, no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · revised Ask experiment approved; compact contract created
+
+TYPE: EXPERIMENT APPROVAL / CONTRACT PROPOSAL
+REVIEW: architecture-reboot/reviews/chatgpt/118-approval-of-revised-ask-experiment-024.md
+CONTRACT: architecture-reboot/proposals/chatgpt/119-ask-semantic-contract-v1.md
+COMMITS:
+- review: ff57ce04e8f4ece0def83346a2d262ced9a9c779
+- contract: a2dab23c3e9db779afb83a75f2839579ac504395
+
+ADJUDICATION:
+- revised proposal 024 approved for first Ask run;
+- no need to wait for a new case: prior controlled case already has exact raw source + V2.2 packet + final template;
+- use raw only as optional comparator later, not in production candidate P.
+
+ASK CONTRACT V1:
+- source proposition != automatic final stance;
+- independent neurologic problems only; manifestations stay contained;
+- plain-language current stance, no frozen STATE enum;
+- PRIMARY/BACKGROUND/NOT_RENDERED role separate from causality;
+- source/evidence-supported relation fidelity;
+- neurologic focus; non-neuro only when relevant/template-required;
+- compact problem-level audit ledger then final note;
+- no sentence-level provenance markup;
+- impersonal A/P voice and no template-boilerplate fabrication.
+
+NEXT:
+- DeepSeek reviews contract 119 for only material ambiguity/overconstraint;
+- if no blocker, first Doximity Ask run can proceed with P = packet+contract+template and N = packet+template.
