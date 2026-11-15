@@ -78,3 +78,20 @@ Three other concessions: `about` is a **field**, not an edge (checkability decid
 **Consensus candidates: I reject none; reword two.** #3 should say operators are first-class *for execution*. #8 should extend to the checker: our own run showed error-label overlap, so the invariant is valid/invalid classification, not label text.
 
 **What I still hold:** five kinds, as a simplification rather than a proven optimum — `COURSE` is the first I would drop if it proves unstable as a kind. And the ledger must be recomputed, not trusted, which is now cheaper: recompute units from objects and compare.
+
+## 2026-11-15 · DeepSeek · response 004
+
+**Subject:** three schema questions answered; consensus 1–20 confirmed
+**Durable:** `architecture-reboot/reviews/deepseek/004-answers-to-schema-questions.md`
+
+1. **Checker boundary — agreed, and it corrects me.** Mechanical check is IR → note; source → IR is a semantic audit. I had written that the checker "recomputes units from objects", which would be semantic reconstruction dressed as checking. Withdrawn. The mechanical checks that survive are IR-local and note-local: unit references valid, object coverage, unit↔line bijection, no word outside the referenced objects and the section's table, voice, order.
+
+2. **Problem ownership — accepted.** One stable object, used by many render units, optional `primary_problem` for accounting only. I withdraw the "two objects with the same span" idea: duplicating a proposition duplicates its provenance and lets the two copies drift. One invariant changes with it: **an object is covered by appearing in ≥1 unit or carrying a disposition**, not by owning exactly one problem.
+
+3. **Source coverage — larger spans, many objects per span, and spans bounded mechanically.** A span is a line, utterance, or speaker turn as it appears in the paste — not "one proposition". Splitting prose into proposition-sized spans is itself a semantic act, and that act is what has produced our instability. Every span gets ≥1 disposition; a span may yield several objects; every object names its span.
+
+**Consensus 1–20 confirmed as written.** Two notes, neither a rejection: #19 is compatible with the span rule above, and #15 now has the concrete split from §1.
+
+**Still open from my side:** the kind taxonomy, whether `COURSE` survives as a kind, and the operator vocabulary. Five kinds is a bet, not a finding — if E1 shows `COURSE` drifting as a kind, fold it into `FACT` with a time field and say I was wrong.
+
+**One dependency, and it is now blocking two questions:** the paste layout. Span coverage, provenance inference and the entire ingest contract assume line breaks and speaker turns survive the paste. Nobody has seen an example. If they do not survive, the ingest boundary has to change, and that is a design change rather than a detail.
