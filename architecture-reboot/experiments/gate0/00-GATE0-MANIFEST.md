@@ -48,6 +48,23 @@ Requirements per seed:
 3. it must not trigger predicates from unrelated families — a scorer that fires everything is as useless as one that fires nothing;
 4. the clean parent must produce **zero** findings.
 
+## 4a. Finding record
+
+A finding is not prose. Every finding carries:
+
+```yaml
+predicate_id: S2-TEMP-01      # exact id, never a layer label
+owner: S2
+artifact: G0-S2-03.json
+path: /s2/adjudication/0/temporal
+oracle_ref: objects.O03.temporal
+expected: "June–November"
+observed: "now"
+status: FIRED | SILENT | UNDECIDABLE
+```
+
+A scorer that reports only `S1`/`S2` cannot pass Gate 0: attribution is checked against `predicate_id`, not the layer.
+
 ## 5. Procedure
 
 ```text

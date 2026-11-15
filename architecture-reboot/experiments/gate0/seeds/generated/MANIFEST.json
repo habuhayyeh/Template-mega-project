@@ -7,8 +7,8 @@
   "active_set": "PILOT-ACTIVE-1",
   "specificity_policy": "FULL_SILENCE-1",
   "hash_method": "sha256 over canonical JSON (sorted keys, compact separators)",
-  "parent_hash": "sha256:61cd692079f6b46ed4d74ca00c38cd11f1b1629c6a6e8f701103c94d47a1046d",
-  "oracle_hash": "sha256:c7de321930d142a8e451e6fef86706aeba560b60ebc5e375059c71d2f491ddaa",
+  "parent_hash": "sha256:5fdbd6eb8119ec7ef6b172220899be9fd3dd4c48283ce22760b9f2ee176457f7",
+  "oracle_hash": "sha256:20b076f17daecc51c2f2f763e4e12dfce54e8386c4226cfb8b59a2abc9233b7c",
   "clean_parent": {
     "artifact": "PARENT-CLEAN.json",
     "expect": "zero findings"
@@ -24,7 +24,7 @@
           "after": "adopted=true"
         }
       ],
-      "hash": "sha256:7a13e9bae61fe331facfcc0179559c1c8c32f448329082d372a86e116d553f1b"
+      "hash": "sha256:d7a411de5dbee55f6e8285f8f94f83de706e63e0c66a30cb4dda81c026210453"
     },
     {
       "artifact": "G0-S1-02.json",
@@ -36,7 +36,7 @@
           "after": "selected_claim=CC1"
         }
       ],
-      "hash": "sha256:6106571245e7ebb5aea219fbf640c2220dc4f11dc9c50637b15b7214de9fd419"
+      "hash": "sha256:203436841bdcab33f2f61842b38ad779ce0c0c02bbbb938a302dce917aa8b344"
     },
     {
       "artifact": "G0-S1-04.json",
@@ -50,7 +50,7 @@
           "after": []
         }
       ],
-      "hash": "sha256:3f12738fa77a03c4cbf599f478962c03ae4e500e58273afc31203ddbf28532a9"
+      "hash": "sha256:999532f1136e43e37d920bf2142279d950b76fed712cbdf08b9e039cc63dbf7f"
     },
     {
       "artifact": "G0-S1-05.json",
@@ -62,7 +62,7 @@
           "after": "C2 substrate-only subject"
         }
       ],
-      "hash": "sha256:bea35d98a0c59c714404ea0dad6b2691eba8e7e39117221b4e18953e9302b65d"
+      "hash": "sha256:14d0d2b007ef09247a297235fa9a734e399e6d88cb3aea3ecf758ed832cfd782"
     },
     {
       "artifact": "G0-S1-06.json",
@@ -74,7 +74,7 @@
           "after": "status_current=true"
         }
       ],
-      "hash": "sha256:a6ae4c391073411087b018d3a88353ba29c4fd1f14e0ee0edc35ca31b58db152"
+      "hash": "sha256:3dbc2aab85a70186e525d50d727bfe8e524d25f0a82837aaa61f1ca85bbb8f53"
     },
     {
       "artifact": "G0-S2-01.json",
@@ -88,7 +88,7 @@
           "after": []
         }
       ],
-      "hash": "sha256:8b10e8e941e85ad36e05cbde475589f8633510d1d065dfa2113c7c8e1b8dcccc"
+      "hash": "sha256:80613dfca3819c8ce3eb90a0ea0e349155679e7d1d87f16306223a8872010165"
     },
     {
       "artifact": "G0-S2-03.json",
@@ -96,7 +96,7 @@
       "mutations": [
         {
           "path": "/s2/adjudication/0/temporal",
-          "before": "2024-02",
+          "before": "2024-02 documented",
           "after": "now"
         }
       ],
@@ -109,10 +109,10 @@
         {
           "path": "/s2/adjudication/0/adoption",
           "before": false,
-          "after": true
+          "after": null
         }
       ],
-      "hash": "sha256:a8096af9f2d71af37a5c51128435b73b3f3a8208ad335df2a5c847ed8b1becba"
+      "hash": "sha256:53668b6c624bdd8b2fb8f0d1ae945612fac133a3372a9df27e4b35ccefa22fed"
     },
     {
       "artifact": "G0-S3-01.json",
@@ -124,7 +124,7 @@
           "after": null
         }
       ],
-      "hash": "sha256:f7690ed358b27814ba2653ab7717958886b30ce8a3ddc171557c1f41c89d94b5"
+      "hash": "sha256:cd13040057e26519d49b95efcecaf405c228b21ab44b67ba9c4e01bdf59cca36"
     },
     {
       "artifact": "G0-S3-02.json",
@@ -136,7 +136,7 @@
           "after": "R-999"
         }
       ],
-      "hash": "sha256:0df5ed317af27bf30adfaa33e4353b6d057d4f0fe91542c004f70c5af6bd2f25"
+      "hash": "sha256:07ea1e589262c4feca03d22e38fe509ad768a5e12192ca17144bc7df1b327e3a"
     },
     {
       "artifact": "G0-S3-04.json",
@@ -148,7 +148,7 @@
           "after": "O07 unaccounted"
         }
       ],
-      "hash": "sha256:26af8c01240b391156376ed72a698e0c46b84f995937aa82ae8af95977bf7b34"
+      "hash": "sha256:f65321d03dcc9bc6989a9c4fc26fa8a9488323a70e519c3b84fecdb99c8c82d5"
     },
     {
       "artifact": "G0-S4-01.json",
@@ -160,7 +160,7 @@
           "after": "0 problems while S3 rendered 1"
         }
       ],
-      "hash": "sha256:7276a55a8cb03cca82bb9726a4ad9cb58df77ca14a30326601ff4ba9fd227a3f"
+      "hash": "sha256:fbc541e1d35f8a9e939036c32517105a676ccaa8aa227b4dbfd7d42d6b5c1b09"
     },
     {
       "artifact": "G0-S4-02.json",
@@ -172,7 +172,7 @@
           "after": "P2 not in S3 rendered set"
         }
       ],
-      "hash": "sha256:ffd356b69d2c3151e430c6d051f658c8c0e1b2bfb32d63bb3b7514ce3aee0d60"
+      "hash": "sha256:8b8eeea07a4dfc260abd87e21db472d900f4c6e3f7e99d8c1aa84fd93d8978e7"
     },
     {
       "artifact": "G0-S4-04.json",
@@ -184,7 +184,7 @@
           "after": "O99 not in retained"
         }
       ],
-      "hash": "sha256:7579f9dd1280306f66d1150fa47fd00b9835ddf0e16891c13731fa5ec59a2e80"
+      "hash": "sha256:fa9fd3b8443ae58191d0bc6b3331bac7e6d1dc0b46ec62b1d5fa380b55de458c"
     },
     {
       "artifact": "G0-S4-06.json",
@@ -196,7 +196,19 @@
           "after": "U2 removed for retained O05"
         }
       ],
-      "hash": "sha256:2ecb2b40db77d32e029d2fbb512f27a2bdd5c2466da964914366bf28b484d363"
+      "hash": "sha256:92a4bff55e85b1cba2963158e7aa15ac6fe3ae218449e934a33eb11da0184f23"
+    },
+    {
+      "artifact": "G0-S4-05.json",
+      "must_fire": "S4-REP-01",
+      "mutations": [
+        {
+          "path": "/s4/units/0/representation",
+          "before": "R1",
+          "after": "R-999 against S3 selected_rep R1"
+        }
+      ],
+      "hash": "sha256:c911754e876d829ca94cd390a33377210b9780a87ca89779ac1c5c8f7ab62433"
     }
   ]
 }

@@ -24,7 +24,7 @@
     "O01": {
       "text": "known left MCA infarct",
       "span": "S01",
-      "temporal": "2024-02"
+      "temporal": "2024-02 documented"
     },
     "O02": {
       "text": "mild residual right faciobrachial weakness",
@@ -44,28 +44,23 @@
     "O05": {
       "text": "check vitamin D",
       "span": "S03",
-      "temporal": "current"
+      "status": "current"
     },
     "O06": {
       "text": "refer to PT for gait training",
       "span": "S03",
-      "temporal": "current"
+      "status": "current"
     },
     "O07": {
       "text": "aspirin 81 daily, unchanged",
       "span": "S04",
-      "temporal": "current"
+      "status": "current"
     }
   },
   "expected": {
     "adoption": {
       "O01": false,
-      "O02": false,
-      "O03": true,
-      "O04": true,
-      "O05": true,
-      "O06": true,
-      "O07": false
+      "O03": true
     },
     "representations_per_problem": {
       "C1": {
@@ -83,7 +78,8 @@
     "candidate_concepts_must_exclude": [
       "old left MCA infarct",
       "known left MCA infarct"
-    ]
+    ],
+    "adoption_note": "Only objects named here are scored by S2-ADOPT-01. O07 is a medication fact and cannot adopt anything; that is a property of the case, not an adoption verdict."
   },
   "matching": "Candidacy and subject checks compare clinical concept/object identity, not literal strings. A candidate naming the infarct by any synonym is excluded.",
   "source_of_truth": "Temporal and text values are copied verbatim from FROZEN-SUBSTRATES.md. That file is the substrate; this oracle and parent.json must agree with it exactly, including punctuation."

@@ -26,7 +26,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 
 | id | mode | owner | asserts | cases |
 |---|---|---|---|---|
-| `S2-ADOPT-01` | SEMANTIC | S2 | adoption verdict per object matches the case's frozen expectation | 01,02,09,03 |
+| `S2-ADOPT-01` | SEMANTIC | S2 | for objects the oracle names in `expected.adoption`, the verdict matches. Objects not named are not scored — an unlisted object has no adoption expectation to violate | 01,02,09 |
 | `S2-ADOPT-02` | HYBRID · `PENDING_SCHEMA` | S2 | no adoption is inferred from medication, drug class, or convention; an adoption must cite a source span. Not mechanical until explicit-link semantics are represented structurally — an adoption citing any span proves nothing | all |
 | `S2-REP-01` | SEMANTIC | S2 | every approved representation is supported by source objects, including representations assembled from relations rather than quoted claims | all |
 | `S2-REP-02` | MECHANICAL | S2 | within `representations[]` (the approved set) for one problem, at most one entry unless every entry has `selection_safe: true` | all |
@@ -73,7 +73,7 @@ Only these predicates are calibrated and scored in the three-case pilot. They ar
 S1-CAND-01, S1-CAND-02, S1-AUTH-01, S1-AUTH-02
 S2-REP-01, S2-TEMP-01, S2-ADOPT-01
 S3-INC-01, S3-SEL-01, S3-ACCT-01
-S4-INC-01, S4-MEM-01, S4-COMP-01
+S4-INC-01, S4-MEM-01, S4-COMP-01, S4-REP-01
 ```
 
 `S1-BODY-01` (body-only subject) and `S2-CONF-01` (contradictory sources) are **not** active: the pilot cases do not exercise them. They belong to CASE-07/08/10 and CASE-11.

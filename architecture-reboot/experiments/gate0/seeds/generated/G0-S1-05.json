@@ -39,8 +39,19 @@
         "anchors": [
           "S01"
         ],
-        "salience": {},
-        "candidate_claims": []
+        "salience": {
+          "acuity": "LOW",
+          "managed_today": false
+        },
+        "candidate_claims": [
+          {
+            "id": "CC2",
+            "text": "known left MCA infarct",
+            "support": [
+              "S01"
+            ]
+          }
+        ]
       }
     ]
   },
@@ -48,7 +59,7 @@
     "adjudication": [
       {
         "object": "O01",
-        "temporal": "2024-02",
+        "temporal": "2024-02 documented",
         "adoption": false,
         "evidence": null
       },

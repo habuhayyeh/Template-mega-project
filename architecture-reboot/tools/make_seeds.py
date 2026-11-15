@@ -52,7 +52,10 @@ def m_s1_04(a):
 def m_s1_05(a):
     a["s1"]["candidates"].append({
         "id": "C2", "subject": "old left MCA infarct", "anchors": ["S01"],
-        "salience": {}, "candidate_claims": [],
+        "salience": {"acuity": "LOW", "managed_today": False},
+        "candidate_claims": [
+            {"id": "CC2", "text": "known left MCA infarct", "support": ["S01"]}
+        ],
     })
     return [("/s1/candidates/-", "<absent>", "C2 substrate-only subject")]
 
@@ -77,8 +80,8 @@ def m_s2_03(a):
 def m_s2_06(a):
     rec = a["s2"]["adjudication"][0]
     before = rec["adoption"]
-    rec["adoption"] = True
-    return [("/s2/adjudication/0/adoption", before, True)]
+    rec["adoption"] = None
+    return [("/s2/adjudication/0/adoption", before, None)]
 
 
 def m_s3_01(a):
@@ -113,6 +116,11 @@ def m_s4_04(a):
     return [("/s4/units/0/members/-", "<absent>", "O99 not in retained")]
 
 
+def m_s4_05(a):
+    a["s4"]["units"][0]["representation"] = "R-999"
+    return [("/s4/units/0/representation", "R1", "R-999 against S3 selected_rep R1")]
+
+
 def m_s4_06(a):
     a["s4"]["units"] = [u for u in a["s4"]["units"] if u["id"] != "U2"]
     return [("/s4/units", "U2 present", "U2 removed for retained O05")]
@@ -134,6 +142,7 @@ SEEDS = [
     ("G0-S4-02", "S4-INC-01", m_s4_02),
     ("G0-S4-04", "S4-MEM-01", m_s4_04),
     ("G0-S4-06", "S4-COMP-01", m_s4_06),
+    ("G0-S4-05", "S4-REP-01", m_s4_05),
 ]
 
 

@@ -39,8 +39,8 @@
     "adjudication": [
       {
         "object": "O01",
-        "temporal": "2024-02",
-        "adoption": true,
+        "temporal": "2024-02 documented",
+        "adoption": null,
         "evidence": null
       },
       {

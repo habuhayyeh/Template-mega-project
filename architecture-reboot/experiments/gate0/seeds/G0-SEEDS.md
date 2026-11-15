@@ -16,9 +16,9 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 |---|---|---|---|---|---|
 | G0-S1-01 | `candidates[0].adopted = true` | `S1-AUTH-01` | S1 | `S2-ADOPT-01`, `S3-INC-01` | RUNNABLE |
 | G0-S1-02 | `candidates[0].selected_claim = "…"` | `S1-AUTH-02` | S1 | `S2-REP-01` | RUNNABLE |
-| G0-S1-03 | append a candidate for a body-only historical fact | `S1-BODY-01` | S1 | `S3-BODY-01` | RUNNABLE |
+| G0-S1-03 | append a candidate for a body-only historical fact | `S1-BODY-01` | S1 | `S3-BODY-01` | NOT_IN_PILOT |
 | G0-S1-04 | `candidates[0].anchors = []` | `S1-CAND-02` | S1 | `S2-REP-01` | RUNNABLE |
-| G0-S1-05 | append a candidate for the old infarct used only as evidence for the seizure claim, with no assessment question of its own | `S1-CAND-01` | S1 | `S2-REP-01` | RUNNABLE |
+| G0-S1-05 | append the old infarct as a candidate with its own source claim and low, unmanaged salience, though it has no assessment question | `S1-CAND-01` | S1 | `S2-REP-01` | RUNNABLE |
 | G0-S1-06 | `candidates[0].status_current = true` (a field in the forbidden set, not `adopted`) | `S1-AUTH-01` | S1 | `S2-REP-01` | RUNNABLE |
 
 ## S2 family — semantic, parent `S2_OUTPUT`
@@ -26,9 +26,9 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 | seed | mutation_path | must fire | owner | must not fire | status |
 |---|---|---|---|---|---|
 | G0-S2-01 | `representations[0].support_refs = []` | `S2-REP-01` | S2 | `S1-AUTH-01` | RUNNABLE |
-| G0-S2-02 | `representations[1].selection_safe = false` on a second approved entry | `S2-REP-02` | S2 | `S3-SEL-01` | RUNNABLE |
+| G0-S2-02 | `representations[1].selection_safe = false` on a second approved entry | `S2-REP-02` | S2 | `S3-SEL-01` | NOT_IN_PILOT |
 | G0-S2-03 | `adjudication[0].temporal` rewritten from the substrate value | `S2-TEMP-01` | S2 | `S1-AUTH-01` | RUNNABLE |
-| G0-S2-04 | delete the non-selected assertion of a contradictory pair | `S2-CONF-01` | S2 | `S3-ACCT-01` | RUNNABLE |
+| G0-S2-04 | delete the non-selected assertion of a contradictory pair | `S2-CONF-01` | S2 | `S3-ACCT-01` | NOT_IN_PILOT |
 | G0-S2-05 | `adjudication[0].adoption = true`, `evidence = null` | `S2-ADOPT-02` | S2 | `S1-AUTH-01` | PENDING_SCHEMA |
 | G0-S2-06 | `adjudication[0].adoption = false` where the case expectation is adopted (CASE-02) | `S2-ADOPT-01` | S2 | `S1-AUTH-01` | RUNNABLE |
 
@@ -38,7 +38,7 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 |---|---|---|---|---|---|
 | G0-S3-01 | render an A/P problem with `approved_representation = null` | `S3-INC-01` | S3 | `S4-INC-01` | RUNNABLE |
 | G0-S3-02 | `rendered[0].selected_rep = "R-999"` | `S3-SEL-01` | S3 | `S2-REP-01` | RUNNABLE |
-| G0-S3-03 | merge two approved representations into one selected | `S3-SEL-02` | S3 | `S2-REP-01` | RUNNABLE |
+| G0-S3-03 | merge two approved representations into one selected | `S3-SEL-02` | S3 | `S2-REP-01` | NOT_IN_PILOT |
 | G0-S3-04 | remove a retained object with no disposition entry | `S3-ACCT-01` | S3 | `S4-MEM-01` | RUNNABLE |
 
 ## S4 family — mechanical, parent `S4_BLUEPRINT`
