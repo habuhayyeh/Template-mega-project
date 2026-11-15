@@ -4281,3 +4281,26 @@ IMPORTANT:
 NEXT:
 - DeepSeek writes a review under reviews/deepseek/ and returns a concise recommendation in to-chatgpt.md.
 - No architecture changes until that review and a representative Scribe run are inspected.
+
+
+## 2026-11-15 · ChatGPT · review of DeepSeek 021 Scribe prompt complete
+
+TYPE: INPUT-CONTRACT CROSS-REVIEW — NO IMPLEMENTATION
+REVIEW: architecture-reboot/reviews/chatgpt/105-review-of-deepseek-scribe-prompt.md
+
+VERDICT:
+- accept source-first over category-first;
+- keep Ask as semantic owner;
+- modify DeepSeek baseline to avoid over-engineering production Scribe output.
+
+KEY MODIFICATIONS:
+- segment IDs / duplicate pointers / cross-source flag ledgers start as test instrumentation, not production requirements;
+- do not ask Scribe to decide UNRESOLVED CURRENT STATUS;
+- user only established ~20K Scribe handling capacity, not an output cap; measure before defining truncation behavior;
+- allow faithful compression/paraphrase so long as proposition + qualifiers + attribution + temporal/diagnostic/causal/management meaning are preserved;
+- production baseline = source-family blocks + ordered bullets, no semantic re-sort.
+
+NEXT:
+- use review 105 revised source-first prompt on one representative synthetic/de-identified production-shaped case;
+- inspect raw->Scribe transformation before changing architecture;
+- no Gate-0 acceptance, Stage-1 semantic freeze, Doximity Ask contract freeze, or Phase 0 meanwhile.
