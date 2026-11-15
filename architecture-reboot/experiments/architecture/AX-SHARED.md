@@ -4,7 +4,7 @@
 
 ## Question
 
-Can the architecture represent one real clinical action that serves multiple neurologic problems with one underlying action identity, losing a rationale, or violating one-owner A/P semantics?
+Can the architecture represent one underlying clinical action that serves multiple neurologic problems while preserving one-owner semantics and all clinically material cross-problem relevance/rationale?
 
 ## Architecture claim under test
 

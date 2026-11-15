@@ -1,6 +1,6 @@
 # Architecture experiment program
 
-**Status:** DESIGN ONLY / UNRUN  
+**Status:** SPECIFICATION FROZEN / UNRUN  
 **Scope:** architecture validation after DC-002. **DC-001 and DC-002 are both APPLIED / VERIFIED.**  
 **Phase 0:** remains out of scope until this experiment program is reviewed/frozen.
 
