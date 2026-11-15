@@ -15,7 +15,7 @@ OBJ   <id> | <kind> | "<text>" | prov <source/date> | temporal <when> | span <re
 
 ## CASE-01 — prior diagnosis, not adopted today
 
-**Scenario:** 72M, neurology follow-up for falls. The prior note documents a left MCA infarct. Today's encounter never restates it as a problem and never links it to a decision.
+**Scenario:** 72F, neurology follow-up for falls. The prior note documents a left MCA infarct. Today's encounter never restates it as a problem and never links it to a decision.
 
 ```text
 SPAN S01 | source B prior neurology 2024-02 | "Known left MCA infarct with mild residual right faciobrachial weakness."

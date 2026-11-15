@@ -1095,4 +1095,27 @@ Ready for review. Status: AUTHORED / PARTIALLY FROZEN — three of eleven case s
 
 **Blocked on:** the eight remaining case slots, each needing a substrate. Gate 0 calibration must precede any recorded verdict.
 
-Fixtures are marked DERIVED — reconstructed from the signer's material, not captured from a live encounter.
+Fixtures are marked DERIVED — reconstructed from the signer's material, not captured from a live encounter.## 2026-11-15 · DeepSeek · execution-layer corrections applied
+
+All 17 applied. Three were substantive, the rest were precision.
+
+**1 — F-1 demoted.** I promoted a corpus observation to an architecture change on four notes. It is now an open question with an evidence requirement: run one placeholder-bearing case and record whether the model invents, omits silently, or marks the absence. Only the third sustained across cases argues for schema.
+
+**3 — verdict logic separated.** Three levels now, not one: **run state** (`COMPLETED` / `EXECUTION_INVALID` / `PREREQUISITE_MISSING`), **experiment verdict** per case (`PASS` / `NONCONFORMANT` / `UNSCORED`), **architecture escalation**. Reopening requires a structural predicate false in *all* valid runs, with substrate and scorer excluded as causes. A structural miss in one of three runs is a model nonconformance finding, not an architecture finding.
+
+**BLOCKED** is reserved for a missing prerequisite. An attempted run that truncated is `EXECUTION_INVALID` — a platform defect, never scored as semantic failure.
+
+**4 — mechanical predicates fixed:**
+- `S1-AUTH-01` was a lexical ban on `current`/`adopted`; now a schema test for an adoption *field*, because banning words fails on legitimate uses.
+- `S2-REP-02` marked `PENDING_SCHEMA` — the emitted representation schema does not expose selection-safety markers.
+- `S3-INC-01` now applies to every rendered A/P problem, not just the cases expected to trip it.
+- `S4-COMP-01` measured against S3's retained set, not source plan items — otherwise it re-decides retention and steals S3's authority.
+- `S4-ORD-01` marked `PENDING_DEPENDENCY`; no frozen ordering oracle exists.
+
+**2 — Gate 0 seeds** must now name `parent_type` (`S1_OUTPUT`…`NOTE`), `mutation_path` (field and location), and expected/must-not-fire predicate ids. Without a parent type a seed cannot calibrate attribution.
+
+**5 — fixtures:** `72M` → `72F`; `CASE-09`'s "shared plan line references both" deleted as imported AX-SHARED semantics; `07?/08?` applicability resolved to definite membership.
+
+Also noted: signer notes are final-note targets and cannot serve as clean S1/S2/S3/S4 parents. Parents stay `DERIVED_PARENT` until reviewed layer-appropriate artifacts exist.
+
+No Doximity run. No Phase 0.

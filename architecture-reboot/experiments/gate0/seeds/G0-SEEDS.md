@@ -2,7 +2,15 @@
 
 Each seed is a single mutation of a clean parent. The parent must score zero; the seed must fire exactly the named predicate, in the named family, attributed to the named owner.
 
-**Parent status:** hand-built clean cases marked `DERIVED_PARENT`. When the signer's notes arrive, real parents replace them and the seeds are re-run — a seed that only works on a toy parent does not calibrate anything.
+**Each seed record must name three things the tables below omit for brevity, and which are mandatory before any run:**
+
+1. `parent_type` — the layer the parent belongs to: `S1_OUTPUT`, `S2_OUTPUT`, `S3_OUTPUT`, `S4_BLUEPRINT`, or `NOTE`. A generic-fidelity seed needs a `NOTE` parent; an S2 seed needs an `S2_OUTPUT` parent.
+2. `mutation_path` — the exact field and location changed, e.g. `representations[0].support_refs` or `problems[1].order`.
+3. `expected_fire` / `must_not_fire` — predicate ids, not family names.
+
+A seed without `parent_type` cannot calibrate attribution, because the scorer has no way to know which layer's owner should be blamed.
+
+**Parent status:** `DERIVED_PARENT`. Signer notes are final-note targets; they are **not** clean S1/S2/S3/S4 parents, and must not be used as parent artifacts. A reviewed, layer-appropriate clean artifact is required before any seed is runnable.
 
 ---
 

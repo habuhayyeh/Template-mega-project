@@ -47,7 +47,7 @@ S3  rendered[]       problem set, selected representation per problem, retained 
 S4  blueprint        sections, problems in final order, units, operators, membership
 ```
 
-Any run missing an artifact is `BLOCKED`, not `FAIL`: a missing artifact is a harness or truncation problem, and scoring it as a semantic failure would misattribute a platform defect to the architecture.
+A run missing an artifact is **`EXECUTION_INVALID`**, not a content failure: a truncated run is a platform or harness problem, and scoring it as semantic failure would misattribute it to the architecture. `BLOCKED` is reserved for a missing prerequisite — no substrate, no calibration, no scorer — and is never an outcome of an attempted run.
 
 ## 4. Run procedure
 
@@ -59,15 +59,18 @@ Any run missing an artifact is `BLOCKED`, not `FAIL`: a missing artifact is a ha
 
 ## 5. Verdict rules
 
-| condition | verdict |
-|---|---|
-| every required predicate true, 3/3 | `PASS` |
-| any structural predicate false in ≥1 run | `FAIL_STRUCTURAL` |
-| any semantic predicate false, structure intact | `FAIL_SEMANTIC` |
-| any required predicate undecidable | `BLOCKED` |
-| artifacts absent or truncated | `BLOCKED` |
+Three things are recorded separately and are not the same claim:
 
-Structural and semantic are scored **separately** and never collapsed. Only `FAIL_STRUCTURAL` supports reopening the interface; `FAIL_SEMANTIC` is a contract, schema, or substrate defect.
+**Run state** — per repetition: `COMPLETED`, `EXECUTION_INVALID` (artifacts truncated or absent), or `PREREQUISITE_MISSING` (no substrate, no calibration, no scorer).
+
+**Experiment verdict** — per case: `PASS` (all required predicates true 3/3), `NONCONFORMANT` (a required predicate false), `UNSCORED` (fewer than 3 valid runs).
+
+**Architecture escalation** — the only level at which the interface may be reopened:
+- `FAIL_STRUCTURAL` requires a structural predicate false in **all** valid runs of a case, **and** the substrate and scorer excluded as causes.
+- A structural miss in one run of three is a model nonconformance finding, not an architecture finding.
+- Any semantic failure is a contract, schema, or substrate defect until shown otherwise.
+
+This separation exists because the first version of this table treated one bad run as an architecture verdict, which would have reopened a converged interface on a single sample.
 
 ## 6. Predicates
 

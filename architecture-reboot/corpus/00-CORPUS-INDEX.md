@@ -21,7 +21,7 @@ BASELINE-03 and BASELINE-04 contain unresolved slots: `[date]`, `[confirm]`, `[t
 
 These are not defects in the note; they are the note marking what it does not know. The current Case IR has no way to express this. Its only options are to omit or to invent, and inventing is the failure we have spent weeks removing.
 
-**Consequence:** the representation layer needs an explicit *unknown slot* that renders as a marker and survives to the note. This is a genuine architecture addition, not a style rule, and it should be proposed as a design change rather than patched in.
+**Status: observation, not a design change.** I proposed schema too early. The architecture may already be enough: if the renderer omits an unsupported value and the note records the gap without inventing, nothing needs adding. Evidence required before any proposal — run one placeholder-bearing case and record which of three things happens: the model invents a value, omits the slot silently, or marks the absence. Only the third sustained across cases argues for a schema addition.
 
 It also settles a scoring question: a run that invents a value where the target has `[date]` fails fidelity; a run that omits the slot entirely fails completeness. Both are checkable.
 
@@ -72,6 +72,6 @@ Two things the contract must **not** do: standardise the signer's abbreviations 
 
 ## 6. Proposed next actions
 
-1. Record F-1 (unknown slots) as a **design change proposal** against the representation layer — it is the first thing the corpus has taught us that the architecture does not already do.
+1. Carry F-1 as an **open question with a stated evidence requirement**, not a design change. No schema proposal until a run shows the current architecture failing at it.
 2. Draft the ten predicates from §3 into an assertion set, marked `PENDING_SOURCE_CASES`.
 3. Hold fixtures until source packages arrive; do not invent them.
