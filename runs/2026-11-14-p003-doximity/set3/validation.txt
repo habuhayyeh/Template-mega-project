@@ -1,5 +1,7 @@
 # P003 — Doximity set 3, with the v4 Handoff
 
+**Model mode: Instant.** Sets 1 and 2 were Thinking. Set 3 therefore changes two variables against set 2 — the Handoff and the mode — so it is a valid within-set reproducibility test (all three runs share package and mode) but is not a single-variable comparison with set 2.
+
 Same package as set 2 except the input: `runs/2026-11-14-p003/handoff_v2.txt`, built from `ap_ledger_v4.txt`, which does not contain O54. Three fresh runs.
 
 ## Confirmed fixed
@@ -43,4 +45,4 @@ The rule exists in `05` — *one fact, one bullet* — and it fails exactly wher
 
 ## What would catch it mechanically
 
-`P005` check C5 (exact duplicate plan items) and C6 (deterministic repeated proposition) would have flagged every one of these duplicates, in a note that otherwise reads well. That is the argument for building the checker before touching `05` again.
+**Correction.** I first wrote that `P005` C5/C6 would have caught every duplicate here. They would not. They catch exact and normalised repeats; they cannot decide that `CT head no hemorrhage` and `CT head no acute abnormality` are one fact, that `but the MRI will tell us` and `we’ll see what the MRI shows` are one proposition, or that apixaban hold and resume are one decision. That is semantic equivalence, which P005 excludes by design. The remaining fixes are upstream grouping (P006) and the checker is a guard, not a solution.

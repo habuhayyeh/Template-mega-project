@@ -1,5 +1,7 @@
 # P003 — three Doximity runs, corrected evidence boundary
 
+**Model mode: Thinking.** All three runs in this set.
+
 **Corrected after `reviews/P003-implementation-doximity-original-branch.md`.** The first version of this file scored three runs as one reproducibility set. They were not one set, and one of its findings was unmeasurable.
 
 ## The three files are not three repetitions

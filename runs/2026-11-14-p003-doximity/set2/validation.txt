@@ -1,5 +1,7 @@
 # P003 — Doximity set 2
 
+**Model mode: Thinking.** All three runs in this set.
+
 Three runs, package: `05`, `AP_ANCHOR`, `STANDING_ITEMS`, Handoff, dispatcher. Raw files alongside this note.
 
 ## What the package fix achieved
