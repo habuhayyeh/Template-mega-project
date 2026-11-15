@@ -1,7 +1,14 @@
 {
   "case": "CASE-01",
-  "predicate_set": "PILOT-1",
-  "parent_hash": "sha256:6e030e27b6391cd4",
+  "predicate_registry": {
+    "id": "PILOT-1",
+    "version": "1"
+  },
+  "active_set": "PILOT-ACTIVE-1",
+  "specificity_policy": "FULL_SILENCE-1",
+  "hash_method": "sha256 over canonical JSON (sorted keys, compact separators)",
+  "parent_hash": "sha256:e663c41be570960257b65be55208af9c46ee61c90e3a88e432fa981c11853181",
+  "oracle_hash": "sha256:c3f874381a145f754a483137a14b815bfcbc0ee081db6ae1f191c533fee684af",
   "clean_parent": {
     "artifact": "PARENT-CLEAN.json",
     "expect": "zero findings"
@@ -17,7 +24,7 @@
           "after": "adopted=true"
         }
       ],
-      "hash": "sha256:8080bafbbb4fb190"
+      "hash": "sha256:92b311e07628cae2094ed582a9aa77203520aecf8ceec5a2ce3bb29fb58c286a"
     },
     {
       "artifact": "G0-S1-02.json",
@@ -29,7 +36,7 @@
           "after": "selected_claim=CC1"
         }
       ],
-      "hash": "sha256:bb1291b88202e817"
+      "hash": "sha256:d3a94bda4b400e01bfbbb91c03f6b7479e29891ef99923290399e65b860c329b"
     },
     {
       "artifact": "G0-S1-04.json",
@@ -43,7 +50,7 @@
           "after": []
         }
       ],
-      "hash": "sha256:f2ab40f9d7f70dad"
+      "hash": "sha256:28f5608af4743a94a704860007eb2b9e2a0cac5b336cc111b9679d85bad36052"
     },
     {
       "artifact": "G0-S1-05.json",
@@ -55,7 +62,7 @@
           "after": "C2 substrate-only subject"
         }
       ],
-      "hash": "sha256:a803ecaff4a2f8c9"
+      "hash": "sha256:c253e417bac83b396daf69ecaf804c51db8ab0961ec78eb58eef7a5a341aa05a"
     },
     {
       "artifact": "G0-S1-06.json",
@@ -67,7 +74,7 @@
           "after": "status_current=true"
         }
       ],
-      "hash": "sha256:61a20b5fc6770b94"
+      "hash": "sha256:749bb86a6fda75b52698c150e11a5c2037cdd6966cf228b8e17134612aaa7bdc"
     },
     {
       "artifact": "G0-S2-01.json",
@@ -81,7 +88,7 @@
           "after": []
         }
       ],
-      "hash": "sha256:522d1b3a53153b70"
+      "hash": "sha256:46b9be177cdcb4d82ae38f2e8d10e7be1229dcb8eeaa939e053081ad65541f89"
     },
     {
       "artifact": "G0-S2-03.json",
@@ -93,27 +100,19 @@
           "after": "now"
         }
       ],
-      "hash": "sha256:842bc26a581efc92"
+      "hash": "sha256:5d336e702014e66563c27f45c68ef3cd14830a6969e604358b5c538090a691a1"
     },
     {
       "artifact": "G0-S2-06.json",
       "must_fire": "S2-ADOPT-01",
       "mutations": [
         {
-          "path": "/s2/adjudication/0",
-          "before": {
-            "adoption": false,
-            "evidence": null
-          },
-          "after": {
-            "adoption": true,
-            "evidence": [
-              "S02"
-            ]
-          }
+          "path": "/s2/adjudication/0/adoption",
+          "before": false,
+          "after": true
         }
       ],
-      "hash": "sha256:df30df2c50340407"
+      "hash": "sha256:a72369d2e04fbc1f7b84995ec4bf57c051468b75dd2202c503c12d49157ed3d3"
     },
     {
       "artifact": "G0-S3-01.json",
@@ -125,7 +124,7 @@
           "after": null
         }
       ],
-      "hash": "sha256:afd6765000e0736e"
+      "hash": "sha256:27c8e51307f116d1a2de6c3a509b42c3b952805896fe232cb43e3ace615eff99"
     },
     {
       "artifact": "G0-S3-02.json",
@@ -137,7 +136,7 @@
           "after": "R-999"
         }
       ],
-      "hash": "sha256:2c097a7007d5c06f"
+      "hash": "sha256:411fdb1ef253241616a4435f02838dc60543a754f18689bf365c8754492edf84"
     },
     {
       "artifact": "G0-S3-04.json",
@@ -149,7 +148,7 @@
           "after": "O07 unaccounted"
         }
       ],
-      "hash": "sha256:7a1dbe94e21f62d6"
+      "hash": "sha256:314f8489c3835cc856c8c1de39cfe8356e9c22fbaf9fd46d3722aca19f2490a8"
     },
     {
       "artifact": "G0-S4-01.json",
@@ -161,7 +160,7 @@
           "after": "0 problems while S3 rendered 1"
         }
       ],
-      "hash": "sha256:1646c003b4f28520"
+      "hash": "sha256:75bb02cea9d6e42989e6d36fd049010eb2c90bda644b4026005bd754a5e17068"
     },
     {
       "artifact": "G0-S4-02.json",
@@ -173,7 +172,7 @@
           "after": "P2 not in S3 rendered set"
         }
       ],
-      "hash": "sha256:67a6d0c9ace8eb9a"
+      "hash": "sha256:059a36bea73be2117dfb05449f12a3f5c8981e4e0002c6f28d56498e3dfffe94"
     },
     {
       "artifact": "G0-S4-04.json",
@@ -185,7 +184,7 @@
           "after": "O99 not in retained"
         }
       ],
-      "hash": "sha256:e3fceb9ffb403e99"
+      "hash": "sha256:82f08c9eb1fc7b9afe802a22f9ea5e183c8050d2c3f5eb4fbe1d6e99294f4006"
     },
     {
       "artifact": "G0-S4-06.json",
@@ -197,7 +196,7 @@
           "after": "U2 removed for retained O05"
         }
       ],
-      "hash": "sha256:8bb3f60027a259b8"
+      "hash": "sha256:5eb92eeb510ba8be40ac4eb900155c8430ca08f21f42f84435bedba4df5c6bda"
     }
   ]
 }

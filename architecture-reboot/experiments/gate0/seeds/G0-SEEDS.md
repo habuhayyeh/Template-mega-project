@@ -4,7 +4,9 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 
 **Parents:** `DERIVED_PARENT` — hand-built, layer-appropriate, reviewed. Signer notes are final-note targets and cannot serve as S1/S2/S3/S4 parents.
 
-**Scope:** only predicates in the pilot `ACTIVE_PREDICATE_SET` (`AX-S1S2-D/predicates.md` §Pilot) are calibrated now. `NT-*` note-level seeds are listed for completeness but **excluded from this pilot**, because this experiment never produces a note.
+**Scope:** only predicates in the pilot `ACTIVE_PREDICATE_SET` (`AX-S1S2-D/predicates.md` §Pilot) are calibrated now. `NT-*` note-level seeds are **excluded from this pilot**, because this experiment never produces a note.
+
+**Calibration policy is derived from each predicate's own mode**, not from the family heading. The `semantic` / `mechanical` labels on the section headings are descriptive; the run count and pass rule come from `predicates.md` for that exact predicate id.
 
 ---
 

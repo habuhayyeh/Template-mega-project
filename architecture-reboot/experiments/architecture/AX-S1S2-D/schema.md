@@ -13,12 +13,12 @@ candidates:
     anchors: [S02]
     salience: { acuity: MODERATE, managed_today: true }
     candidate_claims:
-      - { id: CC1, text: "gait instability from deconditioning", support: [S02, S03] }
+      - { id: CC1, text: "three falls since June", support: [S02] }
     relationships:                   # optional, canonical candidate-level relations only
       - { type: SUPPORTS, target: C2 }
 ```
 
-Forbidden fields: the closed, versioned set defined in `predicates.md` under `S1-AUTH-01`. This file does not restate it — a second copy is a second authority, and the two drifted once already.
+Forbidden fields are defined **only** in `predicates.md` (`S1-AUTH-01` for adoption/final-state, `S1-AUTH-02` for selected-claim). This file never restates them: a second copy is a second authority, and the two drifted twice.
 
 ## S2 output
 

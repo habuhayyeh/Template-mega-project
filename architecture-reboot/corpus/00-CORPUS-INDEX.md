@@ -21,7 +21,7 @@ BASELINE-03 and BASELINE-04 contain unresolved slots: `[date]`, `[confirm]`, `[t
 
 These are not defects in the note; they are the note marking what it does not know. Whether the current Case IR can express this is **not yet established** — it has not been tested, and I asserted it could not.
 
-**Status: observation, and the logic runs the other way.** A model that correctly marks an unknown value is not evidence that new schema is needed — it is evidence the current representation is sufficient for that behaviour. The sequence is: decide product behaviour first (should a note show markers, or omit?), then test whether the current representation can produce that behaviour. Schema is proposed only if it cannot.
+**Status: observation; blocked on a product decision.** No test, predicate, or schema proposal until the signer decides whether a note should show an unknown marker or omit the value. A model that marks a gap correctly is evidence the current representation suffices, not evidence it does not — so neither correct marking nor a single run failure justifies schema on its own. Schema requires a decided requirement **and** a demonstrated inability to meet it.
 
 It also settles a scoring question: a run that invents a value where the target has `[date]` fails fidelity; a run that omits the slot entirely fails completeness. Both are checkable.
 

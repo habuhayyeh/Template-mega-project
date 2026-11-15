@@ -91,4 +91,22 @@ A pass here says the STRUCTURE interfaces can be honoured. It does not say the s
 
 ## 8. Blinding and independence
 
+**The scorer receives three things and nothing else:** the artifact, the case oracle, and the predicate registry (id + version). It does not receive the seed manifest, the expected predicate, or any mutation metadata — those belong to the harness, which selects the artifact and records which predicate *should* fire.
+
+A scorer that can see the expected answer is not a scorer; it is a lookup.
+
 The primary scorer must not be the author of the substrates or of the artifacts under test. The author may score as a secondary challenger; disagreements are recorded, not averaged.
+
+## 9. Frozen campaign identity
+
+Every campaign record carries, at minimum:
+
+```text
+campaign_id, control_plane_version
+predicate_registry {id, version}, active_set id, specificity_policy id
+case, oracle_hash, parent_hash
+package_version, model, mode
+per-run: artifact hash, verdict, findings
+```
+
+Hashes are **SHA-256 over canonical JSON** (sorted keys, compact separators), not over bytes. Byte hashing makes a digest depend on formatting; content hashing makes it depend on content. The method is recorded in the manifest so a later run can tell which was used.

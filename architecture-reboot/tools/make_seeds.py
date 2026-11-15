@@ -26,8 +26,11 @@ def load():
 
 
 def sha(obj):
-    return "sha256:" + hashlib.sha256(
-        json.dumps(obj, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+    # Canonical JSON: sorted keys, fixed separators. Hashing bytes would make
+    # the digest depend on formatting; hashing canonical JSON makes it depend
+    # only on content.
+    canon = json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return "sha256:" + hashlib.sha256(canon).hexdigest()
 
 
 def m_s1_01(a):
@@ -73,10 +76,9 @@ def m_s2_03(a):
 
 def m_s2_06(a):
     rec = a["s2"]["adjudication"][0]
-    before = {"adoption": rec["adoption"], "evidence": rec["evidence"]}
+    before = rec["adoption"]
     rec["adoption"] = True
-    rec["evidence"] = ["S02"]
-    return [("/s2/adjudication/0", before, {"adoption": True, "evidence": ["S02"]})]
+    return [("/s2/adjudication/0/adoption", before, True)]
 
 
 def m_s3_01(a):
@@ -138,10 +140,16 @@ SEEDS = [
 def main():
     os.makedirs(OUT, exist_ok=True)
     parent = load()
+    with open(os.path.join(CASE, "oracle.json"), encoding="utf-8") as fh:
+        oracle = json.load(fh)
     manifest = {
         "case": parent["case"],
-        "predicate_set": PREDICATE_SET,
+        "predicate_registry": {"id": PREDICATE_SET, "version": "1"},
+        "active_set": "PILOT-ACTIVE-1",
+        "specificity_policy": "FULL_SILENCE-1",
+        "hash_method": "sha256 over canonical JSON (sorted keys, compact separators)",
         "parent_hash": sha(parent),
+        "oracle_hash": sha(oracle),
         "clean_parent": {"artifact": "PARENT-CLEAN.json", "expect": "zero findings"},
         "seeds": [],
     }

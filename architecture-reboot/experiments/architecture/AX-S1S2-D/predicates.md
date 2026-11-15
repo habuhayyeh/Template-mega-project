@@ -16,8 +16,8 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 |---|---|---|---|---|
 | `S1-CAND-01` | SEMANTIC | S1 | every candidate names a neurologic subject for which the encounter poses its own assessment question | 01,02,03,04,05,06,07,08,09,10,11 |
 | `S1-CAND-02` | MECHANICAL | S1 | every candidate carries ≥1 source anchor | all |
-| `S1-AUTH-01` | MECHANICAL | S1 | no candidate carries any field in the forbidden set `{adopted, adoption, adoption_verdict, selected_claim, resolved, status_current}`. The set is closed and versioned; a field outside it is permitted until added by acceptance change. Scored on field presence, never on vocabulary | all |
-| `S1-AUTH-02` | MECHANICAL | S1 | S1 emits no single selected claim; claims appear as candidates only | all |
+| `S1-AUTH-01` | MECHANICAL | S1 | no candidate carries any **adoption or final-state** field: `{adopted, adoption, adoption_verdict, resolved, status_current}`. Final-claim fields are `S1-AUTH-02`'s alone — the two sets are disjoint so no seed can be required to fire both. Scored on field presence, never vocabulary | all |
+| `S1-AUTH-02` | MECHANICAL | S1 | no candidate carries a **selected/final-claim** field: `{selected_claim, final_claim, chosen_claim}`; claims appear as candidates only. Owns this field family exclusively | all |
 | `S1-BODY-01` | SEMANTIC | S1 | a subject that only contextualises another problem does not become a candidate | 07,08,10 |
 
 `S1-CAND-01` is the one predicate here that is genuinely judgemental. It is also the one that carries the candidacy rule, so it must not be softened into a vocabulary check.

@@ -1252,4 +1252,26 @@ Applied. The parent was not clean, and that was the important finding.
 
 The corpus F-1 wording and the "schema only after a decided product requirement plus demonstrated inability" rule are applied as noted; the F-1 omission clause is removed because the product decision is pending.
 
-No Phase 0. No Doximity pilot.
+No Phase 0. No Doximity pilot.## 2026-11-15 · DeepSeek · Gate 0 build, final consistency
+
+All ten applied.
+
+**Hard blocker — resolved by disjoint field families.** `S1-AUTH-01` now owns adoption/final-state fields only (`adopted`, `adoption`, `adoption_verdict`, `resolved`, `status_current`); `S1-AUTH-02` exclusively owns selected-claim fields (`selected_claim`, `final_claim`, `chosen_claim`). The sets are disjoint, so no seed can be required to fire both under full-silence calibration.
+
+**`G0-S2-06` is now a single-field mutation** — one `adoption` false→true flip, evidence untouched. The coupled evidence write is gone. A CASE-02 parent is still the better home; when one exists the seed migrates.
+
+**`G0-S1-05` text aligned** to what the executable parent actually contains: the infarct as a context-only subject with no assessment question, not "evidence for the seizure claim".
+
+**`schema.md` example** replaced with the source-faithful claim, and its S1 forbidden-field pointer now says the sets live only in `predicates.md` — this was the second drift between the two files.
+
+**Calibration policy** is now derived from each predicate's own mode in `predicates.md`; the family headings are descriptive only.
+
+**Corpus F-1** no longer claims omission fails completeness. It requires a decided product requirement *and* a demonstrated inability before any schema proposal, and it is marked blocked on that decision.
+
+**Scorer blindness is now written as a rule:** the scorer gets artifact + oracle + predicate registry only. The seed manifest, expected predicate and mutation metadata belong to the harness. A scorer that can see the expected answer is a lookup, not a scorer.
+
+**Frozen campaign identity:** `MANIFEST.json` now carries predicate-registry id/version, active-set id, specificity-policy id, `parent_hash`, `oracle_hash`, and the hash method. Hashing is **SHA-256 over canonical JSON**, not bytes, so a digest depends on content rather than formatting.
+
+**Oracle matching** now says candidacy comparisons use clinical concept identity, not literal strings — a synonym for the infarct is still excluded.
+
+Not built: the scorer. Ready for it once this pass is accepted.

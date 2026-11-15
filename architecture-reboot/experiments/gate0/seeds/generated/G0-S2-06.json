@@ -41,9 +41,7 @@
         "object": "O01",
         "temporal": "2024-02 documented",
         "adoption": true,
-        "evidence": [
-          "S02"
-        ]
+        "evidence": null
       },
       {
         "object": "O03",
