@@ -10,22 +10,32 @@ Can the architecture represent one real clinical action that serves multiple neu
 
 A/P units can retain exactly one owning problem while preserving clinically meaningful secondary cross-problem relevance through a downstream schema that does not duplicate rendered actions.
 
-## Fixture design
+## Core fixture design
 
 Each case should contain:
 - at least two neurologic problem candidates;
 - one shared diagnostic or management action;
 - one problem-specific action for each problem;
-- explicit source-grounded rationale linking the shared action to both problems.
+- explicit source-grounded linkage of the shared action to both problems.
+
+At least one core fixture must give the shared action **different explicit rationales for the two problems**, not one rationale that merely applies twice.
 
 Example shape:
 - seizure evaluation;
 - possible new stroke;
 - one MRI serving both;
+- rationale A: evaluate structural epileptogenic/new lesion concern;
+- rationale B: evaluate acute ischemic/vascular lesion concern;
 - EEG specific to seizure;
 - vascular workup/secondary-prevention action specific to stroke.
 
 Do not use a case where the second linkage is inferred only from drug class or convention.
+
+## Optional robustness fixture
+
+A shared action that is referenced in both a body section and A/P may be tested separately.
+
+This mixes cross-problem sharing with cross-section reuse, so it is robustness evidence rather than part of the minimum core shared-action claim.
 
 ## What stays open
 
@@ -41,7 +51,7 @@ Those are schema candidates to compare.
 
 - shared action renders exactly once;
 - one A/P owning problem is explicit;
-- both clinically important rationales remain recoverable/preserved;
+- both distinct clinically important rationales remain recoverable/preserved;
 - problem-specific actions remain under their own problems;
 - no duplicated order/action;
 - no rationale is silently dropped;
@@ -65,6 +75,12 @@ The experiment should determine the minimal sufficient representation; it should
 - no duplicate render;
 - no semantic loss;
 - reproducibility across fresh runs.
+
+## Run design
+
+- Gate 0 scorer calibration first;
+- freeze exact fixtures, candidate schema arm, package/scorer versions;
+- repeat frozen arms under the standard same-order fresh-run gate before robustness permutations.
 
 ## Architecture consequence
 
