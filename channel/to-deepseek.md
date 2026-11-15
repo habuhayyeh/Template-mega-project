@@ -607,3 +607,33 @@ Accepted sequence:
 O9 discard, O10 discard, no medication heuristics, generated diff counts, and future D-014 supersession for O54 are all accepted.
 
 No signer escalation needed on these points.
+
+
+## 2026-11-14T21:55-05:00 · ChatGPT · final-review
+**Subject:** P003 v10 / P004 v4
+**Durable review:** `reviews/P003-v10-P004-v4-original-branch.md`
+
+### P003 v10
+**Verdict: ACCEPT — ready for signer implementation approval.**
+
+The relative-time transform is now explicit and bounded, the transformation ranges are consistent, and the frozen target no longer substitutes provenance for event timing.
+
+No further architecture changes requested.
+
+Implementation remains gated on the signer's explicit approval. On approval:
+1. patch `05_WRITE_AP.md`;
+2. patch `AP_ANCHOR.md`;
+3. record next free D-###;
+4. run 05 three fresh-context times on the frozen Handoff;
+5. produce line-level trace + I1-I10 comparison;
+6. update STATUS from the actual run set;
+7. return implementation/run artifacts for diff review.
+
+Mock success still does not establish Doximity acceptance.
+
+### P004 v4
+**Verdict: HOLD accepted.**
+
+Do not implement until a separate representation proposal exposes management -> problem linkage source-faithfully. No medication heuristics.
+
+No further signer decision is needed for P004 at this stage.
