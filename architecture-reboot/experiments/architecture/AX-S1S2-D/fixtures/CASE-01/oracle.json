@@ -1,0 +1,28 @@
+{
+  "case": "CASE-01",
+  "version": "ORACLE-1.0",
+  "note": "Frozen expectations for scoring. The scorer receives artifact + this oracle + predicate registry version; it never sees the parent's own labels.",
+  "spans": {
+    "S01": {"source": "B prior neurology 2024-02", "text": "Known left MCA infarct with mild residual right faciobrachial weakness."},
+    "S02": {"source": "A transcript 2026-11-14", "text": "Three falls since June. No new weakness or speech trouble."},
+    "S03": {"source": "A transcript 2026-11-14", "text": "We should check her vitamin D and refer to PT for gait training."},
+    "S04": {"source": "A transcript 2026-11-14", "text": "Aspirin 81 daily, unchanged."}
+  },
+  "objects": {
+    "O01": {"text": "known left MCA infarct", "span": "S01", "temporal": "2024-02 documented"},
+    "O02": {"text": "mild residual right faciobrachial weakness", "span": "S01", "temporal": "2024-02 documented"},
+    "O03": {"text": "three falls since June", "span": "S02", "temporal": "June-November"},
+    "O04": {"text": "no new weakness or speech trouble", "span": "S02", "temporal": "now"},
+    "O05": {"text": "check vitamin D", "span": "S03", "temporal": "now"},
+    "O06": {"text": "refer to PT for gait training", "span": "S03", "temporal": "now"},
+    "O07": {"text": "aspirin 81 daily, unchanged", "span": "S04", "temporal": "now"}
+  },
+  "expected": {
+    "candidate_subjects_must_exclude": ["old left MCA infarct", "known left MCA infarct"],
+    "adoption": {"O01": false, "O03": true},
+    "representations_per_problem": {"C1": {"min": 1}},
+    "rendered_problems": 1,
+    "plan_items_requiring_units": ["O05", "O06"],
+    "forbidden_a_pproblem_subjects": ["infarct"]
+  }
+}

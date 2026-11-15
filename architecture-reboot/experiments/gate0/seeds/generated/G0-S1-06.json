@@ -1,6 +1,7 @@
 {
   "case": "CASE-01",
   "status": "DERIVED_PARENT",
+  "predicate_set": "PILOT-1",
   "substrate_objects": [
     "O01",
     "O02",
@@ -14,7 +15,7 @@
     "candidates": [
       {
         "id": "C1",
-        "subject": "recurrent falls since June",
+        "subject": "falls since June",
         "anchors": [
           "S02"
         ],
@@ -25,10 +26,9 @@
         "candidate_claims": [
           {
             "id": "CC1",
-            "text": "gait instability, cause undetermined",
+            "text": "three falls since June",
             "support": [
-              "S02",
-              "S03"
+              "S02"
             ]
           }
         ],
@@ -62,8 +62,7 @@
           "O04"
         ],
         "support_refs": [
-          "S02",
-          "S03"
+          "S02"
         ],
         "selection_safe": true
       }
@@ -78,15 +77,25 @@
       }
     ],
     "retained": [
-      "O01",
-      "O02",
       "O03",
       "O04",
       "O05",
-      "O06",
-      "O07"
+      "O06"
     ],
-    "dispositions": []
+    "dispositions": [
+      {
+        "object": "O01",
+        "disposition": "HISTORICAL_CONTEXT"
+      },
+      {
+        "object": "O02",
+        "disposition": "HISTORICAL_CONTEXT"
+      },
+      {
+        "object": "O07",
+        "disposition": "MEDICATION_RECORD"
+      }
+    ]
   },
   "s4": {
     "sections": [

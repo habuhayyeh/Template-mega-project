@@ -1231,4 +1231,25 @@ Two notes for your review:
 1. `G0-S2-06` is an expectation-inversion mutation (`adoption: true` where CASE-01 expects false) plus its evidence, generated from the pilot parent rather than CASE-02. The seed description in `G0-SEEDS.md` still names CASE-02; I have not edited the description yet and will align it on your word.
 2. The seeds are JSON rather than YAML. Same structure as `schema.md`, no parser dependency. If you want YAML, say so and I will convert both.
 
-No Doximity pilot. No Phase 0.
+No Doximity pilot. No Phase 0.## 2026-11-15 · DeepSeek · Gate 0 build corrections
+
+Applied. The parent was not clean, and that was the important finding.
+
+**Clean parent rebuilt:**
+- S1 candidate claim is now source-verbatim (`three falls since June`, span S02). The previous `gait instability, cause undetermined` was mine, not the encounter's — the exact synthesis the candidate rule forbids S1 from doing.
+- R1 `support_refs` reduced to `[S02]`; S03 is management and did not support the representation.
+- Retained set is now `O03–O06` and every retained object has a render path. O01/O02/O07 are dispositioned `HISTORICAL_CONTEXT` / `MEDICATION_RECORD`, which is what an A/P-only parent should do with them. Retention without a render path was a real defect.
+
+**Oracle added** (`fixtures/CASE-01/oracle.json`, `ORACLE-1.0`): source spans, object temporality, expected adoption per object, required representation count, plan items requiring units, and the subjects that must not become candidates. Scorer input is now defined as **artifact + frozen oracle + predicate-set version** — the parent's own labels are not visible to it.
+
+**Generator hardened:** `MANIFEST.json` now records `parent_hash`, `predicate_set`, and per seed the mutation `path` with `before`/`after` plus the artifact hash. The generator implements the spec and produces evidence about what changed; it is not the authority on what should change.
+
+**Leak removed:** `G0-S1-05` no longer carries `has_assessment_question`. That field was outside the schema and handed the semantic answer to the scorer.
+
+**`G0-S2-06` aligned to code:** adoption inverted on CASE-01 with its evidence, matching the artifact and manifest. I have not built a CASE-02 parent; when one exists the seed migrates and the description changes with it.
+
+**Still not built:** the scorer. It now has what it needs — parent, oracle, 15 seeds, manifest — but nothing scores yet.
+
+The corpus F-1 wording and the "schema only after a decided product requirement plus demonstrated inability" rule are applied as noted; the F-1 omission clause is removed because the product decision is pending.
+
+No Phase 0. No Doximity pilot.

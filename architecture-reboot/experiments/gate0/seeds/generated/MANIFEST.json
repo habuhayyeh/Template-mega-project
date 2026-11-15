@@ -1,69 +1,203 @@
 {
   "case": "CASE-01",
+  "predicate_set": "PILOT-1",
+  "parent_hash": "sha256:6e030e27b6391cd4",
+  "clean_parent": {
+    "artifact": "PARENT-CLEAN.json",
+    "expect": "zero findings"
+  },
   "seeds": [
     {
-      "artifact": "PARENT-CLEAN.json",
-      "expect": "zero findings"
-    },
-    {
       "artifact": "G0-S1-01.json",
-      "must_fire": "S1-AUTH-01"
+      "must_fire": "S1-AUTH-01",
+      "mutations": [
+        {
+          "path": "/s1/candidates/0",
+          "before": "<no adopted key>",
+          "after": "adopted=true"
+        }
+      ],
+      "hash": "sha256:8080bafbbb4fb190"
     },
     {
       "artifact": "G0-S1-02.json",
-      "must_fire": "S1-AUTH-02"
+      "must_fire": "S1-AUTH-02",
+      "mutations": [
+        {
+          "path": "/s1/candidates/0",
+          "before": "<no selected_claim>",
+          "after": "selected_claim=CC1"
+        }
+      ],
+      "hash": "sha256:bb1291b88202e817"
     },
     {
       "artifact": "G0-S1-04.json",
-      "must_fire": "S1-CAND-02"
+      "must_fire": "S1-CAND-02",
+      "mutations": [
+        {
+          "path": "/s1/candidates/0/anchors",
+          "before": [
+            "S02"
+          ],
+          "after": []
+        }
+      ],
+      "hash": "sha256:f2ab40f9d7f70dad"
     },
     {
       "artifact": "G0-S1-05.json",
-      "must_fire": "S1-CAND-01"
+      "must_fire": "S1-CAND-01",
+      "mutations": [
+        {
+          "path": "/s1/candidates/-",
+          "before": "<absent>",
+          "after": "C2 substrate-only subject"
+        }
+      ],
+      "hash": "sha256:a803ecaff4a2f8c9"
     },
     {
       "artifact": "G0-S1-06.json",
-      "must_fire": "S1-AUTH-01"
+      "must_fire": "S1-AUTH-01",
+      "mutations": [
+        {
+          "path": "/s1/candidates/0",
+          "before": "<no status_current>",
+          "after": "status_current=true"
+        }
+      ],
+      "hash": "sha256:61a20b5fc6770b94"
     },
     {
       "artifact": "G0-S2-01.json",
-      "must_fire": "S2-REP-01"
+      "must_fire": "S2-REP-01",
+      "mutations": [
+        {
+          "path": "/s2/representations/0/support_refs",
+          "before": [
+            "S02"
+          ],
+          "after": []
+        }
+      ],
+      "hash": "sha256:522d1b3a53153b70"
     },
     {
       "artifact": "G0-S2-03.json",
-      "must_fire": "S2-TEMP-01"
+      "must_fire": "S2-TEMP-01",
+      "mutations": [
+        {
+          "path": "/s2/adjudication/0/temporal",
+          "before": "2024-02 documented",
+          "after": "now"
+        }
+      ],
+      "hash": "sha256:842bc26a581efc92"
     },
     {
       "artifact": "G0-S2-06.json",
-      "must_fire": "S2-ADOPT-01"
+      "must_fire": "S2-ADOPT-01",
+      "mutations": [
+        {
+          "path": "/s2/adjudication/0",
+          "before": {
+            "adoption": false,
+            "evidence": null
+          },
+          "after": {
+            "adoption": true,
+            "evidence": [
+              "S02"
+            ]
+          }
+        }
+      ],
+      "hash": "sha256:df30df2c50340407"
     },
     {
       "artifact": "G0-S3-01.json",
-      "must_fire": "S3-INC-01"
+      "must_fire": "S3-INC-01",
+      "mutations": [
+        {
+          "path": "/s3/rendered/0/approved_representation",
+          "before": "R1",
+          "after": null
+        }
+      ],
+      "hash": "sha256:afd6765000e0736e"
     },
     {
       "artifact": "G0-S3-02.json",
-      "must_fire": "S3-SEL-01"
+      "must_fire": "S3-SEL-01",
+      "mutations": [
+        {
+          "path": "/s3/rendered/0/selected_rep",
+          "before": "R1",
+          "after": "R-999"
+        }
+      ],
+      "hash": "sha256:2c097a7007d5c06f"
     },
     {
       "artifact": "G0-S3-04.json",
-      "must_fire": "S3-ACCT-01"
+      "must_fire": "S3-ACCT-01",
+      "mutations": [
+        {
+          "path": "/s3/dispositions",
+          "before": "O07 dispositioned MEDICATION_RECORD",
+          "after": "O07 unaccounted"
+        }
+      ],
+      "hash": "sha256:7a1dbe94e21f62d6"
     },
     {
       "artifact": "G0-S4-01.json",
-      "must_fire": "S4-INC-01"
+      "must_fire": "S4-INC-01",
+      "mutations": [
+        {
+          "path": "/s4/problems",
+          "before": "1 problem",
+          "after": "0 problems while S3 rendered 1"
+        }
+      ],
+      "hash": "sha256:1646c003b4f28520"
     },
     {
       "artifact": "G0-S4-02.json",
-      "must_fire": "S4-INC-01"
+      "must_fire": "S4-INC-01",
+      "mutations": [
+        {
+          "path": "/s4/problems/-",
+          "before": "<absent>",
+          "after": "P2 not in S3 rendered set"
+        }
+      ],
+      "hash": "sha256:67a6d0c9ace8eb9a"
     },
     {
       "artifact": "G0-S4-04.json",
-      "must_fire": "S4-MEM-01"
+      "must_fire": "S4-MEM-01",
+      "mutations": [
+        {
+          "path": "/s4/units/0/members/-",
+          "before": "<absent>",
+          "after": "O99 not in retained"
+        }
+      ],
+      "hash": "sha256:e3fceb9ffb403e99"
     },
     {
       "artifact": "G0-S4-06.json",
-      "must_fire": "S4-COMP-01"
+      "must_fire": "S4-COMP-01",
+      "mutations": [
+        {
+          "path": "/s4/units",
+          "before": "U2 present",
+          "after": "U2 removed for retained O05"
+        }
+      ],
+      "hash": "sha256:8bb3f60027a259b8"
     }
   ]
 }
