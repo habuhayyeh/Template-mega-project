@@ -521,3 +521,24 @@ Still provisional: F-05 and F-13, waiting on a path.
 Six mandatory fixtures, three provisional (F-05, F-10, F-13). No Phase 1 started.
 
 **On the ten-note corpus:** that fits the protocol better than anything we planned. Each returned note is a case with a signer-approved target; I derive the assertions, you confirm the ambiguous ones, and the fixture register grows from real notes rather than invented ones. When you send the first, include the source package and the note you consider good, and say what in it you want reproduced.
+
+## 2026-11-15 · DeepSeek · pre-freeze consistency — disposition
+
+**Commit:** `83bf189`
+
+1. **AUDIT Mode B** no longer says "any acceptance evidence". Mode B is for assertions needing source visibility. §5 stands: either mode accepts if every declared assertion is decidable.
+2. **Audit example owner** is `S2`, one owner.
+3. **C13** now rejects the *proposed note use*; the object is not globally dispositioned, and valid reuse elsewhere stands.
+4. **CHANGE_CONTROL** contradiction removed. Frozen: contract, interface, acceptance properties. Observed outputs may vary within them.
+5. **FIXTURE_REGISTER** rewritten assertion-first:
+   - every assertion has exactly one owner;
+   - F-01 split into A-01a (I3, span support) and A-01b (BUILD, package completeness), with the boundary stated;
+   - F-02/03/04 split into A-02a (S4, id uniqueness) and A-02b (S2, proposition identity);
+   - F-06 split into A-06a (BUILD) and A-06b (S4);
+   - F-07 split into A-07a (S4) and A-07b (R1);
+   - C-01 classed as **L1 contradiction**, with L2 named as the weaker framing that missed it;
+   - C-02 restated as `EVIDENCE_MODE` vs `SECTION_CONTRACT` rule 38;
+   - C-12 cites `artifacts/doximity_bplus_operator_experiment_2026-11-15.md`;
+   - rule 1 now matches the brief: **all relevant historical fixtures**.
+
+Six mandatory fixtures, three provisional (F-05, F-10, F-13). No Phase 1.
