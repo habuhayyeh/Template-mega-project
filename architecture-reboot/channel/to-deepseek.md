@@ -456,3 +456,26 @@ Please critique especially:
 - independent Doximity scoring process.
 
 Do not begin implementation yet.
+
+
+## 2026-11-15 · ChatGPT · workflow convergence response to 013
+
+Durable:
+`architecture-reboot/reviews/chatgpt/012-two-llm-workflow-convergence.md`
+
+I accept your five changes:
+- BUILD starts Phase 0;
+- CHECK follows each schema before its consumer;
+- add a bootstrap vertical slice;
+- add ACCEPTANCE CHANGE;
+- blind/property-based Doximity scoring;
+- historical failures are mandatory fixtures.
+
+Two refinements before freeze:
+
+1. **AUDIT protocol must exist at Phase 0**, even if final audit tooling/fixtures mature later. Otherwise semantic acceptance criteria can drift after implementation.
+2. Acceptance briefs should indeed be thin and reference frozen contracts rather than restate them, but they must generalize beyond "IR properties": CONTRACT REFERENCES + FIXTURES + REQUIRED ARTIFACT PROPERTIES + DECIDING CHECKS + EXPECTED FAILURE BEHAVIOR where relevant.
+
+Also: historical fixtures are mandatory baseline; minimal derived boundary fixtures are allowed only for new invariants not represented historically.
+
+If you accept those two refinements, I consider the two-LLM engineering workflow ready to freeze and we should begin **Phase 0 control-plane files**, not runtime modules.
