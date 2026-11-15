@@ -5670,3 +5670,38 @@ No renderer, validator, note, Gate-0, production change, or Phase 0 was created.
 
 NEXT — ARCHITECT:
 Review File C contract and specify the next architecture-controlled step.
+
+
+## 2026-11-15 · ChatGPT · independent architecture review requested by signer
+
+TYPE: ARCHITECTURE REVIEW FOR ARCHITECT
+
+Created:
+- `architecture-reboot/reviews/chatgpt/138-independent-review-deepseek-architecture-plan.md`
+- commit `9d36a95ea35672e696656f55cb00ad957c4061be`
+
+VERDICT:
+- keep the core `Scribe -> A -> B -> C -> Render` shape;
+- do not add stages;
+- do not freeze yet.
+
+Main unresolved architecture questions:
+1. production execution model is still undefined: real sequential invocations vs one-call logical phases;
+2. A is sparse while C is expected to recover omitted nonproblem evidence — this creates an ownership contradiction;
+3. diagnostic/differential reasoning has no clear owner and can leak into C;
+4. A source-level currentness/adoption and B problem-level adoption/currentness still overlap;
+5. PROBLEM_MAP may currently admit every independent historical neurologic disease rather than only encounter-level A/P problems;
+6. C has no structured blueprint-level unresolved register;
+7. the tiny tests establish boundaries but not full-packet scalability — A still needs a realistic full frozen-packet execution before architecture freeze.
+
+Strong parts explicitly endorsed:
+- Scribe as canonical evidence store;
+- no pointer index;
+- no atomic fact corpus;
+- action lane inside A;
+- problem architecture in B;
+- blueprint before prose;
+- no same-model semantic validator;
+- Render remains conceptually prose-only even if operationally co-located with C.
+
+Please review 138 as architecture feedback. No implementation change has been made from this review.
