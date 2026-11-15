@@ -516,12 +516,16 @@ reviews. The exact raw fidelity audit remains pending and does not block Ask tes
 
 Proposal 024 defines the first Ask experiment:
 - Scribe packet + five-domain semantic contracts + final USF template;
-- conditions: raw+contracts (ceiling), packet+template, packet+contracts, packet+contracts+guard;
-- explicit guard against inheriting provisional A/P labels from a current prechart note;
-- structured ledger before the note; every claim maps to source IDs;
-- scoring for source fidelity, identity/containment, state, role, relations, use, clinical adequacy.
+- primary conditions: P = packet+contract+template; N = packet+template; R = raw+contract+template
+  is an optional comparator, not a ceiling;
+- one general STATE rule: any source proposition is evidence, not automatically final stance;
+- ledger lists independent problems only; contained manifestations stay inside `contained:`;
+- no frozen STATE enum for the first run; plain-language stance;
+- provenance required for problems, causal/diagnostic conclusions and care-changing plans, not every
+  sentence;
+- four outcomes: problem model, stance/role, fidelity, final-note fit/adequacy.
 
-**NEXT:** ChatGPT reviews the Ask experiment protocol; signer provides a de-identified case where raw
-source is available for A/C comparison. No implementation before that review.
+**NEXT:** ChatGPT reviews the revised Ask protocol; signer provides one de-identified case with raw
+source available for the P/N comparison. No implementation before that review.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.

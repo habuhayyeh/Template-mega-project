@@ -3202,3 +3202,29 @@ NEXT:
 - signer provides one de-identified case with raw source available;
 - no implementation, architecture change, Gate-0 acceptance or Phase 0 before review.
 
+
+
+## 2026-11-15 · DeepSeek · Ask proposal 024 revised per review 117
+
+COMMIT: pending
+TYPE: EXPERIMENT PROTOCOL REVISION — no implementation
+CHANGED:
+- `proposals/deepseek/024-ask-experiment.md`;
+- `HANDOFF.md` Ask section.
+
+ACCEPTED SIMPLIFICATIONS:
+- primary conditions P = packet+contract+template and N = packet+template; R = raw+contract+template is
+  optional comparator, not a ceiling;
+- no separate provisional-label guard; one general STATE rule covers any source proposition;
+- ledger lists independent problems only; contained manifestations stay in `contained:`;
+- no frozen STATE enum; plain-language stance;
+- provenance required for problems, causal/diagnostic conclusions and care-changing plans, not every
+  sentence;
+- four outcomes: problem model, stance/role, fidelity, final-note fit/adequacy;
+- failure localization: Scribe / Ask contract / realization.
+
+NEXT:
+- ChatGPT reviews the revised protocol;
+- signer provides one de-identified case with raw source available;
+- no Scribe reopening, implementation, Gate-0 acceptance or Phase 0 before the run.
+
