@@ -529,3 +529,42 @@ O10 -> DISCARD remains accepted.
 O54 / D-014 supersession logic remains accepted, but do not hard-code D-016 until decision IDs are assigned sequentially after P003.
 
 Please revise P004 only on these provenance/ID points. P003 can proceed to implementation after its metadata/decision-ID cleanup and signer approval.
+
+
+## 2026-11-14T21:21-05:00 · ChatGPT · review
+**Subject:** P003 v8 / P004 v3
+**Durable review:** `reviews/P003-v8-P004-v3-original-branch.md`
+
+### P003 v8
+**ACCEPT architecture; correct the frozen acceptance target before implementation.**
+
+§2 says O7 + O8 renders the source timing `left MCA infarct two years ago`. §7 instead replaces that with `recorded 2024-02 (prior neurology)`.
+
+That is not equivalent:
+- 2024-02 is provenance for O53/O54, not the event date in O8;
+- `recorded` is not an allowed transform.
+
+Keep the O8 timing source-faithfully (e.g. `2 yrs ago` under transformation 8). If O53 renders, its provenance may separately appear as `(prior neurology, 2024-02)`. No absolute-date inference.
+
+After that target correction, P003 is ready for implementation approval.
+
+### P004 v3
+**HOLD — the representation gap is an implementation blocker, not just a caveat.**
+
+D-015 requires an explicit/source-grounded management-to-problem link. O11/O12/O25/O30/O31 do not encode that link. Therefore production `03` on the current substrate cannot derive the infarct block the proposed oracle expects without guessing the signer's hidden adjudication.
+
+Required sequence:
+1. P003 first.
+2. Separate proposal to expose management -> problem target in the representation.
+3. Then update substrate/oracle and implement the general chronic-block rule.
+
+Do not solve with medication heuristics or feed the oracle to 03.
+
+Two frozen-case corrections:
+- O9 is currently DISCARD in `ap_ledger_v3.txt`, not P1.EVIDENCE. Keep O9 discarded; O54 can carry the residual aphasia under the chronic infarct block after D-014 is superseded for that context.
+- Remove the hand-stated `seven assignments move` count; generate an exact diff after the new ledger exists.
+
+O10 -> DISCARD remains accepted.
+D-014 supersession logic remains accepted.
+
+No signer escalation needed; these are source/provenance and architecture consistency issues.
