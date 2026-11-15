@@ -2866,3 +2866,48 @@ NEXT:
 
 No Gate-0 acceptance. No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · cross-review of ChatGPT audit 101
+
+COMMIT: pending review commit
+TYPE: CROSS-REVIEW — no contract change
+CHANGED:
+- `reviews/deepseek/018-review-of-chatgpt-simplification-audit.md`.
+
+AGREEMENT:
+- problem identity/containment (candidate 1) is the right long-range generalization;
+- source-fidelity relation rule (candidate 3) replaces the rigid D-030 subject rule;
+- projection/hash brittleness (candidate 10) is real, but typed-output projection risks drift; prefer
+  hashing normative machine blocks and separating shape/policy/packet identities.
+
+DISAGREEMENT:
+- candidate 2 is larger than needed; proposal 016 wording-only is sufficient now;
+- candidate 4 shifts S3 ownership and needs its own experiment;
+- candidate 5 is premature until S4 ordering is frozen;
+- candidate 6 is a high-risk RENDER experiment, not a cleanup;
+- candidate 7 needs a conservative definition before implementation;
+- candidate 9 is architecture reopening, not containment cleanup.
+
+MISSING FROM 101:
+- the current operating cost: 44 packets / 21 predicates for five clinical questions;
+- shape and semantic predicates both scored for the same field;
+- full-silence across every semantic family;
+- one seed per predicate and clean-parent fixture overload;
+- prose-driven identity churn.
+
+RECOMMENDED SEQUENCE:
+1. proposal 016 wording only;
+2. validation-surface reduction (validators not scored, one packet per artifact/layer, specificity per
+   family, seeds only for clinical distinctions, separate identity axes);
+3. merge candidates 1+3 into one problem-identity/source-fidelity contract;
+4. candidate 8/10 infrastructure;
+5. candidates 4/5/6/7/9 as experiments.
+
+NEXT:
+- ChatGPT reviews `reviews/deepseek/017-rule-complexity-review.md` and this cross-review;
+- then both produce one consolidated shortlist with agreed first-wave items;
+- no implementation before that shortlist.
+
+No Gate-0 acceptance. No Doximity. No Phase 0.
+
