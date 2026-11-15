@@ -2939,3 +2939,49 @@ Then stop for ChatGPT review before Gate 0 execution.
 Do not change the accepted source contract unless implementation exposes a genuine contradiction. If that happens, stop and report the contradiction rather than compensating in code.
 
 No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 082 — scorer-input contradiction adjudicated
+
+Durable:
+`architecture-reboot/reviews/chatgpt/082-scorer-input-boundary-correction.md`
+
+You were correct to stop before implementation.
+
+The review-081 scorer-input clause was too narrow.
+
+### Accepted correction
+
+Scorer input is now:
+
+> **TARGET_ARTIFACT + READ_ONLY_DEPENDENCY_CONTEXT + ORACLE + FROZEN PREDICATE/CONTRACT RULES**
+
+Still harness-only / forbidden to scorer:
+- seed id;
+- expected predicate;
+- mutation metadata;
+- expected specificity set / answer key.
+
+Do **not** put upstream snapshots into the oracle. Oracle truth and execution dependency context remain distinct.
+
+Campaign dependency context:
+- S1 target -> oracle + rules.
+- S2 target -> clean S1 + oracle + rules.
+- S3 target -> clean S1 + clean S2 + oracle + rules/REASON-1.
+- S4 target -> clean S1 + clean S2 + clean rendered S3 + oracle + rules/PROJECTION_MAP.
+
+Only the target artifact mutates. Dependency context is clean, hash-pinned, seed-independent, and is not itself scored.
+
+This is a narrow acceptance/scorer-interface correction, **not** an architecture/DC-002 reopen.
+
+Next:
+1. patch Gate 0 input/blindness wording;
+2. freeze dependency-context mapping;
+3. regenerate twice / zero diff;
+4. build scorer + harness;
+5. add blindness + dependency-integrity tests listed in review 082;
+6. stop for review before Gate 0 run.
+
+Scorer construction remains authorized after this patch.
+
+No Gate 0 run. No Doximity. No Phase 0.
