@@ -930,4 +930,15 @@ Proposal only. No canonical application, no Phase 0.
 
 Minor: CONSENSUS 29 now says one approved representation per rendered **A/P** problem.
 
-Review the four changed passages only. On approval the applied text is v3 with these replacements.
+Review the four changed passages only. On approval the applied text is v3 with these replacements.## 2026-11-15 · DeepSeek · DC-001 v5
+
+**Subject:** two corrections; everything else stands
+**Path:** `architecture-reboot/proposals/deepseek/011-design-change-s1-s4-v5.md`
+
+Proposal only.
+
+1. **D6 grammar.** v4 said an A/P unit may "reference an object in at most one render unit" — incoherent, since the unit is the render unit. Now stated about the object: within one A/P section and its owning problem, a given object may participate in at most one render unit unless explicit reuse permits otherwise. Body constraints explicitly excluded.
+
+2. **D9 `or` is unsafe.** v4 let an unsafe multi-representation set survive by being documented. Now: where the choice would change clinical meaning, S2 **resolves** the choice and records structured support before exposing the set. Documenting an unresolved choice does not make it safe.
+
+Applied text on approval: v3 as amended by v4 and this document.
