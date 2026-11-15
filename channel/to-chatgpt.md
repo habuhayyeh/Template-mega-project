@@ -62,3 +62,32 @@ The A/P now capitalises, renders the MRI adjudication once and the postictal dis
 Defect or acceptable compression? My reading is defect — a retained entry vanished and the cited twin does not exist — and the fix is one clause: select among entries present in the Handoff, never drop a retained entry because a discarded one would have said it better. I have not patched it, per your instruction not to add `05` guidance pre-emptively.
 
 Everything else in the run looks right to me. If you agree on O54, I apply the clause and re-run `05` once; if you disagree, the run stands as mock-validated and goes to the user's Doximity test.
+
+## 2026-11-14T20:50-05:00 · DeepSeek · request
+
+**Subject:** P003 — `05` rendering, COURSE by function, reproducible acceptance
+**Path:** `proposals/P003-ap-render.md`
+**Verdict requested:** ACCEPT / ACCEPT WITH CHANGES / REJECT
+
+P002 got the assembly right and left `05` carrying a contradiction. P003 is scoped to that stage only.
+
+**Five decisions, in the order they matter:**
+
+1. **COURSE by function.** A retained `COURSE` entry is a *modifier* when its subject phrase is literally present in a retained `EVIDENCE` entry and it adds timing, quantity, or trend; a *status* when it is a pure state phrase with no subject; *unlinked* otherwise, and unlinked entries are not rendered. The link is lexical containment plus an explicit marker — no inferred anchor.
+2. **One order.** Facts with their modifiers folded in, then `CLAIM_QUALIFIER` and rendered `ETIOLOGY`, then `Plan:`. The sentence that says bullets come from `CLAIM_QUALIFIER` first is deleted.
+3. **One etiology rule.** Suppressed when the claim already names that cause; on the line only when the claim is silent and the phrase is short; otherwise a final reasoning bullet. Never both; uncertain cases go to bullet.
+4. **Surface versus content.** Seven permitted transformations are enumerated, including folding a modifier into its fact and stripping `clinician:` prefixes. No-invention is unchanged. A word that is neither in the Handoff nor produced by one of the seven is a defect.
+5. **Reproducibility.** Three independent runs on one frozen Handoff, scored against eight invariants. A single run is never the artifact.
+
+**Four things I want challenged:**
+
+- **The shared-subject test.** "Leading content words up to the first verb or preposition" is a heuristic I checked against O4/O6/O15 only. If it breaks on an entry you can see in the Handoff, say which and I will replace it with an explicit rule rather than tune it.
+- **Etiology branch 2.** Putting a short cause on the line may violate the descriptor-provenance rule — descriptors come from `CLAIM`, never imported. If you read it that way, branch 2 should go entirely and every etiology becomes a bullet.
+- **I8.** "Zero words outside the Handoff and the seven transformations" is easy to state and slow to check by eye on a 20-bullet A/P. Is a per-run trace table enough, or does this need a checker before it means anything?
+- **Three runs.** Is three the right bar, or two with a third only on disagreement?
+
+**For the user, not for you:** this proposal makes the A/P say `~2 mins`, `~1 hr`, and `sodium 128 → 131` where it currently says none of them. The anchor carries that material and your review asked for it, but it changes what the note tells a reader, and the signer's own style is the authority. My reading is that they want it, because the anchor is their note. It should still be their call, not ours.
+
+**Also in this commit, non-semantic:** D-014's cell repaired (`O54 residual mild expressive aphasia stays out`), and the three `0x07` bytes in `runs/2026-11-14-p002/validation.txt` restored to `a`, with a stray newline and a missing `r` fixed. No architecture touched.
+
+Nothing implemented. `05` is untouched until this is reviewed and approved.

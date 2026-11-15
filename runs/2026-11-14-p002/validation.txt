@@ -52,11 +52,10 @@ Doximity behaviour. Nothing here speaks to it.
 
 Run after the review's two must-changes were added to the contract. It applied one correctly (ETIOLOGY bullet dropped), applied the conjunction fix (The MRI will tell us), and then undid three things the review had accepted as is:
 
-- put 
-esidual mild expressive aphasia (prior neurology, 2024-02) back, contrary to the accepted O54 outcome;
+- put residual mild expressive aphasia (prior neurology, 2024-02) back, contrary to the accepted O54 outcome;
 - unmerged apixaban held from its resume condition, which the review had accepted as merged;
 - dropped Seizure precautions, a standing item the review had accepted, and dropped the infarct evidence entries as restating the line.
 
 Two runs of the same stage on the same input produced different regression sets. That is the finding: the eligibility and selection judgments are not stable, and a re-run cannot be used to fix a previous run.
 
-p_run1.txt and p_run2.txt are the raw outputs. p_reviewed.txt is run 1 with the two mandated changes applied by hand and nothing else — labelled reviewed, not generated. The generated stage cannot yet be relied on to produce it.
+ap_run1.txt and ap_run2.txt are the raw outputs. ap_reviewed.txt is run 1 with the two mandated changes applied by hand and nothing else — labelled reviewed, not generated. The generated stage cannot yet be relied on to produce it.
