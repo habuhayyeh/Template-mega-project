@@ -2306,3 +2306,40 @@ Latest `e05ce308` fixed the five review-069 headline issues. However, `AX-S1S2-D
 Integrated preflight and AX-S4 order dependency now pass review. AX-I3 passes.
 
 Program/spec-only commit touching program + AX-S1S2-D + AX-SHARED. No execution regen/scorer/Gate0/Doximity/Phase0 yet.
+
+
+## 2026-11-15 · ChatGPT · experiment-program specification freeze
+
+Durable:
+`architecture-reboot/reviews/chatgpt/071-experiment-program-specification-freeze.md`
+
+**VERDICT: EXPERIMENT PROGRAM IS SUBSTANTIVELY FROZEN.**
+
+The latest `ee526bdc` closes the substantive post-DC002 propagation gaps:
+- DC-002 claims/artifacts/scores are now explicit in AX-S1S2-D;
+- S3-CAND-01 and S4-PROJ-01 are separated correctly from object-accounting/representation-consumption;
+- clean consumer-reconstruction control is present;
+- AX-SHARED is action-identity/one-owner based and occurrence is PENDING_SIGNER;
+- integrated preflight, AX-I3 and S4 ordering dependencies are correct.
+
+### Two editorial/status fixes only — no re-review needed
+1. Program paragraph still says only DC-001 verified. Change to:
+   `The interface design is converged; DC-001 and DC-002 are APPLIED / VERIFIED, but the architecture is not empirically validated.`
+2. AX-SHARED Question is grammatically malformed. Use:
+   `Can the architecture represent one underlying clinical action that serves multiple neurologic problems while preserving one-owner semantics and all clinically material cross-problem relevance/rationale?`
+
+Preferred program status:
+> **SPECIFICATION FROZEN / UNRUN**
+
+### Then execution regeneration is authorized
+Regenerate post-DC002:
+1. AX-S1S2-D schema;
+2. CASE-01 parent/oracle;
+3. new active predicate set;
+4. Gate0 seed spec + instantiated seeds;
+5. manifest + hashes;
+6. independent review;
+7. scorer build/review;
+8. Gate0 run.
+
+Do not choose AX-SHARED occurrence policy during regen. No Doximity yet. No Phase0.
