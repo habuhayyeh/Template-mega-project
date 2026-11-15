@@ -60,8 +60,8 @@ Named by failure class, not described as bad output.
 ```text
 FAILURE BEHAVIOUR
   class F2 duplication      → reject unit pair, fail closed
-  class C13 over-inclusion  → object is dispositioned NOT_USED with a reason;
-                              placement is checked by audit, not rejected at runtime
+  class C13 over-inclusion  → the proposed note use is rejected; the object is not
+                              globally dispositioned, and valid reuse elsewhere stands
   class C11 contradiction   → build fails, no artifact produced
 ```
 

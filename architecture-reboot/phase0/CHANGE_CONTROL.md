@@ -12,7 +12,7 @@ If a "patch" changes any word that governs behaviour, it is not a patch.
 
 ## 2. IMPLEMENTATION CHANGE
 
-A change that does not alter any interface, contract, scope, or observable behaviour — regardless of how many files it touches. Moving code between files is not a design change; changing what a caller may rely on is.
+A change that does not alter any contract, interface, or acceptance property — regardless of how many files it touches. Observed outputs may vary within those properties. Moving code between files is not a design change; changing what a consumer may rely on is.
 
 Examples: rewriting an internal routine, improving error messages inside the module, refactoring internals.
 

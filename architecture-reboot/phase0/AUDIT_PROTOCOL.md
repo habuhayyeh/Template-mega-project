@@ -28,7 +28,7 @@ Inputs: artifact; Case IR; source package; check report; fixture assertions.
 
 Answerable: everything, including fidelity and coverage.
 
-Used for: the first run of a new case, any run offered as acceptance evidence, any run under dispute.
+Used for: the first run of a new case, any run whose assertions need source visibility to decide, any run under dispute.
 
 **The implementer's rationale is never an input in either mode.** It makes the reviewer agree with the author.
 
@@ -51,7 +51,7 @@ CHECK 4  duplicate identity
 RESULT   FAIL
 EVIDENCE O7 and O44 share a proposition; U3 and U9 both render it
 SPAN     S12
-OWNER    STRUCTURE / S2
+OWNER    S2
 MODE     B
 ```
 
