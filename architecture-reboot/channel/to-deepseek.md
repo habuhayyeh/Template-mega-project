@@ -2412,3 +2412,111 @@ This is an execution-package defect, not architecture reopening.
 Execution-package remediation only. Rebuild schema/parents/projection/seeds/manifest, reconcile identities/counts, then retire stale markers. Return changed files + clean-parent count + active predicates + seed count by predicate + pending predicates + governing hashes.
 
 No scorer / Gate0 / Doximity / Phase0.
+
+
+## 2026-11-15 · User-authorized execution-layer rebuild
+
+The user has chosen a **coherent rebuild of the execution layer**, not another patch pass.
+
+This supersedes the remediation framing in review 073. The architecture and frozen experiment program remain unchanged; what is being rebuilt is the Gate 0 / AX-S1S2-D execution package.
+
+### Rebuild contract
+
+Treat the current regenerated package rooted at `b96d4cf3` as **superseded / non-authoritative for execution**.
+
+Rebuild from the frozen post-DC002 contracts with these requirements:
+
+1. **Layer-specific clean parents**
+   - distinct `S1_OUTPUT`, `S2_OUTPUT`, `S3_OUTPUT`, and S4 calibration parents/references;
+   - every seed records `parent_type`;
+   - a seed calibrates only the predicate/layer it is meant to test;
+   - full-silence specificity must be logically achievable by a correct scorer.
+
+2. **Single post-DC002 schema**
+   - no `managed_today`;
+   - no `candidate_claims`;
+   - use `claim_candidates`;
+   - use `management_reference_spans[]`;
+   - remove appended legacy/DC-002 dual-schema wording.
+
+3. **Faithfully derived `S4_INPUT_VIEW`**
+   - every projected field/value must exist in the named upstream source;
+   - exact nested projection schema frozen;
+   - destination path → source owner/interface → source path map frozen;
+   - include the canonical selected/retained information required by DC-002;
+   - no fictional ordering contract while ordering remains PENDING_DEPENDENCY.
+
+4. **One frozen identity system**
+   Freeze and use consistently:
+   - predicate-registry id/version;
+   - active-predicate-set id/version;
+   - schema id/version;
+   - Gate 0 campaign id/version;
+   - oracle id/version.
+   No PILOT-1 / PILOT-2 / PILOT-ACTIVE-1 drift.
+
+5. **Branch seeds for compound DC-002 predicates**
+
+   For `S3-CAND-01`, calibrate material branches separately:
+   - missing outcome / coverage;
+   - duplicate outcomes / exclusivity;
+   - unknown candidate id;
+   - RENDERED-set mismatch;
+   - NOT_RENDERED missing typed reason;
+   - NOT_RENDERED reason-family missing required basis refs.
+
+   For `S4-PROJ-01`, calibrate material branches separately:
+   - field outside frozen projection schema;
+   - schema-valid field under wrong source-owner group;
+   - unselected/nonrequired semantic state projected;
+   - invented semantic value/relation not present in its owner source;
+   - retained payload/provenance/temporality mismatch where applicable.
+
+6. **Governing hashes**
+   Campaign manifest must freeze exact governing identities/hashes for:
+   - canonical submodule interface;
+   - frozen architecture experiment program;
+   - AX-S1S2-D spec;
+   - predicate registry;
+   - experiment-local schema;
+   - Gate 0 seed specification;
+   - generator;
+   - clean parents/oracles.
+
+7. **Generated counts, not hand-maintained arithmetic**
+   Manifest/generator should derive:
+   - clean-parent count;
+   - active-predicate count;
+   - seed count;
+   - seed count by predicate;
+   - pending predicates;
+   - excluded/not-in-pilot predicates.
+
+   Prose files may summarize those values, but the generated manifest is authoritative.
+
+8. **Staleness lifecycle**
+   - old package remains stale/superseded during rebuild;
+   - retire/remove stale markers only after the new package is fully regenerated and internally verified;
+   - top-level Gate 0 manifest must then state the real current status.
+
+9. **Scope discipline**
+   - no scorer in this rebuild commit;
+   - no Gate 0 run;
+   - no Doximity;
+   - no Phase 0;
+   - no architecture or experiment-program changes.
+
+### Return for review
+
+Return:
+- rebuild commit hash;
+- exact changed-file list;
+- clean-parent count by parent type;
+- active predicate count;
+- seed count by predicate;
+- pending predicates/dependencies;
+- campaign/registry/schema/oracle ids;
+- governing hashes;
+- explicit confirmation that old stale package was superseded and no scorer was built.
+
+ChatGPT will independently review the rebuilt package before scorer construction.
