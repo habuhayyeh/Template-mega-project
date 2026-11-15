@@ -1,3 +1,7 @@
+# DRAFT — DO NOT RUN YET
+
+File 2 is defined but not active. Run only after File 1 passes the canonical reference/action-fidelity rerun.
+
 # FILE 2 — ACTION STATE
 
 **Experimental version:** F2-ACTION-V1
