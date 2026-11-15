@@ -3816,3 +3816,29 @@ NEXT:
 - wait for signer to return the external skill's completed questionnaire;
 - map it to C3 packets and resume only the unresolved signer judgments;
 - no Gate 0 acceptance, Doximity, or Phase 0 meanwhile.
+
+
+## 2026-11-15 · ChatGPT · review 098 — prior-skill mapping exposes C3 packet contradictions
+
+TYPE: CALIBRATION CONTRACT / WORKLOAD REDUCTION
+
+PRIOR-PREFERENCE RESULT:
+- external skill: 18/20 explicit;
+- Q1 general rule ambiguous but CASE-01 directly resolved by signer in chat;
+- Q17 only remaining clinical gap.
+
+BLOCKERS:
+1. G0-S2-08/CERTAIN: S2-CAUSAL-01 semantic strength check overlaps S2-CAUSAL-02 mechanical enum.
+   Gate semantic causality on mechanical validity; no signer packet for structurally invalid entry.
+2. G0-S3-12/UNKNOWN: S3-ROLE-01 overlaps S3-ROLE-02. Gate semantic role on valid enum; no signer
+   packet for structurally invalid role.
+3. G0-S2-01 deletes support_refs but S2-REP-01 packet explicitly judges semantic support independent
+   of mere ref existence. Reclassify support-ref integrity as mechanical or remove this semantic seed.
+   Keep G0-S2-02 as semantic S2-REP failure.
+
+NEXT:
+- implement only these bounded domain/specificity corrections;
+- regenerate packets;
+- report active predicates/seeds/new semantic packet workload and whether clean S3 packet id survives;
+- no signer collection until returned;
+- no acceptance, Doximity or Phase 0.

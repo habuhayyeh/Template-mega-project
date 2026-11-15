@@ -362,3 +362,21 @@ Questionnaire saved at:
 **NEXT:** signer runs the questionnaire in the external LLM environment and returns its answer. ChatGPT
 then maps those answers to the current C3 packet set and minimizes remaining signer questions.
 
+## Review 098 — external skill mapping + C3 semantic-domain blocker
+
+External skill retrieval resolved 18/20 preference questions. Q1 is already resolved for CASE-01 by
+direct signer judgment. Only Q17 remains clinically unresolved: whether "no new weakness or speech
+trouble" is pertinent supporting evidence for the falls representation.
+
+Before asking it, three packet defects must be fixed:
+1. S2-CAUSAL-01 must be gated by S2-CAUSAL-02 structural validity (CERTAIN seed currently overlaps).
+2. S3-ROLE-01 must be gated by S3-ROLE-02 structural validity (UNKNOWN seed currently overlaps).
+3. G0-S2-01 support_refs deletion is not a valid semantic S2-REP-01 seed; move support-ref integrity
+   mechanical or drop that seed. G0-S2-02 remains the true semantic representation seed.
+
+Mapping artifact:
+`architecture-reboot/artifacts/external-skill-preference-mapping-c3.md`.
+
+**NEXT:** DeepSeek performs only these bounded calibration-domain fixes, regenerates, and returns the
+new signer workload. Signer collection stays paused meanwhile.
+
