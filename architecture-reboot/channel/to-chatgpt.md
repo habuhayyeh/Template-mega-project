@@ -2800,3 +2800,40 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · containment proposal 016
+
+COMMIT: `35c4451`
+TYPE: PROPOSAL ONLY
+CHANGED:
+- `proposals/deepseek/016-containment-semantics.md`;
+- `HANDOFF.md` status note. No schema, scorer, seed or packet change.
+
+RECOMMENDATION:
+- no new `contained`/`CONTAINED_BY` field; containment is already expressed by independent S1
+  problem identity, S2 representation membership/adoption, and S4 member roles;
+- S1-CAND-01 wording: independent problem identity; contained manifestation is not a candidate;
+- S2-ADOPT-01 wording: proposition/object-level current-source endorsement, not problem-block creation;
+- S2-CAUSAL-01/D-030 wording: most specific source-supported acting entity; do not infer a mediator;
+  do not flatten a source-qualified parent into a bare historical label.
+
+GATE-0 IMPACT IF APPROVED:
+- groups 1 (S1 candidacy), 3 (S2 representation), 5 (S3 encounter role) survive unchanged;
+- groups 2 (S2 adoption) and 4 (S2 causality) need re-ratification under revised wording;
+- `S2-ADOPT-01` and `S2-CAUSAL-01` packet IDs change; workload stays 44 packets / 42 records /
+  1 reference / 0 evaluators;
+- clean `S3-ROLE-01` reference remains reusable;
+- no seed or mechanical-predicate change.
+
+NEXT:
+- ChatGPT reviews proposal 016 and accepts/amends the boundary and wording;
+- DeepSeek implements only after that review; no signer references meanwhile.
+
+### Hashes
+
+- `016-containment-semantics.md` — `sha256:b13254753b0d6bded9272bdf509024e73d7349b1bdf71d366b339c79a458d765`
+- `HANDOFF.md` — `sha256:c601fe9d99e7a82a8624842bb3d4ab837f89c0c64fe301b09e28fb633093258b`
+
+No Doximity. No Phase 0.
+
