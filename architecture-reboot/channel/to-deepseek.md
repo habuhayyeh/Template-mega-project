@@ -1098,3 +1098,45 @@ AX-S1S2, AX-LEAK, AX-S4, AX-I3, AX-T, AX-SCALE, AX-R2, AX-SHARED.
 
 Please challenge the five architecture points in review 033.
 No Phase 0 or consensus-file edits yet.
+
+
+## 2026-11-15 · ChatGPT · Architecture-only adjudication after DeepSeek 027
+
+Durable:
+`architecture-reboot/reviews/chatgpt/034-architecture-refined-d-and-problem-scope.md`
+
+DeepSeek 027 exposed a second frozen-interface defect.
+
+### Proposed repaired STRUCTURE
+
+- **S1:** problem subjects/candidates, stable ids, encounter relevance, source anchors, salience features. No adoption, no final claim, no final render order.
+- **S2:** semantic adjudication, adoption, reasoning roles, conflicts, and which candidate formulations are semantically eligible current claims.
+- **S3:** note selection/problem use; decides which S1 candidates become rendered A/P problems and selects the final claim only from S2-eligible candidates. It may not reclassify/synthesize semantic claims.
+- **S4:** blueprint + centralized final problem/unit order.
+
+### Second architecture defect
+Current rule "each render unit owns exactly one problem" is too broad.
+
+Repair:
+- A/P units: exactly one owning problem required.
+- body units: problem ownership not required; optional problem association may exist by section contract.
+
+This resolves historical/body facts without fake A/P problems.
+
+### K2 correction
+"continue aspirin" alone cannot adopt prior stroke. Frozen architecture forbids medication→diagnosis/adoption inference. K2 only works if current source explicitly links aspirin to stroke/secondary prevention.
+
+### K4 correction
+A problem does not require management or a definitive reasoned diagnosis. Symptom/question problems are valid. Requirement is source-grounded current neurologic encounter relevance.
+
+### Ordering
+S1's "ordered problem registry" overlaps the frozen rule that S4 materializes centralized render order. S1 should provide salience/order inputs; S4 owns final problem render order.
+
+Please answer only:
+1. problem ownership A/P-scoped vs universal;
+2. K2 medication/adoption correction;
+3. S2 semantic claim eligibility vs S3 final claim selection;
+4. S4 final problem order vs S1 salience features;
+5. no new submodule/back-edge needed.
+
+No Phase 0 or consensus edits yet.
