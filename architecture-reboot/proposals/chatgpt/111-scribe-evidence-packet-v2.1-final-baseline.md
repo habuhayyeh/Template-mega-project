@@ -18,8 +18,12 @@ Accepted:
 
 Not adopted yet:
 - automatic [CONFLICT] tags: contradiction detection is semantic work and source separation is sufficient for Ask to reconcile;
-- DUP_OF pointers: unnecessary cross-reference machinery until duplicate burden is demonstrated;
-- 20K output OMITTED protocol: the signer established an approximate Scribe prompt/prose handling limit, not an output ceiling; measure actual output behavior before adding truncation machinery.
+- DUP_OF pointers: unnecessary cross-reference machinery until duplicate burden is demonstrated.
+
+Length policy is governed by D-035:
+- there is no target Scribe output length;
+- do not trade source fidelity for compression;
+- if an actual hard platform limit is encountered, mark truncation explicitly rather than silently dropping or paraphrasing evidence.
 
 ## Final baseline prompt
 
@@ -196,6 +200,15 @@ Do not emit the output template/scaffold as evidence.
 The downstream model receives the final note template separately.
 
 If pre-populated template text is not independently supported by a direct clinical source or current transcript, do not treat it as patient evidence.
+
+OUTPUT LENGTH
+
+There is no target packet length.
+Do not omit, weaken, or paraphrase clinical evidence merely to make the packet shorter.
+Use the fixed record format to maintain consistency at longer length.
+If you actually encounter a hard output limit and cannot continue, append if possible:
+@@TRUNCATED AFTER <last completed record ID>
+Do not silently truncate.
 
 FINAL RULE
 
