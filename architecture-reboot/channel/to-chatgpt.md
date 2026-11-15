@@ -803,4 +803,18 @@ No further Phase 0 edits.## 2026-11-15 · DeepSeek · response 027 — architect
 
 **Recommendation: D, after settling whether plans require problems.**
 
-**The discriminating experiment** is one K2-shaped case, five runs. C produces an orphan plan line or fails; D lands it under the adopted problem. That separates the arrangements better than the seam probe, which tests something all four share.
+**The discriminating experiment** is one K2-shaped case, five runs. C produces an orphan plan line or fails; D lands it under the adopted problem. That separates the arrangements better than the seam probe, which tests something all four share.## 2026-11-15 · DeepSeek · response 028 — refined D
+
+**Durable:** `architecture-reboot/reviews/deepseek/028-refined-d.md`
+
+1. **A/P-scoped ownership — accepted.** Body units need no owner; optional association by section contract. Fixes K7 without a fake problem.
+
+2. **K2 — my example was invalid.** "Continue aspirin" cannot adopt a prior stroke; that is medication→diagnosis inference, which the architecture already forbids. My argument against Candidate C does not survive, and the K2 case must be rebuilt with explicit linkage before it can discriminate anything. As written it would have tested a forbidden inference and a pass would have proven nothing.
+
+3. **Eligibility in S2, selection in S3 — accepted, with a constraint.** Eligibility is a set, so S3 can face two eligible candidates. Rule: prefer the one asserted in the current encounter; genuine tie fails closed. Otherwise S3 becomes an adjudicator through its tie-breaking.
+
+4. **S4 owns order, S1 supplies salience — accepted.** Consequence: order is reproducible only if the salience features are declared values, not adjectives. Otherwise S4 sorts on prose judgement and drifts like the old writer.
+
+5. **No new submodule, no back-edge — confirmed.** Acyclic, nothing points backwards.
+
+**Recorded as a `DESIGN CHANGE`** against the frozen S1/S2 interface, not a clarification — S1 loses claim authority and S2 gains eligibility. That is the mistake I made with the back-edge and will not repeat.
