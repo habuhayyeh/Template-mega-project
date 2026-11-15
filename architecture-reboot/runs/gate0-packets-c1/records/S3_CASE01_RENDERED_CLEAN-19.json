@@ -1,0 +1,81 @@
+{
+  "artifact_hash": "sha256:35ef0ab9798f4ec8708e65ea33e95e611472dbd0afa7b0eef7d7794531aa71b6",
+  "artifact_name": "G0-S3-06.json",
+  "dependency_context": [
+    {
+      "hash": "sha256:dc361b6fbdb56ebacf78184ca4be0d6b6dfea3bac5d6a579f1c65676233ad038",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT"
+    },
+    {
+      "hash": "sha256:7a9dc00baaa148d30520d40f59159a23623336c22a5463aef104c059d09d18d3",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT"
+    }
+  ],
+  "findings": [
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-ACCT-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "1 S3-CAND-01 violation(s)",
+      "evidence": [
+        {
+          "candidate": "C1",
+          "kind": "EXCLUSIVITY",
+          "path": "/s3/candidate_outcomes/1/candidate"
+        }
+      ],
+      "expected": "S3-CAND-01 constraints satisfied",
+      "observed": "EXCLUSIVITY",
+      "owner": "S3",
+      "path": "/s3/candidate_outcomes/1/candidate",
+      "predicate_id": "S3-CAND-01",
+      "status": "FIRED"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-INC-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S3",
+      "path": null,
+      "predicate_id": "S3-SEL-01",
+      "status": "SILENT"
+    }
+  ],
+  "kind": "seed",
+  "packets": [],
+  "parent_id": "S3_CASE01_RENDERED_CLEAN",
+  "parent_type": "S3_OUTPUT",
+  "scorer_version": "GATE0-SCORER-1",
+  "specificity": {
+    "expected": "S3-CAND-01",
+    "expected_status": "FIRED",
+    "non_silent_other": [],
+    "other_active": [
+      "S3-ACCT-01",
+      "S3-INC-01",
+      "S3-SEL-01"
+    ],
+    "pass": true
+  },
+  "verdict": "PASS"
+}

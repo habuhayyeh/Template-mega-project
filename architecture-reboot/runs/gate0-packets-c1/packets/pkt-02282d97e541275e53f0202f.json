@@ -1,0 +1,187 @@
+{
+  "dependency_context": {
+    "S1_OUTPUT": {
+      "case": "CASE-01",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "registry": "PILOT-2",
+      "s1": {
+        "candidates": [
+          {
+            "anchors": [
+              "S02"
+            ],
+            "claim_candidates": [
+              {
+                "id": "CC1",
+                "support": [
+                  "S02"
+                ],
+                "text": "three falls since June"
+              }
+            ],
+            "id": "C1",
+            "salience": {
+              "acuity": "MODERATE",
+              "management_reference_spans": [
+                "S03"
+              ]
+            },
+            "subject": "falls since June"
+          }
+        ]
+      },
+      "schema": "SCHEMA-2"
+    }
+  },
+  "judgment_schema": {
+    "evaluators": "two independent LLM / EVALUATOR judgments, different model families and sessions",
+    "judge_types": [
+      "HUMAN",
+      "LLM"
+    ],
+    "policy_version": "REVIEW-POLICY-F-1",
+    "reference": "one HUMAN / REFERENCE judgment with authority SIGNER_CLINICIAN",
+    "reference_authority": "SIGNER_CLINICIAN",
+    "required": [
+      "packet_id",
+      "predicate_id",
+      "judge_id",
+      "judge_type",
+      "role",
+      "verdict",
+      "rationale",
+      "policy_version"
+    ],
+    "roles": [
+      "REFERENCE",
+      "EVALUATOR"
+    ],
+    "verdict_values": [
+      "FIRED",
+      "SILENT",
+      "UNDECIDABLE"
+    ]
+  },
+  "oracle": {
+    "matching": "Concept identity, not literal strings.",
+    "objects": {
+      "O01": {
+        "provenance": "B/2024-02",
+        "span": "S01",
+        "temporal": "2024-02 documented",
+        "text": "known left MCA infarct"
+      },
+      "O02": {
+        "provenance": "B/2024-02",
+        "span": "S01",
+        "temporal": "2024-02",
+        "text": "mild residual right faciobrachial weakness"
+      },
+      "O03": {
+        "provenance": "A/2026-11-14",
+        "span": "S02",
+        "temporal": "June\u2013November",
+        "text": "three falls since June"
+      },
+      "O04": {
+        "provenance": "A/2026-11-14",
+        "span": "S02",
+        "temporal": "now",
+        "text": "no new weakness or speech trouble"
+      },
+      "O05": {
+        "provenance": "A/2026-11-14",
+        "span": "S03",
+        "status": "current",
+        "text": "check vitamin D"
+      },
+      "O06": {
+        "provenance": "A/2026-11-14",
+        "span": "S03",
+        "status": "current",
+        "text": "refer to PT for gait training"
+      },
+      "O07": {
+        "provenance": "A/2026-11-14",
+        "span": "S04",
+        "status": "current",
+        "text": "aspirin 81 daily, unchanged"
+      }
+    },
+    "spans": {
+      "S01": {
+        "source": "B prior neurology 2024-02",
+        "text": "Known left MCA infarct with mild residual right faciobrachial weakness."
+      },
+      "S02": {
+        "source": "A transcript 2026-11-14",
+        "text": "Three falls since June. No new weakness or speech trouble."
+      },
+      "S03": {
+        "source": "A transcript 2026-11-14",
+        "text": "We should check her vitamin D and refer to PT for gait training."
+      },
+      "S04": {
+        "source": "A transcript 2026-11-14",
+        "text": "Aspirin 81 daily, unchanged."
+      }
+    }
+  },
+  "packet_id": "pkt-02282d97e541275e53f0202f",
+  "predicate": {
+    "assertion": "every approved representation is semantically supported by source objects and relations, not merely by reference existence",
+    "id": "S2-REP-01",
+    "instructions": "Judge whether each approved representation is semantically supported by its members and their relations, not merely whether ids and support refs exist. The S1 problem/claim context is supplied so you can identify the claim being supported. Record FIRED or SILENT.",
+    "mode": "SIGNER_REFERENCE",
+    "owner": "S2"
+  },
+  "target_artifact": {
+    "case": "CASE-01",
+    "parent_id": "S2_CASE01_CLEAN",
+    "parent_type": "S2_OUTPUT",
+    "registry": "PILOT-2",
+    "s2": {
+      "adjudication": [
+        {
+          "adoption": null,
+          "evidence": null,
+          "object": "O01",
+          "temporal": "2024-02 documented"
+        },
+        {
+          "adoption": true,
+          "evidence": [
+            "S02"
+          ],
+          "object": "O03",
+          "temporal": "June\u2013November"
+        }
+      ],
+      "claim_relations": [],
+      "duplicate_groups": [],
+      "relations": [
+        {
+          "from": "O04",
+          "to": "O03",
+          "type": "SUPPORTS"
+        }
+      ],
+      "representations": [
+        {
+          "id": "R1",
+          "members": [
+            "O03",
+            "O04"
+          ],
+          "problem": "C1",
+          "selection_safe": true,
+          "support_refs": [
+            "S02"
+          ]
+        }
+      ]
+    },
+    "schema": "SCHEMA-2"
+  }
+}

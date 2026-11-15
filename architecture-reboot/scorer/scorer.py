@@ -483,7 +483,9 @@ def _s4_rep_01(target, dependencies, oracle, rules):
     source = rendered[0]
     problem_id = source_to_problem.get(source)
     if problem_id is None:
-        return _undecidable(pid, "rendered problem is absent from s4.problems")
+        # Missing problem membership is S4-INC-01's finding; there is no
+        # in-domain unit to compare for representation equality.
+        return _silent(pid, "no in-domain problem; inclusion is scored by S4-INC-01")
     for i, unit in enumerate(units):
         if not isinstance(unit, dict):
             return _undecidable(pid, "unit %d is not an object" % i)

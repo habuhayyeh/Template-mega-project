@@ -15,10 +15,11 @@ run must produce **zero diff**; a run that does not is a build failure, not a wa
 rejects a seed that is a no-op copy of its parent, or that differs at more than one path. The manifest
 mutation record is the checked parent→seed diff, not a hand-written claim.
 
-**Status: SCORER/HARNESS IMPLEMENTED / OPTION F POLICY APPLIED / PREFLIGHT PASS / GATE 0 UNRUN.** The
+**Status: SCORER/HARNESS IMPLEMENTED / OPTION F HARDENED / PACKETS PREPARED / GATE 0 UNRUN.** The
 scorer and harness exist at `architecture-reboot/scorer/` and
-`architecture-reboot/tools/gate0_harness.py`; the policy patch is not yet re-reviewed. No Gate 0
-acceptance run has been executed.
+`architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 16 semantic packet
+instances. No signer reference or evaluator evidence exists yet; no Gate 0 acceptance run has been
+executed.
 
 ---
 
@@ -204,6 +205,8 @@ specificity answer key. The same packet feeds one `HUMAN / REFERENCE` judgment a
 - `architecture-reboot/scorer/` — scorer implementation and predicate registry.
 - `architecture-reboot/tools/gate0_harness.py` — harness, packets, judgments and evidence.
 - `architecture-reboot/tools/preflight.py` — the D-019 mechanical preflight.
+- `architecture-reboot/runs/gate0-packets-c1/` — packets-mode preparation: 33 artifact records,
+  16 semantic packets, `EVIDENCE.json`, `INDEX.md` and `INDEX.json`. No acceptance verdict.
 - Per-run records: scorer version, predicate set version, control-plane version, case ids, findings,
   verdict.
 

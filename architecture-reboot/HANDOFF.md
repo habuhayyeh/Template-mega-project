@@ -57,7 +57,7 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 - **Execution package:** source contract accepted after review 081; review 082 corrected only the
   scorer-input boundary. The package is source-first and regenerable.
 - **Scorer/harness/preflight:** implemented and **CLOSED under D-019** after independent review.
-  `python architecture-reboot/tools/preflight.py` passes with 7/7 checks and 44 tests.
+  `python architecture-reboot/tools/preflight.py` passes with 7/7 checks and 45 tests.
   **Gate 0:** unrun; the signer reference + two blinded evaluator judgments have not been executed.
   **Doximity:** unrun. **Phase 0:** untouched and stale.
 
@@ -75,7 +75,7 @@ dependency-context map.
 `python architecture-reboot/tools/preflight.py` is the single mechanical entry point. It checks frozen
 architecture/Phase-0 drift, source/generated freshness and determinism, governing hashes and
 identities, active registry, dependency-context integrity, seed mutation integrity, stale source
-markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 44 tests.
+markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 45 tests.
 
 Current counts: 5 clean calibration parents · 4 parent types · 28 seeds · 16 active predicates ·
 campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
@@ -84,8 +84,9 @@ campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · sche
 Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 44 synthetic tests; no Gate 0 acceptance
-run.
+Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 45 synthetic tests; no Gate 0 acceptance
+run. Packet preparation: 33 records, 16 semantic packets, 0 references/0 evaluators; index at
+`architecture-reboot/runs/gate0-packets-c1/INDEX.md`.
 
 ## 6. Review 084 closure: scorer/harness/preflight
 
@@ -119,7 +120,7 @@ checks without adding acceptance criteria: frozen zones, regeneration/freshness/
 hashes/identities/registry, dependency context, seed mutation integrity, stale markers and unit tests.
 It exits non-zero on any failure and does not run Gate 0.
 
-**Gate 0 remains unrun.** 44 synthetic tests pass. No `acceptance` harness run was executed, no
+**Gate 0 remains unrun.** 45 synthetic tests pass. No `acceptance` harness run was executed, no
 judgments were fabricated, and the signer reference + two blinded evaluator judgments have not been executed.
 
 No Doximity, no Phase 0.

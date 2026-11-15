@@ -312,6 +312,8 @@ def load_review_evidence(path):
     elif isinstance(data, dict):
         if data.get('policy_version') not in (None, REVIEW_POLICY):
             raise ValueError('review evidence policy version is not %s' % REVIEW_POLICY)
+        if data.get('review_policy') not in (None, REVIEW_POLICY):
+            raise ValueError('review evidence policy is not %s' % REVIEW_POLICY)
         records = list(data.get('references', [])) + list(data.get('evaluators', []))
     else:
         raise ValueError('review evidence must be a list or object')
@@ -534,6 +536,7 @@ def _artifact_rows(manifest, clean):
         rows.append({
             'kind': 'clean',
             'artifact': clean[parent_id],
+            'artifact_name': rec['artifact'],
             'parent_type': rec['parent_type'],
             'parent_id': parent_id,
             'expected': None,
@@ -545,6 +548,7 @@ def _artifact_rows(manifest, clean):
         rows.append({
             'kind': 'seed',
             'artifact': artifact,
+            'artifact_name': seed['artifact'],
             'parent_type': seed['parent_type'],
             'parent_id': seed['parent_id'],
             'expected': seed['must_fire'],
@@ -628,6 +632,7 @@ def run(mode, out_dir, evidence_path=None, baseline_path=None, limit=None):
                                         row['expected'])
         record = {
             'kind': row['kind'],
+            'artifact_name': row.get('artifact_name'),
             'parent_id': row['parent_id'],
             'parent_type': row['parent_type'],
             'artifact_hash': canon(row['artifact']),

@@ -221,6 +221,7 @@ class ScorerTests(unittest.TestCase):
         self.s4['s4']['problems'] = []
         result = score(self.s4, self.deps_s4, self.oracle, self.rules)
         self.assertEqual(find(result, 'S4-INC-01')['status'], FIRED)
+        self.assertEqual(find(result, 'S4-REP-01')['status'], SILENT)
 
     def test_s4_membership(self):
         self.s4['s4']['units'][0]['members'].append('O3')
@@ -314,12 +315,13 @@ class HarnessTests(unittest.TestCase):
 
         def ref(verdict):
             return dict(base, judge_id='signer', judge_type='HUMAN',
-                        role='REFERENCE', verdict=verdict)
+                        role='REFERENCE', authority='SIGNER_CLINICIAN',
+                        verdict=verdict)
 
         def ev(judge, family, verdict, version='1'):
             return dict(base, judge_id=judge, judge_type='LLM',
                         role='EVALUATOR', verdict=verdict, model_family=family,
-                        model_version=version, session_id='s1',
+                        model_version=version, session_id='session-' + judge,
                         context_scope='PACKET_ONLY',
                         project_context_agent=False)
 
