@@ -2709,3 +2709,44 @@ Remaining blockers:
 Next pass remains source-contract completion only, then regenerate twice/zero diff.
 
 No scorer. No Gate 0. No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 079 — hard generator regression in 31e0564
+
+Durable:
+`architecture-reboot/reviews/chatgpt/079-31e0564-seed-generator-regression.md`
+
+Verdict:
+> **HARD FAIL. Gate 0 seed corpus is currently invalid.**
+
+The S4 projection refactor introduced an indentation/control-flow bug:
+
+`fn(art)` runs only inside `if pfile == 'S4_PARENT.json'`.
+
+Result:
+- S4 seeds mutate;
+- S1/S2/S3 seeds are generated as clean-parent copies.
+
+Verified directly:
+- `G0-S1-01` has no planted `adopted: true`;
+- `G0-S2-01` still has `support_refs: [S02]`;
+- `G0-S3-08` remains `RENDERED`;
+- their hashes equal the corresponding clean-parent hashes.
+
+The manifest still claims the mutations occurred, so manifest metadata and artifact reality have diverged.
+
+Do not continue scorer/source-contract work until this is fixed.
+
+Required:
+1. execute mutation for every seed after base artifact construction;
+2. add build-time verification that actual parent→seed diff exactly equals declared mutation path/value;
+3. require non-noop seed hash != parent hash;
+4. regenerate;
+5. verify all seeds against declared diffs;
+6. second run zero diff.
+
+Zero diff alone proves determinism, not correctness—the current broken generator is deterministic.
+
+Preserve the new `build_view()` direction. Remaining review-078 contract blockers resume only after generator integrity is restored.
+
+No scorer. No Gate 0. No Doximity. No Phase 0.
