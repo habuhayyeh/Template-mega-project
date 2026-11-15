@@ -2327,6 +2327,58 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · sync at 3762b90 — D-025 corrected; packet blinding proposed
+
+COMMIT: pending handoff commit; sync target `3762b90`
+TYPE: GOVERNANCE CORRECTION / CONTRACT PROPOSAL
+CHANGED:
+- `DECISIONS.md` — D-026 corrects D-025;
+- `HANDOFF.md` — review 089 state;
+- `proposals/deepseek/014-semantic-packet-blinding.md` — proposed correction, not implemented;
+- `runs/gate0-packets-c2/PACKET_BLINDING_BLOCKED.md` and blocked index note.
+
+GOVERNANCE CORRECTION:
+- The signer **did** explicitly send `approve` immediately after the SCHEMA-3 handoff that requested
+  approval. D-025's claim that only `.` was sent is factually wrong.
+- D-026 records that evidence; D-024 stands and SCHEMA-3 is signer-ratified.
+- This does not weaken D-022: `.` is still not approval.
+
+CONTRACT FINDING:
+- Review 089 is correct that semantic packets leak their answer key:
+  `S1-CAND-01` includes `candidate_concepts_must_exclude`; `S2-ADOPT-01` includes `expected.adoption`
+  and instructs the judge to compare against it.
+- No reference or evaluator evidence may be collected from `gate0-packets-c2`.
+- Proposal 014 removes all `oracle.expected` from semantic packets, rewrites S2-ADOPT-01 as
+  source/context-supported adoption, and bumps the review policy to `REVIEW-POLICY-F-2`.
+- No code change yet: this is a contract correction and needs signer approval.
+
+VALIDATION:
+- `python -B -m unittest discover -s architecture-reboot/tests` → **46 tests, OK**;
+- `python architecture-reboot/tools/preflight.py` → **PASS**, 7/7 checks, 46 tests;
+- no signer reference or evaluator judgment was collected;
+- no Gate 0 acceptance run.
+
+BLOCKERS:
+- signer approval of proposal 014;
+- regeneration of all semantic packets after the blinding change.
+
+NEXT:
+- signer approves or amends proposal 014;
+- then DeepSeek removes semantic `oracle.expected`, regenerates packets and restarts reference
+  collection from zero; no acceptance before that.
+
+### Hashes
+
+- `DECISIONS.md` — `sha256:c1141291a41e0504329698be4494a4517a580ba33d48ffc2f3e9e0696c06c5ce`
+- `HANDOFF.md` — `sha256:e5d274c6c580f9c1d883a8a3e3399956eac42aaaef24b51a2c89399ccd744dcb`
+- `proposals/deepseek/014-semantic-packet-blinding.md` — `sha256:e9a1ced65be813efbaf8020a6c18ae111f7ca3b4b7043580a437fa7c4c3c4f12`
+- `runs/gate0-packets-c2/EVIDENCE.json` — `sha256:71cf90de5274134cb05bf3540939afe108b5bbd394378bbda886ce6b6cf37309`
+- `runs/gate0-packets-c2/INDEX.md` — `sha256:51532dda6a279e5911b6c295e3c90869cb06717b1b0ef34fe5fcf5d0d7c941f1`
+- `runs/gate0-packets-c2/PACKET_BLINDING_BLOCKED.md` — `sha256:c02251c0b1683aa3701e536003d86f40c2896adcf44fbc0675899b51793c61ab`
+
+No Doximity. No Phase 0.
+
+
 
 
 

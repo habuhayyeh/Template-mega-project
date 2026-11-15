@@ -1,7 +1,10 @@
 # Gate 0 semantic packet index — GATE0-C2 / SCHEMA-3
 
+**BLOCKED:** semantic packets leak expected answers; do not collect evidence from this run.
+See `PACKET_BLINDING_BLOCKED.md` and proposal 014.
+
 **Mode:** packets only · **acceptance:** not run
-**Run:** `20261115T120629Z-2d6284b7`
+**Run:** `20261115T160349Z-2d6284b7`
 **Policy:** `REVIEW-POLICY-F-1`
 **Semantic packets:** 16 · **records:** 33 · **references:** 0 · **evaluators:** 0
 

@@ -86,7 +86,8 @@ Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLE
 
 CASE-01: two rendered problems — falls and a retained inactive infarct; the S1-CAND seed is now a
 medication-only candidate. Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 46 synthetic tests; no Gate 0 acceptance
-run. Packet preparation: 33 records, 16 semantic packets, 0 references/0 evaluators; index at
+run. Packet preparation: 33 records, 16 semantic packets, 0 references/0 evaluators. These packets are
+**blocked for evidence collection** by review 089 answer-key leakage; see proposal 014. Index at
 `architecture-reboot/runs/gate0-packets-c2/INDEX.md`.
 
 ## 6. Review 084 closure: scorer/harness/preflight
@@ -195,12 +196,14 @@ packets mode only, and returns the diff for ChatGPT review.
 
 ## Review 089 blockers
 
-SCHEMA-3 implementation exists and DeepSeek reports 46 tests + preflight PASS, but it is **provisional**:
-D-024 was recorded without explicit signer approval and D-022 makes `.` / `sync` non-approving.
+SCHEMA-3 is **signer-ratified**: D-026 corrects D-025; the signer explicitly sent `approve` after the
+SCHEMA-3 handoff. The CASE-01 rebuild is accepted, with 46 tests + preflight PASS.
 
-A second blocker was found in Option-F semantic packet construction: S1-CAND packets expose
+The remaining blocker is semantic packet blinding. S1-CAND packets expose
 `candidate_concepts_must_exclude`, and S2-ADOPT packets expose `expected.adoption`. These are
-semantic answer-key fields and violate the intended blinded calibration model.
+answer-key fields and violate Option F. `proposals/deepseek/014-semantic-packet-blinding.md` proposes
+the smallest governed correction, including `REVIEW-POLICY-F-2`.
 
-**NEXT:** signer explicitly ratifies/rejects SCHEMA-3; DeepSeek drafts a governed semantic-packet
-blinding correction. No signer collection or Gate-0 acceptance until both are resolved.
+**NEXT:** signer approves/amends proposal 014; then DeepSeek removes semantic `oracle.expected`,
+regenerates packets and restarts reference collection. No references or Gate-0 acceptance from the
+current packet set.

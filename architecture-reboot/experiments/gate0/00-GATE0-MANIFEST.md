@@ -15,7 +15,7 @@ run must produce **zero diff**; a run that does not is a build failure, not a wa
 rejects a seed that is a no-op copy of its parent, or that differs at more than one path. The manifest
 mutation record is the checked parent→seed diff, not a hand-written claim.
 
-**Status: SCORER/HARNESS IMPLEMENTED / SCHEMA-3 + D-023 REBUILT / PACKETS PREPARED / GATE 0 UNRUN.** The
+**Status: SCORER/HARNESS IMPLEMENTED / SCHEMA-3 + D-023 REBUILT / SEMANTIC PACKETS BLOCKED (REVIEW 089) / GATE 0 UNRUN.** The
 scorer and harness exist at `architecture-reboot/scorer/` and
 `architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 16 semantic packet
 instances. No signer reference or evaluator evidence exists yet; no Gate 0 acceptance run has been
