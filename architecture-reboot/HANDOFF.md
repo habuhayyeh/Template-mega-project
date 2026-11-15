@@ -598,3 +598,27 @@ File 1 review:
 frozen Scribe packet. No F2-F7 prompt finalization, Gate-0 acceptance or Phase 0 before F1 evidence.
 
 No Doximity production change.
+
+## Ingestion architecture critique
+
+The old architecture is no longer valid as an execution design: one paste/one Ask call, eleven
+model-executed micro-stages, global atomicization, synthesized fact prose, same-model validation and a
+large carried Case IR all failed or conflict with the Doximity runtime.
+
+Keep the semantic safeguards, not the micro-stages.
+
+Recommended digestion:
+1. Scribe V2.2 packet (canonical source).
+2. F1 pointer-only index, or skip F1 if the packet is short.
+3. F2 semantic reconciliation + action state (split action state only if evidence demands it).
+4. F3 problem architecture.
+5. F4 note compiler.
+6. F5 renderer.
+
+No F1V, no separate audit pass, no atomic-fact corpus. The friend's 8-pass proposal has the right
+fewer-passes instinct, but Pass 1 recreates the claim layer and Pass 8 is the same-model false-pass trap.
+
+**NEXT:** review the pointer-only F1 run and compare it with direct Scribe -> F2. No implementation or
+contract change before that comparison.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.

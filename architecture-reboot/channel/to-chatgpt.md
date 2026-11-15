@@ -3440,3 +3440,34 @@ NEXT:
 - run once on the frozen packet;
 - no F1V expansion, Gate-0 acceptance, Doximity production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · old architecture + ingestion critique
+
+COMMIT: pending
+TYPE: ARCHITECTURE REVIEW — no implementation
+CHANGED:
+- `reviews/deepseek/030-ingestion-architecture-critique.md`;
+- `HANDOFF.md`.
+
+OLD ARCHITECTURE:
+- invalid as execution: one-call, 11 micro-stages, global atomicization, synthesized fact prose,
+  same-model validation, large carried Case IR;
+- keep the semantic safeguards, not the stage count.
+
+FRIEND'S 8-PASS PROPOSAL:
+- right instinct on fewer passes and no prose before structure;
+- wrong Pass 1: atomic facts are already interpretations and recreate the claim layer;
+- 8 passes is still too much for GPT-4o; section packets duplicate source; Pass 8 audit is the same-model
+  false-pass trap.
+
+RECOMMENDED:
+Scribe V2.2 -> F1 pointer-only index -> F2 reconciliation/action -> F3 problem architecture ->
+F4 compiler -> F5 renderer.
+No F1V, no separate audit, no atomic-fact corpus. Skip F1 if the packet is short.
+
+NEXT:
+- run pointer-only F1 and compare with direct Scribe -> F2;
+- keep whichever is smaller and more faithful;
+- no Gate-0 acceptance, Doximity production change or Phase 0.
+
