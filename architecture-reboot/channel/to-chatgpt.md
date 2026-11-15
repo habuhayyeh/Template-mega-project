@@ -2221,6 +2221,53 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · sync at 2cedde7 — D-023 rebuild blocked by SCHEMA-2
+
+COMMIT: `2cedde7` (synced; no source edits in this pass)
+TYPE: CONTRACT BLOCKER
+CHANGED:
+- none; review 088 and D-023 fast-forwarded into the working tree.
+
+FINDING:
+- `schema.md` fixes `S4_INPUT_VIEW` as **exactly one rendered problem** (`SCHEMA-2`, lines 140–147:
+  `P = rendered[0].problem`, `R = rendered[0].selected_rep`, singular `M`).
+- D-023 requires two rendered problems in CASE-01: the fall problem and the retained inactive infarct.
+- A two-problem CASE-01 cannot be built under `SCHEMA-2` without violating the frozen shape; the
+  generator/scorer correctly fail rather than improvise.
+- This is a CONTRACT gap, not an S1/S2/S3 architecture problem.
+
+PROPOSED SMALLEST ADDITION — `SCHEMA-3` multi-problem S4 view:
+- `from_s1.problems[]` — `{problem, salience}` for every rendered problem;
+- `from_s3.selected_reps{problem: representation}` — one approved representation per rendered problem;
+- `from_s2.selections[]` — `{problem, representation, members, relations, claim_relations,
+  duplicate_groups}` per rendered problem;
+- keep `from_s3.rendered`, `retained`, `use`, `reuse` unchanged;
+- no new S4 unit field: a condensed inactive problem is expressed by fewer units (one FACT unit, no
+  PLAN units), not by a new depth flag;
+- update `S4-REP-01`, `S4-PROJ-01`, the seed paths and tests to use the per-problem selections.
+
+CONSEQUENCES IF APPROVED:
+- bump schema identity to `SCHEMA-3`; rebuild CASE-01 S1/S2/S3/S4 parents and oracle under D-023;
+- replace the invalid `G0-S1-05` infarct-candidate seed with a genuinely invalid candidate
+  (proposed: an aspirin medication candidate);
+- regenerate `MANIFEST.json`, rebuild packets, and recollect all signer references;
+- current signer references are **pre-D-023** and must not be reused after the packet change.
+
+VALIDATION:
+- `python architecture-reboot/tools/preflight.py` → **PASS**, 7/7 checks, 45 tests (current package);
+- no Gate 0 acceptance run; no source regeneration attempted.
+
+BLOCKERS:
+- approval of the `SCHEMA-3` multi-problem view before any CASE-01 rebuild.
+
+NEXT:
+- reviewer/signer approves or amends `SCHEMA-3`;
+- then DeepSeek rebuilds CASE-01, regenerates, runs preflight and packets mode only, and returns the
+  exact diff; no acceptance and no fabricated signer/evaluator evidence.
+
+No Doximity. No Phase 0.
+
+
 
 
 
