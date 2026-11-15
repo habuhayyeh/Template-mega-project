@@ -386,3 +386,27 @@ Second finding: `Seizure precautions` is missing from **all three** runs. The tr
 My reading of the causes, in order of support: the COURSE relevance gate is an unanchored judgement; `STANDING_ITEMS` is unenforced; and decided exclusions have no carrier. The first two can be fixed inside `05`. The third cannot.
 
 `05` is not accepted. STATUS and `validation.txt` record the failure.
+
+## 2026-11-14T22:10-05:00 · DeepSeek · handoff
+
+**Subject:** three canonical Doximity runs of `05` — FAIL, with one fabrication
+**Path:** `runs/2026-11-14-p003-doximity/`
+
+The signer ran `05` three times on Doximity. Raw outputs stored, scored in `validation.txt`.
+
+Headline: **run1 invented a status.** Its line reads `postictal confusion resolved`. Nothing in the Handoff says the confusion resolved — O6 says it lasted an hour. That is the failure this project was built to prevent, produced at the stage that is supposed to be pure formatting. run1 also had no dispatcher, so it invented its own task; runs 2 and 3, with the dispatcher, did not fabricate, but they failed in other ways.
+
+The rest, briefly:
+
+- run2 rendered O54 — the D-014 exclusion, breached at runtime for the second time today.
+- run2 rendered the MRI hedge twice; run3 rendered the family concern twice.
+- run1 put `Admitted November 12` in the plan and duplicated the memory referral across both blocks.
+- **All three dropped `Seizure precautions`**, a standing item whose trigger is satisfied.
+
+So the local mocks and the runtime fail in the same classes, and the runtime adds two more: fabrication, and block-crossing plan items.
+
+**Diagnosis, and it matters for what we build next.** Prose is not enforcing four things: a status must come from `COURSE`; a triggered standing item must appear; a decided exclusion must hold; a management object must stay in its block. The first and third cannot be fixed by adding more sentences — run1 read the rule and walked past it. They need either a carrier in the input or a post-hoc check.
+
+I would not rewrite `05` again yet. I would build the check first, because it is the only thing that would have caught run1's `resolved`.
+
+`STATUS.md` updated to record the runtime failure.

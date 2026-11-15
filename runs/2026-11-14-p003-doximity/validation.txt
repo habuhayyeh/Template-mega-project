@@ -1,0 +1,50 @@
+# P003 — three Doximity runs on the frozen Handoff
+
+Canonical runtime runs, not mocks. Same Handoff, same `05`, same anchor.
+
+- `run1.txt` — no dispatcher instructions. The model used its own idea of the task.
+- `run2.txt`, `run3.txt` — with the dispatcher: read `05`, then `AP_ANCHOR`, apply to the Handoff, add nothing, return only the A/P.
+
+## What each run did
+
+| | run1 | run2 | run3 |
+|---|---|---|---|
+| line | **`…, postictal confusion resolved`** | clean | clean |
+| durations folded | yes | yes | yes |
+| sodium trend | yes | yes | yes |
+| infarct timing | omitted | `(prior neurology, February 2024)` | omitted |
+| O54 residual aphasia | omitted | **rendered** | omitted |
+| MRI hedge | one | **two** | one |
+| `Admitted November 12` | **in the plan** | no | no |
+| memory referral in the seizure plan | **yes, duplicated** | no | no |
+| family concern | merged, `not today's issue` lost | clean | **twice** |
+| `Seizure precautions` | **missing** | **missing** | **missing** |
+| etiology bullet under the seizure | yes | yes | yes |
+
+## Findings
+
+1. **run1 invented a status.** `postictal confusion resolved` appears on the problem line. No object states resolution; O5/O6 say postictal confusion lasting an hour. This is the fabricate-a-status failure the project began with, produced by a run that had no instructions. It is the most serious defect in the set and it is not an instability artefact — it is an addition.
+2. **run1 put a past event in the plan.** `Admitted November 12` is a `COURSE` entry, not a management decision. It also duplicated the memory referral into the seizure block's plan while the memory block carried it too.
+3. **run2 rendered O54**, which D-014 excludes. Same breach as local mock run 1.
+4. **run2 duplicated reasoning** — `But the MRI will tell us` and `We'll see what the MRI shows` are one proposition rendered twice.
+5. **run3 duplicated the family concern** — `Family's concern about her memory.` and `… is not today's issue.`
+6. **All three dropped `Seizure precautions`**, a `STANDING_ITEMS` entry whose trigger is satisfied by a seizure working diagnosis. Three for three.
+
+## What all three got right
+
+Durations folded, sodium trend rendered, the etiology rendered under the problem it explains with the line keeping its own cause, `apixaban held … resume once` kept as one conditional, `unless … another event` preserved, memory attribution intact, no empty `Plan:`.
+
+## Verdict
+
+**FAIL**, and worse than the local mocks. The local set drifted on which facts to include; the Doximity set adds a fabricated status, a plan-bucket violation, and cross-block contamination.
+
+## Diagnosis
+
+The dispatcher is not the variable that matters: run1 without it and runs 2–3 with it fail in the same classes, and run1 additionally invents. Three independent mechanisms are missing, in order of severity:
+
+1. **Nothing forbids a status that is not in `COURSE` at the moment of writing.** The rule exists in prose; run1 walked past it.
+2. **Nothing enforces `STANDING_ITEMS`.** An item appears or not by chance, and here it never appeared.
+3. **Nothing carries a decided exclusion into the stage.** D-014 lives in `DECISIONS.md`; `05` cannot see it.
+4. **Nothing prevents a management object from crossing blocks.** run1 moved the referral into the wrong block's plan and kept it in both.
+
+Items 2 and 4 are mechanical and can be checked after the fact. Items 1 and 3 need a carrier in the input or a validator, not another paragraph of prose.
