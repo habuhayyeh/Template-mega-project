@@ -1918,6 +1918,71 @@ prerequisite is outstanding. No `acceptance` mode invocation and no fabricated j
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · preflight + independent review of a5a3d92
+
+COMMIT: `aff8f3d`
+TYPE: IMPLEMENTATION + INDEPENDENT REVIEW
+CHANGED:
+- new `architecture-reboot/tools/preflight.py`
+- `tools/gate0_harness.py` — clean-parent split verdict fix
+- `tests/test_scorer_more.py` — clean-split regression test
+- `HANDOFF.md`, `00-GATE0-MANIFEST.md`, `scorer/README.md`
+- regenerated `seeds/generated/MANIFEST.json`
+
+INVARIANTS:
+- D-019: one preflight entry point consolidates existing checks; it adds no acceptance criteria and
+  does not run Gate 0.
+- A completed 2/3 human split is a calibration failure (`FAIL`), not missing evidence, including on a
+  clean parent.
+- A genuinely `UNDECIDABLE` human judgment remains `INCOMPLETE`.
+- Scorer/harness behavior otherwise unchanged.
+
+VALIDATION:
+- Reviewed `a5a3d92` diff and ran the suite. Its seed-level split handling is correct.
+- Found one gap in that patch: `verdict_for` maps a completed split to `FAIL`, but `clean_verdict` still
+  mapped it to `INCOMPLETE`. Fixed `clean_verdict` to treat `calibration_failure` as `FAIL`; added
+  regression coverage.
+- `python architecture-reboot/tools/preflight.py` → **PASS**:
+
+```text
+PASS frozen architecture/phase0 drift              consensus, experiment program and phase0 unchanged
+PASS source/generated freshness + determinism      35 generated JSON files; second run zero diff
+PASS governing hashes + identities + active registry GATE0-C1; 5 clean parents; 28 seeds
+PASS dependency context integrity                  all target types hash-pinned
+PASS seed mutation integrity                       28/28 seeds non-noop and hash-pinned
+PASS stale source markers                          no stale source markers
+PASS scorer/unit tests                             41 tests passed
+VERDICT: PASS
+```
+
+- Preflight covers frozen-zone drift, source/generated freshness and second-run determinism, governing
+  hashes/identities/active registry, dependency contexts, seed mutation integrity, stale markers and
+  the unit suite. It operates in temporary directories and does not modify the generated package.
+- No Gate 0 acceptance run; no human judgment fabricated.
+
+BLOCKERS:
+- Independent review of `aff8f3d` (preflight + clean-split fix).
+- Gate 0 remains blocked operationally by the three-independent-human-review prerequisite.
+
+NEXT:
+- Review `aff8f3d` diff and rerun `python architecture-reboot/tools/preflight.py`.
+- Then proceed with the next authorized task; do not run Gate 0 acceptance.
+
+### Hashes
+
+- `00-GATE0-MANIFEST.md` — `sha256:5e4f0d2d2c8f51a3073ce8debd7e591b1053e8b74d71342e82e62403054aa78e`
+- `make_seeds.py` — `sha256:4296932a2ece936d808f21429e779ec5ce09363b04c8a3df195dc114816b4e4f`
+- `preflight.py` — `sha256:419269da48bfcfdbe5cf8c74638d0852d31c136b354a80b85488a956a208c27a`
+- `gate0_harness.py` — `sha256:e374890c71ba6a43a3859fbcf39f01a265e861489800bc7c03c279bc15419068`
+- `test_scorer_more.py` — `sha256:0a8324f41c67fb5786291a9833a21ebce4ff952bd69b250f270a5984843fa674`
+- `projection_contract.py` — `sha256:ebe2cab075e980f61f0c1aa7db1225f407a78ee092423ec26a6c6c21c64f5875`
+- `scorer/scorer.py` — `sha256:e9c957928c9d26b7db5f27cfc8e1d7320e35e1c604b979dfd38175484178122b`
+- `scorer/registry.py` — `sha256:763d8fe76e467553dbf31a38baee1370c8706b69394e846df3bcc48dd8f65eb4`
+- `scorer/projection.py` — `sha256:2867510a74184ebd9137c1242c4f4cb64d119e17b3f76f10a9bf7ccd0aa481d8`
+- `MANIFEST.json` file bytes — `5043c380df304621dcbec41bff598a7df5ece5ccd4d63bec8b4f059c12bedcc2`
+
+No Doximity. No Phase 0.
+
 
 
 
