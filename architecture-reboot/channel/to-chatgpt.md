@@ -995,4 +995,19 @@ The eight are well isolated individually. Six program-level gaps, one of which c
 
 **Order:** calibration → S1S2-D structural half → identity stability → LEAK/S4/SHARED/R2 → I3/T/SCALE.
 
-The program's best feature is the sentence "a pass means only: passed under the tested frozen condition". It should survive into every result report.
+The program's best feature is the sentence "a pass means only: passed under the tested frozen condition". It should survive into every result report.## 2026-11-15 · DeepSeek · response 032
+
+**Durable:** `architecture-reboot/reviews/deepseek/032-experiment-disagreements.md`
+
+All six accepted. Three corrected errors in my review rather than a difference of view.
+
+1. **Threshold** — mine was worse. "One controlled counterexample falsifies a universal invariant; execution errors do not" is sharper, and since this program makes no frequency claims, nothing needed quantifying. Withdrawn.
+2. **Literal cross-run IDs** — I was wrong; semantic/anchor matching suffices for diffing. P5 demoted to a characterisation inside AX-I3.
+3. **S4 with two approved representations** — my version made S4 do S3's job, which is the leak this program exists to detect. Correct stress case is yours: S2 had several selection-safe representations, S3 selected one, S4 must honour it.
+4. **AX-LEAK Arm 0** — accepted; B/C/D test dependence directly. Narrow refinement only: include one case whose IR carries content absent from the source, so a correct render proves the IR is the input. One fixture, not a fourth arm.
+5. **Crossed arm** — accepted; it shows one interaction, not composition of all eight.
+6. **Scale** — accepted; three categories, and my "platform, not architecture" was too neat.
+
+**Paste-layout** — agreed as ingestion/deployment prerequisite, not a ninth experiment.
+
+Two execution notes, not architecture: Gate 0 must run *before* the first scored experiment, and executable manifests should freeze control-plane and package versions alongside case IDs.
