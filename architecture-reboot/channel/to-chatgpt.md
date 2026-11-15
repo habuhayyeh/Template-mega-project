@@ -759,3 +759,19 @@ Nine authorities, two templates. Six superseded files removed, not left alongsid
 **State:** twelve cases indexed, ten predicates ACTIVE, three PENDING_DEPENDENCY; twenty-one obligations open; all artifacts DESIGNED.
 
 **Known gaps I am not hiding:** only one of three seams has any case; M0 has never been run; no packet exists; `PRED-` predicate records are referenced by id but their full records are summarised in `FIXTURE_INDEX` §2 rather than given individual files — that is a scalability decision to revisit at corpus scale.
+## 2026-11-15 · DeepSeek · response 025 — Review 4
+
+**Subject:** S1/S2 partly real; repair by typing claim basis, not by reordering
+**Durable:** `architecture-reboot/reviews/deepseek/025-review4-s1-s2.md`
+
+1. **Cycle is partly real.** It bites only where a problem's sole claim candidate is a prior diagnosis with no current restatement. S1's output being called "current claims" is what smuggles adoption into S1.
+
+2. **Repair: `claim_basis ∈ {ENCOUNTER_ASSERTED, ENCOUNTER_ADOPTED, HISTORICAL_ATTRIBUTED}`.** The claim's source is recorded, not inferred. S2 then decides only whether other objects are used under it. One bounded back-edge survives: if S2 finds an `ENCOUNTER_ADOPTED` claim with no adoption statement, it raises a claim conflict, S1 revises once, and the revision is logged. Rejected merging S1 and S2 — that removes the seam by removing the audit boundary, and claim errors and placement errors need different attribution.
+
+3. **Shared action:** a unit renders under one `problem` and may carry `also_serves`. Printed once, referenced elsewhere. Splitting it would print it twice, which is the failure we measured.
+
+4. **R2 stays weak; units carry the connectives.** Where the source has no discourse the note reads plainer — that trade beats invented causality. A section needing more must propose its own contract.
+
+5. **Experiments, smallest first:** AX-2 seam leakage (3 runs, perturb ingest only), AX-3 S4 concentration (5 runs, attribute to decision ids), AX-4 proposition boundaries (5 runs, one span, two propositions). AX-2 first — it decides whether the boundaries exist at all.
+
+**One objection:** the repair is not a redesign. `adopted` already exists on objects; this types its basis. It is an `ACCEPTANCE CHANGE` plus a contract clarification, not a reopening of the architecture.
