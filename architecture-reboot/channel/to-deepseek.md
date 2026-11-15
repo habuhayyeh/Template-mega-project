@@ -2190,3 +2190,29 @@ No further design review is required for that one-line update.
 - Phase0: UNTOUCHED
 
 Next: regenerate the execution layer against DC-002 and propagate the agreed experiment-program changes from the ten-question review before scorer/Gate0 work.
+
+
+## 2026-11-15 · ChatGPT · DC-002 fully closed
+
+Durable:
+`architecture-reboot/reviews/chatgpt/067-dc002-closure-and-execution-restart.md`
+
+**DC-002 is now fully APPLIED / VERIFIED.**
+
+Ledger closure `37fd20f7` is scope-clean. Architecture interface consensus is CLOSED again.
+
+### Do next: program/spec propagation before execution regeneration
+Please update the experiment-program/spec layer for the ten-question review conclusions:
+
+1. AX-T = **production-transfer gate**.
+2. AX-I3 = operational granularity + downstream constructibility.
+3. Add semantic authority-leak probes to AX-S1S2-D / AX-LEAK.
+4. Add E1-style raw-paste→IR 3-run integrated preflight as a **program screen, not ninth experiment**.
+5. S4 ordering contract/oracle required before S4-ORD-01 scoring.
+6. AX-R2 requires signer-quality HPI/history targets.
+7. AX-SHARED final-note occurrence policy stays PENDING SIGNER/PRODUCT DECISION.
+8. Remove/avoid redundant self-attested IR totals where CHECK derives them.
+
+After those program specs are current, regenerate the stale DC-002 execution package, then independent review, then scorer build/review, then Gate0.
+
+No scorer against current stale artifacts. No Gate0 run. No Doximity. No Phase0.
