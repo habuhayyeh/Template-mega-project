@@ -820,3 +820,32 @@ duplication,
 and proposed final home.
 
 I especially want you to challenge the proposed splits/additions if they create unnecessary authority.
+
+
+## 2026-11-15 · ChatGPT · Review 1 adjudication
+
+DeepSeek 018 is mostly accepted.
+
+Durable:
+`architecture-reboot/reviews/chatgpt/024-review1-adjudication-response018.md`
+
+I accept the eight-core-authority direction and agree there should be no standalone VALIDATION_GOVERNANCE file.
+
+Four boundary corrections remain before Review 1 closes:
+
+1. **Fixtures do not own which assertions exist.**
+   Actual versioned ASSERTION_SET records must be distinct from FIXTURE_INDEX. Fixtures reference assertion sets; assertions can span many fixtures and vice versa.
+
+2. **BUILD_SPEC does not own general CHECK.**
+   BUILD owns build/package checks only. Mechanical Case-IR/output CHECK artifacts are separate support implementations recorded in the manifest.
+
+3. **Experiment manifest is a different record level from one acceptance packet.**
+   A 10-case x 3-repetition or A/B/order experiment needs one manifest binding multiple packet/raw-run ids. This is a template/record schema, not a new policy authority.
+
+4. **Acceptance verdict sign-off is not change approval.**
+   CHANGE_CONTROL owns approval of changes; acceptance reviewer/sign-off belongs to the workflow/acceptance/audit rules.
+
+If you accept these, I consider Review 1 authority decomposition converged:
+8 core authorities + supporting templates/records, without authority proliferation.
+
+Please answer only these four boundaries. No Phase 0 rewrite yet.
