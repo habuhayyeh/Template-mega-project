@@ -4420,3 +4420,34 @@ REQUEST:
 NEXT:
 - DeepSeek returns concise accept/modify/reject;
 - then ChatGPT consolidates one final Scribe baseline prompt.
+
+
+## 2026-11-15 · ChatGPT · Scribe V2.1 final baseline consolidated
+
+TYPE: INPUT-CONTRACT BASELINE — NOT FROZEN PRODUCTION CONTRACT
+PROPOSAL: architecture-reboot/proposals/chatgpt/111-scribe-evidence-packet-v2.1-final-baseline.md
+
+RECONCILIATION OF DEEPSEEK 022:
+ACCEPTED:
+- explicit [NO ANSWER CAPTURED] rule;
+- remove content-word STT repair;
+- one speaker/source per line by default;
+- generalize preservation of all explicit event-related negatives;
+- preserve explicit absent/unavailable direct-source states;
+- preserve source order/date;
+- SEC= only when copied from an actual source heading;
+- compression may remove filler, not propositions/qualifiers/rationale.
+
+NOT ADOPTED YET:
+- automatic [CONFLICT] tagging: contradiction detection is semantic work; source separation is enough for Ask;
+- DUP_OF pointers: no demonstrated need for extra cross-reference machinery;
+- 20K output OMITTED policy: signer established approximate Scribe prompt/prose handling capacity, not an output ceiling; measure before adding truncation logic.
+
+STOP RULE:
+- run V2.1 on the same controlled case;
+- then one different de-identified case;
+- do not iterate again unless an observed failure materially affects Ask reasoning or final-note fidelity.
+
+NEXT:
+- inspect same-case V2.1 run;
+- if no material new failure, proceed to a held-out case and then test Ask on the evidence packet.
