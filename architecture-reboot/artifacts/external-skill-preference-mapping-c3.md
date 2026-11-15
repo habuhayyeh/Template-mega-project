@@ -136,3 +136,15 @@ After that, ChatGPT asks the signer the single unresolved Q17 clinical question 
 the clean CASE-01/CASE-10 representation packets.
 
 No Gate-0 acceptance, Doximity or Phase 0.
+
+## Signer resolution of Q17
+
+Signer answer: **YES**.
+
+For CASE-01, `no new weakness or speech trouble` is clinically pertinent negative evidence for the
+falls formulation and may be retained alongside `three falls since June` in the same problem
+representation.
+
+This resolves the final clinical preference gap identified by the external-skill retrieval. The
+remaining work is calibration/packet engineering, not an unresolved signer preference.
+

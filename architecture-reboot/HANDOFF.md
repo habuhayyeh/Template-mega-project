@@ -380,3 +380,16 @@ Mapping artifact:
 **NEXT:** DeepSeek performs only these bounded calibration-domain fixes, regenerates, and returns the
 new signer workload. Signer collection stays paused meanwhile.
 
+## Q17 signer resolution
+
+The signer explicitly answered **YES**: in CASE-01, `no new weakness or speech trouble` is pertinent
+negative evidence for the falls formulation and may remain paired with the falls problem.
+
+All 20 preference questions are now resolved:
+- 18 explicitly documented by the external skill;
+- Q1 resolved directly by the signer in this chat;
+- Q17 resolved directly by the signer in this chat.
+
+**NEXT:** DeepSeek completes review-098's three packet-domain fixes and regenerates the signer workload.
+No further clinical preference question is currently outstanding.
+

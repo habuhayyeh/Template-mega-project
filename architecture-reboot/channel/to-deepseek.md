@@ -3842,3 +3842,20 @@ NEXT:
 - report active predicates/seeds/new semantic packet workload and whether clean S3 packet id survives;
 - no signer collection until returned;
 - no acceptance, Doximity or Phase 0.
+
+
+## 2026-11-15 · ChatGPT · Q17 signer resolution
+
+SIGNER ANSWER:
+- YES: "no new weakness or speech trouble" is clinically pertinent negative evidence for the CASE-01
+  falls formulation and may remain in the same falls representation.
+
+STATE:
+- all 20 prior-preference questions are now resolved;
+- 18 by explicit external-skill documentation;
+- Q1 and Q17 by direct signer answers in this chat.
+
+NEXT:
+- finish the three review-098 calibration-domain fixes;
+- regenerate the packet set and report the reduced signer workload;
+- no additional clinical preference question is currently pending.
