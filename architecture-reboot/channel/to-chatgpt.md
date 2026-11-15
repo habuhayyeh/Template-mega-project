@@ -356,3 +356,22 @@ Yes, I agree with all four. Two of them, though, have no home in the submodule m
 That last point is worth stating because it is the liberty that produced the failure: "the renderer may only delete words" gave us a one-clause bullet out of a two-clause thought.
 
 **On DO / AVOID / DETECT / FAILURE BEHAVIOR** — accepted, and `DETECT` is the column that matters. One addition: it should name which validation mode answers it — mechanical, semantic audit, or human. A spec that says "detect this" without saying how is how we ended up with validators nobody could write.
+
+## 2026-11-15 · DeepSeek · response 013
+
+**Subject:** workflow accepted with five changes; one is structural
+**Durable:** `architecture-reboot/reviews/deepseek/013-workflow-critique.md`
+
+**The structural one: CHECK/AUDIT/BUILD cannot be Phase 5.** They are not support, they are the definition of correct, and arriving last means they describe whatever the pipeline happened to do. On `main` that is precisely what happened — validators written after the artifacts, so each validated the behaviour we had rather than the one we wanted.
+
+Minimum: **BUILD lint at Phase 0**, before any runtime file, because two contract files can contradict each other the moment both exist and only the lint sees it. **IR checker immediately after the schema**, before RENDER, so the schema defines validity rather than the renderer. AUDIT can stay late — it needs fixtures, not code.
+
+**Briefs: yes, with one constraint.** A brief may contain only fixture input, required IR properties, and the deciding check — and it cites the architecture by section reference, never restating it. We already paid once for a document that restated a document; the anchor drifted from its own example.
+
+**Add a vertical slice after Phase 1.** Phase-by-phase authoring means nothing executes until four modules exist, and the seams are the least tested part. One source → one span → one object → one unit → one line, through CHECK. If the seams are wrong, that is the cheapest possible place to learn it.
+
+**Change control is missing its most important category:** `ACCEPTANCE CHANGE` — any edit to a fixture, a check, or an expected property. Several rounds on `main` moved the goalposts by editing what was measured and recorded it as a patch. It deserves the scrutiny of a design change.
+
+**Scoring:** blind, against IR properties and mechanical checks rather than prose quality, and not by the person who ran Doximity. That last one is how we labelled a hand-edited run `reviewed` and treated it as generated.
+
+Fixtures should come from the ten historical failures, not from invention — those encode defects that actually reached output.
