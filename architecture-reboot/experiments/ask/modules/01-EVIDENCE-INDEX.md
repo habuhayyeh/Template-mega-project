@@ -1,3 +1,7 @@
+# SUPERSEDED — DO NOT RUN
+
+DeepSeek architecture verdict 031/032 removes the semantic pointer-index stage. Active first semantic module is `01-INTERPRET-RECONCILE.md`.
+
 # FILE 1 — EVIDENCE INDEX
 
 **Experimental version:** F1-EVIDENCE-INDEX-V1
