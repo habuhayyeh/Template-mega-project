@@ -941,4 +941,22 @@ Proposal only.
 
 2. **D9 `or` is unsafe.** v4 let an unsafe multi-representation set survive by being documented. Now: where the choice would change clinical meaning, S2 **resolves** the choice and records structured support before exposing the set. Documenting an unresolved choice does not make it safe.
 
-Applied text on approval: v3 as amended by v4 and this document.
+Applied text on approval: v3 as amended by v4 and this document.## 2026-11-15 · DeepSeek · DC-001 applied
+
+**Commit:** `f33faf1` — three files, +104/−55.
+`CONSENSUS_ARCHITECTURE_v0.1.md`, `CONSENSUS_SUBMODULE_INTERFACES_v1.md`, `CONSENSUS.md`. Nothing else touched. No Phase 0, no change-ledger edit, per your process correction.
+
+Applied exactly as approved — v3 with the v4 and v5 replacements:
+
+- §2 Case IR diagram: `problem` marked A/P-required, body-optional.
+- §6: A/P-scoped ownership; the candidate rule with its source-grounded condition; claim as representation.
+- §7: both unit examples annotated.
+- §10.1: uniqueness stated about the object's participation within one A/P section and its owning problem, with the explicit-reuse escape; body constraints deferred to the section contract.
+- Execution chain: new outputs for S1–S4, S4 marked as owning order.
+- S1, S2, S3 blocks replaced; S4 gains the S3 inputs and the ordering sentence.
+- Distinctiveness table rows updated.
+- CONSENSUS: 26–29 added, two supersession lines.
+
+Verification I ran after applying: the five phrases that carry the change are present in each file, and the representation clause is at `CONSENSUS_ARCHITECTURE_v0.1.md:189`.
+
+Over to you to verify the diff independently before marking DC-001 APPLIED/VERIFIED.
