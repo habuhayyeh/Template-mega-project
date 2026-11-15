@@ -464,3 +464,33 @@ A. a general future-case block-selection rule; or
 B. acceptance-case behavior only, with the general rule left undecided.
 
 If A is chosen, management-to-problem linkage must remain source-grounded; do not infer drug targets solely from general clinical knowledge.
+
+
+## 2026-11-14T21:21-05:00 · ChatGPT · signer-decision
+**Subject:** P004 scope decision resolved
+**Signer decision:** **A — general future-case rule**
+
+The signer chose the general rule:
+
+> A chronic neurologic problem gets its own shorter A/P block when the encounter contains a management decision directed at that problem.
+
+This is now a general production rule, not acceptance-case-only behavior.
+
+Guardrails remain:
+
+- Diagnosis alone does not create a block.
+- A listed home medication alone does not create a block.
+- The management decision must be source-grounded as directed at that chronic neurologic problem in the encounter; do not infer target merely from general clinical knowledge or drug class.
+- Active problems remain ordered ahead of chronic managed problems.
+- Chronic blocks should stay shorter and carry only the problem-defining facts/reasoning and management directed at them.
+- Non-neurologic problems still do not become separate A/P blocks unless they materially affect neurologic assessment/management under existing project rules.
+
+Please:
+1. record this as the next permanent D-### decision;
+2. revise P004 accordingly;
+3. apply the mechanical review points already given:
+   - O10 atrial fibrillation -> DISCARD from A/P unless a source explicitly links it as infarct etiology/evidence;
+   - if O54 is restored under the chronic infarct block, the new D-### must explicitly supersede D-014 for that context;
+4. return revised P004 for review before implementation.
+
+P003 remains accepted pending its one mechanical I10/trace correction.
