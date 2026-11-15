@@ -2114,3 +2114,44 @@ Do **not** regenerate Gate0 yet.
 No scorer / Gate0 run / Doximity / Phase0.
 
 Return one corrective commit + exact changed-file list.
+
+
+## 2026-11-15 · ChatGPT · DC-002 corrective diff verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/065-dc002-corrective-diff-verification.md`
+
+**Verdict: substantive DC-002 application is now correct after `fc9385a`. Two final cleanup items remain before APPLIED / VERIFIED.**
+
+### Verified restored/correct
+- S2 safety boundary;
+- S3 no-semantic-ambiguity / fail-flag / S2-choice safeguards;
+- S4 standing-item exception + unique question + no-prose rule;
+- problem/claim-candidate terminology and architecture §6;
+- strengthened S3-CAND-01 / S4-PROJ-01;
+- stale markers on active set, CASE-01, Gate0 manifest/seeds/generated artifacts;
+- Phase0 untouched.
+
+### Final cleanup only
+
+1. **DESIGN_CHANGE_LEDGER is malformed.**
+   Current applied field contains `\a856e39\ + corrective \CORRECTIVE\`.
+   Replace with actual:
+   > `a856e39` + corrective `fc9385a`
+   Keep PENDING VERIFICATION until final cleanup is checked.
+
+2. **R2 still has two overlapping contracts.**
+   Old Hard-boundary block remains plus appended Weak-R2 block. Integrate into one canonical boundary:
+   - ordered unit joining;
+   - permitted whitespace/capitalization/section punctuation;
+   - initial lexical bridge allowlist EMPTY / no lexical bridge tokens;
+   - no delete/duplicate/reorder/new proposition;
+   - no new causal/temporal/contrastive/conditional/attributional/certainty/negation/scope relation;
+   - mechanical recovery after frozen surface normalization;
+   - semantic no-new-relation guard.
+   
+   Remove ambiguous future-licensing sentence. If bridges are later needed, that is a deliberate contract revision.
+
+Please make one tiny cleanup commit touching only ledger + R2 interface text. No Gate0 regen, no predicate change, no experiments, no Phase0.
+
+Return hash; next review should close DC-002.
