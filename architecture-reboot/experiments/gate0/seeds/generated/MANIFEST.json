@@ -44,16 +44,20 @@
   },
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
+    "00-GATE0-MANIFEST.md": "sha256:a315a7d1cf4a67685a6759ee71f69ff26cb37e1950b52ac1410b6cc0d8e7259a",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
     "G0-SEEDS.md": "sha256:19c830ebd4b9f8c7a12bba919c6c9fe8e91028e150e8b239c340a5ab64ffad52",
-    "make_seeds.py": "sha256:f54383acd4da71f5f4b6449e1a74f7cc7551a53062fb2e89fe917568d77542a0",
+    "make_seeds.py": "sha256:1ecb66176941e9a21014288a6d513ca257882279d7f859e2f5838b54e2698855",
     "oracle.json": "sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927",
     "predicates.md": "sha256:487eb54ac3c92dfd775dd5e77def439f09636d6a8e94756760ea9a010483b6ec",
     "schema.md": "sha256:8ff774f3db1d090f1aaf812dfcc735d24929b00c132b71b427e4b73b5f2a6062"
   },
-  "hash_method": "sha256 over canonical JSON (sorted keys, compact separators)",
+  "hash_methods": {
+    "artifacts": "sha256 over canonical JSON (sorted keys, compact separators)",
+    "governing_source": "sha256 over file bytes"
+  },
   "oracle": "ORACLE-2.0",
   "registry": "PILOT-2",
   "schema": "SCHEMA-2",
@@ -69,7 +73,8 @@
           "path": "/s1/candidates/0/adopted"
         }
       ],
-      "parent": "PARENT-S1_PARENT.json"
+      "parent": "PARENT-S1_PARENT.json",
+      "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S1-02.json",
@@ -82,7 +87,8 @@
           "path": "/s1/candidates/0/selected_claim"
         }
       ],
-      "parent": "PARENT-S1_PARENT.json"
+      "parent": "PARENT-S1_PARENT.json",
+      "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S1-04.json",
@@ -95,7 +101,8 @@
           "path": "/s1/candidates/0/anchors"
         }
       ],
-      "parent": "PARENT-S1_PARENT.json"
+      "parent": "PARENT-S1_PARENT.json",
+      "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S1-05.json",
@@ -108,7 +115,8 @@
           "path": "/s1/candidates/-"
         }
       ],
-      "parent": "PARENT-S1_PARENT.json"
+      "parent": "PARENT-S1_PARENT.json",
+      "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S1-06.json",
@@ -121,7 +129,8 @@
           "path": "/s1/candidates/0/status_current"
         }
       ],
-      "parent": "PARENT-S1_PARENT.json"
+      "parent": "PARENT-S1_PARENT.json",
+      "parent_type": "S1_OUTPUT"
     },
     {
       "artifact": "G0-S2-01.json",
@@ -134,7 +143,8 @@
           "path": "/s2/representations/0/support_refs"
         }
       ],
-      "parent": "PARENT-S2_PARENT.json"
+      "parent": "PARENT-S2_PARENT.json",
+      "parent_type": "S2_OUTPUT"
     },
     {
       "artifact": "G0-S2-03.json",
@@ -147,7 +157,8 @@
           "path": "/s2/adjudication/0/temporal"
         }
       ],
-      "parent": "PARENT-S2_PARENT.json"
+      "parent": "PARENT-S2_PARENT.json",
+      "parent_type": "S2_OUTPUT"
     },
     {
       "artifact": "G0-S2-06.json",
@@ -160,7 +171,8 @@
           "path": "/s2/adjudication/0/adoption"
         }
       ],
-      "parent": "PARENT-S2_PARENT.json"
+      "parent": "PARENT-S2_PARENT.json",
+      "parent_type": "S2_OUTPUT"
     },
     {
       "artifact": "G0-S3-01.json",
@@ -173,7 +185,8 @@
           "path": "/s3/rendered/0/approved_representation"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-02.json",
@@ -186,7 +199,8 @@
           "path": "/s3/rendered/0/selected_rep"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-04.json",
@@ -199,7 +213,8 @@
           "path": "/s3/dispositions"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-05.json",
@@ -212,7 +227,8 @@
           "path": "/s3/candidate_outcomes"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-06.json",
@@ -225,7 +241,8 @@
           "path": "/s3/candidate_outcomes"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-07.json",
@@ -238,7 +255,8 @@
           "path": "/s3/candidate_outcomes/-"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-08.json",
@@ -251,7 +269,8 @@
           "path": "/s3/candidate_outcomes/0/outcome"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-09.json",
@@ -264,7 +283,8 @@
           "path": "/s3/candidate_outcomes/-"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S3-10.json",
@@ -277,7 +297,8 @@
           "path": "/s3/candidate_outcomes/0/basis"
         }
       ],
-      "parent": "PARENT-S3_PARENT.json"
+      "parent": "PARENT-S3_PARENT.json",
+      "parent_type": "S3_OUTPUT"
     },
     {
       "artifact": "G0-S4-01.json",
@@ -290,7 +311,8 @@
           "path": "/s4/problems"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-02.json",
@@ -303,7 +325,8 @@
           "path": "/s4/problems/-"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-04.json",
@@ -316,7 +339,8 @@
           "path": "/s4/units/0/members/-"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-05.json",
@@ -329,7 +353,8 @@
           "path": "/s4/units/0/representation"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-06.json",
@@ -342,7 +367,8 @@
           "path": "/s4/units"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-07.json",
@@ -355,7 +381,8 @@
           "path": "/s4_input_view/-"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-08.json",
@@ -368,20 +395,22 @@
           "path": "/s4_input_view/from_s2/members"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-09.json",
-      "hash": "sha256:be14401f61d74d6f0e645b4476054369a71b89fe72f00163da51549d6a0bc0f5",
+      "hash": "sha256:cc12137c9122957519327149a9116a27af800ebd8d72a4931d90e43182bd4007",
       "must_fire": "S4-PROJ-01",
       "mutations": [
         {
-          "after": "SEVERE wrong value",
-          "before": "MODERATE",
-          "path": "/s4_input_view/from_s1/salience/acuity"
+          "after": "S3-owned field under S2 wrong-owner group",
+          "before": "<absent>",
+          "path": "/s4_input_view/from_s2/selected_rep"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-10.json",
@@ -394,7 +423,8 @@
           "path": "/s4_input_view/from_ingest/O05"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     },
     {
       "artifact": "G0-S4-11.json",
@@ -407,8 +437,16 @@
           "path": "/s4_input_view/from_s2/claim_relation"
         }
       ],
-      "parent": "PARENT-S4_PARENT.json"
+      "parent": "PARENT-S4_PARENT.json",
+      "parent_type": "S4_BLUEPRINT"
     }
   ],
-  "specificity_policy": "FULL_SILENCE-WITHIN-LAYER"
+  "specificity_policy": "FULL_SILENCE-WITHIN-LAYER",
+  "variation": {
+    "artifact": "VARIATION.json",
+    "basis": "identical semantics, all ids renamed",
+    "expect": "zero findings",
+    "hash": "sha256:c37c29b0ebeefc816830e35f897f1353e8998b9f4ef6952d68070a981a7f54e3",
+    "parent": "PARENT-S3_PARENT.json"
+  }
 }

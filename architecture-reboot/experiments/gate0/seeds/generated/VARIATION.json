@@ -1,0 +1,41 @@
+{
+  "case": "CASE-01",
+  "parent_type": "S3_OUTPUT",
+  "registry": "PILOT-2",
+  "s3": {
+    "candidate_outcomes": [
+      {
+        "candidate": "CX",
+        "outcome": "RENDERED"
+      }
+    ],
+    "dispositions": [
+      {
+        "disposition": "HISTORICAL_CONTEXT",
+        "object": "O01"
+      },
+      {
+        "disposition": "HISTORICAL_CONTEXT",
+        "object": "O02"
+      },
+      {
+        "disposition": "MEDICATION_RECORD",
+        "object": "O07"
+      }
+    ],
+    "rendered": [
+      {
+        "approved_representation": "RX",
+        "problem": "CX",
+        "selected_rep": "RX"
+      }
+    ],
+    "retained": [
+      "OX3",
+      "OX4",
+      "OX5",
+      "OX6"
+    ]
+  },
+  "schema": "SCHEMA-2"
+}

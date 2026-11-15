@@ -87,7 +87,7 @@
     "from_s1": {
       "problem": "C1",
       "salience": {
-        "acuity": "SEVERE",
+        "acuity": "MODERATE",
         "management_reference_spans": [
           "S03"
         ]
@@ -106,7 +106,8 @@
           "to": "O03",
           "type": "SUPPORTS"
         }
-      ]
+      ],
+      "selected_rep": "R-999"
     },
     "from_s3": {
       "rendered": [

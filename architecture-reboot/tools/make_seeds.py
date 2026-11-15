@@ -81,7 +81,7 @@ def s4_05(a): a['s4']['units'][0]['representation'] = 'R-999'
 def s4_06(a): a['s4']['units'] = [u for u in a['s4']['units'] if u['id'] != 'U2']
 def s4_07(a): a['s4_input_view']['adoption'] = True
 def s4_08(a): a['s4_input_view']['from_s2']['members'] = ['O03', 'O04', 'O05']
-def s4_09(a): a['s4_input_view']['from_s1']['salience']['acuity'] = 'SEVERE'
+def s4_09(a): a['s4_input_view']['from_s2']['selected_rep'] = 'R-999'
 def s4_10(a):
     a['s4_input_view']['from_ingest']['O05'] = {'payload': 'vitamin D', 'provenance': 'A',
                                                 'temporal': None}
@@ -113,7 +113,7 @@ SEEDS = [
  ('S4_PARENT.json', 'G0-S4-06', 'S4-COMP-01', s4_06, '/s4/units', 'U2 present', 'U2 removed'),
  ('S4_PARENT.json', 'G0-S4-07', 'S4-PROJ-01', s4_07, '/s4_input_view/-', '<absent>', 'adoption schema'),
  ('S4_PARENT.json', 'G0-S4-08', 'S4-PROJ-01', s4_08, '/s4_input_view/from_s2/members', '["O03","O04"]', 'adds O05 invented'),
- ('S4_PARENT.json', 'G0-S4-09', 'S4-PROJ-01', s4_09, '/s4_input_view/from_s1/salience/acuity', 'MODERATE', 'SEVERE wrong value'),
+ ('S4_PARENT.json', 'G0-S4-09', 'S4-PROJ-01', s4_09, '/s4_input_view/from_s2/selected_rep', '<absent>', 'S3-owned field under S2 wrong-owner group'),
  ('S4_PARENT.json', 'G0-S4-10', 'S4-PROJ-01', s4_10, '/s4_input_view/from_ingest/O05', 'S03 payload', 'fabricated payload'),
  ('S4_PARENT.json', 'G0-S4-11', 'S4-PROJ-01', s4_11, '/s4_input_view/from_s2/claim_relation', 'null', 'COMPETING wrong owner'),
 ]
@@ -129,7 +129,10 @@ def main():
         'campaign': CAMPAIGN, 'registry': REG, 'active_set': ACTIVE,
         'schema': SCHEMA, 'oracle': ORACLE_VER,
         'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
-        'hash_method': 'sha256 over canonical JSON (sorted keys, compact separators)',
+        'hash_methods': {
+            'governing_source': 'sha256 over file bytes',
+            'artifacts': 'sha256 over canonical JSON (sorted keys, compact separators)',
+        },
         'governing_hashes': {
             'CONSENSUS_SUBMODULE_INTERFACES_v1.md': fsha(os.path.join(ROOT, 'CONSENSUS_SUBMODULE_INTERFACES_v1.md')),
             'CONSENSUS_ARCHITECTURE_v0.1.md': fsha(os.path.join(ROOT, 'CONSENSUS_ARCHITECTURE_v0.1.md')),
@@ -139,6 +142,7 @@ def main():
             'predicates.md': fsha(os.path.join(AX, 'predicates.md')),
             'G0-SEEDS.md': fsha(os.path.join(G0, 'seeds/G0-SEEDS.md')),
             'make_seeds.py': fsha(os.path.abspath(__file__)),
+            '00-GATE0-MANIFEST.md': fsha(os.path.join(G0, '00-GATE0-MANIFEST.md')),
             'oracle.json': fsha(os.path.join(AX, 'fixtures/CASE-01/oracle.json')),
         },
         'clean_parents': {}, 'seeds': [],
@@ -161,9 +165,25 @@ def main():
             json.dump(art, fh, indent=2, sort_keys=True)
             fh.write('\n')
         manifest['seeds'].append({
-            'artifact': name, 'parent': 'PARENT-' + pfile, 'must_fire': pred,
+            'artifact': name, 'parent': 'PARENT-' + pfile,
+            'parent_type': parents[pfile]['parent_type'], 'must_fire': pred,
             'mutations': [{'path': path, 'before': before, 'after': after}],
             'hash': canon(art)})
+
+    # harmless variation: S3 parent with every id renamed consistently.
+    var = copy.deepcopy(parents['S3_PARENT.json'])
+    text = json.dumps(var, sort_keys=True)
+    for a, b in (('"C1"', '"CX"'), ('"R1"', '"RX"'), ('"O03"', '"OX3"'),
+                 ('"O04"', '"OX4"'), ('"O05"', '"OX5"'), ('"O06"', '"OX6"')):
+        text = text.replace(a, b)
+    var = json.loads(text)
+    with io.open(os.path.join(GEN, 'VARIATION.json'), 'w', encoding='utf-8', newline='\n') as fh:
+        json.dump(var, fh, indent=2, sort_keys=True)
+        fh.write('\n')
+    manifest['variation'] = {'artifact': 'VARIATION.json', 'parent': 'PARENT-S3_PARENT.json',
+                             'expect': 'zero findings',
+                             'basis': 'identical semantics, all ids renamed',
+                             'hash': canon(var)}
 
     from collections import Counter
     by = Counter(s['must_fire'] for s in manifest['seeds'])
