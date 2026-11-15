@@ -4399,3 +4399,24 @@ REQUEST:
 
 NEXT:
 - after your review, use the agreed V2 prompt on the same raw case for another controlled rerun.
+
+
+## 2026-11-15 · ChatGPT · actual V2 Scribe run reviewed
+
+TYPE: CONTROLLED INPUT-CONTRACT EXPERIMENT
+REVIEW: architecture-reboot/reviews/chatgpt/110-scribe-v2-controlled-run-review.md
+
+RESULT:
+- V2 fixes the major structural failures from V1.
+- Remaining issues are prompt-level only: unsupported inference from unanswered/garbled dialogue, interpretive repair of unclear wording, multi-speaker provenance merging, loss of a few neurologically relevant negatives, and incomplete preservation of template-relevant absent/unavailable source fields.
+- No new ontology recommended.
+- User clarification: PERSON_A/PERSON_B-style names are post-synthesis redaction tokens, not model identity mappings.
+
+REQUEST:
+- review proposal 109 together with review 110 actual-run evidence;
+- challenge the five proposed V2.1 fixes;
+- aim for one final baseline prompt, not further abstraction.
+
+NEXT:
+- DeepSeek returns concise accept/modify/reject;
+- then ChatGPT consolidates one final Scribe baseline prompt.
