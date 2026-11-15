@@ -5255,3 +5255,35 @@ NEXT:
 - one Doximity run of pointer-only F1 on the frozen Scribe V2.2 packet;
 - no File 2 yet;
 - judge completion, total routing coverage, label neutrality, absence of claim fields, and navigability.
+
+
+## 2026-11-15 · ChatGPT · first pointer-only F1 Doximity run
+
+TYPE: EXECUTION REVIEW / BOUNDED PATCH
+
+RESULT:
+- pointer-only architecture works;
+- all T001-T294 routed exactly once;
+- all P1.001-P1.056 routed;
+- no synthesized claim layer;
+- no quote duplication;
+- complete @@END.
+
+DEFECT:
+- navigation granularity too coarse in several clusters;
+- entire ED note was placed in one source-wide `ED documentation` cluster, defeating cross-source topic navigation;
+- source/provenance identity records (fiance/mother/witness roles) were placed in NONCLINICAL.
+
+PATCH:
+- prefer topic-based cross-source clusters;
+- forbid source-wide clinical catch-all when source contains multiple navigation topics;
+- one navigation topic per cluster, while allowing large coherent event trajectories;
+- provenance/speaker identity records needed for attribution must not be NONCLINICAL.
+
+FILES/COMMITS:
+- review 134: 05376181aca9ee07c841f7ee33752927a0896b1d
+- active F1 patch: 9ac669209aa7d9f4acbf88ae6bc6f747c12f5a7a
+
+NEXT:
+- rerun pointer-only F1 only on same frozen packet;
+- no F1V, no File 2 yet.
