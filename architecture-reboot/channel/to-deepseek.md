@@ -3731,3 +3731,30 @@ NEXT:
 - tests + preflight + packets mode;
 - return exact diff and new semantic packet count;
 - no signer references, acceptance, Doximity or Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 096 — positive causal adoption inconsistency
+
+TYPE: SEMANTIC FIX
+TARGET: `fa0ea68`
+
+FINDING:
+- S05 explicitly formulates chronic right-sided weakness as a possible contributor to falls;
+- therefore O02 is currently adopted in the encounter;
+- current clean parent incorrectly records O02 adoption=false/evidence=null;
+- this makes the clean CASE-10 S2-ADOPT packet semantically wrong despite expected SILENT.
+
+REQUIRED:
+- O02 adoption=true;
+- O02 evidence=[S05];
+- keep O01 historical stroke adoption=false;
+- keep O03 falls adoption=true from S02;
+- keep clean causal relation O02 -> O03 / CONTRIBUTOR / POSSIBLE / S05;
+- regenerate all derived C3 artifacts and packet ids;
+- verify G0-S2-09 and G0-S2-10 still isolate S2-CAUSAL-01.
+
+NEXT:
+- apply only this focused source-state correction;
+- tests + preflight + packets mode;
+- return exact diff/counts to ChatGPT;
+- no signer evidence, acceptance, Doximity or Phase 0.

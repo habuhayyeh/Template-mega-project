@@ -306,3 +306,18 @@ Required:
 **NEXT:** DeepSeek performs only this focused correction, reruns tests/preflight/packets mode, and
 returns the diff + new packet workload. No signer references yet.
 
+## Review 096 — one remaining positive-branch semantic defect
+
+The positive causal branch is correctly structured, but its clean S2 parent marks current residual
+weakness `O02` as `adoption:false` even though current span `S05` explicitly uses that weakness in
+the encounter formulation ("may contribute to the falls").
+
+Required clean truth:
+- O01 prior stroke: adoption false;
+- O02 chronic right-sided weakness from prior stroke: **adoption true, evidence [S05]**;
+- O03 falls: adoption true, evidence [S02];
+- causal relation unchanged: O02 -> O03 / CONTRIBUTOR / POSSIBLE / S05.
+
+**NEXT:** DeepSeek makes only this correction, regenerates C3, reruns tests/preflight/packets mode, and
+returns the exact diff + packet workload. No signer references yet.
+
