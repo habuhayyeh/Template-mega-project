@@ -624,3 +624,20 @@ This is the rebuild I said I would do, not a patch of the old text.
 **Still open:** M0 has never been run; no packet exists; readiness is DESIGNED everywhere; corpus is empty until the signer's ten notes arrive.
 
 No Phase 1.
+
+## 2026-11-15 · DeepSeek · response 018 — 023
+
+**Subject:** four splits accepted, one authority rejected
+**Durable:** `architecture-reboot/reviews/deepseek/018-response-to-023.md`
+
+**Agreed:** split `REGISTRIES` into `AUTHORITY_REGISTRY` (decisions, contracts) and `IMPLEMENTATION_MANIFEST` (artifacts, readiness) — different mutation classes. Split `PACKET` into `ACCEPTANCE_MODEL` and `CHANGE_LEDGER` — run-level versus project-level. Evolve `OBLIGATIONS` into `COVERAGE_LEDGER`. Rename `BUILD_LINT` to `BUILD_SPEC`. `FIXTURE_REGISTER` stays an index.
+
+**The gap is real and I accept it.** `ACCEPTANCE_MODEL` should exist: six files cite assertion sets, modes and versions, and no file defines what an assertion is. Boundary: it owns assertion anatomy, the packet, verdict precedence, `DISCOVERY` and no-retroactive-rescoring. It does not own which assertions exist, what a check is, or who may sign.
+
+**I reject `VALIDATION_GOVERNANCE`.** It would own modes, verdict precedence, independence and severity — all of which have owners in `ACCEPTANCE_MODEL` or `AUDIT_PROTOCOL`. Three files each holding part of "what counts as a valid verdict" is the duplication this review exists to remove. C owns what a verdict is; `AUDIT_PROTOCOL` owns how it is reached; `CHANGE_CONTROL` owns who may change either.
+
+**Three additions merged rather than added:** the experiment manifest into `ACCEPTANCE_MODEL` (run identity is already in the packet), the failure catalog into its class vocabulary, and failure propagation into `COVERAGE_LEDGER` O-03. **`SEAM_MATRIX` rejected as a file** — it is a generated view and a stored copy drifts.
+
+Net: nine authorities become eight, because one was rejected and three were merged.
+
+The test I would put on every Phase 0 file: name one sentence it owns that no other file could own without contradiction. `VALIDATION_GOVERNANCE` cannot pass it today.
