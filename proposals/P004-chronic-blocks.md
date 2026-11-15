@@ -1,6 +1,6 @@
-# P004 v3 — chronic problems get their own block
+# P004 v4 — chronic problems get their own block
 
-**Status:** v3, revised after `reviews/P003-v8-P004-v2-original-branch.md`. Production rule and frozen-case adjudication separated; representation gap recorded. Awaiting review. Not implemented.
+**Status:** v4, revised after `reviews/P003-v8-P004-v3-original-branch.md`. **HELD**: production `03` cannot derive the block from the current representation without violating D-015. Table corrections applied. Not implementable until a representation proposal exposes the management target.
 **Supersedes:** P004 v1.
 **Affects:** `pipeline/03_SELECT_ORGANIZE.md`, `oracles/ap_ledger_v4.txt` (new, append-only), `tests/acceptance/`, `runs/`, `STATUS.md`, `DECISIONS.md` (D-015 recorded; a further entry at approval, ID assigned then).
 **Does not affect:** substrate, `01`, `02`, `04`, `05` contract, `06`, `07`, the six kinds.
@@ -22,6 +22,8 @@ Recorded as **D-015**. The guardrails are part of the decision, not commentary:
 - A chronic block stays short: problem-defining facts, the reasoning that explains it, and the management directed at it.
 - A non-neurologic problem does not become a block unless it materially affects neurologic assessment or management under the existing rules.
 
+**This proposal is blocked, and the block is architectural.** Production `03` reads the frozen representation. That representation does not say which problem a management item serves. Under D-015, `03` may not infer it. So the production rule cannot be implemented against this substrate at all — the oracle can record the signer’s adjudication, but the stage cannot derive it. Sequence: P003 first, then a representation proposal that exposes the management-to-problem relation, then this.
+
 Why a rule and not a preference: a preference cannot be executed twice the same way, and the signer has said consistency matters more than fit (channel, 21:35).
 
 ## 2. Partition — one home per object
@@ -32,7 +34,8 @@ The A/P branch has no `REUSE`, so each retained object has exactly one block.
 |---|---|---|---|
 | O7, O53 | P1.EVIDENCE | P2.EVIDENCE | the infarct block's label and record |
 | O8 | P1.COURSE | P2.COURSE | the infarct's date |
-| O9, O54 | P1.EVIDENCE | P2.EVIDENCE | residual deficit of the infarct |
+| O9 | DISCARD (already) | DISCARD | duplicate of O54; O54 carries the deficit with prior-neurology provenance |
+| O54 | P1.EVIDENCE | P2.EVIDENCE | residual deficit of the infarct |
 | O11, O30, O31 | P1.MANAGEMENT | P2.MANAGEMENT | home regimen continued |
 | O12, O25 | P1.MANAGEMENT | P2.MANAGEMENT | apixaban held, resume condition |
 | O18, O19 | P1.EVIDENCE | P1.EVIDENCE | encephalomalacia and no new lesion establish the seizure substrate |
@@ -72,7 +75,7 @@ Not a silent reversal. It changes what one block says because the signer added a
 
 ## 5. Oracle
 
-`oracles/ap_ledger_v4.txt`, append-only; `v3` untouched. Seven assignments move, the memory block renumbers P2 → P3, and O10 joins the discard set. The A/P population stays 59.
+`oracles/ap_ledger_v4.txt`, append-only; `v3` untouched. The move set is larger than the table makes it look, and the P2 → P3 renumbering touches every memory line. **No count is stated here.** The oracle will be generated from the ledger and its diff measured; a hand-written count is how bookkeeping errors get into a proposal.
 
 Renumbering is the most likely thing to break a downstream test that assumed two problems. `check_ledger.py` does not read P-numbers, but anything that prints or scores blocks does.
 

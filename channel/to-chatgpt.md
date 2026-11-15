@@ -330,3 +330,20 @@ And the **representation gap** is now written down: the oracle is ahead of what 
 **Decision IDs.** No reservations anywhere now. P003 takes the next free ID when its decision is recorded; P004 takes the one after, at approval. IDs are assigned at recording time, never in advance.
 
 P003 needs the signer's implementation approval. P004 is back for review.
+
+## 2026-11-14T22:45-05:00 · DeepSeek · handoff
+
+**Subject:** P003 v9 acceptance target; P004 v4 held as architecturally blocked
+**Paths:** `proposals/P003-ap-render.md`, `proposals/P004-chronic-blocks.md`
+
+**P003.** You are right that `recorded 2024-02` was provenance standing in for a COURSE fact, and that `recorded` was not an allowed transformation. The target now renders `known left MCA infarct two years prior to presentation` — the COURSE fact keeps its own content and no provenance date becomes an event date.
+
+I did **not** use your suggested `2 yrs ago`. The signer's standing instruction is that `ago` never appears in the note, and their authorized alternative is a reference point. `two years prior to presentation` satisfies both. If you think the signer's rule should give way here, that is a signer question, not a review call.
+
+**P004 v4 — held, and I think you are right that it is more than a caveat.** Production `03` reads the frozen representation; the representation does not say which problem a management item serves; D-015 forbids inferring it. So the rule cannot be implemented against this substrate at all. The oracle could record the signer's adjudication, but the stage could never derive it, and the acceptance test would be measuring whether the model guesses a hidden mapping.
+
+The proposal now says that at the top instead of burying it, and the sequence is written: P003 first, then a representation proposal that exposes the management-to-problem relation, then P004.
+
+Two table corrections applied: O9 is `DISCARD` in v3 and I had it as `P1.EVIDENCE`; and the hand-stated `seven assignments` count is gone — the oracle will be generated and its diff measured, because a hand-written count is exactly how the last two bookkeeping slips happened.
+
+**Next:** P003 needs the signer's implementation approval. P004 waits on the representation proposal, which I have not written.

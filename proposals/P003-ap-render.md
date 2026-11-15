@@ -1,6 +1,6 @@
-# P003 v8 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v9 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** v8, revised after `reviews/P003-v7-original-branch.md`. One mechanical fix: I10 now admits the split pattern that transformation 9 creates. Architecture accepted; awaiting implementation approval.
+**Status:** v9, revised after `reviews/P003-v8-P004-v3-original-branch.md`. Acceptance target corrected: the COURSE fact keeps its own timing; provenance is not used as an event date. Awaiting implementation approval.
 **Supersedes:** P003 v1 in this file's history.
 **Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
 **Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
@@ -42,7 +42,7 @@ Each retained `COURSE` entry is classified by what it does for the problem, not 
 |---|---|---|
 | O3 + O4 | MODIFIER | `Witnessed generalized tonic-clonic seizure at home, about two minutes.` |
 | O5 + O6 | MODIFIER | `Postictal confusion lasting about an hour.` |
-| O7 + O8 | MODIFIER | `Known left MCA infarct, two years ago.` |
+| O7 + O8 | MODIFIER | `Known left MCA infarct two years prior to presentation.` |
 | O14 + O15 | MODIFIER (trend) | `Sodium 128 on admission, now 131 after fluid restriction.` |
 | O36 | INDEPENDENT | `Daughter reports memory has been getting worse for a year.` |
 | O2 `admitted 11/12` | IRRELEVANT — fails the gate | It changes neither the seizure claim, its course, nor its management. |
@@ -113,6 +113,8 @@ Frozen case: claim `post-stroke seizure from the old left MCA scar rather than a
 7. Combining compatible fragments already present — a held drug with its resume condition, one action stated twice — without adding a clinical word.
 8. Unit and number display, and only this: a written number → numeral; `minutes`/`hours` → `mins`/`hrs`; `about`/`approximately` → `~`. No other synonym or abbreviation substitution.
 9. **Line contraction.** The problem line may drop a trailing qualifier when that qualifier is rendered as a bullet in the same problem. The dropped words must appear in that bullet. No other word-level deletion from a claim is permitted. **Approved by the signer in the example of 2026-11-14**, where the line reads `from chronic L MCA infarct` and the comparator lives in the etiology bullet.
+The reviewer's suggested `2 yrs ago` form collides with the signer's standing instruction that `ago` never appear in the note (channel, 21:35), whose authorized alternative is a reference point. The frozen timing therefore renders as `two years prior to presentation`: the COURSE fact keeps its own content, and no provenance date is promoted into an event date.
+
 Transformation 10 of v6 is withdrawn. It rendered a provenance year as an event year — arithmetic on a record date, not a fact in the object. The infarct’s date reaches the note only as attribution, `(prior neurology, 2024-02)`, under transformation 5.
 
 ### Prohibited
@@ -164,7 +166,7 @@ A single run is never the acceptance artifact. The artifact is the three-run set
 
 ## 7. Acceptance target
 
-Present after P003: witnessed seizure with `~2 mins`; postictal confusion with `~1 hr`; no prior seizures; known left MCA infarct, recorded 2024-02 (prior neurology), and encephalomalacia; CT without hemorrhage or new lesion; sodium 128 → 131 after fluid restriction; distinct reasoning (postictal, not dementia; MRI adjudicates); MRI and EEG; apixaban held with resume condition; no antiseizure medication unless another event; driving restriction; amlodipine, atorvastatin, fluid restriction, seizure precautions; probable vascular dementia attributed to prior neurology 2025-06; daughter-reported memory decline over a year.
+Present after P003: witnessed seizure with `~2 mins`; postictal confusion with `~1 hr`; no prior seizures; known left MCA infarct two years prior to presentation, and encephalomalacia; CT without hemorrhage or new lesion; sodium 128 → 131 after fluid restriction; distinct reasoning (postictal, not dementia; MRI adjudicates); MRI and EEG; apixaban held with resume condition; no antiseizure medication unless another event; driving restriction; amlodipine, atorvastatin, fluid restriction, seizure precautions; probable vascular dementia attributed to prior neurology 2025-06; daughter-reported memory decline over a year.
 
 Absent: O54 as a seizure bullet; duplicate seizure, sodium, or CT statements; duplicate reasoning; O52 promoted into today's plan; invented linkage, etiology, or status.
 
