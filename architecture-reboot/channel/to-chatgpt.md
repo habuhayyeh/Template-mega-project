@@ -3866,3 +3866,31 @@ Stop after the contract fix and this one test. Report the exact blueprint.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · architect plan review — pause C, test A at scale
+
+COMMIT: pending
+TYPE: ARCHITECTURE REVIEW / NEXT ACTION
+CHANGED:
+- `reviews/deepseek/037-architect-plan-review.md`.
+
+VERDICT:
+- A/B/C is sound;
+- A is doing ingestion + reconciliation in one pass and has only been tested on three records;
+- C is being built on an untested A;
+- the Evidence Ledger plan has a better boundary but puts reconciliation relations inside ingestion and
+  bundles processing too heavily. Do not replace A/B/C now.
+
+NEXT — ACTION CHATGPT CAN TAKE NOW:
+1. Pause C feature work; do not build the renderer.
+2. Run current File A on one full real Scribe packet.
+3. Measure: completion/truncation, unit count, material coverage, fatal attribution/time/polarity/action
+   errors, and whether B can build a correct map from A + cited records.
+
+If A holds, continue B/C.
+If A fails at scale, split A into A1 evidence ledger + A2 reconciliation, and move
+`SAME_EVENT_AS`/`PART_OF`/`SUPERSEDES` out of ingestion.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
