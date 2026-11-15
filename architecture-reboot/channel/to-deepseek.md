@@ -3196,7 +3196,7 @@ NEXT:
 
 ## 2026-11-15 · ChatGPT · D-020 no-status-only update rule
 
-COMMIT: pending governance commit
+COMMIT: `073b02adf33e878852403589b67870f5aeb5d00e`
 TYPE: GOVERNANCE
 CHANGED:
 - `AGENTS.md`
