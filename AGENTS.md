@@ -12,19 +12,23 @@ Operational constitution. Read this, then `STATUS.md`, then `DECISIONS.md`, befo
 
 On architectural or contract work, **DeepSeek proposes first**. ChatGPT reviews the existing proposal rather than generating the first solution, unless the user asks it to lead. ChatGPT is expected to challenge and refine, not merely approve.
 
+For **simple bounded contract/design decisions**, ChatGPT may adjudicate and approve without interrupting the signer under D-028. This applies only when the change follows directly from already accepted decisions, preserves architecture/module ownership and clinical/product meaning, has no material competing tradeoff, is local/reversible, and is objectively testable. A file being called a schema, contract, or proposal does not by itself require signer escalation.
+
 On implementation work, either agent may fix a bounded defect when the accepted contract and tests make the correction unambiguous. When ChatGPT discovers such a defect during review, it should normally patch it directly, add or adjust tests, commit the change, and hand the exact commit to DeepSeek for independent review. This direct-patch rule does **not** authorize silent changes to architecture, module ownership, frozen interfaces, predicate meaning, experiment hypotheses, oracle semantics, clinical/style/product policy, or other accepted design contracts.
 
 ## When to stop and ask the user
 
-Either agent escalates, at any point, when:
+Escalate to the signer only when:
 
 - the two agents disagree on a design point and neither can settle it with repository evidence;
 - the contract is genuinely ambiguous, not merely terse;
-- the choice is clinical, stylistic, or product, and cannot be derived from a decision or a contract;
-- the consequence changes what the note says to a reader;
+- the choice is clinical, stylistic, product-level, or architectural and cannot be derived from an accepted decision;
+- the change reallocates responsibility between modules/stages;
+- there are meaningful competing alternatives or tradeoffs that require signer preference;
+- the consequence is irreversible/external or materially changes what the note says to a reader;
 - the alternative is guessing.
 
-Do not escalate mechanical choices, formatting, or tooling details that a decision or contract already answers. An escalation that could have been resolved from the repository is noise.
+Do **not** escalate simple bounded contract/design corrections that satisfy D-028, nor mechanical choices, formatting, or tooling details that accepted decisions already answer. An escalation that the reviewer could safely adjudicate is workflow noise.
 
 Form: one short message — the question, the options, a recommendation. No document.
 
@@ -63,8 +67,9 @@ A ChatGPT direct implementation patch must preserve accepted design semantics, i
 Design/contract changes:
 
 ```text
-task → proposal → review → user decision → implementation → validation
-     → review of the actual diff → correction → state update
+task → proposal → review
+     → [routine bounded: ChatGPT adjudication | material/ambiguous: signer decision]
+     → implementation → validation → review of actual diff → correction → state update
 ```
 
 Bounded implementation defects after the contract is accepted:

@@ -231,3 +231,23 @@ Proposal 014 remains reviewer-approved in principle but not signer-approved.
 
 **NEXT:** ChatGPT owns the signer escalation for the two pending contract decisions; DeepSeek takes no
 further contract action until an explicit decision is recorded.
+
+## D-028/D-029 workflow correction
+
+The signer identified an escalation workflow failure: routine bounded contract decisions should be
+resolved by the agents rather than repeatedly returned to the signer.
+
+D-028 delegates simple bounded contract/design adjudication to ChatGPT as reviewer when the answer is
+already determined by accepted decisions and there is no material clinical/product/architecture
+tradeoff.
+
+Under D-029:
+- **SCHEMA-3 is accepted** under reviewer authority;
+- **Proposal 014 is approved**;
+- DeepSeek is authorized to implement the blinding correction, bump to `REVIEW-POLICY-F-2`,
+  regenerate semantic packets, and run tests/preflight/packets mode.
+
+**NEXT:** DeepSeek implements Proposal 014, regenerates the packet set, runs the full mechanical
+validation suite, and returns the exact diff/results to ChatGPT for independent review. No Gate 0
+acceptance, no Doximity, no Phase 0.
+

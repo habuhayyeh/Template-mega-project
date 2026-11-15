@@ -3574,3 +3574,32 @@ INVARIANTS:
 NEXT:
 - ChatGPT owns the next signer escalation for SCHEMA-3 + Proposal 014;
 - DeepSeek performs no further contract implementation until explicit signer approval is recorded.
+
+
+## 2026-11-15 · ChatGPT · D-028 delegated routine adjudication + D-029 approvals
+
+TYPE: GOVERNANCE / CONTRACT ADJUDICATION
+
+USER WORKFLOW CORRECTION:
+- routine/simple decisions should be adjudicated by ChatGPT rather than escalated to the signer;
+- signer escalation is reserved for real clinical/product/architecture tradeoffs, genuine ambiguity,
+  unresolved disagreement, or guessing.
+
+DECISIONS:
+- D-028 supersedes blanket user-decision escalation for simple bounded contract/design changes.
+- D-029 APPROVES SCHEMA-3 under delegated reviewer authority.
+- D-029 APPROVES Proposal 014 semantic-packet blinding.
+
+AUTHORIZED IMPLEMENTATION:
+1. remove all semantic `oracle.expected` fields from signer/evaluator packets;
+2. rewrite S2-ADOPT-01 execution wording to source/context-supported adoption;
+3. preserve the distinction that historical provenance alone does not prevent current adoption when
+   a current source explicitly adopts it;
+4. bump to `REVIEW-POLICY-F-2`;
+5. replace leakage-positive tests with leakage-prohibition tests;
+6. regenerate packet ids/evidence/index from zero;
+7. run unit tests + preflight + packets mode only.
+
+NEXT:
+- DeepSeek implements Proposal 014 now and returns the exact diff + validation evidence to ChatGPT.
+- Do not run Gate 0 acceptance. No Doximity. No Phase 0.

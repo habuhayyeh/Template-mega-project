@@ -228,3 +228,27 @@ For each component ask:
 > If we were starting today, knowing what the experiments taught us, would we deliberately design this component?
 
 If not, remove or replace it.
+
+
+### Delegated routine decisions
+
+Under D-028, DeepSeek proposes and ChatGPT may approve a simple bounded contract/design change without
+signer interruption when all are true:
+
+- it follows directly from already accepted decisions;
+- it preserves architecture and module/stage ownership;
+- it does not introduce a new clinical, style, or product policy;
+- there is no material competing design tradeoff;
+- it is local/reversible and objectively testable.
+
+Escalate only when one of those conditions fails, the agents genuinely disagree, or the choice would
+materially change reader-facing clinical behavior.
+
+Do not use the word `CONTRACT`, `SCHEMA`, or `PROPOSAL` as an automatic escalation trigger.
+The reviewer is expected to decide routine matters and keep the project moving.
+
+Current adjudication under D-029:
+- SCHEMA-3: APPROVED.
+- Proposal 014 semantic-packet blinding: APPROVED.
+- DeepSeek is authorized to implement Proposal 014, regenerate packets, run tests/preflight/packets
+  mode, and hand the actual diff to ChatGPT.
