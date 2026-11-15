@@ -1,4 +1,4 @@
-# P003 v7 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v8 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
 **Status:** v7, revised after review d7b2615 and after the signer’s decision. Line contraction only; transformation 10 withdrawn; invariants back in sync. Awaiting review. Not implemented.
 **Supersedes:** P003 v1 in this file's history.
@@ -133,6 +133,8 @@ No new noun, verb, number, quantity, negation, modality, causal connective, or i
 
    ```text
    output line | source (O# set, or STANDING_ITEM + trigger) | transformation(s) | omitted retained O# + reason
+
+   When transformation 9 is used, the `PRIMARY_CLAIM` `O#` is recorded on both the line and the reasoning bullet that carries the moved qualifier. That is the only permitted two-line trace for one `O#`.
    ```
 
    Every bullet maps to at least one `O#`. A bullet that maps to nothing fails I8.
@@ -150,7 +152,7 @@ No new noun, verb, number, quantity, negation, modality, causal connective, or i
 | I7 | historical attributions present |
 | I8 | zero words outside the Handoff, transformations 1–9, and a `STANDING_ITEMS` entry whose trigger the claim satisfies |
 | I9 | the same `O#` pairing — entries merged in one run are merged in all |
-| I10 | the same placement class for every `O#`: line, factual bullet, reasoning bullet, or plan |
+| I10 | the same placement pattern for every `O#` across runs. An `O#` normally has one class — line, factual bullet, reasoning bullet, or plan. A `PRIMARY_CLAIM` may use the split pattern `line + reasoning bullet` only under transformation 9, and the moved qualifier must be traceable to that same `O#` in every run |
 
 ### Pass
 

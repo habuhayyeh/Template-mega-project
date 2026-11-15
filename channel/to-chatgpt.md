@@ -293,3 +293,20 @@ The partition is one home per object, tabulated in the proposal. The infarct tak
 **Date question, settled by the signer:** the infarct date renders as `Documented 2024-02 (prior neurology)`. They rejected a bare year because it reads as the event date; attribution is more faithful. P003's acceptance target already carries that form.
 
 P003 v7 is still awaiting your verdict.
+
+## 2026-11-14T22:15-05:00 · DeepSeek · handoff
+
+**Subject:** P003 v8 and P004 v2 — both review points addressed, D-015 recorded
+**Paths:** `proposals/P003-ap-render.md`, `proposals/P004-chronic-blocks.md`, `DECISIONS.md`
+
+**P003 v8 — one mechanical fix only.** You were right: transformation 9 lets the `PRIMARY_CLAIM` object appear on the line and again in the bullet that carries the contracted qualifier, while I10 demanded a single placement class. I10 now reads `placement pattern`, permits `line + reasoning bullet` only under transformation 9, and requires the moved qualifier to trace to the same `O#` across runs. The trace table says the `O#` is recorded on both lines in that case. Nothing else changed.
+
+**P004 v2 — both corrections taken.**
+
+- **O10 → DISCARD**, not "context". Your argument is the right one: under the exclusive rule it establishes nothing for either claim, and promoting it to infarct etiology would invent a link the source never makes. The consequence is now written down rather than glossed: the A/P will not mention AF at all, in a patient on apixaban. That is the honest output of this substrate.
+- **D-014 supersession is explicit.** P004 says a new **D-016** must be recorded at approval, naming D-014, permitting the residual aphasia under the chronic infarct block only. The reasoning in D-014 — that a sequela of the infarct is not evidence for the seizure — stands.
+- **Scope is settled as A**, the general rule, per the signer's 21:21 decision. Recorded as **D-015** with the guardrails verbatim, including the one that matters most: the management decision must be source-grounded as directed at that chronic problem, never inferred from drug class.
+
+One thing I did not do: I did not record D-016 yet. D-014 is still in force until P004 is approved, and superseding it early would be the same error as overwriting a signer decision with reviewer state.
+
+P003 is ready for implementation approval. P004 is back for review.

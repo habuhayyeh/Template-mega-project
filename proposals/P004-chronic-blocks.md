@@ -1,36 +1,36 @@
-# P004 — chronic problems get their own block
+# P004 v2 — chronic problems get their own block
 
-**Status:** draft, awaiting review. Not implemented.
-**Affects:** `pipeline/03_SELECT_ORGANIZE.md`, `oracles/ap_ledger_v4.txt` (new, append-only), `tests/acceptance/`, `runs/`, `STATUS.md`.
+**Status:** v2, revised after `reviews/P004-original-branch.md` and the signer's scope decision. Awaiting review. Not implemented.
+**Supersedes:** P004 v1.
+**Affects:** `pipeline/03_SELECT_ORGANIZE.md`, `oracles/ap_ledger_v4.txt` (new, append-only), `tests/acceptance/`, `runs/`, `STATUS.md`, `DECISIONS.md` (D-015 recorded; D-016 at approval).
 **Does not affect:** substrate, `01`, `02`, `04`, `05` contract, `06`, `07`, the six kinds.
 
 ---
 
-## 1. What the signer asked for
+## 1. The rule, and its status
 
-In the exchange of 2026-11-14 the signer drew a two-block A/P for the frozen case: one block for the post-stroke seizure, one shorter block for the chronic left MCA infarct, with the infarct block carrying secondary prevention. Their words are in `channel/to-chatgpt.md`, entry 21:35.
+The signer chose the general rule, not a case-specific exception:
 
-Current `03` produces one block for the seizure and one for the memory concern. The infarct is evidence inside the seizure block, and its medications are the seizure block's plan items. That is what this proposal changes.
+> A chronic neurologic problem gets its own shorter A/P block when the encounter contains a management decision directed at that problem.
 
-## 2. The rule
+Recorded as **D-015**. The guardrails are part of the decision, not commentary:
 
-> A chronic neurologic problem gets its own block when the encounter contains a management decision directed at it. A chronic problem with no management in this encounter does not get a block; it stays evidence or history.
+- Diagnosis alone does not create a block.
+- A listed home medication alone does not create a block.
+- The management decision must be **source-grounded as directed at that chronic problem in this encounter**. Do not infer the target from general clinical knowledge or drug class.
+- Active problems stay ordered ahead of chronic managed problems.
+- A chronic block stays short: problem-defining facts, the reasoning that explains it, and the management directed at it.
+- A non-neurologic problem does not become a block unless it materially affects neurologic assessment or management under the existing rules.
 
-Three consequences:
+Why a rule and not a preference: a preference cannot be executed twice the same way, and the signer has said consistency matters more than fit (channel, 21:35).
 
-- The trigger is management, not diagnosis. `known left MCA infarct` alone is evidence. `apixaban held, to resume once MRI excludes hemorrhage` is a decision about the infarct's secondary prevention, so the infarct earns a block.
-- The block is short by construction: it carries its label, the facts that describe it, and the management directed at it. It is not a second full problem workup.
-- Ordering stays acuity first, then management weight. The active seizure precedes the chronic infarct; the memory concern, explicitly not today's issue, follows both.
+## 2. Partition — one home per object
 
-This is a rule, not a per-case preference, because a preference cannot be executed twice the same way. If the signer wants exceptions, they are made at review.
-
-## 3. Partition — one home per object
-
-`03` assigns each retained object to exactly one block. The A/P branch has no `REUSE`, so a fact that matters to two blocks must be assigned to the one it primarily describes.
+The A/P branch has no `REUSE`, so each retained object has exactly one block.
 
 | Object | Now | Proposed | Why |
 |---|---|---|---|
-| O7, O53 | P1.EVIDENCE | P2.EVIDENCE | the infarct block's own label and record |
+| O7, O53 | P1.EVIDENCE | P2.EVIDENCE | the infarct block's label and record |
 | O8 | P1.COURSE | P2.COURSE | the infarct's date |
 | O9, O54 | P1.EVIDENCE | P2.EVIDENCE | residual deficit of the infarct |
 | O11, O30, O31 | P1.MANAGEMENT | P2.MANAGEMENT | home regimen continued |
@@ -38,38 +38,50 @@ This is a rule, not a per-case preference, because a preference cannot be execut
 | O18, O19 | P1.EVIDENCE | P1.EVIDENCE | encephalomalacia and no new lesion establish the seizure substrate |
 | O3–O6, O13–O15, O17 | P1 | P1 | unchanged |
 | memory objects | P2 | P3 | renumbered, content unchanged |
-| P2 label | O49 | O7 | the infarct block is labelled from its own object |
+| O10 | P1.EVIDENCE | **DISCARD** | see §3 |
 
-**Open cell — O10 `atrial fibrillation`.** It is currently P1.EVIDENCE and does not establish the seizure. It is not the infarct's stated etiology either: nothing in the encounter says the stroke was from AF. Three options, for review:
+The seizure block keeps the semiology, the durations, the CT, the sodium trend and the encephalomalacia. The infarct block carries its own facts and the secondary-prevention decisions. Memory becomes P3.
 
-1. `P2.EVIDENCE` as context for why secondary prevention matters — defensible, not an etiology claim.
-2. `DISCARD` — strict, and the note then never mentions AF, although the patient is on apixaban for it.
-3. Leave it in P1 — indefensible under the exclusive evidence rule.
+## 3. O10 `atrial fibrillation` — discarded
 
-I propose 1, and a substrate object in a later version carrying the signer's `unanticoagulated AF` sentence so the infarct block can state its own etiology.
+Under the accepted exclusive evidence rule, O10 does not establish, confirm, localise, refute, discriminate, or explain uncertainty for either claim. It cannot be promoted to the infarct's etiology because the source never says the stroke came from AF.
 
-## 4. Oracle
+So O10 is `DISCARD` from the A/P. It stays available to the body branch through its own routing, where it already appears. The A/P does not need to name every comorbidity.
 
-`oracles/ap_ledger_v4.txt`, append-only. `v3` is untouched. The diff is seven assignments moving plus the block renumbering; `check_ledger.py` must be told the new population is still 59.
+Consequence worth stating: the A/P will not mention AF at all, although the patient is on apixaban. That is the honest output of this substrate. A later substrate carrying the signer's `unanticoagulated AF` sentence would let the infarct block state its own etiology; until then the note cannot.
 
-The memory block moves from P2 to P3. This is a mechanical rename, not a semantic change, and it is the part most likely to break a downstream test that assumed two problems.
+## 4. D-014 is superseded, explicitly
 
-## 5. Effect on P003
+`D-014` says the residual expressive aphasia stays out of the A/P. The signer's approved chronic-infarct example places it under that block. Both cannot stand.
 
-P003's acceptance target names two problems. With P004 it is three. The rendering rules do not change — the same `05` writes each block — but the invariant set does:
+At approval of P004, record **D-016**, naming D-014:
 
-- I1 (problem count and order) becomes 3, ordered seizure → infarct → memory.
-- I5/I6 gain the infarct's plan decisions and lose them from the seizure block.
+> D-016 supersedes D-014 for the chronic-infarct context. Residual expressive aphasia may render under the chronic infarct block when it describes that problem. It remains excluded from the seizure block, and the reasoning in D-014 — that a sequela of the infarct is not evidence for the seizure — stands.
+
+Not a silent reversal. It changes what one block says because the signer added a block that owns the fact.
+
+## 5. Oracle
+
+`oracles/ap_ledger_v4.txt`, append-only; `v3` untouched. Seven assignments move, the memory block renumbers P2 → P3, and O10 joins the discard set. The A/P population stays 59.
+
+Renumbering is the most likely thing to break a downstream test that assumed two problems. `check_ledger.py` does not read P-numbers, but anything that prints or scores blocks does.
+
+## 6. Effect on P003
+
+P003's acceptance target names two problems; with P004 it is three. The rendering rules do not change. The invariants do:
+
+- I1 becomes three problems, ordered seizure → infarct → memory.
+- I5/I6 gain the infarct's decisions and lose them from the seizure block.
 - The trace table gains a block column.
 
-P003 must therefore land before P004 in implementation order, or the three-run baseline is measured against a structure that is about to change. I propose: implement P003, run the three-run protocol against the two-block oracle as a stability baseline, then implement P004 and re-run. Two baselines, not one — the second measures the structural change, the first measures the rendering change.
+Implementation order: P003 first, three-run baseline against the two-block oracle, then P004 and a second baseline. Each run set measures one change.
 
-## 6. Risks
+## 7. Risks
 
-- **Block inflation.** Every chronic diagnosis with a medication becomes a block. The management trigger is meant to stop that: a medication the patient takes but nobody decided anything about this encounter does not qualify. `Continue amlodipine` is a decision; a listed home med is not.
-- **The infarct block duplicates the seizure line's cause.** The line says `post-stroke seizure from chronic L MCA infarct`; the infarct block says `chronic L MCA infarct`. That repetition is intended — one names the cause of the seizure, the other is its own problem — but it is the first thing to check in review.
-- **O10.** Leaving AF out entirely is a real information loss; keeping it as context is a judgement. Flagged rather than settled.
+- **Block inflation**, contained by the management trigger and the source-grounding guardrail. `Continue amlodipine` is a decision; a drug merely listed is not.
+- **The cause appears twice by design** — once on the seizure line, once as the infarct block's own label. Intended, and the first thing to check in review.
+- **AF disappears from the A/P.** Accepted in §3. If the signer wants it visible, the substrate has to say why it matters.
 
 ## Out of scope
 
-Substrate, `01`, `02`, `04`, `05` contract, `06`, `07`, the six kinds, and any change to the body note.
+Substrate, `01`, `02`, `04`, `05` contract, `06`, `07`, the six kinds, the body note.
