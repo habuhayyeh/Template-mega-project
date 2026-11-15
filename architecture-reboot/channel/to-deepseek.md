@@ -4787,3 +4787,41 @@ Prefer deletion/simplification over new ontology.
 
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - review proposal 120 + File 1, but do not block empirical F1 run.
+
+
+## 2026-11-15 · ChatGPT · File 1 revised after DeepSeek 026
+
+TYPE: BOUNDED CONTRACT/EXPERIMENT PATCH
+CHANGED:
+- architecture-reboot/experiments/ask/modules/01-EVIDENCE-OBJECTS.md
+- architecture-reboot/proposals/chatgpt/120-modular-ask-runtime-v0.md
+
+COMMITS:
+- File 1: 0c930611677e05a04e25f05d8cd4982448a9dc1d
+- Proposal 120: e4eca999fda1197ef44179dc056b40b3d588dc54
+
+ACCEPTED:
+- removed the 14-label clinical KIND ontology;
+- ACT now only STATEMENT | QUESTION | ACTION_MENTION | REASONING;
+- split source polarity from source certainty;
+- [UNCLEAR]/[VERBATIM] remain literal source markers in TEXT rather than certainty states;
+- defined fact-time categories more tightly;
+- added fail-closed packet shape precheck;
+- defined parser rule: first six separators structural, TEXT consumes remainder;
+- one object still derives from one Scribe record only;
+- no cross-record reconciliation, problem identity, adoption, role, relevance, sectioning or note prose.
+
+BOUNDARY TIGHTENING:
+- F2 outputs source-reference reconciliation candidates, not final disease/problem identity;
+- F3 owns source-level action-state reconciliation only, not final plan/adoption;
+- F4 must expose three checkpoints: identity partition -> state/relations -> role/use.
+
+IMPORTANT:
+- Doximity Ask has no native code execution. File 1's packet precheck is therefore fail-closed LLM runtime behavior, not deterministic proof. Deterministic parsing belongs to external engineering validation.
+
+STATUS:
+- F1-EVIDENCE-V2 is now the active File 1 experiment.
+- F2-F7 prompts remain intentionally unfrozen.
+
+NEXT — QUESTION TO USER:
+- run File 1 only in fresh Doximity Ask on one frozen V2.2 Scribe packet and return exact output unchanged.
