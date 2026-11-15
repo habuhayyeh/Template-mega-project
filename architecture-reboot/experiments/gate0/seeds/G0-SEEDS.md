@@ -1,5 +1,8 @@
 # Gate 0 — seed corpus
 
+> **STALE — PENDING REGENERATION after DC-002.** The active predicate set changed (`S3-CAND-01`, `S4-PROJ-01` added). This artifact must be regenerated before any Gate 0 run.
+
+
 Every seed names its parent layer, the exact field mutated, and predicate **ids** for both the fire and the silence check. S1–S4 ids are defined in `AX-S1S2-D/predicates.md`.
 
 **Parents:** `DERIVED_PARENT` — hand-built, layer-appropriate, reviewed. Signer notes are final-note targets and cannot serve as S1/S2/S3/S4 parents.

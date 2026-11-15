@@ -137,27 +137,31 @@ All render-affecting semantic decisions must be complete before RENDER begins.
 ## S1 — Problem Model
 
 **Goal**
-Identify the neurologic subjects this encounter is actually about.
+Identify the neurologic subjects this encounter is actually about, and partition them.
 
 **Role**
-Propose problem candidates. Name subjects, keep stable ids, anchor every candidate to source, and
-supply structured, inspectable salience inputs. It does not decide adoption, does not finalise a
-claim, and does not order the note.
+Propose problem candidates, attach claim candidates to them, and own the partition. It decides no
+claim and no adoption verdict.
 
 **Input**
 - complete INGEST source-faithful substrate.
 
 **Output**
 - problem candidates with stable ids and source anchors;
-- for each candidate, the candidate claim formulations present in the source;
-- structured salience inputs — declared, inspectable values; the exact schema is downstream;
+- for each problem candidate, its claim candidates — the source formulations that could become, or
+  contribute to, a claim representation;
+- the partition: which claim candidate maps to which problem candidate; each claim candidate maps to
+  exactly one problem candidate;
+- structured salience inputs, including `management_reference_spans[]` — the spans containing a
+  management statement referencing the problem candidate's subject. Salience evidence only: it
+  records that a statement exists, never that the subject is a problem, adopted, or current;
 - candidate-level relationships the substrate states explicitly.
 
 **Distinctive boundary**
-S1 answers **"which neurologic subjects need their own assessment question in this encounter?"**
-It does not decide which candidate is the current claim, whether a prior formulation is adopted, or
-what order problems render in. A candidate exists only where the subject needs its own current
-assessment; otherwise the subject is evidence or context.
+S1 answers **"which neurologic subjects need their own assessment question, and what belongs to what?"**
+Partition authority is exclusive: downstream modules may not merge, split, or re-parent problem
+candidates or their claim candidates. S1 does not decide which candidate is the current claim, whether
+a prior formulation is adopted, or what order problems render in.
 
 ---
 
@@ -167,46 +171,43 @@ assessment; otherwise the subject is evidence or context.
 Resolve what the source objects mean for this encounter, including whether prior material is current.
 
 **Role**
-Adjudicate relations among objects and among candidate claims, decide encounter-level adoption,
+Adjudicate relations among objects and among claim candidates, decide encounter-level adoption,
 assign reasoning roles, and produce approved claim representations.
 
 **Input**
 - annotated stable objects, including the source temporality recorded during annotation;
-- problem candidates and candidate claims from S1.
+- problem candidates, their claim candidates, and the partition between them, from S1.
 
 **Output**
 - adjudicated object relations: duplicates, modifiers, conditions, reasoning roles;
 - encounter-level adoption decisions per object, stated against source evidence;
-- for each problem candidate, the relation among its candidate claims — for example equivalent,
-  nested, complementary, competing, contradictory, or unresolved; this vocabulary is illustrative
-  and is defined downstream;
-- zero or more approved claim representations per problem candidate, which may be built from
+- for each problem candidate, the relation among its claim candidates — for example COMPETING,
+  COMPLEMENTARY, NESTED, or UNRESOLVED; the vocabulary is defined downstream;
+- zero or more approved claim representations per problem candidate, which may be assembled from
   source-grounded objects and relations and are not limited to sources already phrased as claims;
-- where no claim representation can be semantically approved, an explicit state that S3 can act on;
-  its name and form are downstream.
+- where no claim representation can be semantically approved, an explicit state that S3 can act on.
 
 **Distinctive boundary**
-S2 answers **"what do these objects mean here, and which claim formulations are defensible?"**
-It does not select content, choose sections, or order. **Source temporality is not S2's**: it is
-recorded during annotation and only consumed here.
+S2 may adjudicate source-grounded cross-problem and cross-object relations. It may **not** use such a
+relation to merge, split, or re-parent the S1 partition; claim candidates whose relation forms one
+representation stay within one problem candidate. **Source temporality is not S2's** — it is recorded
+during annotation and only consumed here.
 
 **Approval is a safety property.** S2 may expose more than one approved representation for a problem
-only when choosing among them requires no further semantic adjudication under the governing selection
-contract. Where the choice would change clinical meaning, S2 **resolves** the semantic choice and
-records structured source or adjudication support before exposing the set to S3. Documenting an
-unresolved choice does not make it safe.
+only when choosing among them requires no further semantic adjudication. Where the choice would change
+clinical meaning, S2 resolves it and records structured support before exposing the set to S3.
 
 ---
 
 ## S3 — Content Selection & Problem Use
 
 **Goal**
-Decide what the note uses, under which problem, and which approved representation each rendered
-A/P problem carries.
+Decide what the note uses, under which problem, and which approved representation each rendered A/P
+problem carries.
 
 **Role**
-Turn the adjudicated substrate into the rendered-problem set and retained content, and attach one
-approved claim representation to each rendered A/P problem.
+Turn the adjudicated substrate into the rendered-problem set and retained content, and account for
+every candidate and every object.
 
 **Input**
 - problem candidates from S1;
@@ -214,6 +215,8 @@ approved claim representation to each rendered A/P problem.
 
 **Output**
 - the set of problems that render;
+- exactly one outcome for every S1 problem candidate: RENDERED, or NOT_RENDERED with a typed reason
+  and, where the reason family depends on upstream state, basis references to that state;
 - retained object-use set;
 - explicit dispositions for unused clinical objects;
 - problem use/reuse map for each retained object;
@@ -223,48 +226,50 @@ approved claim representation to each rendered A/P problem.
 **Distinctive boundary**
 S3 answers **"what content are we using, for which problem, and which approved claim does it carry?"**
 It may not synthesise a representation, promote an unresolved relation to a single claim, or merge
-representations. **It does not resolve semantic ambiguity.** S3 may not include or render an A/P
-problem that lacks an S2-approved representation. If a separate governing requirement mandates
-inclusion of such a problem, the seam fails or flags rather than rendering a claimless block. If
-S2's approved set for an included problem holds more than one representation and the choice among
-them is not semantically free, that is an S2 defect, not an S3 choice.
+representations. S3 may not include or render an A/P problem that lacks an approved representation. It
+accounts for candidates as well as objects: a candidate that renders nothing leaves a record, not a
+silence.
 
 ---
 
 ## S4 — Note Blueprint / Render-Unit Compilation
 
-**Goal**  
-Convert the retained problem-linked content into the complete executable blueprint of the final note.
+**Goal**
+Convert the retained, problem-linked content into the complete executable blueprint of the final note.
 
-**Role**  
-Freeze every render-affecting decision so RENDER has nothing semantic left to choose.
+**Role**
+Freeze every render-affecting decision so RENDER has nothing semantic left to choose, and own the final
+problem and unit order.
 
-**Input**  
-- problem candidates and S1's salience inputs (S4 owns final order);
-- the rendered-problem set and the representation selected for each problem, from S3;
-- retained object-use set and problem-use map from S3;
-- adjudicated semantic relationships from S2;
-- section/style/operator contracts.
+**Input**
+`S4_INPUT_VIEW` — a mechanical projection assembled at the seam. Each field keeps its source owner; the
+projection decides nothing.
 
-**Output**  
-A completed Case IR containing:
-- ordered section list;
-- explicit section assignment;
-- render units;
-- unit membership/member roles;
-- rhetorical class;
-- canonical operator;
-- order;
-- reuse accounting;
-- completeness status.
+- from S1: problem-candidate identity and structured salience/order inputs, projected only for the ids
+  S3 marked RENDERED;
+- from S3: the rendered set, the selected representation id per problem, retained use, problem-use/reuse;
+- from S2: the selected representation's member ids, the semantic relations those members carry, the
+  selected representation's own claim relation where it has one, and the duplicate/equivalence grouping
+  needed to assign COVERED;
+- from I3/I4: retained object payload, provenance, temporality;
+- from the frozen contracts: section, style, operator definitions, and the ordering contract.
 
-**Standing-item exception**  
-A render unit may have zero source-object members only for a closed-list standing item whose explicit trigger conditions are satisfied by the structured Case IR/problem state. Such units participate in the same completeness accounting as other units.
+Excluded: unselected alternatives, their relations, and the adjudication trail. The exclusion is
+relevance-based, not type-based: an adoption verdict is projected only where a frozen S4 function needs
+it for selected or retained content.
 
-**Distinctive boundary**  
-S4 answers **"exactly what must render, where, in what unit, with which operator, and in what order?"**
-S4 owns the final problem and unit order. S1's salience inputs feed that ordering; they are not an order. S4 may not re-derive salience, and S1 may not pre-order.  
-It does not write prose.
+**Output**
+A completed Case IR containing: ordered section list; explicit section assignment; render units; unit
+membership and **member roles (HEAD, MODIFIER, CONDITION, COVERED)**; rhetorical class; canonical
+operator; order; reuse accounting; completeness status.
+
+**Distinctive boundary**
+The explicit `S4_INPUT_VIEW` does not contain the adjudication record. That is a packaging statement,
+not a behavioural one: this is one shared model context, and least-privilege packaging is not
+non-leakage at runtime.
+
+S2 supplies the relations; S4 supplies the member roles. Neither may do the other's part. S4 owns the
+final problem and unit order; S1's salience inputs feed that ordering and are not an order.
 
 ---
 
@@ -337,6 +342,10 @@ A/P is rendered as its specified bullet/unit structure and bypasses R2 unless a 
 R2 answers **"how do already-rendered units read together as prose?"**  
 It does not perform semantic synthesis.
 
+
+**Weak-R2 bridge boundary.** R2 may add whitespace, capitalisation and contract-permitted punctuation. Punctuation is a surface transform, not a lexical bridge. The lexical bridge allowlist is empty by default and admits no relation-bearing word (`therefore`, `then`, `because`, `despite`, `but`, `however`). Leftover a bridge must be licensed by an upstream relation plus the contract.
+
+Two guards: **mechanical preservation** — after frozen normalisation of permitted capitalisation, whitespace and punctuation, each unit's text appears as a contiguous span in unit order; and a **semantic no-new-relation audit** — no causal, temporal, contrastive, conditional, attributive, certainty, negation or scope relation appears unless a unit contains it.
 ---
 
 ## R3 — Note Assembly

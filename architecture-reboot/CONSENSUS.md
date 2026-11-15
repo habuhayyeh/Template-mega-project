@@ -89,8 +89,8 @@ These points have been explicitly proposed and accepted by both ChatGPT and Deep
     A span is a line, utterance, speaker turn, or equivalent boundary preserved by the paste format. One span may yield multiple objects. Every span has at least one disposition, and every object points back to its source span.
 
 26. **Problem ownership is A/P-scoped.** Body units require no problem; optional association by section contract.
-27. **A problem candidate exists only where the subject needs its own current assessment question**, and is source-grounded.
-28. **A claim is a representation** that may carry several candidates and their relation; the kind vocabulary is downstream.
+27. **A problem candidate exists only where the subject needs its own current assessment question**, and is source-grounded. S1 owns the candidate partition: each claim candidate maps to exactly one problem candidate.
+28. **A claim is a representation** that may carry several claim candidates **belonging to that problem candidate**, together with their relation; the kind vocabulary is downstream.
 29. **S1 proposes candidates; S2 adjudicates adoption and claim relations and produces approved claim representations; S3 selects the rendered-problem set and one approved representation per rendered A/P problem; S4 owns final order.**
 
 ## Still open

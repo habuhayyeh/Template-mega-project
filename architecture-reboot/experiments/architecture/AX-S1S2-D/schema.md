@@ -1,5 +1,8 @@
 # AX-S1S2-D — experiment-local typed test schema
 
+> **STALE — PENDING REGENERATION after DC-002.** The active predicate set changed (`S3-CAND-01`, `S4-PROJ-01` added). This artifact must be regenerated before any Gate 0 run.
+
+
 The mechanical predicates need named fields to compare. This is the schema the pilot artifacts must conform to; it is local to the experiment and is not the production Case IR.
 
 ---

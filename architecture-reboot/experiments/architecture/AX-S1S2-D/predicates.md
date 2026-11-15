@@ -41,6 +41,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S3-SEL-02` | SEMANTIC | S3 | S3 synthesises no representation and merges none | 05,06 |
 | `S3-INC-01` | MECHANICAL | S3 | no A/P problem is rendered without an approved representation — applies to **every rendered A/P problem in every case**, not only the cases expected to trip it | all |
 | `S3-ACCT-01` | MECHANICAL | S3 | every substrate object is either used or carries a disposition entry | all |
+| `S3-CAND-01` | MECHANICAL | S3 | coverage: every S1 problem-candidate id has an outcome; exclusivity: exactly one outcome per candidate; equality: the RENDERED set equals `rendered[]`. Typed reason required on NOT_RENDERED; its correctness is a separate semantic audit | all |
 | `S3-BODY-01` | MECHANICAL | S3 | body-only objects are retained without being promoted to A/P problems | 07,08,10 |
 
 ## S4 family
@@ -51,6 +52,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S4-REP-01` | MECHANICAL | S4 | every `units[].representation` equals the S3 `selected_rep` for that problem, compared by id | all |
 | `S4-ORD-01` | MECHANICAL · `PENDING_DEPENDENCY` | S4 | problem and unit order follow the ordering contract using S1 salience inputs. No frozen ordering oracle or salience value set exists yet; not scoreable until both are frozen | all |
 | `S4-MEM-01` | MECHANICAL | S4 | every unit member exists in the retained-use map | all |
+| `S4-PROJ-01` | MECHANICAL | S4 | every field S4 reads is in the frozen `S4_INPUT_VIEW` projection for selected/retained content; any field or state outside it is a packaging violation. Proves packaging only, not runtime non-leakage | all |
 | `S4-COMP-01` | MECHANICAL | S4 | domain is **S4.problems ∩ S3.rendered** — the intersection, not either set alone. Within it, every problem has a unit whose operator is a claim-bearing operator (`FACT`, `REASONING`, `CLAIM`); every plan item S3 retained has a `PLAN` unit. S4 completeness is measured against S3's retained set, not against the source — otherwise the predicate re-decides retention and steals S3's authority | all |
 
 ---
