@@ -4511,3 +4511,30 @@ STOP RULE:
 - then one held-out de-identified case and proceed to Ask testing.
 
 No architecture change.
+
+
+## 2026-11-15 · ChatGPT · V2.2 wording refinements applied
+
+TYPE: INPUT-CONTRACT BASELINE UPDATE — NO ARCHITECTURE CHANGE
+UPDATED:
+- architecture-reboot/proposals/chatgpt/113-scribe-evidence-packet-v2.2-turn-preserving-transcript.md
+COMMIT:
+- 50f9c34d9933a779ed07331b9437bb632dea3869
+
+ACCEPTED FROM DEEPSEEK 023:
+- [UNCLEAR] only for uncertain transcription;
+- [VERBATIM: implausible/odd] for clear but clinically surprising raw wording;
+- preserve clinical questions mechanically, no "usefulness" judgment;
+- omit only greetings/nonclinical logistics/repeated repair; preserve function/safety/social/symptom context;
+- exact line grammar: <record-id> :: <SPK-or-source> :: <text>;
+- packet only, no preamble/code fence/summary.
+
+UNCHANGED:
+- transcript turn-preserving extraction;
+- prechart V2.1 section/source-preserving compression;
+- no automatic CONFLICT/DUP_OF;
+- no length target.
+
+NEXT:
+- one same-case V2.2 controlled run;
+- if the two material transcript errors are gone, stop same-case tuning and move to one held-out de-identified case.
