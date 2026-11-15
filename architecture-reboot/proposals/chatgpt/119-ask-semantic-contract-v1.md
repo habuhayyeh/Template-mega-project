@@ -27,11 +27,17 @@ A diagnosis, assessment, problem label, medication, plan, historical statement, 
 
 Do not blindly inherit a source label into the final A/P.
 
-Do not invent patient-specific facts.
+All patient-specific facts must come from the supplied packet.
+
+General medical knowledge may support clinical reasoning, but it must not be used to invent patient-specific findings, history, tests, treatments, or outcomes.
 
 Preserve meaningful uncertainty, negation, attribution, chronology, and disagreement.
 
 ### 2. Build independent neurologic problems, not a problem for every manifestation
+
+Decide problem identity first, before deciding whether the problem is relevant enough to render or whether its encounter role is PRIMARY/BACKGROUND/NOT_RENDERED.
+
+An independent neurologic problem can remain BACKGROUND or NOT_RENDERED and still be an independent problem.
 
 Create a separate problem only when the item has an independent clinical identity in this encounter.
 
@@ -62,7 +68,7 @@ For each independent neurologic problem:
 
 - `PRIMARY` = actively evaluated/managed now or independently driving the current neurologic assessment/management;
 - `BACKGROUND` = neurologically relevant established/suspected disease that is not itself a primary current problem;
-- `NOT_RENDERED` = does not warrant its own A/P problem representation.
+- `NOT_RENDERED` = an independent neurologic problem that does not warrant its own A/P problem representation in this encounter. It does not mean the item is not a problem.
 
 Historical relevance alone does not make a problem PRIMARY.
 
@@ -114,7 +120,7 @@ AUDIT LEDGER
 PROBLEM P1
   label: <plain-language independent problem>
   evidence: <packet record IDs supporting the problem and current reasoning>
-  contained: <important symptoms/deficits/status/evidence that belong inside this problem>
+  contained: <important manifestations/status/evidence that belong inside this problem; this is not a second problem list>
   stance: <plain-language current encounter stance, including uncertainty>
   role: PRIMARY | BACKGROUND | NOT_RENDERED
   relations: <supported causal/contributory relations or none>
@@ -122,6 +128,8 @@ PROBLEM P1
 
 PROBLEM P2
   ...
+
+--- END AUDIT LEDGER ---
 ```
 
 Do not create a PROBLEM record for a contained manifestation.
@@ -135,7 +143,7 @@ After the ledger, render the final note using the supplied template.
 The final note must:
 
 - use only supplied patient-specific facts plus clinical conclusions traceable to those facts;
-- preserve uncertainty;
+- preserve uncertainty and material disagreement between sources;
 - distinguish current findings from historical/background information;
 - keep manifestations contained under their parent problem when appropriate;
 - avoid unsupported causal claims;
@@ -155,4 +163,4 @@ Before returning the answer, verify:
 5. Current vs historical status and uncertainty are preserved.
 6. The final A/P contains the neurologic problems that actually matter for this encounter and keeps background problems compact.
 
-Return `AUDIT LEDGER` followed by `FINAL NOTE`.
+Return `AUDIT LEDGER`, then the exact line `--- END AUDIT LEDGER ---`, then `FINAL NOTE`. The ledger is not part of the final note.
