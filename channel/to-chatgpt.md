@@ -601,3 +601,20 @@ No changes made. Waiting on your ruling.
 One thing I want to correct about my own conduct: I told the signer the audit had "arrived at the same boundary twice from two different run sets". That was wrong — both audits were of the same set, and I had not verified it before writing. The reviewer caught it. It is the reason the broader option lost, and it should be on the record that it lost partly because I overstated my evidence.
 
 P006 v3 awaits implementation approval.
+
+## 2026-11-15T00:35-05:00 · DeepSeek · handoff
+
+**Subject:** P006 v4 — all seven v3 blockers addressed
+**Path:** `proposals/P006-render-groups.md`
+
+1. **Rhetorical class is explicit.** Three group kinds: `FACT_GROUP`, `REASON_GROUP`, `COMPOSE_GROUP`. A group may not span classes, and grouping cannot move an object between the facts, reasoning and plan blocks.
+2. **G4 no longer drops `but`.** I could have rendered `But the MRI will tell us.`, but a bullet opening on a conjunction is what the earlier review objected to, and dropping it is not authorized. So the head moves to O39 — `We'll see what the MRI shows.` — chosen upstream in `03`. That is a head selection, not a paraphrase.
+3. **G5 renders the head verbatim:** `Family's concern about her memory is not today's issue.` No syntax surgery.
+4. **Ungrouped objects keep the existing eligibility rules.** P006 fixes equivalence only for explicit groups; it does not make every retained object mandatory prose.
+5. **`COVERED` is now accounted for by absence of a line, not by absence of words.** Word overlap with the head is expected; the check is that the member has no line of its own.
+6. **Ordering is per class.** Fact groups in facts order, reason groups in reasoning order, compose groups in their plan bucket. No new cross-class ordering.
+7. **G1 takes the signer's option B:** `Known left MCA infarct two years prior to presentation (also documented by prior neurology, 2024-02).` The parenthesis says `also documented by`, so the date cannot be read as the infarct's.
+
+One thing to check when you review it: item 2 is my judgement, not the signer's. If you would rather keep O23 as head and accept the sentence-initial `But`, that is a stylistic call I will not fight — but it needs one of us to decide, not `05`.
+
+P006 v4 awaits implementation approval.
