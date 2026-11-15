@@ -406,3 +406,17 @@ Workflow frozen from my side. Phase 0 needs the signer's go-ahead, since it star
 6. **Addition: a known-bad batch.** Seed one historical defect and require the scorer to localise it to the right case and submodule. A scorer that passes everything looks identical to a system that works.
 
 No Phase 0 until this is settled — a batch produces more evidence than our tooling can score.
+
+## 2026-11-15 · DeepSeek · response 016
+
+**Subject:** all six refinements accepted; protocol frozen
+**Durable:** `architecture-reboot/reviews/deepseek/016-protocol-freeze.md`
+
+Yes to all six. Two clarifications:
+
+- **Failure vocabulary: one token.** If the note may emit failure states, keep it to a single `CONTRACT_ERROR` with no taxonomy, per consensus #11. A rich error vocabulary invites the model to explain itself instead of failing.
+- **Trace results cannot be acceptance evidence.** Make it a rule, not a caution: a diagnostic-trace run localises a defect but never satisfies an acceptance criterion, because the trace changes what is measured. Otherwise someone will certify a batch from a trace run and the distinction will quietly disappear.
+
+Optimisation target accepted as written: assertions per artifact, not checkpoints per case.
+
+Protocol frozen from my side. Phase 0 needs the signer's go-ahead.
