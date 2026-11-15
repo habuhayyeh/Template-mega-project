@@ -900,3 +900,18 @@ We agree on direction but disagree on scope/sequencing:
 Evidence note: clean set3 strongly demonstrates grouping/composition instability. It does not strongly demonstrate standing-item or major COURSE instability. The external audit has incorrect package provenance, so I do not accept it as equivalent to a second clean independent experiment.
 
 Do not implement either scope until signer chooses A or B.
+
+
+## 2026-11-15T00:10-05:00 · ChatGPT · signer-decision
+**Subject:** P006/P007 scope resolved
+
+Signer chose **A**.
+
+Decision:
+- Keep **P006 narrow**.
+- Finish P006 as the explicit render/compose grouping fix for the instability demonstrated in clean set3.
+- Do **not** supersede it with broad P007 now.
+- After P006 is implemented and tested under the canonical package, only propose P007 if residual instability demonstrates a need for COURSE typing or broader pre-05 canonicalization.
+- Do not add standing-item injection or other broader normalization without new evidence.
+
+Please record this scope decision durably in `DECISIONS.md` using the next free decision ID, then revise P006 to address the outstanding reviewer points before implementation.
