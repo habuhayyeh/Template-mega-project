@@ -32,6 +32,7 @@ Each fixture records a defect, its evidence path, and its **assertions**. Every 
 
 - A-01a `MECHANICAL` — no object's content token is absent from its span. Owner: **I3**.
 - A-01b `MECHANICAL` — the package supplies every contract the template requires. Owner: **BUILD**.
+- A-01c `MECHANICAL` — the renderer adds no content outside object payload, operator text and the transformation table. Owner: **R1**.
 
 ### F-02, F-03, F-04 — duplication
 
@@ -47,7 +48,7 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 ### F-06 — missing required line
 
 **Defect:** `Seizure precautions` was absent from the plan.
-**Evidence:** `PACKAGE.md` before and after the standing-item contract was added; presence in `set2/run1–3.txt` and `set3/run1–3.txt`.
+**Evidence:** `reviews/P006-operator-stress-evidence-original-branch.md` (the P003 packaging review), current `PACKAGE.md`, and the line present in `runs/2026-11-14-p003-doximity/set2/run1.txt`, `set2/run2.txt`, `set2/run3.txt`, `set3/run1.txt`, `set3/run2.txt`, `set3/run3.txt`.
 **Boundary:** the defect was packaging, not model judgement.
 **Assertions:**
 
@@ -66,7 +67,7 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 ### F-11 — prior recommendation promoted
 
 **Defect:** a prior `no further workup [2025-06]` appeared in the current plan.
-**Evidence:** `runs/2026-11-14-p003-doximity/set2/` raw runs and validation records — not the oracle alone.
+**Evidence:** `runs/2026-11-14-p003-doximity/set2/run1.txt`, `set2/run2.txt`, `set2/run3.txt`, and their validation records — not the oracle alone.
 **Assertions:**
 
 - A-11a `SEMANTIC_AUDIT` — a prior recommendation does not render in the plan without an adoption statement. Owner: **S2**.
@@ -90,7 +91,7 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 
 ### C-02 — non-local regression
 
-**Defect:** the `EVIDENCE_MODE` requirement added for `COURSE` conflicted with the existing `SECTION_CONTRACT` rule 38 governing the same text, and the `O51` statement moved as an unrelated effect.
+**Defect:** the prior-record-result rule (`NEURO_HISTORY`) conflicted with the historical-study rule (`WORKUP`) for rule 38, and the `O51` statement moved as an unrelated effect.
 **Evidence:** `artifacts/06_doximity_run3.md`.
 **Assertions:**
 
@@ -103,8 +104,8 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 **Boundary:** that is the historical artifact's wording. It is **not** D-017's signer-approved `MRI to show.`; the two must not be cited interchangeably.
 **Assertions:**
 
-- A-C12a `MECHANICAL` — a rendered line carries every content token of its head member. Owner: **R1**.
-- A-C12b `SEMANTIC_AUDIT` — a fuller operator is not passed over in favour of a thinner one. Owner: **S4**.
+- A-C12a `MECHANICAL` — the operator's required semantic roles are all present in the unit. Owner: **S4**.
+- A-C12b `MECHANICAL` — the renderer neither infers nor supplies a missing semantic role; a unit lacking a required role fails closed. Owner: **R1**.
 
 ## 3. Provisional — path required
 

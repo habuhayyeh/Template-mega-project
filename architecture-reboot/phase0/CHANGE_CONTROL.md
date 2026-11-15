@@ -21,7 +21,7 @@ Adding, removing, or altering a check or assertion is **not** an implementation 
 Requirements:
 - the module's frozen contract and acceptance properties still hold. Observed outputs may change; frozen properties may not.
 - no contract file changes;
-- the reviewing agent confirms no interface, contract or observable behaviour changed. The reviewer confirms absence of interface change, not smallness of diff.
+- the reviewing agent confirms the contract, interface and acceptance properties are unchanged, and runs the module's regression fixtures. Diffs are judged by properties, not by size.
 
 ## 3. DESIGN CHANGE
 

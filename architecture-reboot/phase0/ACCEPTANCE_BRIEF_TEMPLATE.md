@@ -73,7 +73,7 @@ FAILURE BEHAVIOUR
 2. No code, no prompt text. If the brief contains the solution, it is no longer a test.
 3. Every property has a check; every check names its mode.
 4. Every fixture id must exist in the register.
-5. The brief is frozen before implementation starts. Changing it afterwards is an `ACCEPTANCE CHANGE` and needs the same approval as a design change.
+5. The brief is frozen before implementation starts. Changing it afterwards is an `ACCEPTANCE CHANGE` and follows that approval path, not the design-change one.
 
 ## 3. Review of a brief
 

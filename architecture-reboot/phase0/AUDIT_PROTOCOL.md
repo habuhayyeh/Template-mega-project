@@ -16,19 +16,17 @@ The reviewer has the returned artifact and the frozen assertions for the case.
 
 Inputs: the artifact; the fixture assertions (**properties only, never expected prose**).
 
-Answerable: consistency, placement, completeness, voice.
+Answerability here is per assertion, not per mode: an assertion is answerable if the available evidence settles it. Nothing is answerable merely because of the mode, and nothing is barred merely because of it.
 
-Not answerable: whether the IR is faithful to a source the reviewer cannot see.
-
-Used for: batch volume.
+Used for: batch volume, where the source is large and most assertions concern the artifact itself.
 
 ### Mode B — full audit
 
 Inputs: artifact; Case IR; source package; check report; fixture assertions.
 
-Answerable: everything, including fidelity and coverage.
+Answerability is again per assertion: source-dependent assertions become decidable here, and the rest are decided as in Mode A.
 
-Used for: the first run of a new case, any run whose assertions need source visibility to decide, any run under dispute.
+Used for: the first run of a new case, any run whose assertions need source visibility, any run under dispute.
 
 **The implementer's rationale is never an input in either mode.** It makes the reviewer agree with the author.
 
