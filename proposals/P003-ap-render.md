@@ -1,6 +1,6 @@
 # P003 v8 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** v7, revised after review d7b2615 and after the signer’s decision. Line contraction only; transformation 10 withdrawn; invariants back in sync. Awaiting review. Not implemented.
+**Status:** v8, revised after `reviews/P003-v7-original-branch.md`. One mechanical fix: I10 now admits the split pattern that transformation 9 creates. Architecture accepted; awaiting implementation approval.
 **Supersedes:** P003 v1 in this file's history.
 **Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
 **Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
@@ -174,7 +174,7 @@ Absent: O54 as a seizure bullet; duplicate seizure, sodium, or CT statements; du
 
 Corruption repaired in this commit: `DECISIONS.md` D-014 cell; `runs/2026-11-14-p002/validation.txt` three `0x07` bytes, stray newline, missing `r`; `STATUS.md` regenerated — the damaged fence, the `uns/` path, the stale O54-pending line and the "mock validated" contradiction are gone.
 
-After implementation: `CHANGELOG.md` entry, and a `D-015` recording the COURSE classes and the two-branch etiology rule.
+After implementation: `CHANGELOG.md` entry, and a decision recording the COURSE classes and the two-branch etiology rule. **Do not reserve an ID here** — D-015 is the signer-approved chronic-block rule. Take the next free `D-###` at the moment of recording.
 
 ---
 

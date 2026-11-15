@@ -1,8 +1,8 @@
-# P004 v2 — chronic problems get their own block
+# P004 v3 — chronic problems get their own block
 
-**Status:** v2, revised after `reviews/P004-original-branch.md` and the signer's scope decision. Awaiting review. Not implemented.
+**Status:** v3, revised after `reviews/P003-v8-P004-v2-original-branch.md`. Production rule and frozen-case adjudication separated; representation gap recorded. Awaiting review. Not implemented.
 **Supersedes:** P004 v1.
-**Affects:** `pipeline/03_SELECT_ORGANIZE.md`, `oracles/ap_ledger_v4.txt` (new, append-only), `tests/acceptance/`, `runs/`, `STATUS.md`, `DECISIONS.md` (D-015 recorded; D-016 at approval).
+**Affects:** `pipeline/03_SELECT_ORGANIZE.md`, `oracles/ap_ledger_v4.txt` (new, append-only), `tests/acceptance/`, `runs/`, `STATUS.md`, `DECISIONS.md` (D-015 recorded; a further entry at approval, ID assigned then).
 **Does not affect:** substrate, `01`, `02`, `04`, `05` contract, `06`, `07`, the six kinds.
 
 ---
@@ -42,6 +42,16 @@ The A/P branch has no `REUSE`, so each retained object has exactly one block.
 
 The seizure block keeps the semiology, the durations, the CT, the sodium trend and the encephalomalacia. The infarct block carries its own facts and the secondary-prevention decisions. Memory becomes P3.
 
+### 2.1 The rule and this table use different evidence standards
+
+They do, and the difference has to be visible.
+
+**A. The production rule.** `03` creates a chronic block only when the representation contains a source-grounded link between a management decision and that problem. Where the link is absent, `03` does not infer it from the drug's identity, its class, or clinical knowledge. On the current substrate, the atomic texts `on apixaban`, `Continue amlodipine 10 mg daily`, `Continue atorvastatin 80 mg`, `apixaban held since admission` do not by themselves say which problem they are directed at.
+
+**B. The frozen-case adjudication.** For this synthetic case the signer placed apixaban hold/resume, amlodipine and atorvastatin in the chronic infarct block. `oracles/ap_ledger_v4.txt` may encode that as a reviewed oracle decision — an explicit adjudication by the signer, on the record — even though the atomic representation does not expose the link.
+
+**Representation gap.** The oracle is therefore ahead of what the rule can derive. That gap is recorded, not papered over: the oracle is an adjudicated answer for one case, not evidence that `03` can produce it. Solving it inside P004 with medication heuristics is forbidden; the durable fix is a management-target relation in a later representation, and that is a separate proposal.
+
 ## 3. O10 `atrial fibrillation` — discarded
 
 Under the accepted exclusive evidence rule, O10 does not establish, confirm, localise, refute, discriminate, or explain uncertainty for either claim. It cannot be promoted to the infarct's etiology because the source never says the stroke came from AF.
@@ -54,9 +64,9 @@ Consequence worth stating: the A/P will not mention AF at all, although the pati
 
 `D-014` says the residual expressive aphasia stays out of the A/P. The signer's approved chronic-infarct example places it under that block. Both cannot stand.
 
-At approval of P004, record **D-016**, naming D-014:
+At approval of P004, record a new **D-###** — ID assigned at recording, not reserved here — naming D-014:
 
-> D-016 supersedes D-014 for the chronic-infarct context. Residual expressive aphasia may render under the chronic infarct block when it describes that problem. It remains excluded from the seizure block, and the reasoning in D-014 — that a sequela of the infarct is not evidence for the seizure — stands.
+> The new decision supersedes D-014 for the chronic-infarct context. Residual expressive aphasia may render under the chronic infarct block when it describes that problem. It remains excluded from the seizure block, and the reasoning in D-014 — that a sequela of the infarct is not evidence for the seizure — stands.
 
 Not a silent reversal. It changes what one block says because the signer added a block that owns the fact.
 

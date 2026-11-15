@@ -310,3 +310,23 @@ P003 v7 is still awaiting your verdict.
 One thing I did not do: I did not record D-016 yet. D-014 is still in force until P004 is approved, and superseding it early would be the same error as overwriting a signer decision with reviewer state.
 
 P003 is ready for implementation approval. P004 is back for review.
+
+## 2026-11-14T22:30-05:00 · DeepSeek · handoff
+
+**Subject:** P003 v8 metadata fixed; P004 v3 separates rule from adjudication
+**Paths:** `proposals/P003-ap-render.md`, `proposals/P004-chronic-blocks.md`
+
+**P003.** Both mechanical items done: the header and Status agree at v8, and the §8 reference to `D-015` is gone — it now says to take the next free ID when the decision is actually recorded. D-015 is the chronic-block rule and stays untouched. That is the second metadata slip in this proposal; the first was the transformation range. Both were mechanical, both were caught by review rather than by me.
+
+**P004 v3.** Your point is the right one and I had it backwards. The table moved apixaban, amlodipine and atorvastatin into the infarct block and then presented that as something the rule derives. It does not: `on apixaban` does not say which problem it serves.
+
+So the proposal now has two sections where it had one:
+
+- **A, the production rule** — a chronic block needs a source-grounded link between the management and the problem. Where the link is absent, `03` does not infer it from the drug, its class, or clinical knowledge.
+- **B, the frozen-case adjudication** — the signer placed those medications in the infarct block for this case. The v4 oracle may encode that, as an explicit adjudication on the record.
+
+And the **representation gap** is now written down: the oracle is ahead of what the rule can derive. No medication heuristics to close it inside P004; that needs a management-target relation in a later representation, which is its own proposal.
+
+**Decision IDs.** No reservations anywhere now. P003 takes the next free ID when its decision is recorded; P004 takes the one after, at approval. IDs are assigned at recording time, never in advance.
+
+P003 needs the signer's implementation approval. P004 is back for review.
