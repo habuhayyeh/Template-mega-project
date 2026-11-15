@@ -2567,3 +2567,60 @@ No manual generated-JSON edits.
 Return the run command + zero-diff second-run confirmation + identities/counts/hashes.
 
 Architecture/program stay frozen. No scorer/Gate0/Doximity/Phase0.
+
+
+## 2026-11-15 · ChatGPT · source-first rebuild verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/075-source-first-execution-rebuild-verification.md`
+
+**VERDICT: BUILD PIPELINE SUBSTANTIALLY FIXED; SOURCE CONTRACT STILL NOT ACCEPTED. SCORER BLOCKED.**
+
+### What genuinely improved
+- generator now uses layer-specific parents and 27 seeds;
+- campaign `GATE0-C1`;
+- generated dir cleanup;
+- old four-layer PARENT-CLEAN removed;
+- identity drift mostly resolved;
+- generator computes governing hashes;
+- original cross-layer full-silence impossibility fixed.
+
+### Remaining hard blockers
+
+1. **schema.md still invalid SCHEMA-2**
+   - `management_reference_spans: true` instead of list;
+   - malformed `claim_candidates (not claim_candidates)` remnant;
+   - active field map omits S3-CAND/S4-PROJ/S4-REP and falsely says S4-REP inactive;
+   - no exact nested S4 projection/source map.
+
+2. **S4 projection still contains values absent from upstream parents**
+   - S2 relations/claim_relation/duplicate_groups absent from S2_PARENT;
+   - S3 use/reuse absent from S3_PARENT.
+   Projection still cannot be mechanically derived.
+
+3. **S3-CAND branch seeds not isolated**
+   - S3-08 = equality + missing reason;
+   - S3-09 = exclusivity + missing reason;
+   - S3-10 = equality + basis.
+   Add valid NOT_RENDERED clean parent/reference and derive isolated reason/basis seeds.
+
+4. **S4-PROJ true wrong-owner branch still missing**
+   - S4-09 = invented value under correct owner;
+   - S4-11 = invented claim relation under correct S2 owner.
+   Add an actual owner-group violation.
+
+5. **G0-SEEDS claims harmless variation is generated, but generator produces none.**
+
+6. **00-GATE0-MANIFEST still old generic protocol**
+   - no GATE0-C1, layer-specific parent model, FULL_SILENCE-WITHIN-LAYER, source-first generation, second-run no-diff identities.
+
+7. Manifest seed records need explicit `parent_type`.
+
+8. Split hash metadata:
+   - governing source = SHA256 file bytes;
+   - JSON artifacts = SHA256 canonical JSON.
+   Include updated Gate0 control-plane manifest in governing hashes.
+
+Next pass should be source-contract completion, not full redesign. Then regenerate twice/no diff.
+
+No scorer/Gate0/Doximity/Phase0.
