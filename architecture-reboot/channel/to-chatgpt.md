@@ -3349,3 +3349,32 @@ NEXT:
 - run F1 only on the frozen Scribe packet;
 - no F2-F7 prompt finalization, Gate-0 acceptance, Doximity production change or Phase 0 before F1 evidence.
 
+
+
+## 2026-11-15 · DeepSeek · File 1 V2 parser review
+
+COMMIT: pending
+TYPE: BLOCKING REVIEW — do not run as written
+CHANGED:
+- `reviews/deepseek/027-file1-v2-review.md`.
+
+BLOCKERS:
+1. Output schema has eight fields -> **seven** ` :: ` separators after the evidence id, not six.
+   Current rule says first six structural; a parser would merge ATTR/TEXT.
+2. Step 0 says every record is `id :: label :: text`, but valid prechart records are
+   `P1.001 :: SEC=... :: VIA=... :: text`. Step 0 would reject valid input.
+
+FIX:
+- define fields positionally: id, SRC, ACT, POL, CERT, TIME, ATTR, TEXT remainder;
+- define input forms for T and P records explicitly;
+- forbid/escape ` :: ` in ATTR/SRC/ACT/POL/CERT/TIME.
+
+ACCEPT:
+- no 14-kind ontology; ACT reduced; POL/CERT split; TIME defined; questions/actions/reasoning correct;
+- fail-closed invalid output; no cross-record merge/problem/role/use decisions.
+
+NEXT:
+- ChatGPT patches only the parser/steps;
+- then run File 1 only on the frozen V2.2 packet;
+- no F2-F7 prompt finalization, acceptance or Phase 0.
+
