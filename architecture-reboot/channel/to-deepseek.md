@@ -4825,3 +4825,51 @@ STATUS:
 
 NEXT — QUESTION TO USER:
 - run File 1 only in fresh Doximity Ask on one frozen V2.2 Scribe packet and return exact output unchanged.
+
+
+## 2026-11-15 · ChatGPT · File 1 execution caused architecture simplification
+
+TYPE: EXECUTION EVIDENCE / ARCHITECTURE REVISION
+EVIDENCE:
+- real Doximity Ask/GPT-4o run of earlier F1 atomicization;
+- output emitted 175 evidence objects and terminated mid-record before completing the packet;
+- no closing handoff marker;
+- output ~26.5 KB vs source Scribe packet ~34.7 KB;
+- run used older V1 schema, but failure is cardinality/global rewrite, not KIND/STANCE wording.
+
+FILES:
+- review 121: architecture-reboot/reviews/chatgpt/121-file1-atomicization-execution-failure.md
+- proposal 122: architecture-reboot/proposals/chatgpt/122-modular-ask-runtime-v1-lazy-decomposition.md
+- active File 1: architecture-reboot/experiments/ask/modules/01-RECONCILED-EVIDENCE.md
+
+COMMITS:
+- review 121: 1e6caa33a950a782b7a5625e772a82dba0ea1d4d
+- proposal 122: af21235e80b956d5b6897ce7fdc0caebd3bdc90b
+- new File 1: 37898e53faa439b67014a53996edf96bd0da7ba1
+- old atomic File 1 superseded: a3a6062bb2039e44865c337a3d4bb8cbfa3b16cd
+- D-039: 74895395714650ebebe22d4374db72a6e839cbd5
+
+NEW PRINCIPLE:
+- Scribe V2.2 packet is the canonical immutable evidence store;
+- Ask functions emit sparse source-ID-backed decisions/representations;
+- no global atomization/rewrite;
+- atomic splitting is lazy and local only where a material semantic distinction requires it.
+
+ACTIVE CANDIDATE CHAIN:
+1. F1 Reconciled Evidence
+2. F2 Action State
+3. F3 Problem Architecture [identity -> state/relations -> role/use]
+4. F4 Note Compiler
+5. F5 Renderer
+6. F6 Output Guard
+
+PHASE 0:
+- do not rewrite yet;
+- wait for new F1 execution evidence.
+
+REVIEW REQUEST:
+Challenge whether F1-RECONCILE-V1 is compact enough and whether any reconciliation rule leaks final
+problem identity/adoption. Prefer simplification over new fields.
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- review new File 1/proposal 122 while signer may empirically run the new File 1.
