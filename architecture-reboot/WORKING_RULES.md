@@ -169,6 +169,19 @@ Map only after the signer answers:
 Never show signer-review users the operator `INDEX.md`, `INDEX.json`, seed identity, expected verdict,
 mutation metadata, or specificity answer key.
 
+### Signer answer style
+
+Prefer natural clinician-language judgments over scorer vocabulary.
+
+Good examples:
+- "These are related and should be mentioned together."
+- "This is background only and should not be its own problem."
+- "This is a valid problem and should be assessed separately."
+- "I can't tell from the information shown."
+
+The presenting agent should phrase the question so the signer can answer naturally. Convert the answer
+to FIRED / SILENT / UNDECIDABLE only after the signer responds.
+
 ### Preflight first
 
 Consolidate recurring mechanical checks behind one architecture-reboot preflight entry point. It should cover, where applicable:
