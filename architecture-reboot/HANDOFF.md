@@ -107,6 +107,15 @@ No Doximity, no Phase 0.
 
 ## 7. Working rules that matter
 
+**Efficiency protocol:** classify findings as ARCHITECTURE / CONTRACT / IMPLEMENTATION / NONBLOCKING;
+review the changed diff plus its dependency cone rather than re-auditing the whole project; stop a layer
+once its contract is satisfied, validators pass and evidence is reproducible; reopen only on new evidence.
+Implementation handoffs use `COMMIT / TYPE / CHANGED / INVARIANTS / VALIDATION / BLOCKERS / NEXT`.
+Prefer asymmetric work: DeepSeek handles substantial/new implementation and local execution; ChatGPT
+handles adversarial review, invariant/test design and bounded direct fixes; the non-author reviews the
+actual diff. Consolidate recurring mechanical checks behind one preflight entry point before broad review
+or acceptance. Human/semantic prerequisites block semantic acceptance, not safe mechanical preparation.
+
 - **Never claim a fix is applied without reading the file back.** A dedupe guard whose marker was an
   empty string silently skipped every append once; a file-truncating bug turned a 75-line file into 5
   because `open(w).write(open(r).read())` evaluates the write first. Read → transform in memory →

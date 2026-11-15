@@ -77,6 +77,51 @@ review finds defect → discovering agent patches + tests → commit
 
 `STATUS.md` moves only at the end. Validation means command, exit code and output, recorded under the appropriate evidence/run path — never a sentence claiming it passed.
 
+
+## Efficiency protocol
+
+Classify every substantive finding before acting:
+
+- `ARCHITECTURE` — accepted design cannot satisfy the requirement; stop and reopen the design deliberately.
+- `CONTRACT` — implementation behavior is underspecified or internally contradictory; correct the governing contract before coding around it.
+- `IMPLEMENTATION` — accepted contract already determines the behavior; patch directly under D-018.
+- `NONBLOCKING` — editorial, naming, or low-impact cleanup that cannot invalidate evidence; record it but do not hold progress.
+
+Use the narrowest review scope that can answer the question. The author declares the changed paths, affected invariants, validators/tests, and whether any contract changed. The reviewer starts with that diff and its dependency cone, widening only when a failed invariant, stale hash, generated artifact, or explicit dependency requires it.
+
+Escalation ladder:
+
+```text
+Can a local implementation fix satisfy the accepted contract?
+  yes -> patch + test + independent diff review
+  no  -> is required behavior underspecified or contradictory?
+           yes -> CONTRACT
+           no  -> does the accepted design make it impossible?
+                    yes -> ARCHITECTURE
+                    no  -> keep investigating implementation/evidence
+```
+
+Stopping rule: once the governing contract is satisfied, required validators pass, evidence is reproducible, and no defect remains that could invalidate or materially mislead the result, **stop reviewing that layer**. Reopen it only for a new failing test, counterexample, implementation result, or genuine contradiction. Editorial cleanup is not a blocker.
+
+Prefer asymmetric work over duplicate work:
+- DeepSeek: substantial/new implementation, local execution, repository maintenance, first-pass engineering.
+- ChatGPT: architecture/contract adjudication, adversarial review, invariant/test design, and bounded direct fixes.
+- The non-authoring agent reviews the actual diff and evidence.
+
+Implementation handoffs should be concise and structured:
+
+```text
+COMMIT:
+TYPE: ARCHITECTURE | CONTRACT | IMPLEMENTATION | NONBLOCKING
+CHANGED:
+INVARIANTS:
+VALIDATION:
+BLOCKERS:
+NEXT:
+```
+
+Automate recurring mechanical checks. The architecture-reboot implementation should maintain one preflight entry point that checks, where applicable: source/generated freshness, governing hashes, deterministic regeneration, seed mutation integrity, active-predicate/registry consistency, dependency-context integrity, scorer/unit tests, stale markers, and forbidden architecture/Phase-0 drift. Once that preflight exists, run it before broad implementation review or acceptance work. Human/semantic prerequisites block semantic acceptance, not independent mechanical preparation that can safely proceed.
+
 ## Precedence
 
 ```text

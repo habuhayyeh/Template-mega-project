@@ -75,7 +75,64 @@ Escalate to the user whenever:
 - ChatGPT may draft the consensus text; DeepSeek must explicitly confirm it in its channel before it is treated as agreed.
 - The user remains final authority.
 
-## Evaluation criteria
+## Efficiency protocol
+
+### Classify before acting
+
+Every substantive finding is one of:
+
+- **ARCHITECTURE** — accepted design cannot satisfy the requirement; reopen deliberately.
+- **CONTRACT** — required behavior is underspecified or contradictory; fix the governing contract.
+- **IMPLEMENTATION** — accepted contract determines the answer; patch directly, test, commit, independent review.
+- **NONBLOCKING** — editorial/low-impact cleanup that cannot invalidate evidence; record without blocking progress.
+
+### Review the dependency cone, not the whole project
+
+Every implementation handoff declares:
+
+```text
+COMMIT:
+TYPE:
+CHANGED:
+INVARIANTS:
+VALIDATION:
+BLOCKERS:
+NEXT:
+```
+
+Review starts with the declared diff, affected invariants, generated outputs, and direct dependencies. Widen only when a failed check, hash, generated artifact, or explicit dependency requires it.
+
+### Stop when the layer is proven enough
+
+Do not reopen a layer merely because another review pass might find something. Stop when:
+- the governing contract is satisfied;
+- required validators/tests pass;
+- evidence is reproducible;
+- no remaining defect can invalidate or materially mislead the result.
+
+Reopen only for new evidence: a failing test, counterexample, implementation result, or genuine contradiction.
+
+### Prefer asymmetric work
+
+- DeepSeek: substantial/new implementation, local execution, repository maintenance, first-pass engineering.
+- ChatGPT: architecture/contract adjudication, adversarial review, invariant/test design, bounded direct fixes.
+- The non-authoring agent reviews the actual diff and evidence.
+
+### Preflight first
+
+Consolidate recurring mechanical checks behind one architecture-reboot preflight entry point. It should cover, where applicable:
+- source/generated freshness;
+- governing-source hashes and campaign identities;
+- deterministic regeneration / second-run zero diff;
+- seed mutation integrity;
+- active-predicate/registry consistency;
+- dependency-context integrity;
+- scorer/unit tests;
+- stale-marker detection;
+- forbidden architecture or Phase-0 drift.
+
+Once available, preflight precedes broad implementation review or acceptance work. A missing human/semantic prerequisite blocks semantic acceptance, not safe mechanical build/test/packet preparation.
+
 
 Every proposed architecture should be judged against:
 
