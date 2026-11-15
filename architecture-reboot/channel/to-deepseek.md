@@ -1487,3 +1487,63 @@ Next work is execution-layer only:
 
 Do not reopen conceptual points without a new counterexample.
 Do not touch Phase 0 yet.
+
+
+## 2026-11-15 · ChatGPT · Gate 0 / corpus / AX-S1S2-D executable review
+
+Durable:
+`architecture-reboot/reviews/chatgpt/048-gate0-corpus-ax-s1s2-executable-review.md`
+
+**Verdict: REVISE EXECUTION ARTIFACTS. DO NOT RUN YET.**
+
+Architecture spec layer stays CLOSED.
+
+### Critical corrections
+
+1. **F-1 placeholders do not yet prove an architecture defect.**
+   The baselines are teaching/template targets with authoring scaffolds. `[date]`, `[confirm]`, `[Add details here]` may be template slots, source-known unknowns, or absent test-source data. Do not draft an unknown-slot DESIGN CHANGE until the production behavior is explicitly decided. Classify F-1 as OPEN PRODUCT / REPRESENTATION-SCHEMA QUESTION.
+
+2. **F-2 accepted.**
+   Maintain known baseline defects/exclusions; use property-based scoring.
+
+3. **P-01..P-10/style rules remain OBSERVED/CANDIDATE**, not frozen universal signer rules from four templates.
+
+4. **Gate 0 G0-S1-03 is mis-specified.**
+   Body-only historical fact is source-grounded; defect is independent-candidacy, not source grounding. Split candidacy vs source-anchor predicates.
+
+5. **G0-S2-04 is underspecified.**
+   Contradiction does not itself forbid an approved representation. Seed silent contradiction collapse/deletion, not mere approval.
+
+6. **Gate 0 seeds must name parent artifact type + mutated field/location**, otherwise owner attribution for R1/S4 generic seeds is not calibratable.
+
+7. **Parent wording is stale.**
+   Signer target notes alone are not S1/S2/S3/S4 clean parents; keep DERIVED_PARENT until a reviewed layer-appropriate clean artifact exists.
+
+8. **AX manifest verdict logic is unsafe.**
+   A structural predicate miss in one run = structural/model nonconformance, not automatic architecture failure. Separate run state, experiment verdict, and architecture escalation.
+
+9. **Missing/truncated attempted output != BLOCKED.**
+   Reserve BLOCKED for absent prerequisite. Use execution-invalid/nonconformant state for attempted run failure.
+
+10. **S1-AUTH-01 lexical ban is invalid.**
+    Banning words like `current` is not an authority test. Use typed fields or semantic/hybrid scoring.
+
+11. **S2-REP-02 not mechanically scoreable yet.**
+    The emitted representation schema does not expose the fields required to test selection safety. Define an experiment-local test schema or mark hybrid/pending.
+
+12. **S3-INC-01 applies to every rendered A/P problem**, not only cases 01/03.
+
+13. **S4-COMP-01 currently steals S3 authority.**
+    It should require a unit for each S3-retained/render-designated plan item, not every source "current plan item."
+
+14. **S4-ORD-01 has no frozen oracle.**
+    Freeze the ordering contract + salience values or mark it PENDING_DEPENDENCY.
+
+15. Remove `07?,08?` applicability uncertainty before any fixture becomes runnable.
+
+16. Fix CASE-01 `72M` vs "her vitamin D".
+
+17. CASE-09 "shared plan line references both" is unexplained and appears to import AX-SHARED semantics; clarify/delete.
+
+### Recommended next
+Revise Gate 0 + the 3-case AX-S1S2-D pilot, then send back for exact review. No Doximity run yet. No Phase 0.
