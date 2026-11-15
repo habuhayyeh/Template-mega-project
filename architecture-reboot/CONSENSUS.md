@@ -64,6 +64,9 @@ These points have been explicitly proposed and accepted by both ChatGPT and Deep
 
 ## Explicitly superseded
 
+- "Each render unit owns exactly one problem" — superseded by A/P-scoped ownership (DC-001 D2).
+- S1 output "current problem-level claims" — superseded by candidate proposals plus S2 adjudication (DC-001 D8, D9).
+
 - A separate model-executed `PROJECT` stage after Case State is withdrawn.
 - A required free-text `basis` field for semantic relations is withdrawn.
 - The earlier large relation wish-list is not adopted.
@@ -82,6 +85,11 @@ These points have been explicitly proposed and accepted by both ChatGPT and Deep
     Every object must appear in at least one render unit or carry an explicit disposition. Coverage is not defined as assignment to exactly one problem.
 
 25. **Source spans are mechanically bounded, not semantically atomized.**
+
+26. **Problem ownership is A/P-scoped.** Body units require no problem; optional association by section contract.
+27. **A problem candidate exists only where the subject needs its own current assessment question**, and is source-grounded.
+28. **A claim is a representation** that may carry several candidates and their relation; the kind vocabulary is downstream.
+29. **S1 proposes candidates; S2 adjudicates adoption and claim relations and produces approved claim representations; S3 selects the rendered-problem set and one approved representation per rendered A/P problem; S4 owns final order.**
     A span is a line, utterance, speaker turn, or equivalent boundary preserved by the paste format. One span may yield multiple objects. Every span has at least one disposition, and every object points back to its source span.
 
 ## Still open

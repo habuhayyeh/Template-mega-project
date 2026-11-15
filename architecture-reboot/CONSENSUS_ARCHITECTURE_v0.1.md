@@ -41,7 +41,7 @@ CASE IR
    |-- problems
    |-- current/historical/adoption metadata
    |-- explicit render units
-   |     |-- problem
+   |     |-- problem  (required for A/P units; optional for body units)
    |     |-- rhetorical class
    |     |-- canonical operator
    |     |-- object member roles
@@ -176,7 +176,17 @@ No drug-class or diagnosis heuristic may infer adoption.
 
 Problems are explicit clinical organizational nodes.
 
-Each render unit owns exactly one problem.
+Each **A/P** render unit owns exactly one problem.
+
+A body unit requires no problem. It may carry an optional problem association where the section contract asks for one, and that association is not an ownership claim.
+
+A problem candidate exists only when the neurologic subject requires its own current assessment question or status in this encounter.
+
+A subject that supports, refutes, or contextualises another problem remains evidence or context unless it is independently assessed. These are examples, not an exhaustive list.
+
+Every candidate must be source-grounded: a subject the model infers but the encounter never addresses cannot become a problem.
+
+A problem's claim is a **representation**, not a single object reference. A representation may carry more than one candidate together with the relation among them. The kinds of representation and their fields are defined downstream.
 
 A source object may be reused by units belonging to different problems when that reuse is clinically justified.
 
@@ -197,7 +207,7 @@ Conceptually:
 ```text
 UNIT U7
 section=AP
-problem=P1
+problem=P1            # required for A/P units; optional for body units
 class=FACT
 operator=FACT_WITH_TIME_AND_PROVENANCE
 members:
@@ -212,7 +222,7 @@ or:
 ```text
 UNIT U11
 section=AP
-problem=P1
+problem=P1            # required for A/P units; optional for body units
 class=PLAN
 operator=PLAN_CONDITIONAL
 members:
@@ -328,7 +338,8 @@ Checks only mechanical predicates, such as:
 - only allowed operator/transform text is introduced;
 - A/P voice rule is obeyed;
 - every object is either used by >=1 unit or explicitly dispositioned;
-- within one section + problem, the same object may participate in at most one render unit;
+- within one A/P section and its owning problem, a given object may participate in at most one render unit, unless explicit reuse permits otherwise;
+- this rule does not apply to body units; body duplicate and use constraints are governed by the section contract;
 - cross-section reuse is allowed;
 - explicit cross-problem reuse within the same section is allowed.
 

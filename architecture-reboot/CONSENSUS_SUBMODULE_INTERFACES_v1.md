@@ -136,70 +136,98 @@ All render-affecting semantic decisions must be complete before RENDER begins.
 
 ## S1 — Problem Model
 
-**Goal**  
-Define what the current neurologic encounter is clinically about.
+**Goal**
+Identify the neurologic subjects this encounter is actually about.
 
-**Role**  
-Create the encounter-level neurologic problem/claim framework that organizes later decisions.
+**Role**
+Propose problem candidates. Name subjects, keep stable ids, anchor every candidate to source, and
+supply structured, inspectable salience inputs. It does not decide adoption, does not finalise a
+claim, and does not order the note.
 
-**Input**  
+**Input**
 - complete INGEST source-faithful substrate.
 
-**Output**  
-- ordered neurologic problem registry;
-- current problem-level claims/formulations;
-- any required problem hierarchy or relationships needed for note organization.
+**Output**
+- problem candidates with stable ids and source anchors;
+- for each candidate, the candidate claim formulations present in the source;
+- structured salience inputs — declared, inspectable values; the exact schema is downstream;
+- candidate-level relationships the substrate states explicitly.
 
-**Distinctive boundary**  
-S1 answers **"what are the problems/claims?"**  
-It does not yet decide every object's use, section, or render form.
+**Distinctive boundary**
+S1 answers **"which neurologic subjects need their own assessment question in this encounter?"**
+It does not decide which candidate is the current claim, whether a prior formulation is adopted, or
+what order problems render in. A candidate exists only where the subject needs its own current
+assessment; otherwise the subject is evidence or context.
 
 ---
 
 ## S2 — Semantic Adjudication
 
-**Goal**  
-Resolve the encounter-level semantic meaning and relationships of the source objects.
+**Goal**
+Resolve what the source objects mean for this encounter, including whether prior material is current.
 
-**Role**  
-Determine how objects relate to one another and to the current encounter before note-layout decisions.
+**Role**
+Adjudicate relations among objects and among candidate claims, decide encounter-level adoption,
+assign reasoning roles, and produce approved claim representations.
 
-**Input**  
-- annotated stable objects;
-- problem model from S1.
+**Input**
+- annotated stable objects, including the source temporality recorded during annotation;
+- problem candidates and candidate claims from S1.
 
-**Output**  
-- semantically adjudicated object set/relationships;
-- resolved duplicate/coverage, modifier, condition, reasoning-role, temporality/adoption, and similar semantic relationships;
-- no section assignment and no render operator yet.
+**Output**
+- adjudicated object relations: duplicates, modifiers, conditions, reasoning roles;
+- encounter-level adoption decisions per object, stated against source evidence;
+- for each problem candidate, the relation among its candidate claims — for example equivalent,
+  nested, complementary, competing, contradictory, or unresolved; this vocabulary is illustrative
+  and is defined downstream;
+- zero or more approved claim representations per problem candidate, which may be built from
+  source-grounded objects and relations and are not limited to sources already phrased as claims;
+- where no claim representation can be semantically approved, an explicit state that S3 can act on;
+  its name and form are downstream.
 
-**Distinctive boundary**  
-S2 answers **"what does this object mean here, and how does it relate to other objects?"**  
-It does not decide whether the object is selected for the note or how it renders.
+**Distinctive boundary**
+S2 answers **"what do these objects mean here, and which claim formulations are defensible?"**
+It does not select content, choose sections, or order. **Source temporality is not S2's**: it is
+recorded during annotation and only consumed here.
+
+**Approval is a safety property.** S2 may expose more than one approved representation for a problem
+only when choosing among them requires no further semantic adjudication under the governing selection
+contract. Where the choice would change clinical meaning, S2 **resolves** the semantic choice and
+records structured source or adjudication support before exposing the set to S3. Documenting an
+unresolved choice does not make it safe.
 
 ---
 
 ## S3 — Content Selection & Problem Use
 
-**Goal**  
-Decide which adjudicated objects are used in the note and for which problem(s), while preserving explicit reuse.
+**Goal**
+Decide what the note uses, under which problem, and which approved representation each rendered
+A/P problem carries.
 
-**Role**  
-Turn the complete semantic substrate into the retained note-content set.
+**Role**
+Turn the adjudicated substrate into the rendered-problem set and retained content, and attach one
+approved claim representation to each rendered A/P problem.
 
-**Input**  
-- ordered problem model;
-- semantically adjudicated objects from S2.
+**Input**
+- problem candidates from S1;
+- adjudicated objects, adoption decisions and approved claim representations from S2.
 
-**Output**  
+**Output**
+- the set of problems that render;
 - retained object-use set;
 - explicit dispositions for unused clinical objects;
 - problem use/reuse map for each retained object;
+- for each rendered A/P problem, one representation taken from S2's approved set;
 - complete accounting of every clinical object as used or dispositioned.
 
-**Distinctive boundary**  
-S3 answers **"what content are we using, and for which problem?"**  
-It does not choose the final section, operator, wording, or unit shape.
+**Distinctive boundary**
+S3 answers **"what content are we using, for which problem, and which approved claim does it carry?"**
+It may not synthesise a representation, promote an unresolved relation to a single claim, or merge
+representations. **It does not resolve semantic ambiguity.** S3 may not include or render an A/P
+problem that lacks an S2-approved representation. If a separate governing requirement mandates
+inclusion of such a problem, the seam fails or flags rather than rendering a claimless block. If
+S2's approved set for an included problem holds more than one representation and the choice among
+them is not semantically free, that is an S2 defect, not an S3 choice.
 
 ---
 
@@ -212,7 +240,8 @@ Convert the retained problem-linked content into the complete executable bluepri
 Freeze every render-affecting decision so RENDER has nothing semantic left to choose.
 
 **Input**  
-- ordered problem model;
+- problem candidates and S1's salience inputs (S4 owns final order);
+- the rendered-problem set and the representation selected for each problem, from S3;
 - retained object-use set and problem-use map from S3;
 - adjudicated semantic relationships from S2;
 - section/style/operator contracts.
@@ -233,7 +262,8 @@ A completed Case IR containing:
 A render unit may have zero source-object members only for a closed-list standing item whose explicit trigger conditions are satisfied by the structured Case IR/problem state. Such units participate in the same completeness accounting as other units.
 
 **Distinctive boundary**  
-S4 answers **"exactly what must render, where, in what unit, with which operator, and in what order?"**  
+S4 answers **"exactly what must render, where, in what unit, with which operator, and in what order?"**
+S4 owns the final problem and unit order. S1's salience inputs feed that ordering; they are not an order. S4 may not re-derive salience, and S1 may not pre-order.  
 It does not write prose.
 
 ---
@@ -355,18 +385,18 @@ I4 SOURCE ANNOTATION
    |
    v
 S1 PROBLEM MODEL
-   -> problem registry
+   -> problem candidates + candidate claims + salience inputs
    |
    v
 S2 SEMANTIC ADJUDICATION
-   -> adjudicated object set
+   -> adjudicated objects + adoption + approved claim representations
    |
    v
 S3 CONTENT SELECTION & PROBLEM USE
-   -> retained use map + dispositions
+   -> rendered-problem set + retained use map + dispositions + selected representations
    |
    v
-S4 NOTE BLUEPRINT / UNIT COMPILATION
+S4 NOTE BLUEPRINT / UNIT COMPILATION  (owns final problem and unit order)
    -> completed Case IR
    |
    v
@@ -399,9 +429,9 @@ Each submodule therefore owns one primary question:
 | I2 | What source fragments were received? |
 | I3 | What clinical propositions are present? |
 | I4 | What source-grounded attributes belong to them? |
-| S1 | What are the encounter's neurologic problems/claims? |
-| S2 | What do the objects mean here and how do they relate? |
-| S3 | Which content is used, and for which problem? |
+| S1 | Which neurologic subjects need their own assessment question? |
+| S2 | What do the objects mean, and which claim formulations are defensible? |
+| S3 | Which content is used, for which problem, with which approved claim? |
 | S4 | Exactly what must render, where, how, and in what order? |
 | R1 | How does one specified unit read? |
 | R2 | How do specified prose units read together without semantic change? |
