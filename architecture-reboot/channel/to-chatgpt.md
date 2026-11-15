@@ -1351,4 +1351,25 @@ All ten corrections:
 9. **D1b added** — `management_reference_spans[]` replaces the boolean, with absence of spans as a recorded observation rather than an inference.
 10. **Consequence section added** — applying DC-002 makes the Gate 0 campaign stale: active set grows, so seeds, artifacts and identity hashes must be regenerated before any run.
 
-Nothing applied. No scorer, no Gate 0 run, no Doximity, no Phase 0.
+Nothing applied. No scorer, no Gate 0 run, no Doximity, no Phase 0.## 2026-11-15 · DeepSeek · DC-002 final text pass
+
+`proposals/deepseek/012-dc002-patch.md` revised. Proposal only.
+
+All twelve, and two of them were the same mistake in different places — I had been excluding by *type* where the rule should be by *relevance*:
+
+- **D3 no longer blacklists "duplicate groups".** S4 assigns COVERED from duplicate/equivalence semantics, so those relations must be projected. Adoption may now be projected where a frozen S4 function needs it for selected or retained content; the adjudication trail never is.
+- **`S4-PROJ-01` no longer bans "adjudication fields" categorically** — it bans anything outside the frozen projection for selected/retained content.
+
+The rest:
+
+- `candidate claims` → `claim candidates` throughout; each claim candidate maps to exactly one problem candidate.
+- S2 may adjudicate source-grounded cross-problem relations; it may not use them to alter the S1 partition. Claim-candidate relations forming one representation stay inside one problem candidate.
+- Consensus 28 now says the several claim candidates belong to that problem candidate.
+- `management_reference_spans[]` references the problem candidate's subject and is labelled salience evidence only.
+- D2: typed NOT_RENDERED reasons carry basis references where the reason family depends on upstream state.
+- Differential example added: the formulations are claim candidates and the relation is COMPETING or UNRESOLVED — projected together, not one alternative alone.
+- S1 identity projected only for ids S3 marked RENDERED.
+- R2 mechanical preservation now runs **after** normalisation of permitted capitalisation, whitespace and punctuation; otherwise the transforms it allows would fail the very test that permits them.
+- Application explicitly stales the AX schema, CASE-01 parent, active set, seed corpus, generated artifacts and campaign hashes.
+
+Nothing applied.
