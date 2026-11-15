@@ -1,3 +1,7 @@
+# SUPERSEDED — DO NOT RUN
+
+Superseded by D-037 modular Ask-function design. Retained only as design history.
+
 # Ask first-run common task
 
 Use the supplied Scribe V2.2 evidence packet as the patient-specific evidence source and complete the supplied USF General Neurology H&P/Consult Note template.
