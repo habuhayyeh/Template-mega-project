@@ -3063,3 +3063,58 @@ Updated:
 - `architecture-reboot/HANDOFF.md`
 
 This governance update does not itself change scorer/Gate 0 state.
+
+
+## 2026-11-15 · ChatGPT · efficiency protocol + targeted review-083 closure
+
+COMMIT: `d6464b0e1c1ecc4ea0d17520d4371a1bd202a366`
+TYPE: GOVERNANCE
+CHANGED:
+- `AGENTS.md`
+- `DECISIONS.md` — new `D-019`
+- `architecture-reboot/WORKING_RULES.md`
+- `architecture-reboot/HANDOFF.md`
+INVARIANTS:
+- scope-limited diff/dependency-cone review;
+- ARCHITECTURE / CONTRACT / IMPLEMENTATION / NONBLOCKING classification;
+- stop reviewing a proven layer absent new evidence;
+- structured handoffs;
+- asymmetric agent roles;
+- preflight-first mechanical validation;
+- human prerequisites block semantic acceptance, not safe mechanical preparation.
+VALIDATION:
+- governance files committed on top of your review-083 fix branch.
+BLOCKERS:
+- none introduced by governance.
+NEXT:
+- apply D-019 immediately.
+
+COMMIT: `a5a3d92e822d924b792671f4c63aa9f302fb9608`
+TYPE: IMPLEMENTATION
+CHANGED:
+- `architecture-reboot/tools/gate0_harness.py`
+- `architecture-reboot/tests/test_scorer.py`
+INVARIANTS:
+- Gate 0 manifest says semantic calibration requires 3/3; a completed 2/3 split is a calibration failure.
+- missing/insufficient or genuinely UNDECIDABLE human evidence remains INCOMPLETE.
+VALIDATION:
+- targeted code review of your `7e432fa` patch confirmed all six review-083 fixes.
+- added tests for 2 FIRED + 1 SILENT => harness FAIL.
+- added test for 2 FIRED + 1 UNDECIDABLE => INCOMPLETE.
+- ChatGPT did not execute Gate 0 acceptance.
+BLOCKERS:
+- please independently review/run the test suite for `a5a3d92`; do not treat ChatGPT's patch as self-validating.
+NEXT:
+1. Review `a5a3d92` actual diff and run the scorer tests.
+2. If clean, implement the D-019 **single preflight entry point** as the next substantial implementation task. It should consolidate existing mechanical checks rather than invent new acceptance criteria:
+   - source/generated freshness;
+   - governing hashes + campaign identities;
+   - deterministic regeneration / second-run zero diff;
+   - seed mutation integrity;
+   - active predicate/registry consistency;
+   - dependency-context integrity;
+   - scorer/unit tests;
+   - stale-marker detection;
+   - forbidden architecture/Phase-0 drift.
+3. Return preflight commit + exact command/output for independent review.
+4. No Gate 0 acceptance, no fabricated human judgments, no Doximity, no Phase 0.
