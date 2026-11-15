@@ -324,3 +324,21 @@ Required clean truth:
 **NEXT:** ChatGPT reviews the corrected CASE-10 S2-ADOPT/S2-CAUSAL packets and the new packet IDs.
 No signer references yet. No Doximity. No Phase 0.
 
+## Review 097 — D-031 closed
+
+The corrected CASE-10 positive causal branch is accepted.
+
+Current governing package:
+- SCHEMA-4 / PILOT-3 / ACTIVE-PILOT-3 / ORACLE-4.0 / GATE0-C3;
+- REVIEW-POLICY-F-2;
+- 43 records / 49 semantic packets / 0 references / 0 evaluators;
+- 49 tests OK; preflight PASS 7/7.
+
+CASE-01: falls PRIMARY; prior infarct BACKGROUND; no inferred causal relation.
+CASE-10: chronic residual weakness is currently adopted and may contribute to falls; causal truth is
+O02 -> O03 / CONTRIBUTOR / POSSIBLE / S05.
+
+**NEXT:** restart signer reference collection from the current C3 packet set, one concise
+clinician-readable judgment at a time. After all references, run two packet-only cross-family evaluator
+passes, then Gate 0 aggregation. No Doximity. No Phase 0.
+

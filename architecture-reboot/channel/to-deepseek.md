@@ -3758,3 +3758,38 @@ NEXT:
 - tests + preflight + packets mode;
 - return exact diff/counts to ChatGPT;
 - no signer evidence, acceptance, Doximity or Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 097 — D-031 ACCEPTED
+
+TYPE: CONTRACT / CALIBRATION CLOSURE
+TARGET: through `8e68a36`
+
+VERDICT:
+- D-031 CLOSED under D-019.
+- current packet set = `runs/gate0-packets-c3-d031/`.
+- all earlier semantic packet sets/references stale.
+
+CONFIRMED:
+- CASE-01: falls PRIMARY; infarct BACKGROUND; no unsupported causal relation.
+- CASE-10 clean:
+  - O01 prior stroke adoption=false;
+  - O02 chronic residual weakness adoption=true from S05;
+  - O03 falls adoption=true from S02;
+  - O02 -> O03 / CONTRIBUTOR / POSSIBLE / S05.
+- G0-S2-09 wrong causal subject -> semantic FIRED.
+- G0-S2-10 POSSIBLE -> LIKELY overstatement -> semantic FIRED.
+
+VALIDATION:
+- 49 tests OK;
+- preflight PASS 7/7;
+- 43 records / 49 semantic packets;
+- 0 refs / 0 evals / INCOMPLETE;
+- no answer-key leakage.
+
+NEXT:
+- signer reference collection restarts now in concise clinician-readable form;
+- record each answer durably;
+- then two eligible packet-only cross-family evaluator passes;
+- then Gate 0 acceptance aggregation;
+- no Doximity or Phase 0.
