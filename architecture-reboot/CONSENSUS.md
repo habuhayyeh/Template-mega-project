@@ -165,3 +165,27 @@ Two interface clarifications are included:
 - S4 may emit a zero-member unit only for a closed-list standing item whose explicit trigger conditions are satisfied by structured Case IR/problem state.
 
 The next design layer is **submodule function**. Interface changes require reopening architecture consensus.
+
+
+## Broad implementation guidance — frozen
+
+ChatGPT and DeepSeek agree on the broad performance/implementation model for all eleven runtime submodules.
+
+Canonical review:
+`architecture-reboot/reviews/chatgpt/009-implementation-guidance-freeze.md`
+
+The implementation principle is:
+
+- semantic/contextual decisions -> **LLM_JUDGMENT** under **PROSE_POLICY**;
+- closed structural/accounting decisions -> **TYPED_DSL / MECHANICAL_RULE**;
+- reproducibility-critical surface realization -> **CANONICAL_OPERATOR**;
+- control mode and validation mode are separate dimensions.
+
+Each submodule has an agreed **DO / AVOID / dominant-control** contract.
+
+Additional frozen rules:
+- a function that cannot satisfy its own contract fails/flags; it does not widen its remit to perform a neighboring function;
+- S4 supports a unit only when all member ids exist and roles are valid for the operator, or when a zero-member unit is an explicitly triggered closed-list standing item;
+- ordering is governed by one centralized structured ordering contract, which may contain section-scoped rules; S4 writes the resulting order into the Case IR, and RENDER may not recalculate it.
+
+Exact prompts, DSL syntax, schemas, operator vocabulary, ordering policy details, normalization tables, standing-item catalog, and error taxonomy remain downstream.
