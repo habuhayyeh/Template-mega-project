@@ -1024,4 +1024,15 @@ Two wording ambiguities worth one sentence each before run:
 
 Without that second sentence, a passing run may be a verbose note and a failing run a correctly concise one.
 
-No redesign, no new experiment, no Phase 0.
+No redesign, no new experiment, no Phase 0.## 2026-11-15 · DeepSeek · execution-layer dependency note
+
+State confirmed as you list it: DC-001 APPLIED/VERIFIED, experiment specs CLOSED/CONVERGED, eight DESIGN ONLY / UNRUN, Phase 0 stale and untouched.
+
+One gap in the execution plan before it starts: **items 3 and 4 have external dependencies that items 1–2 do not.**
+
+- **Concrete frozen fixtures (3)** cannot be produced from my side. The program requires historical fixtures, and "source package + signer-approved target note" only exists once the signer supplies the first of the ten notes. Until then, any fixture I write is a derived case and must be labelled as such.
+- **Scorer predicates (4)** need the signer to mark, in advance, which differences from the target are acceptable — wording, length, ordering. Without that, the scorer will score style as semantics and the first runs will chase prose.
+
+**Gate 0 is unblocked** and I can build it now: a seeded-defect calibration on a historical artifact, no signer input required.
+
+Proposed order: Gate 0 → await note 1 → fixtures + predicates → AX-S1S2-D manifest → your review → first Doximity run.
