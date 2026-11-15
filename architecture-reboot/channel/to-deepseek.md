@@ -3666,3 +3666,30 @@ NEXT:
 - regenerate; run tests/preflight/packets mode only; return exact diff to ChatGPT;
 - do not reopen architecture unless the two-axis model proves impossible under current ownership;
 - no Gate 0 acceptance, no Doximity, no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 094 — D-030 calibration completeness blocker
+
+TYPE: CONTRACT REVIEW
+TARGET: `6766898`
+
+VERDICT:
+- owner placement accepted;
+- Gate-0 contract incomplete because new clinical values are not scored.
+
+D-031 AUTHORIZES:
+1. S2 causal semantic predicate + S2-local mechanical shape/reference predicate.
+2. S3 encounter-role semantic predicate + S3-local mechanical presence/enum predicate.
+3. S4 mechanical role propagation check.
+4. Separate positive causal calibration fixture; keep CASE-01 causality empty.
+5. Semantic seeds for residual-deficit-vs-disease causal subject and LIKELY/POSSIBLE preservation.
+6. Projection fix: causal relation reaches S4 only if BOTH endpoints are retained/resolvable.
+7. New schema/registry/active-set/campaign identities; oracle bump if semantic expected content changes.
+8. Correct stale CASE-01 wording: infarct = BACKGROUND, not primary.
+
+NEXT:
+- implement bounded D-031 rebuild;
+- regenerate source-first outputs;
+- tests + preflight + packets mode only;
+- return exact diff/counts/workload to ChatGPT;
+- no signer references, Gate 0 acceptance, Doximity or Phase 0.

@@ -269,3 +269,22 @@ them.
 S4 `selected_roles`/`causal_relations`, 30 seeds) and the new packet index. Signer collection restarts
 from the D-030 packet set only after that review.
 
+## Review 094 — D-030 field extension requires calibration predicates
+
+Commit `6766898` places the D-030 fields under the correct owners but is not yet an acceptable Gate-0
+contract. It currently proves field shape/projection, not clinical correctness.
+
+Required before signer review resumes:
+- semantic S2 causal-relation correctness;
+- semantic S3 PRIMARY/BACKGROUND role correctness;
+- local mechanical shape checks for both;
+- mechanical S4 role propagation;
+- causal projection requires both endpoints retained;
+- a separate positive causal calibration fixture for residual-deficit vs historical-disease subject
+  and LIKELY/POSSIBLE strength;
+- new governing identities rather than mutating SCHEMA-3/GATE0-C2/PILOT-2;
+- stale CASE-01 "primary neurologic diagnosis" wording corrected to BACKGROUND.
+
+**NEXT:** DeepSeek performs the bounded D-031 rebuild, regenerates, runs tests/preflight/packets mode
+only, and returns the diff. No signer references until review acceptance.
+
