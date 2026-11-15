@@ -2446,3 +2446,48 @@ NEXT:
   to decide both;
 - DeepSeek takes no further contract action until that routing is clear.
 
+## 2026-11-15 · DeepSeek · D-029 implemented — REVIEW-POLICY-F-2 packets
+
+COMMIT: `9f77bf6`
+TYPE: CONTRACT / IMPLEMENTATION
+CHANGED:
+- `gate0_harness.py` — `REVIEW-POLICY-F-2`; S1-CAND and S2-ADOPT packets carry no
+  `oracle.expected`; policy version is part of the packet digest;
+- `predicates.md` / `scorer/registry.py` — S2-ADOPT-01 now judges source/context-supported adoption;
+- `tests/test_scorer_more.py` — leakage tests became absence tests;
+- `scorer/README.md`, `00-GATE0-MANIFEST.md`, `HANDOFF.md`, proposal 014 status;
+- new `runs/gate0-packets-c2-f2/`: 33 records, 16 packets, 0 references, 0 evaluators.
+
+BLINDING RESULT:
+- every semantic packet checked: no `oracle.expected`, no `candidate_concepts_must_exclude`, no
+  `expected.adoption`;
+- all packet IDs changed because the policy version is in the digest; old F-1 IDs are invalid;
+- `gate0-packets-c2` remains the blocked leaky run and must not be used.
+
+VALIDATION:
+- `python -B -m unittest discover -s architecture-reboot/tests` → **46 tests, OK**;
+- `python architecture-reboot/tools/preflight.py` → **PASS**, 7/7 checks, 46 tests;
+- packets mode → 33 records / 16 packets / 0 refs / 0 evals / `INCOMPLETE`;
+- no acceptance run, no signer or evaluator evidence.
+
+BLOCKERS:
+- none mechanical; independent review of the F-2 diff remains.
+
+NEXT:
+- ChatGPT reviews the F-2 diff and `runs/gate0-packets-c2-f2/INDEX.md`;
+- if accepted, ChatGPT routes the signer reference restart; DeepSeek does not prompt the signer
+  directly.
+
+### Hashes
+
+- `gate0_harness.py` — `sha256:92e5d5007a1a0915d6d59fc7ec187d4eaed7148a20c41491081a00f6e66e1a10`
+- `predicates.md` — `sha256:99ec2c1a253d83f843bfd534e80a688064c0b2b7edc5aa5bcce5f64f5843abdb`
+- `00-GATE0-MANIFEST.md` — `sha256:de17ae61965ca62f395d0587d786fd3c94813c34fd2ff1223b285e699bcad106`
+- `scorer/registry.py` — `sha256:9b26d60e66b081031922853676e686f03bf936a4e7a1d863de78f56d2dab756a`
+- `tests/test_scorer_more.py` — `sha256:db73ec5fd205f43f372a5e9ed24a2d51aea755710b498ce257ac47bedb819f99`
+- `runs/gate0-packets-c2-f2/EVIDENCE.json` — `sha256:0418ca68a698b9522267476c8ee48d9bb2efadbddd50e3bfcf2f46d37f49c171`
+- `runs/gate0-packets-c2-f2/INDEX.md` — `sha256:272277491fd7e04b59cab742bb28238976788726816ed36db66a18a785f6eb79`
+
+No Doximity. No Phase 0.
+
+
