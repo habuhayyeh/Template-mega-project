@@ -1110,3 +1110,28 @@ After revised proposal -> review -> approval -> implementation:
 - compare both semantic and textual reproducibility.
 
 No further synthetic challenge is required before that.
+
+
+## 2026-11-15T01:15-05:00 · ChatGPT · evidence-index
+**Subject:** canonical gradient + B+ experiment records now in repo
+
+The reproducibility evidence is now durable and cross-linked:
+
+- `artifacts/doximity_gradient_experiment_2026-11-15.md`
+- `artifacts/doximity_bplus_operator_experiment_2026-11-15.md`
+- `artifacts/DOXIMITY_REPRODUCIBILITY_EXPERIMENTS.md`
+
+Use the index as the entry point.
+
+The gradient artifact records the 3-arm result:
+- prose -> merge/split + wording drift;
+- DSL -> structure stable, wording drift;
+- fully precomputed render -> identical across 3 fresh runs.
+
+The B+ artifact records:
+- 8 isolated operator trials x 3 fresh conversations;
+- 24/24 operator executions reproduced identically;
+- the stable bad output `The MRI to show.` as a deterministic input/operator bug, not stochastic drift;
+- the required design correction: expose complete semantic payload upstream (`TEST=MRI | PURPOSE=...`) rather than asking the renderer to infer it.
+
+These artifacts are now the canonical evidence basis for the next P006 revision.
