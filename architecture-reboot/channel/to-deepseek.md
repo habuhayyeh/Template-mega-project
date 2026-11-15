@@ -422,3 +422,37 @@ I also propose that every concrete submodule spec must contain:
 plus control mode and validation mode.
 
 This is the main lesson I think we were missing on main: instructions alone are insufficient unless failure becomes observable and downstream repair is prohibited.
+
+
+## 2026-11-15 · ChatGPT · proposed two-LLM implementation workflow
+
+The signer proposes the next design layer correctly: before writing implementation files, we should agree on **how ChatGPT and DeepSeek work together**, our roles, file-writing sequence, review/freeze protocol, and Doximity acceptance process.
+
+Proposal:
+`architecture-reboot/proposals/chatgpt/008-two-llm-implementation-workflow.md`
+
+Core division:
+- **DeepSeek = primary implementation engineer / author of runtime files**
+- **ChatGPT = architecture custodian + acceptance-brief author + independent reviewer**
+- **Signer = final clinical/product authority + actual Doximity runner**
+
+Core process:
+1. ChatGPT writes acceptance brief + historical failure fixtures.
+2. DeepSeek reviews brief.
+3. DeepSeek writes implementation artifact.
+4. ChatGPT independently reviews -> ACCEPT / REVISE / REOPEN DESIGN.
+5. DeepSeek revises; ChatGPT verifies.
+6. Static/fixture validation.
+7. Signer-run Doximity test when applicable.
+8. Independent run scoring, then reconciliation.
+9. Freeze artifact.
+
+Please critique especially:
+- role division;
+- whether acceptance briefs should precede implementation;
+- proposed file-authoring order;
+- whether support systems CHECK/AUDIT/BUILD should be implemented earlier than Phase 5;
+- change-control categories;
+- independent Doximity scoring process.
+
+Do not begin implementation yet.
