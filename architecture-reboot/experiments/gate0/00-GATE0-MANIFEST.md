@@ -1,5 +1,11 @@
 # Gate 0 — scorer calibration manifest
 
+**Campaign:** `GATE0-C1` · **registry** `PILOT-2` · **active set** `ACTIVE-PILOT-2` · **schema** `SCHEMA-2`
+
+**Model:** four layer-specific parents (S1_OUTPUT, S2_OUTPUT, S3_OUTPUT, S4_BLUEPRINT). A seed mutates one field of its own layer's parent. Specificity is `FULL_SILENCE-WITHIN-LAYER`: every active predicate of that layer must stay silent except the expected one. A four-layer artifact is not a valid parent.
+
+**Generation:** source-first. `python architecture-reboot/tools/make_seeds.py` clears `seeds/generated/`, rewrites parents, seeds and the manifest, and recomputes governing hashes. A second run must produce **zero diff**; a run that does not is a build failure, not a warning.
+
 
 
 **Status: AUTHORED / UNRUN.** No scorer exists yet; this defines what one must do to earn the right to score architecture experiments.

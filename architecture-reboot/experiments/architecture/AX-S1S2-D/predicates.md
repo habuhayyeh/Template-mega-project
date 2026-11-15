@@ -93,3 +93,19 @@ Not active: `S1-BODY-01`, `S2-REP-02`, `S2-CONF-01` (no pilot case produces the 
 ## Not yet scoreable
 
 Predicates referencing `PENDING` cases are declared but cannot run. They are listed so the manifest is complete, not so they can be scored early.
+
+## Execution mode per predicate
+
+A predicate labelled SEMANTIC needs a frozen execution mode before a scorer can implement it. "Model-
+or human-judged" is not an implementation.
+
+| predicate | mode | how it is decided |
+|---|---|---|
+| `S1-CAND-01` | SEMANTIC / HUMAN_REVIEW | reviewer compares candidate concepts to the oracle's excluded list; recorded with the reviewer id |
+| `S2-ADOPT-01` | SEMANTIC / HUMAN_REVIEW | reviewer compares adoption verdicts to the oracle; no model self-judgement |
+| `S3-SEL-01` | MECHANICAL | id membership in the approved set |
+| `S4-COMP-01` | MECHANICAL | domain S4 ∩ S3, operator class check |
+
+No semantic predicate is scored by the model that produced the artifact. Where a human judge is used,
+the finding records judge id and the rule applied; where a mechanical check exists, it never defers to
+a judgement.

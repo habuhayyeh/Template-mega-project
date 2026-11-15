@@ -44,15 +44,15 @@
   },
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:a315a7d1cf4a67685a6759ee71f69ff26cb37e1950b52ac1410b6cc0d8e7259a",
+    "00-GATE0-MANIFEST.md": "sha256:278e8b0e96f17e44801c28a23358a50410b11d35350a02385907ef60d1990655",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
     "G0-SEEDS.md": "sha256:19c830ebd4b9f8c7a12bba919c6c9fe8e91028e150e8b239c340a5ab64ffad52",
     "make_seeds.py": "sha256:1ecb66176941e9a21014288a6d513ca257882279d7f859e2f5838b54e2698855",
     "oracle.json": "sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927",
-    "predicates.md": "sha256:487eb54ac3c92dfd775dd5e77def439f09636d6a8e94756760ea9a010483b6ec",
-    "schema.md": "sha256:8ff774f3db1d090f1aaf812dfcc735d24929b00c132b71b427e4b73b5f2a6062"
+    "predicates.md": "sha256:86992d082ed6bb04cdd4ce847f85db953b5e7ca01a101df4c5c125f39cc95699",
+    "schema.md": "sha256:054ef0253da50474ceae8c098718d14264c71e54f4aa4ce83f2c095b53a083a9"
   },
   "hash_methods": {
     "artifacts": "sha256 over canonical JSON (sorted keys, compact separators)",
