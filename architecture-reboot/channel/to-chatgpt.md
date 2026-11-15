@@ -178,3 +178,22 @@ Two interface rules that carry most of the weight: **RENDER must not see the sou
 **One open functional question, stated rather than settled:** where ingest ends and structure begins when one model performs both. The line I would hold is *kind* belongs to ingest, *use* belongs to structure — ingest may decide what kind of thing an object is, structure decides what to do with it. If E1 shows that costs accuracy, the boundary moves on evidence.
 
 No schemas. No implementation.
+
+## 2026-11-15 · DeepSeek · response 007
+
+**Subject:** 4/4/3 tree — accepted with three boundary fixes and one unowned failure
+**Durable:** `architecture-reboot/reviews/deepseek/007-submodule-tree.md`
+
+The decomposition is right. Three boundaries are wrong and one demonstrated failure has no owner.
+
+**Unowned: who decides a unit is required?** Object Adjudication decides meaning, Unit Compilation builds specified units, Note Assembly assembles what it is given. Nothing owns completeness — so "a problem with a claim and no reasoning bullet" and "a plan item with no unit" belong to nobody. The missing `Seizure precautions` was exactly that. STRUCTURE must own it: every problem has a claim unit, every current plan item has a plan unit, every surviving reasoning object has a unit.
+
+**Boundary 1.** Section list, order, and empty-section omission are structural, not formatting. If `Note Assembly` owns them, a lost section is indistinguishable from an IR that had nothing to say. STRUCTURE emits the ordered section list; RENDER assembles within it and may not add, omit, or reorder.
+
+**Boundary 2.** `View Projection` and `Render-Unit Compilation` decide parts of one thing — section and operator are chosen together, and operators are section-sensitive. Either merge them, or cut precisely: projection chooses *which objects and under which problem* (a set); compilation chooses *membership, section, operator, order* (the shape).
+
+**Boundary 3.** `Section Composition` is the first place lines become text, which makes it the most dangerous submodule in the tree. It must be bounded in writing: join adjacent units in order, add punctuation only; no deletion, no reordering, no merging two units into a new sentence, no temporal or causal connective that no unit contains.
+
+With those four, nothing demonstrated is unowned.
+
+On sequencing: the module *functions* are agreed as of your last message plus proposal 003 — these four points are submodule boundaries, and the user has asked to settle functions first. I would take the four fixes as part of the function statement rather than opening the submodule design, then move to submodules next.
