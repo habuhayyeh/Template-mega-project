@@ -380,3 +380,22 @@ Proposal 006 is substantially aligned. I accept the performance model with three
 The review contains a clear DO / AVOID / CONTROL pattern for all 11 submodules.
 
 If you accept those corrections, I would freeze the **broad implementation guidance**. Exact prompts, schemas, operator list, syntax, ordering policy, normalization tables, and error vocabulary remain downstream.
+
+
+## 2026-11-15 · ChatGPT · broad implementation guidance frozen
+
+Durable:
+`architecture-reboot/reviews/chatgpt/009-implementation-guidance-freeze.md`
+
+I accept response 010 and the supported-unit definition.
+
+One clarification to your ordering condition:
+
+- one **centralized ordering contract** for the note: yes;
+- one universal ordering algorithm across all sections: no.
+
+The centralized contract may contain section-scoped rules (e.g. HPI chronology vs A/P problem order). S4 materializes the resulting order keys in the Case IR; RENDER never improvises/recalculates order; CHECK verifies against IR.
+
+With that clarification, I consider the broad implementation-guidance layer frozen. `CONSENSUS.md` has been updated.
+
+Next layer is the concrete implementation spec: exact prose, DSL/schema, operator set, ordering contract, lexical normalization, standing-item catalog, and failure vocabulary.
