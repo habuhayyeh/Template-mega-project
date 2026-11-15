@@ -2267,6 +2267,67 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · SCHEMA-3 approval + CASE-01 rebuild
+
+COMMIT: `91de2be`
+TYPE: CONTRACT / ORACLE / IMPLEMENTATION
+CHANGED:
+- `schema.md` — `SCHEMA-3` multi-problem S4 view: `from_s1.problems[]`,
+  `from_s3.selected_reps{}`, `from_s2.selections[]`; all other groups unchanged;
+- `projection_contract.py` — new projection ops and two-problem builder;
+- `S1/S2/S3/S4` CASE-01 parents and `oracle.json` — falls plus retained inactive infarct;
+- `G0-S1-05` — now adds an aspirin medication-only candidate, not the infarct;
+- `S4` clean blueprint — P1/U1-U3 plus condensed P2/U4;
+- `scorer.py` — `S4-REP-01` compares each unit against `selected_reps[source]`;
+- `00-GATE0-MANIFEST.md`, `G0-SEEDS.md`, `predicates.md`, `HANDOFF.md`, `DECISIONS.md` (D-024);
+- regenerated `seeds/generated/`; new `runs/gate0-packets-c2/`; c1 marked superseded.
+
+INVARIANTS:
+- infarct is **not currently adopted** but is retained as a **condensed A/P problem** (one FACT unit,
+  no PLAN unit);
+- two rendered problems C1 and C2; S3 outcomes, S4 problems and units agree;
+- `S4-REP-01` checks P1/R1 and P2/R2 independently;
+- all pre-D-023 references are invalid; c1 packets and `SIGNER_REFERENCES.json` must not be reused;
+- no Gate 0 acceptance run.
+
+VALIDATION:
+- `python architecture-reboot/tools/make_seeds.py` → 5 clean parents, 4 parent types, 28 seeds,
+  16 active predicates; second run zero diff;
+- `python -B -m unittest discover -s architecture-reboot/tests` → **46 tests, OK**;
+- `python architecture-reboot/tools/preflight.py` → **PASS**, 7/7 checks, 46 tests;
+- packets mode → 33 records, **16 semantic packets**, references=0, evaluators=0,
+  `campaign_verdict=INCOMPLETE`;
+- every S3/S4 clean and seed record is silent except its expected mechanical predicate; S1/S2 semantic
+  packets remain `UNDECIDABLE` pending references;
+- `runs/gate0-packets-c2/INDEX.md` contains the 16-packet index.
+
+BLOCKERS:
+- all 16 semantic packets need fresh post-D-023 signer references and two evaluator passes.
+
+NEXT:
+- reviewer checks the SCHEMA-3 diff and the 16-packet index;
+- signer records fresh references against `runs/gate0-packets-c2`; do not reuse c1 evidence.
+
+### Hashes
+
+- `schema.md` — `sha256:75b8fbe4f57a78681cc1d625b7d5b770a46857dae452c9ff99f73ca9c1475ef4`
+- `predicates.md` — `sha256:130fee0d8cf92036d3a815da67b8585bf760226b0bccd13ade110271bc761752`
+- `oracle.json` — `sha256:5e582029dfc298782d1e3408a0491c3d77ddf1b4e9cc703c63a4e82c5ea1b036`
+- `00-GATE0-MANIFEST.md` — `sha256:aca36d863799fac7176dcc3c78298c320855c0c360a7051717dc3cdfdc923a5a`
+- `G0-SEEDS.md` — `sha256:918d2f1ae2ae5e8f4d7edd08b0cede24424e4b2a71a321bcb84a307e131d8d78`
+- `MANIFEST.json` — `sha256:7824f595e02ece38e09c1be3362d7107e6986afe395bac2af2ca3af239671717`
+- `make_seeds.py` — `sha256:3c7f88796744ef96f8c50fc1bfec4583b4c3ff322fa8893e7feee10d457a49ab`
+- `gate0_harness.py` — `sha256:de0720bb098b232b9f11a496b5d911c1678ecea559c8cd4f8b8c06adc69414f7`
+- `projection_contract.py` — `sha256:a6a9dd4de4b421f721d2b5cfba3f1b3c72771cb45d991e1f2064f3313d5df502`
+- `scorer/scorer.py` — `sha256:ffdc892b19c38a9da5d1a309a070f57310b0743dfd04efd86ffa3607d0a5e46b`
+- `tests/test_scorer.py` — `sha256:4037073a75114a0962a2fde462b2bb4fcacd773b56230c164edc32bd8ec1b1b3`
+- `tests/test_scorer_more.py` — `sha256:55d2b908c5d70b3ae42ec1da2d2a5ac955d69bf3f6a1dc436c99d267ce60610f`
+- `runs/gate0-packets-c2/EVIDENCE.json` — `sha256:28be930f9d950032c904607098048d8a768f08058742ae1e01d24352c5ed0c7f`
+- `runs/gate0-packets-c2/INDEX.md` — `sha256:d026f6f6628dfbd01a5b1f7332fdbe736c5a3ff80aef2d7ab4934feba5cfdff8`
+
+No Doximity. No Phase 0.
+
+
 
 
 
