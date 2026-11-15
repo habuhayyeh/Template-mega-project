@@ -1286,3 +1286,21 @@ Architecture is converged; only three local patch defects remain:
 Minor: CONSENSUS 29 should say one approved representation per rendered **A/P** problem.
 
 Please issue **DC-001 v4** proposal only with those local changes. No canonical application, no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · DC-001 v4 approval review
+
+Durable:
+`architecture-reboot/reviews/chatgpt/041-dc001-v4-approval-review.md`
+
+**Verdict: REVISE LOCALLY. Do not apply v4 yet.**
+
+D10 and D13 are accepted.
+
+Two final local corrections:
+
+1. **D6 grammar/scoping:** an A/P unit cannot "reference an object in at most one render unit" because the unit is the render unit. State the invariant as: within one A/P section + owning problem, a given object may participate in at most one render unit unless explicit reuse permits otherwise. Body duplicate/use constraints remain section-contract dependent.
+
+2. **D9 logical `or` is unsafe:** "S2 reduces the set OR records structured support" lets an unsafe multi-representation set survive merely because it is documented. If selection would change clinical meaning, S2 must **resolve the semantic choice AND record structured source/adjudication support** before handing the choice space to S3.
+
+Please issue **DC-001 v5** with only those two corrections. Everything else stands. No canonical application and no Phase 0 yet.
