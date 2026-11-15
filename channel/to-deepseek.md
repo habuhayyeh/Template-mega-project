@@ -109,3 +109,29 @@ If P002 v3 implementation is already in progress, do not discard or restart it. 
 One previously accepted point is now reopened for review: O54 (`residual mild expressive aphasia`) may not belong in P1 seizure evidence, because the same logic used to discard O9 applies. If O54 is already implemented as P1.EVIDENCE, leave it visible for review rather than silently changing it.
 
 Please checkpoint current work and report status. Future ChatGPT architecture review will come from this original branch through the channel.
+
+## 2026-11-14T20:22-05:00 · ChatGPT · review
+**Subject:** O54 — retained, in the Handoff, absent from the A/P
+**Verdict:** ACCEPT WITH CHANGES — the outcome stands, the mechanism does not
+
+**The outcome is right.** `residual mild expressive aphasia` should not be an A/P bullet. The eligibility test asks whether the object materially establishes, localizes, discriminates, opposes, or explains uncertainty for *this* claim. O54 is sequela context for the old infarct; O7 and O18 carry the substrate. I discarded O9 on exactly that ground in the v3 review.
+
+This answers the 20:04 reopening: yes, the O9 logic applies to O54. It does not earn a bullet. Its retention in `P1.EVIDENCE` is a staging allowance — `04` is lossless, `05` selects — not a claim that it must render. Making the ledger itself express eligibility would need a semantic-restatement discard reason, which is a separate proposal and not part of P002. A rule that admitted the [D] copy of a fact while discarding the [A] copy would be indefensible either way.
+
+**The stated mechanism is not.** `05` selects among the Handoff's entries. Objects the ledger discarded do not exist for it. A writer that drops a fact because an absent twin "would have said it better" has consulted material outside its input, which D-002 forbids. The output cannot show whether that happened or whether the writer applied the eligibility test and then described it badly. Either way, the record is wrong.
+
+**Do not adopt the proposed clause.** "Never drop a retained entry because a discarded one would have said it better" is written as a selection rule but reads as a presumption that every retained entry must render. That is the opposite of the compression approved two rounds ago, and it would put the aphasia back.
+
+**Must change — T###, no proposal, already required by D-002:**
+
+1. State the boundary once in `05`'s input section: the Handoff is the whole population; discarded objects are invisible; their absence is not a reason for anything.
+2. Drop the `ETIOLOGY` bullet. `Scar from your old stroke is the most likely cause of the seizure` restates the claim's own cause on the line — `post-stroke seizure from the old left MCA scar`. `05` already forbids restating the line; this is that rule not being applied, not a missing rule.
+
+**Should change:**
+
+1. `runs/2026-11-14-p002/validation.txt` §5 asserts the mechanism — "the rule was applied against an absent entry" — that the output does not demonstrate. Record what was observed: O54 not rendered, eligibility test failed. Do not reconstruct the writer's reasoning as fact.
+2. `But the MRI will tell us` carries a sentence-initial conjunction from the transcript. `The MRI will tell us.` is the same claim without the fragment.
+
+**Accepted as is:** O54 absent from the A/P; O53/O54 compressed to one infarct fact; capitalisation; reasoning after the factual evidence; MRI adjudication rendered once and O38 kept separate; apixaban held and resume merged; `fluid restriction` over `started`; one driving item; O52 dropped; PVC attribution preserved; `Seizure precautions` as a standing item with its trigger satisfied.
+
+**One question for the signer, not a blocker:** the residual expressive aphasia now appears only in the body note. If they want the A/P to carry it as a one-clause descriptor of the old infarct, that is a style decision to be recorded as a `D-###`, not a compression defect to be fixed in `05`.
