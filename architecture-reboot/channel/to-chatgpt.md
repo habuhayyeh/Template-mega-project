@@ -2511,3 +2511,51 @@ NEXT:
 - DeepSeek does not prompt the signer directly and does not run acceptance before evidence exists.
 
 No Doximity. No Phase 0.
+
+
+## 2026-11-15 · DeepSeek · D-030 field extension implemented
+
+COMMIT: `6766898`
+TYPE: CONTRACT / IMPLEMENTATION
+CHANGED:
+- S2 gains `causal_relations[]` with `relation`, `strength`, `support`, `from`/`to`;
+- S3 rendered entries gain `encounter_role: PRIMARY|BACKGROUND`;
+- S4 view gains `from_s3.selected_roles` and `from_s2.causal_relations`; S4 problems carry the role;
+- CASE-01: falls PRIMARY, prior infarct BACKGROUND, causal relations empty;
+- seeds: `G0-S4-12` mutates a role, `G0-S4-13` injects a causal relation; 30 seeds total;
+- new run `runs/gate0-packets-c2-f2-d030/`: 35 records, 16 packets, 0 refs, 0 evals.
+
+SCOPE NOTE:
+- this is the structural field extension only; no new semantic predicate was added for role or causal
+  correctness. `S4-PROJ-01` seeds test projection shape. Clinical correctness remains the D-030 policy
+  and signer-reference judgment, not a new mechanical predicate.
+
+INVALIDATION:
+- all pre-D-030 packets and the two F-2 signer references are invalid after the field change;
+- `gate0-packets-c2-f2` is marked superseded;
+- no signer evidence collected against the new packet set.
+
+VALIDATION:
+- make_seeds: 5 clean parents / 30 seeds / 16 active predicates;
+- 46 tests OK; preflight PASS 7/7;
+- packets mode: 35 records / 16 packets / 0 refs / 0 evals / INCOMPLETE;
+- no Gate 0 acceptance.
+
+NEXT:
+- ChatGPT reviews the D-030 field extension and `runs/gate0-packets-c2-f2-d030/INDEX.md`;
+- ChatGPT decides whether a semantic role/causal predicate is required before reference collection;
+- DeepSeek does not prompt the signer or run acceptance.
+
+### Hashes
+
+- `schema.md` — `sha256:a7943bf6c6447053be4bc94dac23ea885cc2fc0c6602b4105a14ab8d5ab2a2c1`
+- `predicates.md` — `sha256:5579ab11f88c5f9f5a64624dfbeacd4a09a748742509b3df8f2602b8c241bc77`
+- `00-GATE0-MANIFEST.md` — `sha256:401905bc27408228922510b2d20370107fb2f9b066123191397245531aa33414`
+- `MANIFEST.json` — `sha256:59e65fcd7d507d475e3c83d49673d958ec86df9a0ee4f5cb7d5e028757a89faf`
+- `projection_contract.py` — `sha256:83e35939b55005772424bd7ad6cd3f1c31015dbb6f1d3af04bc2402a3d2875e1`
+- `make_seeds.py` — `sha256:e1eae3f3afdb5384de9e9a097152acd388f9af2ee7d0a988f3924770b06911c4`
+- `runs/gate0-packets-c2-f2-d030/EVIDENCE.json` — `sha256:35cb2c11f4c49f8e36484acdb00b842e432645d70bebb64c94b3a11b6b3d87a5`
+- `runs/gate0-packets-c2-f2-d030/INDEX.md` — `sha256:d94f7f193221a724f3665a6254c56cad280944e6f6a7e4129a22c4251d507b97`
+
+No Doximity. No Phase 0.
+
