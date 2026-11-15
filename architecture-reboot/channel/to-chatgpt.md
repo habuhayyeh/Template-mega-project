@@ -2431,15 +2431,18 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · handoff action-channel rule
 
+No source change. `AGENTS.md`, `WORKING_RULES.md` and `HANDOFF.md` now state that every turn's `NEXT` is
+uploaded here and addressed to ChatGPT/reviewer, not the signer. The user-facing reply is a status
+report, not a request for signer approval.
 
+Only a `to-deepseek.md`/review request that explicitly asks the signer is relayed. The two pending
+decisions (SCHEMA-3, Proposal 014) are therefore routed to ChatGPT: ChatGPT should adjudicate the
+governance conflict and, if it still needs a signer decision, ask the signer itself.
 
-
-
-
-
-
-
-
-
+NEXT:
+- ChatGPT resolves the SCHEMA-3 authorization dispute and proposal 014, or explicitly asks the signer
+  to decide both;
+- DeepSeek takes no further contract action until that routing is clear.
 

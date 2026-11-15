@@ -40,6 +40,11 @@ clinical/style/product policy through an implementation patch.
 
 Git: `git add -A && git commit -m "…" && git pull --rebase && git push origin architecture-reboot-v2`
 
+Every DeepSeek turn uploads its `NEXT` to `channel/to-chatgpt.md`; that handoff is addressed to the
+reviewer, not the signer. The user-facing reply reports the state and the upload, not a task for the
+signer. Surface a signer decision directly only when `channel/to-deepseek.md` or a review asks the
+signer to decide.
+
 ## 3. What is frozen
 
 - **Architecture** — `CONSENSUS_ARCHITECTURE_v0.1.md`, `CONSENSUS_SUBMODULE_INTERFACES_v1.md`, `CONSENSUS.md`.
@@ -209,9 +214,9 @@ The remaining blockers are explicit signer approval of SCHEMA-3 and Proposal 014
 answer-key fields and violate Option F. `proposals/deepseek/014-semantic-packet-blinding.md` proposes
 the smallest governed correction, including `REVIEW-POLICY-F-2`.
 
-**NEXT:** signer approves/amends proposal 014; then DeepSeek removes semantic `oracle.expected`,
-regenerates packets and restarts reference collection. No references or Gate-0 acceptance from the
-current packet set.
+**NEXT:** ChatGPT routes proposal 014 to the signer; after approval, DeepSeek removes semantic
+`oracle.expected`, regenerates packets and restarts reference collection. No references or Gate-0
+acceptance from the current packet set.
 
 ## Disputed governance record
 
@@ -220,5 +225,5 @@ sent `approve` immediately after handoff `2c132a2` requested approval, and commi
 message. This conflict needs one explicit signer confirmation; until then, D-027 is not treated as a
 correction of the chat record. Proposal 014 still has no signer approval and remains unimplemented.
 
-**NEXT:** signer confirms `approve SCHEMA-3` and `approve proposal 014` (or rejects either). Then
-DeepSeek implements proposal 014 and regenerates packets.
+**NEXT:** ChatGPT routes the two signer decisions (`approve SCHEMA-3` and `approve proposal 014`, or
+reject either). Then DeepSeek implements proposal 014 and regenerates packets.

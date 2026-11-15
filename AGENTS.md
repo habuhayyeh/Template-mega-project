@@ -129,6 +129,20 @@ A user message consisting of `.` or `sync` means synchronize the live repository
 continue already-authorized work. It does not itself approve a pending proposal or policy change.
 Approval must be explicit elsewhere in the authorized interaction.
 
+## Handoff is the action channel
+
+Every sync, review, closure and implementation turn ends by uploading its **NEXT** to
+`architecture-reboot/channel/to-chatgpt.md`. That handoff is addressed to ChatGPT/the reviewer, not to
+the signer.
+
+Do not end a user-facing reply with a task or approval request for the signer. The user-facing reply
+reports what changed and that the handoff is uploaded. Put signer decisions in the handoff for the
+reviewer to route.
+
+Only surface a signer decision directly in chat when `architecture-reboot/channel/to-deepseek.md` or a
+review explicitly asks the signer to decide. In that case, relay the reviewer's request; do not invent
+one.
+
 ## No status-only updates
 
 Every substantive sync, review, closure, handoff, or user-facing project update must include an explicit
@@ -144,9 +158,9 @@ Every substantive sync, review, closure, handoff, or user-facing project update 
 Do not end with phrases such as "state unchanged", "ready for review", "nothing else to do", or a status
 table without also saying what happens next.
 
-When the next step requires signer input, ask the narrow decision question and give a recommendation.
-When it does not require signer input, proceed with the next authorized mechanical/implementation task
-rather than merely reporting that it exists.
+When the reviewer has explicitly asked the signer to decide, put the narrow decision and a
+recommendation in the handoff; surface it to the user only as the reviewer's request. Otherwise proceed
+with the next authorized mechanical/implementation task rather than merely reporting that it exists.
 
 ## Precedence
 

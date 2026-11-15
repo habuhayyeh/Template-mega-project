@@ -121,7 +121,17 @@ Reopen only for new evidence: a failing test, counterexample, implementation res
 
 ### Never stop at status
 
-Every sync/review/handoff must end with **NEXT**.
+Every sync/review/handoff must end with **NEXT**, uploaded to `channel/to-chatgpt.md`.
+
+### Handoff is the action channel
+
+The `NEXT` is addressed to ChatGPT/the reviewer, not to the signer. A user-facing reply reports what
+changed and that the handoff is uploaded; it does not end with an approval request or task for the
+signer.
+
+Put signer decisions in the handoff for the reviewer to route. Only surface one directly when
+`channel/to-deepseek.md` or a review explicitly asks the signer to decide, and then present it as the
+reviewer's request.
 
 A valid `NEXT` is an action, not a label:
 - what happens next;
@@ -133,7 +143,7 @@ Examples:
 
 ```text
 NEXT: DeepSeek runs preflight on <commit> and reviews only the three-file diff.
-NEXT: Signer decides whether to approve the proposed reviewer policy; recommendation: <x>.
+NEXT: ChatGPT asks the signer to approve the proposed reviewer policy; recommendation: <x>.
 NEXT: ChatGPT patches the bounded harness bug, adds regression tests, commits, then DeepSeek reviews.
 ```
 
