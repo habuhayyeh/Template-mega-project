@@ -1,6 +1,6 @@
-# P003 v4 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v5 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** v4, revised after `reviews/P003-v3-original-branch.md`. Only the etiology suppression rule changed. Awaiting review. Not implemented.
+**Status:** v5, revised after `reviews/P003-v3-original-branch.md`. Etiology now renders under the problem it explains: line carries the short cause, bullet carries the reason. Awaiting review. Not implemented.
 **Supersedes:** P003 v1 in this file's history.
 **Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
 **Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
@@ -65,30 +65,34 @@ The sentence "From `CLAIM_QUALIFIER`, then `EVIDENCE`" is deleted.
 
 ## 4. One etiology rule, and the anchor change it requires
 
-Two outcomes, decided by what the etiology adds:
+**An etiology belongs to the problem it explains, not to the noun it mentions.** `Etiology of the seizure is likely the chronic infarct` sits under the seizure problem; `etiology of the infarct was unanticoagulated AF` would sit under the infarct problem. Routing on the predicate, not the subject, is already what the ledger does — O35 is on P1 — so this rule constrains rendering only.
 
-1. **Suppressed** — only when the etiology adds no distinct reasoning beyond the causal meaning the claim already fully states. **Sharing a cause is not enough to suppress.**
-2. **Reasoning bullet** — whenever it adds degree of certainty, mechanism, rationale, a contrast, or an uncertainty, even where the claim names the same cause.
+**Both places are allowed, with different jobs:**
 
-**A separate `ETIOLOGY` entry never reaches the problem line.** The line's only causal wording is what the claim itself states. No length threshold, no import, and no reasoning synthesised from evidence.
+1. **The line** carries the claim's own short cause, as the claim states it. Nothing is imported into the line, and no reasoning is synthesised from evidence.
+2. **The bullet** renders the etiology as reasoning, under the same problem, whenever it adds something the line does not say: degree of certainty, mechanism, a date, a rationale, a contrast, or an uncertainty.
+3. **Suppressed** only when the etiology adds nothing at all — when the line already carries its full content. Duplication of the bare cause alone is what is forbidden, not the coexistence of a short cause and a fuller reason.
 
-The first test is a judgment, and it is the one place in `05` where two competent readers can differ. That is deliberate: D-004 protects the clinician's reasoning, so a redundant etiology is cheaper than a deleted one. The guard is I4 — if one run suppresses an etiology and another renders it, the run set fails acceptance, and that failure is the signal that the boundary is set wrong.
+The judgment in branch 3 is narrow and it is the one place in `05` where two readers can differ. That is deliberate: D-004 protects the clinician's reasoning, so a redundant etiology is cheaper than a deleted one. The guard is I4 — if one run renders an etiology and another suppresses it, the run set fails acceptance, and that failure is the signal that the boundary is set wrong.
 
-`pipeline/AP_ANCHOR.md` currently contradicts this and must change with it. Proposed edit:
+`pipeline/AP_ANCHOR.md` currently says a separate `ETIOLOGY` contributes to the line. Under this rule it does not: the line's cause comes from the claim, and the etiology is reasoning. Proposed edit:
 
 - Settled-table row `| Cause — both sources | … both contribute to the line |` becomes
-  `| Cause | only the cause inside CLAIM reaches the line; a separate ETIOLOGY renders as the final reasoning bullet |`.
+  `| Cause | the line carries the cause stated in CLAIM; a separate ETIOLOGY renders as the final reasoning bullet when it adds anything the line does not say |`.
 - The section `## Cause: both contribute` is replaced by:
 
 ```text
 ## Cause
 
-The line carries only the cause the claim itself states. A separate ETIOLOGY entry is not imported
-into the line — it renders as the final reasoning bullet, in the clinician's own words. It is
-suppressed only when it adds nothing the claim already says; sharing a cause is not enough.
+The line carries the cause the claim itself states, shortened if the claim allows it. A separate
+ETIOLOGY entry renders as the final reasoning bullet — the mechanism, the date, the certainty, the
+rationale — whenever it adds something the line does not say. It is suppressed only when it adds
+nothing, that is, when it repeats the bare cause.
+
+An etiology belongs to the problem it explains, not to the noun it mentions.
 ```
 
-Frozen case: claim `post-stroke seizure from the old left MCA scar rather than a new lesion`; etiology `scar from your old stroke is the most likely cause of the seizure`. The judgment is whether `most likely cause` adds a certainty the claim does not already carry. Either reading is defensible on the words alone; the run set decides, not the proposal, because a boundary that flips between runs is not an acceptable one.
+Frozen case: claim `post-stroke seizure from the old left MCA scar rather than a new lesion`; etiology `scar from your old stroke is the most likely cause of the seizure`. Under this rule the bullet renders, because `most likely cause` is an explicit certainty statement the line does not carry in those words. The line keeps the short cause.
 
 ---
 
