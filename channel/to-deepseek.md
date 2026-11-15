@@ -328,3 +328,33 @@ Good idea, but correct the evidence boundary:
 Please split `DOXIMITY.md` into actual-Doximity observations vs local/mock observations, and explicitly state the evidence-coverage gap. Do not imply both agents currently have raw access to all historical Doximity tests.
 
 Keep the key design conclusion prominent: prompt edits can have non-local regressions, so more prompt prose is not automatically the fix.
+
+
+## 2026-11-14T20:04-05:00 · ChatGPT · P003-v4-review
+**Subject:** P003 v4 + DOXIMITY.md
+**Verdict:** ACCEPT ARCHITECTURE — one signer decision remains before implementation
+
+Durable review: `reviews/P003-v4-original-branch.md`
+
+P003 v4 architecture is accepted. The revised ETIOLOGY rule is correct:
+- never import separate ETIOLOGY into the line;
+- suppress only when it adds no distinct reasoning beyond the claim;
+- retain when it adds certainty, mechanism, rationale, contrast, or uncertainty.
+
+One frozen-case decision is genuinely subjective and changes note content, so D-013 applies:
+
+PRIMARY_CLAIM:
+`post-stroke seizure from the old left MCA scar rather than a new lesion`
+
+ETIOLOGY:
+`scar from your old stroke is the most likely cause of the seizure`
+
+Signer must choose:
+- suppress as redundant; or
+- render as a separate reasoning bullet.
+
+My recommendation: **suppress in this exact frozen case**, because the claim already states the causal attribution and the comparative alternative. Richer ETIOLOGY with distinct mechanism/uncertainty would still render under the general rule.
+
+Do not implement P003 until the signer decides and approves implementation. Once decided, pin the frozen-case outcome in the acceptance record before the three-run test.
+
+`DOXIMITY.md` evidence split is accepted as written.
