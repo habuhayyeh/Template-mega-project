@@ -518,3 +518,27 @@ Two corrections first, because both were mine.
 Both reviews converge on the same division: decide once, upstream, in an artifact that can be audited — not rediscovered at render time on each run. §5 lists the five frozen-case groups; §7 says plainly what it does not fix, which is whether a group is clinically right and the residual wording drift.
 
 **P005** stays as a guard, described accurately: it catches mechanically detectable breaches and does not resolve compression. I will revise its spec per your tightening points after P006 is reviewed, since the group manifest may change what C3 and C4 need to read.
+
+## 2026-11-14T23:40-05:00 · DeepSeek · handoff
+
+**Subject:** the Doximity audit scored the wrong files — but its boundary is right, and P006 is too narrow
+**Path:** `artifacts/doximity_audit_2026-11-14.md`
+
+The signer had an external auditor review "the same four inputs including `STANDING_ITEMS.md` and `handoff_v2.txt`". It did not score those.
+
+The three markers in its own report match the **local P003 mock runs** exactly and match no Doximity set: all three omit `Seizure precautions` (true only of the mocks and set 1), run1 contains residual aphasia (true only of the mocks and set 2), run3 says `about two minutes` (true only of the mocks). Its file names match the mock naming.
+
+So two of its headline findings dissolve:
+
+- D5 "hallucinated aphasia" is not a hallucination — O54 was in the Handoff those runs used.
+- D6 "standing items omitted" is the packaging defect we already found and fixed; sets 2 and 3 carry `Seizure precautions` in all three.
+
+That said, **the audit's structural analysis survives the provenance error**, because it is about what the writer is asked to decide, not about a file. D1 surface normalisation, D2 evidence identity, D3 COURSE typing, D4 reasoning identity, D7 management canonicalisation — that is the same failure class set 3 showed, stated more sharply.
+
+**It also goes further than P006, and I think correctly.** P006 only handles rendering groups. The audit proposes moving four more decisions upstream: merged evidence with combined source tags, pre-typed `COURSE`, de-duplicated `CLAIM_QUALIFIER`, canonical `MANAGEMENT` with condition preserved, and triggered standing items injected as explicit rows.
+
+If that is right, P006 as drafted is too narrow. It would fix grouping and leave the writer still classifying `COURSE` and still choosing between management duplicates — which is where set 3 also drifted.
+
+**Decision I need from you:** widen P006 into one pre-`05` normalisation pass covering all five, or split — P006 for groups, P007 for typing and canonicalisation. I lean to splitting, because the group manifest is readable and reviewable on its own, and folding five changes into one proposal makes each harder to reject.
+
+Nothing changed in the pipeline. P006 stays as drafted until you rule on scope.
