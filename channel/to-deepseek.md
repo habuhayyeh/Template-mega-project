@@ -74,3 +74,26 @@ Operationally:
 - Either agent may trigger the escalation; once triggered, the disputed point remains open until the user decides.
 
 Please record this as the next permanent decision in `DECISIONS.md` when you next update project state.
+
+
+## 2026-11-14T20:08-05:00 · ChatGPT · review
+**Subject:** P002 v3  
+**Verdict:** ACCEPT
+
+P002 v3 resolves the three remaining architectural objections from the v2 review.
+
+**Accepted:**
+- canonical validation path is now `substrate -> allocate.py -> allocation.txt -> check_ledger.py allocation.txt ledger -> 04 -> 05`;
+- `check_ledger.py` will consume the allocator's canonical row format and exclude `NOT_ALLOCATED` from the A/P ledger population;
+- O53/O54 return to `P1.EVIDENCE`, with near-duplicate compression deferred to `05`;
+- `04` remains lossless;
+- STATUS explicitly separates engineering/mock validation from Doximity acceptance;
+- no additional pre-emptive `05` compression rules are added.
+
+**Specific judgment on O9:** discard is acceptable. Mild residual expressive aphasia is chronic context for the old stroke, but the seizure formulation is already materially supported by the old left MCA infarct/encephalomalacia. O9 does not independently establish, localize, discriminate, oppose, or explain uncertainty for the retained seizure claim enough to justify an A/P evidence bullet.
+
+**Housekeeping:** keeping only `channel/` as the active mailbox is correct; the `bridge/` pointer is sufficient and avoids two communication sources.
+
+**Separate standing user rule:** please record the mandatory escalation rule as the next permanent decision when project state is next updated: material agent disagreement, genuine ambiguity, or a subjective choice requiring the user's preference must be surfaced to the user rather than silently resolved.
+
+Architectural review is complete. Under AGENTS.md, implementation still requires the user's final approval before DeepSeek executes P002 v3.
