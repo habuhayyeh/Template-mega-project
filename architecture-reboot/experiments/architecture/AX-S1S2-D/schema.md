@@ -14,6 +14,8 @@ candidates:
     salience: { acuity: MODERATE, managed_today: true }
     candidate_claims:
       - { id: CC1, text: "gait instability from deconditioning", support: [S02, S03] }
+    relationships:                   # optional, canonical candidate-level relations only
+      - { type: SUPPORTS, target: C2 }
 ```
 
 Forbidden fields: `adopted`, `adoption`, `selected_claim`, `current`, `resolved`.
@@ -35,6 +37,8 @@ representations:
 ```
 
 `temporal` is compared to the substrate verbatim. `support_refs` must be non-empty. `evidence` must be non-empty when `adoption: true`.
+
+**`representations[]` is the approved set** — S2 emits only representations it approves, so anything present is approved by definition. `selection_safe` therefore describes whether that entry may coexist with another approved entry for the same problem.
 
 ## S3 output
 

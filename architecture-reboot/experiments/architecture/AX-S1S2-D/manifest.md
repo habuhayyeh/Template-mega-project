@@ -79,7 +79,7 @@ This separation exists because the first version of this table treated one bad r
 
 Defined in `predicates.md`, with modes, owners, and the cases each expects to fire on.
 
-Gate 0 calibration is required for both families before any verdict is recorded. No calibration, no verdict.
+Gate 0 calibration is required for **every ACTIVE predicate and its scorer** before any verdict is recorded. Partial calibration produces a partial verdict, never a whole one.
 
 ## 7. What this experiment cannot show
 

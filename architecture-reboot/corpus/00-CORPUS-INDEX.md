@@ -64,7 +64,16 @@ Observed, not invented:
 
 Two things the contract must **not** do: standardise the signer's abbreviations into full words, or expand the terse negative bullets into prose. Both would make the note more correct and less like the signer's.
 
-## 5. What is still blocked
+## 5. Two fixture classes, different claims
+
+| class | members | may proceed now? | claim it supports |
+|---|---|---|---|
+| realistic signer corpus | BASELINE-01…04 | **blocked** — needs source packages | statements about real clinical input |
+| derived synthetic architecture fixtures | `CASE-01/02/09`, Gate 0 `DERIVED_PARENT` artifacts | **yes** | statements about interface conformance only, never about clinical quality |
+
+A pass on a derived synthetic fixture says the interfaces can be honoured. It says nothing about how the system behaves on a real encounter, and no result report may blur the two.
+
+## 6. What is still blocked
 
 - **Fixtures** need source packages. Without them, a case has a target and no input, so nothing can be run.
 - **Gate 0 parents** stay `DERIVED_PARENT` until at least one case has a source package.

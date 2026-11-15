@@ -16,16 +16,18 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 | G0-S1-02 | `candidates[0].selected_claim = "…"` | `S1-AUTH-02` | S1 | `S2-REP-01` | RUNNABLE |
 | G0-S1-03 | append a candidate for a body-only historical fact | `S1-BODY-01` | S1 | `S3-BODY-01` | RUNNABLE |
 | G0-S1-04 | `candidates[0].anchors = []` | `S1-CAND-02` | S1 | `S2-REP-01` | RUNNABLE |
+| G0-S1-05 | append a candidate for a PMHx item with no assessment question ("hypothyroidism") | `S1-CAND-01` | S1 | `S2-REP-01` | RUNNABLE |
 
 ## S2 family — semantic, parent `S2_OUTPUT`
 
 | seed | mutation_path | must fire | owner | must not fire | status |
 |---|---|---|---|---|---|
 | G0-S2-01 | `representations[0].support_refs = []` | `S2-REP-01` | S2 | `S1-AUTH-01` | RUNNABLE |
-| G0-S2-02 | approve two representations, neither selection-safe | `S2-REP-02` | S2 | `S3-SEL-01` | PENDING_SCHEMA |
+| G0-S2-02 | `representations[1].selection_safe = false` on a second approved entry | `S2-REP-02` | S2 | `S3-SEL-01` | RUNNABLE |
 | G0-S2-03 | `adjudication[0].temporal` rewritten from the substrate value | `S2-TEMP-01` | S2 | `S1-AUTH-01` | RUNNABLE |
 | G0-S2-04 | delete the non-selected assertion of a contradictory pair | `S2-CONF-01` | S2 | `S3-ACCT-01` | RUNNABLE |
 | G0-S2-05 | `adjudication[0].adoption = true`, `evidence = null` | `S2-ADOPT-02` | S2 | `S1-AUTH-01` | PENDING_SCHEMA |
+| G0-S2-06 | `adjudication[0].adoption = false` where the case expectation is adopted (CASE-02) | `S2-ADOPT-01` | S2 | `S1-AUTH-01` | RUNNABLE |
 
 ## S3 family — semantic, parent `S3_OUTPUT`
 
@@ -44,7 +46,8 @@ Every seed names its parent layer, the exact field mutated, and predicate **ids*
 | G0-S4-02 | add a problem absent from S3's rendered set | `S4-INC-01` | S4 | `S3-INC-01` | RUNNABLE |
 | G0-S4-03 | swap two problem orders | `S4-ORD-01` | S4 | `S1-AUTH-01` | PENDING_DEPENDENCY |
 | G0-S4-04 | unit member id absent from the retained-use map | `S4-MEM-01` | S4 | `S3-ACCT-01` | RUNNABLE |
-| G0-S4-05 | unit representation id differs from S3's selected id | `S4-REP-01` | S4 | `S3-SEL-01` | PENDING_SCHEMA |
+| G0-S4-05 | `units[0].representation = "R-999"` while S3 selected `R1` | `S4-REP-01` | S4 | `S3-SEL-01` | RUNNABLE |
+| G0-S4-06 | delete the plan unit for a plan item S3 retained | `S4-COMP-01` | S4 | `S3-ACCT-01` | RUNNABLE |
 
 ## Note-level — excluded from this pilot
 
@@ -64,4 +67,30 @@ Wrong-submodule attribution is a calibration failure.
 
 ## Current state
 
-**18 RUNNABLE · 3 PENDING_SCHEMA · 1 PENDING_DEPENDENCY** across all families. Within the pilot's `ACTIVE_PREDICATE_SET`, **11 seeds** calibrate the predicates used by CASE-01/02/09; the rest wait for their predicates to activate or for cases that use them.
+**19 RUNNABLE · 1 PENDING_SCHEMA · 1 PENDING_DEPENDENCY**, plus 4 note-level seeds excluded from this pilot.
+
+## ACTIVE_PREDICATE → SEED map
+
+Every active predicate has at least one seed. A predicate in the active set without a seed is a calibration gap, not an oversight to be absorbed later.
+
+| predicate | seed(s) |
+|---|---|
+| `S1-CAND-01` | G0-S1-05 |
+| `S1-CAND-02` | G0-S1-04 |
+| `S1-AUTH-01` | G0-S1-01 |
+| `S1-AUTH-02` | G0-S1-02 |
+| `S2-REP-01` | G0-S2-01 |
+| `S2-REP-02` | G0-S2-02 |
+| `S2-TEMP-01` | G0-S2-03 |
+| `S2-ADOPT-01` | G0-S2-06 |
+| `S3-INC-01` | G0-S3-01 |
+| `S3-SEL-01` | G0-S3-02 |
+| `S3-ACCT-01` | G0-S3-04 |
+| `S4-INC-01` | G0-S4-01, G0-S4-02 |
+| `S4-MEM-01` | G0-S4-04 |
+| `S4-COMP-01` | G0-S4-06 |
+| `S4-REP-01` | G0-S4-05 |
+
+**18 seeds calibrate the 15 active predicates** used by CASE-01/02/09.
+
+Inactive predicates keep their seeds: `S1-BODY-01` (G0-S1-03), `S2-CONF-01` (G0-S2-04) and `S4-ORD-01` (G0-S4-03) are not scored in this pilot because the cases do not exercise them or their oracle is unfrozen.

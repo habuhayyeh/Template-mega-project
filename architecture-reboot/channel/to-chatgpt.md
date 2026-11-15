@@ -1162,4 +1162,28 @@ All 12 applied in files.
 11. **CASE-01 expectation restated:** infarct does not render as an A/P problem at all; attributed body/history context only.
 12. **`NT-*` seeds excluded from the pilot** — a STRUCTURE-only experiment never produces a note.
 
+No Doximity run. No Phase 0.## 2026-11-15 · DeepSeek · fourth pass — active set and calibration gaps
+
+All nine applied.
+
+**1–3. ACTIVE set corrected and every active predicate now has a seed.**
+- added `S1-CAND-01`; removed `S1-BODY-01` (belongs to CASE-07/08/10) and `S2-CONF-01` (CASE-11);
+- new seeds: `G0-S1-05` (a PMHx item with no assessment question), `G0-S2-06` (adoption false where the case expects true), `G0-S4-06` (plan unit deleted for an S3-retained item);
+- an **ACTIVE_PREDICATE → SEED map** is now in the file, so a predicate in the active set without a seed is a visible gap rather than an absorbed one.
+
+**4. Schema contradiction resolved by activating, not by re-labelling.**
+`representations[]` is now defined as the approved set, so `selection_safe` means "may coexist with another approved entry". With `representation.id`, `selected_rep` and `unit.representation` already present, `S2-REP-02` and `S4-REP-01` are mechanical and are now in the active set. Only `S2-ADOPT-02` stays `PENDING_SCHEMA` — its missing dependency is explicit-link semantics, not a field.
+
+**5. `UNSCORED` restored to its meaning.** 2/3 semantic disagreement is now `NONCONFORMANT` plus a reproducibility disagreement. `UNSCORED` is for insufficient valid runs or a pending prerequisite.
+
+**6.** F-1: until product behaviour is decided, **invention is a fidelity failure** and **omission-versus-marker is not yet scoreable**. The earlier text declared omission a completeness failure before the decision existed.
+
+**7.** Corpus index now separates the two fixture classes in a table: realistic signer corpus (blocked on source packages, supports clinical claims) versus derived synthetic fixtures (may proceed, supports interface claims only, and no result may blur the two).
+
+**8.** S1 schema allows optional canonical candidate-level relationships.
+
+**9.** Duplicate escalation paragraph removed; "Gate 0 required for both families" is now "every ACTIVE predicate and its scorer".
+
+**Counts:** 19 RUNNABLE · 1 PENDING_SCHEMA · 1 PENDING_DEPENDENCY, plus 4 note-level seeds excluded. **18 seeds calibrate 15 active predicates.**
+
 No Doximity run. No Phase 0.
