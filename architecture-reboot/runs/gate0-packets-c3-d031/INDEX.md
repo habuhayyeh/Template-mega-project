@@ -1,7 +1,7 @@
 # Gate 0 semantic packet index — GATE0-C3 / SCHEMA-4 / D-031 / REVIEW-POLICY-F-2
 
 **Mode:** packets only · **acceptance:** not run
-**Run:** `20261115T194025Z-2a9c3508`
+**Run:** `20261115T194344Z-2a9c3508`
 **Policy:** `REVIEW-POLICY-F-2`
 **Semantic packets:** 44 · **records:** 42 · **references:** 0 · **evaluators:** 0
 **External signer references:** 1 (clean S3-ROLE-01, pkt-6dae7cba2d6a1243a2d10f7d)

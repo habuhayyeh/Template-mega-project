@@ -413,3 +413,14 @@ continues.
 regeneration and packets mode; report whether the 44-packet workload and existing clean S3 reference
 remain valid.
 
+## Review 099 — semantic domain gates hardened
+
+Independent review of ChatGPT patch `f524671`: structural SILENT now yields semantic review; structural
+FIRED yields semantic SILENT with no packet; structural UNDECIDABLE yields semantic UNDECIDABLE with no
+packet. Gate-0 parent count corrected to 6.
+
+Validation: 49 tests OK; preflight PASS 7/7; deterministic regeneration; 42 records / 44 packets /
+1 signer reference / 0 evaluators. Packet IDs are unchanged, including clean `S3-ROLE-01`
+`pkt-6dae7cba2d6a1243a2d10f7d`; the existing reference remains reusable.
+
+**NEXT:** ChatGPT proceeds to grouped signer ratification; no acceptance yet. No Doximity. No Phase 0.

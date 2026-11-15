@@ -5,7 +5,7 @@
   "evaluators": [],
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:f2f819a43ab4c813705745ba713183c1ca3ae9c0a151934a532c0f18d0e3e1aa",
+    "00-GATE0-MANIFEST.md": "sha256:465237a561fb0025174937e7a70dee096a722af970f46bbb3bd1dd605fbda7fe",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
@@ -26,7 +26,7 @@
     "projection_contract.py": "sha256:0e7bffaf83a952ed38b8a0eafc942bfbbfe41c0181ce177856274c56175df75e",
     "scorer/projection.py": "sha256:2867510a74184ebd9137c1242c4f4cb64d119e17b3f76f10a9bf7ccd0aa481d8",
     "scorer/registry.py": "sha256:620fb0feafb10547b23783c01832eeeb070b9f19202b9d57f8fe66c6010f111a",
-    "scorer/scorer.py": "sha256:db49d999e1a9514391fb9c908837b9dadbabf6c2a45e54bb6f298357c3b5cd43",
+    "scorer/scorer.py": "sha256:c1201beaa703bb557613e9446a5a516426856b431ffca9782a784954b74d3c40",
     "tools/gate0_harness.py": "sha256:c8a57f6c777457c888f80ca1976a2fe41e8a7f7014ff9aaffa0bf702b0c15270"
   },
   "mode": "packets",
@@ -4312,6 +4312,6 @@
   "reference_count": 0,
   "references": [],
   "review_policy": "REVIEW-POLICY-F-2",
-  "run_id": "20261115T194025Z-2a9c3508",
+  "run_id": "20261115T194344Z-2a9c3508",
   "scorer_version": "GATE0-SCORER-1"
 }
