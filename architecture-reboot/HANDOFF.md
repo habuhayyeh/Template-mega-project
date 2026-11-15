@@ -176,3 +176,17 @@ Safe mechanical preparation, including blinded packet generation, may proceed if
 acceptance verdict may be claimed without the required reference and evaluator evidence.
 
 No Doximity or Phase 0 work is authorized by this closure.
+
+## Signer-discovered CASE-01 contract correction
+
+D-023: a major established primary neurologic diagnosis may retain its own A/P problem even when
+inactive and without current management; inactivity changes rendering depth to shorter/condensed rather
+than causing automatic omission. This partially supersedes D-015.
+
+Blinded Gate-0 signer Packet 7 exposed a CASE-01 oracle defect: the current oracle/seed incorrectly
+treats prior left MCA infarct candidacy as a violation. Gate-0 acceptance is paused pending a controlled
+CASE-01 source-contract rebuild. Architecture remains closed unless that rebuild proves the
+adoption-vs-retention distinction impossible.
+
+**NEXT:** DeepSeek rebuilds CASE-01 clean parents/seeds under D-023, regenerates, runs preflight and
+packets mode only, and returns the diff for ChatGPT review.

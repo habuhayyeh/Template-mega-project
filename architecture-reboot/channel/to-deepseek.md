@@ -3415,3 +3415,41 @@ NEXT:
 - use this format for signer packets 1–4.
 - record signer answers only after the signer responds.
 - do not run Gate 0 acceptance yet.
+
+
+## 2026-11-15 · ChatGPT · review 088 — CASE-01 oracle contradicted by signer
+
+COMMIT: pending
+TYPE: CONTRACT / ORACLE
+CHANGED:
+- D-023 clinical/product policy;
+- review 088;
+- HANDOFF state;
+- this channel handoff.
+
+SIGNER FINDING:
+- Packet 7: prior left MCA infarct **should remain its own A/P problem** because it is a major primary
+  neurologic diagnosis.
+- It is inactive, so its block should be **shorter/condensed**, not omitted.
+- signer verdict for current `S1-CAND-01` packet = SILENT.
+
+CONFLICT:
+- current CASE-01 oracle excludes infarct as a candidate and forbids it from rendering;
+- `G0-S1-05` therefore encodes the wrong clinical truth.
+
+INVARIANTS:
+- do not reopen architecture merely because the fixture is wrong;
+- S1 candidacy, S2 current adoption, and S3 problem retention remain distinct;
+- generated artifacts are rebuilt only through the generator;
+- current signer references are pre-D-023 and cannot be reused after packet change unless identity
+  remains exactly valid.
+
+NEXT:
+1. Rebuild CASE-01 clean S1/S2/S3/S4 truth under D-023.
+2. Replace the invalid S1-CAND seed with a genuinely bad candidate.
+3. Preserve Packet-2's signer-approved distinction if representable: remote infarct may be not-currently-
+   adopted yet still have a condensed problem block.
+4. Check whether S4 can encode condensed inactive-problem depth without new architecture; if not, raise
+   the smallest CONTRACT proposal.
+5. Regenerate; run preflight; run packets mode only; return diff + results.
+6. Do not run acceptance. No Doximity. No Phase 0.
