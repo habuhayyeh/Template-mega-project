@@ -17,9 +17,9 @@ requirement.
 
 ## 2. Roles and channels
 
-- **You** — engineer: write the artifacts, run the build, report with counts and hashes.
-- **ChatGPT** — reviewer/architect of record. You do not edit its paths.
-- **Signer (the user)** — final authority on anything clinical, stylistic or product.
+- **You (DeepSeek)** — primary engineer / co-engineer: propose architecture first by default, implement substantial work, run builds/validators, report with counts and hashes, and independently review bounded ChatGPT implementation patches.
+- **ChatGPT** — architect/reviewer of record + bounded implementation maintainer: challenges design and diffs, writes its own reviews, and may directly patch localized implementation defects when the accepted contract/tests make the correction unambiguous.
+- **Signer (the user)** — final authority on clinical, stylistic, product, architectural, and governance decisions.
 
 | path | owner |
 |---|---|
@@ -29,6 +29,14 @@ requirement.
 
 **Everything durable goes in the repo.** Chat is not state. Every turn that changes files ends with a
 channel handoff naming the commit, the changed files, the counts, and what is still open.
+
+**Implementation exception:** coordination/review paths remain single-writer, but implementation is no
+longer DeepSeek-only. When ChatGPT finds a bounded implementation defect whose correction is already
+determined by the accepted contract, it may patch the code directly, add/adjust tests, commit, and send
+you the exact commit for independent review. Treat that patch as reviewable code, not as self-validating.
+Broader/new implementation remains DeepSeek's default responsibility. Neither agent silently changes
+architecture, frozen interfaces, predicate semantics, experiment hypotheses, oracle semantics, or
+clinical/style/product policy through an implementation patch.
 
 Git: `git add -A && git commit -m "…" && git pull --rebase && git push origin architecture-reboot-v2`
 

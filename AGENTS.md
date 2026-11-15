@@ -4,13 +4,15 @@ Operational constitution. Read this, then `STATUS.md`, then `DECISIONS.md`, befo
 
 ## Roles
 
-- **DeepSeek — primary engineer.** Inspects the repository, proposes, implements, runs validators, records results, updates state.
-- **ChatGPT — architect/reviewer.** Reads the actual repository and diffs, challenges assumptions, detects overfitting and drift, writes reviews.
-- **User — final authority.** Resolves clinical and style disputes, approves architectural change, merges.
+- **DeepSeek — primary engineer / co-engineer.** Inspects the repository, proposes architecture first by default, implements substantial work, runs validators, records results, updates state, and independently reviews bounded implementation patches made by ChatGPT.
+- **ChatGPT — architect/reviewer + bounded implementation maintainer.** Reads the actual repository and diffs, challenges assumptions, detects overfitting and drift, writes reviews, and may directly patch localized implementation defects when the accepted contract already determines the correct behavior.
+- **User — final authority.** Resolves clinical, style, product, governance, and architectural disputes and may change the agent division of labor.
 
-## The one rule that governs collaboration
+## The rules that govern collaboration
 
-On architectural work, **DeepSeek proposes first**. ChatGPT reviews the existing proposal rather than generating the first solution, unless the user asks it to lead. ChatGPT is expected to challenge and refine, not merely approve.
+On architectural or contract work, **DeepSeek proposes first**. ChatGPT reviews the existing proposal rather than generating the first solution, unless the user asks it to lead. ChatGPT is expected to challenge and refine, not merely approve.
+
+On implementation work, either agent may fix a bounded defect when the accepted contract and tests make the correction unambiguous. When ChatGPT discovers such a defect during review, it should normally patch it directly, add or adjust tests, commit the change, and hand the exact commit to DeepSeek for independent review. This direct-patch rule does **not** authorize silent changes to architecture, module ownership, frozen interfaces, predicate meaning, experiment hypotheses, oracle semantics, clinical/style/product policy, or other accepted design contracts.
 
 ## When to stop and ask the user
 
@@ -43,23 +45,37 @@ Fixing behaviour that was already agreed is a `T###` task with a recorded valida
 
 ## Ownership
 
+Coordination/review paths remain single-writer. Implementation paths have a bounded exception under D-018.
+
 | Path | Writer |
 |---|---|
-| `pipeline/`, `tools/`, `substrate/`, `oracles/`, `tests/`, `runs/`, `artifacts/`, `proposals/`, `tasks/` | DeepSeek |
-| `reviews/` | ChatGPT |
-| `STATUS.md`, `DECISIONS.md`, `CHANGELOG.md` | DeepSeek |
-| `AGENTS.md`, `PROJECT.md` | DeepSeek, after an approved proposal |
+| legacy implementation paths such as `pipeline/`, `tools/`, `substrate/`, `oracles/`, `tests/`, `runs/`, `artifacts/`, `tasks/` | DeepSeek by default; ChatGPT may patch bounded implementation defects under D-018 |
+| `architecture-reboot/scorer/`, `architecture-reboot/tools/`, `architecture-reboot/tests/`, and other implementation artifacts under the reboot | DeepSeek by default; ChatGPT may patch bounded implementation defects under D-018 |
+| `architecture-reboot/reviews/chatgpt/`, `architecture-reboot/proposals/chatgpt/`, `architecture-reboot/channel/to-deepseek.md` | ChatGPT |
+| `architecture-reboot/reviews/deepseek/`, `architecture-reboot/proposals/deepseek/`, `architecture-reboot/channel/to-chatgpt.md` | DeepSeek |
+| `STATUS.md`, `CHANGELOG.md` | DeepSeek by default |
+| `DECISIONS.md`, `AGENTS.md`, `PROJECT.md` | either agent only after an explicit user-approved governance/design decision |
 
-One writer per path. ChatGPT does not patch implementation.
+A ChatGPT direct implementation patch must preserve accepted design semantics, include or update validation/tests where applicable, be committed to GitHub, and be handed to DeepSeek for independent review. DeepSeek must not treat a ChatGPT patch as self-validating merely because ChatGPT authored it.
 
 ## Workflow
+
+Design/contract changes:
 
 ```text
 task → proposal → review → user decision → implementation → validation
      → review of the actual diff → correction → state update
 ```
 
-`STATUS.md` moves only at the end. Validation means command, exit code and output, recorded under `runs/` — never a sentence claiming it passed.
+Bounded implementation defects after the contract is accepted:
+
+```text
+review finds defect → discovering agent patches + tests → commit
+                    → other agent independently reviews actual diff
+                    → correction if needed → state update
+```
+
+`STATUS.md` moves only at the end. Validation means command, exit code and output, recorded under the appropriate evidence/run path — never a sentence claiming it passed.
 
 ## Precedence
 

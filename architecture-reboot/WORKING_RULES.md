@@ -19,31 +19,40 @@ Design the smallest architecture that can reliably turn source material — espe
 - resistant to fabricated facts or silent loss;
 - practical to deploy in Doximity's attachment-based environment.
 
-## Design phase only
+## Design and implementation boundary
 
-Do **not** modify the production pipeline from this branch while the structural design is unsettled.
+The structural architecture is frozen unless a new counterexample requires reopening it. Do **not** silently change architecture, module ownership, interfaces, predicate meaning, experiment hypotheses, oracle semantics, or product/clinical policy during implementation.
 
-No implementation should begin until the agents agree on a structural design or the user explicitly chooses between unresolved alternatives.
+Once a contract is accepted, bounded implementation defects may be fixed directly. DeepSeek remains the default primary engineer for substantial implementation. ChatGPT may directly patch localized defects when the accepted contract and tests determine the correction, then must commit the change and hand it to DeepSeek for independent review.
 
 ## Review loop
 
-The intended cycle is:
+For architecture/contract work, the intended cycle is:
 
-1. ChatGPT writes a structural proposal.
-2. DeepSeek reviews it critically:
+1. DeepSeek proposes first by default, unless the user asks ChatGPT to lead.
+2. ChatGPT reviews it critically:
    - identify unnecessary complexity;
    - identify missing relationships;
    - identify Doximity/runtime assumptions;
-   - propose a better alternative where appropriate.
-3. ChatGPT reviews DeepSeek's critique and revision.
-4. Repeat until the agents agree.
-5. Escalate to the user whenever:
+   - challenge unsupported assumptions and drift.
+3. DeepSeek revises; ChatGPT reviews the actual change.
+4. Repeat until the agents agree or the user adjudicates.
+
+For bounded implementation defects after the contract is accepted:
+
+1. whichever agent finds the defect may patch it directly if the correction is unambiguous from the accepted contract;
+2. add/adjust tests or validators;
+3. commit the patch;
+4. the other agent independently reviews the actual diff and validation evidence;
+5. correct if needed, then update state.
+
+Escalate to the user whenever:
    - the agents disagree and repository evidence does not settle it;
    - the choice is subjective, clinical, stylistic, or product-related;
    - a platform assumption cannot be verified;
    - proceeding would require guessing.
 
-## One writer per path
+## Path ownership and implementation exception
 
 ### ChatGPT owns
 - `architecture-reboot/proposals/chatgpt/`
@@ -54,6 +63,12 @@ The intended cycle is:
 - `architecture-reboot/proposals/deepseek/`
 - `architecture-reboot/reviews/deepseek/`
 - `architecture-reboot/channel/to-chatgpt.md`
+
+### Implementation
+- DeepSeek is the default primary implementer for substantial/new implementation work.
+- ChatGPT may directly edit implementation paths for bounded, contract-preserving fixes it discovers during review.
+- A ChatGPT implementation patch must include or update tests/validation where applicable, be committed, and be handed to DeepSeek for independent review.
+- This exception does not permit ChatGPT to silently alter frozen architecture, interfaces, predicate semantics, experiment definitions, oracle semantics, or product/clinical/style policy.
 
 ### Consensus
 - `architecture-reboot/CONSENSUS.md` is written only after both agents explicitly agree on a design point.
