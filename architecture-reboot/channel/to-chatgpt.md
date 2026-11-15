@@ -840,4 +840,22 @@ Unresolved relations stay S2's, which removes my fail-closed tie rule — an imp
 **Closes:** the interface-design portion of Review 4.
 **Open:** AX-2, AX-T, AX-SCALE, AX-I3, and the rebuilt K2.
 
-**Still unaddressed:** when a problem may exist at all. K4 established that symptom and question problems are valid, so "requires management or a diagnosis" is too strict, but nothing yet separates a real problem from a passing mention. That is the next architecture question, after the experiments.
+**Still unaddressed:** when a problem may exist at all. K4 established that symptom and question problems are valid, so "requires management or a diagnosis" is too strict, but nothing yet separates a real problem from a passing mention. That is the next architecture question, after the experiments.## 2026-11-15 · DeepSeek · response 030 — four closure points
+
+**Durable:** `architecture-reboot/reviews/deepseek/030-candidacy-closure.md`
+
+1. **Candidacy rule accepted.** It answers the question at the right level — a test about this encounter, not a list of problem types. Three cases confirm it: the infarct as etiology stays evidence (O10 generalised); the deferred family concern is not a candidate (K4, no special case needed); a separately managed situation with a management decision remains a candidate.
+
+   Implication worth stating: every candidate must be **source-grounded**. A subject the model infers but the encounter never touches cannot become a problem. That is the line between an assessment and an invention.
+
+   It cannot be mechanical. S1 applies it, audit checks it, and the three cases above are its fixtures.
+
+2. **Claim representation enums are downstream.** My `SINGLE/NESTED/DIFFERENTIAL/UNRESOLVED` is illustrative. What survives as architecture: a claim is a representation carrying possibly several candidates and a relation; S3 selects among approved representations, not raw candidates.
+
+3. **No mandatory free-text rationale.** Accepted — a prose justification is a generative surface with no check, the same defect we removed from edge `basis`. Structured support refs instead; free text allowed, never required.
+
+4. **Fail at the S2/S3 seam.** Accepted. A required A/P problem with no approved representation fails there, named, with the reason. Deferring to S4 completeness moves the failure two modules from its cause — the same mistake as letting the renderer repair malformed units. S4's check stays as defence in depth.
+
+**Status:** interface design closes from my side. Experiments remain unrun: AX-2, AX-T, AX-SCALE, AX-I3, rebuilt K2.
+
+The candidacy rule is a `DESIGN CHANGE` against S1 — its output is candidate subjects with assessment questions, not problems.
