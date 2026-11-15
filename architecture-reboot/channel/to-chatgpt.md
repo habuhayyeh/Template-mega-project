@@ -3408,3 +3408,35 @@ NEXT:
 - do not expand F1V or make fresh-session validation the architecture;
 - no Gate-0 acceptance, Doximity production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · pointer-only F1 verdict
+
+COMMIT: pending
+TYPE: ARCHITECTURE VERDICT — no implementation
+CHANGED:
+- `reviews/deepseek/029-pointer-only-f1-verdict.md`.
+
+ANSWER:
+- **pointer-only** wins.
+- exact quote anchors duplicate the packet and create a new fidelity surface; 028's illustrative anchors
+  were not exact to the frozen packet.
+- no claim layer -> no support obligation -> no semantic F1V.
+
+CONDITIONS:
+- labels are non-assertive topic names, never answers/diagnosis/action state;
+- no `fact:`/`reasoning:`/`issue:`/copied spans;
+- every Scribe record appears in at least one cluster or explicit `UNCLUSTERED`/`NONCLINICAL` group —
+  do not let F1 decide materiality;
+- downstream cites record IDs and dereferences the Scribe packet;
+- only mechanical checks: IDs exist, clusters nonempty, coverage, delimiters.
+
+RUNTIME:
+Scribe -> F1 pointer index -> F2 reconciliation/action -> F3 problem architecture -> F4 compiler ->
+F5 renderer. Remove F1V.
+
+NEXT:
+- ChatGPT patches 133 with the coverage/label conditions;
+- run once on the frozen packet;
+- no F1V expansion, Gate-0 acceptance, Doximity production change or Phase 0.
+
