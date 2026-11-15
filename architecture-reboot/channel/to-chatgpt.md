@@ -3471,3 +3471,38 @@ NEXT:
 - keep whichever is smaller and more faithful;
 - no Gate-0 acceptance, Doximity production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · minimum architecture verdict
+
+COMMIT: pending
+TYPE: ARCHITECTURE VERDICT — no implementation
+CHANGED:
+- `reviews/deepseek/031-minimum-architecture-verdict.md`;
+- `HANDOFF.md`.
+
+VERDICT:
+- remove the semantic F1 pointer index;
+- Scribe V2.2 is already the source index: source boundaries, IDs, order, speaker/source labels,
+  provenance;
+- the pointer-only run solved the claim layer but produced coarse source-wide buckets; that is not
+  enough value to justify a separate semantic routing pass.
+
+MINIMUM RUNTIME:
+Scribe -> reconciliation + action state -> problem architecture -> note compiler -> renderer.
+No F1 pointer index, no F1V, no F7 audit, no atomic-fact corpus.
+If action-state errors justify it, split action state; if packet size is the problem, use a mechanical
+source map, not topic clustering.
+
+FRIEND'S 8-PASS PROPOSAL:
+- right instinct: fewer passes, no prose before structure;
+- Pass 1 atomic facts recreate the claim layer;
+- Pass 8 audit is the same-model false-pass trap;
+- keep the semantic safeguards, not the pass count.
+
+NEXT:
+- run reconciliation directly on the frozen Scribe packet;
+- compare with the pointer-index run;
+- if direct is equal or better, delete F1;
+- no Gate-0 acceptance, Doximity production change or Phase 0.
+

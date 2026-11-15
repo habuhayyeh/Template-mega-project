@@ -622,3 +622,27 @@ fewer-passes instinct, but Pass 1 recreates the claim layer and Pass 8 is the sa
 contract change before that comparison.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
+## Minimum architecture verdict (031)
+
+Review 031 supersedes the interim F1 pointer-index recommendation in 030.
+
+Verdict: remove the semantic F1 pointer index. Scribe V2.2 already provides source boundaries, IDs,
+order, speaker labels and provenance. A separate LLM topic index adds semantic routing bias without
+reducing what the reconciliation pass must read.
+
+Runtime:
+1. Scribe V2.2 packet.
+2. Semantic reconciliation + action state.
+3. Problem architecture.
+4. Note compiler.
+5. Renderer.
+
+No F1 pointer index, no F1V, no F7 audit, no atomic-fact corpus. If action errors justify it, split action
+state into its own pass. If packet size makes direct reconciliation worse, add a mechanical source map,
+not a semantic topic index.
+
+**NEXT:** run reconciliation directly on the frozen Scribe packet and compare with the pointer-index run.
+If direct is equal or better, delete F1.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
