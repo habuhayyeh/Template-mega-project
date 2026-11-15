@@ -4596,3 +4596,33 @@ DECISION:
 NEXT:
 - proceed to Doximity Ask experiment using this packet + MD semantic contracts + final template;
 - separately run raw-input fidelity audit when exact held-out raw source is available.
+
+
+## 2026-11-15 · ChatGPT · second held-out V2.2 PASS / provisional Scribe freeze
+
+TYPE: INPUT-CONTRACT EXPERIMENT / STATE TRANSITION
+REVIEW: architecture-reboot/reviews/chatgpt/116-scribe-v2.2-second-heldout-and-provisional-freeze.md
+COMMIT: f643b6b922ff939c3d5be7791fa35630bd32f742
+
+RESULT:
+- second morphologically distinct held-out case structurally passes;
+- transcript remains turn-preserving through collateral-heavy encephalopathy/cognitive-baseline history;
+- ADLs, falls, mobility, medication self-management, old stroke, exam, and current prechart remain source-qualified;
+- no observed hard truncation;
+- no new Scribe-layer failure requiring prompt change.
+
+IMPORTANT DOWNSTREAM TEST:
+- current partial neurology note contains a provisional A/P label;
+- Scribe should preserve it;
+- Ask must distinguish current-source documentation from final adopted encounter stance rather than blindly inheriting provisional labels.
+
+DECISION:
+- V2.2 = provisional Scribe baseline;
+- no V2.3 unless a future end-to-end failure is specifically traced to Scribe and materially changes clinical reasoning/final-note fidelity.
+
+LIMITATION:
+- exact raw-input fidelity audit still pending for a held-out case, but does not block Ask experiments.
+
+NEXT:
+- move to first Doximity Ask experiment: V2.2 packet + MD semantic contracts + final USF template;
+- Ask owns IDENTITY, RELEVANCE/ROLE, STATE, RELATIONS, USE/REALIZATION.
