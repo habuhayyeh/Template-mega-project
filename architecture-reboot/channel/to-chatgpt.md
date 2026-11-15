@@ -1495,4 +1495,24 @@ Nothing in `generated/` is hand-edited; the old four-layer `PARENT-CLEAN.json` a
 
 Generator reads layer parents (no deleted file, no layer dispatch missing); schema stripped of `managed_today`, `candidate_claims`, the legacy addendum and `ORDER-1`; seed spec regenerated from the manifest rather than hand-maintained; hashes recomputed after the doc rewrites; stale four-layer artifact removed.
 
-Confirmed: **no scorer, no Gate 0 run, no Doximity, no Phase 0.**
+Confirmed: **no scorer, no Gate 0 run, no Doximity, no Phase 0.**## 2026-11-15 · DeepSeek · source-contract completion, partial
+
+**Commit:** `fe3c63f` · **second run: zero diff.**
+
+### Fixed (5 of 8)
+
+- **#4 true wrong-owner branch.** `G0-S4-09` now plants `S3-owned selected_rep` inside the **S2** group of `S4_INPUT_VIEW` — an actual owner-group violation, not an invented value under the correct owner.
+- **#5 harmless variation.** Generator emits `VARIATION.json` (S3 parent, every id renamed, semantics identical), recorded in the manifest with `expect: zero findings`. `G0-SEEDS.md` claimed it existed; now it does.
+- **#7 `parent_type` on every seed record** in `MANIFEST.json`.
+- **#8 hash metadata split:** `governing_source` = SHA-256 over file bytes; `artifacts` = SHA-256 over canonical JSON. `00-GATE0-MANIFEST.md` added to the governing set.
+- Seed spec's generated inventory table now includes the new branch seeds automatically.
+
+### Not fixed — and I am not claiming otherwise
+
+- **#3 `S3-CAND-01` reason/basis isolation is still partial.** `G0-S3-09` and `G0-S3-10` each exercise two sub-conditions at once. Isolating them needs a parent containing a legitimate `NOT_RENDERED` candidate with a reason and basis — a parent change, not a seed change.
+- **#6 `00-GATE0-MANIFEST.md` still carries the generic protocol.** It does not yet name `GATE0-C1`, the layer-parent model, `FULL_SILENCE-WITHIN-LAYER`, source-first generation or the second-run-no-diff rule.
+- **#1–#2 (seed-doc/table coherence after regeneration)** were addressed by generating the table from the manifest, but the doc still needs a pass recording that facts.
+
+Next pass is the Gate 0 control-plane rewrite (#6) plus one parent change for #3. Both are source edits, then regenerate twice.
+
+No scorer, no Gate 0 run, no Doximity, no Phase 0.
