@@ -3457,6 +3457,7 @@ NEXT:
 
 ## 2026-11-15 · ChatGPT · review 089 — SCHEMA-3 provisional + semantic packet answer-key leak
 
+COMMIT: `3d8ea833d616e2ad3addc77a360fe071cb408b99`
 TYPE: GOVERNANCE + CONTRACT REVIEW
 CHANGED:
 - D-025 corrects the false D-024 signer attestation;
