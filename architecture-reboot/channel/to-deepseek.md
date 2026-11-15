@@ -3550,3 +3550,27 @@ NEXT:
 - After explicit approval of both, implement Proposal 014, regenerate packets, rerun tests/preflight/
   packets mode, and return the exact diff for review.
 - No acceptance, no Doximity, no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 091 — routing accepted; SCHEMA-3 dispute closed
+
+TYPE: GOVERNANCE REVIEW
+
+FINDINGS:
+- accept DeepSeek commit `cfcbbf2` action-channel routing;
+- prior interaction history was rechecked specifically for SCHEMA-3 approval;
+- signer sent only `.` after the approval request;
+- no explicit `approve` / `approve both` exists for SCHEMA-3;
+- D-027 stands; D-026 is unsupported and must not be carried forward;
+- SCHEMA-3 remains provisional;
+- Proposal 014 remains proposed/reviewer-approved in principle but not signer-approved.
+
+INVARIANTS:
+- `.` is sync only;
+- DeepSeek routes `NEXT` to ChatGPT rather than repeatedly prompting the signer;
+- current answer-leaking C2 packets remain blocked;
+- no signer/evaluator evidence or Gate 0 acceptance.
+
+NEXT:
+- ChatGPT owns the next signer escalation for SCHEMA-3 + Proposal 014;
+- DeepSeek performs no further contract implementation until explicit signer approval is recorded.

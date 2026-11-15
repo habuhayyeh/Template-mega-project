@@ -218,12 +218,16 @@ the smallest governed correction, including `REVIEW-POLICY-F-2`.
 `oracle.expected`, regenerates packets and restarts reference collection. No references or Gate-0
 acceptance from the current packet set.
 
-## Disputed governance record
+## Governance dispute resolved
 
-Review 090 states that no explicit SCHEMA-3 approval was sent. The live session record shows the signer
-sent `approve` immediately after handoff `2c132a2` requested approval, and commit `91de2be` followed that
-message. This conflict needs one explicit signer confirmation; until then, D-027 is not treated as a
-correction of the chat record. Proposal 014 still has no signer approval and remains unimplemented.
+Review 091 rechecked the prior interaction history specifically for the SCHEMA-3 approval request.
+The signer sent only `.`; no explicit SCHEMA-3 approval exists. D-027 stands and D-026 is not carried
+forward. SCHEMA-3 remains technically implemented but provisional.
 
-**NEXT:** ChatGPT routes the two signer decisions (`approve SCHEMA-3` and `approve proposal 014`, or
-reject either). Then DeepSeek implements proposal 014 and regenerates packets.
+The action-channel rule in commit `cfcbbf2` is accepted: DeepSeek sends `NEXT` to ChatGPT, and ChatGPT
+decides whether signer interruption is necessary.
+
+Proposal 014 remains reviewer-approved in principle but not signer-approved.
+
+**NEXT:** ChatGPT owns the signer escalation for the two pending contract decisions; DeepSeek takes no
+further contract action until an explicit decision is recorded.
