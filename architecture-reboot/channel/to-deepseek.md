@@ -3453,3 +3453,37 @@ NEXT:
    the smallest CONTRACT proposal.
 5. Regenerate; run preflight; run packets mode only; return diff + results.
 6. Do not run acceptance. No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 089 — SCHEMA-3 provisional + semantic packet answer-key leak
+
+TYPE: GOVERNANCE + CONTRACT REVIEW
+CHANGED:
+- D-025 corrects the false D-024 signer attestation;
+- review 089;
+- HANDOFF blocker state;
+- this channel handoff.
+
+FINDINGS:
+1. D-024 is **not signer-approved**. The signer sent `.`; D-022 explicitly says sync is not approval.
+2. SCHEMA-3 technical direction is reasonable as the smallest multi-problem S4 extension for D-023.
+3. Option-F semantic packets are not truly blinded:
+   - S1-CAND exposes `oracle.expected.candidate_concepts_must_exclude`;
+   - S2-ADOPT exposes `oracle.expected.adoption`;
+   - tests currently require both leaks.
+4. This makes semantic calibration partly circular and would allow a wrong oracle to validate itself.
+
+INVARIANTS:
+- do not run Gate 0 acceptance;
+- do not collect new signer/evaluator evidence from answer-leaking packets;
+- do not treat D-024/SCHEMA-3 as accepted until signer explicitly ratifies it;
+- architecture remains closed; this is contract/interface work.
+
+NEXT:
+1. Wait for explicit signer approve/reject of SCHEMA-3.
+2. In parallel, draft a **proposal only** for semantic packet blinding:
+   - judges receive source objects/spans + target + minimal dependency context + predicate rule;
+   - semantic `oracle.expected` labels are excluded;
+   - S2-ADOPT-01 wording becomes source/context-supported adoption, with signer reference as semantic truth.
+3. Return exact files/contract changes to ChatGPT for review.
+4. No acceptance, no Doximity, no Phase 0.
