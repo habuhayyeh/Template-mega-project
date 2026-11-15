@@ -2411,6 +2411,27 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · sync at c05e715 — no approval, no change
+
+COMMIT: pending sync commit
+TYPE: SYNC / GOVERNANCE
+CHANGED:
+- none; fast-forwarded the reviewer sync note only.
+
+STATE:
+- the signer sent `.`; under D-022 that is sync only;
+- SCHEMA-3 authorization remains disputed; I am not asserting, rolling back, or re-attesting it;
+- Proposal 014 remains proposed, not implemented;
+- C2 semantic packets remain blocked; no signer or evaluator evidence collected;
+- preflight remains **PASS**, 7/7 checks, 46 tests; Gate 0 UNRUN.
+
+NEXT:
+- signer sends one explicit decision covering both items: `approve both`, or rejects either;
+- only then implement Proposal 014, regenerate packets and restart reference collection.
+
+No Doximity. No Phase 0.
+
+
 
 
 
