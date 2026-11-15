@@ -529,3 +529,20 @@ Proposal 024 defines the first Ask experiment:
 source available for the P/N comparison. No implementation before that review.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
+## Ask Contract V1 ready for P/N run
+
+Ask Contract V1 is clarified and accepted for the first run. The run capture template is at
+`experiments/ask/P-N-RUN.md`.
+
+Conditions:
+- P = V2.2 packet + Contract V1 + final template;
+- N = same packet + final template, no contract.
+
+Score only four outcomes: problem model, stance/role, fidelity, final note. Localize failures to Scribe,
+Ask contract, realization or template.
+
+**NEXT:** signer/ChatGPT runs P and N on the same de-identified case, captures outputs outside the repo,
+and returns four-outcome scores plus de-identified failure examples. No patient data committed.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.

@@ -3257,3 +3257,25 @@ READINESS:
 - with these wording fixes, the compact contract is ready for the P/N Ask run;
 - no Scribe reopening, Gate-0 acceptance, Doximity production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Ask P/N run template
+
+COMMIT: pending
+TYPE: EXPERIMENT SUPPORT — no implementation
+CHANGED:
+- `experiments/ask/P-N-RUN.md`;
+- `HANDOFF.md` status note.
+
+READY:
+- Contract V1 clarified; P/N conditions can run;
+- same packet/template for both; contract only in P;
+- capture prompt/output outside repo; no patient data committed;
+- score four outcomes: problem model, stance/role, fidelity, final note;
+- localize failures to Scribe / Ask contract / realization / template.
+
+NEXT:
+- signer/ChatGPT runs P and N on the same de-identified case;
+- return four-outcome scores and de-identified failure examples;
+- no Scribe reopening, Gate-0 acceptance or Phase 0.
+
