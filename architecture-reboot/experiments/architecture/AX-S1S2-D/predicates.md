@@ -103,7 +103,7 @@ or human-judged" is not an implementation.
 |---|---|---|
 | `S1-CAND-01` | SEMANTIC / HUMAN_REVIEW | reviewer compares candidate concepts to the oracle's excluded list; recorded with the reviewer id |
 | `S2-ADOPT-01` | SEMANTIC / HUMAN_REVIEW | reviewer compares adoption verdicts to the oracle; no model self-judgement |
-| `S2-REP-01` | SEMANTIC / HUMAN_REVIEW | reviewer checks each representation's members trace to source objects and its support refs exist |
+| `S2-REP-01` | SEMANTIC / HUMAN_REVIEW | reviewer judges whether each representation's members and their relations semantically support the problem's claim, not merely that ids and support refs exist; real objects and refs are necessary but not sufficient, and a representation assembled from real objects into an unsupported claim or relation fails |
 | `S3-SEL-01` | MECHANICAL | id membership in the approved set |
 | `S4-COMP-01` | MECHANICAL | domain S4 ∩ S3, operator class check |
 
@@ -111,8 +111,17 @@ No semantic predicate is scored by the model that produced the artifact. Where a
 the finding records judge id and the rule applied; where a mechanical check exists, it never defers to
 a judgement.
 
-**Repetition for HUMAN_REVIEW.** Gate 0's three runs cannot measure human variance on a static seed —
-one judge scoring the same artifact three times measures consistency of that judge, not the scorer's
-reliability. For HUMAN_REVIEW predicates the run count means: **three independent judges**, or one
-judge plus a mechanical pre-filter, recorded with each judge id. A single judge repeating is recorded
-as `1 judge × 3 passes` and is not accepted as calibration evidence.
+**Gate 0 repetition for HUMAN_REVIEW.** A semantic judgment cannot be manufactured by deterministic
+preprocessing. The frozen policy is:
+
+- **three independent, blinded human judgments** per seed;
+- each judge sees artifact + case oracle + predicate rule, never the seed id, expected predicate,
+  mutation metadata or specificity answer key;
+- **all three** must detect the seeded defect **and** satisfy `FULL_SILENCE-WITHIN-LAYER`;
+- two of three is a calibration failure; there is no majority rule;
+- a single judge repeating is recorded as `1 judge × 3 passes` and is not calibration evidence;
+- a mechanical pre-filter may prepare evidence, but it is not a judgment and cannot substitute for any
+  of the three. If it fully decides the branch, that branch is mechanical and must be reclassified.
+
+Three independent judges who all detect the seed but one over-fires another predicate in the layer also
+fail: detection without specificity is not calibration.

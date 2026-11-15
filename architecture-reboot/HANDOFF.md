@@ -53,37 +53,44 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 
 ## 5. Exact position
 
-HEAD at handoff: see `git log -1`. Last substantive commit: review-078 four-blocker source pass.
+HEAD at handoff: see `git log -1`. Last substantive commit: review-080 source-contract pass.
 
 `python architecture-reboot/tools/make_seeds.py` builds:
-5 clean parents across 4 parent types → 27 seeds → `MANIFEST.json`. **A second run must produce zero
+5 clean parents across 4 parent types → 28 seeds → `MANIFEST.json`. **A second run must produce zero
 diff**; that is a build failure condition, not a warning. The build also checks every seed is a real
-non-noop mutation and differs from its parent at exactly one declared path; 27/27 are checked, with 0
+non-noop mutation and differs from its parent at exactly one declared path; 28/28 are checked, with 0
 no-op and 0 multi-diff seeds. The manifest records the checked before/after values.
 
-Current counts: 5 clean calibration parents · 4 parent types · 27 seeds · 16 active predicates ·
+Current counts: 5 clean calibration parents · 4 parent types · 28 seeds · 16 active predicates ·
 campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
 `ORACLE-2.0` · reason registry `REASON-1` · operator set `PILOT-OPERATORS-1`.
 
 Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-## 6. Review 078 four-blocker pass — addressed, pending review
+## 6. Review 080 source pass — addressed, pending review
 
-**Review 079 regression is closed.** The mutation function now runs for every parent type; the build
-rejects a no-op copy and any seed whose actual diff does not match exactly one declared path. The
-manifest mutation record is derived from the checked diff.
+**Review 079 generator integrity is closed.** The mutation function runs for every parent type; the
+build rejects a no-op copy and any seed whose actual diff does not match exactly one declared path. The
+manifest mutation record is derived from the checked diff. 28/28 seeds are checked.
 
-1. **Exact S4 source map.** `schema.md::PROJECTION_MAP` freezes destination, owner, source path,
-   selector, requirement and transform for all 14 mapped rules. `make_seeds.py` reads the block and
-   constructs `S4_INPUT_VIEW`; `S4_PARENT.json` carries no projection.
-2. **Gate 0 specificity.** `00-GATE0-MANIFEST.md` now uses `FULL_SILENCE-WITHIN-LAYER` in the model,
-   seed requirement, procedure and pass criteria.
-3. **S3 reason registry.** `schema.md::REASON_REGISTRY` freezes `REASON-1`, the reason→basis map, the
-   `object` basis target type, non-empty and reference-existence rules. `S3_CASE01_NOT_RENDERED_CLEAN`
-   is the valid reference; equality/reason/basis seeds derive from it.
-4. **Parent identity.** Every parent carries `parent_id`; the manifest keys `clean_parents` by identity
-   and counts types separately from parents.
+Review 080 items:
+
+1. **Projection map is bound to executable ops.** `make_seeds.py::OP_CONTRACTS` freezes the only valid
+   metadata for each op. Every `PROJECTION_MAP` rule is compared exactly on destination, owner, source,
+   source path, condition, requirement and transform; any mismatch fails the build.
+2. **HUMAN_REVIEW policy is coherent.** Gate 0 requires three independent blinded human judgments. All
+   three must detect the seeded defect and all three must satisfy `FULL_SILENCE-WITHIN-LAYER`. Two of
+   three fails; a mechanical pre-filter is not a judgment and cannot substitute for one.
+3. **S2-REP-01 tests semantic support.** The instruction judges whether members and relations support
+   the problem's claim, not merely whether ids/refs exist. `G0-S2-02` adds aspirin object `O07` to the
+   falls representation while keeping every id and support ref valid; `G0-S2-01` remains the structural
+   empty-refs branch.
+4. **S4-PROJ wording corrected.** `G0-S4-09` is the wrong-owner-group seed; `G0-S4-11` is a valid-field
+   fabricated duplicate group, not a wrong-owner relation.
+
+Review 078 items are retained: exact S4 source map, uniform within-layer specificity, `REASON-1` plus
+clean NOT_RENDERED parent, and parent identity separate from parent type.
 
 No scorer, no Gate 0 run, no Doximity, no Phase 0.
 

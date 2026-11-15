@@ -206,6 +206,145 @@ OPS = {
     'contract_operator_set': lambda c: c['contracts']['operator_set'],
 }
 
+# Each op has exactly one valid map contract. The build compares every map rule
+# against this table; a changed destination, owner, source path, condition,
+# requirement or transform fails instead of silently running old code.
+OP_CONTRACTS = {
+    's1_problem': {
+        'dst': '/from_s1/problem',
+        'owner': 'S1',
+        'source': 'S1_PARENT.json',
+        'source_path': '/s1/candidates[id=P]/id',
+        'condition': 'P is the unique rendered problem',
+        'required': 'required',
+        'transform': 'copy id',
+    },
+    's1_salience': {
+        'dst': '/from_s1/salience',
+        'owner': 'S1',
+        'source': 'S1_PARENT.json',
+        'source_path': '/s1/candidates[id=P]/salience',
+        'condition': 'same candidate as /from_s1/problem',
+        'required': 'required',
+        'transform': 'copy object',
+    },
+    's3_selected_rep': {
+        'dst': '/from_s3/selected_rep',
+        'owner': 'S3',
+        'source': 'S3_PARENT.json',
+        'source_path': '/s3/rendered[problem=P]/selected_rep',
+        'condition': 'exactly one rendered entry for P',
+        'required': 'required',
+        'transform': 'copy id',
+    },
+    's3_rendered': {
+        'dst': '/from_s3/rendered',
+        'owner': 'S3',
+        'source': 'S3_PARENT.json',
+        'source_path': '/s3/rendered[i]/problem',
+        'condition': 'all i, source order',
+        'required': 'required',
+        'transform': 'collect problem ids',
+    },
+    's3_retained': {
+        'dst': '/from_s3/retained',
+        'owner': 'S3',
+        'source': 'S3_PARENT.json',
+        'source_path': '/s3/retained[i]',
+        'condition': 'all i, source order',
+        'required': 'required',
+        'transform': 'collect ids',
+    },
+    's3_use': {
+        'dst': '/from_s3/use',
+        'owner': 'S3',
+        'source': 'S3_PARENT.json',
+        'source_path': '/s3/use/{object}',
+        'condition': 'object keys must be a subset of T',
+        'required': 'required',
+        'transform': 'copy map',
+    },
+    's3_reuse': {
+        'dst': '/from_s3/reuse',
+        'owner': 'S3',
+        'source': 'S3_PARENT.json',
+        'source_path': '/s3/reuse[i]',
+        'condition': 'all i, source order',
+        'required': 'required',
+        'transform': 'copy list',
+    },
+    's2_members': {
+        'dst': '/from_s2/members',
+        'owner': 'S2',
+        'source': 'S2_PARENT.json',
+        'source_path': '/s2/representations[id=R]/members[i]',
+        'condition': 'R is from_s3.selected_rep; all i, source order',
+        'required': 'required',
+        'transform': 'copy ids',
+    },
+    's2_relations': {
+        'dst': '/from_s2/relations',
+        'owner': 'S2',
+        'source': 'S2_PARENT.json',
+        'source_path': '/s2/relations[i]',
+        'condition': 'from in M and to in M; source order',
+        'required': 'required',
+        'transform': 'filter and copy',
+    },
+    's2_claim_relations': {
+        'dst': '/from_s2/claim_relations',
+        'owner': 'S2',
+        'source': 'S2_PARENT.json',
+        'source_path': '/s2/claim_relations[i]',
+        'condition': 'problem == P and representation == R; source order',
+        'required': 'required',
+        'transform': 'filter and copy',
+    },
+    's2_duplicate_groups': {
+        'dst': '/from_s2/duplicate_groups',
+        'owner': 'S2',
+        'source': 'S2_PARENT.json',
+        'source_path': '/s2/duplicate_groups[i]',
+        'condition': 'set(group) intersects M; source order',
+        'required': 'required',
+        'transform': 'filter and copy',
+    },
+    'oracle_ingest': {
+        'dst': '/from_ingest',
+        'owner': 'I3/I4',
+        'source': 'fixtures/CASE-01/oracle.json',
+        'source_path': '/objects[{object in T}]/{text,provenance,temporal|status}',
+        'condition': 'one entry per T; exactly one of temporal/status',
+        'required': 'payload and provenance required; exactly one of temporal/status',
+        'transform': 'text→payload; copy provenance; copy temporal or status',
+        'expands': {
+            '/from_ingest/{object}/payload': '/objects[{object in T}]/text',
+            '/from_ingest/{object}/provenance': '/objects[{object in T}]/provenance',
+            '/from_ingest/{object}/temporal': '/objects[{object in T}]/temporal when present',
+            '/from_ingest/{object}/status': '/objects[{object in T}]/status when temporal is absent',
+        },
+    },
+    'contract_section': {
+        'dst': '/from_contracts/section',
+        'owner': 'frozen contracts',
+        'source': 'SCHEMA-2 contracts block',
+        'source_path': '#/contracts/section',
+        'condition': 'always',
+        'required': 'required',
+        'transform': 'copy constant',
+    },
+    'contract_operator_set': {
+        'dst': '/from_contracts/operator_set',
+        'owner': 'frozen contracts',
+        'source': 'SCHEMA-2 contracts block',
+        'source_path': '#/contracts/operator_set',
+        'condition': 'always',
+        'required': 'required',
+        'transform': 'copy constant',
+    },
+}
+
+
 
 def build_view(s1p, s2p, s3p, oracle, pmap):
     """Construct S4_INPUT_VIEW from upstream artifacts using the schema map.
@@ -305,23 +444,25 @@ def build_view(s1p, s2p, s3p, oracle, pmap):
         op = rule.get('op')
         if not dst or dst in seen:
             fail('projection map has missing or duplicate dst %r' % dst)
-        for key in ('owner', 'source', 'source_path', 'condition', 'required', 'transform'):
-            if not rule.get(key):
-                fail('projection map rule %s is missing %s' % (dst, key))
-        if dst == '/from_ingest':
-            expected = {
-                '/from_ingest/{object}/payload',
-                '/from_ingest/{object}/provenance',
-                '/from_ingest/{object}/temporal',
-                '/from_ingest/{object}/status',
-            }
-            if set(rule.get('expands', {})) != expected:
-                fail('from_ingest map must expand payload/provenance/temporal/status')
-        seen.add(dst)
-        if op not in OPS:
+        if set(rule) - {'dst', 'op', 'owner', 'source', 'source_path',
+                        'condition', 'required', 'transform', 'expands'}:
+            fail('projection map rule %s has unknown keys' % dst)
+        if op not in OPS or op not in OP_CONTRACTS:
             fail('projection map rule %s uses unknown op %r' % (dst, op))
+        contract = OP_CONTRACTS[op]
+        for key in ('dst', 'owner', 'source', 'source_path',
+                    'condition', 'required', 'transform'):
+            if rule.get(key) != contract.get(key):
+                fail('projection map rule %s %s=%r does not match op contract %r'
+                     % (dst, key, rule.get(key), contract.get(key)))
+        if rule.get('expands') != contract.get('expands'):
+            fail('projection map rule %s expands=%r does not match op contract %r'
+                 % (dst, rule.get('expands'), contract.get('expands')))
+        seen.add(dst)
         set_path(view, dst, OPS[op](ctx))
 
+    if set(OP_CONTRACTS) != set(OPS):
+        fail('op registry and op contract table do not cover the same ops')
     if {r['op'] for r in pmap['rules']} != set(OPS):
         fail('projection map ops do not match the implemented op set')
     if set(view) != set(pmap['groups']):
@@ -426,6 +567,7 @@ def s1_05(a):
 def s1_06(a): a['s1']['candidates'][0]['status_current'] = True
 
 def s2_01(a): a['s2']['representations'][0]['support_refs'] = []
+def s2_02(a): a['s2']['representations'][0]['members'].append('O07')
 def s2_03(a): a['s2']['adjudication'][0]['temporal'] = 'now'
 def s2_06(a): a['s2']['adjudication'][0]['adoption'] = None
 
@@ -470,6 +612,7 @@ SEEDS = [
  ('S1_PARENT.json', 'G0-S1-05', 'S1-CAND-01', s1_05, '/s1/candidates', '<absent>', 'C2 context-only'),
  ('S1_PARENT.json', 'G0-S1-06', 'S1-AUTH-01', s1_06, '/s1/candidates/0/status_current', '<absent>', 'true'),
  ('S2_PARENT.json', 'G0-S2-01', 'S2-REP-01', s2_01, '/s2/representations/0/support_refs', '["S02"]', '[]'),
+ ('S2_PARENT.json', 'G0-S2-02', 'S2-REP-01', s2_02, '/s2/representations/0/members', '["O03","O04"]', 'adds O07 medication'),
  ('S2_PARENT.json', 'G0-S2-03', 'S2-TEMP-01', s2_03, '/s2/adjudication/0/temporal', '2024-02 documented', 'now'),
  ('S2_PARENT.json', 'G0-S2-06', 'S2-ADOPT-01', s2_06, '/s2/adjudication/0/adoption', 'false', 'null'),
  ('S3_PARENT.json', 'G0-S3-01', 'S3-INC-01', s3_01, '/s3/rendered/0/approved_representation', 'R1', 'null'),

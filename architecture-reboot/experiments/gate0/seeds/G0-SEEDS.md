@@ -20,7 +20,7 @@ The authoritative inventory is `seeds/generated/MANIFEST.json`. This table is a 
 | `S1-CAND-01` | `G0-S1-05` |
 | `S1-CAND-02` | `G0-S1-04` |
 | `S2-ADOPT-01` | `G0-S2-06` |
-| `S2-REP-01` | `G0-S2-01` |
+| `S2-REP-01` | `G0-S2-01`, `G0-S2-02` |
 | `S2-TEMP-01` | `G0-S2-03` |
 | `S3-ACCT-01` | `G0-S3-04` |
 | `S3-CAND-01` | `G0-S3-05`, `G0-S3-06`, `G0-S3-07`, `G0-S3-08`, `G0-S3-09`, `G0-S3-10` |
@@ -32,15 +32,19 @@ The authoritative inventory is `seeds/generated/MANIFEST.json`. This table is a 
 | `S4-PROJ-01` | `G0-S4-07`, `G0-S4-08`, `G0-S4-09`, `G0-S4-10`, `G0-S4-11` |
 | `S4-REP-01` | `G0-S4-05` |
 
-**Counts:** 5 clean parents across 4 parent types · 27 seeds · 16 active predicates.
+**Counts:** 5 clean parents across 4 parent types · 28 seeds · 16 active predicates.
 
 Clean parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-Branch coverage — `S3-CAND-01` has coverage, exclusivity, unknown-id, rendered-set equality, missing
-reason and missing basis. The equality, missing-reason and missing-basis seeds are single mutations of
-the clean `NOT_RENDERED` parent, so they no longer overlap. `S4-PROJ-01` has schema (injected field),
-invented member, wrong value, fabricated payload and wrong-owner relation.
+Branch coverage — `S2-REP-01` has a structural empty-`support_refs` seed and a semantic-support seed:
+`G0-S2-02` keeps every id and support ref valid but adds the aspirin object `O07` to the falls
+representation, so the representation is unsupported by its members. `S3-CAND-01` has coverage,
+exclusivity, unknown-id, rendered-set equality, missing reason and missing basis. The equality,
+missing-reason and missing-basis seeds are single mutations of the clean `NOT_RENDERED` parent, so they
+no longer overlap. `S4-PROJ-01` has schema injection (`G0-S4-07`), invented member (`G0-S4-08`), true
+wrong-owner group (`G0-S4-09`), fabricated payload (`G0-S4-10`) and a valid-field fabricated duplicate
+group (`G0-S4-11`).
 
 Pending: `S2-ADOPT-02` (schema), `S4-ORD-01` (ordering oracle). Not produced by any pilot case:
 `S1-BODY-01`, `S2-REP-02`, `S2-CONF-01`.

@@ -49,6 +49,10 @@ another approved entry for the same problem. `claim_relations[].problem` and
 `claim_relations[].representation` are the selectors used by the S4 projection; an entry without
 either is a schema violation.
 
+Approval is semantic support, not member existence. The representation's `problem` identifies the S1
+candidate whose claim candidate(s) the members and relations must support; real object ids and support
+refs are necessary but not sufficient. `S2-REP-01` assesses that semantic support.
+
 ## S3 output
 
 ```yaml
@@ -125,8 +129,13 @@ audit named in `predicates.md`, not a Gate 0 structural check.
 ## S4 input view — exact source map
 
 `S4_INPUT_VIEW` is assembled at the seam. Every value is copied from the source named below. The
-projection authors nothing. The map is executable: `make_seeds.py` reads this block, applies one `op`
-per destination, and fails if a rule is missing, duplicated, or unknown.
+projection authors nothing. The map is the sole declared projection contract: `make_seeds.py` reads
+this block, binds every rule to a frozen op contract, applies one `op` per destination, and fails if a
+rule is missing, duplicated, unknown or mismatched.
+
+Each `op` also has a frozen contract in `make_seeds.py::OP_CONTRACTS`. The build compares every map
+rule field — destination, owner, source, source path, condition, requirement and transform — exactly
+against that contract and fails on any mismatch. The map and code cannot drift on declared metadata.
 
 **Gate 0 shape:** exactly one rendered problem. The frozen shape is singular; a case with zero or more
 than one rendered problem needs a new schema identity, not an improvised shape. `P`, `R`, `M`, and `T`
@@ -341,7 +350,7 @@ units:
 | `S1-AUTH-02` | absence of selected-claim fields in `candidates[*]` |
 | `S1-CAND-01` | `candidates[*]` vs oracle excluded concepts, by concept identity |
 | `S1-CAND-02` | `candidates[*].anchors` non-empty |
-| `S2-REP-01` | `representations[*].support_refs` non-empty |
+| `S2-REP-01` | `representations[*]` members, relations and `support_refs` versus the problem's claim; semantic support, not ref existence alone |
 | `S2-TEMP-01` | `adjudication[*].temporal` vs substrate |
 | `S2-ADOPT-01` | `adjudication[*].adoption` vs oracle |
 | `S3-CAND-01` | `candidate_outcomes` coverage, exclusivity, unknown ids, REASON-1 reason/basis, equality with `rendered` |

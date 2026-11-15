@@ -1,0 +1,49 @@
+{
+  "case": "CASE-01",
+  "parent_id": "S2_CASE01_CLEAN",
+  "parent_type": "S2_OUTPUT",
+  "registry": "PILOT-2",
+  "s2": {
+    "adjudication": [
+      {
+        "adoption": false,
+        "evidence": null,
+        "object": "O01",
+        "temporal": "2024-02 documented"
+      },
+      {
+        "adoption": true,
+        "evidence": [
+          "S02"
+        ],
+        "object": "O03",
+        "temporal": "June\u2013November"
+      }
+    ],
+    "claim_relations": [],
+    "duplicate_groups": [],
+    "relations": [
+      {
+        "from": "O04",
+        "to": "O03",
+        "type": "SUPPORTS"
+      }
+    ],
+    "representations": [
+      {
+        "id": "R1",
+        "members": [
+          "O03",
+          "O04",
+          "O07"
+        ],
+        "problem": "C1",
+        "selection_safe": true,
+        "support_refs": [
+          "S02"
+        ]
+      }
+    ]
+  },
+  "schema": "SCHEMA-2"
+}

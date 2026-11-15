@@ -59,7 +59,12 @@ fifth type.
 
 **Mechanical predicates** are deterministic. One run. A failure to fire is a scorer bug, not variance.
 
-**Semantic predicates** are model- or human-judged. Three runs. Calibration passes only if the seeded defect is detected in **all three**; two of three is a calibration failure, because a scorer that detects a planted defect two times in three cannot be trusted to detect a real one once.
+**Semantic predicates** are human-judged. Gate 0 requires **three independent blinded human
+judgments** per seed, each seeing artifact + case oracle + predicate rule only. Calibration passes only
+if all three detect the seeded defect **and** all three satisfy `FULL_SILENCE-WITHIN-LAYER`; two of
+three is a calibration failure. A single judge repeating is `1 judge × 3 passes`, not evidence. A
+mechanical pre-filter may prepare evidence but is not a judgment and cannot substitute for any of the
+three; if it fully decides the branch, that branch is mechanical and must be reclassified.
 
 ## 4. Seed requirements
 
@@ -106,7 +111,7 @@ For each parent type under test:
   2. run the scorer on each seed of that type          -> expect the named predicate to fire
   3. check attribution                                 -> expect the owning submodule
   4. check specificity                                 -> every other ACTIVE predicate in the seed's parent_type is SILENT
-  5. semantic modes: repeat 2-4 three times            -> expect detection 3/3
+  5. semantic HUMAN_REVIEW: three independent blinded judges each 2-4 -> detection 3/3 and specificity 3/3
 ```
 
 Steps 1 and 4 are the ones usually skipped, and they are the ones that make a pass meaningful.
@@ -115,9 +120,9 @@ Steps 1 and 4 are the ones usually skipped, and they are the ones that make a pa
 
 Gate 0 passes for a parent type when:
 
-- every seed of that type is detected, 3/3 for semantic modes;
+- every seed of that type is detected; mechanical one run, semantic 3/3 independent blinded judges;
 - every seed is attributed to the owning submodule;
-- for every seed, **every other ACTIVE predicate in the seed's `parent_type` is silent**;
+- under every judgment, **every other ACTIVE predicate in the seed's `parent_type` is silent**;
 - every clean parent of that type scores zero.
 
 It fails if any of those is false, including "detected but misattributed" — a finding attached to the wrong module sends the fix to the wrong place, which is worse than no finding. A single extra finding on another active predicate in the same layer is also a failure, not a warning.

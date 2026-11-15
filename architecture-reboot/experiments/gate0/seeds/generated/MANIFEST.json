@@ -46,7 +46,7 @@
       "S1-CAND-01": 1,
       "S1-CAND-02": 1,
       "S2-ADOPT-01": 1,
-      "S2-REP-01": 1,
+      "S2-REP-01": 2,
       "S2-TEMP-01": 1,
       "S3-ACCT-01": 1,
       "S3-CAND-01": 6,
@@ -64,20 +64,20 @@
       "S2-ADOPT-02",
       "S4-ORD-01"
     ],
-    "seed_mutations_checked": 27,
-    "seeds": 27
+    "seed_mutations_checked": 28,
+    "seeds": 28
   },
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:ec157ef28be3ac1da6d1fee782670d2b3ccd2da82616109c59926e8f370399d5",
+    "00-GATE0-MANIFEST.md": "sha256:fe51e5ecf3db87a50a90318a5dc1c89e54e7e13d5fa7ee4c50efe05021d4d018",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
-    "G0-SEEDS.md": "sha256:89abcf934f18f99daaf2eabe8c14c36c7bc951339b925a1f9ebc40651a7e8a05",
-    "make_seeds.py": "sha256:6bbfe43682bc606ed4e39a0db0506598e4e0c478b299edcac8eacbd645b06a54",
+    "G0-SEEDS.md": "sha256:620479896710d7575fbc94e7a2a6317d9fbcacf883ae25875abb6f1d922ae8c5",
+    "make_seeds.py": "sha256:eb9f7988354b7903a228ba59ab20d4f399f51a43d6e86617e97cb296183cc194",
     "oracle.json": "sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927",
-    "predicates.md": "sha256:3d92a334bd4b0fe3d5b65b38c15d3f6510991b9477d9b0ca27c7ed676dc47d08",
-    "schema.md": "sha256:c3e1100c7d2dfca19d10e45b21a5854a3abaec1a91abb840e3d7a8d2ffa790c8"
+    "predicates.md": "sha256:f6fd7174ade7678d531d2f6c04461fe6618a2e3c9ed2d550b7a208d6e30b2639",
+    "schema.md": "sha256:47d8afd3fe4380016dc618ccad30665536343f142820955bfa5687dbfc25f5c3"
   },
   "hash_methods": {
     "artifacts": "sha256 over canonical JSON (sorted keys, compact separators)",
@@ -124,7 +124,7 @@
   "registry": "PILOT-2",
   "schema": "SCHEMA-2",
   "seed_integrity": {
-    "checked": 27,
+    "checked": 28,
     "multi_diff": 0,
     "noop": 0,
     "rule": "each seed differs from its parent at exactly the declared path; manifest values are the checked diff"
@@ -220,6 +220,22 @@
           "before": "[\"S02\"]",
           "label": "[\"S02\"] -> []",
           "path": "/s2/representations/0/support_refs"
+        }
+      ],
+      "parent": "PARENT-S2_PARENT.json",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT"
+    },
+    {
+      "artifact": "G0-S2-02.json",
+      "hash": "sha256:9dfd9c2dbb7f5e3e1c6fc1ea59873a9ced6cd44ab3c66bb1d336b6bac08653e0",
+      "must_fire": "S2-REP-01",
+      "mutations": [
+        {
+          "after": "[\"O03\",\"O04\",\"O07\"]",
+          "before": "[\"O03\",\"O04\"]",
+          "label": "[\"O03\",\"O04\"] -> adds O07 medication",
+          "path": "/s2/representations/0/members"
         }
       ],
       "parent": "PARENT-S2_PARENT.json",
