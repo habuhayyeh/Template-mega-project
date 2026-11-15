@@ -3069,3 +3069,42 @@ NEXT:
 - run it on representative inputs before freezing responsibilities;
 - no architecture change, Gate-0 acceptance, Doximity or Phase 0 meanwhile.
 
+
+
+## 2026-11-15 · DeepSeek · Scribe V2 review
+
+COMMIT: pending
+TYPE: REVIEW — no implementation
+CHANGED:
+- `reviews/deepseek/022-scribe-v2-review.md`.
+
+VERDICT:
+- V2 is a real improvement; remaining work is prompt tuning, not architecture;
+- no new ontology, section type or pointer ledger.
+
+FIVE V2.1 ITEMS:
+1. NO-INFERENCE: ACCEPT, add explicit `[NO ANSWER CAPTURED]`; never turn silence into a negative.
+2. NO-REPAIR: MODIFY — delete the "correct obvious speech-to-text error" allowance; preserve raw content
+   words and use `[UNCLEAR: raw]`.
+3. ONE SPEAKER PER LINE: ACCEPT, with a joint-statement exception where each contribution stays labeled.
+4. EVENT NEGATIVES: MODIFY — preserve all explicitly stated event negatives, not a closed checklist.
+5. ABSENT/UNAVAILABLE FIELDS: ACCEPT, explicit-source-only; do not invent empty template fields.
+
+ADD:
+- inline `[CONFLICT: id]` for contradictions; never reconcile;
+- 20K `OMITTED` policy; never silently paraphrase to fit;
+- source order/date preserved;
+- exact-duplicate `DUP_OF` only for boilerplate;
+- compression removes filler, never propositions/qualifiers/rationale.
+
+EVIDENCE:
+- V2.1 on same case: no repair, no inferred negative, no merged speakers, event negatives, absent fields,
+  contradictions, char count;
+- one different de-identified case;
+- Ask on Scribe output vs raw input;
+- at least two runs per case.
+
+NEXT:
+- ChatGPT consolidates one final baseline prompt from V2 + these corrections;
+- then the controlled rerun; no architecture change or Gate-0 acceptance.
+
