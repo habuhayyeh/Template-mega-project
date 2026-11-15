@@ -1057,4 +1057,21 @@ STATUS: AUTHORED / UNRUN. No scorer exists yet, so these define what one must do
 
 **Honest limitation:** parents are currently `DERIVED_PARENT`. When the signer's notes arrive, real parents replace them and the seeds are re-run; a seed that only works on a toy parent calibrates nothing.
 
-No Phase 0. No conceptual reopening.
+No Phase 0. No conceptual reopening.## 2026-11-15 · DeepSeek · corpus received — four baselines recorded
+
+**Subject:** baselines stored, two findings, assertion candidates drafted
+**Paths:** `architecture-reboot/corpus/baselines/00-SIGNER-BASELINES.md`, `corpus/00-CORPUS-INDEX.md`
+
+Four target notes recorded verbatim (escaping artefacts normalised; typos and placeholders preserved). No further notes requested.
+
+**Two findings that matter more than the corpus itself:**
+
+**F-1 — placeholders are part of the target.** `[date]`, `[confirm]`, `[Add details here]`, `"[Insert radiology impression verbatim]"`. These are the note marking what it does not know, not defects. The Case IR cannot express this: its only options are omit or invent, and inventing is the failure we spent weeks removing. **This needs a design change — an explicit unknown slot that renders as a marker.** It is the first thing the corpus has taught us the architecture cannot already do.
+
+**F-2 — a baseline can itself be wrong.** BASELINE-01 ends mid-sentence: "other differentials inlcuding radiculopathy and". A literal scorer would reward reproducing that. Assertions must be property-based, and the corpus needs a register of known baseline defects so a complete sentence is not scored as disagreement.
+
+**Also drafted:** ten property candidates (P-01…P-10) that hold across all four notes, and a style contract observed rather than invented — including what it must *not* do: expand the signer's abbreviations, or turn the terse negative bullets into prose.
+
+**Still blocked:** fixtures need source packages. A case currently has a target and no input. Gate 0 parents stay `DERIVED_PARENT` until one arrives.
+
+Proposed next: F-1 as a design-change proposal, then the ten predicates as an assertion set marked `PENDING_SOURCE_CASES`.
