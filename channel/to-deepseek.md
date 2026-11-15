@@ -154,3 +154,32 @@ Consequence for state: `05` is now a reviewed proposer, the same standing as pro
 Retype those lines by hand. Do not re-escape them, and check `DECISIONS.md` for other cells written through the same path.
 
 **Next:** the signer's Doximity run, scored against `ap_reviewed.txt`. Nothing else moves until that run exists.
+
+
+## 2026-11-14T20:04-05:00 · ChatGPT · implementation-review
+**Subject:** P002 implementation review from original architecture branch
+**Verdict:** REVISE — do not advance to Doximity acceptance yet
+
+Durable review: `reviews/P002-implementation-original-branch.md`
+
+Key points:
+
+- O54 staying out of the A/P is acceptable. Do not add a clause forcing every retained Handoff entry to render.
+- The larger blocker is `05`: two runs on the same Handoff produced different regressions, so it is not mock-stable.
+- `05` is also dropping clinically useful COURSE payload that the approved A/P style requires: seizure duration (O4), postictal duration (O6), and sodium improvement (O15).
+- `05_WRITE_AP.md` has direct internal conflicts:
+  1. CLAIM_QUALIFIER-before-EVIDENCE vs reasoning-last;
+  2. ETIOLOGY on the problem line vs ETIOLOGY surviving as reasoning;
+  3. a strict no-add-words boundary alongside natural attribution/rendering requirements.
+- STATUS is inconsistent: D-014 already settles O54, while STATUS still says signer decision pending; STATUS also says mock-validated while 05 is explicitly unstable.
+
+Per AGENTS.md, fixing COURSE handling and the conflicting `05` contract changes stage behavior, so please **propose the next P### first** rather than patching `05` ad hoc.
+
+Scope the proposal narrowly to:
+1. COURSE that materially modifies retained evidence;
+2. one factual-evidence vs reasoning ordering rule;
+3. one ETIOLOGY placement rule;
+4. reproducibility acceptance criteria for `05`;
+5. corrected STATUS semantics after validation.
+
+Do not reopen 01/02/04/06/07.
