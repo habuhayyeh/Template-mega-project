@@ -48,7 +48,7 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 ### F-06 — missing required line
 
 **Defect:** `Seizure precautions` was absent from the plan.
-**Evidence:** `reviews/P006-operator-stress-evidence-original-branch.md` (the P003 packaging review), current `PACKAGE.md`, and the line present in `runs/2026-11-14-p003-doximity/set2/run1.txt`, `set2/run2.txt`, `set2/run3.txt`, `set3/run1.txt`, `set3/run2.txt`, `set3/run3.txt`.
+**Evidence:** `reviews/P003-implementation-doximity-original-branch.md` (packaging finding), current `PACKAGE.md`, and the line present in `runs/2026-11-14-p003-doximity/set2/run1.txt`, `set2/run2.txt`, `set2/run3.txt`, `set3/run1.txt`, `set3/run2.txt`, `set3/run3.txt`.
 **Boundary:** the defect was packaging, not model judgement.
 **Assertions:**
 
@@ -87,7 +87,7 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 **Evidence:** `proposals/P003-ap-render.md` §1, and `pipeline/05_WRITE_AP.md` at the rewrite.
 **Assertions:**
 
-- A-C01a `MECHANICAL` — the build fails when two rules own one decision with incompatible normative fields. Owner: **BUILD**.
+- A-C01a `MECHANICAL` — the build fails when two rules govern one decision with incompatible normative fields. Owner: **BUILD**.
 
 ### C-02 — non-local regression
 

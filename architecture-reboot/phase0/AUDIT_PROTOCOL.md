@@ -22,7 +22,7 @@ Used for: batch volume, where the source is large and most assertions concern th
 
 ### Mode B — full audit
 
-Inputs: artifact; Case IR; source package; check report; fixture assertions.
+Inputs: the artifact; the fixture assertions; and whichever of source package, Case IR or check report the assertions under review require. The Case IR is included only where an assertion concerns it.
 
 Answerability is again per assertion: source-dependent assertions become decidable here, and the rest are decided as in Mode A.
 

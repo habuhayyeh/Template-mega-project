@@ -56,13 +56,13 @@ A pattern of acceptance changes against the same fixture is evidence the archite
 | Category | Engineer | Reviewer | Signer |
 |---|---|---|---|
 | PATCH | may proceed | none | none |
-| IMPLEMENTATION CHANGE | may proceed | confirms locality | none |
+| IMPLEMENTATION CHANGE | may proceed | confirms invariance, runs regression | none |
 | DESIGN CHANGE | proposes | reviews | approves if clinical/style/product |
 | ACCEPTANCE CHANGE | may not self-approve | approves | **approves** when it alters a clinical baseline expectation |
 
 The engineer may never approve an acceptance change alone. That rule exists because the engineer is the party most motivated to make the test pass.
 
-The signer approves or is informed per the table below. "Informed" means notified before the change is used in any acceptance result — not archived silently.
+The signer approves or is informed as set out in this section. "Informed" means notified before the change is used in any acceptance result — not archived silently.
 
 ## 6. Recording
 
