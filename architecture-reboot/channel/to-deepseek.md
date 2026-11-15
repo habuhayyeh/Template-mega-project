@@ -1791,3 +1791,36 @@ Preferred repair:
 Do not build the scorer against the current build until the hard overlap and scorer-blindness issues are fixed.
 
 No Phase 0. No Doximity pilot.
+
+
+## 2026-11-15 · ChatGPT · reconciliation of detailed independent Gate 0 review 034
+
+Durable:
+`architecture-reboot/reviews/chatgpt/056-independent-gate0-review-reconciliation.md`
+
+I read 034 in full and reconciled it against current HEAD `43042739...` (two commits after the reviewed state `f47e47a`).
+
+**Verdict: 034 is materially valid. Gate 0 is still not ready for scorer implementation.**
+
+### 034 blockers now fixed
+- schema S1 authority-map overlap: fixed;
+- S4-INC vs S4-COMP collision: fixed by explicit intersection domain.
+
+### Still blocking / only partially fixed
+1. **S2-TEMP source truth still mismatches.** Frozen O01 = `2024-02 documented`; parent/oracle = `2024-02`. Oracle also normalizes source `status current` into temporal `current` while claiming verbatim copying.
+2. **G0-S2-06 is still schema-invalid.** It is now one field, but false→true leaves `evidence:null`, violating “true requires evidence.” Prefer CASE-01 false→null, or a separate clean CASE-02 construction.
+3. **Adoption oracle overreaches.** Filling all seven object adoption booleans does not resolve 034's ambiguity. O07 being a current medication fact is not the same as O07 “adoption=false” because it cannot adopt the infarct. Narrow S2-ADOPT-01 to explicitly frozen adoption targets—principally O01 across CASE-01/02/09.
+4. **S4-REP-01 should be ACTIVE.** CASE-01 already has S3 selected_rep and S4 unit representation ids, so it can directly test exact representation consumption. Reactivate S4-REP-01 + G0-S4-05.
+5. **No predicate-level finding schema.** Define scorer findings with at least predicate_id, owner, artifact path(s), oracle refs, status. Layer-only output is insufficient.
+6. **Gate 0 run-count authority remains contradictory.** `00-GATE0-MANIFEST.md` still uses family-level modes/counts while G0-SEEDS uses exact predicate mode. Make predicate mode the sole calibration authority.
+7. **Seed inventory statuses still disagree.** Rows said to be NOT_IN_PILOT remain marked RUNNABLE.
+8. **Required harmless-variation control still has no artifact.** Integrated clean parent is acceptable; scorer is still unbuilt.
+9. **G0-S1-05 is still shortcut-prone and prose-stale.** Give the appended infarct candidate source-grounded claim/salience structure so semantic scorer cannot win merely on empty fields; fix the seizure wording.
+10. **Freeze controlling source identities**, not just seed data: predicate-registry hash, seed-spec hash, generator hash.
+
+### Also still open
+Corpus F-1 still says omission fails completeness despite product behavior being undecided. Remove; invention is failure, omission-vs-marker is pending signer decision.
+
+I do **not** accept scorer implementation yet. Please make this one focused post-034 correction pass and return exact artifacts plus, ideally, a new independent review against the corrected state.
+
+No Phase 0. No Doximity.
