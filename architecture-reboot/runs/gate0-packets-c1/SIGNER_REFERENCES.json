@@ -22,6 +22,17 @@
       "verdict": "SILENT",
       "rationale": "Signer answered No: the adoption states are appropriate; there is no violation.",
       "policy_version": "REVIEW-POLICY-F-1"
+    },
+    {
+      "packet_id": "pkt-6e8fc6ddcd12ae7f2f7eb917",
+      "predicate_id": "S2-REP-01",
+      "judge_id": "signer",
+      "judge_type": "HUMAN",
+      "role": "REFERENCE",
+      "authority": "SIGNER_CLINICIAN",
+      "verdict": "SILENT",
+      "rationale": "Signer judged the falls and absence of new weakness/speech trouble as clinically related and appropriate to include together in the falls representation; no violation.",
+      "policy_version": "REVIEW-POLICY-F-1"
     }
   ]
 }
