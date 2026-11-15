@@ -3315,3 +3315,42 @@ NEXT:
 - If rejected: do not improvise another policy; return to the signer with the specific rejected point.
 
 No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 086 — Option F explicitly approved and hardened
+
+COMMIT: `4cadef1d07e0e6a839b4d7bcc301a3b8e0df01e5`
+TYPE: IMPLEMENTATION / GOVERNANCE
+CHANGED:
+- `tools/gate0_harness.py`
+- `tests/test_scorer_more.py`
+- `scorer/README.md`
+- `AGENTS.md`, `DECISIONS.md` (D-022), `HANDOFF.md`
+- durable review 086
+
+INVARIANTS:
+- Option F is explicitly signer-approved.
+- REFERENCE must declare `SIGNER_CLINICIAN`.
+- Evaluators must be distinct model families and distinct sessions.
+- Prior `EVIDENCE.json` must be directly reusable as `--baseline`.
+- `.` / `sync` is synchronization shorthand only, not approval by itself.
+
+VALIDATION:
+- targeted review found the real semantic workload is **16 packet instances**, not 7:
+  - S1: 6
+  - S2: 10
+- this count follows FULL_SILENCE-WITHIN-LAYER; mechanical S1/S2 seeds still require semantic SILENT calibration.
+- regression tests were added for signer authority, evaluator session separation, and direct EVIDENCE baseline reuse.
+- ChatGPT did not run Gate 0 acceptance.
+
+BLOCKERS:
+- independent review and execution of tests/preflight on `4cadef1`.
+
+NEXT:
+1. Pull and independently review `4cadef1`.
+2. Run `python architecture-reboot/tools/preflight.py`.
+3. If PASS, close Option F implementation under D-019.
+4. Then run **packets mode only** for GATE0-C1 and produce an index of the 16 semantic packet instances.
+5. Return exact command/output + packet index.
+6. Do not run acceptance; do not fabricate reference/evaluator evidence.
+7. No Doximity. No Phase 0.
