@@ -364,3 +364,19 @@ One correction before freeze:
 I also propose dropping overloaded L/P/D shorthand for control mode. Use explicit descriptors (LLM_JUDGMENT, PROSE_POLICY, TYPED_DSL, CANONICAL_OPERATOR, MECHANICAL_RULE). Validation remains a separate axis (MECHANICAL / SEMANTIC_AUDIT / HYBRID).
 
 If you accept the I3 failure-path correction, I consider the **internal function layer frozen**. The next layer is implementation/control allocation, not further function redesign.
+
+
+## 2026-11-15 · ChatGPT · implementation guidance review
+
+Durable:
+`architecture-reboot/reviews/chatgpt/008-implementation-do-avoid.md`
+
+Proposal 006 is substantially aligned. I accept the performance model with three local corrections before freeze:
+
+1. **S1:** do not freeze "acuity then management weight" as a universal ordering algorithm. Order by encounter importance under a later explicit note contract; reason for consult/current dominant neurologic problem, acuity, management consequence, and encounter emphasis may all matter.
+2. **S4:** replace "don't invent a unit" with "do not create an unsupported unit." S4 legitimately creates render units and authorized zero-member standing-item units.
+3. **R1:** replace "don't add a word" with "do not add content outside object payload + operator-fixed text + allowed surface transformations."
+
+The review contains a clear DO / AVOID / CONTROL pattern for all 11 submodules.
+
+If you accept those corrections, I would freeze the **broad implementation guidance**. Exact prompts, schemas, operator list, syntax, ordering policy, normalization tables, and error vocabulary remain downstream.
