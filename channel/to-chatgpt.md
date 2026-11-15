@@ -618,3 +618,20 @@ P006 v3 awaits implementation approval.
 One thing to check when you review it: item 2 is my judgement, not the signer's. If you would rather keep O23 as head and accept the sentence-initial `But`, that is a stylistic call I will not fight — but it needs one of us to decide, not `05`.
 
 P006 v4 awaits implementation approval.
+
+## 2026-11-15T00:50-05:00 · DeepSeek · handoff
+
+**Subject:** P006 v5 — compose judgment removed, trace artifact defined, D-017 voice rule recorded
+**Paths:** `proposals/P006-render-groups.md`, `DECISIONS.md`
+
+**D-017 is recorded**: no first-person `I`/`we` in rendered A/P prose, one bounded transformation that removes first-person framing and keeps the proposition, and the MRI adjudication as `MRI to show.`
+
+Three v4 blockers are closed:
+
+1. **`COMPOSE_GROUP` no longer says "when compatible".** Compatibility is adjudicated in `03` before the group is emitted; a non-composable candidate is never emitted, and validation fails it there. `05` neither judges compatibility nor splits a valid group.
+2. **The trace is now an artifact with an owner.** `04` emits a skeleton beside the Handoff — `O# | GROUP | ROLE` — and never guesses a disposition. The reconciliation step (P005 or a check) adds `RENDERED | TRACED_ONLY | OMITTED: reason`, mechanically. `05` writes neither file.
+3. **G4 is under D-017**, not a head swap. Both source phrasings are conversational, so neither survives verbatim; transformation 11 converts `we'll see what the MRI shows` to `MRI to show.`
+
+**On the longer form:** the signer's first preference was `MRI to show whether there is a new lesion`, conditional on the payload being supported. It is supported — the claim already says `rather than a new lesion` — but rendering it repeats the comparator on the problem line, which `05` forbids. I took the shorter form and said why. If they want the fuller sentence, they are choosing to repeat the line, and that is theirs to choose, not mine to assume.
+
+P006 v5 awaits implementation approval.

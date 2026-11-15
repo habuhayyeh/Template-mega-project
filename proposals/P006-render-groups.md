@@ -1,6 +1,6 @@
-# P006 v4 — explicit render, reasoning and compose groups
+# P006 v5 — explicit render, reasoning and compose groups
 
-**Status:** v4, revised after `reviews/P006-v3-original-branch.md` and the signer's G1 decision. Scope fixed by **D-016**. Awaiting implementation approval.
+**Status:** v5, revised after `reviews/P006-v4-original-branch.md` and the signer’s voice decision (D-017). Scope fixed by D-016. Awaiting implementation approval.
 **Affects:** `pipeline/03_SELECT_ORGANIZE.md`, `pipeline/04_ASSEMBLE.md`, `pipeline/05_WRITE_AP.md`, `oracles/` (groups file, append-only), `tests/`, `runs/`.
 **Does not affect:** substrate, `01`, `02`, `06`, `07`, the six kinds.
 
@@ -37,9 +37,9 @@ Rules: exactly one `HEAD` per group; every member keeps its `O#` and provenance;
 
 - **`FACT_GROUP`** — one bullet: head, plus modifier if any. Sits in the facts block.
 - **`REASON_GROUP`** — one bullet: head verbatim. Sits in the reasoning block, in its existing position.
-- **`COMPOSE_GROUP`** — one plan line: head plus condition when compatible. Sits in its plan bucket. A `COMPOSE_GROUP` with no condition is malformed.
+- **`COMPOSE_GROUP`** — one plan line: `HEAD` plus `CONDITION`. Sits in its plan bucket. Compatibility is adjudicated in `03` before the group is emitted; a non-composable candidate is never emitted as a `COMPOSE_GROUP`, and validation fails it there. `05` neither judges compatibility nor splits a valid group.
 
-`05` does not choose a head, decide equivalence, or compose. It renders the head and folds what the group marks as foldable.
+`05` does not choose a head, decide equivalence, judge compatibility, or compose. It renders the head and folds what the group marks as foldable.
 
 ## 4. Ungrouped objects
 
@@ -69,19 +69,47 @@ Grouping creates no new ordering system:
 | G1 | FACT | HEAD O7 `known left MCA infarct`; MODIFIER O8 `two years ago`; COVERED O53 | `Known left MCA infarct two years prior to presentation (also documented by prior neurology, 2024-02).` |
 | G2 | COMPOSE | HEAD O12 `apixaban held since admission`; CONDITION O25 | `Apixaban held since admission, to resume once MRI excludes hemorrhage.` |
 | G3 | FACT | HEAD O17 `CT head no hemorrhage`; COVERED O44 | `CT head no hemorrhage.` |
-| G4 | REASON | HEAD O39 `we'll see what the MRI shows`; COVERED O23 | `We'll see what the MRI shows.` |
+| G4 | REASON | HEAD O39 `we'll see what the MRI shows`; COVERED O23 | `MRI to show.` |
 | G5 | FACT | HEAD O34 `family's concern … is not today's issue`; COVERED O32 | `Family's concern about her memory is not today's issue.` |
 
 Deliberate choices:
 
 - **G1 carries documentation provenance, not event timing.** The signer chose the explicit form: clinical timing from O8, and O53's `2024-02` shown as a documentation date. The parenthesis says `also documented by`, so it cannot be read as the infarct's date.
-- **G4's head is O39, not O23.** O23 begins with `but`; rendering it verbatim gives `But the MRI will tell us.`, and dropping the conjunction is not among the ten transformations. Choosing the other member upstream avoids an unauthorized edit — `HEAD` selection is `03`'s decision, not a paraphrase licence.
+- **G4 is impounded by D-017.** Neither source phrasing survives verbatim: `we'll see what the MRI shows` and `but the MRI will tell us` are conversational, and the A/P voice is impersonal. A new bounded transformation 11 removes first-person framing and keeps the proposition: `we'll see what the MRI shows` becomes `MRI to show.` The longer `MRI to show whether there is a new lesion` is rejected here because it repeats the comparator already on the problem line.
 - **G5 renders the head verbatim.** Deleting `is` and rewriting the clause would be a syntax change no transformation permits.
 - **G3 renders one head only.** Joining `no hemorrhage` and `no acute abnormality` needs a word neither contains.
 
 `O18` encephalomalacia and `O19` no new focal lesion stay ungrouped and remain subject to eligibility.
 
-## 8. Validation
+## 8. The trace artifact
+
+Ungrouped omission happens inside `05`, so one artifact cannot know everything. Ownership is split:
+
+**`04` emits the skeleton**, beside the Handoff, one row per retained `O#`:
+
+```text
+O7   | GROUP=G1 | ROLE=HEAD
+O8   | GROUP=G1 | ROLE=MODIFIER
+O53  | GROUP=G1 | ROLE=COVERED
+O18  | UNGROUPED | ROLE=NONE
+```
+
+**The validator reconciles it against the output** (P005, or a check step), one row per `O#` with its final disposition:
+
+```text
+O7   | GROUP=G1 | ROLE=HEAD      | RENDERED
+O53  | GROUP=G1 | ROLE=COVERED   | TRACED_ONLY
+O18  | UNGROUPED | ROLE=NONE     | RENDERED
+O2   | UNGROUPED | ROLE=NONE     | OMITTED: not material to this claim
+```
+
+- `04` owns `GROUP` and `ROLE`; it never guesses a disposition.
+- The reconciliation step owns `RENDERED | TRACED_ONLY | OMITTED: reason`, and it is mechanical: it looks for the head's words in the output, and for every `O#` exactly once.
+- `05` never writes either file. It receives the Handoff and the group lines, and emits prose only.
+
+That is what makes "every O# accounted for" checkable instead of aspirational: one skeleton, one reconciliation, two writers, no overlap.
+
+## 9. Validation
 
 1. every grouped `O#` is retained; no object in two groups; no group spans problems or classes;
 2. exactly one `HEAD` per group;
@@ -92,11 +120,12 @@ Deliberate choices:
 
 P005 checks conformance to these groups; it does not search prose for semantic duplicates.
 
-## 9. Not fixed here
+## 10. Not fixed here
 
 - Whether a group is clinically right — `03` decides, review audits it.
 - Wording drift below the group level.
 - `COURSE` classification, standing-item evaluation, evidence include-flags, management canonicalisation — all **out of scope under D-016**.
+- Transformation 11 (impersonal voice) is in scope because D-017 requires it and the frozen case cannot be rendered without it. It is bounded to first-person removal, not paraphrase.
 
 ## Out of scope
 
