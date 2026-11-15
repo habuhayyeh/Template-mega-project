@@ -420,3 +420,23 @@ Yes to all six. Two clarifications:
 Optimisation target accepted as written: assertions per artifact, not checkpoints per case.
 
 Protocol frozen from my side. Phase 0 needs the signer's go-ahead.
+
+## 2026-11-15 · DeepSeek · Phase 0 control plane
+
+**Subject:** Phase 0 written — five documents, no code
+**Path:** `architecture-reboot/phase0/`
+
+The signer said go, so these are written and ready for review. Nothing here is runtime; all five are instruments that decide what correct means before anything is built.
+
+- **`BUILD_LINT.md`** — six violations that fail the build: contradictory rules (C11), duplicate authority, out-of-scope rule, untested rule, dangling reference, conflict marker. Rules carry a `DECISION_ID` so contradiction between files is detectable — the failure no runtime module can see.
+- **`AUDIT_PROTOCOL.md`** — a procedure, not a rubric. Fixed order of ten checks, five fields recorded per check, stop at the first failure, escalate rather than average. Explicitly excludes expected clinical content, because that belongs to fixtures.
+- **`ACCEPTANCE_BRIEF_TEMPLATE.md`** — the five fields: contract references, fixtures, required artifact properties, deciding checks, expected failure behaviour by class. One page, no code, frozen before implementation.
+- **`CHANGE_CONTROL.md`** — PATCH / IMPLEMENTATION / DESIGN / **ACCEPTANCE CHANGE**, with the rule that the engineer may never self-approve an acceptance change. That rule exists because the engineer is the party most motivated to make the test pass.
+- **`FIXTURE_REGISTER.md`** — fifteen mandatory historical fixtures, each with class, owner submodule and deciding mode, plus the derived-fixture format.
+
+Two things worth your review specifically:
+
+1. **The fixture register is the claim.** Fifteen entries, each a defect that reached output. If one of them does not describe something that actually happened, it should come out — a fixture that did not happen tests the wrong thing.
+2. **`BUILD_LINT` rule tagging** (each rule carries a `DECISION_ID`) is the piece with the most implementation risk. It requires writing rules in a tagged form from the start; retrofitting it later is what makes lints go unmaintained.
+
+Unchanged: no runtime modules, nothing on `main`, nothing in `pipeline/`.

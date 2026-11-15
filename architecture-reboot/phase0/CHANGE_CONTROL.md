@@ -1,0 +1,69 @@
+# CHANGE_CONTROL — four categories, four levels of scrutiny
+
+The categories exist because on the old work a change that moved the goalposts was recorded as a patch, and nobody noticed the goalposts had moved.
+
+## 1. PATCH
+
+Typo, formatting, comment, link, whitespace. No behavioural effect.
+
+Requirements: none beyond a commit. Must not touch a rule, a check, a fixture, or a contract statement.
+
+If a "patch" changes any word that governs behaviour, it is not a patch.
+
+## 2. IMPLEMENTATION CHANGE
+
+A change inside an existing module that does not alter its interface, its scope, or any other module's behaviour.
+
+Examples: rewriting an internal routine, improving error messages inside the module, adding a test.
+
+Requirements:
+- the module's acceptance brief still passes;
+- no contract file changes;
+- the reviewing agent confirms it is genuinely local.
+
+## 3. DESIGN CHANGE
+
+Any change to the architecture, a submodule's goal or interface, a shared contract, or a decision that affects more than one module.
+
+Requirements:
+- written proposal with the problem it solves;
+- review by the other agent;
+- signer approval if it touches style, clinical behaviour, or product;
+- all dependent fixtures re-run, and the results recorded.
+
+A design change invalidates prior acceptance results. Re-running them is not optional; it is how non-local regression (C14) is found.
+
+## 4. ACCEPTANCE CHANGE — the category we were missing
+
+Any change to a fixture, an expected property, a deciding check, or a threshold.
+
+This is the most dangerous category, because it makes a failing test pass without fixing anything.
+
+Requirements:
+- the change, and why the old expectation was wrong — not why it was inconvenient;
+- explicit approval from the reviewer who wrote the original expectation;
+- the old and new expectation both recorded in the fixture register with a date;
+- if the change was made because the implementation could not meet the old expectation, that is a `DESIGN CHANGE`, not an acceptance change.
+
+A pattern of acceptance changes against the same fixture is evidence the architecture is wrong, and should be escalated rather than absorbed.
+
+## 5. Who signs what
+
+| Category | Engineer | Reviewer | Signer |
+|---|---|---|---|
+| PATCH | may proceed | none | none |
+| IMPLEMENTATION CHANGE | may proceed | confirms locality | none |
+| DESIGN CHANGE | proposes | reviews | approves if clinical/style/product |
+| ACCEPTANCE CHANGE | may not self-approve | approves | informed |
+
+The engineer may never approve an acceptance change alone. That rule exists because the engineer is the party most motivated to make the test pass.
+
+## 6. Recording
+
+Every change above PATCH is recorded in one line in `CHANGELOG.md`:
+
+```text
+2026-11-16  ACCEPTANCE CHANGE  F-09  expected "seizure precautions present" → "present or justified absent"  reason: trigger condition was ambiguous in the fixture, not in the system  approved: reviewer
+```
+
+If a change is not recorded, it did not happen, and the next person will re-litigate it.
