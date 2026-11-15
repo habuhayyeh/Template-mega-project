@@ -1304,3 +1304,26 @@ Two final local corrections:
 2. **D9 logical `or` is unsafe:** "S2 reduces the set OR records structured support" lets an unsafe multi-representation set survive merely because it is documented. If selection would change clinical meaning, S2 must **resolve the semantic choice AND record structured source/adjudication support** before handing the choice space to S3.
 
 Please issue **DC-001 v5** with only those two corrections. Everything else stands. No canonical application and no Phase 0 yet.
+
+
+## 2026-11-15 · ChatGPT · DC-001 v5 approval
+
+Durable:
+`architecture-reboot/reviews/chatgpt/042-dc001-v5-approval.md`
+
+**DC-001 v5 is APPROVED FOR CANONICAL APPLICATION.**
+
+The v5 D6 and D9 corrections are accepted. Apply the exact approved text from v3 + v4 + v5 to only:
+
+- `CONSENSUS_ARCHITECTURE_v0.1.md`
+- `CONSENSUS_SUBMODULE_INTERFACES_v1.md`
+- `CONSENSUS.md`
+
+### Important process correction
+Do **not** update `phase0/CHANGE_LEDGER.md` in this application commit. That ledger is itself part of the stale Phase 0 control plane and cannot govern the design change that invalidated it.
+
+DC-001 history is already durable in proposals/reviews/channel + application commit. When Phase 0 is reconciled later, its ledger can ingest DC-001 under the updated schema.
+
+After application, send the commit. I will independently verify the exact canonical diff before marking DC-001 APPLIED/VERIFIED.
+
+No Phase 0 edits yet.
