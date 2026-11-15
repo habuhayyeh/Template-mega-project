@@ -2834,3 +2834,108 @@ Separate operational issue:
 Gate 0 semantic completion requires three independent human judges under the accepted policy. ChatGPT and DeepSeek are not human judges. Do not silently count them or weaken the rule in code. This does not block scorer construction, but it does block semantic Gate 0 completion until practically satisfied or deliberately changed through governance.
 
 No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · scorer/harness implementation brief after review 081
+
+State confirmed by signer:
+- local + remote at `999c855`;
+- working tree clean;
+- review 081 accepted the execution source contract;
+- scorer construction is authorized;
+- Gate 0 remains unrun;
+- three-independent-human-review prerequisite remains outstanding;
+- scorer has not yet been started.
+
+### Implement next: scorer + Gate 0 harness only
+
+Do **not** run Gate 0 in the same pass.
+
+The implementation must consume the accepted campaign contract without redefining it:
+
+- campaign: `GATE0-C1`
+- registry: `PILOT-2`
+- active set: `ACTIVE-PILOT-2`
+- schema: `SCHEMA-2`
+- oracle: `ORACLE-2.0`
+- reason registry: `REASON-1`
+- specificity: `FULL_SILENCE-WITHIN-LAYER`
+- current five clean-parent identities
+- current 28-seed manifest
+
+### Required scorer/harness behavior
+
+1. **Blindness**
+   - scorer input = artifact + oracle + predicate registry/rules only;
+   - scorer must not receive seed id, expected predicate, mutation metadata, manifest answer key, or expected specificity set.
+
+2. **Mechanical predicates**
+   - deterministic implementation;
+   - no semantic fallback;
+   - one evaluation per artifact;
+   - explicit finding path/evidence.
+
+3. **HUMAN_REVIEW predicates**
+   - scorer/harness generates a blinded review packet;
+   - packet includes only material required by the predicate;
+   - records judge id and structured judgment;
+   - does not auto-decide semantic predicates;
+   - mechanical prefilters may prepare evidence but cannot substitute for a human verdict.
+
+4. **Specificity**
+   - harness, not scorer, owns answer-key comparison;
+   - expected predicate must fire;
+   - every other ACTIVE predicate in that `parent_type` must remain silent.
+
+5. **Clean parents**
+   - every clean parent expects zero findings.
+
+6. **UNDECIDABLE**
+   - must be first-class;
+   - must never be silently coerced to PASS or SILENT.
+
+7. **Evidence records**
+   Capture at minimum:
+   - scorer version/hash;
+   - campaign/registry/schema/oracle identities;
+   - governing hashes;
+   - artifact hash;
+   - parent id/type;
+   - findings;
+   - human-review packet id where relevant;
+   - judge id + judgment record where relevant;
+   - harness verdict;
+   - timestamp/run id if the implementation already has a stable mechanism.
+
+8. **Answer-key separation**
+   - scorer module must not import/read the seed manifest or mutation metadata;
+   - harness may read them for expected-result comparison;
+   - add a negative/self-test proving scorer execution cannot access the answer key.
+
+9. **Aggregation**
+   - mechanical predicates: direct deterministic verdict;
+   - HUMAN_REVIEW: harness supports three independent blinded judgments but do not fabricate them;
+   - semantic Gate 0 must remain incomplete until three genuine human judgments exist;
+   - 2/3 is failure under the accepted contract.
+
+10. **Failure containment**
+   - malformed artifact / missing oracle dependency / unknown predicate / missing human judgment => explicit non-pass state;
+   - no silent repair;
+   - no raw-source rescue outside the accepted scorer inputs.
+
+### Deliverables for next review
+
+Return:
+- exact scorer implementation path(s);
+- exact harness path(s);
+- any machine-readable finding/result schema;
+- unit/self-tests, especially blindness and specificity separation;
+- sample dry-run outputs using synthetic/internal test fixtures only;
+- explanation of how HUMAN_REVIEW packets are produced and stored;
+- proof that no Gate 0 acceptance run was executed.
+
+Then stop for ChatGPT review before Gate 0 execution.
+
+Do not change the accepted source contract unless implementation exposes a genuine contradiction. If that happens, stop and report the contradiction rather than compensating in code.
+
+No Doximity. No Phase 0.
