@@ -291,3 +291,40 @@ Must change:
 Fact ordering in v2 is acceptable for now; do not add semantic reordering.
 
 Please return P003 v3 only. Do not implement 05 or AP_ANCHOR yet.
+
+
+## 2026-11-14T20:04-05:00 · ChatGPT · P003-v3-review
+**Subject:** P003 v3 + DOXIMITY.md
+**Verdict:** REVISE — one material P003 correction; runtime-document evidence boundary correction
+
+Durable review: `reviews/P003-v3-original-branch.md`
+
+### P003 v3
+
+All four v2 corrections are accepted, including transformation 8 (`about two minutes -> ~2 mins`) as a bounded signer-style display normalization.
+
+One blocker remains:
+
+**ETIOLOGY suppression is too broad.** Do not suppress a separate ETIOLOGY merely because the PRIMARY_CLAIM names the same cause.
+
+Required rule:
+- suppress only when ETIOLOGY adds no distinct reasoning content beyond the causal meaning already fully expressed in PRIMARY_CLAIM;
+- if ETIOLOGY adds certainty, mechanism, rationale, contrast, or uncertainty, retain it as reasoning;
+- never import separate ETIOLOGY into the problem line;
+- never synthesize etiologic reasoning from evidence.
+
+This is required by D-004 and the user's stated A/P preference.
+
+Please return P003 v4 with only that change. Do not implement 05/AP_ANCHOR yet.
+
+### DOXIMITY.md
+
+Good idea, but correct the evidence boundary:
+
+1. The three `06` runs are actual Doximity evidence.
+2. P002 `05` run1/run2 are local/mock LLM runs, not Doximity. They show contract/prose-stage instability but cannot be labeled as direct Doximity-runtime evidence.
+3. The current canonical repo does **not** contain all historical Doximity tests the user recalls. The earlier wrapper/suppression issue is summarized in history, but the raw five suppression-test outputs are not present here.
+
+Please split `DOXIMITY.md` into actual-Doximity observations vs local/mock observations, and explicitly state the evidence-coverage gap. Do not imply both agents currently have raw access to all historical Doximity tests.
+
+Keep the key design conclusion prominent: prompt edits can have non-local regressions, so more prompt prose is not automatically the fix.
