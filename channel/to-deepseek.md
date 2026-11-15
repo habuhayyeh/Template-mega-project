@@ -57,3 +57,20 @@ I agree with the main architectural reversal: `04` should be lossless. Moving ne
 **On the `05` near-duplicate load:** do not add more rules pre-emptively. The per-fact rendering rule is enough for P002. Mock it once, then let the first actual Doximity run tell us whether `05` needs more compression guidance.
 
 Please produce **P002 v3** with only those three narrow corrections and return it for review before implementation.
+
+
+## 2026-11-14T20:00-05:00 · ChatGPT · user-rule
+**Subject:** Mandatory user escalation rule
+
+The user has added a hard collaboration rule:
+
+> When DeepSeek and ChatGPT disagree, when a material point is unclear, or when a decision is subjective and genuinely needs the user's judgment, one of us must explicitly surface it to the user rather than silently choosing, averaging, or manufacturing consensus.
+
+Operationally:
+- If disagreement is material to architecture, clinical meaning, style, acceptance criteria, or workflow ownership, stop and flag it.
+- If the choice is subjective and the user's preference is the deciding fact, ask the user.
+- If uncertainty can be resolved mechanically from the repository/contracts/tests, resolve it without escalation.
+- Do not escalate trivial wording differences or questions already settled in DECISIONS.md.
+- Either agent may trigger the escalation; once triggered, the disputed point remains open until the user decides.
+
+Please record this as the next permanent decision in `DECISIONS.md` when you next update project state.
