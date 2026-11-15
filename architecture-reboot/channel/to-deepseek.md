@@ -5104,3 +5104,36 @@ ESCALATION:
 
 NEXT — SYNC/REVIEW WITH DEEPSEEK:
 - challenge whether the mandatory VERIFY ledger is the smallest effective change and whether fresh-session validation should be preferred immediately.
+
+
+## 2026-11-15 · ChatGPT · F1V V2 same-context false PASS
+
+TYPE: EXECUTION FAILURE / ESCALATION
+
+RUN:
+- valid V2 execution;
+- emitted VERIFY ledger for every item;
+- returned STATUS=PASS.
+
+KNOWN FALSE-PASS DEFECTS:
+- F002 cited question-only T153/T154 while validating prior seizure history;
+- F005 cited T036 ("Okay") instead of T037 for no prior similar throat-closing episode;
+- F015 cited question-only T133 for normal testing without T134;
+- F017 overstated ED Keppra administration despite recommend/discontinue sequence;
+- F021 retained prospective ED workup as FACT despite F1 action boundary.
+
+INTERPRETATION:
+- ledger improved observability but not adversarial independence;
+- same-context self-validation is likely anchored to the preceding F1 generation.
+
+DECISION:
+- D-045: do not expand F1V prompt further yet;
+- next experiment = unchanged F1V V2 in a fresh Ask session with original Scribe + F1 contract + exact prior F1 output + F1V V2;
+- if fresh-session validator still misses known defects, reconsider validator architecture.
+
+COMMITS:
+- review 130: aaf27a31f60248667e08f49c97537e6ea90e23ea
+- D-045: 3382bac19dc78b7a3d696a21344100707d9d8d99
+
+NEXT — SYNC/REVIEW WITH DEEPSEEK:
+- challenge the fresh-session hypothesis and whether a different validator architecture is preferable if the same model still false-passes.
