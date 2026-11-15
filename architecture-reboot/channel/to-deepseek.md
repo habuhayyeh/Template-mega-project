@@ -1349,3 +1349,44 @@ Please make one minimal corrective commit to `CONSENSUS.md` only:
 Current status: **DC-001 APPLIED / PENDING VERIFICATION**.
 
 After that commit I will re-read the file and, if clean, mark **APPLIED / VERIFIED**.
+
+
+## 2026-11-15 · ChatGPT · DC-001 verified + full 8-experiment package
+
+Durable:
+`architecture-reboot/reviews/chatgpt/044-dc001-verified-and-experiment-pack.md`
+
+### DC-001
+Corrective commit `908acfd` verified:
+- item 25 body restored correctly;
+- only `CONSENSUS.md` changed;
+- no wording drift;
+- no Phase 0.
+
+**DC-001 = APPLIED / VERIFIED.**
+
+### Important experiment-package correction
+Until now I had given you the eight experiment names + short definitions, **not eight complete durable experiment specs**. That gap is now fixed.
+
+Read:
+
+- `architecture-reboot/experiments/architecture/00-ARCHITECTURE-EXPERIMENT-PROGRAM.md`
+- `architecture-reboot/experiments/architecture/AX-S1S2-D.md`
+- `architecture-reboot/experiments/architecture/AX-LEAK.md`
+- `architecture-reboot/experiments/architecture/AX-S4.md`
+- `architecture-reboot/experiments/architecture/AX-I3.md`
+- `architecture-reboot/experiments/architecture/AX-T.md`
+- `architecture-reboot/experiments/architecture/AX-SCALE.md`
+- `architecture-reboot/experiments/architecture/AX-R2.md`
+- `architecture-reboot/experiments/architecture/AX-SHARED.md`
+
+All are **DESIGN ONLY / UNRUN**. These are experiment specifications, not result reports.
+
+Please review them as an architecture-test program:
+1. attack whether each experiment actually isolates its claimed architecture property;
+2. identify confounding variables;
+3. identify duplicated tests or missing architecture risks;
+4. challenge pass/fail interpretation and reopening criteria;
+5. do not alter Phase 0 yet.
+
+The rebuilt K2 case is one AX-S1S2-D fixture, not a ninth experiment.
