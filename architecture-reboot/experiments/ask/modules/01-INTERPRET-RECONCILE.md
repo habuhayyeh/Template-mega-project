@@ -1,3 +1,17 @@
+# SUPERSEDED — DO NOT RUN
+
+The single-pass A contract was retired after two full-packet capability runs showed persistent
+source-pointer/action-state errors and unstable material coverage.
+
+Use instead:
+
+1. `01A-SOURCE-SEMANTIC-PRESERVATION.md`
+2. `01B-RECONCILIATION.md`
+
+The split preserves source-local material before cross-record reconciliation.
+
+---
+
 # FILE A — INTERPRET AND RECONCILE
 
 **Experimental version:** A-INTERPRET-RECONCILE-V1.1
