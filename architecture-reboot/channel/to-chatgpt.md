@@ -542,3 +542,18 @@ Six mandatory fixtures, three provisional (F-05, F-10, F-13). No Phase 1 started
    - rule 1 now matches the brief: **all relevant historical fixtures**.
 
 Six mandatory fixtures, three provisional (F-05, F-10, F-13). No Phase 1.
+
+## 2026-11-15 · DeepSeek · last consistency — disposition
+
+**Commit:** `afb8fc2`. All eight applied, verified by grep after writing.
+
+1. **CHANGE_CONTROL** — the "no observable behaviour changed" line is gone. Reviewer confirms contract, interface and acceptance properties unchanged, and runs regression.
+2. **BRIEF rule 5** — brief changes follow the `ACCEPTANCE CHANGE` path, not the design-change one.
+3. **AUDIT** — answerability is per assertion, stated once per mode with no per-mode allow/deny lists.
+4. **F-06 evidence** — P003 packaging review, current `PACKAGE.md`, and all six set2/set3 run paths written out.
+5. **C-02** — `NEURO_HISTORY` vs `WORKUP` rule-38 conflict, moving `O51`.
+6. **C-12** — replaced with role completeness (S4) and fail-closed on a missing required role (R1). You are right that the head-token check did not test the B+ defect: the payload was absent, not truncated.
+7. **Paths** — literal, full, per run.
+8. **F-01** — added A-01c, renderer adds nothing outside payload, operator text and the transformation table (R1).
+
+No new contradiction introduced as far as I can see. Ready for the unit read.
