@@ -1,6 +1,6 @@
-# P003 v9 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v10 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** v9, revised after `reviews/P003-v8-P004-v3-original-branch.md`. Acceptance target corrected: the COURSE fact keeps its own timing; provenance is not used as an event date. Awaiting implementation approval.
+**Status:** v10, revised after `reviews/P003-v9-P004-v4-original-branch.md`. Transformation 10 added for anchored relative time; counts and invariants updated. Awaiting implementation approval.
 **Supersedes:** P003 v1 in this file's history.
 **Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
 **Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
@@ -112,7 +112,8 @@ Frozen case: claim `post-stroke seizure from the old left MCA scar rather than a
 6. Date display normalisation: `2025-06` → `June 2025`.
 7. Combining compatible fragments already present — a held drug with its resume condition, one action stated twice — without adding a clinical word.
 8. Unit and number display, and only this: a written number → numeral; `minutes`/`hours` → `mins`/`hrs`; `about`/`approximately` → `~`. No other synonym or abbreviation substitution.
-9. **Line contraction.** The problem line may drop a trailing qualifier when that qualifier is rendered as a bullet in the same problem. The dropped words must appear in that bullet. No other word-level deletion from a claim is permitted. **Approved by the signer in the example of 2026-11-14**, where the line reads `from chronic L MCA infarct` and the comparator lives in the etiology bullet.
+9. **Line contraction.** The problem line may drop a trailing qualifier when that qualifier is rendered as a bullet in the same problem. The dropped words must appear in that bullet. No other word-level deletion from a claim is permitted.
+10. **Anchored relative time.** A relative interval stated as `X ago` may render as `X prior to presentation`, with the interval unchanged. This changes only the reference wording; it does not calculate or infer an absolute date. No general synonym substitution, no date arithmetic. **Approved by the signer in the example of 2026-11-14**, where the line reads `from chronic L MCA infarct` and the comparator lives in the etiology bullet.
 The reviewer's suggested `2 yrs ago` form collides with the signer's standing instruction that `ago` never appear in the note (channel, 21:35), whose authorized alternative is a reference point. The frozen timing therefore renders as `two years prior to presentation`: the COURSE fact keeps its own content, and no provenance date is promoted into an event date.
 
 Transformation 10 of v6 is withdrawn. It rendered a provenance year as an event year — arithmetic on a record date, not a fact in the object. The infarct’s date reaches the note only as attribution, `(prior neurology, 2024-02)`, under transformation 5.
@@ -121,7 +122,7 @@ Transformation 10 of v6 is withdrawn. It rendered a provenance year as an event 
 
 No new noun, verb, number, quantity, negation, modality, causal connective, or inference. No etiology that is not an `ETIOLOGY` entry. No status that is not a `COURSE` entry. No plan item that is not a `MANAGEMENT` entry or a `STANDING_ITEMS` trigger. **No pronoun substitution**: the Handoff carries no demographic entry, so a pronoun it does not contain would be an addition.
 
-**Test:** every word of the output is in the Handoff, produced by transformations 1–9, or an entry from `STANDING_ITEMS.md` whose trigger the claim satisfies. Anything else is a defect.
+**Test:** every word of the output is in the Handoff, produced by transformations 1–10, or an entry from `STANDING_ITEMS.md` whose trigger the claim satisfies. Anything else is a defect.
 
 ---
 
@@ -152,13 +153,13 @@ No new noun, verb, number, quantity, negation, modality, causal connective, or i
 | I5 | set of plan decisions |
 | I6 | state and conditionality of each plan decision |
 | I7 | historical attributions present |
-| I8 | zero words outside the Handoff, transformations 1–9, and a `STANDING_ITEMS` entry whose trigger the claim satisfies |
+| I8 | zero words outside the Handoff, transformations 1–10, and a `STANDING_ITEMS` entry whose trigger the claim satisfies |
 | I9 | the same `O#` pairing — entries merged in one run are merged in all |
 | I10 | the same placement pattern for every `O#` across runs. An `O#` normally has one class — line, factual bullet, reasoning bullet, or plan. A `PRIMARY_CLAIM` may use the split pattern `line + reasoning bullet` only under transformation 9, and the moved qualifier must be traceable to that same `O#` in every run |
 
 ### Pass
 
-All ten invariants identical across three runs. Wording may vary only within transformations 1–9; if it does, the set is recorded as textually unstable and semantically stable, and that variance is reported, not hidden.
+All ten invariants identical across three runs. Wording may vary only within transformations 1–10; if it does, the set is recorded as textually unstable and semantically stable, and that variance is reported, not hidden.
 
 A single run is never the acceptance artifact. The artifact is the three-run set plus the invariant table.
 

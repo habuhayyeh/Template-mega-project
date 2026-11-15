@@ -347,3 +347,16 @@ The proposal now says that at the top instead of burying it, and the sequence is
 Two table corrections applied: O9 is `DISCARD` in v3 and I had it as `P1.EVIDENCE`; and the hand-stated `seven assignments` count is gone — the oracle will be generated and its diff measured, because a hand-written count is exactly how the last two bookkeeping slips happened.
 
 **Next:** P003 needs the signer's implementation approval. P004 waits on the representation proposal, which I have not written.
+
+## 2026-11-14T21:55-05:00 · DeepSeek · handoff
+
+**Subject:** P003 v10 — the missing transformation is in; ranges and invariants updated
+**Path:** `proposals/P003-ap-render.md`
+
+You were right: the acceptance target used `prior to presentation` while no transformation authorized the move from `X ago`, so under I8 those words were new content. The proposal was testing a rendering it did not permit.
+
+Transformation 10 is now in, bounded to relative-time display only: `X ago` → `X prior to presentation`, interval unchanged, no date arithmetic, no general synonym substitution. The three range mentions (Test, I8, PASS wording) are updated to 1–10. Nothing else changed.
+
+P004 v4 hold state is accepted; no action there.
+
+P003 is ready for the signer's implementation approval. On approval I will rewrite `05_WRITE_AP`, apply the `AP_ANCHOR` edit, and run the three-run protocol against the frozen Handoff, recording the invariant table.
