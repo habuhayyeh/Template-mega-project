@@ -4164,3 +4164,120 @@ NEXT:
 - independently redesign the input experiment around this two-surface runtime;
 - specify the minimum Scribe output contract to preserve source fidelity while reducing Ask burden;
 - wait for representative Scribe input/output examples before freezing responsibilities.
+
+
+## 2026-11-15 · ChatGPT · request DeepSeek review of baseline Scribe prompt
+
+TYPE: ARCHITECTURE / INPUT-CONTRACT REVIEW — NO IMPLEMENTATION
+
+CONTEXT:
+Signer clarified Doximity production can use:
+RAW PRECHART + TRANSCRIPT -> SCRIBE -> structured text artifact -> ASK + final template -> final note.
+
+Current candidate boundary:
+- SCRIBE = high-recall, source-preserving ingest/compression/organization;
+- ASK = semantic adjudication, problem architecture, note-use decisions, and final rendering.
+D-034 records this as provisional pending representative input/output testing.
+
+CHATGPT BASELINE SCRIBE PROMPT TO REVIEW:
+
+---
+Create a structured, high-recall record of the clinical information contained in the prechart material and encounter transcript.
+
+The purpose is NOT to write the final clinical note and NOT to decide what is important. The output will be given to another AI that will perform the clinical assessment, problem organization, and final note generation.
+
+GENERAL RULES
+
+- Capture all clinically meaningful information provided in the source material, including information that may ultimately prove irrelevant.
+- Preserve which source the information came from whenever that is identifiable.
+- Keep current encounter information separate from prior/chart information.
+- Preserve dates, timing, chronology, laterality, severity, frequency, progression, and other qualifiers when stated.
+- Preserve negation exactly. Do not turn “no new weakness” into “weakness.”
+- Preserve uncertainty and degree of confidence exactly. Do not change “possible,” “may,” “unclear,” “suspected,” or similar language into a definite statement.
+- Preserve attribution. Distinguish patient report, family/collateral report, examination findings, test results, and clinician statements when identifiable.
+- Preserve explicit clinician assessments, diagnostic formulations, causal statements, and treatment rationales as stated.
+- Preserve medications, medication changes, prior treatments, treatment response, adverse effects, and adherence information when provided.
+- Preserve pertinent normal and abnormal examination findings.
+- Preserve relevant imaging, diagnostic studies, laboratory results, and their dates when available.
+- Preserve relevant neurologic history, baseline deficits, prior episodes, prior diagnoses, and previous management.
+- Do not silently resolve contradictions between sources. Show both statements and identify that they differ.
+- Do not infer that an old diagnosis, medication, recommendation, or finding is still current unless the current source explicitly establishes that.
+- Do not infer causation, diagnosis, stability, worsening, treatment intent, or clinical significance from association alone.
+- Do not create a final problem list.
+- Do not label problems PRIMARY or BACKGROUND.
+- Do not decide what belongs in the final Assessment/Plan.
+- Do not add medical facts that are not present in the supplied material.
+- Do not omit a fact merely because it appears redundant with another source. Information repeated across different sources should remain attributable to those sources.
+- You may omit purely administrative formatting, navigation text, and obvious nonclinical boilerplate.
+
+OUTPUT FORMAT
+
+## CURRENT ENCOUNTER — PATIENT / COLLATERAL HISTORY
+- Include all symptoms, concerns, chronology, functional changes, pertinent negatives, and other clinical information reported during the current encounter.
+- Identify the speaker when relevant.
+
+## CURRENT ENCOUNTER — EXAM / OBSERVATIONS
+- Include examination findings and other directly observed clinical findings if present.
+
+## CURRENT ENCOUNTER — CLINICIAN FORMULATIONS
+- Include only diagnostic impressions, causal statements, differential considerations, interpretations, or other reasoning explicitly stated in the current encounter material.
+- Preserve uncertainty exactly.
+
+## CURRENT ENCOUNTER — MANAGEMENT
+- Include medications started/stopped/changed, tests ordered or planned, counseling, follow-up, procedures, referrals, and other explicit management decisions.
+
+## PRECHART — NEUROLOGIC HISTORY
+- Include prior neurologic diagnoses, syndromes, events, baseline/residual deficits, prior symptom course, and relevant neurologic history.
+- Preserve source/date when available.
+
+## PRECHART — PRIOR CLINICIAN FORMULATIONS
+- Include prior diagnostic impressions, etiologic statements, differentials, interpretations, and other explicit reasoning.
+- Do not treat these as current unless the current encounter explicitly adopts them.
+
+## PRECHART — PRIOR / CURRENT MANAGEMENT
+- Include prior and current medications, procedures, therapies, recommendations, follow-up plans, treatment response, and adverse effects.
+- Preserve whether the information comes from a historical note, medication list, or current encounter when identifiable.
+
+## IMAGING / DIAGNOSTIC STUDIES
+For each relevant study:
+- Date
+- Study type
+- Findings
+- Impression/conclusion if provided
+
+## LABORATORY DATA
+- Preserve date and value when available.
+- Keep recent and historical results distinguishable.
+
+## OTHER RELEVANT MEDICAL / SOCIAL / FAMILY INFORMATION
+- Include non-neurologic, social, family, or other information that could plausibly affect neurologic assessment or management.
+
+## SOURCE DISAGREEMENTS / UNRESOLVED INFORMATION
+- List contradictions, differing accounts, uncertain current status, or places where the supplied sources cannot be reconciled without making an inference.
+
+## OTHER CLINICAL INFORMATION
+- Place any clinically meaningful information not fitting the categories above here rather than omitting it.
+
+Do not produce an Assessment/Plan or final note. The goal is a structured, source-faithful clinical information packet for downstream reasoning.
+---
+
+REVIEW QUESTIONS:
+1. Is this the right responsibility boundary for Scribe vs Ask?
+2. Which instructions are too broad, too narrow, redundant, or likely to cause Scribe to make hidden semantic decisions?
+3. Does the proposed output structure preserve source provenance well enough, or does grouping by semantic category destroy source identity/context?
+4. Should the first experiment instead preserve source blocks more literally (e.g., transcript / most recent neurology note / prior notes / imaging / labs) and only structure within each source?
+5. What information is most at risk of being lost by this prompt: contradictions, chronology, attribution, current-vs-historical status, negative findings, repeated facts, management rationale, or something else?
+6. Given the ~20K-character Scribe prompt/output constraint, what should be prioritized if full recall conflicts with compression?
+7. Does Scribe's existence imply we should collapse or remove any of I1-I4, or merely move them to the Scribe surface?
+8. Propose the smallest baseline Scribe prompt you would actually test first, and explain why it is safer/better than the one above.
+9. State what raw input + Scribe output evidence you would need before freezing the Scribe->Ask contract.
+
+IMPORTANT:
+- do not implement anything;
+- do not assume the proposed headings are correct;
+- challenge the premise if source-family preservation is more important than semantic-category organization;
+- prioritize what will make ASK reliable, not what makes the Scribe output look polished.
+
+NEXT:
+- DeepSeek writes a review under reviews/deepseek/ and returns a concise recommendation in to-chatgpt.md.
+- No architecture changes until that review and a representative Scribe run are inspected.
