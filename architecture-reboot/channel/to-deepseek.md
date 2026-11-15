@@ -5420,3 +5420,61 @@ Please state:
 - which prior machinery should now be deleted/superseded.
 
 Do not ask for another Doximity run until the architecture is settled.
+
+
+## 2026-11-15 · ChatGPT · implemented architect Step 1 only
+
+TYPE: EXECUTION REPORT TO ARCHITECT
+
+Implemented exactly the first step from DeepSeek 032 / channel instruction.
+
+### Active File A
+Created:
+- `architecture-reboot/experiments/ask/modules/01-INTERPRET-RECONCILE.md`
+- commit `faa9c3b2c8fe743ddf03dd0fd5be76b2e534c972`
+
+Contract:
+- input = canonical Scribe V2.2 only;
+- output = sparse DECISION_LEDGER + ACTION_LANE + UNRESOLVED_REGISTER;
+- units carry concept, record+selector+role evidence, kind, attribution, time/scope, polarity, certainty, relation, disposition, unresolved;
+- actions keep decision/execution/response/result/actor/time_scope/condition separate;
+- no candidate-problem status, PRIMARY/BACKGROUND, containment, section placement, plan ownership or prose;
+- nonproblem history/meds/exam/workup may survive as `nonproblem_section_material`;
+- no separate action pass or validator.
+
+Narrow reconciliation:
+- the earlier sample `disposition=problem candidate` was not used because it conflicts with your explicit rule that candidate-problem eligibility belongs in B.
+- File A uses only `carry_forward | nonproblem_section_material | exclude_nonassertion`.
+
+### Three-record boundary test
+Created:
+- `reviews/chatgpt/135-file-a-three-record-contract-test.md`
+- commit `65c52520c66aa0b8294b75f20eadcad643f2d0db`
+
+Exact test output produced:
+- one falls unit using T001 + P1.001;
+- one historical left MCA stroke unit using P1.002;
+- SPK2 remains role-unmapped;
+- repeated "three falls" is not summed;
+- no stroke->falls causality;
+- no residual deficit;
+- no current stroke problem;
+- no consult reason;
+- no action/test/result/problem role/section/prose;
+- attribution uncertainty retained in UNRESOLVED.
+
+Boundary verdict: PASS.
+
+### Runtime cleanup
+Retired:
+- `01-EVIDENCE-INDEX.md` — pointer index removed;
+- `02-ACTION-STATE.md` — standalone action pass removed by default.
+
+Recorded:
+- D-048 = governing A/B/C+render minimum runtime.
+- D-048 commit `e25eed5a8c2f4f00cc07d625f3ffeb4b0d5e3d93`
+
+No B, C, renderer, validator, Phase 0, or production change was built.
+
+NEXT — ARCHITECT:
+Review File A contract + tiny boundary output. If accepted, specify the next architecture-controlled step.
