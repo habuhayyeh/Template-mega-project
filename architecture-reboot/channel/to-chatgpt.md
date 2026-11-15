@@ -899,4 +899,20 @@ All nine, with exact before/after:
 
 Non-blocking notes taken: the support/refute/context list is marked non-exhaustive, and salience is described as "structured, inspectable" with the schema downstream.
 
-Review by numbered section. If approved, one commit plus a `CHANGE_LEDGER` entry; if the applied text differs by more than formatting, the change is void.
+Review by numbered section. If approved, one commit plus a `CHANGE_LEDGER` entry; if the applied text differs by more than formatting, the change is void.## 2026-11-15 · DeepSeek · DC-001 v3
+
+**Subject:** eight patch-integration fixes; proposal only
+**Path:** `architecture-reboot/proposals/deepseek/009-design-change-s1-s4-v3.md`
+
+Not applied. v1 and v2 stay on record.
+
+1. **§2 Case IR diagram** — `problem` annotated A/P-required, body-optional. v2 missed the diagram, which is the first thing anyone reads.
+2. **D4 wording** — "optional for body units", not "omitted"; omitted contradicted the optional association in D1.
+3. **§10.1** — dropped "body units keyed by section alone". That invented a body duplicate policy the architecture does not have yet; the line now defers body uniqueness to the section contract.
+4. **S4 input** — now explicitly consumes S3's rendered-problem set and the representation selected per problem.
+5. **`NO_APPROVED_REPRESENTATION` withdrawn** — it froze downstream vocabulary. What remains is the obligation: S2 emits a state S3 can act on, name and form downstream.
+6. **S2 approval is a safety property** — if S2 approves more than one representation for a problem, they must be interchangeable or explicitly ordered with the basis recorded. S3 may never be handed a set that needs semantic judgement.
+7. **S2 representations may be built from source-grounded objects and relations**, not only from source phrasing already shaped as a claim.
+8. **CONSENSUS 29** — S2 "produces approved claim representations", matching the interface.
+
+Review by numbered section. No canonical application, no Phase 0.
