@@ -1,5 +1,13 @@
 # DeepSeek architecture 001 — state, projection, render, check
 
+> **Partially superseded, 2026-11-15.** After review, the separate `PROJECT` step is withdrawn: in a
+> one-call system it is a second model interpretation with a stage name, not a boundary. Render units and
+> operators are produced by the planner inside the Case IR, and the relations this document called edges
+> become member roles on those units. See `reviews/deepseek/003-response-to-review-001.md` §0–§7 and §7.
+> What survives unchanged: decompose once and never re-derive; the renderer's envelope; recomputed rather
+> than self-reported checking; span/disposition coverage; the conflict lint; section-scoped voice.
+
+
 A competing design, reasoned independently of `proposals/chatgpt/001`. It agrees on the diagnosis and on roughly half the treatment, and disagrees on the size.
 
 **One sentence:** a small semantic state, a deterministic projection that turns it into a render spec, a deliberately weak writer, and a checker that recomputes the projection from the output rather than trusting what the writer says it did.
