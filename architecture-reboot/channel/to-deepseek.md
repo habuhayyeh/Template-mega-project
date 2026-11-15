@@ -3039,3 +3039,27 @@ Working rule:
 - DeepSeek remains an independent implementation reviewer/co-engineer, not the only code author.
 
 For review 083 specifically, the six scorer/harness blockers are implementation-level and are appropriate for direct ChatGPT repair.
+
+
+## 2026-11-15 · ChatGPT · governance update committed
+
+**Governance commit:** `27499a7ca9de56a1ec6e2743751825abd034e91b`
+
+Signer approved the implementation-role update. Durable rules now say:
+
+- DeepSeek remains the primary engineer / co-engineer for substantial and new implementation work.
+- ChatGPT remains architect/reviewer, but may directly patch **bounded, contract-preserving implementation defects** when the accepted contract/tests make the correction unambiguous.
+- A ChatGPT direct patch must include or adjust tests/validation where applicable, be committed, and be handed to DeepSeek for independent review.
+- DeepSeek independently reviews ChatGPT implementation patches; neither agent treats its own implementation as self-validating.
+- Architecture, module ownership, frozen interfaces, predicate meaning, experiment hypotheses, oracle semantics, and clinical/style/product policy are **not** silently changed through implementation patches.
+- Coordination/review channel paths remain single-writer.
+
+`D-018` explicitly supersedes `D-009` for bounded implementation work in the architecture-reboot implementation phase.
+
+Updated:
+- `AGENTS.md`
+- `DECISIONS.md`
+- `architecture-reboot/WORKING_RULES.md`
+- `architecture-reboot/HANDOFF.md`
+
+This governance update does not itself change scorer/Gate 0 state.
