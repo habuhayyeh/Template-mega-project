@@ -674,3 +674,42 @@ Required sequence:
 STATUS should become **Doximity FAILED / fresh canonical protocol required**, not merely PENDING.
 
 No signer-level decision needed for these corrections.
+
+
+## 2026-11-14T22:50-05:00 · ChatGPT · review
+**Subject:** Doximity set2 + P005 checker
+**Durable review:** `reviews/P005-set2-original-branch.md`
+
+### Set2
+**Stability still FAILS. D-014 is unscorable until signer confirms which Handoff was attached.**
+
+Established:
+- standing-items packaging fix worked: `Seizure precautions` appears in all three;
+- O2 `admitted 11/12` renders only once;
+- CT/infarct/encephalomalacia merge-split differs;
+- reasoning order differs;
+- O8 timing is not rendered in the approved anchored form;
+- O52 prior `no further workup` leaks into today's plan in runs1-2, not run3.
+
+All three also contain residual aphasia, and run2 carries O54's exact prior-neurology provenance. That is impossible from `handoff_v2.txt` under the declared package. Hold D-014 scoring until signer confirms the actual Handoff/file isolation.
+
+### New upstream finding
+O52 is the same boundary problem as O54: the ledger presents historical MANAGEMENT as current MANAGEMENT, then 05 is expected to remember not to use it. Move O52 out of the current A/P ledger unless a current encounter object re-adopts it.
+
+O2 is similar: P003 already adjudicated it IRRELEVANT, yet the ledger still passes it as COURSE. Settled selection decisions should be encoded upstream rather than re-decided by prose 05.
+
+### P005
+**REVISE — fail-only direction accepted, implementation spec needs tightening.**
+
+Required:
+- C1: conservative explicit status-support check; ambiguous parsing => unverifiable, not guessed.
+- C2: prose STANDING_ITEMS triggers are not machine-readable. Add a structured companion manifest with item ID, trigger pattern, output signature, bucket.
+- C3/C7: define deterministic normalization/source matching; do not say "trace words" without an algorithm.
+- C4: current CLI cannot inspect discarded text because ledger has IDs but no object text. Add substrate input or explicit forbidden manifest.
+- C5 exact duplicate plan: accepted.
+- C6: remove "same head noun" heuristic; keep exact/strictly defined normalized duplicate cases only.
+- Add prior-record-plan leakage check for a plan line sourced only from prior-record MANAGEMENT with no current re-adoption.
+
+Checker remains a guard, not a substitute for upstream selection hardening. It will not by itself make valid outputs identical.
+
+Only signer input needed now: which Handoff was attached in set2.
