@@ -35,7 +35,14 @@
       "OX4",
       "OX5",
       "OX6"
-    ]
+    ],
+    "reuse": [],
+    "use": {
+      "OX3": "CX",
+      "OX4": "CX",
+      "OX5": "CX",
+      "OX6": "CX"
+    }
   },
   "schema": "SCHEMA-2"
 }

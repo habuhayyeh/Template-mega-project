@@ -19,6 +19,15 @@
         "temporal": "June\u2013November"
       }
     ],
+    "claim_relations": [],
+    "duplicate_groups": [],
+    "relations": [
+      {
+        "from": "O04",
+        "to": "O03",
+        "type": "SUPPORTS"
+      }
+    ],
     "representations": [
       {
         "id": "R1",

@@ -1,6 +1,6 @@
 # Gate 0 — scorer calibration manifest
 
-**Campaign:** `GATE0-C1` · **registry** `PILOT-2` · **active set** `ACTIVE-PILOT-2` · **schema** `SCHEMA-2`
+**Campaign:** `GATE0-C1` · **registry** `PILOT-2` · **active set** `ACTIVE-PILOT-2` · **schema** `SCHEMA-2` · **oracle** `ORACLE-2.0`
 
 **Model:** four layer-specific parents (S1_OUTPUT, S2_OUTPUT, S3_OUTPUT, S4_BLUEPRINT). A seed mutates one field of its own layer's parent. Specificity is `FULL_SILENCE-WITHIN-LAYER`: every active predicate of that layer must stay silent except the expected one. A four-layer artifact is not a valid parent.
 

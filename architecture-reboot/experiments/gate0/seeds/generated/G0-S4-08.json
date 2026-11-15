@@ -94,7 +94,7 @@
       }
     },
     "from_s2": {
-      "claim_relation": null,
+      "claim_relations": [],
       "duplicate_groups": [],
       "members": [
         "O03",

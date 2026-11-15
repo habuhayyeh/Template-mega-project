@@ -95,6 +95,7 @@
     },
     "from_s2": {
       "claim_relation": "COMPETING",
+      "claim_relations": [],
       "duplicate_groups": [],
       "members": [
         "O03",

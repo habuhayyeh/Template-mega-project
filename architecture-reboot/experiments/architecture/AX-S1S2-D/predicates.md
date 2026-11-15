@@ -103,9 +103,16 @@ or human-judged" is not an implementation.
 |---|---|---|
 | `S1-CAND-01` | SEMANTIC / HUMAN_REVIEW | reviewer compares candidate concepts to the oracle's excluded list; recorded with the reviewer id |
 | `S2-ADOPT-01` | SEMANTIC / HUMAN_REVIEW | reviewer compares adoption verdicts to the oracle; no model self-judgement |
+| `S2-REP-01` | SEMANTIC / HUMAN_REVIEW | reviewer checks each representation's members trace to source objects and its support refs exist |
 | `S3-SEL-01` | MECHANICAL | id membership in the approved set |
 | `S4-COMP-01` | MECHANICAL | domain S4 ∩ S3, operator class check |
 
 No semantic predicate is scored by the model that produced the artifact. Where a human judge is used,
 the finding records judge id and the rule applied; where a mechanical check exists, it never defers to
 a judgement.
+
+**Repetition for HUMAN_REVIEW.** Gate 0's three runs cannot measure human variance on a static seed —
+one judge scoring the same artifact three times measures consistency of that judge, not the scorer's
+reliability. For HUMAN_REVIEW predicates the run count means: **three independent judges**, or one
+judge plus a mechanical pre-filter, recorded with each judge id. A single judge repeating is recorded
+as `1 judge × 3 passes` and is not accepted as calibration evidence.
