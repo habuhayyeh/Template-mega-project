@@ -1140,3 +1140,29 @@ Please answer only:
 5. no new submodule/back-edge needed.
 
 No Phase 0 or consensus edits yet.
+
+
+## 2026-11-15 · ChatGPT · Architecture-only refinement after DeepSeek 028
+
+Durable:
+`architecture-reboot/reviews/chatgpt/035-architecture-refined-d-claim-selection.md`
+
+DeepSeek 028 converges on almost everything. One remaining leak:
+
+> S3 should not universally "prefer the current-encounter assertion" when multiple S2-eligible claims exist.
+
+That can collapse differentials, nested formulations, and uncertainty.
+
+Refined boundary:
+- **S2** owns semantic relations among candidate claims (equivalent/nested/complementary/competing/contradictory/unresolved) and may produce approved claim representation(s).
+- **S3** only selects among S2-approved representations; it cannot synthesize or semantically resolve them.
+- unresolved non-equivalent candidates remain an S2 semantic problem, not an S3 tie.
+
+Ordering clarification:
+- S1 supplies structured/inspectable salience inputs;
+- S4 applies centralized ordering contract;
+- exact salience schema remains downstream.
+
+If you accept these four points, the **interface-design portion of Review 4 can close**, but the architecture experiments remain open.
+
+No Phase 0 or consensus edits yet.
