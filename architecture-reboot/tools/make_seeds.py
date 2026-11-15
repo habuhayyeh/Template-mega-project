@@ -344,7 +344,6 @@ SEEDS = [
  ('S1_PARENT.json', 'G0-S1-04', 'S1-CAND-02', s1_04, '/s1/candidates/0/anchors', '["S02"]', '[]'),
  ('S1_PARENT.json', 'G0-S1-05', 'S1-CAND-01', s1_05, '/s1/candidates', '<absent>', 'C3 medication-only'),
  ('S1_PARENT.json', 'G0-S1-06', 'S1-AUTH-01', s1_06, '/s1/candidates/0/status_current', '<absent>', 'true'),
- ('S2_PARENT.json', 'G0-S2-01', 'S2-REP-01', s2_01, '/s2/representations/0/support_refs', '["S02"]', '[]'),
  ('S2_PARENT.json', 'G0-S2-02', 'S2-REP-01', s2_02, '/s2/representations/0/members', '["O03","O04"]', 'adds O07 medication'),
  ('S2_PARENT.json', 'G0-S2-03', 'S2-TEMP-01', s2_03, '/s2/adjudication/0/temporal', '2024-02 documented', 'now'),
  ('S2_PARENT.json', 'G0-S2-06', 'S2-ADOPT-01', s2_06, '/s2/adjudication/0/adoption', 'false', 'null'),

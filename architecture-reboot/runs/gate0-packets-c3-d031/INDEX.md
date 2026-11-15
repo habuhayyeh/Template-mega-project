@@ -1,9 +1,9 @@
 # Gate 0 semantic packet index — GATE0-C3 / SCHEMA-4 / D-031 / REVIEW-POLICY-F-2
 
 **Mode:** packets only · **acceptance:** not run
-**Run:** `20261115T180907Z-21450963`
+**Run:** `20261115T193906Z-2a9c3508`
 **Policy:** `REVIEW-POLICY-F-2`
-**Semantic packets:** 49 · **records:** 43 · **references:** 0 · **evaluators:** 0
+**Semantic packets:** 44 · **records:** 42 · **references:** 0 · **evaluators:** 0
 
 This run removes all `oracle.expected` labels from semantic packets. Judges receive source
 objects/spans, target artifact, dependency context and predicate rule only.
@@ -24,9 +24,6 @@ objects/spans, target artifact, dependency context and predicate rule only.
 | `G0-S1-04.json` | seed | `S1_CASE01_CLEAN` | `S1-CAND-01` | `pkt-4983f345d0d01b8a0ee95a39` | SILENT |
 | `G0-S1-05.json` | seed | `S1_CASE01_CLEAN` | `S1-CAND-01` | `pkt-39b3a055c23a59f53be1a459` | FIRED |
 | `G0-S1-06.json` | seed | `S1_CASE01_CLEAN` | `S1-CAND-01` | `pkt-63a66d986a06536d85f2edfd` | SILENT |
-| `G0-S2-01.json` | seed | `S2_CASE01_CLEAN` | `S2-ADOPT-01` | `pkt-29211d342922580dbef2d2d2` | SILENT |
-| `G0-S2-01.json` | seed | `S2_CASE01_CLEAN` | `S2-CAUSAL-01` | `pkt-d50eb4d0b9d3edd34c354fde` | SILENT |
-| `G0-S2-01.json` | seed | `S2_CASE01_CLEAN` | `S2-REP-01` | `pkt-9c460bd22965e3f0b1fd496d` | FIRED |
 | `G0-S2-02.json` | seed | `S2_CASE01_CLEAN` | `S2-ADOPT-01` | `pkt-90d1e7b7ab71ba07934ea75d` | SILENT |
 | `G0-S2-02.json` | seed | `S2_CASE01_CLEAN` | `S2-CAUSAL-01` | `pkt-499ef29e044d07368e3062b4` | SILENT |
 | `G0-S2-02.json` | seed | `S2_CASE01_CLEAN` | `S2-REP-01` | `pkt-44120c49b375bc1a66f6b63c` | FIRED |
@@ -40,7 +37,6 @@ objects/spans, target artifact, dependency context and predicate rule only.
 | `G0-S2-07.json` | seed | `S2_CASE01_CLEAN` | `S2-CAUSAL-01` | `pkt-0b54e5ed007bbe894259eb54` | FIRED |
 | `G0-S2-07.json` | seed | `S2_CASE01_CLEAN` | `S2-REP-01` | `pkt-3595781258eac2b8661405da` | SILENT |
 | `G0-S2-08.json` | seed | `S2_CASE01_CLEAN` | `S2-ADOPT-01` | `pkt-610460f4d65e8d3a51df7c43` | SILENT |
-| `G0-S2-08.json` | seed | `S2_CASE01_CLEAN` | `S2-CAUSAL-01` | `pkt-1abf288d40eb11102b1a3183` | SILENT |
 | `G0-S2-08.json` | seed | `S2_CASE01_CLEAN` | `S2-REP-01` | `pkt-6d86dcbd164dc132f44834e7` | SILENT |
 | `G0-S2-09.json` | seed | `S2_CASE10_CAUSAL` | `S2-ADOPT-01` | `pkt-937aaee9c55e1d3a6635c95d` | SILENT |
 | `G0-S2-09.json` | seed | `S2_CASE10_CAUSAL` | `S2-CAUSAL-01` | `pkt-b1248da45d1fabbf07f5615e` | FIRED |
@@ -58,11 +54,10 @@ objects/spans, target artifact, dependency context and predicate rule only.
 | `G0-S3-09.json` | seed | `S3_CASE01_NOT_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-d5e988b224fcd193779c1a63` | SILENT |
 | `G0-S3-10.json` | seed | `S3_CASE01_NOT_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-baab43538d1f545135f9961e` | SILENT |
 | `G0-S3-11.json` | seed | `S3_CASE01_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-267cb08264469475462cafb7` | FIRED |
-| `G0-S3-12.json` | seed | `S3_CASE01_RENDERED_CLEAN` | `S3-ROLE-01` | `pkt-e17fa41dd6803760f415bf3e` | SILENT |
 
 ## Workload
 
-- **49 semantic packet instances:** 6 S1, 30 S2 (10 artifacts x 3 predicates) and 13 S3 role packets.
+- **44 semantic packet instances:** 6 S1, 26 S2 (CASE-01 and CASE-10) and 12 S3 role packets. G0-S2-08 and G0-S3-12 are structural-only seeds with no semantic packet.
 - The seeded predicate packet expects `FIRED`; every other semantic packet on the same artifact
   expects `SILENT` for specificity.
 - Each packet needs one signer/clinician reference and two eligible packet-only LLM evaluator

@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:9252793203594c6c865512130209401e972ed8f3a36ffc75023898657af7c22a",
-  "artifact_name": "G0-S4-08.json",
+  "artifact_hash": "sha256:066a6e628360024a1cef3b5049a2763236e950012b76839a23637d9a4439d6a7",
+  "artifact_name": "G0-S4-09.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -53,20 +53,13 @@
       "detail": "S4 input view does not match the mapped source projection",
       "evidence": [
         {
-          "first_diff": "/from_s2/selections/0/members"
+          "first_diff": "/from_s2/selected_rep"
         }
       ],
-      "expected": [
-        "O03",
-        "O04"
-      ],
-      "observed": [
-        "O03",
-        "O04",
-        "O05"
-      ],
+      "expected": "<absent>",
+      "observed": "R-999",
       "owner": "S4",
-      "path": "/s4_input_view/from_s2/selections/0/members",
+      "path": "/s4_input_view/from_s2/selected_rep",
       "predicate_id": "S4-PROJ-01",
       "status": "FIRED"
     },

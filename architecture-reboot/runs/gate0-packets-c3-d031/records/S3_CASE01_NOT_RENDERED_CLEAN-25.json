@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:e8361b26c056a516b941ccd00ef3b01ca0a0ad33e556114eb393d52ca6f5ba4b",
-  "artifact_name": "G0-S3-12.json",
+  "artifact_hash": "sha256:4f582aaec1f453c9f79545733d6da56fb5008da4cab6d82ddcc845daa45ceeee",
+  "artifact_name": "G0-S3-08.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -25,14 +25,23 @@
       "status": "SILENT"
     },
     {
-      "detail": "no violation",
-      "evidence": [],
-      "expected": null,
-      "observed": null,
+      "detail": "1 S3-CAND-01 violation(s)",
+      "evidence": [
+        {
+          "from_outcomes": [],
+          "kind": "RENDERED_SET_EQUALITY",
+          "path": "/s3/rendered",
+          "rendered": [
+            "C1"
+          ]
+        }
+      ],
+      "expected": "S3-CAND-01 constraints satisfied",
+      "observed": "RENDERED_SET_EQUALITY",
       "owner": "S3",
-      "path": null,
+      "path": "/s3/rendered",
       "predicate_id": "S3-CAND-01",
-      "status": "SILENT"
+      "status": "FIRED"
     },
     {
       "detail": "no violation",
@@ -55,20 +64,20 @@
       },
       "observed": null,
       "owner": "S3",
-      "packet_id": "pkt-e17fa41dd6803760f415bf3e",
+      "packet_id": "pkt-19386b6105a33e5894bf7c3c",
       "path": null,
       "predicate_id": "S3-ROLE-01",
       "status": "UNDECIDABLE"
     },
     {
-      "detail": "rendered problem has missing or invalid encounter_role",
+      "detail": "no violation",
       "evidence": [],
-      "expected": "PRIMARY or BACKGROUND",
-      "observed": "UNKNOWN",
+      "expected": null,
+      "observed": null,
       "owner": "S3",
-      "path": "/s3/rendered/0/encounter_role",
+      "path": null,
       "predicate_id": "S3-ROLE-02",
-      "status": "FIRED"
+      "status": "SILENT"
     },
     {
       "detail": "no violation",
@@ -85,20 +94,20 @@
   "packets": [
     "S3-ROLE-01"
   ],
-  "parent_id": "S3_CASE01_RENDERED_CLEAN",
+  "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
   "parent_type": "S3_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S3-ROLE-02",
+    "expected": "S3-CAND-01",
     "expected_status": "FIRED",
     "non_silent_other": [
       "S3-ROLE-01"
     ],
     "other_active": [
       "S3-ACCT-01",
-      "S3-CAND-01",
       "S3-INC-01",
       "S3-ROLE-01",
+      "S3-ROLE-02",
       "S3-SEL-01"
     ],
     "pass": false

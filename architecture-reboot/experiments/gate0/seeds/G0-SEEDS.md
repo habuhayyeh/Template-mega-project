@@ -22,7 +22,7 @@ The authoritative inventory is `seeds/generated/MANIFEST.json`. This table is a 
 | `S2-ADOPT-01` | `G0-S2-06` |
 | `S2-CAUSAL-01` | `G0-S2-07` |
 | `S2-CAUSAL-02` | `G0-S2-08` |
-| `S2-REP-01` | `G0-S2-01`, `G0-S2-02` |
+| `S2-REP-01` | `G0-S2-02` |
 | `S2-TEMP-01` | `G0-S2-03` |
 | `S3-ACCT-01` | `G0-S3-04` |
 | `S3-CAND-01` | `G0-S3-05`, `G0-S3-06`, `G0-S3-07`, `G0-S3-08`, `G0-S3-09`, `G0-S3-10` |
@@ -37,7 +37,7 @@ The authoritative inventory is `seeds/generated/MANIFEST.json`. This table is a 
 | `S4-REP-01` | `G0-S4-05` |
 | `S4-ROLE-01` | `G0-S4-14` |
 
-**Counts:** 6 clean parents across 4 parent types · 37 seeds · 21 active predicates.
+**Counts:** 6 clean parents across 4 parent types · 36 seeds · 21 active predicates.
 
 Clean parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.

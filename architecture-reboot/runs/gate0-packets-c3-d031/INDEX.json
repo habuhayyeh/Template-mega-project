@@ -159,39 +159,6 @@
       "scorer_status": "UNDECIDABLE"
     },
     {
-      "artifact": "G0-S2-01.json",
-      "expected_reference": "SILENT",
-      "kind": "seed",
-      "packet_id": "pkt-29211d342922580dbef2d2d2",
-      "parent_id": "S2_CASE01_CLEAN",
-      "parent_type": "S2_OUTPUT",
-      "predicate_id": "S2-ADOPT-01",
-      "scorer_detail": "SIGNER_REFERENCE_MISSING",
-      "scorer_status": "UNDECIDABLE"
-    },
-    {
-      "artifact": "G0-S2-01.json",
-      "expected_reference": "SILENT",
-      "kind": "seed",
-      "packet_id": "pkt-d50eb4d0b9d3edd34c354fde",
-      "parent_id": "S2_CASE01_CLEAN",
-      "parent_type": "S2_OUTPUT",
-      "predicate_id": "S2-CAUSAL-01",
-      "scorer_detail": "SIGNER_REFERENCE_MISSING",
-      "scorer_status": "UNDECIDABLE"
-    },
-    {
-      "artifact": "G0-S2-01.json",
-      "expected_reference": "FIRED",
-      "kind": "seed",
-      "packet_id": "pkt-9c460bd22965e3f0b1fd496d",
-      "parent_id": "S2_CASE01_CLEAN",
-      "parent_type": "S2_OUTPUT",
-      "predicate_id": "S2-REP-01",
-      "scorer_detail": "SIGNER_REFERENCE_MISSING",
-      "scorer_status": "UNDECIDABLE"
-    },
-    {
       "artifact": "G0-S2-02.json",
       "expected_reference": "SILENT",
       "kind": "seed",
@@ -331,17 +298,6 @@
       "parent_id": "S2_CASE01_CLEAN",
       "parent_type": "S2_OUTPUT",
       "predicate_id": "S2-ADOPT-01",
-      "scorer_detail": "SIGNER_REFERENCE_MISSING",
-      "scorer_status": "UNDECIDABLE"
-    },
-    {
-      "artifact": "G0-S2-08.json",
-      "expected_reference": "SILENT",
-      "kind": "seed",
-      "packet_id": "pkt-1abf288d40eb11102b1a3183",
-      "parent_id": "S2_CASE01_CLEAN",
-      "parent_type": "S2_OUTPUT",
-      "predicate_id": "S2-CAUSAL-01",
       "scorer_detail": "SIGNER_REFERENCE_MISSING",
       "scorer_status": "UNDECIDABLE"
     },
@@ -531,21 +487,10 @@
       "predicate_id": "S3-ROLE-01",
       "scorer_detail": "SIGNER_REFERENCE_MISSING",
       "scorer_status": "UNDECIDABLE"
-    },
-    {
-      "artifact": "G0-S3-12.json",
-      "expected_reference": "SILENT",
-      "kind": "seed",
-      "packet_id": "pkt-e17fa41dd6803760f415bf3e",
-      "parent_id": "S3_CASE01_RENDERED_CLEAN",
-      "parent_type": "S3_OUTPUT",
-      "predicate_id": "S3-ROLE-01",
-      "scorer_detail": "SIGNER_REFERENCE_MISSING",
-      "scorer_status": "UNDECIDABLE"
     }
   ],
   "reference_count": 0,
   "review_policy": "REVIEW-POLICY-F-2",
-  "run_id": "20261115T180907Z-21450963",
-  "semantic_packets": 49
+  "run_id": "20261115T193906Z-2a9c3508",
+  "semantic_packets": 44
 }

@@ -17,7 +17,7 @@ mutation record is the checked parent→seed diff, not a hand-written claim.
 
 **Status: SCORER/HARNESS IMPLEMENTED / SCHEMA-4 + D-023 + D-030 + D-031 REBUILT / F-2 PACKETS PREPARED / GATE 0 UNRUN.** The
 scorer and harness exist at `architecture-reboot/scorer/` and
-`architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 49 semantic packet
+`architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 44 semantic packet
 instances. No signer reference or evaluator evidence exists yet; no Gate 0 acceptance run has been
 executed.
 
@@ -206,8 +206,8 @@ the signer reference or each other's verdict. Current policy: `REVIEW-POLICY-F-2
 - `architecture-reboot/scorer/` — scorer implementation and predicate registry.
 - `architecture-reboot/tools/gate0_harness.py` — harness, packets, judgments and evidence.
 - `architecture-reboot/tools/preflight.py` — the D-019 mechanical preflight.
-- `architecture-reboot/runs/gate0-packets-c3-d031/` — packets-mode preparation: 43 artifact records,
-  49 semantic packets, `EVIDENCE.json`, `INDEX.md` and `INDEX.json`. No acceptance verdict.
+- `architecture-reboot/runs/gate0-packets-c3-d031/` — packets-mode preparation: 42 artifact records,
+  44 semantic packets, `EVIDENCE.json`, `INDEX.md` and `INDEX.json`. No acceptance verdict.
 - Per-run records: scorer version, predicate set version, control-plane version, case ids, findings,
   verdict.
 

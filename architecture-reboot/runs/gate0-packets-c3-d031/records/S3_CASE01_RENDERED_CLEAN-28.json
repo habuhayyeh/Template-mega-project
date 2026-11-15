@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:d6deb54c8628464288a5d020de0b64ecc218000a3cfd90b4379b1cb3a328d5a2",
-  "artifact_name": "G0-S3-07.json",
+  "artifact_hash": "sha256:e202497bfb457d6d579bb601830a25aebf4316ece6a746cb3e2af47da7291595",
+  "artifact_name": "G0-S3-11.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -25,20 +25,14 @@
       "status": "SILENT"
     },
     {
-      "detail": "1 S3-CAND-01 violation(s)",
-      "evidence": [
-        {
-          "candidate": "C9",
-          "kind": "UNKNOWN_CANDIDATE",
-          "path": "/s3/candidate_outcomes/2/candidate"
-        }
-      ],
-      "expected": "S3-CAND-01 constraints satisfied",
-      "observed": "UNKNOWN_CANDIDATE",
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
       "owner": "S3",
-      "path": "/s3/candidate_outcomes/2/candidate",
+      "path": null,
       "predicate_id": "S3-CAND-01",
-      "status": "FIRED"
+      "status": "SILENT"
     },
     {
       "detail": "no violation",
@@ -61,7 +55,7 @@
       },
       "observed": null,
       "owner": "S3",
-      "packet_id": "pkt-4b78fe190d1f52917282a1af",
+      "packet_id": "pkt-267cb08264469475462cafb7",
       "path": null,
       "predicate_id": "S3-ROLE-01",
       "status": "UNDECIDABLE"
@@ -95,15 +89,13 @@
   "parent_type": "S3_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S3-CAND-01",
-    "expected_status": "FIRED",
-    "non_silent_other": [
-      "S3-ROLE-01"
-    ],
+    "expected": "S3-ROLE-01",
+    "expected_status": "UNDECIDABLE",
+    "non_silent_other": [],
     "other_active": [
       "S3-ACCT-01",
+      "S3-CAND-01",
       "S3-INC-01",
-      "S3-ROLE-01",
       "S3-ROLE-02",
       "S3-SEL-01"
     ],

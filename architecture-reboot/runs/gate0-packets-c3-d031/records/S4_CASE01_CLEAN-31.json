@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:34a871b12fa8b8fb64396530ffae308b888c2c1da3b545d7671ca4a34eef76ae",
-  "artifact_name": "G0-S4-01.json",
+  "artifact_hash": "sha256:6f5d575e7a64814be4abf4ccca1c1f17479173140839cf0b29213afb8ff5c03f",
+  "artifact_name": "G0-S4-02.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -37,11 +37,19 @@
             "C1",
             "C2"
           ],
-          "s4_sources": []
+          "s4_sources": [
+            "C1",
+            "C2",
+            "C9"
+          ]
         }
       ],
       "expected": "problem sources equal from_s3.rendered ['C1', 'C2']",
-      "observed": [],
+      "observed": [
+        "C1",
+        "C2",
+        "C9"
+      ],
       "owner": "S4",
       "path": "/s4/problems",
       "predicate_id": "S4-INC-01",

@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:dde07d82000dbfddf0e5874d8b526720ce731d79e334d84fb69cd87b31c9ac67",
-  "artifact_name": "G0-S3-05.json",
+  "artifact_hash": "sha256:1b2835f39ef592c6e53c13709e8cdade5f0287f7701f17b847cf6eb0d5bd87e0",
+  "artifact_name": "G0-S3-06.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -25,30 +25,18 @@
       "status": "SILENT"
     },
     {
-      "detail": "2 S3-CAND-01 violation(s)",
+      "detail": "1 S3-CAND-01 violation(s)",
       "evidence": [
         {
-          "kind": "COVERAGE",
-          "missing": [
-            "C1",
-            "C2"
-          ],
-          "path": "/s3/candidate_outcomes"
-        },
-        {
-          "from_outcomes": [],
-          "kind": "RENDERED_SET_EQUALITY",
-          "path": "/s3/rendered",
-          "rendered": [
-            "C1",
-            "C2"
-          ]
+          "candidate": "C1",
+          "kind": "EXCLUSIVITY",
+          "path": "/s3/candidate_outcomes/2/candidate"
         }
       ],
       "expected": "S3-CAND-01 constraints satisfied",
-      "observed": "COVERAGE",
+      "observed": "EXCLUSIVITY",
       "owner": "S3",
-      "path": "/s3/candidate_outcomes",
+      "path": "/s3/candidate_outcomes/2/candidate",
       "predicate_id": "S3-CAND-01",
       "status": "FIRED"
     },
@@ -73,7 +61,7 @@
       },
       "observed": null,
       "owner": "S3",
-      "packet_id": "pkt-85ed041f9228be9e29423fc2",
+      "packet_id": "pkt-8e38d2767da942329d25a0ff",
       "path": null,
       "predicate_id": "S3-ROLE-01",
       "status": "UNDECIDABLE"

@@ -5,12 +5,12 @@
   "evaluators": [],
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:d59aaec0ea476f58320a59e3886ceea2991e451f71bb5747dbd1cdd04ea6afc1",
+    "00-GATE0-MANIFEST.md": "sha256:b8d1180ceaba947e0cf1d3398830fb048e9a1fd241adabb2f78ce98f0e5ea2c7",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
-    "G0-SEEDS.md": "sha256:df1615f06a314b34ef2fc9a12cdebc09b342cfdb73202cbb5700d653c35ed9ec",
-    "make_seeds.py": "sha256:bfac53d0608d16fd97ecec9757d2ba43b8e8c605d20a6e12c5c3b128269cd405",
+    "G0-SEEDS.md": "sha256:a8e573d30ccd9a03589b3ee3a182eb9ec609fec7df8caf560cb54b3ca84df302",
+    "make_seeds.py": "sha256:d8b0fad618b5bbf03b8f289072dd2e05f884dc97d70828f291aff1404ec87c6e",
     "oracle.json": "sha256:de909199d517ab900b2ee28c134c8cc566dea6d924567b5e44303a19bc78db34",
     "predicates.md": "sha256:361ebf9368dcf7195b1366e918904e38553ff8a47f6b964346f44912fde495be",
     "schema.md": "sha256:f19904e7db86747a12fb179865cfcdc15faef385d46f93fbd5ebe51f25e92bdb"
@@ -26,7 +26,7 @@
     "projection_contract.py": "sha256:0e7bffaf83a952ed38b8a0eafc942bfbbfe41c0181ce177856274c56175df75e",
     "scorer/projection.py": "sha256:2867510a74184ebd9137c1242c4f4cb64d119e17b3f76f10a9bf7ccd0aa481d8",
     "scorer/registry.py": "sha256:620fb0feafb10547b23783c01832eeeb070b9f19202b9d57f8fe66c6010f111a",
-    "scorer/scorer.py": "sha256:1a2eb5652c223b51ccd1457d027a306cc6e5fc41149218aec063bc83d26d55e6",
+    "scorer/scorer.py": "sha256:db49d999e1a9514391fb9c908837b9dadbabf6c2a45e54bb6f298357c3b5cd43",
     "tools/gate0_harness.py": "sha256:c8a57f6c777457c888f80ca1976a2fe41e8a7f7014ff9aaffa0bf702b0c15270"
   },
   "mode": "packets",
@@ -942,112 +942,6 @@
       "verdict": "INCOMPLETE"
     },
     {
-      "artifact_hash": "sha256:c70eea72179f28cafacdf109253c6d458db5653beb77e9c0c604bd9c926b269d",
-      "artifact_name": "G0-S2-01.json",
-      "dependency_context": [
-        {
-          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
-          "parent_id": "S1_CASE01_CLEAN",
-          "parent_type": "S1_OUTPUT"
-        }
-      ],
-      "findings": [
-        {
-          "detail": "SIGNER_REFERENCE_MISSING",
-          "evidence": [],
-          "expected": null,
-          "human_review": {
-            "packet_kind": "S2-ADOPT-01",
-            "reason": "HUMAN_JUDGMENT_REQUIRED",
-            "required": true
-          },
-          "observed": null,
-          "owner": "S2",
-          "packet_id": "pkt-29211d342922580dbef2d2d2",
-          "path": null,
-          "predicate_id": "S2-ADOPT-01",
-          "status": "UNDECIDABLE"
-        },
-        {
-          "detail": "SIGNER_REFERENCE_MISSING",
-          "evidence": [],
-          "expected": null,
-          "human_review": {
-            "packet_kind": "S2-CAUSAL-01",
-            "reason": "HUMAN_JUDGMENT_REQUIRED",
-            "required": true
-          },
-          "observed": null,
-          "owner": "S2",
-          "packet_id": "pkt-d50eb4d0b9d3edd34c354fde",
-          "path": null,
-          "predicate_id": "S2-CAUSAL-01",
-          "status": "UNDECIDABLE"
-        },
-        {
-          "detail": "no violation",
-          "evidence": [],
-          "expected": null,
-          "observed": null,
-          "owner": "S2",
-          "path": null,
-          "predicate_id": "S2-CAUSAL-02",
-          "status": "SILENT"
-        },
-        {
-          "detail": "SIGNER_REFERENCE_MISSING",
-          "evidence": [],
-          "expected": null,
-          "human_review": {
-            "packet_kind": "S2-REP-01",
-            "reason": "HUMAN_JUDGMENT_REQUIRED",
-            "required": true
-          },
-          "observed": null,
-          "owner": "S2",
-          "packet_id": "pkt-9c460bd22965e3f0b1fd496d",
-          "path": null,
-          "predicate_id": "S2-REP-01",
-          "status": "UNDECIDABLE"
-        },
-        {
-          "detail": "no violation",
-          "evidence": [],
-          "expected": null,
-          "observed": null,
-          "owner": "S2",
-          "path": null,
-          "predicate_id": "S2-TEMP-01",
-          "status": "SILENT"
-        }
-      ],
-      "kind": "seed",
-      "packets": [
-        "S2-ADOPT-01",
-        "S2-CAUSAL-01",
-        "S2-REP-01"
-      ],
-      "parent_id": "S2_CASE01_CLEAN",
-      "parent_type": "S2_OUTPUT",
-      "scorer_version": "GATE0-SCORER-1",
-      "specificity": {
-        "expected": "S2-REP-01",
-        "expected_status": "UNDECIDABLE",
-        "non_silent_other": [
-          "S2-ADOPT-01",
-          "S2-CAUSAL-01"
-        ],
-        "other_active": [
-          "S2-ADOPT-01",
-          "S2-CAUSAL-01",
-          "S2-CAUSAL-02",
-          "S2-TEMP-01"
-        ],
-        "pass": false
-      },
-      "verdict": "INCOMPLETE"
-    },
-    {
       "artifact_hash": "sha256:1d33db3c2269ecbefb1b62493a46d64a8f41216db50bfd5b59087d273d67a050",
       "artifact_name": "G0-S2-02.json",
       "dependency_context": [
@@ -1504,20 +1398,14 @@
           "status": "UNDECIDABLE"
         },
         {
-          "detail": "SIGNER_REFERENCE_MISSING",
+          "detail": "gated by S2-CAUSAL-02 structural failure",
           "evidence": [],
           "expected": null,
-          "human_review": {
-            "packet_kind": "S2-CAUSAL-01",
-            "reason": "HUMAN_JUDGMENT_REQUIRED",
-            "required": true
-          },
           "observed": null,
           "owner": "S2",
-          "packet_id": "pkt-1abf288d40eb11102b1a3183",
           "path": null,
           "predicate_id": "S2-CAUSAL-01",
-          "status": "UNDECIDABLE"
+          "status": "SILENT"
         },
         {
           "detail": "causal strength is outside the closed set",
@@ -1563,7 +1451,6 @@
       "kind": "seed",
       "packets": [
         "S2-ADOPT-01",
-        "S2-CAUSAL-01",
         "S2-REP-01"
       ],
       "parent_id": "S2_CASE01_CLEAN",
@@ -1574,7 +1461,6 @@
         "expected_status": "FIRED",
         "non_silent_other": [
           "S2-ADOPT-01",
-          "S2-CAUSAL-01",
           "S2-REP-01"
         ],
         "other_active": [
@@ -2967,20 +2853,14 @@
           "status": "SILENT"
         },
         {
-          "detail": "SIGNER_REFERENCE_MISSING",
+          "detail": "gated by S3-ROLE-02 structural failure",
           "evidence": [],
           "expected": null,
-          "human_review": {
-            "packet_kind": "S3-ROLE-01",
-            "reason": "HUMAN_JUDGMENT_REQUIRED",
-            "required": true
-          },
           "observed": null,
           "owner": "S3",
-          "packet_id": "pkt-e17fa41dd6803760f415bf3e",
           "path": null,
           "predicate_id": "S3-ROLE-01",
-          "status": "UNDECIDABLE"
+          "status": "SILENT"
         },
         {
           "detail": "rendered problem has missing or invalid encounter_role",
@@ -3004,18 +2884,14 @@
         }
       ],
       "kind": "seed",
-      "packets": [
-        "S3-ROLE-01"
-      ],
+      "packets": [],
       "parent_id": "S3_CASE01_RENDERED_CLEAN",
       "parent_type": "S3_OUTPUT",
       "scorer_version": "GATE0-SCORER-1",
       "specificity": {
         "expected": "S3-ROLE-02",
         "expected_status": "FIRED",
-        "non_silent_other": [
-          "S3-ROLE-01"
-        ],
+        "non_silent_other": [],
         "other_active": [
           "S3-ACCT-01",
           "S3-CAND-01",
@@ -3023,9 +2899,9 @@
           "S3-ROLE-01",
           "S3-SEL-01"
         ],
-        "pass": false
+        "pass": true
       },
-      "verdict": "INCOMPLETE"
+      "verdict": "PASS"
     },
     {
       "artifact_hash": "sha256:34a871b12fa8b8fb64396530ffae308b888c2c1da3b545d7671ca4a34eef76ae",
@@ -4436,6 +4312,6 @@
   "reference_count": 0,
   "references": [],
   "review_policy": "REVIEW-POLICY-F-2",
-  "run_id": "20261115T180907Z-21450963",
+  "run_id": "20261115T193906Z-2a9c3508",
   "scorer_version": "GATE0-SCORER-1"
 }

@@ -1,13 +1,7 @@
 {
-  "artifact_hash": "sha256:c5ce4b1f5f52774b2c169db13950679d9e50b3db68119fe6f9bd50f3c83cef52",
-  "artifact_name": "G0-S2-08.json",
-  "dependency_context": [
-    {
-      "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
-      "parent_id": "S1_CASE01_CLEAN",
-      "parent_type": "S1_OUTPUT"
-    }
-  ],
+  "artifact_hash": "sha256:8700af6aa9aa3ec8ed6b4aa0fff9848e696355b591f969c29ca59c58282cd999",
+  "artifact_name": "G0-S2-09.json",
+  "dependency_context": [],
   "findings": [
     {
       "detail": "SIGNER_REFERENCE_MISSING",
@@ -20,7 +14,7 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-610460f4d65e8d3a51df7c43",
+      "packet_id": "pkt-937aaee9c55e1d3a6635c95d",
       "path": null,
       "predicate_id": "S2-ADOPT-01",
       "status": "UNDECIDABLE"
@@ -36,24 +30,20 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-1abf288d40eb11102b1a3183",
+      "packet_id": "pkt-b1248da45d1fabbf07f5615e",
       "path": null,
       "predicate_id": "S2-CAUSAL-01",
       "status": "UNDECIDABLE"
     },
     {
-      "detail": "causal strength is outside the closed set",
+      "detail": "no violation",
       "evidence": [],
-      "expected": [
-        "LIKELY",
-        "POSSIBLE",
-        "UNLIKELY"
-      ],
-      "observed": "CERTAIN",
+      "expected": null,
+      "observed": null,
       "owner": "S2",
-      "path": "/s2/causal_relations/0/strength",
+      "path": null,
       "predicate_id": "S2-CAUSAL-02",
-      "status": "FIRED"
+      "status": "SILENT"
     },
     {
       "detail": "SIGNER_REFERENCE_MISSING",
@@ -66,7 +56,7 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-6d86dcbd164dc132f44834e7",
+      "packet_id": "pkt-b3dbc6f399b3785dd77881c0",
       "path": null,
       "predicate_id": "S2-REP-01",
       "status": "UNDECIDABLE"
@@ -88,20 +78,19 @@
     "S2-CAUSAL-01",
     "S2-REP-01"
   ],
-  "parent_id": "S2_CASE01_CLEAN",
+  "parent_id": "S2_CASE10_CAUSAL",
   "parent_type": "S2_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S2-CAUSAL-02",
-    "expected_status": "FIRED",
+    "expected": "S2-CAUSAL-01",
+    "expected_status": "UNDECIDABLE",
     "non_silent_other": [
       "S2-ADOPT-01",
-      "S2-CAUSAL-01",
       "S2-REP-01"
     ],
     "other_active": [
       "S2-ADOPT-01",
-      "S2-CAUSAL-01",
+      "S2-CAUSAL-02",
       "S2-REP-01",
       "S2-TEMP-01"
     ],

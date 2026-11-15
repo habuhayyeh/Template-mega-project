@@ -71,9 +71,9 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 HEAD at handoff: see `git log -1`. Last substantive commit: CASE-01 SCHEMA-4 rebuild under D-023/D-024.
 
 `python architecture-reboot/tools/make_seeds.py` builds:
-6 clean parents across 4 parent types → 37 seeds → `MANIFEST.json`. **A second run must produce zero
+6 clean parents across 4 parent types → 36 seeds → `MANIFEST.json`. **A second run must produce zero
 diff**; that is a build failure condition, not a warning. The build also checks every seed is a real
-non-noop mutation and differs from its parent at exactly one declared path; 37/37 are checked, with 0
+non-noop mutation and differs from its parent at exactly one declared path; 36/36 are checked, with 0
 no-op and 0 multi-diff seeds. The manifest records the checked before/after values and the
 dependency-context map.
 
@@ -82,7 +82,7 @@ architecture/Phase-0 drift, source/generated freshness and determinism, governin
 identities, active registry, dependency-context integrity, seed mutation integrity, stale source
 markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 46 tests.
 
-Current counts: 6 clean calibration parents · 4 parent types · 37 seeds · 21 active predicates ·
+Current counts: 6 clean calibration parents · 4 parent types · 36 seeds · 21 active predicates ·
 campaign `GATE0-C3` · registry `PILOT-3` · active set `ACTIVE-PILOT-3` · schema `SCHEMA-4` · oracle
 `ORACLE-4.0` · reason registry `REASON-1` · operator set `PILOT-OPERATORS-1`.
 
@@ -91,7 +91,7 @@ Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLE
 
 CASE-01: two rendered problems — falls and a retained inactive infarct; the S1-CAND seed is now a
 medication-only candidate. CASE-10 is the positive causal fixture: chronic weakness -> falls, CONTRIBUTOR/POSSIBLE. Scorer: 16 mechanical predicates + 5 semantic signer-reference predicates; 49 synthetic tests; no Gate 0 acceptance
-run. Packet preparation: 43 records, 49 semantic packets, 0 references/0 evaluators under
+run. Packet preparation: 42 records, 44 semantic packets, 0 references/0 evaluators under
 `REVIEW-POLICY-F-2` plus D-030; semantic packets contain no `oracle.expected`. Index at
 `architecture-reboot/runs/gate0-packets-c3-d031/INDEX.md`.
 
@@ -280,9 +280,9 @@ Added:
 - causal projection now requires both endpoints retained;
 - CASE-01 wording corrected to BACKGROUND; CASE-01 has no causal relation;
 - a separate positive causal fixture in tests (residual-deficit subject, POSSIBLE strength);
-- 37 seeds, 21 active predicates, 49 semantic packets.
+- 36 seeds, 21 active predicates, 44 semantic packets.
 
-Validation: 49 tests OK; preflight PASS 7/7; packets mode 43 records / 49 packets / 0 refs /
+Validation: 49 tests OK; preflight PASS 7/7; packets mode 42 records / 44 packets / 0 refs /
 0 evals; no FAIL. No Gate 0 acceptance and no signer references from this set.
 
 **NEXT:** ChatGPT reviews the D-031 rebuild and the 40-packet index. No signer references until that
@@ -319,7 +319,7 @@ Required clean truth:
 - causal relation unchanged: O02 -> O03 / CONTRIBUTOR / POSSIBLE / S05.
 
 **Implemented:** O02 is now adopted with evidence [S05]; CASE-01 is unchanged. C3 was regenerated:
-6 clean parents, 37 seeds, 43 records, 49 packets, 0 references. 49 tests OK; preflight PASS 7/7.
+6 clean parents, 36 seeds, 42 records, 44 packets, 0 references. 49 tests OK; preflight PASS 7/7.
 
 **NEXT:** ChatGPT reviews the corrected CASE-10 S2-ADOPT/S2-CAUSAL packets and the new packet IDs.
 No signer references yet. No Doximity. No Phase 0.
@@ -377,8 +377,11 @@ Before asking it, three packet defects must be fixed:
 Mapping artifact:
 `architecture-reboot/artifacts/external-skill-preference-mapping-c3.md`.
 
-**NEXT:** DeepSeek performs only these bounded calibration-domain fixes, regenerates, and returns the
-new signer workload. Signer collection stays paused meanwhile.
+**Implemented:** S2-CAUSAL-01 and S3-ROLE-01 are gated by their structural predicates; structural-only
+seeds get no semantic packet. G0-S2-01 is removed; G0-S2-02 remains the semantic S2-REP seed. C3 now has
+6 clean parents / 36 seeds / 42 records / 44 packets. Clean S3-ROLE packet ID is unchanged.
+
+**NEXT:** ChatGPT reviews the 44-packet workload; signer collection resumes only after that review.
 
 ## Q17 signer resolution
 
@@ -390,6 +393,8 @@ All 20 preference questions are now resolved:
 - Q1 resolved directly by the signer in this chat;
 - Q17 resolved directly by the signer in this chat.
 
-**NEXT:** DeepSeek completes review-098's three packet-domain fixes and regenerates the signer workload.
-No further clinical preference question is currently outstanding.
+**Implemented:** review-098 fixes are complete; Q17 is resolved in CASE-01. No further clinical preference
+question is outstanding.
+
+**NEXT:** ChatGPT reviews the 44-packet workload, then signer reference collection resumes.
 

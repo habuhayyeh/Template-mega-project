@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:a7dcdb61c7e7b60a235d1c0b2ed63f765d253f08342015485513033758041c25",
-  "artifact_name": "G0-S2-07.json",
+  "artifact_hash": "sha256:c5ce4b1f5f52774b2c169db13950679d9e50b3db68119fe6f9bd50f3c83cef52",
+  "artifact_name": "G0-S2-08.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -20,36 +20,34 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-2e9932412b961f11a8dcf804",
+      "packet_id": "pkt-610460f4d65e8d3a51df7c43",
       "path": null,
       "predicate_id": "S2-ADOPT-01",
       "status": "UNDECIDABLE"
     },
     {
-      "detail": "SIGNER_REFERENCE_MISSING",
+      "detail": "gated by S2-CAUSAL-02 structural failure",
       "evidence": [],
       "expected": null,
-      "human_review": {
-        "packet_kind": "S2-CAUSAL-01",
-        "reason": "HUMAN_JUDGMENT_REQUIRED",
-        "required": true
-      },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-0b54e5ed007bbe894259eb54",
       "path": null,
       "predicate_id": "S2-CAUSAL-01",
-      "status": "UNDECIDABLE"
+      "status": "SILENT"
     },
     {
-      "detail": "no violation",
+      "detail": "causal strength is outside the closed set",
       "evidence": [],
-      "expected": null,
-      "observed": null,
+      "expected": [
+        "LIKELY",
+        "POSSIBLE",
+        "UNLIKELY"
+      ],
+      "observed": "CERTAIN",
       "owner": "S2",
-      "path": null,
+      "path": "/s2/causal_relations/0/strength",
       "predicate_id": "S2-CAUSAL-02",
-      "status": "SILENT"
+      "status": "FIRED"
     },
     {
       "detail": "SIGNER_REFERENCE_MISSING",
@@ -62,7 +60,7 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-3595781258eac2b8661405da",
+      "packet_id": "pkt-6d86dcbd164dc132f44834e7",
       "path": null,
       "predicate_id": "S2-REP-01",
       "status": "UNDECIDABLE"
@@ -81,22 +79,21 @@
   "kind": "seed",
   "packets": [
     "S2-ADOPT-01",
-    "S2-CAUSAL-01",
     "S2-REP-01"
   ],
   "parent_id": "S2_CASE01_CLEAN",
   "parent_type": "S2_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S2-CAUSAL-01",
-    "expected_status": "UNDECIDABLE",
+    "expected": "S2-CAUSAL-02",
+    "expected_status": "FIRED",
     "non_silent_other": [
       "S2-ADOPT-01",
       "S2-REP-01"
     ],
     "other_active": [
       "S2-ADOPT-01",
-      "S2-CAUSAL-02",
+      "S2-CAUSAL-01",
       "S2-REP-01",
       "S2-TEMP-01"
     ],

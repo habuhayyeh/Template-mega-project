@@ -725,6 +725,18 @@ def score(target, dependencies, oracle, rules):
 
     findings = []
     for pred_id in registry.predicates_for(parent_type):
+        if pred_id == "S2-CAUSAL-01":
+            structural = _s2_causal_02(target, dependencies, oracle, rules)
+            if structural.status == FIRED:
+                findings.append(_silent(
+                    pred_id, "gated by S2-CAUSAL-02 structural failure"))
+                continue
+        if pred_id == "S3-ROLE-01":
+            structural = _s3_role_02(target, dependencies, oracle, rules)
+            if structural.status == FIRED:
+                findings.append(_silent(
+                    pred_id, "gated by S3-ROLE-02 structural failure"))
+                continue
         if pred_id in registry.SEMANTIC_PREDICATES:
             findings.append(_human(pred_id))
             continue

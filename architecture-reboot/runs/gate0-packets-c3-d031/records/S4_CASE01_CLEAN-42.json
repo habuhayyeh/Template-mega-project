@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:e136c59bb785fed2381155f742e2d3f498ca6970794443a980d70c061e541055",
-  "artifact_name": "G0-S4-13.json",
+  "artifact_hash": "sha256:bae455eeff03ea4a66e62d322aa90c3f87b9d0dec4f5d4bdcfb59e1fe425f9bf",
+  "artifact_name": "G0-S4-14.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -50,29 +50,14 @@
       "status": "SILENT"
     },
     {
-      "detail": "S4 input view does not match the mapped source projection",
-      "evidence": [
-        {
-          "first_diff": "/from_s2/causal_relations"
-        }
-      ],
-      "expected": [],
-      "observed": [
-        {
-          "from": "O02",
-          "relation": "CONTRIBUTOR",
-          "strength": "POSSIBLE",
-          "support": [
-            "S01",
-            "S02"
-          ],
-          "to": "O03"
-        }
-      ],
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
       "owner": "S4",
-      "path": "/s4_input_view/from_s2/causal_relations",
+      "path": null,
       "predicate_id": "S4-PROJ-01",
-      "status": "FIRED"
+      "status": "SILENT"
     },
     {
       "detail": "no violation",
@@ -85,14 +70,14 @@
       "status": "SILENT"
     },
     {
-      "detail": "no violation",
+      "detail": "S4 encounter role does not match S3 selected role",
       "evidence": [],
-      "expected": null,
-      "observed": null,
+      "expected": "BACKGROUND",
+      "observed": "PRIMARY",
       "owner": "S4",
-      "path": null,
+      "path": "/s4/problems/1/encounter_role",
       "predicate_id": "S4-ROLE-01",
-      "status": "SILENT"
+      "status": "FIRED"
     }
   ],
   "kind": "seed",
@@ -101,15 +86,15 @@
   "parent_type": "S4_BLUEPRINT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S4-PROJ-01",
+    "expected": "S4-ROLE-01",
     "expected_status": "FIRED",
     "non_silent_other": [],
     "other_active": [
       "S4-COMP-01",
       "S4-INC-01",
       "S4-MEM-01",
-      "S4-REP-01",
-      "S4-ROLE-01"
+      "S4-PROJ-01",
+      "S4-REP-01"
     ],
     "pass": true
   },

@@ -55,7 +55,7 @@
       "S2-ADOPT-01": 1,
       "S2-CAUSAL-01": 3,
       "S2-CAUSAL-02": 1,
-      "S2-REP-01": 2,
+      "S2-REP-01": 1,
       "S2-TEMP-01": 1,
       "S3-ACCT-01": 1,
       "S3-CAND-01": 6,
@@ -76,8 +76,8 @@
       "S2-ADOPT-02",
       "S4-ORD-01"
     ],
-    "seed_mutations_checked": 37,
-    "seeds": 37
+    "seed_mutations_checked": 36,
+    "seeds": 36
   },
   "dependency_context": {
     "S1_OUTPUT": [],
@@ -129,12 +129,12 @@
   },
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:d59aaec0ea476f58320a59e3886ceea2991e451f71bb5747dbd1cdd04ea6afc1",
+    "00-GATE0-MANIFEST.md": "sha256:b8d1180ceaba947e0cf1d3398830fb048e9a1fd241adabb2f78ce98f0e5ea2c7",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
-    "G0-SEEDS.md": "sha256:df1615f06a314b34ef2fc9a12cdebc09b342cfdb73202cbb5700d653c35ed9ec",
-    "make_seeds.py": "sha256:bfac53d0608d16fd97ecec9757d2ba43b8e8c605d20a6e12c5c3b128269cd405",
+    "G0-SEEDS.md": "sha256:a8e573d30ccd9a03589b3ee3a182eb9ec609fec7df8caf560cb54b3ca84df302",
+    "make_seeds.py": "sha256:d8b0fad618b5bbf03b8f289072dd2e05f884dc97d70828f291aff1404ec87c6e",
     "oracle.json": "sha256:de909199d517ab900b2ee28c134c8cc566dea6d924567b5e44303a19bc78db34",
     "predicates.md": "sha256:361ebf9368dcf7195b1366e918904e38553ff8a47f6b964346f44912fde495be",
     "schema.md": "sha256:f19904e7db86747a12fb179865cfcdc15faef385d46f93fbd5ebe51f25e92bdb"
@@ -196,7 +196,7 @@
   "registry": "PILOT-3",
   "schema": "SCHEMA-4",
   "seed_integrity": {
-    "checked": 37,
+    "checked": 36,
     "multi_diff": 0,
     "noop": 0,
     "rule": "each seed differs from its parent at exactly the declared path; manifest values are the checked diff"
@@ -281,22 +281,6 @@
       "parent": "PARENT-S1_PARENT.json",
       "parent_id": "S1_CASE01_CLEAN",
       "parent_type": "S1_OUTPUT"
-    },
-    {
-      "artifact": "G0-S2-01.json",
-      "hash": "sha256:c70eea72179f28cafacdf109253c6d458db5653beb77e9c0c604bd9c926b269d",
-      "must_fire": "S2-REP-01",
-      "mutations": [
-        {
-          "after": "[]",
-          "before": "[\"S02\"]",
-          "label": "[\"S02\"] -> []",
-          "path": "/s2/representations/0/support_refs"
-        }
-      ],
-      "parent": "PARENT-S2_PARENT.json",
-      "parent_id": "S2_CASE01_CLEAN",
-      "parent_type": "S2_OUTPUT"
     },
     {
       "artifact": "G0-S2-02.json",

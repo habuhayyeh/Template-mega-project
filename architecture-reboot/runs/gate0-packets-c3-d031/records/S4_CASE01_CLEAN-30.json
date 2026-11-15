@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:bae455eeff03ea4a66e62d322aa90c3f87b9d0dec4f5d4bdcfb59e1fe425f9bf",
-  "artifact_name": "G0-S4-14.json",
+  "artifact_hash": "sha256:34a871b12fa8b8fb64396530ffae308b888c2c1da3b545d7671ca4a34eef76ae",
+  "artifact_name": "G0-S4-01.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -30,14 +30,22 @@
       "status": "SILENT"
     },
     {
-      "detail": "no violation",
-      "evidence": [],
-      "expected": null,
-      "observed": null,
+      "detail": "S4 problem set diverges from S3 rendered set",
+      "evidence": [
+        {
+          "rendered": [
+            "C1",
+            "C2"
+          ],
+          "s4_sources": []
+        }
+      ],
+      "expected": "problem sources equal from_s3.rendered ['C1', 'C2']",
+      "observed": [],
       "owner": "S4",
-      "path": null,
+      "path": "/s4/problems",
       "predicate_id": "S4-INC-01",
-      "status": "SILENT"
+      "status": "FIRED"
     },
     {
       "detail": "no violation",
@@ -70,14 +78,14 @@
       "status": "SILENT"
     },
     {
-      "detail": "S4 encounter role does not match S3 selected role",
+      "detail": "no violation",
       "evidence": [],
-      "expected": "BACKGROUND",
-      "observed": "PRIMARY",
+      "expected": null,
+      "observed": null,
       "owner": "S4",
-      "path": "/s4/problems/1/encounter_role",
+      "path": null,
       "predicate_id": "S4-ROLE-01",
-      "status": "FIRED"
+      "status": "SILENT"
     }
   ],
   "kind": "seed",
@@ -86,15 +94,15 @@
   "parent_type": "S4_BLUEPRINT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S4-ROLE-01",
+    "expected": "S4-INC-01",
     "expected_status": "FIRED",
     "non_silent_other": [],
     "other_active": [
       "S4-COMP-01",
-      "S4-INC-01",
       "S4-MEM-01",
       "S4-PROJ-01",
-      "S4-REP-01"
+      "S4-REP-01",
+      "S4-ROLE-01"
     ],
     "pass": true
   },
