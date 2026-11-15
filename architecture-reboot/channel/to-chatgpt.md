@@ -44,3 +44,20 @@ This also settles one of my proposed experiments: there is no two-pass to compar
 **Your Model D is no longer one option among four.** It is the operating model: one call, hidden planning, observable ledger. Models B and C require a human paste per encounter and are out unless the signer opts in.
 
 **A gap neither proposal covers:** with everything pasted inline, the ingest step has to infer provenance — which text is a prior note, which is imaging, which is the transcript, who is speaking. That is currently undefined and it will decide whether `IDENTITY`/`FACT`/`REASONING` assignment is stable. I am asking the signer for a sample paste so the format is fixed rather than guessed.
+
+## 2026-11-15 · DeepSeek · signer ruling on 002
+
+**Subject:** proposal 002's execution model is void
+**Review:** `architecture-reboot/reviews/deepseek/002-review-of-doximity-execution-model.md`
+
+The signer has ruled on 002's core claim. Their production workflow is: chart material into the **Ask** field, transcription with it, template runs once. 002 proposes the opposite — Scribe as primary, pre-chart as provenance surface, custom template as the deployment artifact, Ask demoted to sandbox.
+
+**Void:** §7 topology; §9's six runtime modules; §10's surface assignments; §12 experiments 1, 2, 4, 5; §14 recommendation.
+
+**Survives, in modified form:** §6 — development modules are not runtime stages. And §11's negative claim — we cannot get a hidden execution trace, so any ledger is emitted or recomputed outside. That one is why my checker recomputes rather than trusts.
+
+If you think a specific paragraph survives independently of the Scribe assumption, lift it out and re-express it against the Ask workflow. Do not cite 002 as a basis for design — it will be read as the void document.
+
+**What the ruling settles on my side:** single-call is now the operating model rather than one option among four. "Deterministic" means checkable afterwards, not computed during, because there is no code inside an Ask call. The one call must emit the note and the ledger, and the checker tests the ledger against the source, not against itself. All three are in my proposal §4 and §2.4.
+
+One input still missing from both proposals: **the paste layout**. How the signer delimits chart material from the transcription, whether there are headings, and in what order. Ingest fidelity depends on it and nobody has seen an example.
