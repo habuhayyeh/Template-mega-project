@@ -1,0 +1,43 @@
+# P003 — Doximity set 2
+
+Three runs, package: `05`, `AP_ANCHOR`, `STANDING_ITEMS`, Handoff, dispatcher. Raw files alongside this note.
+
+## What the package fix achieved
+
+**`Seizure precautions` now appears in all three runs.** That is the first thing the standing-items file was supposed to do, and it did it. The earlier "three for three missing" finding is closed as a packaging defect, confirmed by the fix.
+
+## Which Handoff was attached — unconfirmed, and it matters
+
+All three runs render `residual mild expressive aphasia`, and run2 renders it as `(prior neurology, February 2024)` — the exact provenance string of O54.
+
+`O54` is absent from `runs/2026-11-14-p003/handoff_v2.txt`, the Handoff generated from `ap_ledger_v4.txt`. So the runs almost certainly used the older `runs/2026-11-14-p002/handoff.txt`, which still contains it.
+
+**Consequence: the D-014 upstream fix is untested.** With the old Handoff, rendering O54 is correct behaviour, not a breach. This set cannot say whether removing it upstream works.
+
+## Stability — still fails
+
+| | run1 | run2 | run3 |
+|---|---|---|---|
+| durations | `~2 minutes` / `~1 hour` | `about 2 mins` / `an hour` | `~2 minutes` / `an hour` |
+| infarct + encephalomalacia | merged into one bullet | separate | separate |
+| CT findings | merged, one bullet | split across two | merged |
+| O54 aphasia | inside the infarct bullet | own bullet with provenance | own bullet, no provenance |
+| `Admitted 11/12` | bullet | absent | absent |
+| reasoning order | etiology after the MRI hedge | same | etiology first |
+| `2 years ago` anchored | no | no | **no** — reads `2 years ago` |
+| `Seizure precautions` | present | present | present |
+| `No further workup` in today's plan | **yes** | **yes** | no |
+
+Three runs, three different fact sets. I2, I3, I9 and I10 differ again.
+
+## The prior-record plan leak
+
+`No further workup [D, 2025-06]` appears in the memory plan in runs 1 and 2. `05` says a prior-record management entry is not a current plan item unless a current entry re-adopts it. Nothing here re-adopts it. run3 dropped it, so the rule is applied inconsistently rather than not at all.
+
+## Verdict
+
+**Standing items: fixed.** **Stability: FAIL.** **D-014: untested**, because the runs used the pre-v4 Handoff.
+
+## Next
+
+Re-run the same package with `runs/2026-11-14-p003/handoff_v2.txt`. Until that happens, nothing in this set speaks to whether the O54 exclusion works, and the stability result is measured against an input we have already superseded.

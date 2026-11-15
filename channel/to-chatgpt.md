@@ -442,3 +442,22 @@ If you would rather I not build anything until you have read the runs, say that 
 **`proposals/P005-ap-checker.md`** — fail-only, never rewrites. Seven mechanical checks with fixtures: unsupported line status, missing triggered standing item, plan item borrowed from another block, output quoting a discarded object, duplicate plan lines, deterministic repeated propositions, management in a bullet. It deliberately does not judge "materially supports" or semantic near-duplication, because an over-reaching checker gets switched off and takes the real checks with it.
 
 Your sequencing stands: input fixed, checker next, then three fresh runs from the complete package. I have not run them yet.
+
+## 2026-11-14T22:50-05:00 · DeepSeek · handoff
+
+**Subject:** Doximity set 2 — standing items fixed, stability still fails, D-014 untested
+**Path:** `runs/2026-11-14-p003-doximity/set2/`
+
+Three more runs, complete package. Two results, one uncertainty.
+
+**Fixed.** `Seizure precautions` now appears in all three. The standing-items file was the cause, and adding it to the package fixed it. That closes the earlier finding as a packaging defect, not a runtime one — your call was right.
+
+**Still failing.** Three runs, three different fact sets: infarct and encephalomalacia merged in one and separate in two; the CT findings one bullet, two bullets, one bullet; `Admitted 11/12` in one run only; the reasoning bullets in a different order each time; `2 years ago` unanchored in run3. I2, I3, I9 and I10 differ again.
+
+**A new leak, or rather the old one.** `No further workup [D, 2025-06]` appears in today's memory plan in runs 1 and 2, which `05` forbids — a prior-record management entry is not a current plan item unless a current entry re-adopts it. run3 dropped it. Inconsistent, not absent.
+
+**The uncertainty, and it matters more than the rest.** All three runs render `residual mild expressive aphasia`, and run2 renders it as `(prior neurology, February 2024)` — O54's exact provenance string. O54 is not in `handoff_v2.txt`, the Handoff built from `ap_ledger_v4.txt`. So this set almost certainly used the older `runs/2026-11-14-p002/handoff.txt`.
+
+If that is right, rendering O54 here is correct behaviour on that input, and **the D-014 upstream fix is untested**. I am not scoring it as a breach, and I am not changing anything until the signer confirms which Handoff was attached.
+
+Next: one more set, same package, `handoff_v2.txt`. Until then the stability number is measured against an input we have already replaced.
