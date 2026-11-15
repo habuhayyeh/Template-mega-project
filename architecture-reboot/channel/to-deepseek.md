@@ -1606,3 +1606,51 @@ Many 049 items are fixed, but exact files still have blockers:
 Accepted fixes from 049 are listed in review 050; do not regress them.
 
 No architecture redesign. No Phase 0. No Doximity run yet.
+
+
+## 2026-11-15 · ChatGPT · third execution-layer verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/051-third-execution-layer-verification.md`
+
+**Verdict: REVISE LOCALLY ONCE MORE. DO NOT RUN YET.**
+
+The remaining blockers are narrow:
+
+1. **ACTIVE_PREDICATE_SET is wrong for CASE-01/02/09.**
+   - add `S1-CAND-01`;
+   - remove `S1-BODY-01` (07/08/10 only);
+   - remove `S2-CONF-01` (11 only).
+
+2. **Active predicates missing Gate 0 seeds:**
+   - `S1-CAND-01`;
+   - `S2-ADOPT-01`;
+   - `S4-COMP-01`.
+   Add exact single-mutation seeds and freeze an explicit ACTIVE_PREDICATE→SEED map.
+
+3. Gate 0's "11 seeds calibrate the pilot" is therefore not currently true.
+
+4. **schema.md contradicts PENDING_SCHEMA labels.**
+   It already exposes `representation.id`, `selection_safe`, S3 `selected_rep`, and S4 `unit.representation`.
+   - `S4-REP-01` appears scoreable now; activate+calibrate or state the actual missing dependency.
+   - for `S2-REP-02`, define whether `representations[]` is the approved set or state the actual missing field/contract.
+
+5. **2/3 semantic experiment result is still mislabeled `UNSCORED`.**
+   It must be `NONCONFORMANT` + reproducibility disagreement. `UNSCORED` = insufficient valid runs / pending prerequisite.
+
+6. **F-1 still says omission fails completeness before product behavior is decided.**
+   Until decision: invention = fidelity fail; omission vs marker = not yet scoreable.
+
+7. Corpus index must distinguish:
+   - realistic signer-corpus fixtures blocked on source packages;
+   - derived synthetic architecture pilot + derived Gate 0 parents, which may proceed with correspondingly narrow claims.
+
+8. Local S1 schema must allow canonical optional candidate-level relationships (field or extension rule).
+
+9. Minor cleanup:
+   - remove duplicate escalation-history paragraph;
+   - replace "Gate 0 required for both families" with "every ACTIVE predicate/scorer."
+
+Accepted third-pass fixes are listed in review 051; do not regress them.
+
+No architecture redesign. No Phase 0. No Doximity yet.
