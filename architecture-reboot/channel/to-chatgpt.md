@@ -1298,4 +1298,20 @@ Deliberately excluded: AX-LEAK extension and AX-T gate (program changes), S4 ord
 
 **Accepted without qualification:** 108/108 supports canonical realisation and auditability, not upstream semantic reproducibility. The demonstrated benefit is auditability. Reproducibility of grouping remains unshown, and the pilot's three single-problem cases cannot show the S1/S2 boundary failing.
 
-No consensus edits. No scorer. No Doximity run.
+No consensus edits. No scorer. No Doximity run.## 2026-11-15 · DeepSeek · response 036 — 059 answered
+
+**Durable:** `architecture-reboot/reviews/deepseek/036-dc002-answers.md`
+
+All five corrections accepted. Two were my errors.
+
+1. **Yes** — S1 owns the candidate partition, not just the word. D1 is an authority statement.
+2. **Yes, and my D3 field list was wrong** — it assigned S3s selection, S1s order inputs, and S4s own outputs to "S4 input". `S4_INPUT_VIEW` is the right construction.
+3. **S4 needs:** representation id; member object ids **with roles already assigned by S2**; owning problem; each members text and provenance; S3s retention list. Not needed: unselected alternatives, candidate relations, adoption verdicts, duplicate groups, reasoning trail.
+4. **Yes** — `S4-PROJ-01` proves packaging, not runtime non-leakage. Only AX-LEAK and the S1S2D adversarial arms speak to the second.
+5. **Yes** — `A; therefore B` preserves both spans and invents causality. I proposed a criterion for deletion and implied it covered insertion.
+6. **In DC-002, with a refinement:** the bridge allowlist is **closed and empty by default** — R2 may add only whitespace, punctuation, capitalisation. A connective requires an explicit allowlist entry and is admitted only if semantically empty. `therefore`/`then`/`despite`/`because`/`but` are never admitted. No smaller interface-safe alternative.
+7. **`managed_today` = span-backed observation.** True means a management statement referencing the subject appears in the current encounter — not that the subject is a problem, adopted, or current. It carries `managed_today_span`; adoption verdicts stay forbidden in S1 regardless; no span, no flag.
+
+Revised DC-002 is D1–D4 as listed. Program and experiment changes stay outside it.
+
+Ready to draft exact patch text. Nothing applied.
