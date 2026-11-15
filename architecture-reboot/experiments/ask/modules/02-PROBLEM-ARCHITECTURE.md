@@ -27,7 +27,11 @@ The Scribe packet remains the canonical source store.
 
 ## Output
 
-Return `PROBLEM_MAP` only.
+Return only:
+- `PROBLEM_MAP`; and
+- `ARCHITECTURE_UNRESOLVED` when needed.
+
+`ARCHITECTURE_UNRESOLVED` is not a problem list. It is the place to preserve architecture questions that cannot be safely decided without inventing a problem.
 
 ```text
 @@HANDOFF B_PROBLEM_ARCHITECTURE_V1
@@ -50,8 +54,18 @@ PROBLEM P001
   primary_action_holder=<ACTION IDs>
   order=<integer>
 
+ARCHITECTURE_UNRESOLVED
+
+ARCH_UNRESOLVED X001
+  topic=<short architecture question>
+  evidence=<record IDs + selectors>
+  issue=<why problem threshold/identity/role/relation cannot be safely decided>
+  return_to_A=<yes|no; reason if yes>
+
 @@END
 ```
+
+Omit `ARCHITECTURE_UNRESOLVED` when empty.
 
 Use only fields that have supported content, except:
 - `label`
@@ -86,8 +100,9 @@ File B must not:
 
 - create new source meaning;
 - alter File A's polarity, certainty, temporality, attribution, event identity, or action state;
-- resolve an `UNRESOLVED` conflict from File A unless the canonical source packet explicitly supplies
-  evidence that File A failed to carry;
+- resolve or rewrite an `UNRESOLVED` conflict from File A;
+- change File A's polarity, time, attribution, certainty, event identity, or action state by re-reading the packet;
+- silently repair material evidence that File A failed to carry; if B detects such a gap, add `ARCHITECTURE_UNRESOLVED` with `return_to_A=yes`;
 - change action decision/execution/response/result state;
 - invent causality because two findings coexist;
 - promote a historical disease into a current problem merely because it is mentioned;
@@ -183,6 +198,28 @@ Do not manufacture a multifactorial syndrome merely because several abnormalitie
 
 Contributors remain relations, not automatically separate neurologic problems.
 
+## Architecture-unresolved register
+
+Use `ARCHITECTURE_UNRESOLVED` when:
+- no problem threshold is established;
+- problem identity cannot be safely decided;
+- encounter role cannot be safely decided;
+- a causal/containment/separation relation is unsupported or unresolved;
+- B detects that File A omitted material semantic evidence needed for architecture.
+
+Do not invent a problem merely to hold uncertainty.
+
+If the problem is an upstream File A omission or semantic defect, set:
+```text
+return_to_A=yes
+```
+and identify the missing/defective semantic input.
+
+If the uncertainty is genuinely architectural despite adequate A input, set:
+```text
+return_to_A=no
+```
+
 ## Adoption and currentness
 
 `adoption` answers how the problem identity is held in this encounter.
@@ -199,6 +236,14 @@ Do not confuse:
 - historical identity with current activity;
 - outside diagnosis with Neurology adoption;
 - mention with endorsement.
+
+Valid adoption/role combinations include:
+- `historical + BACKGROUND` when an established historical neurologic disease is relevant enough to retain as a background problem;
+- `current_adopted + PRIMARY` when the problem is currently adopted and central to evaluation/management.
+
+`historical + PRIMARY` requires separate current evidence that the historical disease itself is under independent evaluation or management in this encounter. Historical diagnosis alone is not enough.
+
+If encounter relevance/role is not established, use `ARCHITECTURE_UNRESOLVED` rather than forcing BACKGROUND or PRIMARY.
 
 ## Certainty
 
@@ -331,14 +376,15 @@ That material remains available to File C through File A + the canonical packet.
 
 ## Unresolved states
 
-When problem identity, containment, role, or relation cannot be safely resolved from the available evidence:
+When problem identity, threshold, containment, role, or relation cannot be safely resolved:
 
-- use `unresolved`;
+- use `ARCHITECTURE_UNRESOLVED`;
 - preserve the relevant evidence;
 - do not guess;
-- do not convert uncertainty into a new diagnosis.
+- do not convert uncertainty into a new diagnosis or fake problem;
+- do not rewrite File A's source conflict.
 
-File B may carry forward an unresolved architecture question but may not rewrite File A's source conflict.
+A field-level `unresolved` value may still be used inside an otherwise justified problem, but uncertainty alone does not justify creating that problem.
 
 ## Structural checks
 
@@ -355,6 +401,8 @@ Before returning:
 9. action IDs preserve File A action state and are not rewritten;
 10. no note section, prose, or final-plan decision appears;
 11. no forced problem count;
-12. output contains only `PROBLEM_MAP` and ends with `@@END`.
+12. uncertainty that does not meet problem threshold is held in `ARCHITECTURE_UNRESOLVED`, not a fabricated problem;
+13. B has not changed any File A polarity, time, attribution, certainty, event identity, or action state;
+14. output contains only `PROBLEM_MAP`, optional `ARCHITECTURE_UNRESOLVED`, and ends with `@@END`.
 
-Return the problem map only.
+Return the architecture handoff only.
