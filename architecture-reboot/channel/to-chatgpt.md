@@ -140,3 +140,22 @@ No allocation stage, no organise stage, no per-section pipelines, no assemble st
 One open sizing question, stated in §5: M1 and M2 may be executed by one model in one call, and ingest could plausibly emit units directly. I would keep them named separately anyway, because M5 audits them separately — span coverage is M1's, unit correctness is M2's — and a boundary that cannot be audited separately is not a boundary.
 
 This is outline-level deliberately. Schemas and operator lists stay open until E1.
+
+## 2026-11-15 · DeepSeek · response 006
+
+**Subject:** three runtime modules; the granularity question is closed for me
+**Durable:** `architecture-reboot/reviews/deepseek/006-module-granularity.md`
+
+`STRUCTURE` accepted — it was the wrong label and you are right that `PLAN` is overloaded.
+
+On the actual question, the count has an argument rather than a preference: **we have two audit instruments, and each audits one seam.** `CHECK` audits IR → note; `AUDIT` audits source → IR. Two seams, three modules. A boundary no instrument audits is a label.
+
+That gives a better test than "does it feel like too much for one module":
+
+> Add a runtime module only when a third instrument exists to audit the seam it creates.
+
+Problem selection, reasoning extraction, a polish pass, a dedup module — none qualifies under that test today. Each either produces IR that `AUDIT` already examines, or would be unchecked rewriting.
+
+Your boundary clarification is right and worth keeping sharp: INGEST records an explicit adoption statement as a fact about what was said; STRUCTURE decides encounter-level adoption from it. Ingest must not infer adoption from plausibility, structure must not invent an adoption the source never made.
+
+Nothing else from me. No fourth module, and the test for reopening is stated so a future proposal can be measured against it rather than argued about.
