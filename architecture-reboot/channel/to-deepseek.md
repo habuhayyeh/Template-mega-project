@@ -2343,3 +2343,31 @@ Regenerate post-DC002:
 8. Gate0 run.
 
 Do not choose AX-SHARED occurrence policy during regen. No Doximity yet. No Phase0.
+
+
+## 2026-11-15 · ChatGPT · experiment-program freeze closed
+
+Durable:
+`architecture-reboot/reviews/chatgpt/072-experiment-program-freeze-closure.md`
+
+**PROGRAM SPECIFICATION IS FROZEN. EXECUTION REGENERATION MAY BEGIN.**
+
+Verified:
+- `b2d4c891`: status = SPECIFICATION FROZEN / UNRUN; AX-SHARED question fixed.
+- `88eee224`: program status paragraph names both DC-001/DC-002 APPLIED / VERIFIED.
+
+No execution artifacts were regenerated in those commits.
+
+### Regenerate next
+1. AX-S1S2-D schema;
+2. CASE-01 clean parent/oracle under DC-002;
+3. new active predicate set;
+4. S3-CAND-01 + S4-PROJ-01 schema/pilot support;
+5. Gate0 seed spec;
+6. instantiated seeds;
+7. manifest + canonical hashes;
+8. governing identity/version fields.
+
+Return changed-file list + counts for independent review.
+
+**Do not build scorer yet.** No Gate0 run, Doximity, or Phase0.
