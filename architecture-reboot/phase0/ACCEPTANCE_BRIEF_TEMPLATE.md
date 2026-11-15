@@ -19,13 +19,13 @@ If the brief needs to explain the contract, the contract is unclear and should b
 
 ### B. Fixtures
 
-The cases the artifact must handle, by id from `FIXTURE_REGISTER.md`. A brief cites at least one fixture; historical fixtures are preferred, and a derived one must justify why no historical case covers the invariant.
+The cases the artifact must handle, by id from `FIXTURE_REGISTER.md`. A brief cites **all relevant historical fixtures** for the artifact, plus any derived fixture, which must justify why no historical case covers its invariant.
 
 ```text
 FIXTURES
-  F-04 duplication, infarct block
-  F-09 standing item, seizure precautions
-  F-12 (derived) empty span disposition — adjacent to F-03
+  F-02 duplication, infarct block
+  F-06 missing required line, seizure precautions
+  D-01 (derived) zero-member unit — adjacent to F-06
 ```
 
 ### C. Required artifact properties
@@ -41,14 +41,14 @@ PROPERTIES
 
 ### D. Deciding checks
 
-For each property, the check that decides it, and which mode answers it.
+For each property, the check that decides it, and which mode answers it — `MECHANICAL`, `SEMANTIC_AUDIT` or `HYBRID`.
 
 ```text
 CHECKS
-  P1  MECHANICAL  unit.problem is single-valued
-  P2  MECHANICAL  operator ∈ vocabulary
-  P3  MECHANICAL  section list has no duplicates
-  P4  SEMANTIC    operator renders the payload (audit step 7)
+  P1  MECHANICAL      unit.problem is single-valued
+  P2  MECHANICAL      operator ∈ vocabulary
+  P3  MECHANICAL      section list has no duplicates
+  P4  SEMANTIC_AUDIT  operator renders the payload
 ```
 
 A property with no deciding check is not a property. It is a hope.

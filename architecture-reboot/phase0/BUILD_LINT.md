@@ -37,7 +37,7 @@ Different wording of the same requirement is not a contradiction and is not repo
 
 Two rules share a `decision` but their normative fields are not comparable, so a machine cannot tell whether they agree.
 
-This fails the build. If a machine cannot decide whether two statements conflict, a reader cannot either, and the runtime will pick one arbitrarily — which is the mechanism that produced the original contradiction.
+This fails the build. The build blocks until the ambiguity is resolved into one rule or two distinct decisions. Two statements governing one decision, whose agreement cannot be established, will resolve arbitrarily at runtime — which is how the original contradiction behaved.
 
 ### L2 — Duplicate authority
 

@@ -19,7 +19,7 @@ Examples: rewriting an internal routine, improving error messages inside the mod
 Adding, removing, or altering a check or assertion is **not** an implementation change. See §4.
 
 Requirements:
-- the module's acceptance brief still passes;
+- the module's frozen contract and acceptance properties still hold. Observed outputs may change; frozen properties may not.
 - no contract file changes;
 - the reviewing agent confirms no interface, contract or observable behaviour changed. The reviewer confirms absence of interface change, not smallness of diff.
 
@@ -58,7 +58,7 @@ A pattern of acceptance changes against the same fixture is evidence the archite
 | PATCH | may proceed | none | none |
 | IMPLEMENTATION CHANGE | may proceed | confirms locality | none |
 | DESIGN CHANGE | proposes | reviews | approves if clinical/style/product |
-| ACCEPTANCE CHANGE | may not self-approve | approves | informed |
+| ACCEPTANCE CHANGE | may not self-approve | approves | **approves** when it alters a clinical baseline expectation |
 
 The engineer may never approve an acceptance change alone. That rule exists because the engineer is the party most motivated to make the test pass.
 

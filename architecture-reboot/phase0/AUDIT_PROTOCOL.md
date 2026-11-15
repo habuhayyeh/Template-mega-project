@@ -34,22 +34,15 @@ Used for: the first run of a new case, any run offered as acceptance evidence, a
 
 ## 3. What the auditor does
 
-The order below is the default. It is a sequence of questions, not a fixed rubric: the reviewer answers the ones that apply, adds case-specific questions where warranted, and records which were not answerable and why.
+The audit is driven by the fixture's **declared assertions**, not by a fixed checklist.
 
-1. **Coverage** — does every source span have a disposition, and every object a span?
-2. **Fidelity** — is every object's content supported by its span?
-3. **Problem model** — does every problem have a claim, and are any two problems the same thing?
-4. **Duplicate identity** — does any fact render twice within one section and problem?
-5. **Adoption** — is any prior recommendation presented as current, or a current one buried?
-6. **Placement** — is each object used under the problem it explains?
-7. **Operator fit** — does the chosen operator render the payload it was given?
-8. **Completeness** — does every required line exist?
-9. **Voice and format** — section-scoped style?
-10. **Note as a whole** — sections in order, nothing invented between them?
+Each assertion belongs to one seam (coverage, fidelity, problem model, duplicate identity, adoption, placement, operator fit, completeness, voice, whole-note). The auditor takes the assertions declared for this case, groups them by seam, and answers each one.
 
-Do not stop at the first failure. Record every question answerable and every failure found; a batch that returns one failure per run wastes the run.
+If an assertion cannot be decided from the evidence available in this mode, it is recorded as `UNDECIDABLE` with the reason. It is not answered from expectation.
 
-Stop early only when a failure makes later questions uninterpretable, and state why: coverage wrong → fidelity unanswerable; IR malformed → operator fit unanswerable; source incomplete → nothing downstream trustworthy.
+The auditor may add a case-specific assertion when the case shows something the declared set does not cover; the addition is recorded and, if it proves general, promoted through `ACCEPTANCE CHANGE`.
+
+Do not stop at the first failure. Record every assertion answerable and every failure found; a batch returning one failure per run wastes the run. Stop early only when a failure makes later assertions uninterpretable, and state why.
 
 ## 4. What is recorded
 
@@ -70,7 +63,7 @@ Five fields plus the mode. The owner is a submodule, not a person.
 `REJECT` — at least one failed, with the full list of independent failures.
 `BLOCKED` — the audit could not proceed, with the stopping reason.
 
-A Mode A audit may reject or report, but may not sign an acceptance decision. Acceptance requires Mode B.
+Either mode may sign acceptance **if every declared assertion for that case is decidable from the evidence available in it**. If any is `UNDECIDABLE`, the audit cannot accept, whatever the mode.
 
 ## 6. When the reviewer cannot decide
 

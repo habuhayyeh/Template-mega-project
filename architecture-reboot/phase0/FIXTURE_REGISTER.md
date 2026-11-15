@@ -26,7 +26,7 @@ Each fixture records a defect, its evidence path, its owner, and how it is decid
 ### F-01 — fabrication
 
 **Defect:** a run produced `postictal confusion resolved`, which no source supported.
-**Evidence:** `runs/2026-11-14-p003-doximity/set1/run1.txt` — a deliberate control: no dispatcher, no standing items.
+**Evidence:** `runs/2026-11-14-p003-doximity/run1.txt` — a deliberate control: no dispatcher, no standing items.
 **Boundary:** this tests the **whole envelope**, not the extraction guard alone. Its cause was an under-specified call; it must not be cited as proof that I3 alone failed.
 **Required:** nothing renders without span support.
 **Owner:** I3 (guard), envelope (cause). **Decides:** mechanical.
@@ -34,7 +34,7 @@ Each fixture records a defect, its evidence path, its owner, and how it is decid
 ### F-02, F-03, F-04 — duplication
 
 **Defect:** the infarct (F-02), the CT findings (F-03), and the family memory concern (F-04) each rendered twice within one problem block.
-**Evidence:** `runs/2026-11-14-p003-doximity/set3/run1–3.txt`.
+**Evidence:** `runs/2026-11-14-p003-doximity/set3/run1.txt`, `set3/run2.txt`, `set3/run3.txt`.
 **Required, two levels:**
 
 - mechanical — an object id appears in at most one unit per (section, problem);
@@ -47,7 +47,7 @@ Both levels are needed because the old failures were *semantic* duplicates — t
 ### F-06 — missing required line
 
 **Defect:** `Seizure precautions` was absent from the plan.
-**Evidence:** the package then in use did not include the standing-item contract; once it did, the line appeared 3/3 in `set2` and 3/3 in `set3`. The defect was packaging, not model judgement.
+**Evidence:** `PACKAGE.md` before and after the standing-item contract was added; presence confirmed in `runs/2026-11-14-p003-doximity/set2/run1.txt`, `set2/run2.txt`, `set2/run3.txt` and `set3/run1.txt`, `set3/run2.txt`, `set3/run3.txt`. The defect was packaging, not model judgement.
 **Required:** a package declaring standing items must carry their contract; S4 emits the unit when the trigger is met.
 **Owner:** BUILD (primary), S4 (secondary). **Decides:** mechanical.
 
@@ -68,20 +68,21 @@ Both levels are needed because the old failures were *semantic* duplicates — t
 ### C-01 — contract contradiction
 
 **Defect:** two clauses in `05` governed the same ordering decision — one put reasoning before the fact lines, the other put facts before reasoning. The writer obeyed a different one per run.
-**Evidence:** `pipeline/05_WRITE_AP.md` at the rewrite, against `pipeline/AP_ANCHOR.md`; one decision, two owners.
+**Evidence:** `proposals/P003-ap-render.md` §1, and `pipeline/05_WRITE_AP.md` at the rewrite — one decision, two owners.
 **Required:** the build fails when two rules own one decision.
 **Owner:** BUILD. **Decides:** mechanical.
 
 ### C-02 — non-local regression
 
 **Defect:** adding the `EVIDENCE_MODE` requirement for `COURSE` collided with an existing rule governing course text, and moved the `O51` statement, which had nothing to do with the change.
-**Evidence:** the `O51` statement before and after the `EVIDENCE_MODE` clause was added.
+**Evidence:** `artifacts/06_doximity_run3.md` — the `EVIDENCE_MODE` requirement against `SECTION_CONTRACT` rule 38; the `O51` statement moved when the clause was added.
 **Required:** after any contract change, re-run the frozen case and diff the IR.
 **Owner:** process, not a module. **Decides:** measured.
 
 ### C-12 — faithful but clinically empty
 
 **Defect:** the artifact rendered `The MRI to show.` — grammatical, supported, carrying none of the claim's payload.
+**Evidence:** the B+ operator experiment, `artifacts/doximity_operator_stress_results_2026-11-15.md`.
 **Boundary:** that is the historical artifact's exact wording. It is **not** D-017's signer-approved `MRI to show.`, which is a deliberate impersonal form. The two must not be cited interchangeably.
 **Required:** an operator may not discard a member's payload; where a fuller operator exists, the thinner one is not selected.
 **Owner:** S4 (operator choice), R1 (payload retention). **Decides:** mechanical for payload coverage, semantic for operator fit.
@@ -89,22 +90,16 @@ Both levels are needed because the old failures were *semantic* duplicates — t
 ### F-07 — malformed output
 
 **Defect:** a free-text `REUSE` line broke the output schema on a repeated run.
-**Evidence:** Doximity `06` run 3 — not a local run. An earlier local observation was a different event and is not this evidence.
+**Evidence:** `artifacts/06_doximity_run3.md` — not a local run. An earlier local observation was a different event and is not this evidence.
 **Required:** the unit fails to typecheck; the renderer emits `CONTRACT_ERROR` and the run fails.
 **Owner:** S4 (producer), R1 (fail-closed). **Decides:** mechanical.
-
-### F-10 — provenance misuse
-
-**Defect:** `2024-02` rendered as the date of the infarct rather than the date of the prior note documenting it.
-**Evidence:** the prior-note display case in the same run family.
-**Required:** a provenance date stays inside the attribution and never becomes the event's time.
-**Owner:** R1 (parenthetical), S2 (provenance assignment). **Decides:** HYBRID — placement is mechanical; whether the date means event or documentation is semantic.
 
 ## 3. Provisional — path required
 
 | ID | Class | Defect | Missing |
 |---|---|---|---|
 | F-05 | F3 | infarct evidence absent in one run of a set | the specific run and diff line |
+| F-10 | F7 | `2024-02` read as the infarct date | the exact run; the prior-note display case is known but not pinned to a file |
 | F-13 | F10 | a whole source block absent from the IR | the run |
 
 Not usable in a brief until the path exists.
