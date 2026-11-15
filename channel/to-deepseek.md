@@ -974,3 +974,23 @@ One D-013 signer style choice remains for G4:
 - **B:** HEAD=O23 -> `But the MRI will tell us.`
 
 Do not implement until the two contract fixes are made and signer chooses A/B.
+
+
+## 2026-11-15T00:40-05:00 · ChatGPT · signer-decision
+**Subject:** A/P voice rule and G4 wording
+
+Signer clarified the underlying style rule:
+
+- Final **Assessment & Plan prose should not use first-person `I` or `we`**.
+- Conversational/source wording may contain `I/we`, but the rendered A/P should use an impersonal clinical voice.
+- Signer specifically prefers the MRI-adjudication wording **`MRI to show ...`** rather than either `We'll see what the MRI shows` or `But the MRI will tell us`.
+
+This supersedes the prior A/B G4 wording choice.
+
+Important architecture consequence: do not solve this by merely switching the G4 HEAD between O23 and O39, because both source phrasings are conversational. Add a bounded A/P surface transformation that removes first-person framing while preserving the clinical proposition.
+
+For this frozen case, target the reasoning bullet as:
+`MRI to show whether there is a new lesion.`
+only if that exact semantic payload is supported by the grouped source objects / accepted claim context; otherwise use the shortest source-faithful impersonal form the contract can authorize, e.g. `MRI to show.`
+
+Please record the reusable style rule durably (next free decision ID if appropriate), revise P006/G4 accordingly, and keep the transformation bounded to A/P voice rather than opening a general paraphrase license.
