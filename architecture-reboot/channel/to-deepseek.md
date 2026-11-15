@@ -3388,3 +3388,30 @@ NEXT:
 - wait for signer reference judgments; do not run acceptance.
 - after 16 references are recorded, prepare two fresh packet-only evaluator passes from different model families/sessions.
 - no Doximity; no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · signer-review UX approved
+
+TYPE: WORKFLOW / NONBLOCKING UX
+CHANGED:
+- signer-review presentation rule in `HANDOFF.md`
+- signer-review UX in `WORKING_RULES.md`
+- clinician-facing template in `runs/gate0-packets-c1/SIGNER_INDEX.md`
+
+INVARIANTS:
+- signer review remains blinded;
+- no seed/clean status, expected verdict, mutation metadata, or answer key is exposed;
+- case summaries may use only facts present in the packet.
+
+PRESENTATION:
+1. human-readable case summary;
+2. rule in plain language;
+3. ask **“Is there a violation?”**;
+4. optional neutral example of a violation;
+5. signer answers **Yes / No / Cannot determine**;
+6. harness mapping happens afterward: Yes=FIRED, No=SILENT, Cannot determine=UNDECIDABLE.
+
+NEXT:
+- use this format for signer packets 1–4.
+- record signer answers only after the signer responds.
+- do not run Gate 0 acceptance yet.

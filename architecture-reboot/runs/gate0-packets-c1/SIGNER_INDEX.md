@@ -54,3 +54,30 @@ operator artifacts containing answer-key information.
 ```
 
 Do not inspect answer-key/operator artifacts until all signer reference verdicts are recorded.
+
+
+## Clinician-facing review format
+
+For each packet, the presenting agent should convert the JSON into this blinded clinician-facing form:
+
+```text
+Case summary:
+<2–5 sentences using only packet-visible facts>
+
+Rule being tested:
+<plain-language version of the predicate>
+
+Question:
+Is there a violation?
+
+Example of a violation:
+<short hypothetical example that clarifies the rule without revealing the current packet's expected answer>
+
+Answer:
+Yes / No / Cannot determine
+```
+
+Mapping is performed after the signer answers:
+`Yes -> FIRED`, `No -> SILENT`, `Cannot determine -> UNDECIDABLE`.
+
+Do not expose operator answer-key artifacts during this review.

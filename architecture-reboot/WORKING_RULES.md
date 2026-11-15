@@ -149,6 +149,24 @@ No further work.
 A closure message must name the next dependency immediately. If no new commit exists on sync, report that
 briefly and continue with the already-authorized next action rather than stopping at the status report.
 
+### Signer-review UX
+
+For semantic reference collection, do not lead with scorer jargon. Present each packet as:
+
+1. **Case summary** — 2–5 clinician-readable sentences using only information actually present in the blinded packet.
+2. **Rule being tested** — translate the predicate into plain clinical language without changing its meaning.
+3. **Question** — **Is there a violation?**
+4. **Example** — one short hypothetical example of a violation when it helps disambiguate the rule. The example must not reveal whether the current packet is clean/seeded or what answer is expected.
+5. **Response choices** — `Yes`, `No`, `Cannot determine`.
+
+Map only after the signer answers:
+- Yes -> `FIRED`
+- No -> `SILENT`
+- Cannot determine -> `UNDECIDABLE`
+
+Never show signer-review users the operator `INDEX.md`, `INDEX.json`, seed identity, expected verdict,
+mutation metadata, or specificity answer key.
+
 ### Preflight first
 
 Consolidate recurring mechanical checks behind one architecture-reboot preflight entry point. It should cover, where applicable:

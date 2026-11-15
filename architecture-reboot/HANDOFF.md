@@ -130,6 +130,13 @@ No Doximity, no Phase 0.
 **Sync shorthand.** `.` / `sync` means refresh live state and continue already-authorized work; it
 does not itself approve a pending proposal. Option F is separately and explicitly signer-approved.
 
+**Signer-review presentation.** Semantic signer packets are presented in clinician-readable form:
+(1) short case summary using only packet-visible facts; (2) the exact rule in plain language; (3)
+the question **“Is there a violation?”**; (4) a brief example of what would count as a violation when
+helpful. The signer answers `Yes / No / Cannot determine`; the harness mapping is
+`Yes -> FIRED`, `No -> SILENT`, `Cannot determine -> UNDECIDABLE`. The presentation must not
+reveal seed/clean status, expected verdict, mutation metadata, or answer-key fields.
+
 **No status-only updates.** Every sync, review, closure, handoff, and user-facing project update must
 end with a concrete `NEXT`: the next task/decision, responsible actor when relevant, and—if blocked—
 the exact unblock action. Even when no new work landed, state the next authorized action. Closing one
