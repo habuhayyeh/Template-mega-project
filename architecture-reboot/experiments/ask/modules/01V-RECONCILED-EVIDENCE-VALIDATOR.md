@@ -1,3 +1,7 @@
+# SUPERSEDED — DO NOT RUN
+
+Active File 1 is now `01-EVIDENCE-INDEX.md` (pointer-only). Semantic F1V has been removed from the active runtime after false-PASS evidence and DeepSeek architecture review 029.
+
 # FILE 1V — RECONCILED EVIDENCE VALIDATOR
 
 **Experimental version:** F1V-RECONCILE-V2
