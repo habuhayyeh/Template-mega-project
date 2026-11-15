@@ -19,7 +19,7 @@ If the brief needs to explain the contract, the contract is unclear and should b
 
 ### B. Fixtures
 
-The cases the artifact must handle, by id from `FIXTURE_REGISTER.md`. Every brief includes at least one historical fixture; a brief with only derived cases is rejected.
+The cases the artifact must handle, by id from `FIXTURE_REGISTER.md`. A brief cites at least one fixture; historical fixtures are preferred, and a derived one must justify why no historical case covers the invariant.
 
 ```text
 FIXTURES
@@ -30,7 +30,7 @@ FIXTURES
 
 ### C. Required artifact properties
 
-What the output must contain, stated so a script could test it. Properties, not examples.
+What the output must contain, stated so that the named check can decide it. Properties, not examples. A property answerable only semantically is legitimate — it just has to say so.
 
 ```text
 PROPERTIES
@@ -60,7 +60,8 @@ Named by failure class, not described as bad output.
 ```text
 FAILURE BEHAVIOUR
   class F2 duplication      → reject unit pair, fail closed
-  class C13 over-inclusion  → reject object, do not silently drop
+  class C13 over-inclusion  → object is dispositioned NOT_USED with a reason;
+                              placement is checked by audit, not rejected at runtime
   class C11 contradiction   → build fails, no artifact produced
 ```
 

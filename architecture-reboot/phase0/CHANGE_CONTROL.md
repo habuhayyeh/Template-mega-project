@@ -12,7 +12,7 @@ If a "patch" changes any word that governs behaviour, it is not a patch.
 
 ## 2. IMPLEMENTATION CHANGE
 
-A change inside an existing module that does not alter its interface, its scope, or any other module's behaviour.
+A change that does not alter any interface, contract, scope, or observable behaviour — regardless of how many files it touches. Moving code between files is not a design change; changing what a caller may rely on is.
 
 Examples: rewriting an internal routine, improving error messages inside the module, refactoring internals.
 
@@ -21,7 +21,7 @@ Adding, removing, or altering a check or assertion is **not** an implementation 
 Requirements:
 - the module's acceptance brief still passes;
 - no contract file changes;
-- the reviewing agent confirms it is genuinely local.
+- the reviewing agent confirms no interface, contract or observable behaviour changed. The reviewer confirms absence of interface change, not smallness of diff.
 
 ## 3. DESIGN CHANGE
 
@@ -47,7 +47,7 @@ Requirements:
 - the change, and why the old expectation was wrong — not why it was inconvenient;
 - explicit approval from the reviewer who wrote the original expectation;
 - the old and new expectation both recorded in the fixture register with a date;
-- if the change was made because the implementation could not meet the old expectation, that is a `DESIGN CHANGE`, not an acceptance change.
+- if the change was prompted by a failing implementation, it is **still** an acceptance change — but it must show, from evidence, that the old expectation was wrong. If the correction implies an architectural change, a separate linked `DESIGN CHANGE` is recorded; the two are not merged and neither substitutes for the other.
 
 A pattern of acceptance changes against the same fixture is evidence the architecture is wrong, and should be escalated rather than absorbed.
 
@@ -61,6 +61,8 @@ A pattern of acceptance changes against the same fixture is evidence the archite
 | ACCEPTANCE CHANGE | may not self-approve | approves | informed |
 
 The engineer may never approve an acceptance change alone. That rule exists because the engineer is the party most motivated to make the test pass.
+
+The signer approves or is informed per the table below. "Informed" means notified before the change is used in any acceptance result — not archived silently.
 
 ## 6. Recording
 

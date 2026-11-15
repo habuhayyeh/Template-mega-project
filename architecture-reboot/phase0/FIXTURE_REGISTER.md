@@ -1,6 +1,6 @@
 # FIXTURE_REGISTER — the failures that reached output
 
-Each fixture names its class, the defect it encodes, the evidence, and who owns it. **A fixture without a citable evidence path is not mandatory** — it moves to §3 and cannot be used in an acceptance brief until the path is supplied.
+Each fixture records a defect, its evidence path, its owner, and how it is decided. A fixture whose evidence cannot be produced does not belong in §2.
 
 ## 1. Failure classes
 
@@ -21,39 +21,100 @@ Each fixture names its class, the defect it encodes, the evidence, and who owns 
 | C13 | over-inclusion / wrong note use |
 | C14 | non-local regression after a contract change |
 
-## 2. Mandatory fixtures — evidence cited
+## 2. Mandatory fixtures
 
-| ID | Class | Defect | Evidence | Required behaviour | Owner | Decides |
-|---|---|---|---|---|---|---|
-| F-02 | F2 | infarct rendered as one bullet in some runs, two in others | `runs/2026-11-14-p003/set3/run1–3.txt` | one unit per object per section+problem | S4 | mechanical |
-| F-03 | F2 | CT findings duplicated the same way | same set | as F-02 | S4 | mechanical |
-| F-04 | F2 | family memory concern rendered twice in one block | same set | as F-02 | S4 | mechanical |
-| F-06 | F3 | `Seizure precautions` absent from the plan | `PACKAGE.md` shipped without the standing-item list; present 3/3 in `set2` and `set3` once it was added | package must include the standing-item contract; the unit exists when triggered | BUILD (primary), S4 (secondary) | mechanical |
-| F-11 | F8 | prior `no further workup [2025-06]` appeared in today's plan | `oracles/ap_ledger_v4.txt`, O52 disposition | historical never renders in plan without adoption | S2 | semantic |
-| F-12 | F9 | conversational first-person phrasing in the A/P | D-017; the MRI adjudication bullet in `set3` | section-scoped voice | R1 | mechanical |
-| C-01 | C11 | `05` carried "reasoning before facts" and "reasoning after facts" in adjacent sections | `pipeline/05_WRITE_AP.md` history, `proposals/P003-ap-render.md` | build lint fails; no artifact produced | BUILD | mechanical |
-| C-02 | C14 | adding a clause for one statement moved an unrelated one | the O51 statement after the O57 clause was added | re-run the frozen case after any contract change; diff the IR | process, not a module | measured |
+### F-01 — fabrication
 
-## 3. Provisional — evidence path still required
+**Defect:** a run produced `postictal confusion resolved`, which no source supported.
+**Evidence:** `runs/2026-11-14-p003-doximity/set1/run1.txt` — a deliberate control: no dispatcher, no standing items.
+**Boundary:** this tests the **whole envelope**, not the extraction guard alone. Its cause was an under-specified call; it must not be cited as proof that I3 alone failed.
+**Required:** nothing renders without span support.
+**Owner:** I3 (guard), envelope (cause). **Decides:** mechanical.
 
-Real failures I can describe but cannot yet cite. **Not usable in an acceptance brief** until the path is filled. This is the honest state, not a placeholder.
+### F-02, F-03, F-04 — duplication
 
-| ID | Class | Defect | What is missing | Owner if confirmed |
-|---|---|---|---|---|
-| F-01 | F1 | a run invented `postictal confusion resolved` | it is `set1/run1`, but the condition was a deliberate control — no dispatcher, no standing items. As a fixture it tests the **execution envelope**, not the extraction guard. Restate before use | I3 (envelope) |
-| F-05 | F3 | infarct evidence absent in one run of a set | the specific run and diff line | S3 |
-| F-07 | F4 | a free-text `REUSE` line broke the output schema | observed in a local run of `05`; Doximity reproduction not established | S4 (producer), R1 (fail-closed) |
-| F-10 | F7 | `2024-02` read as the infarct date | the run | S2 |
-| F-13 | F10 | a whole source block absent from the IR | the run | I2 |
+**Defect:** the infarct (F-02), the CT findings (F-03), and the family memory concern (F-04) each rendered twice within one problem block.
+**Evidence:** `runs/2026-11-14-p003-doximity/set3/run1–3.txt`.
+**Required, two levels:**
 
-## 4. Withdrawn as unverified
+- mechanical — an object id appears in at most one unit per (section, problem);
+- semantic — two distinct objects asserting the same proposition must not both render; the audit decides identity, not the checker.
 
-- **Referral rendered under two problems.** Proposed as F-09; I cannot cite it in the canonical artifacts. Withdrawn. If re-observed, it enters §3 with a path.
-- **Residual aphasia as seizure evidence (old F-15).** Under the v4 ledger the exclusion was enforced by the object's absence, not by a runtime rule. That was **not** a runtime breach; the demonstrated defect was contract contradiction (C11), and it now belongs there.
+**Owner:** S4 (mechanical), S2 (identity). **Decides:** MECHANICAL and SEMANTIC.
+
+Both levels are needed because the old failures were *semantic* duplicates — the object ids differed, so an id-based rule alone would have passed them.
+
+### F-06 — missing required line
+
+**Defect:** `Seizure precautions` was absent from the plan.
+**Evidence:** the package then in use did not include the standing-item contract; once it did, the line appeared 3/3 in `set2` and 3/3 in `set3`. The defect was packaging, not model judgement.
+**Required:** a package declaring standing items must carry their contract; S4 emits the unit when the trigger is met.
+**Owner:** BUILD (primary), S4 (secondary). **Decides:** mechanical.
+
+### F-11 — prior recommendation promoted
+
+**Defect:** a prior `no further workup [2025-06]` appeared in the current plan.
+**Evidence:** `runs/2026-11-14-p003-doximity/set2/` raw runs and their validation records — not the oracle alone. The oracle recorded the disposition after the fact; the runtime behaviour is the evidence.
+**Required:** a prior recommendation does not render in the plan without an adoption statement.
+**Owner:** S2. **Decides:** semantic.
+
+### F-12 — voice
+
+**Defect:** first person and conversational framing in the A/P.
+**Evidence:** `runs/2026-11-14-p003-doximity/set3/run3.txt`.
+**Required:** section-scoped voice; the A/P is impersonal (D-017).
+**Owner:** R1. **Decides:** mechanical.
+
+### C-01 — contract contradiction
+
+**Defect:** two clauses in `05` governed the same ordering decision — one put reasoning before the fact lines, the other put facts before reasoning. The writer obeyed a different one per run.
+**Evidence:** `pipeline/05_WRITE_AP.md` at the rewrite, against `pipeline/AP_ANCHOR.md`; one decision, two owners.
+**Required:** the build fails when two rules own one decision.
+**Owner:** BUILD. **Decides:** mechanical.
+
+### C-02 — non-local regression
+
+**Defect:** adding the `EVIDENCE_MODE` requirement for `COURSE` collided with an existing rule governing course text, and moved the `O51` statement, which had nothing to do with the change.
+**Evidence:** the `O51` statement before and after the `EVIDENCE_MODE` clause was added.
+**Required:** after any contract change, re-run the frozen case and diff the IR.
+**Owner:** process, not a module. **Decides:** measured.
+
+### C-12 — faithful but clinically empty
+
+**Defect:** the artifact rendered `The MRI to show.` — grammatical, supported, carrying none of the claim's payload.
+**Boundary:** that is the historical artifact's exact wording. It is **not** D-017's signer-approved `MRI to show.`, which is a deliberate impersonal form. The two must not be cited interchangeably.
+**Required:** an operator may not discard a member's payload; where a fuller operator exists, the thinner one is not selected.
+**Owner:** S4 (operator choice), R1 (payload retention). **Decides:** mechanical for payload coverage, semantic for operator fit.
+
+### F-07 — malformed output
+
+**Defect:** a free-text `REUSE` line broke the output schema on a repeated run.
+**Evidence:** Doximity `06` run 3 — not a local run. An earlier local observation was a different event and is not this evidence.
+**Required:** the unit fails to typecheck; the renderer emits `CONTRACT_ERROR` and the run fails.
+**Owner:** S4 (producer), R1 (fail-closed). **Decides:** mechanical.
+
+### F-10 — provenance misuse
+
+**Defect:** `2024-02` rendered as the date of the infarct rather than the date of the prior note documenting it.
+**Evidence:** the prior-note display case in the same run family.
+**Required:** a provenance date stays inside the attribution and never becomes the event's time.
+**Owner:** R1 (parenthetical), S2 (provenance assignment). **Decides:** HYBRID — placement is mechanical; whether the date means event or documentation is semantic.
+
+## 3. Provisional — path required
+
+| ID | Class | Defect | Missing |
+|---|---|---|---|
+| F-05 | F3 | infarct evidence absent in one run of a set | the specific run and diff line |
+| F-13 | F10 | a whole source block absent from the IR | the run |
+
+Not usable in a brief until the path exists.
+
+## 4. Withdrawn
+
+- **Referral rendered under two problems.** Cannot be cited. Withdrawn; if re-observed it enters §3 with a path.
+- **Residual aphasia as seizure evidence.** Under the v4 ledger, exclusion was enforced by the object's absence, not a runtime rule. Not a runtime breach. The demonstrated defect was contract contradiction (C-01).
 
 ## 5. Derived fixtures
-
-Allowed only for an invariant no historical case covers, and must name the historical class beside it.
 
 ```text
 D-01  invariant: zero-member unit legal only for a closed-list standing item
@@ -65,8 +126,8 @@ D-01  invariant: zero-member unit legal only for a closed-list standing item
 
 ## 6. Rules
 
-1. Every acceptance brief cites at least one mandatory fixture.
+1. A brief cites at least one fixture; historical preferred.
 2. A fixture changes only via `ACCEPTANCE CHANGE`.
 3. A fixture that stops applying is marked withdrawn with the reason, never deleted.
-4. When a new defect reaches output, it is registered **before** it is fixed.
-5. A fixture whose evidence cannot be produced is not evidence, and does not belong in §2.
+4. A new defect reaching output is registered **before** it is fixed.
+5. Evidence is a path, not a recollection.

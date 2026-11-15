@@ -1,84 +1,87 @@
 # AUDIT_PROTOCOL — how semantic correctness is judged
 
-This is a procedure, not a rubric. It says who looks at what, in what order, and what they record. It deliberately does not list expected clinical outcomes for any case: those live in fixtures, and fixtures live in evidence.
+This is a procedure. It says who looks at what, in what order they look, and what they record. It does not contain clinical expectations for any case: those live in fixtures, and fixtures live in evidence.
 
 ## 1. Why this exists
 
-The mechanical checker can prove that the note matches the Case IR. It cannot prove the IR matches the encounter. That gap is audited by a person or an independent reviewer, and the procedure is fixed in advance so the criteria do not drift toward whatever got built.
+The mechanical checker can prove the note matches the Case IR. It cannot prove the IR matches the encounter. That gap is audited by a reviewer, and the procedure is fixed in advance so the criteria do not drift toward whatever got built.
 
-## 2. Inputs
+## 2. Two audit modes
 
-The auditor receives exactly these, and nothing else:
+The auditor is not always given everything. Which inputs exist determines which questions are answerable.
 
-1. the source package as the signer pasted it;
-2. the Case IR (test mode);
-3. the final note;
-4. the check report;
-5. the frozen fixture assertions for this case — **properties only, never expected prose**.
+### Mode A — artifact audit
 
-The auditor is not always given source, IR and note. For artifact-level batches the audit works from the returned artifact plus the frozen assertions. What is never given is the implementer's rationale.
+The reviewer has the returned artifact and the frozen assertions for the case.
 
-The auditor does not receive the implementer's rationale, the brief, or the design discussion. Those make an auditor agree with the author.
+Inputs: the artifact; the fixture assertions (**properties only, never expected prose**).
 
-## 3. Order of checks
+Answerable: consistency, placement, completeness, voice.
 
-Fixed order, but **do not stop at the first failure**. Record every check that fails and can still be interpreted independently.
+Not answerable: whether the IR is faithful to a source the reviewer cannot see.
 
-The batch is expensive and its value is the failure picture; an audit that returns one failure per run wastes the run. Order matters for attribution, not for stopping: the earliest failed check names the owning submodule.
+Used for: batch volume.
 
-Stop early only when a failure makes later checks uninterpretable, and state the reason:
+### Mode B — full audit
 
-- coverage wrong → fidelity cannot be assessed;
-- IR malformed → operator fit is meaningless;
-- source package incomplete → nothing downstream is trustworthy.
+Inputs: artifact; Case IR; source package; check report; fixture assertions.
 
-1. **Coverage** — every source span has a disposition; every object traces to a span.
-2. **Fidelity** — every object's content is supported by its span. Any word not supported is a finding, regardless of plausibility.
-3. **Problem model** — every problem has a claim; no two problems describe the same clinical thing.
-4. **Duplicate identity** — no fact is rendered twice within a section and problem; every duplicate group has one canonical.
-5. **Adoption** — no prior recommendation is presented as current without a statement; no current one is buried as historical.
-6. **Placement** — each object is used under the problem it explains, not the one that merely mentions it.
-7. **Operator fit** — the chosen operator renders the payload it was given. A line thinner than its head is a finding.
-8. **Completeness** — every required line exists; standing items present where triggered.
-9. **Voice and format** — section-scoped style; A/P impersonal.
-10. **Note as a whole** — sections in order, nothing invented between them, nothing missing.
+Answerable: everything, including fidelity and coverage.
 
-## 4. What the auditor records for each check
+Used for: the first run of a new case, any run offered as acceptance evidence, any run under dispute.
+
+**The implementer's rationale is never an input in either mode.** It makes the reviewer agree with the author.
+
+## 3. What the auditor does
+
+The order below is the default. It is a sequence of questions, not a fixed rubric: the reviewer answers the ones that apply, adds case-specific questions where warranted, and records which were not answerable and why.
+
+1. **Coverage** — does every source span have a disposition, and every object a span?
+2. **Fidelity** — is every object's content supported by its span?
+3. **Problem model** — does every problem have a claim, and are any two problems the same thing?
+4. **Duplicate identity** — does any fact render twice within one section and problem?
+5. **Adoption** — is any prior recommendation presented as current, or a current one buried?
+6. **Placement** — is each object used under the problem it explains?
+7. **Operator fit** — does the chosen operator render the payload it was given?
+8. **Completeness** — does every required line exist?
+9. **Voice and format** — section-scoped style?
+10. **Note as a whole** — sections in order, nothing invented between them?
+
+Do not stop at the first failure. Record every question answerable and every failure found; a batch that returns one failure per run wastes the run.
+
+Stop early only when a failure makes later questions uninterpretable, and state why: coverage wrong → fidelity unanswerable; IR malformed → operator fit unanswerable; source incomplete → nothing downstream trustworthy.
+
+## 4. What is recorded
 
 ```text
 CHECK 4  duplicate identity
 RESULT   FAIL
-EVIDENCE object O7 and O44 share the same proposition; units U3 and U9 both render it
+EVIDENCE O7 and O44 share a proposition; U3 and U9 both render it
 SPAN     S12
 OWNER    STRUCTURE / S2
+MODE     B
 ```
 
-Five fields: check, result, evidence, span, owner. The owner is the submodule, not a person.
+Five fields plus the mode. The owner is a submodule, not a person.
 
 ## 5. Sign-off
 
-A case is audited when every check has a result and every failure has an owner and evidence. "Signed" means the auditor states one of:
+`ACCEPT` — every answerable question passed.
+`REJECT` — at least one failed, with the full list of independent failures.
+`BLOCKED` — the audit could not proceed, with the stopping reason.
 
-- `ACCEPT` — every check passed;
-- `REJECT` — at least one check failed, with the full list of independent failures;
-- `BLOCKED` — the audit could not proceed, with the stopping reason.
+A Mode A audit may reject or report, but may not sign an acceptance decision. Acceptance requires Mode B.
 
-A `REJECT` lists every independent failure, not the first one.
+## 6. When the reviewer cannot decide
 
-## 6. When the auditor cannot decide
-
-The auditor escalates to the signer. They do not average, hedge, or accept with reservations. An unresolved semantic question recorded as "probably fine" is how a wrong claim enters the corpus and becomes a fixture.
+Escalate to the signer. Do not average, hedge, or accept with reservations. An unresolved question recorded as "probably fine" becomes a fixture and then a standard.
 
 ## 7. What this protocol must not contain
 
-- expected clinical content for any case (that is a fixture);
-- a scoring formula (that is the batch protocol);
-- criteria invented after seeing an implementation (that is drift).
+- expected clinical content for any case — that is a fixture;
+- a scoring formula — that is the batch protocol;
+- criteria invented after seeing the implementation — that is drift.
 
 ## 8. Who audits
 
-Any reviewer who did not write the artifact. For signer-facing cases, the signer decides; for engineering cases, the reviewing agent decides. An agent auditing its own output is not an audit.
-
-## 9. Cost
-
-Ten checks per case. Most pass in seconds. The expensive ones are 3 and 4, and they are the ones worth the time — they are the failures that reached output most often.
+Any reviewer who did not write the artifact. An agent auditing its own output is not an audit.
