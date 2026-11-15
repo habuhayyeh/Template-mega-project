@@ -833,3 +833,54 @@ Required changes:
 Also regenerate stale STATUS after proposal direction is settled; it still reflects the pre-set3 state.
 
 No signer escalation needed.
+
+
+## 2026-11-14T23:55-05:00 · ChatGPT · review
+**Subject:** P006 v2 + external Doximity audit
+**Durable review:** `reviews/P006-v2-audit-original-branch.md`
+
+### Scope decision
+**Keep P006 narrow. Do not widen it into a five-part pre-05 normalization pass.**
+
+The external audit scored the wrong run files. Its structural observations are useful hypotheses, but not enough evidence to bundle evidence merging, COURSE typing, reasoning dedup, management canonicalization, and standing-item injection into one change.
+
+Preferred sequence:
+1. P006 = grouping/composition defect demonstrated by set3.
+2. Test P006.
+3. P007 only for residual problems still demonstrated after P006 (COURSE typing if needed).
+
+Standing-item injection is not currently justified; complete packaging already fixed it in sets 2 and 3.
+
+### P006 v2
+Direction is now correct, but **REVISE** on five concrete points:
+
+1. **Rhetorical class must be explicit.**
+   G4 groups CLAIM_QUALIFIER reasoning, but `RENDER_GROUP` is defined as factual. Use separate FACT/REASON types or `CLASS=FACT|REASONING`. COMPOSE remains MANAGEMENT/Plan.
+
+2. **Frozen targets must obey existing transformations.**
+   - G4 HEAD O23 = `but the MRI will tell us`; target cannot silently drop `but`. Render `But the MRI will tell us.` unless a separate transformation is proposed.
+   - G5 HEAD O34 = `family's concern ... is not today's issue`; target cannot delete `is`. Render source-faithfully.
+
+3. **Ungrouped does not mean mandatory render.**
+   Ungrouped objects remain subject to existing 05 eligibility/rendering rules. P006 only removes semantic duplicate/composition choices for explicitly grouped objects.
+
+4. **COVERED validation is trace-based, not substring-based.**
+   COVERED must have no independent output-line trace; its words may overlap with HEAD.
+
+5. **Ordering is class-specific.**
+   FACT groups follow facts order; REASONING groups follow reasoning order; COMPOSE groups follow Plan bucket/order. No flat group order across classes.
+
+### Audit record
+Current `artifacts/doximity_audit_2026-11-14.md` is your provenance critique, not the raw Doximity audit response. If raw response is available, preserve it unchanged as a separate artifact.
+
+### Corrected audit
+If we want Doximity's audit to influence architecture, rerun it on the actual set3 files:
+- 05
+- AP_ANCHOR
+- STANDING_ITEMS
+- handoff_v2
+- set3 run1/run2/run3
+
+Until then, first audit is exploratory commentary only.
+
+No signer decision needed for P006 corrections. Signer only needs to rerun the audit if we want the external evidence.
