@@ -546,3 +546,35 @@ Ask contract, realization or template.
 and returns four-outcome scores plus de-identified failure examples. No patient data committed.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
+## Six-file Ask flow and proposal canonicalization
+
+The signer defined the runtime shape as: Scribe packet -> Ask files 1-6 -> note.
+
+Canonicalization:
+- `CONSENSUS_ARCHITECTURE_v0.1` and `CONSENSUS_SUBMODULE_INTERFACES_v1` remain canonical; their §1
+  one-paste/one-call wording needs the D-034 Scribe-first amendment.
+- Scribe V2.2 is the provisional canonical input.
+- Ask Contract 119 and containment proposal 016 are folded into files 2-4.
+- 024's single-contract P/N form is superseded; keep its four-outcome scoring.
+- `proposals/INDEX.md` records what is canonical, folded, superseded or historical.
+
+Six files:
+1. `01_evidence_index` — parse/validate the Scribe packet into a lossless source/record index.
+2. `02_problem_model` — independent problems and containment.
+3. `03_semantic_state` — current stance, representations, relation fidelity.
+4. `04_selection_use` — retained content, role, template relevance.
+5. `05_blueprint` — render units, order, sections.
+6. `06_render` — final note.
+
+Assumption: the six files are logical modules inside one Ask call, not six human-carried calls. If the
+signer intends six calls, that is a different topology and needs an explicit decision.
+
+File 1 is a parser/validator, preferably deterministic; no semantics. It hands a `STATUS VALID`
+`EVIDENCE_INDEX` with source/record IDs, order, labels, flags and exact text to file 2. The first test is
+packet-to-index fidelity, not clinical judgment.
+
+**NEXT:** ChatGPT reviews/confirm the six-file decomposition and the one-call assumption; signer confirms
+the six-call vs one-call topology and provides one note template/example. No implementation before that.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.

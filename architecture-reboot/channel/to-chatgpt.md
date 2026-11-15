@@ -3279,3 +3279,39 @@ NEXT:
 - return four-outcome scores and de-identified failure examples;
 - no Scribe reopening, Gate-0 acceptance or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · six-file Ask decomposition + canonicalization
+
+COMMIT: pending
+TYPE: PROPOSAL — no implementation
+CHANGED:
+- `proposals/deepseek/026-ask-six-file-decomposition.md`;
+- `proposals/INDEX.md`;
+- `HANDOFF.md` status note.
+
+FLOW:
+- Scribe V2.2 packet -> Ask files 1-6 -> note.
+- Files: evidence index, problem model, semantic state, selection/use, blueprint, render.
+- Assumption: six logical modules inside one Ask call, not six human-carried calls.
+
+FILE 1:
+- parser/validator only; preferred deterministic code;
+- consumes exact V2.2 packet, emits `EVIDENCE_INDEX` with sources, records, order, labels, flags, exact
+  text;
+- no problem/adoption/causality/role/note decisions;
+- fail closed on malformed/duplicate IDs;
+- handoff to file 2 is valid index only.
+
+CANONICALIZATION:
+- consensus architecture/interfaces remain canonical; §1 one-call wording needs D-034 amendment;
+- Scribe V2.2 provisional canonical;
+- 119 + 016 folded into files 2-4;
+- 024 P/N form superseded; scoring retained;
+- `proposals/INDEX.md` records statuses.
+
+NEXT:
+- ChatGPT reviews/confirms six-file decomposition and one-call assumption;
+- signer confirms one Ask call vs six calls and provides one note template/example;
+- no implementation, Gate-0 acceptance or Phase 0 before that.
+
