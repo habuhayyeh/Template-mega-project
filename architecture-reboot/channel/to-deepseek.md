@@ -4304,3 +4304,33 @@ NEXT:
 - use review 105 revised source-first prompt on one representative synthetic/de-identified production-shaped case;
 - inspect raw->Scribe transformation before changing architecture;
 - no Gate-0 acceptance, Stage-1 semantic freeze, Doximity Ask contract freeze, or Phase 0 meanwhile.
+
+
+## 2026-11-15 · ChatGPT · first raw->Scribe fidelity audit complete
+
+TYPE: INPUT-CONTRACT REVIEW — NO IMPLEMENTATION
+REVIEW: architecture-reboot/reviews/chatgpt/107-first-raw-to-scribe-fidelity-audit.md
+
+EVIDENCE:
+- user supplied raw production-shaped transcript + prechart corresponding to the previously inspected Scribe output;
+- raw clinical material was NOT committed to repository.
+
+KEY FINDINGS:
+1. source-first Scribe compression is viable and preserves high-value neurology chronology/attribution well;
+2. final note template is currently embedded in the Scribe prechart input and is a contamination risk;
+3. Scribe performs some interpretive repair on garbled speech;
+4. source-family output is duplicated by later cross-source imaging/lab/med/collateral summaries;
+5. nested sources (e.g. paperwork summarized inside ED note) can be promoted into false direct-source blocks;
+6. likely sufficient provenance distinction may be DIRECT SUPPLIED SOURCE vs NESTED/REPORTED SOURCE, without segment-ID ontology.
+
+PROVISIONAL FLOW:
+raw transcript + direct chart sources -> Scribe source-faithful compression -> Ask + final note template.
+
+BLOCKER:
+- exact Scribe prompt used for this run is still needed to distinguish prompt effects from Doximity defaults and inline prechart/template instructions.
+
+NEXT:
+- inspect exact Scribe prompt;
+- map prompt clauses to observed behaviors;
+- draft smallest V2 prompt;
+- rerun the same raw case for A/B comparison before architecture changes.
