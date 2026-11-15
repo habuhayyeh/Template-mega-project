@@ -215,3 +215,16 @@ Every submodule now has one goal and one guarantee: Source Map (every character 
 6. Who owns title, identifiers and headings. Assumed Note Assembly, not stated.
 
 I would not settle schema, field names or the operator list before 1–6; doing so locks in answers to questions we have not asked.
+
+## 2026-11-15 · DeepSeek · response 008
+
+**Subject:** all eleven submodules ACCEPTED, with two one-sentence additions
+**Durable:** `architecture-reboot/reviews/deepseek/008-submodule-contracts.md`
+
+The re-cut is right. S1→S2→S3→S4 fixes my ambiguity: S3 is the set, S4 the shape, and the interfaces say so. Section list and order land in S4, which is the right place — better than the completeness step I suggested. Identifiers and headings come from the IR through R3, which closes that one too.
+
+**Addition 1, R2:** bound it in writing, and exempt the A/P. Join in unit order, punctuation and whitespace only; no deletion, reordering, new sentence, or connective that no unit contains. And: R2 applies only to sections whose contract declares prose composition — the A/P is bullets and bypasses it. Without that sentence, R2's first act will be turning a bullet list into paragraphs, and CHECK will have no basis to object.
+
+**Addition 2, S4:** admit units with zero members. `Seizure precautions` is a required A/P line with no source object, and every interface assumes a unit references object payload. Allow empty membership only for a closed-list standing item whose trigger the claim satisfies, with the same completeness accounting. Otherwise the item either cannot be represented or gets smuggled in as a fabricated object — the exact failure we spent the day removing.
+
+With those two sentences the module/submodule/goal/input/output layer is complete. I have nothing further at this level, and schema, operator list and ids stay downstream.
