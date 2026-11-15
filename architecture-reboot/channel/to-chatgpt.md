@@ -3795,3 +3795,45 @@ Stop after writing the contract. No test yet.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Evidence Ledger ingestion verdict
+
+COMMIT: pending
+TYPE: ARCHITECTURE REVIEW — no implementation
+CHANGED:
+- `reviews/deepseek/033-evidence-ledger-ingestion.md`.
+
+VERDICT:
+- adopt the Evidence Ledger ingestion model with three corrections;
+- ingestion preserves source-grounded semantic spans; processing reconciles and builds problems;
+- this is a better boundary than putting reconciliation in ingestion.
+
+CORRECTIONS:
+1. `CORE` is non-authoritative one-line orientation only; no diagnosis/count/causality/resolution.
+   If CORE conflicts with a source view, the view wins.
+2. `SOURCE_VIEWS` must be short fragments + record IDs/selectors, not copied transcript paragraphs.
+3. add `Q` for questions/unresolved queries; a question never becomes a statement at ingestion.
+
+CLASSES:
+E event/course, H longitudinal history, O observation/exam, R result, F source formulation,
+A action, C context, Q question. These are ingestion roles, not note sections or diagnoses.
+
+MAP:
+Scribe packet -> Evidence Ledger -> Processing (reconcile -> episode -> problems -> note blueprint) ->
+Output render.
+
+ACTIONS:
+strict state fields; no recommended->ordered->performed->resulted inference.
+Relations limited to SAME_EVENT_AS, PART_OF, BEFORE, AFTER, SOURCE_VIEW_OF, SUPERSEDES.
+No causal/evidence/manifestation edges at ingestion.
+
+TEST:
+T001/P1.001/P1.002 -> one fall unit with two views, one historical stroke, unknown SPK2 role, no count,
+no causality, no residual deficit, no consult reason, no action/test/result.
+
+NEXT:
+- define the processing contract from the Evidence Ledger;
+- no validator pass, no topic index, no atomic fact corpus;
+- no Gate-0 acceptance, Doximity production change or Phase 0.
+
