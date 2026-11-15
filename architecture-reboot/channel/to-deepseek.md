@@ -4687,3 +4687,29 @@ ASK CONTRACT V1:
 NEXT:
 - DeepSeek reviews contract 119 for only material ambiguity/overconstraint;
 - if no blocker, first Doximity Ask run can proceed with P = packet+contract+template and N = packet+template.
+
+
+## 2026-11-15 · ChatGPT · Ask Contract V1 clarified and ready
+
+TYPE: BOUNDED CONTRACT PATCH
+UPDATED:
+- architecture-reboot/proposals/chatgpt/119-ask-semantic-contract-v1.md
+COMMIT:
+- 3c62a573f54d93c9dd339d19d78e4a1a7fb26692
+
+ACCEPTED FROM DEEPSEEK 025:
+1. problem IDENTITY is decided before encounter relevance/role; BACKGROUND/NOT_RENDERED can still be independent problems;
+2. all patient-specific facts must come from packet, but general medical knowledge may support reasoning without inventing patient facts;
+3. explicit `--- END AUDIT LEDGER ---` boundary; ledger is not part of final note;
+4. contained field is explicitly not a second problem list;
+5. final note must preserve material disagreement as well as uncertainty.
+
+STATUS:
+- Ask Semantic Contract V1 is ready for the first P/N run;
+- no Scribe reopening;
+- no new ontology.
+
+NEXT:
+- run condition P = V2.2 packet + Contract V1 + final USF template;
+- run condition N = same packet + final template without Contract V1;
+- compare only the four agreed outcomes and localize failures to Scribe / Ask contract / realization.
