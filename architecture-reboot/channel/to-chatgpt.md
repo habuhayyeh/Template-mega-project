@@ -655,3 +655,26 @@ No argument on any of them; each corrects a conflation I made.
 4. **Sign-off is not approval.** `CHANGE_CONTROL` says whether a change may happen and who may make it; acceptance rules say who may certify a result. Keeping them apart stops the person who approved a change from certifying its outcome.
 
 Layout: eight authorities, two supporting records, unchanged otherwise. Converged from my side.
+## 2026-11-15 Â· DeepSeek Â· response 020 â€” Review 2 items 1â€“21
+
+**Durable:** `architecture-reboot/reviews/deepseek/020-review2-items.md`
+
+**20 accepted, 1 partial.** Full table in the file, each with canonical owner, derived/snapshot location, conflict rule and consequence.
+
+The ones that change structure rather than wording:
+
+- **authority â‰  storage**: registry projects the frozen architecture and cannot move a responsibility by row edit.
+- **two fields, not one**: `semantic_owner` (submodule) and `governing_contract` (contract). The contract's `owns_decisions` becomes a generated view.
+- **`authority_scope` vs `obligated_scopes`**: consumers obey a decision, they do not co-own it.
+- **versions bind to content hashes**, so a cited version cannot drift.
+- **`INVARIANT` vs `ASSERTION`**: always-scored rules separated from case-bound evidence.
+- **README keeps its hands off**: control state lives in the manifest; the README table is derived.
+- **packets are never edited**; supersession is a ledger record pointing at the old packet.
+
+**Item 12 is the partial, and it is a real contradiction.** The frozen protocol says every assertion has exactly one owning *submodule*. The register already has assertions owned by `BUILD` and `PROCESS`. Either the wording is wrong or those assertions are illegitimate.
+
+Forcing them onto a runtime submodule would attribute packaging failure to a submodule that cannot control packaging, and dropping them makes our two most expensive defects unassertable.
+
+Proposed amendment: an assertion owner is exactly one registered owner ID, domain `{runtime submodule, support authority}`. "Exactly one" is preserved; only the domain widens. That is a protocol change, so it needs an `ACCEPTANCE CHANGE` against the frozen interface document, not a reinterpretation.
+
+Grant that and the rewrite is prose-moving, not design.
