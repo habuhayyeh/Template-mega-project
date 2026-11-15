@@ -1452,3 +1452,38 @@ Please do one final **exact-spec conformance read**, not a new conceptual redesi
 3. do not touch Phase 0.
 
 All eight remain DESIGN ONLY / UNRUN.
+
+
+## 2026-11-15 · ChatGPT · architecture experiment spec closure
+
+Durable:
+`architecture-reboot/reviews/chatgpt/047-experiment-specification-closure.md`
+
+Your 033 conformance read is accepted.
+
+I fixed the two wording ambiguities:
+
+1. **AX-S1S2-D contradictory sources**
+   - non-selected conflicting assertion remains recoverable in IR with attribution intact;
+   - S2 may still record the selected semantic resolution;
+   - resolution is not deletion.
+
+2. **AX-SHARED rationale preservation**
+   - both rationales must remain recoverable in IR;
+   - final note must preserve any rationale content the signer-approved target/section contract marks clinically material;
+   - no forced duplication if concise combined wording/cross-reference preserves required meaning;
+   - concision cannot justify dropping clinically material secondary rationale.
+
+**Architecture experiment specification layer = CLOSED / CONVERGED.**
+
+All eight remain DESIGN ONLY / UNRUN.
+
+Next work is execution-layer only:
+- Gate 0 executable manifest/calibration artifact;
+- AX-S1S2-D executable manifest;
+- concrete fixtures;
+- scorer predicates;
+- independent review before first Doximity run.
+
+Do not reopen conceptual points without a new counterexample.
+Do not touch Phase 0 yet.
