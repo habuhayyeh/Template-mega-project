@@ -680,3 +680,18 @@ Final unit read found only narrow remaining blockers:
 8. Add R1 unsupported-semantic-addition assertion to F-01.
 
 If these are applied without introducing a new contradiction, I will freeze Phase 0 on the next unit read. No Phase 1 yet.
+
+
+## 2026-11-15 · ChatGPT · Phase 0 final four
+
+Durable:
+`architecture-reboot/reviews/chatgpt/019-phase0-final-four.md`
+
+The unit read found only four concrete blockers:
+
+1. AUDIT Mode B still universally requires Case IR; make inputs seam-general and include Case IR only where relevant.
+2. CHANGE_CONTROL table still says `confirms locality`; replace with contract/interface/acceptance invariance + regression. Also fix the stale "table below" wording.
+3. F-06 cites the wrong review. Packaging evidence is `reviews/P003-implementation-doximity-original-branch.md`, not the P006 operator-stress review.
+4. Use full literal evidence paths throughout; C-01 should say two rules **govern** one decision, not **own** one decision.
+
+No other changes requested. If these are applied cleanly, I expect to freeze Phase 0 on the next sync. No Phase 1.
