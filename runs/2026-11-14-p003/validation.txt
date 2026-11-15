@@ -1,0 +1,63 @@
+# P003 implementation run — 2026-11-14
+
+Engineering mock, not Doximity.
+
+## 1. What was implemented
+
+- `pipeline/05_WRITE_AP.md` rewritten: COURSE by function with the relevance gate, one render order, the two-branch etiology rule, ten bounded surface transformations.
+- `pipeline/AP_ANCHOR.md`: the cause row and section now match — the line carries the claim's own cause, a separate etiology is reasoning.
+
+## 2. Input
+
+`runs/2026-11-14-p002/handoff.txt`, unchanged. `04` is lossless and the ledger is the same, so this Handoff is the one `04` produced for `ap_ledger_v3.txt`.
+
+## 3. Three runs
+
+`ap_run1.txt`, `ap_run2.txt`, `ap_run3.txt`. Same contract, same input, fresh context each.
+
+## 4. Invariants
+
+| # | Result | Detail |
+|---|---|---|
+| I1 problems and order | **same** | 2 blocks, seizure then memory, all three |
+| I2 rendered O# set | **DIFFERS** | see table below |
+| I3 omitted O# set | **DIFFERS** | follows from I2 |
+| I4 reasoning propositions | **DIFFERS** | three each, but the MRI hedge is O23 in R1/R2 and O39 in R3 |
+| I5 plan decisions | **same** | eight decisions in all three |
+| I6 state and conditionality | **same** | `held … to resume once`, `unless`, `not starting` preserved in all three |
+| I7 historical attribution | **DIFFERS** | R1 renders O54 with `(prior neurology, February 2024)`; R2 and R3 omit O54 |
+| I8 words outside the Handoff | **same** | no new content found; `February 2024` is transformation 6 from `2024-02`, `ago` is source text |
+| I9 O# pairing | **same** | one O# per bullet in all runs; sodium folded in all three |
+| I10 placement | **DIFFERS** | O54 factual bullet in R1, absent elsewhere; O2 present in R1/R2, absent in R3 |
+
+| Object | R1 | R2 | R3 |
+|---|---|---|---|
+| O2 `admitted 11/12` | rendered | rendered | omitted |
+| O17 / O44 CT entry | O44 `no acute abnormality` | O44 | O17 `no hemorrhage` |
+| O18 encephalomalacia | rendered | omitted | rendered |
+| O19 no new focal lesion | omitted | rendered | rendered |
+| O54 residual aphasia | **rendered** | omitted | omitted |
+| MRI hedge | O23 | O23 | O39 |
+
+## 5. Verdict
+
+**FAIL.** I2, I3, I4, I7, I10 differ across three runs on one input. The rewrite made the output better and still did not make it reproducible.
+
+Two findings beyond the invariants:
+
+1. **D-014 was breached by run 1.** O54 rendered as a seizure-block fact. D-014 says it stays out of the A/P. A stage that can render a fact a decision excludes is a decision-enforcement gap, not a rendering preference.
+2. **`Seizure precautions` is missing from all three runs.** It is a `STANDING_ITEMS` entry whose trigger — a seizure as the working diagnosis — is satisfied. Three runs, three omissions: that is not drift, it is the rule not being applied.
+
+## 6. What the runs did get right
+
+Durations folded (`~2 mins`, `1 hr`), the sodium trend rendered, the infarct timing anchored, the etiology rendered under the seizure with the line keeping its own cause, apixaban hold and resume stayed one conditional, `unless another event` survived, the memory block kept its attribution, and no run invented a word.
+
+## 7. Next
+
+Do not treat `05` as accepted. Three candidate causes, in order of how well the runs support them:
+
+- the COURSE relevance gate is a judgement with no anchor, so `admitted`, `encephalomalacia` and `no new focal lesion` drift;
+- `STANDING_ITEMS` is not enforced anywhere, so an item appears or not by chance;
+- D-014 has no mechanism — nothing in `05` knows a decided exclusion exists.
+
+The first two are fixable inside `05`. The third is not: it needs the exclusion to live in the input, or a check after the fact.

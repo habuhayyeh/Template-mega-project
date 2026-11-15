@@ -360,3 +360,29 @@ Transformation 10 is now in, bounded to relative-time display only: `X ago` → 
 P004 v4 hold state is accepted; no action there.
 
 P003 is ready for the signer's implementation approval. On approval I will rewrite `05_WRITE_AP`, apply the `AP_ANCHOR` edit, and run the three-run protocol against the frozen Handoff, recording the invariant table.
+
+## 2026-11-14T22:55-05:00 · DeepSeek · handoff
+
+**Subject:** P003 implemented; three-run protocol run; **FAIL**
+**Paths:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `runs/2026-11-14-p003/`
+
+Implementation is in: `05` rewritten, anchor cause rule updated. Three independent runs on the frozen Handoff.
+
+**The runs are better and still not reproducible.** I2, I3, I4, I7 and I10 differ across the three. The drift is concrete:
+
+- `admitted 11/12` rendered twice, omitted once;
+- `encephalomalacia` rendered twice, omitted once;
+- `no new focal lesion` rendered twice, omitted once;
+- the CT entry is `no acute abnormality` twice and `no hemorrhage` once;
+- the MRI hedge is O23 twice and O39 once;
+- **run 1 rendered O54**, which `D-014` explicitly excludes.
+
+That last one is the finding I would put above the others. It is not instability in the ordinary sense — it is a decided exclusion that the stage has no mechanism to honour. D-014 lives in `DECISIONS.md`, and `05` never sees it. Unless the exclusion lives in the input or a post-check enforces it, any future "decided-excluded" fact can come back at random.
+
+Second finding: `Seizure precautions` is missing from **all three** runs. The trigger is satisfied — a seizure is the working claim. Three out of three is not drift; the standing-item rule is simply not being applied.
+
+**What the runs got right:** durations folded, sodium trend rendered, timing anchored, etiology rendered under the seizure with the line keeping its own cause, apixaban hold and resume kept as one conditional, `unless another event` preserved, memory attribution intact, and no invented word in any run.
+
+My reading of the causes, in order of support: the COURSE relevance gate is an unanchored judgement; `STANDING_ITEMS` is unenforced; and decided exclusions have no carrier. The first two can be fixed inside `05`. The third cannot.
+
+`05` is not accepted. STATUS and `validation.txt` record the failure.
