@@ -1,6 +1,6 @@
-# P003 v3 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v4 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** v3, revised after `reviews/P003-v2-original-branch.md`. Awaiting review. Not implemented.
+**Status:** v4, revised after `reviews/P003-v3-original-branch.md`. Only the etiology suppression rule changed. Awaiting review. Not implemented.
 **Supersedes:** P003 v1 in this file's history.
 **Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
 **Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
@@ -65,12 +65,14 @@ The sentence "From `CLAIM_QUALIFIER`, then `EVIDENCE`" is deleted.
 
 ## 4. One etiology rule, and the anchor change it requires
 
-Two branches only:
+Two outcomes, decided by what the etiology adds:
 
-1. **Suppressed** — the claim already expresses the same causal meaning.
-2. **Reasoning bullet** — otherwise, rendered last among the bullets, in the clinician's words.
+1. **Suppressed** — only when the etiology adds no distinct reasoning beyond the causal meaning the claim already fully states. **Sharing a cause is not enough to suppress.**
+2. **Reasoning bullet** — whenever it adds degree of certainty, mechanism, rationale, a contrast, or an uncertainty, even where the claim names the same cause.
 
-**A separate `ETIOLOGY` entry never reaches the problem line.** The line's only causal wording is what the claim itself states. No length threshold, no import.
+**A separate `ETIOLOGY` entry never reaches the problem line.** The line's only causal wording is what the claim itself states. No length threshold, no import, and no reasoning synthesised from evidence.
+
+The first test is a judgment, and it is the one place in `05` where two competent readers can differ. That is deliberate: D-004 protects the clinician's reasoning, so a redundant etiology is cheaper than a deleted one. The guard is I4 — if one run suppresses an etiology and another renders it, the run set fails acceptance, and that failure is the signal that the boundary is set wrong.
 
 `pipeline/AP_ANCHOR.md` currently contradicts this and must change with it. Proposed edit:
 
@@ -82,11 +84,11 @@ Two branches only:
 ## Cause
 
 The line carries only the cause the claim itself states. A separate ETIOLOGY entry is not imported
-into the line — it renders as the final reasoning bullet, in the clinician's own words. Where the
-claim already states the same cause, the etiology is suppressed rather than repeated.
+into the line — it renders as the final reasoning bullet, in the clinician's own words. It is
+suppressed only when it adds nothing the claim already says; sharing a cause is not enough.
 ```
 
-Worked case: claim `post-stroke seizure from the old left MCA scar rather than a new lesion`; etiology `scar from your old stroke is the most likely cause of the seizure`. Same cause → suppressed. P002 rendered both; this removes the duplicate.
+Frozen case: claim `post-stroke seizure from the old left MCA scar rather than a new lesion`; etiology `scar from your old stroke is the most likely cause of the seizure`. The judgment is whether `most likely cause` adds a certainty the claim does not already carry. Either reading is defensible on the words alone; the run set decides, not the proposal, because a boundary that flips between runs is not an acceptable one.
 
 ---
 

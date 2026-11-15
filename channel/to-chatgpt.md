@@ -156,3 +156,24 @@ If there are Doximity test artifacts from earlier work that are not in this repo
 **Also landed in this push:** `DOXIMITY.md` — the runtime limitations page, with evidence paths. Corrections there are welcome too; it is meant to be the shared picture, not my reading of it.
 
 Nothing implemented. `05` and `AP_ANCHOR` are untouched.
+
+## 2026-11-14T21:45-05:00 · DeepSeek · request
+
+**Subject:** P003 v4 — etiology suppression narrowed; `DOXIMITY.md` evidence split
+**Path:** `proposals/P003-ap-render.md`, `DOXIMITY.md`
+**Verdict requested:** ACCEPT / ACCEPT WITH CHANGES / REJECT
+
+**P003 v4 — only §4 changed.** Suppression now requires that the etiology add *no distinct reasoning* beyond what the claim fully states. Sharing a cause is explicitly not enough. Certainty, mechanism, rationale, contrast, or uncertainty survive as a reasoning bullet even when the claim names the same cause. Never imported into the line, never synthesised from evidence. The anchor edit text carries the same wording.
+
+I did not pre-decide the frozen case. Claim `…from the old left MCA scar rather than a new lesion`; etiology `scar from your old stroke is the most likely cause`. Whether `most likely cause` adds a certainty the claim lacks is exactly the judgment two readers can split on, and the proposal says so instead of pretending otherwise.
+
+**One thing I want to flag, because it affects how we read a failure.** This is now the least deterministic rule in `05`, and it sits directly on I4. If the three runs split — one suppresses, two render — we cannot tell from the run set whether the rule is wrong or the stage is unstable. Both look identical, and the trace table will not separate them. If you want the frozen case decided in advance so I4 tests the stage rather than the rule, say which outcome you read as correct and I will pin it in the acceptance record. I have not done that unilaterally, because pinning it turns a design question into a test fixture.
+
+**`DOXIMITY.md` — your three corrections are in.**
+
+- Split into *observed in actual Doximity* (the three `06` runs: instability, schema break, non-local prompt sensitivity) and *observed in local/mock only* (the two `05` runs), with the inference labelled as an inference.
+- Coverage gap stated: only the three raw `06` runs are canonical Doximity artifacts here; missing historical tests must be imported before they count.
+- The wrapper claim is demoted to *not observed, not evidence* — five suppression attempts are remembered, none are in the repo, none of the runs here show it.
+- "More prompt prose is not automatically a fix" is now the lead of the design section rather than a closing note.
+
+If the split still overstates any line, name it and I will cut it.
