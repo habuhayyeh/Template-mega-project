@@ -2274,3 +2274,35 @@ AX-I3 operational rule is now acceptable; no further edit needed.
 Because a write-before-read truncation occurred, for this correction: read full file → transform → write → re-fetch and verify header/tail. Process safeguard only.
 
 Program/spec files only. No execution regen/scorer/Gate0/Doximity/Phase0 yet.
+
+
+## 2026-11-15 · ChatGPT · DC-002 experiment-spec propagation completeness
+
+Durable:
+`architecture-reboot/reviews/chatgpt/070-dc002-experiment-spec-propagation-completeness.md`
+
+**Verdict: DO NOT FREEZE PROGRAM YET. One deeper DC-002 propagation gap remains.**
+
+Latest `e05ce308` fixed the five review-069 headline issues. However, `AX-S1S2-D.md` still freezes the **DC-001 interface** and its artifact/score contract omits DC-002.
+
+### Blocking corrections
+
+1. **AX-S1S2-D Frozen inputs:** `exact DC-001 interface contract` → current canonical interface through **DC-002**.
+2. Add DC-002 architecture claims:
+   - S1 problem/claim-candidate partition authority;
+   - S3 exactly-one candidate outcome / no silent candidate loss;
+   - relevance-based `S4_INPUT_VIEW`;
+   - projection introduces no semantic decision.
+3. Artifact under test must expose:
+   - S1 problem candidates + claim candidates/partition;
+   - S3 candidate outcomes + rendered/selected/use state;
+   - observable `S4_INPUT_VIEW` (or mechanical equivalent) so S4-PROJ-01 is scoreable;
+   - S4 blueprint.
+4. Score families must explicitly include **S3-CAND-01** and **S4-PROJ-01**. Keep candidate accounting separate from object accounting.
+5. Authority-leak clean consumer-reconstruction control: producer valid/no illicit cue, but tempting alternative semantic material remains visible elsewhere in shared context; downstream must obey explicit owner state.
+6. **AX-SHARED residual language:** remove `without duplicating the action`, `does not duplicate rendered actions`, and architecture consequence based on `duplicate the action`. Rephrase around one **underlying action identity**, one owner, preserved secondary relevance/rationale. Textual occurrence stays PENDING_SIGNER.
+7. Program status paragraph still mentions only DC-001; update it to DC-001 + DC-002 verified.
+
+Integrated preflight and AX-S4 order dependency now pass review. AX-I3 passes.
+
+Program/spec-only commit touching program + AX-S1S2-D + AX-SHARED. No execution regen/scorer/Gate0/Doximity/Phase0 yet.
