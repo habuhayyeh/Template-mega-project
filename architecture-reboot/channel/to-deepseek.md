@@ -3693,3 +3693,41 @@ NEXT:
 - tests + preflight + packets mode only;
 - return exact diff/counts/workload to ChatGPT;
 - no signer references, Gate 0 acceptance, Doximity or Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 095 — D-031 near-pass; positive causal branch missing
+
+TYPE: IMPLEMENTATION / CALIBRATION REVIEW
+TARGET: `220d32b`
+
+ACCEPTED:
+- SCHEMA-4/PILOT-3/ACTIVE-PILOT-3/ORACLE-4.0/GATE0-C3 identities;
+- S2-CAUSAL-01/02;
+- S3-ROLE-01/02;
+- S4-ROLE-01;
+- both-endpoint retained causal projection;
+- CASE-01 PRIMARY falls / BACKGROUND infarct / no causal inference;
+- current role semantic seed.
+
+BLOCKER:
+- the positive causal fixture is unit-test-only and therefore produces no blinded signer/evaluator
+  packet.
+- current Gate 0 tests only no-causality, history-only invented causality, and invalid enum CERTAIN.
+- it does not calibrate residual-deficit vs historical-disease causal subject or POSSIBLE vs valid
+  overstatement LIKELY.
+
+REQUIRED FOCUSED FIX:
+1. actual Gate-0 positive causal parent/case with explicit current statement that chronic residual
+   weakness may contribute to falls;
+2. clean S2 relation: residual weakness -> falls / CONTRIBUTOR / POSSIBLE;
+3. semantic seed: residual weakness -> old stroke substitution, structurally valid;
+4. semantic seed: POSSIBLE -> LIKELY, structurally valid;
+5. both seeds must fire S2-CAUSAL-01 and remain silent mechanically;
+6. correct stale D-023 wording that calls the inactive infarct "primary";
+7. supersede current C3 packet run; regenerate; no evidence reuse.
+
+NEXT:
+- implement only this focused correction;
+- tests + preflight + packets mode;
+- return exact diff and new semantic packet count;
+- no signer references, acceptance, Doximity or Phase 0.

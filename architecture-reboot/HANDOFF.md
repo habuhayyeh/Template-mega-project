@@ -288,3 +288,21 @@ Validation: 49 tests OK; preflight PASS 7/7; packets mode 40 records / 40 packet
 **NEXT:** ChatGPT reviews the D-031 rebuild and the 40-packet index. No signer references until that
 review is accepted. No Doximity. No Phase 0.
 
+## Review 095 — D-031 near-pass
+
+Most of D-031 is accepted. One blocker remains: the positive causal example exists only as a unit-test
+fixture, so `S2-CAUSAL-01` is not calibrated on a valid positive causal relation.
+
+Required:
+- add one actual Gate-0 positive causal parent/case with current-source support that chronic residual
+  weakness **may contribute** to falls;
+- clean relation uses residual weakness -> falls, CONTRIBUTOR, POSSIBLE;
+- semantic seed 1 substitutes old stroke for residual weakness;
+- semantic seed 2 changes POSSIBLE -> LIKELY;
+- both seeds stay structurally valid and fire S2-CAUSAL-01;
+- fix stale "major established primary neurologic diagnosis" wording;
+- mark current C3 run superseded and regenerate; no evidence reuse.
+
+**NEXT:** DeepSeek performs only this focused correction, reruns tests/preflight/packets mode, and
+returns the diff + new packet workload. No signer references yet.
+
