@@ -27,7 +27,8 @@ At minimum include:
 7. body-only historical neurologic fact;
 8. historical condition used only as etiology/evidence for another problem;
 9. rebuilt K2: explicit current linkage of a continued historical problem to management, so no medication->diagnosis inference is needed;
-10. candidate mentioned but explicitly deferred / not independently assessed.
+10. candidate mentioned but explicitly deferred / not independently assessed;
+11. explicit contradictory-source case: two source families make incompatible assertions that must remain attributed/adjudicated rather than silently collapsed.
 
 ## Frozen inputs
 
@@ -36,6 +37,8 @@ For each case:
 - signer-approved target note;
 - annotated ingest substrate when testing STRUCTURE in isolation;
 - exact DC-001 interface contract.
+
+If STRUCTURE is isolated, the ingest substrate must be hand-frozen or come from a separately scored ingest artifact; do not let an unscored same-session ingest error masquerade as a STRUCTURE failure.
 
 ## Artifact under test
 
@@ -47,47 +50,66 @@ Preferred artifact-level output:
 
 Avoid full final-note generation unless needed for a paired end-to-end check.
 
-## Assertions
+## Score families
 
-### S1
-- candidate exists only when subject requires its own current assessment question/status;
-- candidacy is source-grounded;
+### A. Structural/interface assertions
+
+#### S1
 - no adoption verdict appears in S1;
 - no final claim selection appears in S1;
-- body-only context does not become a fake A/P problem.
+- no final render order appears in S1.
 
-### S2
+#### S2
 - source temporality is consumed, not re-owned;
-- current adoption is adjudicated correctly;
-- competing/nested/complementary/contradictory relations are preserved when present;
 - approved representation(s) are source-grounded;
 - S2 does not expose a choice set requiring further semantic adjudication by S3.
 
-### S3
+#### S3
 - only S2-approved representations are selected;
 - no new claim is synthesized;
-- rendered A/P problem inclusion is correct;
-- no A/P problem renders without an approved representation;
-- body-only content remains usable without problem promotion.
+- no A/P problem renders without an approved representation.
 
-### S4
-- consumes S3 rendered-problem state;
+#### S4
+- consumes S3 rendered-problem state and selected representation;
 - does not re-decide inclusion or claim;
-- final problem order follows centralized ordering contract and S1 salience inputs.
+- final problem order is owned by S4, using S1 salience inputs rather than an upstream final order.
+
+### B. Semantic correctness assertions
+
+- the right neurologic subjects become S1 candidates;
+- body-only context does not become a fake A/P problem;
+- current adoption is clinically correct;
+- competing/nested/complementary/contradictory relations are faithfully preserved/adjudicated;
+- contradictory sources remain attributed rather than silently collapsed;
+- rendered A/P problem inclusion is clinically correct;
+- body-only content remains usable without problem promotion;
+- final order satisfies the governing clinical/order contract.
+
+Report structural/interface and semantic results separately.
 
 ## Run design
 
+- Gate 0 scorer calibration first;
 - small artifact batch first;
-- full batch if schema/output is stable;
+- executable manifest freezes exact case IDs/count/order/package/scorer versions;
+- full batch only if schema/output is stable;
 - exact same-order batch repeated in 3 fresh conversations;
 - diagnostic trace only for failed cases.
 
-## Failure interpretation
+## Architecture-reopen logic
 
-- S1 adoption/final-claim leakage -> interface implementation failure; if unavoidable across realistic cases, reopen S1/S2 design.
-- S2 cannot provide safe representations without forcing S3 semantic choice -> reopen S2/S3 boundary.
-- S4 changes which problems exist or which claims are selected -> authority leak.
-- correct, stable boundary behavior -> supports DC-001 STRUCTURE architecture.
+Do **not** use an arbitrary percentage threshold.
+
+A controlled logical counterexample can falsify a universal authority invariant if satisfying the correct clinical/structural requirement requires violating the canonical responsibility boundary.
+
+Before reopening architecture, exclude:
+- malformed fixture;
+- scorer defect;
+- implementation noncompliance;
+- missing downstream schema/contract detail.
+
+Ordinary semantic mistakes are implementation/contract/schema defects first.
+A reproducible semantic failure becomes architectural when the interface cannot carry the information needed to make the correct decision without authority violation.
 
 ## What this experiment cannot prove
 
