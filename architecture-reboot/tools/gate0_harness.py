@@ -30,8 +30,36 @@ from scorer import registry  # noqa: E402
 GEN = os.path.join(ROOT, 'experiments/gate0/seeds/generated')
 AX = os.path.join(ROOT, 'experiments/architecture/AX-S1S2-D')
 SCHEMA = os.path.join(AX, 'schema.md')
+PREDICATES = os.path.join(AX, 'predicates.md')
 ORACLE = os.path.join(AX, 'fixtures/CASE-01/oracle.json')
 MANIFEST = os.path.join(GEN, 'MANIFEST.json')
+G0_SEEDS = os.path.join(ROOT, 'experiments/gate0/seeds/G0-SEEDS.md')
+G0_MANIFEST = os.path.join(ROOT, 'experiments/gate0/00-GATE0-MANIFEST.md')
+PROGRAM = os.path.join(ROOT, 'experiments/architecture/00-ARCHITECTURE-EXPERIMENT-PROGRAM.md')
+AX_SPEC = os.path.join(ROOT, 'experiments/architecture/AX-S1S2-D.md')
+INTERFACES = os.path.join(ROOT, 'CONSENSUS_SUBMODULE_INTERFACES_v1.md')
+ARCHITECTURE = os.path.join(ROOT, 'CONSENSUS_ARCHITECTURE_v0.1.md')
+
+GOVERNING_PATHS = {
+    'CONSENSUS_SUBMODULE_INTERFACES_v1.md': INTERFACES,
+    'CONSENSUS_ARCHITECTURE_v0.1.md': ARCHITECTURE,
+    '00-ARCHITECTURE-EXPERIMENT-PROGRAM.md': PROGRAM,
+    'AX-S1S2-D.md': AX_SPEC,
+    'schema.md': SCHEMA,
+    'predicates.md': PREDICATES,
+    'G0-SEEDS.md': G0_SEEDS,
+    'make_seeds.py': os.path.join(ROOT, 'tools/make_seeds.py'),
+    '00-GATE0-MANIFEST.md': G0_MANIFEST,
+    'oracle.json': ORACLE,
+}
+EXPECTED_IDENTITIES = {
+    'campaign': 'GATE0-C1',
+    'registry': 'PILOT-2',
+    'active_set': 'ACTIVE-PILOT-2',
+    'schema': 'SCHEMA-2',
+    'oracle': 'ORACLE-2.0',
+    'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
+}
 
 
 class InputIntegrityError(Exception):
@@ -66,6 +94,43 @@ def load_json(path):
         return json.load(fh)
 
 
+def active_predicates_from_source(path=PREDICATES):
+    with io.open(path, encoding='utf-8') as fh:
+        text = fh.read()
+    match = re.search(r'## Pilot ACTIVE_PREDICATE_SET.*?```text\s*(.*?)```', text, re.S)
+    if not match:
+        raise InputIntegrityError('predicates.md has no ACTIVE_PREDICATE_SET block')
+    return {p.strip() for p in re.split(r'[,\n]', match.group(1)) if p.strip()}
+
+
+def verify_governing_hashes(manifest, paths=None):
+    paths = paths or GOVERNING_PATHS
+    recorded = manifest.get('governing_hashes')
+    if not isinstance(recorded, dict) or not recorded:
+        raise InputIntegrityError('MANIFEST governing_hashes is missing')
+    missing = set(paths) - set(recorded)
+    if missing:
+        raise InputIntegrityError('MANIFEST is missing governing hashes: %s'
+                                  % sorted(missing))
+    for key, expected in recorded.items():
+        if key not in paths:
+            raise InputIntegrityError('unknown governing hash %s' % key)
+        actual = file_sha(paths[key])
+        if actual != expected:
+            raise InputIntegrityError('governing hash mismatch for %s' % key)
+
+
+def verify_campaign_contract(manifest):
+    for key, expected in EXPECTED_IDENTITIES.items():
+        if manifest.get(key) != expected:
+            raise InputIntegrityError('campaign identity %s=%r, expected %r'
+                                      % (key, manifest.get(key), expected))
+    verify_governing_hashes(manifest)
+    source_active = active_predicates_from_source()
+    if source_active != set(registry.PREDICATES):
+        raise InputIntegrityError('scorer registry does not match accepted active set')
+
+
 def write_json(path, value):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with io.open(path, 'w', encoding='utf-8', newline='\n') as fh:
@@ -75,6 +140,7 @@ def write_json(path, value):
 
 def load_campaign():
     manifest = load_json(MANIFEST)
+    verify_campaign_contract(manifest)
     oracle = load_json(ORACLE)
     rules = {
         'reason_registry': read_block(SCHEMA, 'REASON_REGISTRY'),
@@ -105,7 +171,11 @@ def dependency_context(manifest, clean, target_type):
         if canon(artifact) != entry['hash']:
             raise InputIntegrityError('dependency %s hash mismatch' % parent_id)
         context[parent_id] = artifact
-        pinned.append({'parent_id': parent_id, 'hash': entry['hash']})
+        pinned.append({
+            'parent_id': parent_id,
+            'parent_type': entry['parent_type'],
+            'hash': entry['hash'],
+        })
     return context, pinned
 
 
@@ -221,7 +291,20 @@ def load_judgments(path):
     return out
 
 
+def validate_judgments(judgments, packets_by_id):
+    for j in judgments:
+        packet = packets_by_id.get(j.get('packet_id'))
+        if packet is None:
+            raise ValueError('judgment references unknown packet %r' % j.get('packet_id'))
+        if j.get('predicate_id') != packet['predicate']['id']:
+            raise ValueError(
+                'judgment predicate %r does not match packet predicate %r'
+                % (j.get('predicate_id'), packet['predicate']['id']))
+
+
 def aggregate_human(result, packets, judgments):
+    packets_by_id = {p['packet_id']: p for p in packets.values()}
+    validate_judgments(judgments, packets_by_id)
     by_packet = {}
     for j in judgments:
         by_packet.setdefault(j['packet_id'], []).append(j)
@@ -252,16 +335,49 @@ def aggregate_human(result, packets, judgments):
     return result
 
 
-def evaluate_artifact(target, context, oracle, rules, judgments=None, packet_dir=None):
-    """Run the scorer and attach packets; never receives expected-predicate metadata."""
+def prepare_artifact(target, context, oracle, rules, packet_dir=None):
+    """Score one target and attach blinded packets; no answer-key comparison."""
     result = score(target, context, oracle, rules)
     # The packet builder needs the target, but this field is removed before evidence.
     result['target_for_packet'] = target
     packets = attach_packets(result, context, oracle, packet_dir=packet_dir)
-    aggregate_human(result, packets, judgments or [])
     result.pop('target_for_packet', None)
     result['packets'] = packets
     return result
+
+
+def evaluate_artifact(target, context, oracle, rules, judgments=None, packet_dir=None):
+    """Run the scorer, attach packets, and aggregate judgments for this artifact."""
+    result = prepare_artifact(target, context, oracle, rules, packet_dir=packet_dir)
+    aggregate_human(result, result['packets'], judgments or [])
+    return result
+
+
+def clean_verdict(findings):
+    statuses = [f['status'] for f in findings]
+    if FIRED in statuses:
+        return 'FAIL'
+    if UNDECIDABLE in statuses:
+        return 'INCOMPLETE'
+    return 'PASS'
+
+
+def aggregate_parent_type(records):
+    statuses = [r['verdict'] for r in records]
+    if 'FAIL' in statuses:
+        return 'FAIL'
+    if 'INCOMPLETE' in statuses or not statuses:
+        return 'INCOMPLETE'
+    return 'PASS'
+
+
+def aggregate_campaign(parent_type_verdicts, required_types):
+    statuses = [parent_type_verdicts.get(t, 'INCOMPLETE') for t in required_types]
+    if 'FAIL' in statuses:
+        return 'FAIL'
+    if 'INCOMPLETE' in statuses:
+        return 'INCOMPLETE'
+    return 'PASS'
 
 
 def specificity(target_type, findings, expected):
@@ -321,21 +437,39 @@ def run(mode, out_dir, judgments_path=None, limit=None):
     if limit:
         rows = rows[:limit]
     packets_dir = os.path.join(out_dir, 'packets')
-    records = []
+
+    prepared = []
     for row in rows:
         context, pinned = dependency_context(manifest, clean, row['parent_type'])
-        result = evaluate_artifact(row['artifact'], context, oracle, rules,
-                                   judgments=judgments, packet_dir=packets_dir)
+        result = prepare_artifact(row['artifact'], context, oracle, rules,
+                                  packet_dir=packets_dir)
+        prepared.append({'row': row, 'result': result, 'pinned': pinned})
+
+    global_packets = {}
+    for item in prepared:
+        for packet in item['result']['packets'].values():
+            global_packets[packet['packet_id']] = packet
+    validate_judgments(judgments, global_packets)
+
+    records = []
+    for item in prepared:
+        row = item['row']
+        result = item['result']
+        local_packet_ids = {p['packet_id'] for p in result['packets'].values()}
+        local_judgments = [j for j in judgments if j['packet_id'] in local_packet_ids]
+        aggregate_human(result, result['packets'], local_judgments)
         if row['kind'] == 'clean':
-            verdict = 'PASS' if all(f['status'] == SILENT for f in result['findings']) else 'INCOMPLETE'
+            verdict = clean_verdict(result['findings'])
             spec = None
         else:
-            verdict, spec = verdict_for(row['parent_type'], result['findings'], row['expected'])
+            verdict, spec = verdict_for(row['parent_type'], result['findings'],
+                                        row['expected'])
         record = {
             'kind': row['kind'],
             'parent_id': row['parent_id'],
             'parent_type': row['parent_type'],
             'artifact_hash': canon(row['artifact']),
+            'dependency_context': item['pinned'],
             'scorer_version': result['scorer_version'],
             'findings': result['findings'],
             'packets': sorted(result['packets']),
@@ -346,6 +480,25 @@ def run(mode, out_dir, judgments_path=None, limit=None):
         write_json(os.path.join(out_dir, 'records',
                                 row['parent_id'] + '-' + str(len(records)) + '.json'),
                    record)
+
+    required_types = manifest.get('parent_model', {}).get('parent_types')
+    if not required_types:
+        required_types = sorted({r['parent_type'] for r in records})
+    parent_type_verdicts = {}
+    for parent_type in required_types:
+        parent_records = [r for r in records if r['parent_type'] == parent_type]
+        parent_type_verdicts[parent_type] = aggregate_parent_type(parent_records)
+    campaign_verdict = aggregate_campaign(parent_type_verdicts, required_types)
+    if limit:
+        campaign_verdict = 'INCOMPLETE'
+
+    implementation_hashes = {
+        'projection_contract.py': file_sha(os.path.join(ROOT, 'projection_contract.py')),
+        'scorer/scorer.py': file_sha(os.path.join(ROOT, 'scorer/scorer.py')),
+        'scorer/registry.py': file_sha(os.path.join(ROOT, 'scorer/registry.py')),
+        'scorer/projection.py': file_sha(os.path.join(ROOT, 'scorer/projection.py')),
+        'tools/gate0_harness.py': file_sha(os.path.join(ROOT, 'tools/gate0_harness.py')),
+    }
     evidence = {
         'mode': mode,
         'run_id': datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ') + '-' +
@@ -359,8 +512,10 @@ def run(mode, out_dir, judgments_path=None, limit=None):
             'specificity_policy': manifest['specificity_policy'],
         },
         'scorer_version': registry.SCORER_VERSION,
-        'scorer_hash': file_sha(os.path.join(ROOT, 'scorer/scorer.py')),
+        'implementation_hashes': implementation_hashes,
         'governing_hashes': manifest['governing_hashes'],
+        'parent_type_verdicts': parent_type_verdicts,
+        'campaign_verdict': campaign_verdict,
         'records': records,
     }
     write_json(os.path.join(out_dir, 'EVIDENCE.json'), evidence)

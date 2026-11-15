@@ -15,9 +15,9 @@ run must produce **zero diff**; a run that does not is a build failure, not a wa
 rejects a seed that is a no-op copy of its parent, or that differs at more than one path. The manifest
 mutation record is the checked parent→seed diff, not a hand-written claim.
 
-**Status: SCORER IMPLEMENTED / GATE 0 UNRUN.** The scorer and harness exist at
-`architecture-reboot/scorer/` and `architecture-reboot/tools/gate0_harness.py`; they are not yet
-reviewed. No Gate 0 acceptance run has been executed.
+**Status: SCORER/HARNESS IMPLEMENTED / REVIEW-083 FIXES APPLIED / GATE 0 UNRUN.** The scorer and
+harness exist at `architecture-reboot/scorer/` and `architecture-reboot/tools/gate0_harness.py`; they
+are not yet re-reviewed. No Gate 0 acceptance run has been executed.
 
 ---
 

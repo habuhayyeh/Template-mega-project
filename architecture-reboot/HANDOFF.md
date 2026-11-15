@@ -79,22 +79,28 @@ campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · sche
 Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-Scorer: 13 mechanical predicates + 3 human-review predicates; 35 synthetic tests; no Gate 0 acceptance
+Scorer: 13 mechanical predicates + 3 human-review predicates; 41 synthetic tests; no Gate 0 acceptance
 run.
 
-## 6. Review 082 scorer-input correction and scorer implementation
+## 6. Review 083 scorer/harness integrity pass
 
-**Input boundary corrected.** Scorer input is now target artifact + read-only dependency context +
-oracle + frozen predicate/contract rules. `00-GATE0-MANIFEST.md` fixes the dependency matrix; the
-manifest hash-pins the clean, seed-independent context. The scorer evaluates only the target
-`parent_type`.
+**Input boundary.** Scorer input is target artifact + read-only dependency context + oracle + frozen
+predicate/contract rules. `00-GATE0-MANIFEST.md` fixes the dependency matrix; the manifest hash-pins the
+clean, seed-independent context. The scorer evaluates only the target `parent_type`.
 
-**Scorer/harness implemented.** `architecture-reboot/scorer/` contains the pure scorer, predicate
-registry and projection verifier. `architecture-reboot/tools/gate0_harness.py` owns the answer key,
-packet generation, specificity, human-judgment aggregation and immutable evidence. The scorer does not
-open files or read the manifest; a test patches `builtins.open` to prove it.
+**Review-083 fixes.** The harness now recomputes every governing hash, checks the frozen campaign
+identities and the scorer registry's active set before packets/acceptance, and rejects a stale manifest.
+Generator and scorer share one pure `projection_contract.py`. Clean-parent verdicts distinguish
+`FAIL`/`INCOMPLETE`/`PASS`. Judgments are bound to packet + predicate; stale or mismatched records fail.
+Evidence records the dependency hashes actually supplied and the implementation fingerprints. Parent-type
+and campaign verdicts are written to `EVIDENCE.json`.
 
-**Gate 0 remains unrun.** 35 synthetic tests pass. No `acceptance` harness run was executed, no
+**Scorer/harness.** `architecture-reboot/scorer/` contains the pure scorer, predicate registry and
+projection adapter. `architecture-reboot/tools/gate0_harness.py` owns the answer key, packet generation,
+specificity, human-judgment aggregation and immutable evidence. The scorer does not open files or read
+the manifest; a test patches `builtins.open` to prove it.
+
+**Gate 0 remains unrun.** 41 synthetic tests pass. No `acceptance` harness run was executed, no
 judgments were fabricated, and the three-independent-human-review prerequisite is outstanding.
 
 No Doximity, no Phase 0.

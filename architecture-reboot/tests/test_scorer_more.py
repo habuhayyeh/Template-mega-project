@@ -14,9 +14,21 @@ sys.path.insert(0, os.path.join(BASE, 'tools'))
 sys.path.insert(0, HERE)
 
 from scorer import FIRED, SILENT, UNDECIDABLE, score  # noqa: E402
-from scorer import registry  # noqa: E402
+from scorer import projection, registry  # noqa: E402
+from scorer.projection import ProjectionError  # noqa: E402
 import gate0_harness  # noqa: E402
-from gate0_harness import build_packet, canon  # noqa: E402
+from gate0_harness import (  # noqa: E402
+    InputIntegrityError,
+    aggregate_campaign,
+    aggregate_human,
+    aggregate_parent_type,
+    build_packet,
+    canon,
+    clean_verdict,
+    dependency_context,
+    validate_judgments,
+    verify_governing_hashes,
+)
 from test_scorer import base_fixtures, find  # noqa: E402
 
 
@@ -109,6 +121,7 @@ class AdditionalPredicateTests(unittest.TestCase):
             'governing_hashes': {},
             'clean_parents': {'S1_SYN': clean_parent},
             'dependency_context': {'S1_OUTPUT': []},
+            'parent_model': {'parent_types': ['S1_OUTPUT']},
             'seeds': [seed_record],
         }
         with tempfile.TemporaryDirectory() as tmp:
@@ -127,12 +140,19 @@ class AdditionalPredicateTests(unittest.TestCase):
             with mock.patch.object(gate0_harness, 'GEN', gen), \
                     mock.patch.object(gate0_harness, 'MANIFEST',
                                       os.path.join(gen, 'MANIFEST.json')), \
-                    mock.patch.object(gate0_harness, 'ORACLE', oracle_path):
+                    mock.patch.object(gate0_harness, 'ORACLE', oracle_path), \
+                    mock.patch.object(gate0_harness, 'verify_campaign_contract',
+                                      lambda manifest: None):
                 evidence = gate0_harness.run('packets', out)
             self.assertEqual(len(evidence['records']), 2)
             self.assertEqual(evidence['mode'], 'packets')
+            self.assertEqual(evidence['campaign_verdict'], 'INCOMPLETE')
+            self.assertIn('S1_OUTPUT', evidence['parent_type_verdicts'])
             self.assertTrue(os.path.isfile(os.path.join(out, 'EVIDENCE.json')))
             self.assertTrue(os.path.isdir(os.path.join(out, 'packets')))
+            for record in evidence['records']:
+                self.assertIn('dependency_context', record)
+            self.assertIn('implementation_hashes', evidence)
 
     def test_registry_matches_accepted_active_set(self):
         path = os.path.join(BASE, 'experiments/architecture/AX-S1S2-D/predicates.md')
@@ -146,6 +166,86 @@ class AdditionalPredicateTests(unittest.TestCase):
             self.assertRegex(
                 text,
                 r'\|\s*`' + re.escape(pid) + r'`\s*\|\s*SEMANTIC / HUMAN_REVIEW\s*\|')
+
+
+    def test_governing_hash_mismatch_fails(self):
+        with tempfile.NamedTemporaryFile(delete=False) as fh:
+            fh.write(b'x')
+            path = fh.name
+        try:
+            manifest = {'governing_hashes': {'synthetic': 'sha256:bad'}}
+            with self.assertRaises(InputIntegrityError):
+                verify_governing_hashes(manifest, {'synthetic': path})
+        finally:
+            os.unlink(path)
+
+    def test_projection_map_drift_fails(self):
+        bad = copy.deepcopy(self.rules['projection_map'])
+        for rule in bad['rules']:
+            if rule['op'] == 's2_relations':
+                rule['source_path'] = '/s2/nope'
+        deps = {'S1_SYN': self.s1, 'S2_SYN': self.s2, 'S3_SYN': self.s3}
+        with self.assertRaises(ProjectionError):
+            projection.build_expected_view(deps, self.oracle, bad)
+
+    def test_dependency_context_pins_type_and_hash(self):
+        manifest = {
+            'dependency_context': {
+                'S2_OUTPUT': [{
+                    'parent_id': 'S1_SYN',
+                    'parent_type': 'S1_OUTPUT',
+                    'artifact': 'PARENT-S1.json',
+                    'hash': canon(self.s1),
+                }],
+            },
+        }
+        context, pinned = dependency_context(manifest, {'S1_SYN': self.s1},
+                                             'S2_OUTPUT')
+        self.assertEqual(list(context), ['S1_SYN'])
+        self.assertEqual(pinned[0]['parent_type'], 'S1_OUTPUT')
+        self.assertEqual(pinned[0]['hash'], canon(self.s1))
+
+    def test_clean_verdict_three_branches(self):
+        self.assertEqual(clean_verdict([{'status': FIRED}]), 'FAIL')
+        self.assertEqual(clean_verdict([{'status': UNDECIDABLE}]), 'INCOMPLETE')
+        self.assertEqual(clean_verdict([{'status': SILENT}]), 'PASS')
+
+    def test_judgment_predicate_binding(self):
+        packet = build_packet('S2-REP-01', self.s2, {'S1_SYN': self.s1}, self.oracle)
+        result = score(self.s2, {'S1_SYN': self.s1}, self.oracle, self.rules)
+        finding = find(result, 'S2-REP-01')
+        finding['packet_id'] = packet['packet_id']
+        packets = {'S2-REP-01': packet}
+        wrong = [{
+            'packet_id': packet['packet_id'], 'predicate_id': 'S2-ADOPT-01',
+            'judge_id': 'j1', 'judge_type': 'HUMAN', 'verdict': FIRED,
+            'rationale': 'x',
+        }]
+        with self.assertRaises(ValueError):
+            aggregate_human(result, packets, wrong)
+        stale = [{
+            'packet_id': 'pkt-unknown', 'predicate_id': 'S2-REP-01',
+            'judge_id': 'j1', 'judge_type': 'HUMAN', 'verdict': FIRED,
+            'rationale': 'x',
+        }]
+        with self.assertRaises(ValueError):
+            validate_judgments(stale, {packet['packet_id']: packet})
+
+    def test_parent_type_and_campaign_aggregation(self):
+        self.assertEqual(aggregate_parent_type([{'verdict': 'PASS'}]), 'PASS')
+        self.assertEqual(aggregate_parent_type(
+            [{'verdict': 'PASS'}, {'verdict': 'FAIL'}]), 'FAIL')
+        self.assertEqual(aggregate_parent_type(
+            [{'verdict': 'PASS'}, {'verdict': 'INCOMPLETE'}]), 'INCOMPLETE')
+        self.assertEqual(aggregate_campaign(
+            {'S1_OUTPUT': 'PASS', 'S2_OUTPUT': 'PASS'},
+            ['S1_OUTPUT', 'S2_OUTPUT']), 'PASS')
+        self.assertEqual(aggregate_campaign(
+            {'S1_OUTPUT': 'PASS', 'S2_OUTPUT': 'FAIL'},
+            ['S1_OUTPUT', 'S2_OUTPUT']), 'FAIL')
+        self.assertEqual(aggregate_campaign(
+            {'S1_OUTPUT': 'PASS', 'S2_OUTPUT': 'INCOMPLETE'},
+            ['S1_OUTPUT', 'S2_OUTPUT']), 'INCOMPLETE')
 
 
 if __name__ == '__main__':

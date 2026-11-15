@@ -11,6 +11,7 @@ Source (hand-authored, authoritative):
   AX-S1S2-D/schema.md (PROJECTION_MAP and REASON_REGISTRY blocks)
   AX-S1S2-D/predicates.md (active predicate set)
   gate0/seeds/G0-SEEDS.md
+  projection_contract.py (shared executable map, also used by the scorer)
   this file's SEEDS table
 
 Generated (never hand-edited):
@@ -48,6 +49,9 @@ PARENT_FILES = [
 ]
 PARENT_TYPES = {'S1_OUTPUT', 'S2_OUTPUT', 'S3_OUTPUT', 'S4_BLUEPRINT'}
 PENDING_PREDICATES = ['S2-ADOPT-02', 'S4-ORD-01']
+
+sys.path.insert(0, ROOT)
+from projection_contract import ProjectionError, build_view
 
 
 def fail(msg):
@@ -172,303 +176,6 @@ def load_active_predicates():
         if not re.match(r'^S[1-4]-[A-Z]+-\d\d$', p):
             fail('predicates.md has malformed predicate id %r' % p)
     return preds
-
-
-def set_path(root, dst, value):
-    parts = [p for p in dst.strip('/').split('/') if p]
-    if not parts:
-        fail('empty destination path')
-    cur = root
-    for p in parts[:-1]:
-        nxt = cur.setdefault(p, {})
-        if not isinstance(nxt, dict):
-            fail('destination path collision at %s' % dst)
-        cur = nxt
-    if parts[-1] in cur:
-        fail('duplicate destination %s' % dst)
-    cur[parts[-1]] = value
-
-
-OPS = {
-    's1_problem': lambda c: c['cand']['id'],
-    's1_salience': lambda c: copy.deepcopy(c['cand']['salience']),
-    's3_selected_rep': lambda c: c['rendered'][0]['selected_rep'],
-    's3_rendered': lambda c: [r['problem'] for r in c['rendered']],
-    's3_retained': lambda c: list(c['retained']),
-    's3_use': lambda c: copy.deepcopy(c['use']),
-    's3_reuse': lambda c: copy.deepcopy(c['reuse']),
-    's2_members': lambda c: list(c['members']),
-    's2_relations': lambda c: copy.deepcopy(c['relations']),
-    's2_claim_relations': lambda c: copy.deepcopy(c['claim_relations']),
-    's2_duplicate_groups': lambda c: copy.deepcopy(c['duplicate_groups']),
-    'oracle_ingest': lambda c: copy.deepcopy(c['ingest']),
-    'contract_section': lambda c: c['contracts']['section'],
-    'contract_operator_set': lambda c: c['contracts']['operator_set'],
-}
-
-# Each op has exactly one valid map contract. The build compares every map rule
-# against this table; a changed destination, owner, source path, condition,
-# requirement or transform fails instead of silently running old code.
-OP_CONTRACTS = {
-    's1_problem': {
-        'dst': '/from_s1/problem',
-        'owner': 'S1',
-        'source': 'S1_PARENT.json',
-        'source_path': '/s1/candidates[id=P]/id',
-        'condition': 'P is the unique rendered problem',
-        'required': 'required',
-        'transform': 'copy id',
-    },
-    's1_salience': {
-        'dst': '/from_s1/salience',
-        'owner': 'S1',
-        'source': 'S1_PARENT.json',
-        'source_path': '/s1/candidates[id=P]/salience',
-        'condition': 'same candidate as /from_s1/problem',
-        'required': 'required',
-        'transform': 'copy object',
-    },
-    's3_selected_rep': {
-        'dst': '/from_s3/selected_rep',
-        'owner': 'S3',
-        'source': 'S3_PARENT.json',
-        'source_path': '/s3/rendered[problem=P]/selected_rep',
-        'condition': 'exactly one rendered entry for P',
-        'required': 'required',
-        'transform': 'copy id',
-    },
-    's3_rendered': {
-        'dst': '/from_s3/rendered',
-        'owner': 'S3',
-        'source': 'S3_PARENT.json',
-        'source_path': '/s3/rendered[i]/problem',
-        'condition': 'all i, source order',
-        'required': 'required',
-        'transform': 'collect problem ids',
-    },
-    's3_retained': {
-        'dst': '/from_s3/retained',
-        'owner': 'S3',
-        'source': 'S3_PARENT.json',
-        'source_path': '/s3/retained[i]',
-        'condition': 'all i, source order',
-        'required': 'required',
-        'transform': 'collect ids',
-    },
-    's3_use': {
-        'dst': '/from_s3/use',
-        'owner': 'S3',
-        'source': 'S3_PARENT.json',
-        'source_path': '/s3/use/{object}',
-        'condition': 'object keys must be a subset of T',
-        'required': 'required',
-        'transform': 'copy map',
-    },
-    's3_reuse': {
-        'dst': '/from_s3/reuse',
-        'owner': 'S3',
-        'source': 'S3_PARENT.json',
-        'source_path': '/s3/reuse[i]',
-        'condition': 'all i, source order',
-        'required': 'required',
-        'transform': 'copy list',
-    },
-    's2_members': {
-        'dst': '/from_s2/members',
-        'owner': 'S2',
-        'source': 'S2_PARENT.json',
-        'source_path': '/s2/representations[id=R]/members[i]',
-        'condition': 'R is from_s3.selected_rep; all i, source order',
-        'required': 'required',
-        'transform': 'copy ids',
-    },
-    's2_relations': {
-        'dst': '/from_s2/relations',
-        'owner': 'S2',
-        'source': 'S2_PARENT.json',
-        'source_path': '/s2/relations[i]',
-        'condition': 'from in M and to in M; source order',
-        'required': 'required',
-        'transform': 'filter and copy',
-    },
-    's2_claim_relations': {
-        'dst': '/from_s2/claim_relations',
-        'owner': 'S2',
-        'source': 'S2_PARENT.json',
-        'source_path': '/s2/claim_relations[i]',
-        'condition': 'problem == P and representation == R; source order',
-        'required': 'required',
-        'transform': 'filter and copy',
-    },
-    's2_duplicate_groups': {
-        'dst': '/from_s2/duplicate_groups',
-        'owner': 'S2',
-        'source': 'S2_PARENT.json',
-        'source_path': '/s2/duplicate_groups[i]',
-        'condition': 'set(group) intersects M; source order',
-        'required': 'required',
-        'transform': 'filter and copy',
-    },
-    'oracle_ingest': {
-        'dst': '/from_ingest',
-        'owner': 'I3/I4',
-        'source': 'fixtures/CASE-01/oracle.json',
-        'source_path': '/objects[{object in T}]/{text,provenance,temporal|status}',
-        'condition': 'one entry per T; exactly one of temporal/status',
-        'required': 'payload and provenance required; exactly one of temporal/status',
-        'transform': 'text→payload; copy provenance; copy temporal or status',
-        'expands': {
-            '/from_ingest/{object}/payload': '/objects[{object in T}]/text',
-            '/from_ingest/{object}/provenance': '/objects[{object in T}]/provenance',
-            '/from_ingest/{object}/temporal': '/objects[{object in T}]/temporal when present',
-            '/from_ingest/{object}/status': '/objects[{object in T}]/status when temporal is absent',
-        },
-    },
-    'contract_section': {
-        'dst': '/from_contracts/section',
-        'owner': 'frozen contracts',
-        'source': 'SCHEMA-2 contracts block',
-        'source_path': '#/contracts/section',
-        'condition': 'always',
-        'required': 'required',
-        'transform': 'copy constant',
-    },
-    'contract_operator_set': {
-        'dst': '/from_contracts/operator_set',
-        'owner': 'frozen contracts',
-        'source': 'SCHEMA-2 contracts block',
-        'source_path': '#/contracts/operator_set',
-        'condition': 'always',
-        'required': 'required',
-        'transform': 'copy constant',
-    },
-}
-
-
-
-def build_view(s1p, s2p, s3p, oracle, pmap):
-    """Construct S4_INPUT_VIEW from upstream artifacts using the schema map.
-
-    The map in schema.md is the authority for destinations, source owners and
-    source paths. This function supplies one operation per mapped destination;
-    it authors no value that is not copied from a named source.
-    """
-    rendered = s3p['s3']['rendered']
-    if len(rendered) != 1:
-        fail('S4_INPUT_VIEW scope requires exactly one rendered problem, found %d'
-             % len(rendered))
-
-    problem_id = rendered[0]['problem']
-    candidates = [c for c in s1p['s1']['candidates'] if c.get('id') == problem_id]
-    if len(candidates) != 1:
-        fail('expected one S1 candidate for problem %s, found %d'
-             % (problem_id, len(candidates)))
-    cand = candidates[0]
-
-    selected_rep = rendered[0]['selected_rep']
-    reps = [r for r in s2p['s2']['representations'] if r.get('id') == selected_rep]
-    if len(reps) != 1:
-        fail('expected one S2 representation for selected_rep %s, found %d'
-             % (selected_rep, len(reps)))
-    rep = reps[0]
-    if rep.get('problem') != problem_id:
-        fail('selected representation %s belongs to %r, not rendered problem %s'
-             % (selected_rep, rep.get('problem'), problem_id))
-    members = list(rep['members'])
-    if not members:
-        fail('selected representation %s has no members' % selected_rep)
-
-    relations = [
-        copy.deepcopy(r) for r in s2p['s2'].get('relations', [])
-        if r.get('from') in members and r.get('to') in members
-    ]
-
-    claim_relations = []
-    for r in s2p['s2'].get('claim_relations', []):
-        if 'problem' not in r or 'representation' not in r:
-            fail('S2 claim_relation lacks problem/representation selectors: %r' % (r,))
-        if r['problem'] == problem_id and r['representation'] == selected_rep:
-            claim_relations.append(copy.deepcopy(r))
-
-    duplicate_groups = [
-        list(g) for g in s2p['s2'].get('duplicate_groups', [])
-        if set(g) & set(members)
-    ]
-
-    retained = list(s3p['s3']['retained'])
-    use = copy.deepcopy(s3p['s3']['use'])
-    if set(use) - set(retained):
-        fail('S3 use map references objects outside retained: %s'
-             % sorted(set(use) - set(retained)))
-
-    ingest = {}
-    for oid in retained:
-        if oid not in oracle['objects']:
-            fail('retained object %s is absent from the oracle' % oid)
-        src = oracle['objects'][oid]
-        if 'text' not in src or 'provenance' not in src:
-            fail('oracle object %s lacks text or provenance' % oid)
-        has_temporal = 'temporal' in src
-        has_status = 'status' in src
-        if has_temporal == has_status:
-            fail('oracle object %s must carry exactly one of temporal/status' % oid)
-        rec = {'payload': src['text'], 'provenance': src['provenance']}
-        if has_temporal:
-            rec['temporal'] = src['temporal']
-        else:
-            rec['status'] = src['status']
-        ingest[oid] = rec
-
-    contracts = pmap.get('contracts')
-    if not contracts:
-        fail('projection map has no contracts block')
-
-    ctx = {
-        'cand': cand,
-        'rendered': rendered,
-        'retained': retained,
-        'use': use,
-        'reuse': copy.deepcopy(s3p['s3']['reuse']),
-        'members': members,
-        'relations': relations,
-        'claim_relations': claim_relations,
-        'duplicate_groups': duplicate_groups,
-        'ingest': ingest,
-        'contracts': contracts,
-    }
-
-    view = {}
-    seen = set()
-    for rule in pmap['rules']:
-        dst = rule.get('dst')
-        op = rule.get('op')
-        if not dst or dst in seen:
-            fail('projection map has missing or duplicate dst %r' % dst)
-        if set(rule) - {'dst', 'op', 'owner', 'source', 'source_path',
-                        'condition', 'required', 'transform', 'expands'}:
-            fail('projection map rule %s has unknown keys' % dst)
-        if op not in OPS or op not in OP_CONTRACTS:
-            fail('projection map rule %s uses unknown op %r' % (dst, op))
-        contract = OP_CONTRACTS[op]
-        for key in ('dst', 'owner', 'source', 'source_path',
-                    'condition', 'required', 'transform'):
-            if rule.get(key) != contract.get(key):
-                fail('projection map rule %s %s=%r does not match op contract %r'
-                     % (dst, key, rule.get(key), contract.get(key)))
-        if rule.get('expands') != contract.get('expands'):
-            fail('projection map rule %s expands=%r does not match op contract %r'
-                 % (dst, rule.get('expands'), contract.get('expands')))
-        seen.add(dst)
-        set_path(view, dst, OPS[op](ctx))
-
-    if set(OP_CONTRACTS) != set(OPS):
-        fail('op registry and op contract table do not cover the same ops')
-    if {r['op'] for r in pmap['rules']} != set(OPS):
-        fail('projection map ops do not match the implemented op set')
-    if set(view) != set(pmap['groups']):
-        fail('projected groups %s do not match frozen groups %s'
-             % (sorted(view), sorted(pmap['groups'])))
-    return view
 
 
 def reason_by_code(reason_reg):
@@ -664,7 +371,10 @@ def main():
     s4p = parents['S4_PARENT.json']
     oracle = load_json(os.path.join(AX, 'fixtures/CASE-01/oracle.json'))
 
-    built_view = build_view(s1p, s2p, s3p, oracle, pmap)
+    try:
+        built_view = build_view(s1p, s2p, s3p, oracle, pmap)
+    except ProjectionError as exc:
+        fail(str(exc))
     clean_s4 = {
         'case': s4p['case'],
         'parent_id': s4p['parent_id'],
