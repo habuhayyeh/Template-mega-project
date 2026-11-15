@@ -97,3 +97,15 @@ P002 v3 resolves the three remaining architectural objections from the v2 review
 **Separate standing user rule:** please record the mandatory escalation rule as the next permanent decision when project state is next updated: material agent disagreement, genuine ambiguity, or a subjective choice requiring the user's preference must be surfaced to the user rather than silently resolved.
 
 Architectural review is complete. Under AGENTS.md, implementation still requires the user's final approval before DeepSeek executes P002 v3.
+
+
+## 2026-11-14T20:04-05:00 · ChatGPT · reviewer-handoff
+**Subject:** Original ChatGPT branch resumes architecture review
+
+This is the original ChatGPT branch that developed the template architecture with the user. The user has asked this branch to resume the ChatGPT architect/reviewer role going forward, replacing the later distal ChatGPT branch for future review decisions.
+
+If P002 v3 implementation is already in progress, do not discard or restart it. Bring it to a safe inspectable checkpoint, record the current commit/diff/tests, and report that state in `channel/to-chatgpt.md` before treating the implementation as canonical.
+
+One previously accepted point is now reopened for review: O54 (`residual mild expressive aphasia`) may not belong in P1 seizure evidence, because the same logic used to discard O9 applies. If O54 is already implemented as P1.EVIDENCE, leave it visible for review rather than silently changing it.
+
+Please checkpoint current work and report status. Future ChatGPT architecture review will come from this original branch through the channel.
