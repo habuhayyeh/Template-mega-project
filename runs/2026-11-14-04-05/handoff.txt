@@ -1,0 +1,49 @@
+PROBLEM 1
+PRIMARY_CLAIM: post-stroke seizure from the old left MCA scar rather than a new lesion [A, Neurology consult, 2026-11-14]
+CLAIM_QUALIFIER:
+- but the MRI will tell us [A, Neurology consult, 2026-11-14]
+- clinician: confusion today is not dementia — it's postictal [B, Transcript, ]
+- clinician: we'll see what the MRI shows [B, Transcript, ]
+ETIOLOGY:
+- clinician: scar from your old stroke is the most likely cause of the seizure [B, Transcript, ]
+EVIDENCE:
+- witnessed generalized tonic-clonic seizure at home [A, Neurology consult, 2026-11-14]
+- postictal confusion [A, Neurology consult, 2026-11-14]
+- known left MCA infarct [A, Neurology consult, 2026-11-14]
+- no prior seizures [A, Neurology consult, 2026-11-14]
+- sodium 128 on admission [A, Neurology consult, 2026-11-14]
+- CT head no hemorrhage [A, Neurology consult, 2026-11-14]
+- old left MCA encephalomalacia [A, Neurology consult, 2026-11-14]
+- no new focal lesion [A, Neurology consult, 2026-11-14]
+- CT head no acute abnormality [C, ED note, 11/12]
+COURSE:
+- admitted 11/12 [A, Neurology consult, 2026-11-14]
+- witnessed generalized tonic-clonic seizure about two minutes [A, Neurology consult, 2026-11-14]
+- postictal confusion lasting an hour [A, Neurology consult, 2026-11-14]
+- left MCA infarct two years ago [A, Neurology consult, 2026-11-14]
+- sodium now 131 after fluid restriction [A, Neurology consult, 2026-11-14]
+MANAGEMENT:
+- on apixaban [A, Neurology consult, 2026-11-14]
+- apixaban held since admission [A, Neurology consult, 2026-11-14]
+- MRI brain with and without contrast ordered, not yet done [A, Neurology consult, 2026-11-14]
+- EEG requested, pending [A, Neurology consult, 2026-11-14]
+- I am not starting an antiseizure medication unless she has another event [A, Neurology consult, 2026-11-14]
+- Apixaban to resume once MRI excludes hemorrhage [A, Neurology consult, 2026-11-14]
+- not driving until six months seizure-free [A, Neurology consult, 2026-11-14]
+- Continue amlodipine 10 mg daily [A, Neurology consult, 2026-11-14]
+- Continue atorvastatin 80 mg [A, Neurology consult, 2026-11-14]
+- clinician: not driving for six months — that's not negotiable [B, Transcript, ]
+- fluid restriction started [C, ED note, 11/12]
+
+PROBLEM 2
+PROBLEM_LABEL: progressive memory difficulty [D, Prior neurology, 2025-06]
+EVIDENCE:
+- family's concern about her memory is not today's issue [A, Neurology consult, 2026-11-14]
+- daughter: doctor in clinic said it was dementia [B, Transcript, ]
+- probable vascular dementia [D, Prior neurology, 2025-06]
+- MMSE 24 [D, Prior neurology, 2025-06]
+COURSE:
+- daughter: memory has been getting worse for a year [B, Transcript, ]
+MANAGEMENT:
+- I will refer her to the memory clinic after discharge [A, Neurology consult, 2026-11-14]
+- no further workup [D, Prior neurology, 2025-06]

@@ -1,0 +1,13 @@
+O1 -> ROS
+O1 -> HPI
+O2 -> NOT_A_SECTION
+O3 -> DISCARD: BECAUSE
+O22 -> HPI
+O35 -> HPI
+O99 -> HPI
+REUSE: O12 -> ROS, distinct function: test
+REUSE: O3 -> HPI, distinct function: test
+REUSE: O3 -> HPI, distinct function: test
+UNACCOUNTED_IDS: none
+MULTIPLY_ASSIGNED_IDS: none
+ACCOUNTING: 60/60

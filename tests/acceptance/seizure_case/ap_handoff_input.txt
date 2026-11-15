@@ -1,0 +1,61 @@
+PROBLEM 1
+CLAIM: post-stroke seizure from the old left MCA scar rather than a new lesion; confusion today is not dementia — it's postictal
+ETIOLOGY: scar from your old stroke is the most likely cause of the seizure
+EVIDENCE:
+- witnessed generalized tonic-clonic seizure at home
+- postictal confusion
+- known left MCA infarct
+- mild residual expressive aphasia
+- atrial fibrillation
+- no prior seizures
+- sodium 128 on admission
+- CT head no hemorrhage
+- old left MCA encephalomalacia
+- no new focal lesion
+- no fever
+- no neck stiffness
+- She wants to drive
+- I've been driving myself everywhere
+- witnessed generalized tonic-clonic seizure
+- CT head no acute abnormality
+- sodium 128
+- alert, oriented to person and place
+- mild word-finding difficulty at baseline per family
+COURSE:
+- admitted 11/12
+- witnessed generalized tonic-clonic seizure about two minutes
+- postictal confusion lasting an hour
+- left MCA infarct two years ago
+- sodium now 131 after fluid restriction
+MANAGEMENT:
+- on apixaban
+- apixaban held since admission
+- fluid restriction
+- MRI brain with and without contrast ordered, not yet done
+- EEG requested, pending
+- but the MRI will tell us
+- I am not starting an antiseizure medication unless she has another event
+- Apixaban to resume once MRI excludes hemorrhage
+- not driving until six months seizure-free
+- Continue amlodipine 10 mg daily
+- Continue atorvastatin 80 mg
+- we'll see what the MRI shows
+- not driving for six months — that's not negotiable
+- fluid restriction started
+
+PROBLEM 2
+CLAIM: progressive memory difficulty
+EVIDENCE:
+- family's concern about her memory
+- family's concern about her memory is not today's issue
+- doctor in clinic said it was dementia
+- probable vascular dementia
+- MMSE 24
+- left MCA infarct
+- residual mild expressive aphasia
+COURSE:
+- memory has been getting worse for a year
+MANAGEMENT:
+- I will refer her to the memory clinic after discharge
+- no further workup
+

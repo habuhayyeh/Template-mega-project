@@ -1,0 +1,60 @@
+O1 | DEMOGRAPHIC | 68F | [A, Neurology consult, 2026-11-14]
+O2 | COURSE | admitted 11/12 | [A, Neurology consult, 2026-11-14] | UNKNOWN
+O3 | OBSERVATION | witnessed generalized tonic-clonic seizure at home | [A, Neurology consult, 2026-11-14] | REPORTED
+O4 | COURSE | witnessed generalized tonic-clonic seizure about two minutes | [A, Neurology consult, 2026-11-14] | REPORTED
+O5 | OBSERVATION | postictal confusion | [A, Neurology consult, 2026-11-14] | REPORTED
+O6 | COURSE | postictal confusion lasting an hour | [A, Neurology consult, 2026-11-14] | REPORTED
+O7 | OBSERVATION | known left MCA infarct | [A, Neurology consult, 2026-11-14] | REPORTED
+O8 | COURSE | left MCA infarct two years ago | [A, Neurology consult, 2026-11-14] | REPORTED
+O9 | OBSERVATION | mild residual expressive aphasia | [A, Neurology consult, 2026-11-14] | REPORTED
+O10 | OBSERVATION | atrial fibrillation | [A, Neurology consult, 2026-11-14] | REPORTED
+O11 | MANAGEMENT | on apixaban | [A, Neurology consult, 2026-11-14]
+O12 | MANAGEMENT | apixaban held since admission | [A, Neurology consult, 2026-11-14]
+O13 | OBSERVATION | no prior seizures | [A, Neurology consult, 2026-11-14] | REPORTED
+O14 | OBSERVATION | sodium 128 on admission | [A, Neurology consult, 2026-11-14] | TEST_RESULT
+O15 | COURSE | sodium now 131 after fluid restriction | [A, Neurology consult, 2026-11-14] | TEST_RESULT
+O16 | MANAGEMENT | fluid restriction | [A, Neurology consult, 2026-11-14]
+O17 | OBSERVATION | CT head no hemorrhage | [A, Neurology consult, 2026-11-14] | TEST_RESULT
+O18 | OBSERVATION | old left MCA encephalomalacia | [A, Neurology consult, 2026-11-14] | TEST_RESULT
+O19 | OBSERVATION | no new focal lesion | [A, Neurology consult, 2026-11-14] | TEST_RESULT
+O20 | MANAGEMENT | MRI brain with and without contrast ordered, not yet done | [A, Neurology consult, 2026-11-14]
+O21 | MANAGEMENT | EEG requested, pending | [A, Neurology consult, 2026-11-14]
+O22 | DIAGNOSTIC_FORMULATION | post-stroke seizure from the old left MCA scar rather than a new lesion | [A, Neurology consult, 2026-11-14]
+O23 | MANAGEMENT | but the MRI will tell us | [A, Neurology consult, 2026-11-14]
+O24 | MANAGEMENT | I am not starting an antiseizure medication unless she has another event | [A, Neurology consult, 2026-11-14]
+O25 | MANAGEMENT | Apixaban to resume once MRI excludes hemorrhage | [A, Neurology consult, 2026-11-14]
+O26 | OBSERVATION | no fever | [A, Neurology consult, 2026-11-14] | EXAMINED
+O27 | OBSERVATION | no neck stiffness | [A, Neurology consult, 2026-11-14] | EXAMINED
+O28 | OBSERVATION | She wants to drive | [A, Neurology consult, 2026-11-14] | REPORTED
+O29 | MANAGEMENT | not driving until six months seizure-free | [A, Neurology consult, 2026-11-14]
+O30 | MANAGEMENT | Continue amlodipine 10 mg daily | [A, Neurology consult, 2026-11-14]
+O31 | MANAGEMENT | Continue atorvastatin 80 mg | [A, Neurology consult, 2026-11-14]
+O32 | OBSERVATION | family's concern about her memory | [A, Neurology consult, 2026-11-14] | REPORTED
+O33 | MANAGEMENT | I will refer her to the memory clinic after discharge | [A, Neurology consult, 2026-11-14]
+O34 | OBSERVATION | family's concern about her memory is not today's issue | [A, Neurology consult, 2026-11-14] | CLINICIAN_COMMENT
+O35 | ETIOLOGY | clinician: scar from your old stroke is the most likely cause of the seizure | [B, Transcript, ]
+O36 | COURSE | daughter: memory has been getting worse for a year | [B, Transcript, ] | REPORTED
+O37 | OBSERVATION | daughter: doctor in clinic said it was dementia | [B, Transcript, ] | REPORTED
+O38 | DIAGNOSTIC_FORMULATION | clinician: confusion today is not dementia — it's postictal | [B, Transcript, ]
+O39 | MANAGEMENT | clinician: we'll see what the MRI shows | [B, Transcript, ]
+O40 | OBSERVATION | clinician: sometimes these turn out to be something we can't find a cause for | [B, Transcript, ] | CLINICIAN_COMMENT
+O41 | OBSERVATION | patient: I've been driving myself everywhere | [B, Transcript, ] | REPORTED
+O42 | MANAGEMENT | clinician: not driving for six months — that's not negotiable | [B, Transcript, ]
+O43 | OBSERVATION | witnessed generalized tonic-clonic seizure | [C, ED note, 11/12] | REPORTED
+O44 | OBSERVATION | CT head no acute abnormality | [C, ED note, 11/12] | TEST_RESULT
+O45 | OBSERVATION | sodium 128 | [C, ED note, 11/12] | TEST_RESULT
+O46 | MANAGEMENT | fluid restriction started | [C, ED note, 11/12]
+O47 | OBSERVATION | alert, oriented to person and place | [C, ED note, 11/12] | EXAMINED
+O48 | OBSERVATION | mild word-finding difficulty at baseline per family | [C, ED note, 11/12] | REPORTED
+O49 | OBSERVATION | progressive memory difficulty | [D, Prior neurology, 2025-06] | REPORTED
+O50 | OBSERVATION | probable vascular dementia | [D, Prior neurology, 2025-06] | REPORTED
+O51 | OBSERVATION | MMSE 24 | [D, Prior neurology, 2025-06] | TEST_RESULT
+O52 | MANAGEMENT | no further workup | [D, Prior neurology, 2025-06]
+O53 | OBSERVATION | left MCA infarct | [D, Prior neurology, 2024-02] | REPORTED
+O54 | OBSERVATION | residual mild expressive aphasia | [D, Prior neurology, 2024-02] | REPORTED
+O55 | MANAGEMENT | apixaban started | [D, Prior neurology, 2024-02]
+O56 | OBSERVATION | 5 mm incidental right cavernous ICA aneurysm | [D, Prior radiology, 2024-03] | TEST_RESULT
+O57 | MANAGEMENT | neurosurgery recommended follow-up imaging in two years | [D, Prior radiology, 2024-03]
+O58 | MANAGEMENT | propranolol started for migraine | [D, Prior neurology, 2025-01]
+O59 | MANAGEMENT | propranolol stopped because of fatigue | [D, Prior neurology, 2025-01]
+O60 | COURSE | propranolol stopped 2025-03 | [D, Prior neurology, 2025-01] | REPORTED

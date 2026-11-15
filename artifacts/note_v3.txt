@@ -1,0 +1,71 @@
+REASON FOR CONSULT
+Witnessed generalized tonic-clonic seizure at home.
+
+HISTORY OF PRESENT ILLNESS
+A 68-year-old woman with a left MCA infarct two years ago. She had no prior seizures. She was admitted 11/12 after a witnessed generalized tonic-clonic seizure at home lasting ~2 mins, followed by postictal confusion lasting an hour.
+
+NEUROLOGIC HISTORY
+Left MCA infarct two years ago, with mild residual expressive aphasia and mild word-finding difficulty at baseline per family. Propranolol was started for migraine and stopped in 2025-03 because of fatigue. Incidental 5 mm right cavernous ICA aneurysm (2024-03), with neurosurgery recommending follow-up imaging in two years. Her family is concerned about her memory. Her daughter reports it has been getting worse for a year and that a doctor in clinic said it was dementia; neurology had documented progressive memory difficulty and probable vascular dementia in 2025-06.
+
+OTHER PAST MEDICAL HISTORY
+Atrial fibrillation.
+
+SOCIAL HISTORY
+She has been driving herself everywhere.
+
+MEDICATIONS
+Apixaban.
+Amlodipine 10 mg daily.
+Atorvastatin 80 mg.
+
+EXAMINATION
+No fever. Alert, oriented to person and place. No neck stiffness.
+
+WORKUP
+Sodium 128 on admission, now 131 after fluid restriction.
+CT head showed no acute abnormality, no hemorrhage, and no new focal lesion, with old left MCA encephalomalacia.
+MMSE 24 at prior neurology evaluation, June 2025.
+
+ASSESSMENT AND PLAN
+//Post-stroke seizure from the old left MCA scar rather than a new lesion; confusion today is not dementia — it's postictal.
+
+- witnessed generalized tonic-clonic seizure at home
+- known left MCA infarct
+- mild residual expressive aphasia
+- atrial fibrillation
+- no prior seizures
+- sodium 128 on admission
+- CT head no hemorrhage
+- old left MCA encephalomalacia
+- no new focal lesion
+- no fever
+- no neck stiffness
+- She wants to drive
+- alert, oriented to person and place
+- mild word-finding difficulty at baseline per family
+
+Plan:
+
+- MRI brain with and without contrast ordered, not yet done
+- EEG requested, pending
+- apixaban held since admission
+- not starting an antiseizure medication unless she has another event
+- Apixaban to resume once MRI excludes hemorrhage
+- Continue amlodipine 10 mg daily
+- Continue atorvastatin 80 mg
+- fluid restriction
+- not driving until six months seizure-free
+
+//Progressive memory difficulty.
+
+- family's concern about her memory is not today's issue
+- doctor in clinic said it was dementia
+- probable vascular dementia
+- MMSE 24
+- left MCA infarct
+- residual mild expressive aphasia
+
+Plan:
+
+- no further workup
+- refer to the memory clinic after discharge
