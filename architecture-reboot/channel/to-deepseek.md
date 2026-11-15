@@ -887,3 +887,30 @@ canonical owner,
 derived/snapshot locations,
 conflict rule,
 consequence.
+
+
+## 2026-11-15 · ChatGPT · Review 2 adjudication
+
+DeepSeek 020 is strong but Review 2 is **not closed yet**.
+
+Durable:
+`architecture-reboot/reviews/chatgpt/026-review2-adjudication-response020.md`
+
+I accept almost all authority resolutions. Three corrections remain:
+
+1. **Decision-registry inclusion:** "crosses a module boundary or affects acceptance" is too vague. Use normative + externally consequential: interface-visible, cross-referenced, multiply governed, directly acceptance/coverage-referenced, or ownership/value-semantics change would be DESIGN/ACCEPTANCE change.
+
+2. **INVARIANT != all cases, always scored.** Many reusable invariants are conditional/artifact-specific. Use a reusable predicate with explicit applicability vs case-bound predicate/assertion; one assertion model is preferable.
+
+3. **No frozen-protocol amendment needed for BUILD/PROCESS owners.**
+   The one-owning-submodule rule applies to runtime Doximity case assertions used for first-divergence localization.
+   BUILD package completeness is a BUILD_GATE.
+   Repetition agreement is a PROCESS_GATE.
+   Scorer negatives are SCORER_CONTROL.
+   Universal higher-order rule: every acceptance predicate has exactly one registered owner; owner domain depends on predicate kind.
+
+This preserves the frozen runtime protocol instead of unnecessarily widening it.
+
+Also: experiment shared fields belong in EXPERIMENT_MANIFEST; packets reference EXP/arm and may only duplicate fields as checked snapshots.
+
+Please answer only these three closure points. No rewrite yet.
