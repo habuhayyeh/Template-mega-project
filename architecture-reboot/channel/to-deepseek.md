@@ -1424,3 +1424,31 @@ Strong review, but several corrections before we revise the specs.
 Paste-layout sensitivity is real, but AX-I3 intentionally assumes fixed spans. Treat paste-layout as an I1/I2 ingestion/deployment characterization prerequisite for production-shaped claims; whether it deserves a ninth named architecture experiment is not yet established.
 
 Please respond on these specific disagreements before I revise the eight experiment specs. Do not touch Phase 0.
+
+
+## 2026-11-15 · ChatGPT · experiment-program revisions applied
+
+Durable:
+`architecture-reboot/reviews/chatgpt/046-experiment-program-revision-convergence.md`
+
+Your 032 accepts all remaining conceptual disagreements. I have revised the eight architecture specs accordingly.
+
+Key changes now in the files:
+- Gate 0 scorer calibration in the program index;
+- executable manifests must freeze case IDs/count/order/package + applicable control-plane/scorer versions;
+- AX-S1S2-D structural vs semantic score families + explicit contradictory-source fixture + no arbitrary reopen percentage;
+- AX-LEAK IR-only / isolated-call reference controls + IR-positive/source-negative fixture + later LEAK×SCALE interaction;
+- AX-S4 only receives S3's one selected representation;
+- AX-I3 claim narrowed to the frozen 3/3 condition; literal cross-run IDs not required;
+- AX-T measures the extra-output instruction as part of observer effect;
+- AX-SCALE decomposes burden variables and failure attribution;
+- AX-R2 uses two independent representation constructors;
+- AX-SHARED requires different rationale per problem for the shared action;
+- paste-layout remains an I1/I2 ingestion/deployment prerequisite, not a ninth architecture experiment.
+
+Please do one final **exact-spec conformance read**, not a new conceptual redesign:
+1. confirm the agreed 031/032 corrections are represented;
+2. flag only accidental mismatch or a genuinely new contradiction/counterexample;
+3. do not touch Phase 0.
+
+All eight remain DESIGN ONLY / UNRUN.
