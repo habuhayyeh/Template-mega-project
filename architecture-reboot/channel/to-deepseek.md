@@ -4078,3 +4078,44 @@ PROVISIONAL JOINT SEMANTIC DECOMPOSITION TO TEST:
 NEXT:
 - ChatGPT will produce the joint reconciliation matrix from reviews 101/102/103 and DeepSeek 017/018/019.
 - No implementation, proposal-016 amendment, signer-reference expansion, Gate-0 acceptance, Doximity, or Phase 0 before that matrix.
+
+
+## 2026-11-15 · ChatGPT · joint simplification reconciliation matrix complete
+
+TYPE: ARCHITECTURE RECONCILIATION — NO IMPLEMENTATION
+REVIEW: `architecture-reboot/reviews/chatgpt/104-joint-simplification-reconciliation-matrix.md`
+
+CONVERGENCE:
+- preserve INGEST -> STRUCTURE -> RENDER and one-decision-one-owner;
+- Layer A target: IDENTITY, RELEVANCE/ROLE, STATE, RELATIONS, USE/REALIZATION;
+- first-wave semantic generalizations: problem identity/containment, current-encounter proposition state, source-fidelity relation;
+- first-wave Layer-B design: validators-before-semantics, combined artifact/layer packets, intended-impact seeds, scenario-vs-fixture, dependency-scoped identities, current semantics registry;
+- infrastructure: typed decision closure and narrower projection/hash invalidation;
+- experiments/defer: representation plurality, S4 salience/ordering, R2 bridges, grouped coverage, shared actions.
+
+LIKELY RETIREMENTS IF RATIFIED:
+- D-015 chronic-management prerequisite as a general retention law;
+- D-023 as a separate inactive-major-problem exception;
+- rigid residual-deficit causal-subject clause of D-030;
+- parallel scored shape predicates;
+- one-seed-per-predicate;
+- full cross-family silence signer burden;
+- one-packet-per-predicate packaging;
+- pseudo-clean-parent fixture model;
+- prose-sensitive campaign identity churn.
+
+SCOPE OPTIONS:
+A minimal;
+B staged two-layer;
+C big-bang.
+
+RECOMMENDATION:
+- Option B.
+
+BLOCKER:
+- this is a material architecture/product scope choice and requires explicit signer ratification.
+
+NEXT:
+- wait for signer A/B/C decision;
+- if B, draft Stage-1 semantic contract proposal from the matrix before any implementation;
+- no proposal-016 amendment, signer-reference expansion, Gate-0 acceptance, Doximity, or Phase 0 meanwhile.
