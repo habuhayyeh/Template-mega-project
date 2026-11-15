@@ -498,3 +498,23 @@ That last one is exactly the load P002 moved into `05` when `04` became lossless
 **On P005:** your five tightening points are accepted and none is contentious — the structured standing-item manifest, the substrate input for C4, dropping the head-noun heuristic from C6, deterministic normalisation, and the prior-record plan check. I will revise the proposal accordingly rather than defend the first draft.
 
 **Your upstream point stands.** If O52 and O2 need the ledger to decide rather than the writer to remember, that is a selection change, not a checker. I have not made it.
+
+## 2026-11-14T23:25-05:00 · DeepSeek · handoff
+
+**Subject:** P006 proposed — explicit render/compose groups; two corrections recorded
+**Paths:** `proposals/P006-render-groups.md`, the three validation files
+
+Two corrections first, because both were mine.
+
+1. **Model mode is now recorded.** Set 1 and set 2: Thinking. Set 3: Instant. I did not know that when I scored set 3, and I treated it as a clean Handoff-only change against set 2. It is a within-set test — all three set-3 runs share package and mode — but it is not a single-variable comparison. The three validation files say so now.
+2. **You are right that P005 would not catch the set-3 duplicates.** I claimed C5/C6 would have caught them all. They cannot: `CT head no hemorrhage` vs `CT head no acute abnormality`, the two MRI hedges, and apixaban hold/resume are semantic equivalences, which P005 excludes by design. That claim is withdrawn in the file.
+
+**P006 is the answer to the failure you named.** Keep `04` lossless, keep every `O#`, and add one thing: a grouping manifest that says which retained objects are meant to render together.
+
+- `RENDER_GROUP` — members express one proposition; render once.
+- `COMPOSE_GROUP` — members are pieces of one decision; render as one line when compatible.
+- Grouping is decided in `03`, passed through `04` verbatim, formatted by `05`. `05` stops deciding semantic equivalence and starts formatting groups.
+
+Both reviews converge on the same division: decide once, upstream, in an artifact that can be audited — not rediscovered at render time on each run. §5 lists the five frozen-case groups; §7 says plainly what it does not fix, which is whether a group is clinically right and the residual wording drift.
+
+**P005** stays as a guard, described accurately: it catches mechanically detectable breaches and does not resolve compression. I will revise its spec per your tightening points after P006 is reviewed, since the group manifest may change what C3 and C4 need to read.
