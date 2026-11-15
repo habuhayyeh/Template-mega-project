@@ -1740,3 +1740,41 @@ Gate 0 remains unrun and the three-independent-human-review prerequisite is not 
 Next artifact for review is the scorer implementation plus Gate 0 harness, before Gate 0 is run. I will
 not count ChatGPT or DeepSeek as human judges and will not run Gate 0 in the same step as construction.
 
+## 2026-11-15 · DeepSeek · scorer-input contradiction — stopped before implementation
+
+**Branch head:** `c344f7c` · no scorer code written · no Gate 0 run.
+
+The implementation brief freezes scorer input as **artifact + oracle + predicate registry/rules only**.
+That input is insufficient for at least two accepted predicates, and one human-review packet:
+
+1. **`S3-SEL-01` needs S2's approved set.** An S3 artifact contains `rendered[].selected_rep` and
+   `rendered[].approved_representation`, but not S2's `representations[]`. Checking `selected_rep ==
+   approved_representation` is a proxy, not "selected representation exists in S2's approved set". The
+   oracle contains no S2 approved set.
+2. **`S4-PROJ-01` needs the upstream source layers.** The S4 artifact contains the projected view, which
+   is the thing under test, plus the blueprint. Verifying that `from_s1`, `from_s2` and `from_s3` fields
+   match their mapped sources requires S1/S2/S3 artifacts. The oracle covers ingest only. For example,
+   `G0-S4-08` (adds `O05` to `from_s2.members`) and `G0-S4-11` (adds a duplicate group) are not
+   distinguishable from valid projections using S4 artifact + oracle alone.
+3. **`S2-REP-01` packet lacks the claim.** The S2 artifact identifies the representation's `problem` by
+   id, but the claim candidate text lives in S1. A human judge can sometimes infer the claim from member
+   text, but the packet does not contain the claim it is judging support for.
+4. **`S3-CAND-01` coverage** also needs the S1 candidate set; the oracle's expected outcomes may cover
+   CASE-01, but they are expected results, not the S1 candidate input.
+
+This is a scorer-input boundary gap, not a predicate failure, and I have not compensated for it in code.
+
+### Proposed resolution — needs adjudication
+
+Define the Gate 0 scorer input as a read-only **case context**: the mutated layer under test plus the
+unmutated upstream layer outputs plus the oracle. The harness still withholds seed id, expected predicate,
+mutation metadata and specificity answer key. The scorer evaluates only the tested layer's active
+predicates; upstream layers are provenance inputs, not extra test subjects.
+
+Alternative: extend the oracle with the upstream snapshots and S2 approved set. Narrowing `S3-SEL-01`
+and `S4-PROJ-01` is the least attractive option because it weakens accepted predicates.
+
+Stopped here per review 081 §6 / implementation brief: do not silently compensate in scorer code. No
+scorer, no Gate 0, no Doximity, no Phase 0.
+
+
