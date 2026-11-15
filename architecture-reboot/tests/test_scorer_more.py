@@ -118,6 +118,57 @@ class AdditionalPredicateTests(unittest.TestCase):
         self.assertNotIn('expected', packet['oracle'])
         self.assertNotIn('expected.adoption', json.dumps(packet))
 
+    def test_d030_mechanical_shape_and_role_propagation(self):
+        s2 = copy.deepcopy(self.s2)
+        s2['s2']['causal_relations'] = [{
+            'from': 'O2', 'to': 'O1', 'relation': 'CONTRIBUTOR',
+            'strength': 'POSSIBLE', 'support': ['S1']}]
+        result = score(s2, self.deps_s2, self.oracle, self.rules)
+        self.assertEqual(find(result, 'S2-CAUSAL-02')['status'], SILENT)
+
+        bad = copy.deepcopy(s2)
+        bad['s2']['causal_relations'][0]['strength'] = 'CERTAIN'
+        result = score(bad, self.deps_s2, self.oracle, self.rules)
+        self.assertEqual(find(result, 'S2-CAUSAL-02')['status'], FIRED)
+
+        s3 = copy.deepcopy(self.s3)
+        result = score(s3, self.deps_s3, self.oracle, self.rules)
+        self.assertEqual(find(result, 'S3-ROLE-02')['status'], SILENT)
+        del s3['s3']['rendered'][0]['encounter_role']
+        result = score(s3, self.deps_s3, self.oracle, self.rules)
+        self.assertEqual(find(result, 'S3-ROLE-02')['status'], FIRED)
+
+        s4 = copy.deepcopy(self.s4)
+        s4['s4']['problems'][0]['encounter_role'] = 'BACKGROUND'
+        result = score(s4, self.deps_s4, self.oracle, self.rules)
+        self.assertEqual(find(result, 'S4-ROLE-01')['status'], FIRED)
+
+    def test_d030_positive_causal_fixture(self):
+        oracle = copy.deepcopy(self.oracle)
+        oracle['objects']['O2'] = {
+            'text': 'chronic right-sided weakness from prior stroke',
+            'provenance': 'A', 'temporal': 'chronic',
+        }
+        oracle['spans']['S2'] = {
+            'text': 'The chronic right-sided weakness may contribute to the falls.'
+        }
+        s2 = copy.deepcopy(self.s2)
+        s2['s2']['causal_relations'] = [{
+            'from': 'O2', 'to': 'O1', 'relation': 'CONTRIBUTOR',
+            'strength': 'POSSIBLE', 'support': ['S2'],
+        }]
+        result = score(s2, self.deps_s2, oracle, self.rules)
+        self.assertEqual(find(result, 'S2-CAUSAL-02')['status'], SILENT)
+
+    def test_d030_semantic_packets_are_blinded(self):
+        s2_packet = build_packet('S2-CAUSAL-01', self.s2, self.deps_s2, self.oracle)
+        self.assertNotIn('expected', s2_packet['oracle'])
+        self.assertNotIn('expected.adoption', json.dumps(s2_packet))
+        s3_packet = build_packet('S3-ROLE-01', self.s3, self.deps_s3, self.oracle)
+        self.assertNotIn('expected', s3_packet['oracle'])
+        self.assertIn('S1_OUTPUT', s3_packet['dependency_context'])
+        self.assertIn('S2_OUTPUT', s3_packet['dependency_context'])
+
     def test_human_status_not_promoted_by_absence_of_judgments(self):
         result = score(self.s2, self.deps_s2, self.oracle, self.rules)
         self.assertEqual(find(result, 'S2-REP-01')['status'], UNDECIDABLE)

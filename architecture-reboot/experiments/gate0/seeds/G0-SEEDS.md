@@ -1,6 +1,6 @@
 # Gate 0 — seed corpus (source spec)
 
-**Identities:** registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-3` · oracle `ORACLE-3.0` · campaign `GATE0-C2`.
+**Identities:** registry `PILOT-3` · active set `ACTIVE-PILOT-3` · schema `SCHEMA-4` · oracle `ORACLE-4.0` · campaign `GATE0-C3`.
 
 Seeds are generated from **five clean parents across four parent types** by
 `architecture-reboot/tools/make_seeds.py`. S3 has two identities: `S3_CASE01_RENDERED_CLEAN` and
@@ -20,19 +20,24 @@ The authoritative inventory is `seeds/generated/MANIFEST.json`. This table is a 
 | `S1-CAND-01` | `G0-S1-05` |
 | `S1-CAND-02` | `G0-S1-04` |
 | `S2-ADOPT-01` | `G0-S2-06` |
+| `S2-CAUSAL-01` | `G0-S2-07` |
+| `S2-CAUSAL-02` | `G0-S2-08` |
 | `S2-REP-01` | `G0-S2-01`, `G0-S2-02` |
 | `S2-TEMP-01` | `G0-S2-03` |
 | `S3-ACCT-01` | `G0-S3-04` |
 | `S3-CAND-01` | `G0-S3-05`, `G0-S3-06`, `G0-S3-07`, `G0-S3-08`, `G0-S3-09`, `G0-S3-10` |
 | `S3-INC-01` | `G0-S3-01` |
 | `S3-SEL-01` | `G0-S3-02` |
+| `S3-ROLE-01` | `G0-S3-11` |
+| `S3-ROLE-02` | `G0-S3-12` |
 | `S4-COMP-01` | `G0-S4-06` |
 | `S4-INC-01` | `G0-S4-01`, `G0-S4-02` |
 | `S4-MEM-01` | `G0-S4-04` |
 | `S4-PROJ-01` | `G0-S4-07`, `G0-S4-08`, `G0-S4-09`, `G0-S4-10`, `G0-S4-11`, `G0-S4-12`, `G0-S4-13` |
 | `S4-REP-01` | `G0-S4-05` |
+| `S4-ROLE-01` | `G0-S4-14` |
 
-**Counts:** 5 clean parents across 4 parent types · 30 seeds · 16 active predicates.
+**Counts:** 5 clean parents across 4 parent types · 35 seeds · 21 active predicates.
 
 Clean parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.

@@ -53,11 +53,11 @@ GOVERNING_PATHS = {
     'oracle.json': ORACLE,
 }
 EXPECTED_IDENTITIES = {
-    'campaign': 'GATE0-C2',
-    'registry': 'PILOT-2',
-    'active_set': 'ACTIVE-PILOT-2',
-    'schema': 'SCHEMA-3',
-    'oracle': 'ORACLE-3.0',
+    'campaign': 'GATE0-C3',
+    'registry': 'PILOT-3',
+    'active_set': 'ACTIVE-PILOT-3',
+    'schema': 'SCHEMA-4',
+    'oracle': 'ORACLE-4.0',
     'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
 }
 REVIEW_POLICY = 'REVIEW-POLICY-F-2'
@@ -225,6 +225,32 @@ def build_packet(predicate_id, target, context, oracle):
             'its members and their relations, not merely whether ids and support refs '
             'exist. The S1 problem/claim context is supplied so you can identify the '
             'claim being supported. Record FIRED or SILENT.'
+        )
+    elif predicate_id == 'S2-CAUSAL-01':
+        packet_oracle = _subset_oracle(oracle, [])
+        s1 = _dep_by_type(context, 'S1_OUTPUT')
+        packet_context = {'S1_OUTPUT': s1} if s1 else {}
+        instructions = (
+            'Judge every S2 causal relation against the current source: whether it is '
+            'supported at all, whether the relation noun, strength and direction are '
+            'correct, and whether the acting subject is the residual deficit/mechanism '
+            'rather than merely the historical disease label. Historical coexistence '
+            'alone is not a causal relation. Record FIRED or SILENT.'
+        )
+    elif predicate_id == 'S3-ROLE-01':
+        packet_oracle = _subset_oracle(oracle, [])
+        s1 = _dep_by_type(context, 'S1_OUTPUT')
+        s2 = _dep_by_type(context, 'S2_OUTPUT')
+        packet_context = {}
+        if s1:
+            packet_context['S1_OUTPUT'] = s1
+        if s2:
+            packet_context['S2_OUTPUT'] = s2
+        instructions = (
+            'Judge every rendered problem encounter role from the current encounter. '
+            'PRIMARY means actively evaluated/managed now or independently driving '
+            'current neurologic assessment/management; otherwise BACKGROUND. Historical '
+            'relevance alone does not make a problem PRIMARY. Record FIRED or SILENT.'
         )
     else:
         raise ValueError('no semantic packet defined for %s' % predicate_id)

@@ -1,0 +1,56 @@
+{
+  "case": "CASE-01",
+  "parent_id": "S3_CASE01_RENDERED_CLEAN",
+  "parent_type": "S3_OUTPUT",
+  "registry": "PILOT-3",
+  "s3": {
+    "candidate_outcomes": [
+      {
+        "candidate": "C1",
+        "outcome": "RENDERED"
+      },
+      {
+        "candidate": "C2",
+        "outcome": "RENDERED"
+      }
+    ],
+    "dispositions": [
+      {
+        "disposition": "MEDICATION_RECORD",
+        "object": "O07"
+      }
+    ],
+    "rendered": [
+      {
+        "approved_representation": "R1",
+        "encounter_role": "UNKNOWN",
+        "problem": "C1",
+        "selected_rep": "R1"
+      },
+      {
+        "approved_representation": "R2",
+        "encounter_role": "BACKGROUND",
+        "problem": "C2",
+        "selected_rep": "R2"
+      }
+    ],
+    "retained": [
+      "O01",
+      "O02",
+      "O03",
+      "O04",
+      "O05",
+      "O06"
+    ],
+    "reuse": [],
+    "use": {
+      "O01": "C2",
+      "O02": "C2",
+      "O03": "C1",
+      "O04": "C1",
+      "O05": "C1",
+      "O06": "C1"
+    }
+  },
+  "schema": "SCHEMA-4"
+}

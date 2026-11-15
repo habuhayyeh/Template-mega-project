@@ -48,6 +48,18 @@ PREDICATES = {
         "mode": "SIGNER_REFERENCE",
         "assertion": "each S2 adoption verdict is supported by the supplied source/context for the current encounter",
     },
+    "S2-CAUSAL-01": {
+        "owner": "S2",
+        "parent_type": "S2_OUTPUT",
+        "mode": "SIGNER_REFERENCE",
+        "assertion": "every causal relation is source/current-formulation supported, with correct relation noun, strength, direction and acting subject",
+    },
+    "S2-CAUSAL-02": {
+        "owner": "S2",
+        "parent_type": "S2_OUTPUT",
+        "mode": "MECHANICAL",
+        "assertion": "every causal relation has closed-vocabulary relation/strength fields, known from/to objects, and non-empty valid support spans",
+    },
     "S3-CAND-01": {
         "owner": "S3",
         "parent_type": "S3_OUTPUT",
@@ -72,6 +84,18 @@ PREDICATES = {
         "mode": "MECHANICAL",
         "assertion": "every substrate object is retained or carries a disposition entry",
     },
+    "S3-ROLE-01": {
+        "owner": "S3",
+        "parent_type": "S3_OUTPUT",
+        "mode": "SIGNER_REFERENCE",
+        "assertion": "every rendered problem's encounter role is clinically supported by the current encounter",
+    },
+    "S3-ROLE-02": {
+        "owner": "S3",
+        "parent_type": "S3_OUTPUT",
+        "mode": "MECHANICAL",
+        "assertion": "every rendered problem carries encounter_role PRIMARY or BACKGROUND",
+    },
     "S4-INC-01": {
         "owner": "S4",
         "parent_type": "S4_BLUEPRINT",
@@ -95,6 +119,12 @@ PREDICATES = {
         "parent_type": "S4_BLUEPRINT",
         "mode": "MECHANICAL",
         "assertion": "every unit representation equals S3's selected_rep for that problem",
+    },
+    "S4-ROLE-01": {
+        "owner": "S4",
+        "parent_type": "S4_BLUEPRINT",
+        "mode": "MECHANICAL",
+        "assertion": "every S4 problem's encounter role equals the S3 selected role for its source problem",
     },
     "S4-PROJ-01": {
         "owner": "S4",

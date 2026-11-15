@@ -2,7 +2,7 @@
   "case": "CASE-01",
   "parent_id": "S2_CASE01_CLEAN",
   "parent_type": "S2_OUTPUT",
-  "registry": "PILOT-2",
+  "registry": "PILOT-3",
   "s2": {
     "adjudication": [
       {
@@ -66,5 +66,5 @@
       }
     ]
   },
-  "schema": "SCHEMA-3"
+  "schema": "SCHEMA-4"
 }

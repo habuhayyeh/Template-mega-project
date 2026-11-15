@@ -1,0 +1,4155 @@
+{
+  "campaign": "GATE0-C3",
+  "campaign_verdict": "INCOMPLETE",
+  "evaluator_count": 0,
+  "evaluators": [],
+  "governing_hashes": {
+    "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
+    "00-GATE0-MANIFEST.md": "sha256:c05a88e313cee368b674c4d0065e61ecd60b1fb9536b6582477675c7a6444a4d",
+    "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
+    "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
+    "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
+    "G0-SEEDS.md": "sha256:ae4b1c81f3ca73f9b13f87c1a13a5e4a86f594d35615d1dd7c6b219d61a059c5",
+    "make_seeds.py": "sha256:254b787a4369d314c45b0dc9c35e0c5c2c8392ba4cf78a6d55e003abaeca0d8b",
+    "oracle.json": "sha256:de909199d517ab900b2ee28c134c8cc566dea6d924567b5e44303a19bc78db34",
+    "predicates.md": "sha256:361ebf9368dcf7195b1366e918904e38553ff8a47f6b964346f44912fde495be",
+    "schema.md": "sha256:f19904e7db86747a12fb179865cfcdc15faef385d46f93fbd5ebe51f25e92bdb"
+  },
+  "identities": {
+    "active_set": "ACTIVE-PILOT-3",
+    "oracle": "ORACLE-4.0",
+    "registry": "PILOT-3",
+    "schema": "SCHEMA-4",
+    "specificity_policy": "FULL_SILENCE-WITHIN-LAYER"
+  },
+  "implementation_hashes": {
+    "projection_contract.py": "sha256:0e7bffaf83a952ed38b8a0eafc942bfbbfe41c0181ce177856274c56175df75e",
+    "scorer/projection.py": "sha256:2867510a74184ebd9137c1242c4f4cb64d119e17b3f76f10a9bf7ccd0aa481d8",
+    "scorer/registry.py": "sha256:620fb0feafb10547b23783c01832eeeb070b9f19202b9d57f8fe66c6010f111a",
+    "scorer/scorer.py": "sha256:1a2eb5652c223b51ccd1457d027a306cc6e5fc41149218aec063bc83d26d55e6",
+    "tools/gate0_harness.py": "sha256:bd0910469feb76d540f126dba6b04b239eb783fed6e8fec8650ed31cede94993"
+  },
+  "mode": "packets",
+  "parent_type_verdicts": {
+    "S1_OUTPUT": "INCOMPLETE",
+    "S2_OUTPUT": "INCOMPLETE",
+    "S3_OUTPUT": "INCOMPLETE",
+    "S4_BLUEPRINT": "PASS"
+  },
+  "records": [
+    {
+      "artifact_hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+      "artifact_name": "PARENT-S1_PARENT.json",
+      "dependency_context": [],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S1-CAND-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S1",
+          "packet_id": "pkt-e61b1ead1920a55305beaa6c",
+          "path": null,
+          "predicate_id": "S1-CAND-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-CAND-02",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "clean",
+      "packets": [
+        "S1-CAND-01"
+      ],
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": null,
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+      "artifact_name": "PARENT-S2_PARENT.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-ADOPT-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-a2dcf40e81302478a9d2925e",
+          "path": null,
+          "predicate_id": "S2-ADOPT-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-CAUSAL-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-1df7181920569739d9e4a6fb",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-REP-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-d474bb130eacbf48f5ba45f4",
+          "path": null,
+          "predicate_id": "S2-REP-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-TEMP-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "clean",
+      "packets": [
+        "S2-ADOPT-01",
+        "S2-CAUSAL-01",
+        "S2-REP-01"
+      ],
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": null,
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:3ff1f8a591d4a5877454ac5bfbb458d8ec5d462ae6ea6f68c59ef0dc903c03c7",
+      "artifact_name": "PARENT-S3_PARENT_NOT_RENDERED.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-CAND-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-c2d599edac147564d9336589",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "clean",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": null,
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+      "artifact_name": "PARENT-S3_PARENT.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-CAND-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-6dae7cba2d6a1243a2d10f7d",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "clean",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": null,
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:d81287241a0cf2e2b6a3e7bcf20447570b0f1ec1216858a2eccc27cbfb685955",
+      "artifact_name": "PARENT-S4_PARENT.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-PROJ-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "clean",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": null,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:3a0626272fe761d90fe08574424fdc922c7937fcadc609a00686b897ee5b61d3",
+      "artifact_name": "G0-S1-01.json",
+      "dependency_context": [],
+      "findings": [
+        {
+          "detail": "adoption/final-state field present",
+          "evidence": [
+            {
+              "field": "adopted",
+              "path": "/s1/candidates/0/adopted"
+            }
+          ],
+          "expected": "field absent",
+          "observed": "present",
+          "owner": "S1",
+          "path": "/s1/candidates/0/adopted",
+          "predicate_id": "S1-AUTH-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S1-CAND-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S1",
+          "packet_id": "pkt-d38a0b056db32b7e7384a5ce",
+          "path": null,
+          "predicate_id": "S1-CAND-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-CAND-02",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S1-CAND-01"
+      ],
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S1-AUTH-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S1-CAND-01"
+        ],
+        "other_active": [
+          "S1-AUTH-02",
+          "S1-CAND-01",
+          "S1-CAND-02"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:72344cff12fc1dddc88d8377d586af1f65aeb111d5820148979156924190c62c",
+      "artifact_name": "G0-S1-02.json",
+      "dependency_context": [],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "selected-claim field present",
+          "evidence": [
+            {
+              "field": "selected_claim",
+              "path": "/s1/candidates/0/selected_claim"
+            }
+          ],
+          "expected": "field absent",
+          "observed": "present",
+          "owner": "S1",
+          "path": "/s1/candidates/0/selected_claim",
+          "predicate_id": "S1-AUTH-02",
+          "status": "FIRED"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S1-CAND-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S1",
+          "packet_id": "pkt-244512aabc47f650636b0746",
+          "path": null,
+          "predicate_id": "S1-CAND-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-CAND-02",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S1-CAND-01"
+      ],
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S1-AUTH-02",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S1-CAND-01"
+        ],
+        "other_active": [
+          "S1-AUTH-01",
+          "S1-CAND-01",
+          "S1-CAND-02"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:f8e0a5096b327a5c4d4e9c0aed8092d9fcc2a9c03666401edf8ea1f53b1a2a2c",
+      "artifact_name": "G0-S1-04.json",
+      "dependency_context": [],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S1-CAND-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S1",
+          "packet_id": "pkt-4983f345d0d01b8a0ee95a39",
+          "path": null,
+          "predicate_id": "S1-CAND-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "candidate has no source anchor",
+          "evidence": [
+            {
+              "candidate": "C1",
+              "path": "/s1/candidates/0/anchors"
+            }
+          ],
+          "expected": "at least one anchor",
+          "observed": "[]",
+          "owner": "S1",
+          "path": "/s1/candidates/0/anchors",
+          "predicate_id": "S1-CAND-02",
+          "status": "FIRED"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S1-CAND-01"
+      ],
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S1-CAND-02",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S1-CAND-01"
+        ],
+        "other_active": [
+          "S1-AUTH-01",
+          "S1-AUTH-02",
+          "S1-CAND-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:82d5b779e052af66e3b05779dda8a0153518d8a094268cdb4f46806dc071cb94",
+      "artifact_name": "G0-S1-05.json",
+      "dependency_context": [],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S1-CAND-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S1",
+          "packet_id": "pkt-39b3a055c23a59f53be1a459",
+          "path": null,
+          "predicate_id": "S1-CAND-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-CAND-02",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S1-CAND-01"
+      ],
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S1-CAND-01",
+        "expected_status": "UNDECIDABLE",
+        "non_silent_other": [],
+        "other_active": [
+          "S1-AUTH-01",
+          "S1-AUTH-02",
+          "S1-CAND-02"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:3e6f02f0914760e7352b1a4bf4c3c9eb7c9f2a20e36e337704e9cbf9c44403eb",
+      "artifact_name": "G0-S1-06.json",
+      "dependency_context": [],
+      "findings": [
+        {
+          "detail": "adoption/final-state field present",
+          "evidence": [
+            {
+              "field": "status_current",
+              "path": "/s1/candidates/0/status_current"
+            }
+          ],
+          "expected": "field absent",
+          "observed": "present",
+          "owner": "S1",
+          "path": "/s1/candidates/0/status_current",
+          "predicate_id": "S1-AUTH-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-AUTH-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S1-CAND-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S1",
+          "packet_id": "pkt-63a66d986a06536d85f2edfd",
+          "path": null,
+          "predicate_id": "S1-CAND-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S1",
+          "path": null,
+          "predicate_id": "S1-CAND-02",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S1-CAND-01"
+      ],
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S1-AUTH-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S1-CAND-01"
+        ],
+        "other_active": [
+          "S1-AUTH-02",
+          "S1-CAND-01",
+          "S1-CAND-02"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:c70eea72179f28cafacdf109253c6d458db5653beb77e9c0c604bd9c926b269d",
+      "artifact_name": "G0-S2-01.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-ADOPT-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-29211d342922580dbef2d2d2",
+          "path": null,
+          "predicate_id": "S2-ADOPT-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-CAUSAL-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-d50eb4d0b9d3edd34c354fde",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-REP-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-9c460bd22965e3f0b1fd496d",
+          "path": null,
+          "predicate_id": "S2-REP-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-TEMP-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S2-ADOPT-01",
+        "S2-CAUSAL-01",
+        "S2-REP-01"
+      ],
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S2-REP-01",
+        "expected_status": "UNDECIDABLE",
+        "non_silent_other": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-01"
+        ],
+        "other_active": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-01",
+          "S2-CAUSAL-02",
+          "S2-TEMP-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:1d33db3c2269ecbefb1b62493a46d64a8f41216db50bfd5b59087d273d67a050",
+      "artifact_name": "G0-S2-02.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-ADOPT-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-90d1e7b7ab71ba07934ea75d",
+          "path": null,
+          "predicate_id": "S2-ADOPT-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-CAUSAL-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-499ef29e044d07368e3062b4",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-REP-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-44120c49b375bc1a66f6b63c",
+          "path": null,
+          "predicate_id": "S2-REP-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-TEMP-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S2-ADOPT-01",
+        "S2-CAUSAL-01",
+        "S2-REP-01"
+      ],
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S2-REP-01",
+        "expected_status": "UNDECIDABLE",
+        "non_silent_other": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-01"
+        ],
+        "other_active": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-01",
+          "S2-CAUSAL-02",
+          "S2-TEMP-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:59030c674057428e81e7ec76a6862035ae53c187eebbffa90d075fd31c949d41",
+      "artifact_name": "G0-S2-03.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-ADOPT-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-3cd127947ff9d2656295368e",
+          "path": null,
+          "predicate_id": "S2-ADOPT-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-CAUSAL-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-28c34b3fa981df66c9223ac2",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-REP-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-7095a6085459cd0c46915721",
+          "path": null,
+          "predicate_id": "S2-REP-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "S2 altered substrate temporality for O01",
+          "evidence": [
+            {
+              "object": "O01"
+            }
+          ],
+          "expected": "2024-02 documented",
+          "observed": "now",
+          "owner": "S2",
+          "path": "/s2/adjudication/0/temporal",
+          "predicate_id": "S2-TEMP-01",
+          "status": "FIRED"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S2-ADOPT-01",
+        "S2-CAUSAL-01",
+        "S2-REP-01"
+      ],
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S2-TEMP-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-01",
+          "S2-REP-01"
+        ],
+        "other_active": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-01",
+          "S2-CAUSAL-02",
+          "S2-REP-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:37ff4c3765508a6ef6f3f4fbbac5779d9c23bf4363b64e8d7e5fec36c50df81b",
+      "artifact_name": "G0-S2-06.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-ADOPT-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-154e85054d5744a08f4c6770",
+          "path": null,
+          "predicate_id": "S2-ADOPT-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-CAUSAL-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-0d4d6b552e4a4a8bcf91dece",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-REP-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-67198a82d18dcd4cb887050b",
+          "path": null,
+          "predicate_id": "S2-REP-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-TEMP-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S2-ADOPT-01",
+        "S2-CAUSAL-01",
+        "S2-REP-01"
+      ],
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S2-ADOPT-01",
+        "expected_status": "UNDECIDABLE",
+        "non_silent_other": [
+          "S2-CAUSAL-01",
+          "S2-REP-01"
+        ],
+        "other_active": [
+          "S2-CAUSAL-01",
+          "S2-CAUSAL-02",
+          "S2-REP-01",
+          "S2-TEMP-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:a7dcdb61c7e7b60a235d1c0b2ed63f765d253f08342015485513033758041c25",
+      "artifact_name": "G0-S2-07.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-ADOPT-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-2e9932412b961f11a8dcf804",
+          "path": null,
+          "predicate_id": "S2-ADOPT-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-CAUSAL-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-0b54e5ed007bbe894259eb54",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-REP-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-3595781258eac2b8661405da",
+          "path": null,
+          "predicate_id": "S2-REP-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-TEMP-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S2-ADOPT-01",
+        "S2-CAUSAL-01",
+        "S2-REP-01"
+      ],
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S2-CAUSAL-01",
+        "expected_status": "UNDECIDABLE",
+        "non_silent_other": [
+          "S2-ADOPT-01",
+          "S2-REP-01"
+        ],
+        "other_active": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-02",
+          "S2-REP-01",
+          "S2-TEMP-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:c5ce4b1f5f52774b2c169db13950679d9e50b3db68119fe6f9bd50f3c83cef52",
+      "artifact_name": "G0-S2-08.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-ADOPT-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-610460f4d65e8d3a51df7c43",
+          "path": null,
+          "predicate_id": "S2-ADOPT-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-CAUSAL-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-1abf288d40eb11102b1a3183",
+          "path": null,
+          "predicate_id": "S2-CAUSAL-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "causal strength is outside the closed set",
+          "evidence": [],
+          "expected": [
+            "LIKELY",
+            "POSSIBLE",
+            "UNLIKELY"
+          ],
+          "observed": "CERTAIN",
+          "owner": "S2",
+          "path": "/s2/causal_relations/0/strength",
+          "predicate_id": "S2-CAUSAL-02",
+          "status": "FIRED"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S2-REP-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S2",
+          "packet_id": "pkt-6d86dcbd164dc132f44834e7",
+          "path": null,
+          "predicate_id": "S2-REP-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S2",
+          "path": null,
+          "predicate_id": "S2-TEMP-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S2-ADOPT-01",
+        "S2-CAUSAL-01",
+        "S2-REP-01"
+      ],
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S2-CAUSAL-02",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-01",
+          "S2-REP-01"
+        ],
+        "other_active": [
+          "S2-ADOPT-01",
+          "S2-CAUSAL-01",
+          "S2-REP-01",
+          "S2-TEMP-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:2692fad4d9adf4d2a2dfc733cd3cd6acf1ac68ccb982831b1e93b64adfaf23b0",
+      "artifact_name": "G0-S3-01.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-CAND-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "rendered problem C1 has no approved representation",
+          "evidence": [],
+          "expected": "non-null approved representation",
+          "observed": null,
+          "owner": "S3",
+          "path": "/s3/rendered/0/approved_representation",
+          "predicate_id": "S3-INC-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-2ca7cb635a55fb2b903be138",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-INC-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-CAND-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:ac71ba2720d07841461cd9f8a675dc479decada2c394b044955280ccdf88ef70",
+      "artifact_name": "G0-S3-02.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-CAND-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-f78762b079d5c552a3ea898a",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "selected representation is not in S2's approved set for C1",
+          "evidence": [
+            {
+              "approved_ids": [
+                "R1"
+              ],
+              "problem": "C1"
+            }
+          ],
+          "expected": "selected_rep in S2 approved set ['R1']",
+          "observed": "R-999",
+          "owner": "S3",
+          "path": "/s3/rendered/0/selected_rep",
+          "predicate_id": "S3-SEL-01",
+          "status": "FIRED"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-SEL-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-CAND-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:2168696c4c666ce4e1444aa31c0a801c31a0e9ea3f8715902437c1cd6c9b6a0f",
+      "artifact_name": "G0-S3-04.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "unaccounted substrate objects: O07",
+          "evidence": [
+            {
+              "missing": [
+                "O07"
+              ]
+            }
+          ],
+          "expected": "all substrate objects accounted",
+          "observed": [
+            "O07"
+          ],
+          "owner": "S3",
+          "path": "/s3/dispositions",
+          "predicate_id": "S3-ACCT-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-CAND-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-28c1ec2556889b1c6d7fca47",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-ACCT-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-CAND-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:dde07d82000dbfddf0e5874d8b526720ce731d79e334d84fb69cd87b31c9ac67",
+      "artifact_name": "G0-S3-05.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "2 S3-CAND-01 violation(s)",
+          "evidence": [
+            {
+              "kind": "COVERAGE",
+              "missing": [
+                "C1",
+                "C2"
+              ],
+              "path": "/s3/candidate_outcomes"
+            },
+            {
+              "from_outcomes": [],
+              "kind": "RENDERED_SET_EQUALITY",
+              "path": "/s3/rendered",
+              "rendered": [
+                "C1",
+                "C2"
+              ]
+            }
+          ],
+          "expected": "S3-CAND-01 constraints satisfied",
+          "observed": "COVERAGE",
+          "owner": "S3",
+          "path": "/s3/candidate_outcomes",
+          "predicate_id": "S3-CAND-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-85ed041f9228be9e29423fc2",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-CAND-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:1b2835f39ef592c6e53c13709e8cdade5f0287f7701f17b847cf6eb0d5bd87e0",
+      "artifact_name": "G0-S3-06.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "1 S3-CAND-01 violation(s)",
+          "evidence": [
+            {
+              "candidate": "C1",
+              "kind": "EXCLUSIVITY",
+              "path": "/s3/candidate_outcomes/2/candidate"
+            }
+          ],
+          "expected": "S3-CAND-01 constraints satisfied",
+          "observed": "EXCLUSIVITY",
+          "owner": "S3",
+          "path": "/s3/candidate_outcomes/2/candidate",
+          "predicate_id": "S3-CAND-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-8e38d2767da942329d25a0ff",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-CAND-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:d6deb54c8628464288a5d020de0b64ecc218000a3cfd90b4379b1cb3a328d5a2",
+      "artifact_name": "G0-S3-07.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "1 S3-CAND-01 violation(s)",
+          "evidence": [
+            {
+              "candidate": "C9",
+              "kind": "UNKNOWN_CANDIDATE",
+              "path": "/s3/candidate_outcomes/2/candidate"
+            }
+          ],
+          "expected": "S3-CAND-01 constraints satisfied",
+          "observed": "UNKNOWN_CANDIDATE",
+          "owner": "S3",
+          "path": "/s3/candidate_outcomes/2/candidate",
+          "predicate_id": "S3-CAND-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-4b78fe190d1f52917282a1af",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-CAND-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:4f582aaec1f453c9f79545733d6da56fb5008da4cab6d82ddcc845daa45ceeee",
+      "artifact_name": "G0-S3-08.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "1 S3-CAND-01 violation(s)",
+          "evidence": [
+            {
+              "from_outcomes": [],
+              "kind": "RENDERED_SET_EQUALITY",
+              "path": "/s3/rendered",
+              "rendered": [
+                "C1"
+              ]
+            }
+          ],
+          "expected": "S3-CAND-01 constraints satisfied",
+          "observed": "RENDERED_SET_EQUALITY",
+          "owner": "S3",
+          "path": "/s3/rendered",
+          "predicate_id": "S3-CAND-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-19386b6105a33e5894bf7c3c",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-CAND-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:acda6ca47caeb97f8d2ffb8693d1ae5b81764986bfda6c6bb6ba658c1f9cb671",
+      "artifact_name": "G0-S3-09.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "1 S3-CAND-01 violation(s)",
+          "evidence": [
+            {
+              "kind": "MISSING_OR_UNKNOWN_REASON",
+              "path": "/s3/candidate_outcomes/0/reason",
+              "reason": null
+            }
+          ],
+          "expected": "S3-CAND-01 constraints satisfied",
+          "observed": "MISSING_OR_UNKNOWN_REASON",
+          "owner": "S3",
+          "path": "/s3/candidate_outcomes/0/reason",
+          "predicate_id": "S3-CAND-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-d5e988b224fcd193779c1a63",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-CAND-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:862fd85acecee86f8d3ef1f5e5e550eef61427d305babb8bbeb525ec7963a8dc",
+      "artifact_name": "G0-S3-10.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "1 S3-CAND-01 violation(s)",
+          "evidence": [
+            {
+              "kind": "MISSING_BASIS",
+              "path": "/s3/candidate_outcomes/0/basis"
+            }
+          ],
+          "expected": "S3-CAND-01 constraints satisfied",
+          "observed": "MISSING_BASIS",
+          "owner": "S3",
+          "path": "/s3/candidate_outcomes/0/basis",
+          "predicate_id": "S3-CAND-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-baab43538d1f545135f9961e",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-CAND-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:e202497bfb457d6d579bb601830a25aebf4316ece6a746cb3e2af47da7291595",
+      "artifact_name": "G0-S3-11.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-CAND-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-267cb08264469475462cafb7",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ROLE-02",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-ROLE-01",
+        "expected_status": "UNDECIDABLE",
+        "non_silent_other": [],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-CAND-01",
+          "S3-INC-01",
+          "S3-ROLE-02",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:e8361b26c056a516b941ccd00ef3b01ca0a0ad33e556114eb393d52ca6f5ba4b",
+      "artifact_name": "G0-S3-12.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-ACCT-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-CAND-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "SIGNER_REFERENCE_MISSING",
+          "evidence": [],
+          "expected": null,
+          "human_review": {
+            "packet_kind": "S3-ROLE-01",
+            "reason": "HUMAN_JUDGMENT_REQUIRED",
+            "required": true
+          },
+          "observed": null,
+          "owner": "S3",
+          "packet_id": "pkt-e17fa41dd6803760f415bf3e",
+          "path": null,
+          "predicate_id": "S3-ROLE-01",
+          "status": "UNDECIDABLE"
+        },
+        {
+          "detail": "rendered problem has missing or invalid encounter_role",
+          "evidence": [],
+          "expected": "PRIMARY or BACKGROUND",
+          "observed": "UNKNOWN",
+          "owner": "S3",
+          "path": "/s3/rendered/0/encounter_role",
+          "predicate_id": "S3-ROLE-02",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S3",
+          "path": null,
+          "predicate_id": "S3-SEL-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [
+        "S3-ROLE-01"
+      ],
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S3-ROLE-02",
+        "expected_status": "FIRED",
+        "non_silent_other": [
+          "S3-ROLE-01"
+        ],
+        "other_active": [
+          "S3-ACCT-01",
+          "S3-CAND-01",
+          "S3-INC-01",
+          "S3-ROLE-01",
+          "S3-SEL-01"
+        ],
+        "pass": false
+      },
+      "verdict": "INCOMPLETE"
+    },
+    {
+      "artifact_hash": "sha256:34a871b12fa8b8fb64396530ffae308b888c2c1da3b545d7671ca4a34eef76ae",
+      "artifact_name": "G0-S4-01.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 problem set diverges from S3 rendered set",
+          "evidence": [
+            {
+              "rendered": [
+                "C1",
+                "C2"
+              ],
+              "s4_sources": []
+            }
+          ],
+          "expected": "problem sources equal from_s3.rendered ['C1', 'C2']",
+          "observed": [],
+          "owner": "S4",
+          "path": "/s4/problems",
+          "predicate_id": "S4-INC-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-PROJ-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-INC-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-MEM-01",
+          "S4-PROJ-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:6f5d575e7a64814be4abf4ccca1c1f17479173140839cf0b29213afb8ff5c03f",
+      "artifact_name": "G0-S4-02.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 problem set diverges from S3 rendered set",
+          "evidence": [
+            {
+              "rendered": [
+                "C1",
+                "C2"
+              ],
+              "s4_sources": [
+                "C1",
+                "C2",
+                "C9"
+              ]
+            }
+          ],
+          "expected": "problem sources equal from_s3.rendered ['C1', 'C2']",
+          "observed": [
+            "C1",
+            "C2",
+            "C9"
+          ],
+          "owner": "S4",
+          "path": "/s4/problems",
+          "predicate_id": "S4-INC-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-PROJ-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-INC-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-MEM-01",
+          "S4-PROJ-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:e72bddaec7cf7b133776ee60fd6636ef37af75bb57ad576c3dda4667d3346998",
+      "artifact_name": "G0-S4-04.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "unit member is absent from from_s3.use",
+          "evidence": [],
+          "expected": "member in retained-use map",
+          "observed": "O99",
+          "owner": "S4",
+          "path": "/s4/units/0/members/2",
+          "predicate_id": "S4-MEM-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-PROJ-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-MEM-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-PROJ-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:dd076b312a4927cd933a75c23d1384ddc1b639fe9aa7bcc8f0c565af8a2aec3d",
+      "artifact_name": "G0-S4-05.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-PROJ-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "unit representation differs from selected_reps for C1",
+          "evidence": [],
+          "expected": "R1",
+          "observed": "R-999",
+          "owner": "S4",
+          "path": "/s4/units/0/representation",
+          "predicate_id": "S4-REP-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-REP-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-PROJ-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:4d745d916c1d45bb7dcc7788361348b534d0279c9b632bb9c9cbc1791436bfb5",
+      "artifact_name": "G0-S4-06.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "retained plan item has no PLAN unit",
+          "evidence": [
+            {
+              "plan_item": "O05"
+            }
+          ],
+          "expected": "PLAN unit for retained plan item O05",
+          "observed": "absent",
+          "owner": "S4",
+          "path": "/s4/units",
+          "predicate_id": "S4-COMP-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-PROJ-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-COMP-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-PROJ-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:f0174dcdafc1d410f707a7c31909ac6269b1cd3ab206859343bb618a67ec0381",
+      "artifact_name": "G0-S4-07.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 input view does not match the mapped source projection",
+          "evidence": [
+            {
+              "first_diff": "/adoption"
+            }
+          ],
+          "expected": "<absent>",
+          "observed": true,
+          "owner": "S4",
+          "path": "/s4_input_view/adoption",
+          "predicate_id": "S4-PROJ-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-PROJ-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:9252793203594c6c865512130209401e972ed8f3a36ffc75023898657af7c22a",
+      "artifact_name": "G0-S4-08.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 input view does not match the mapped source projection",
+          "evidence": [
+            {
+              "first_diff": "/from_s2/selections/0/members"
+            }
+          ],
+          "expected": [
+            "O03",
+            "O04"
+          ],
+          "observed": [
+            "O03",
+            "O04",
+            "O05"
+          ],
+          "owner": "S4",
+          "path": "/s4_input_view/from_s2/selections/0/members",
+          "predicate_id": "S4-PROJ-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-PROJ-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:066a6e628360024a1cef3b5049a2763236e950012b76839a23637d9a4439d6a7",
+      "artifact_name": "G0-S4-09.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 input view does not match the mapped source projection",
+          "evidence": [
+            {
+              "first_diff": "/from_s2/selected_rep"
+            }
+          ],
+          "expected": "<absent>",
+          "observed": "R-999",
+          "owner": "S4",
+          "path": "/s4_input_view/from_s2/selected_rep",
+          "predicate_id": "S4-PROJ-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-PROJ-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:a64e2a46bc840d42cb6949a2f012e4eccb38f6007301bcd99cc9d6f12f27481f",
+      "artifact_name": "G0-S4-10.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 input view does not match the mapped source projection",
+          "evidence": [
+            {
+              "first_diff": "/from_ingest/O05/payload"
+            }
+          ],
+          "expected": "check vitamin D",
+          "observed": "vitamin D",
+          "owner": "S4",
+          "path": "/s4_input_view/from_ingest/O05/payload",
+          "predicate_id": "S4-PROJ-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-PROJ-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:e29b9a4809611791d787f78230edd5765f3f6e426d1b82f0cd2bad23d2b86611",
+      "artifact_name": "G0-S4-11.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 input view does not match the mapped source projection",
+          "evidence": [
+            {
+              "first_diff": "/from_s2/selections/0/duplicate_groups"
+            }
+          ],
+          "expected": [],
+          "observed": [
+            [
+              "O03",
+              "O04"
+            ]
+          ],
+          "owner": "S4",
+          "path": "/s4_input_view/from_s2/selections/0/duplicate_groups",
+          "predicate_id": "S4-PROJ-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-PROJ-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:aeb9db99bf31707d032a0c32dc29b81007cade15c778ad01507887e540702950",
+      "artifact_name": "G0-S4-12.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 input view does not match the mapped source projection",
+          "evidence": [
+            {
+              "first_diff": "/from_s3/selected_roles/C9"
+            }
+          ],
+          "expected": "<absent>",
+          "observed": "BACKGROUND",
+          "owner": "S4",
+          "path": "/s4_input_view/from_s3/selected_roles/C9",
+          "predicate_id": "S4-PROJ-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-PROJ-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:e136c59bb785fed2381155f742e2d3f498ca6970794443a980d70c061e541055",
+      "artifact_name": "G0-S4-13.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 input view does not match the mapped source projection",
+          "evidence": [
+            {
+              "first_diff": "/from_s2/causal_relations"
+            }
+          ],
+          "expected": [],
+          "observed": [
+            {
+              "from": "O02",
+              "relation": "CONTRIBUTOR",
+              "strength": "POSSIBLE",
+              "support": [
+                "S01",
+                "S02"
+              ],
+              "to": "O03"
+            }
+          ],
+          "owner": "S4",
+          "path": "/s4_input_view/from_s2/causal_relations",
+          "predicate_id": "S4-PROJ-01",
+          "status": "FIRED"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-ROLE-01",
+          "status": "SILENT"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-PROJ-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-REP-01",
+          "S4-ROLE-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hash": "sha256:bae455eeff03ea4a66e62d322aa90c3f87b9d0dec4f5d4bdcfb59e1fe425f9bf",
+      "artifact_name": "G0-S4-14.json",
+      "dependency_context": [
+        {
+          "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
+          "parent_id": "S1_CASE01_CLEAN",
+          "parent_type": "S1_OUTPUT"
+        },
+        {
+          "hash": "sha256:5e7a397084c803861ea59cf67cef438cbc1bd4567d783004f2c8424d0094e05d",
+          "parent_id": "S2_CASE01_CLEAN",
+          "parent_type": "S2_OUTPUT"
+        },
+        {
+          "hash": "sha256:cf8d4d8ee62cfe306e4a3b27bbde43ddb5c4d5da92475a1985e1e945d54ac739",
+          "parent_id": "S3_CASE01_RENDERED_CLEAN",
+          "parent_type": "S3_OUTPUT"
+        }
+      ],
+      "findings": [
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-COMP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-INC-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-MEM-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-PROJ-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "no violation",
+          "evidence": [],
+          "expected": null,
+          "observed": null,
+          "owner": "S4",
+          "path": null,
+          "predicate_id": "S4-REP-01",
+          "status": "SILENT"
+        },
+        {
+          "detail": "S4 encounter role does not match S3 selected role",
+          "evidence": [],
+          "expected": "BACKGROUND",
+          "observed": "PRIMARY",
+          "owner": "S4",
+          "path": "/s4/problems/1/encounter_role",
+          "predicate_id": "S4-ROLE-01",
+          "status": "FIRED"
+        }
+      ],
+      "kind": "seed",
+      "packets": [],
+      "parent_id": "S4_CASE01_CLEAN",
+      "parent_type": "S4_BLUEPRINT",
+      "scorer_version": "GATE0-SCORER-1",
+      "specificity": {
+        "expected": "S4-ROLE-01",
+        "expected_status": "FIRED",
+        "non_silent_other": [],
+        "other_active": [
+          "S4-COMP-01",
+          "S4-INC-01",
+          "S4-MEM-01",
+          "S4-PROJ-01",
+          "S4-REP-01"
+        ],
+        "pass": true
+      },
+      "verdict": "PASS"
+    }
+  ],
+  "reference_count": 0,
+  "references": [],
+  "review_policy": "REVIEW-POLICY-F-2",
+  "run_id": "20261115T175215Z-d0231d5f",
+  "scorer_version": "GATE0-SCORER-1"
+}

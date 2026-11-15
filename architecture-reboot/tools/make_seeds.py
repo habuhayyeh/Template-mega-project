@@ -37,8 +37,8 @@ PAR = os.path.join(AX, 'parents')
 SCHEMA_PATH = os.path.join(AX, 'schema.md')
 PREDICATES_PATH = os.path.join(AX, 'predicates.md')
 
-REG, ACTIVE, SCHEMA, ORACLE_VER = 'PILOT-2', 'ACTIVE-PILOT-2', 'SCHEMA-3', 'ORACLE-3.0'
-CAMPAIGN = 'GATE0-C2'
+REG, ACTIVE, SCHEMA, ORACLE_VER = 'PILOT-3', 'ACTIVE-PILOT-3', 'SCHEMA-4', 'ORACLE-4.0'
+CAMPAIGN = 'GATE0-C3'
 
 PARENT_FILES = [
     'S1_PARENT.json',
@@ -281,6 +281,14 @@ def s2_01(a): a['s2']['representations'][0]['support_refs'] = []
 def s2_02(a): a['s2']['representations'][0]['members'].append('O07')
 def s2_03(a): a['s2']['adjudication'][0]['temporal'] = 'now'
 def s2_06(a): a['s2']['adjudication'][0]['adoption'] = None
+def s2_07(a):
+    a['s2']['causal_relations'] = [{
+        'from': 'O01', 'to': 'O03', 'relation': 'CONTRIBUTOR',
+        'strength': 'POSSIBLE', 'support': ['S01']}]
+def s2_08(a):
+    a['s2']['causal_relations'] = [{
+        'from': 'O02', 'to': 'O03', 'relation': 'CONTRIBUTOR',
+        'strength': 'CERTAIN', 'support': ['S01', 'S02']}]
 
 def s3_01(a): a['s3']['rendered'][0]['approved_representation'] = None
 def s3_02(a): a['s3']['rendered'][0]['selected_rep'] = 'R-999'
@@ -303,6 +311,8 @@ def s3_09(a):
     a['s3']['candidate_outcomes'][0]['reason'] = None
 def s3_10(a):
     a['s3']['candidate_outcomes'][0]['basis'] = []
+def s3_11(a): a['s3']['rendered'][1]['encounter_role'] = 'PRIMARY'
+def s3_12(a): a['s3']['rendered'][0]['encounter_role'] = 'UNKNOWN'
 
 def s4_01(a): a['s4']['problems'] = []
 def s4_02(a): a['s4']['problems'].append({'id': 'P3', 'source': 'C9', 'order': 3})
@@ -315,11 +325,12 @@ def s4_09(a): a['s4_input_view']['from_s2']['selected_rep'] = 'R-999'
 def s4_10(a):
     a['s4_input_view']['from_ingest']['O05']['payload'] = 'vitamin D'
 def s4_11(a): a['s4_input_view']['from_s2']['selections'][0]['duplicate_groups'] = [['O03', 'O04']]
-def s4_12(a): a['s4_input_view']['from_s3']['selected_roles']['C1'] = 'BACKGROUND'
+def s4_12(a): a['s4_input_view']['from_s3']['selected_roles']['C9'] = 'BACKGROUND'
 def s4_13(a):
     a['s4_input_view']['from_s2']['causal_relations'] = [{
         'from': 'O02', 'to': 'O03', 'relation': 'CONTRIBUTOR',
         'strength': 'POSSIBLE', 'support': ['S01', 'S02']}]
+def s4_14(a): a['s4']['problems'][1]['encounter_role'] = 'PRIMARY'
 
 
 SEEDS = [
@@ -332,6 +343,8 @@ SEEDS = [
  ('S2_PARENT.json', 'G0-S2-02', 'S2-REP-01', s2_02, '/s2/representations/0/members', '["O03","O04"]', 'adds O07 medication'),
  ('S2_PARENT.json', 'G0-S2-03', 'S2-TEMP-01', s2_03, '/s2/adjudication/0/temporal', '2024-02 documented', 'now'),
  ('S2_PARENT.json', 'G0-S2-06', 'S2-ADOPT-01', s2_06, '/s2/adjudication/0/adoption', 'false', 'null'),
+ ('S2_PARENT.json', 'G0-S2-07', 'S2-CAUSAL-01', s2_07, '/s2/causal_relations', '[]', 'history-only causal relation'),
+ ('S2_PARENT.json', 'G0-S2-08', 'S2-CAUSAL-02', s2_08, '/s2/causal_relations', '[]', 'invalid strength'),
  ('S3_PARENT.json', 'G0-S3-01', 'S3-INC-01', s3_01, '/s3/rendered/0/approved_representation', 'R1', 'null'),
  ('S3_PARENT.json', 'G0-S3-02', 'S3-SEL-01', s3_02, '/s3/rendered/0/selected_rep', 'R1', 'R-999'),
  ('S3_PARENT.json', 'G0-S3-04', 'S3-ACCT-01', s3_04, '/s3/dispositions', 'O07 recorded', 'O07 unaccounted'),
@@ -341,6 +354,8 @@ SEEDS = [
  ('S3_PARENT_NOT_RENDERED.json', 'G0-S3-08', 'S3-CAND-01', s3_08, '/s3/rendered', '[]', 'C1 rendered while outcome is NOT_RENDERED'),
  ('S3_PARENT_NOT_RENDERED.json', 'G0-S3-09', 'S3-CAND-01', s3_09, '/s3/candidate_outcomes/0/reason', 'NO_APPROVED_REPRESENTATION', 'null'),
  ('S3_PARENT_NOT_RENDERED.json', 'G0-S3-10', 'S3-CAND-01', s3_10, '/s3/candidate_outcomes/0/basis', '["O03","O04"]', '[]'),
+ ('S3_PARENT.json', 'G0-S3-11', 'S3-ROLE-01', s3_11, '/s3/rendered/1/encounter_role', 'BACKGROUND', 'PRIMARY'),
+ ('S3_PARENT.json', 'G0-S3-12', 'S3-ROLE-02', s3_12, '/s3/rendered/0/encounter_role', 'PRIMARY', 'UNKNOWN'),
  ('S4_PARENT.json', 'G0-S4-01', 'S4-INC-01', s4_01, '/s4/problems', '2 problems', '0 problems'),
  ('S4_PARENT.json', 'G0-S4-02', 'S4-INC-01', s4_02, '/s4/problems', '<absent>', 'P3 not rendered'),
  ('S4_PARENT.json', 'G0-S4-04', 'S4-MEM-01', s4_04, '/s4/units/0/members', '<absent>', 'O99'),
@@ -351,8 +366,9 @@ SEEDS = [
  ('S4_PARENT.json', 'G0-S4-09', 'S4-PROJ-01', s4_09, '/s4_input_view/from_s2/selected_rep', '<absent>', 'S3-owned field under S2 wrong-owner group'),
  ('S4_PARENT.json', 'G0-S4-10', 'S4-PROJ-01', s4_10, '/s4_input_view/from_ingest/O05/payload', 'S03 payload', 'fabricated payload'),
  ('S4_PARENT.json', 'G0-S4-11', 'S4-PROJ-01', s4_11, '/s4_input_view/from_s2/selections/0/duplicate_groups', '[]', '[[O03,O04]] authored'),
- ('S4_PARENT.json', 'G0-S4-12', 'S4-PROJ-01', s4_12, '/s4_input_view/from_s3/selected_roles/C1', 'PRIMARY', 'BACKGROUND'),
+ ('S4_PARENT.json', 'G0-S4-12', 'S4-PROJ-01', s4_12, '/s4_input_view/from_s3/selected_roles/C9', '<absent>', 'BACKGROUND'),
  ('S4_PARENT.json', 'G0-S4-13', 'S4-PROJ-01', s4_13, '/s4_input_view/from_s2/causal_relations', '[]', 'causal relation authored'),
+ ('S4_PARENT.json', 'G0-S4-14', 'S4-ROLE-01', s4_14, '/s4/problems/1/encounter_role', 'BACKGROUND', 'PRIMARY'),
 ]
 
 
@@ -368,7 +384,7 @@ def main():
     active = load_active_predicates()
 
     if pmap.get('schema') != SCHEMA or pmap.get('view') != 'S4_INPUT_VIEW':
-        fail('projection map identity does not match SCHEMA-3/S4_INPUT_VIEW')
+        fail('projection map identity does not match SCHEMA-4/S4_INPUT_VIEW')
 
     parents = {f: load_parent(f) for f in PARENT_FILES}
     parent_ids = [p['parent_id'] for p in parents.values()]

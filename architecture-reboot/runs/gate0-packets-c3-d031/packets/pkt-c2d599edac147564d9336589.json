@@ -1,0 +1,289 @@
+{
+  "dependency_context": {
+    "S1_OUTPUT": {
+      "case": "CASE-01",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT",
+      "registry": "PILOT-3",
+      "s1": {
+        "candidates": [
+          {
+            "anchors": [
+              "S02"
+            ],
+            "claim_candidates": [
+              {
+                "id": "CC1",
+                "support": [
+                  "S02"
+                ],
+                "text": "three falls since June"
+              }
+            ],
+            "id": "C1",
+            "salience": {
+              "acuity": "MODERATE",
+              "management_reference_spans": [
+                "S03"
+              ]
+            },
+            "subject": "falls since June"
+          },
+          {
+            "anchors": [
+              "S01"
+            ],
+            "claim_candidates": [
+              {
+                "id": "CC2",
+                "support": [
+                  "S01"
+                ],
+                "text": "known left MCA infarct"
+              }
+            ],
+            "id": "C2",
+            "salience": {
+              "acuity": "LOW",
+              "management_reference_spans": []
+            },
+            "subject": "prior left MCA infarct"
+          }
+        ]
+      },
+      "schema": "SCHEMA-4"
+    },
+    "S2_OUTPUT": {
+      "case": "CASE-01",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT",
+      "registry": "PILOT-3",
+      "s2": {
+        "adjudication": [
+          {
+            "adoption": false,
+            "evidence": null,
+            "object": "O01",
+            "temporal": "2024-02 documented"
+          },
+          {
+            "adoption": false,
+            "evidence": null,
+            "object": "O02",
+            "temporal": "2024-02"
+          },
+          {
+            "adoption": true,
+            "evidence": [
+              "S02"
+            ],
+            "object": "O03",
+            "temporal": "June\u2013November"
+          }
+        ],
+        "causal_relations": [],
+        "claim_relations": [],
+        "duplicate_groups": [],
+        "relations": [
+          {
+            "from": "O04",
+            "to": "O03",
+            "type": "SUPPORTS"
+          },
+          {
+            "from": "O02",
+            "to": "O01",
+            "type": "SUPPORTS"
+          }
+        ],
+        "representations": [
+          {
+            "id": "R1",
+            "members": [
+              "O03",
+              "O04"
+            ],
+            "problem": "C1",
+            "selection_safe": true,
+            "support_refs": [
+              "S02"
+            ]
+          },
+          {
+            "id": "R2",
+            "members": [
+              "O01",
+              "O02"
+            ],
+            "problem": "C2",
+            "selection_safe": true,
+            "support_refs": [
+              "S01"
+            ]
+          }
+        ]
+      },
+      "schema": "SCHEMA-4"
+    }
+  },
+  "judgment_schema": {
+    "evaluators": "two independent LLM / EVALUATOR judgments, different model families and sessions",
+    "judge_types": [
+      "HUMAN",
+      "LLM"
+    ],
+    "policy_version": "REVIEW-POLICY-F-2",
+    "reference": "one HUMAN / REFERENCE judgment with authority SIGNER_CLINICIAN",
+    "reference_authority": "SIGNER_CLINICIAN",
+    "required": [
+      "packet_id",
+      "predicate_id",
+      "judge_id",
+      "judge_type",
+      "role",
+      "verdict",
+      "rationale",
+      "policy_version"
+    ],
+    "roles": [
+      "REFERENCE",
+      "EVALUATOR"
+    ],
+    "verdict_values": [
+      "FIRED",
+      "SILENT",
+      "UNDECIDABLE"
+    ]
+  },
+  "oracle": {
+    "matching": "Concept identity, not literal strings.",
+    "objects": {
+      "O01": {
+        "provenance": "B/2024-02",
+        "span": "S01",
+        "temporal": "2024-02 documented",
+        "text": "known left MCA infarct"
+      },
+      "O02": {
+        "provenance": "B/2024-02",
+        "span": "S01",
+        "temporal": "2024-02",
+        "text": "mild residual right faciobrachial weakness"
+      },
+      "O03": {
+        "provenance": "A/2026-11-14",
+        "span": "S02",
+        "temporal": "June\u2013November",
+        "text": "three falls since June"
+      },
+      "O04": {
+        "provenance": "A/2026-11-14",
+        "span": "S02",
+        "temporal": "now",
+        "text": "no new weakness or speech trouble"
+      },
+      "O05": {
+        "provenance": "A/2026-11-14",
+        "span": "S03",
+        "status": "current",
+        "text": "check vitamin D"
+      },
+      "O06": {
+        "provenance": "A/2026-11-14",
+        "span": "S03",
+        "status": "current",
+        "text": "refer to PT for gait training"
+      },
+      "O07": {
+        "provenance": "A/2026-11-14",
+        "span": "S04",
+        "status": "current",
+        "text": "aspirin 81 daily, unchanged"
+      }
+    },
+    "spans": {
+      "S01": {
+        "source": "B prior neurology 2024-02",
+        "text": "Known left MCA infarct with mild residual right faciobrachial weakness."
+      },
+      "S02": {
+        "source": "A transcript 2026-11-14",
+        "text": "Three falls since June. No new weakness or speech trouble."
+      },
+      "S03": {
+        "source": "A transcript 2026-11-14",
+        "text": "We should check her vitamin D and refer to PT for gait training."
+      },
+      "S04": {
+        "source": "A transcript 2026-11-14",
+        "text": "Aspirin 81 daily, unchanged."
+      }
+    }
+  },
+  "packet_id": "pkt-c2d599edac147564d9336589",
+  "policy_version": "REVIEW-POLICY-F-2",
+  "predicate": {
+    "assertion": "every rendered problem's encounter role is clinically supported by the current encounter",
+    "id": "S3-ROLE-01",
+    "instructions": "Judge every rendered problem encounter role from the current encounter. PRIMARY means actively evaluated/managed now or independently driving current neurologic assessment/management; otherwise BACKGROUND. Historical relevance alone does not make a problem PRIMARY. Record FIRED or SILENT.",
+    "mode": "SIGNER_REFERENCE",
+    "owner": "S3"
+  },
+  "target_artifact": {
+    "case": "CASE-01",
+    "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
+    "parent_type": "S3_OUTPUT",
+    "registry": "PILOT-3",
+    "s3": {
+      "candidate_outcomes": [
+        {
+          "basis": [
+            "O03",
+            "O04"
+          ],
+          "candidate": "C1",
+          "outcome": "NOT_RENDERED",
+          "reason": "NO_APPROVED_REPRESENTATION"
+        },
+        {
+          "basis": [
+            "O01",
+            "O02"
+          ],
+          "candidate": "C2",
+          "outcome": "NOT_RENDERED",
+          "reason": "NO_APPROVED_REPRESENTATION"
+        }
+      ],
+      "dispositions": [
+        {
+          "disposition": "HISTORICAL_CONTEXT",
+          "object": "O01"
+        },
+        {
+          "disposition": "HISTORICAL_CONTEXT",
+          "object": "O02"
+        },
+        {
+          "disposition": "MEDICATION_RECORD",
+          "object": "O07"
+        }
+      ],
+      "rendered": [],
+      "retained": [
+        "O03",
+        "O04",
+        "O05",
+        "O06"
+      ],
+      "reuse": [],
+      "use": {
+        "O03": "C1",
+        "O04": "C1",
+        "O05": "C1",
+        "O06": "C1"
+      }
+    },
+    "schema": "SCHEMA-4"
+  }
+}

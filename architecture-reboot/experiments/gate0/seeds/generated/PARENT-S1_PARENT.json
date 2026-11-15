@@ -2,7 +2,7 @@
   "case": "CASE-01",
   "parent_id": "S1_CASE01_CLEAN",
   "parent_type": "S1_OUTPUT",
-  "registry": "PILOT-2",
+  "registry": "PILOT-3",
   "s1": {
     "candidates": [
       {
@@ -49,5 +49,5 @@
       }
     ]
   },
-  "schema": "SCHEMA-3"
+  "schema": "SCHEMA-4"
 }

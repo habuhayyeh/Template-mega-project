@@ -107,7 +107,7 @@ OP_CONTRACTS = {
         'owner': 'S2',
         'source': 'S2_PARENT.json',
         'source_path': '/s2/causal_relations[i]',
-        'condition': 'from or to in T; source order',
+        'condition': 'from and to in T; source order',
         'required': 'required',
         'transform': 'filter and copy',
     },
@@ -129,7 +129,7 @@ OP_CONTRACTS = {
     'contract_section': {
         'dst': '/from_contracts/section',
         'owner': 'frozen contracts',
-        'source': 'SCHEMA-3 contracts block',
+        'source': 'SCHEMA-4 contracts block',
         'source_path': '#/contracts/section',
         'condition': 'always',
         'required': 'required',
@@ -138,7 +138,7 @@ OP_CONTRACTS = {
     'contract_operator_set': {
         'dst': '/from_contracts/operator_set',
         'owner': 'frozen contracts',
-        'source': 'SCHEMA-3 contracts block',
+        'source': 'SCHEMA-4 contracts block',
         'source_path': '#/contracts/operator_set',
         'condition': 'always',
         'required': 'required',
@@ -292,7 +292,7 @@ def build_view(s1p, s2p, s3p, oracle, pmap):
                 raise ProjectionError('S2 causal_relation from is not an oracle object')
             if rel.get('to') not in oracle.get('objects', {}):
                 raise ProjectionError('S2 causal_relation to is not an oracle object')
-            if rel.get('from') in retained or rel.get('to') in retained:
+            if rel.get('from') in retained and rel.get('to') in retained:
                 causal_relations.append(copy.deepcopy(rel))
         use = copy.deepcopy(s3p['s3']['use'])
         if set(use) - set(retained):

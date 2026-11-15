@@ -2,7 +2,7 @@
   "case": "CASE-01",
   "parent_id": "S4_CASE01_CLEAN",
   "parent_type": "S4_BLUEPRINT",
-  "registry": "PILOT-2",
+  "registry": "PILOT-3",
   "s4": {
     "problems": [
       {
@@ -195,8 +195,9 @@
         "C2": "R2"
       },
       "selected_roles": {
-        "C1": "BACKGROUND",
-        "C2": "BACKGROUND"
+        "C1": "PRIMARY",
+        "C2": "BACKGROUND",
+        "C9": "BACKGROUND"
       },
       "use": {
         "O01": "C2",
@@ -208,5 +209,5 @@
       }
     }
   },
-  "schema": "SCHEMA-3"
+  "schema": "SCHEMA-4"
 }

@@ -31,6 +31,8 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S2-REP-01` | SEMANTIC | S2 | every approved representation is supported by source objects, including representations assembled from relations rather than quoted claims | all |
 | `S2-REP-02` | MECHANICAL | S2 | within `representations[]` (the approved set) for one problem, at most one entry unless every entry has `selection_safe: true` | all |
 | `S2-TEMP-01` | MECHANICAL | S2 | S2 does not alter the temporality recorded in the substrate | all |
+| `S2-CAUSAL-01` | SEMANTIC | S2 | every causal relation is source/current-formulation supported, with correct relation noun, strength, direction, and acting subject; historical coexistence alone is not causality; a residual deficit may be the acting subject instead of the historical disease label | 01,10 |
+| `S2-CAUSAL-02` | MECHANICAL | S2 | every `causal_relations[]` entry has closed-vocabulary `relation`/`strength`, known `from`/`to` object ids, a non-self endpoint pair, and non-empty support spans present in the oracle | 10 |
 | `S2-CONF-01` | SEMANTIC | S2 | contradictory sources are adjudicated, not collapsed: the non-selected assertion remains recoverable with attribution | 11 |
 
 ## S3 family
@@ -43,6 +45,8 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S3-ACCT-01` | MECHANICAL | S3 | every substrate object is either used or carries a disposition entry | all |
 | `S3-CAND-01` | MECHANICAL | S3 | coverage: every S1 problem-candidate id has an outcome; exclusivity: exactly one outcome per candidate; equality: the RENDERED set equals `rendered[]`. NOT_RENDERED requires a reason from `REASON-1`; basis is required exactly when the registry says so, must be non-empty, unique, and target object ids present in the oracle; unknown candidate ids are a violation; the correctness of a reason is a separate semantic audit | all |
 | `S3-BODY-01` | MECHANICAL | S3 | body-only objects are retained without being promoted to A/P problems | 07,08,10 |
+| `S3-ROLE-01` | SEMANTIC | S3 | every rendered problem's `encounter_role` is clinically supported by the current encounter: PRIMARY only when actively evaluated/managed now or independently driving current assessment/management; otherwise BACKGROUND | 01,10 |
+| `S3-ROLE-02` | MECHANICAL | S3 | every rendered problem carries `encounter_role` in `{PRIMARY, BACKGROUND}` | all |
 
 ## S4 family
 
@@ -50,6 +54,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 |---|---|---|---|---|
 | `S4-INC-01` | MECHANICAL | S4 | S4 adds or removes no problem relative to S3's rendered set | all |
 | `S4-REP-01` | MECHANICAL | S4 | every `units[].representation` equals the S3 `selected_rep` for that problem, compared by id | all |
+| `S4-ROLE-01` | MECHANICAL | S4 | every S4 problem's `encounter_role` equals the S3 selected role for its source problem | all |
 | `S4-ORD-01` | MECHANICAL · `PENDING_DEPENDENCY` | S4 | problem and unit order follow the ordering contract using S1 salience inputs. No frozen ordering oracle or salience value set exists yet; not scoreable until both are frozen | all |
 | `S4-MEM-01` | MECHANICAL | S4 | every unit member exists in the retained-use map | all |
 | `S4-PROJ-01` | MECHANICAL | S4 | every field S4 reads is in the frozen `S4_INPUT_VIEW` projection for selected/retained content; the projection schema and exact source map are frozen in `schema.md::PROJECTION_MAP`; every field must match its mapped source path and owner; no unselected or non-required state; no semantic value may be introduced by the projection. Proves packaging only, not runtime non-leakage | all |
@@ -78,22 +83,22 @@ may be condensed by using fewer units, not by deleting the problem.
 
 | case | must be true | must be false |
 |---|---|---|
-| `CASE-01` | infarct is **not currently adopted**, but it is retained as a **condensed A/P problem** because it is a major established primary neurologic diagnosis; the medication line does **not** create an infarct claim | adoption inferred from the medication line or convention, or failure to retain the established infarct problem |
+| `CASE-01` | infarct is **not currently adopted** and is a **BACKGROUND** neurologic problem with a compact A/P representation; the medication line does **not** create an infarct claim and no causal link to falls is inferred | adoption inferred from the medication line or convention, treating the infarct as PRIMARY, or asserting an unsupported causal relation to falls |
 | `CASE-02` | infarct adopted on the explicit statement; claim representation carries attribution | adoption from anything other than the statement |
 | `CASE-09` | infarct adopted on the explicit secondary-prevention linkage in `O02`; the plan line names the infarct as its indication | adoption inferred from drug class alone |
 
 These three cases exist to separate "adoption from evidence" from "adoption from convenience". A run that gets `CASE-02` right and `CASE-01` wrong has inferred adoption rather than found it.
 
-## Pilot ACTIVE_PREDICATE_SET (PILOT-2, post-DC-002)
+## Pilot ACTIVE_PREDICATE_SET (PILOT-3, post-DC-002)
 
 ```text
 S1-CAND-01, S1-CAND-02, S1-AUTH-01, S1-AUTH-02
-S2-REP-01, S2-TEMP-01, S2-ADOPT-01
-S3-CAND-01, S3-INC-01, S3-SEL-01, S3-ACCT-01
-S4-INC-01, S4-MEM-01, S4-COMP-01, S4-REP-01, S4-PROJ-01
+S2-REP-01, S2-TEMP-01, S2-ADOPT-01, S2-CAUSAL-01, S2-CAUSAL-02
+S3-CAND-01, S3-INC-01, S3-SEL-01, S3-ACCT-01, S3-ROLE-01, S3-ROLE-02
+S4-INC-01, S4-MEM-01, S4-COMP-01, S4-REP-01, S4-PROJ-01, S4-ROLE-01
 ```
 
-Sixteen predicates. `S3-CAND-01` and `S4-PROJ-01` are new under DC-002; both are mechanical and both
+Twenty-one predicates. `S3-CAND-01` and `S4-PROJ-01` are new under DC-002; both are mechanical and both
 have seeds in this pilot.
 
 Not active: `S1-BODY-01`, `S2-REP-02`, `S2-CONF-01` (no pilot case produces the condition),
@@ -120,6 +125,8 @@ or human-judged" is not an implementation.
 |---|---|---|
 | `S1-CAND-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes the reference verdict; two blinded LLM evaluators must match it; reviewer describes candidacy, not vocabulary |
 | `S2-ADOPT-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes the reference verdict from source/context; two blinded LLM evaluators must match it; no model self-judgement |
+| `S2-CAUSAL-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes the causal judgment from source/current formulation; two blinded LLM evaluators must match it |
+| `S3-ROLE-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes PRIMARY/BACKGROUND for each rendered problem; two blinded LLM evaluators must match it |
 | `S2-REP-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes the reference verdict on semantic support; two blinded LLM evaluators must match it; real objects and refs are necessary but not sufficient |
 | `S3-SEL-01` | MECHANICAL | id membership in the approved set |
 | `S4-COMP-01` | MECHANICAL | domain S4 ∩ S3, operator class check |

@@ -1,6 +1,6 @@
 # AX-S1S2-D — experiment-local typed test schema
 
-**Identities:** schema `SCHEMA-3` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · oracle `ORACLE-3.0`
+**Identities:** schema `SCHEMA-4` · registry `PILOT-3` · active set `ACTIVE-PILOT-3` · oracle `ORACLE-4.0`
 **Scope:** post-DC-002 only. No legacy fields, no dual schema.
 
 ---
@@ -98,7 +98,7 @@ audit named in `predicates.md`.
 ```json
 {
   "registry": "REASON-1",
-  "scope": "GATE0-C2, S3-CAND-01 only; experiment-local, not a production taxonomy",
+  "scope": "GATE0-C3, S3-CAND-01 only; experiment-local, not a production taxonomy",
   "outcomes": ["RENDERED", "NOT_RENDERED"],
   "reasons": [
     {
@@ -151,7 +151,7 @@ Each `op` also has a frozen contract in `make_seeds.py::OP_CONTRACTS`. The build
 rule field — destination, owner, source, source path, condition, requirement and transform — exactly
 against that contract and fails on any mismatch. The map and code cannot drift on declared metadata.
 
-**Gate 0 shape:** one or more rendered problems. `SCHEMA-3` makes the S4 view multi-problem: it carries
+**Gate 0 shape:** one or more rendered problems. `SCHEMA-4` makes the S4 view multi-problem: it carries
 all rendered problems, their S1 salience, their S3 selected representations and their S2 approved
 selections. A problem with no rendered entry is not in this view; it is an S3 outcome, not an S4 input.
 `P` and `R` are per-rendered-problem variables.
@@ -163,9 +163,9 @@ selections. A problem with no rendered entry is not in this view; it is an S3 ou
 <!-- BEGIN:PROJECTION_MAP -->
 ```json
 {
-  "schema": "SCHEMA-3",
+  "schema": "SCHEMA-4",
   "view": "S4_INPUT_VIEW",
-  "scope": "GATE0-C2: one or more rendered problems. Each rendered problem must have one S1 candidate, one S2 approved representation and one S3 selected representation.",
+  "scope": "GATE0-C3: one or more rendered problems. Each rendered problem must have one S1 candidate, one S2 approved representation and one S3 selected representation.",
   "variables": {
     "P": "S3_PARENT.s3.rendered[i].problem",
     "R": "S3_PARENT.s3.rendered[i].selected_rep"
@@ -277,7 +277,7 @@ selections. A problem with no rendered entry is not in this view; it is an S3 ou
       "owner": "S2",
       "source": "S2_PARENT.json",
       "source_path": "/s2/causal_relations[i]",
-      "condition": "from or to in T; source order",
+      "condition": "from and to in T; source order",
       "required": "required",
       "transform": "filter and copy"
     },
@@ -301,7 +301,7 @@ selections. A problem with no rendered entry is not in this view; it is an S3 ou
       "dst": "/from_contracts/section",
       "op": "contract_section",
       "owner": "frozen contracts",
-      "source": "SCHEMA-3 contracts block",
+      "source": "SCHEMA-4 contracts block",
       "source_path": "#/contracts/section",
       "condition": "always",
       "required": "required",
@@ -311,7 +311,7 @@ selections. A problem with no rendered entry is not in this view; it is an S3 ou
       "dst": "/from_contracts/operator_set",
       "op": "contract_operator_set",
       "owner": "frozen contracts",
-      "source": "SCHEMA-3 contracts block",
+      "source": "SCHEMA-4 contracts block",
       "source_path": "#/contracts/operator_set",
       "condition": "always",
       "required": "required",
@@ -325,7 +325,7 @@ selections. A problem with no rendered entry is not in this view; it is an S3 ou
 `from_contracts` is deliberately narrow for Gate 0: section `AP` and operator set
 `PILOT-OPERATORS-1 = {FACT, REASONING, CLAIM, PLAN}`. No style contract is projected because this
 campaign freezes none. No ordering contract is projected because `S4-ORD-01` is `PENDING_DEPENDENCY`.
-`PILOT-2` is the predicate registry identity and is not used as an operator contract.
+`PILOT-3` is the predicate registry identity and is not used as an operator contract.
 
 Any key outside the five mapped groups is a packaging violation. Any value that does not match its
 mapped source path is a packaging violation. Ordering is absent from S4's input view.

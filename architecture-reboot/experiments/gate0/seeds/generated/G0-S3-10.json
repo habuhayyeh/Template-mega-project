@@ -2,7 +2,7 @@
   "case": "CASE-01",
   "parent_id": "S3_CASE01_NOT_RENDERED_CLEAN",
   "parent_type": "S3_OUTPUT",
-  "registry": "PILOT-2",
+  "registry": "PILOT-3",
   "s3": {
     "candidate_outcomes": [
       {
@@ -50,5 +50,5 @@
       "O06": "C1"
     }
   },
-  "schema": "SCHEMA-3"
+  "schema": "SCHEMA-4"
 }

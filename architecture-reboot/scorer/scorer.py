@@ -597,20 +597,115 @@ def _s4_proj_01(target, dependencies, oracle, rules):
     return _silent(pid)
 
 
+
+def _s2_causal_02(target, dependencies, oracle, rules):
+    pid = "S2-CAUSAL-02"
+    rels = target.get("s2", {}).get("causal_relations")
+    if not isinstance(rels, list):
+        return _undecidable(pid, "causal_relations is missing")
+    objects = oracle.get("objects", {})
+    spans = oracle.get("spans", {})
+    nouns = {"CONTRIBUTOR", "ETIOLOGY", "MECHANISM", "CAUSE"}
+    strengths = {"LIKELY", "POSSIBLE", "UNLIKELY"}
+    for i, rel in enumerate(rels):
+        if not isinstance(rel, dict):
+            return _fired(pid, "/s2/causal_relations/%d" % i,
+                          "causal relation object", repr(rel),
+                          "causal relation is not an object")
+        for key in ("from", "to", "relation", "strength", "support"):
+            if key not in rel:
+                return _fired(pid, "/s2/causal_relations/%d/%s" % (i, key),
+                              "required causal field", "absent",
+                              "causal relation is missing %s" % key)
+        if rel["relation"] not in nouns:
+            return _fired(pid, "/s2/causal_relations/%d/relation" % i,
+                          sorted(nouns), rel["relation"],
+                          "causal relation noun is outside the closed set")
+        if rel["strength"] not in strengths:
+            return _fired(pid, "/s2/causal_relations/%d/strength" % i,
+                          sorted(strengths), rel["strength"],
+                          "causal strength is outside the closed set")
+        if rel["from"] not in objects:
+            return _fired(pid, "/s2/causal_relations/%d/from" % i,
+                          "known oracle object", rel["from"],
+                          "causal from endpoint is not an oracle object")
+        if rel["to"] not in objects:
+            return _fired(pid, "/s2/causal_relations/%d/to" % i,
+                          "known oracle object", rel["to"],
+                          "causal to endpoint is not an oracle object")
+        if rel["from"] == rel["to"]:
+            return _fired(pid, "/s2/causal_relations/%d" % i,
+                          "distinct endpoints", "same object",
+                          "causal relation is self-referential")
+        support = rel["support"]
+        if not isinstance(support, list) or not support:
+            return _fired(pid, "/s2/causal_relations/%d/support" % i,
+                          "non-empty support span list", support,
+                          "causal support is missing")
+        for j, span in enumerate(support):
+            if span not in spans:
+                return _fired(pid, "/s2/causal_relations/%d/support/%d" % (i, j),
+                              "known oracle span", span,
+                              "causal support span is unknown")
+    return _silent(pid)
+
+
+def _s3_role_02(target, dependencies, oracle, rules):
+    pid = "S3-ROLE-02"
+    rendered = target.get("s3", {}).get("rendered")
+    if not isinstance(rendered, list):
+        return _undecidable(pid, "rendered is missing")
+    for i, entry in enumerate(rendered):
+        if not isinstance(entry, dict):
+            return _fired(pid, "/s3/rendered/%d" % i,
+                          "rendered entry object", repr(entry),
+                          "rendered entry is not an object")
+        if entry.get("encounter_role") not in ("PRIMARY", "BACKGROUND"):
+            return _fired(pid, "/s3/rendered/%d/encounter_role" % i,
+                          "PRIMARY or BACKGROUND", entry.get("encounter_role"),
+                          "rendered problem has missing or invalid encounter_role")
+    return _silent(pid)
+
+
+def _s4_role_01(target, dependencies, oracle, rules):
+    pid = "S4-ROLE-01"
+    view = _view(target)
+    problems = target.get("s4", {}).get("problems")
+    if view is None or not isinstance(problems, list):
+        return _undecidable(pid, "S4 view/problems missing")
+    roles = view.get("from_s3", {}).get("selected_roles")
+    if not isinstance(roles, dict):
+        return _undecidable(pid, "from_s3.selected_roles is missing")
+    for i, problem in enumerate(problems):
+        if not isinstance(problem, dict):
+            return _undecidable(pid, "problem %d is not an object" % i)
+        source = problem.get("source")
+        expected = roles.get(source)
+        if expected is None:
+            continue
+        if problem.get("encounter_role") != expected:
+            return _fired(pid, "/s4/problems/%d/encounter_role" % i,
+                          expected, problem.get("encounter_role"),
+                          "S4 encounter role does not match S3 selected role")
+    return _silent(pid)
+
 MECHANICAL = {
     "S1-AUTH-01": _s1_auth_01,
     "S1-AUTH-02": _s1_auth_02,
     "S1-CAND-02": _s1_cand_02,
     "S2-TEMP-01": _s2_temp_01,
+    "S2-CAUSAL-02": _s2_causal_02,
     "S3-INC-01": _s3_inc_01,
     "S3-SEL-01": _s3_sel_01,
     "S3-ACCT-01": _s3_acct_01,
     "S3-CAND-01": _s3_cand_01,
+    "S3-ROLE-02": _s3_role_02,
     "S4-INC-01": _s4_inc_01,
     "S4-MEM-01": _s4_mem_01,
     "S4-COMP-01": _s4_comp_01,
     "S4-REP-01": _s4_rep_01,
     "S4-PROJ-01": _s4_proj_01,
+    "S4-ROLE-01": _s4_role_01,
 }
 
 

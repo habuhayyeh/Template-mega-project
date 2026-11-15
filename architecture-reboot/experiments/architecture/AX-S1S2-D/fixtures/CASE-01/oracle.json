@@ -1,8 +1,8 @@
 {
   "case": "CASE-01",
-  "oracle": "ORACLE-3.0",
-  "registry": "PILOT-2",
-  "schema": "SCHEMA-3",
+  "oracle": "ORACLE-4.0",
+  "registry": "PILOT-3",
+  "schema": "SCHEMA-4",
   "matching": "Concept identity, not literal strings.",
   "source_of_truth": "Temporal and text values copied verbatim from FROZEN-SUBSTRATES.md.",
   "spans": {
