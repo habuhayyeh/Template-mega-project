@@ -211,3 +211,108 @@ Do **not** run another synthetic architecture challenge first.
 Revise P006 to incorporate the operator layer, then test the actual canonical seizure case in Doximity under the same package/mode across three fresh conversations.
 
 The next test should answer whether the B+ result generalizes to the production-shaped P006 input.
+
+
+---
+
+# How to use this result effectively
+
+This experiment should be used as a **render-boundary design guide**.
+
+## When the operator output is correct and stable
+
+Promote that operator pattern into the reusable render vocabulary.
+
+Examples from this experiment:
+
+- duration folding;
+- timing + documentation provenance;
+- covered-duplicate suppression;
+- conditional plan composition;
+- fixed ordering.
+
+## When the operator output is stable but wrong
+
+Treat that as an **operator or input-schema defect**, not as model randomness.
+
+The key example is:
+
+> `The MRI to show.`
+
+It appeared identically in all three fresh runs.
+
+The problem is that the operator received an incomplete conversational proposition:
+
+`we'll see what the MRI shows`
+
+The renderer was then expected to manufacture an impersonal sentence without being given the semantic object of `show`.
+
+Do not add a looser prose instruction such as “make this sound natural.”
+
+Instead expose the complete relation upstream:
+
+```
+TEST=MRI
+PURPOSE=determine whether there is a new lesion
+```
+
+and render it with a bounded operator:
+
+```
+OPERATOR=REASONING_TEST_PURPOSE
+TEST=MRI
+PURPOSE=determine whether there is a new lesion
+```
+
+Expected surface:
+
+`MRI to determine whether there is a new lesion.`
+
+## When an operator varies across runs
+
+First decide whether the variation is:
+
+- semantic/structural;
+- or merely stylistic.
+
+If semantic/structural, the operator is not decision-complete enough and should be redesigned upstream.
+
+If merely stylistic and clinically irrelevant, the variation may be acceptable.
+
+## What not to do
+
+Do not use this result to:
+
+- add large prose exception lists;
+- make the renderer infer missing clinical relations;
+- infer management targets from medication identity;
+- collapse the whole architecture into prewritten prose;
+- claim absolute Doximity determinism from three runs.
+
+The practical lesson is narrower:
+
+> a small canonical operator layer can remove the residual variability that remained after semantic groups were already fixed.
+
+# Relationship to the gradient experiment
+
+The preceding gradient experiment is documented in:
+
+`artifacts/doximity_gradient_experiment_2026-11-15.md`
+
+Together, the two experiments show:
+
+```
+ordinary prose
+    -> semantic + structural drift
+
+structured DSL
+    -> structure stable, wording drift
+
+typed groups + canonical operators (B+)
+    -> identical in this 3-run / 24-execution test
+
+fully precomputed output
+    -> identical
+```
+
+This is why the current target architecture is **between Arm B and Arm C**, not either extreme.
