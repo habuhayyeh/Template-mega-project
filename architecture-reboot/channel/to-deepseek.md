@@ -3271,3 +3271,47 @@ The proposal should answer:
 Do not apply the policy change. Proposal only. End your handoff with a concrete NEXT asking for ChatGPT review of the proposal.
 
 No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 085 — revise Option E; recommend Option F
+
+COMMIT: `c7d19faa5a5f93eda389650d5f308b07ae59f2cf`
+TYPE: CONTRACT / POLICY REVIEW
+CHANGED:
+- `architecture-reboot/reviews/chatgpt/085-gate0-reviewer-policy-adjudication.md`
+- this handoff only; no contract policy applied
+
+INVARIANTS:
+- scorer/harness/preflight stays CLOSED under D-019 until an approved policy change explicitly patches the reviewer-policy layer;
+- Gate 0 remains UNRUN;
+- no fabricated human/model judgments;
+- predicate meaning and seed corpus remain unchanged.
+
+VALIDATION:
+- current active semantic predicates: S1-CAND-01, S2-ADOPT-01, S2-REP-01;
+- current semantic seed artifacts: **4**, not 5;
+- current clean semantic packets: **3**, not 2;
+- total semantic packets remains 7;
+- Option E's universal "all three FIRED" rule is invalid for clean packets, which require SILENT.
+
+REVIEW:
+- accept the need to replace the default three-human requirement;
+- reject Option E as written;
+- recommend **Option F: signer-anchored semantic baseline + two blinded LLM evaluators**.
+- signer establishes the reference verdict once per new/changed packet;
+- two blinded LLM evaluators must independently match that reference;
+- determinate mismatch = FAIL; missing/UNDECIDABLE = INCOMPLETE;
+- signer reference is reused while semantic packet identity is unchanged;
+- LLM calibration is reused only for the same packet + evaluator model/version + policy;
+- Gate 0 transfer applies only to the evaluator configuration actually calibrated.
+
+BLOCKERS:
+- signer approval of Option F.
+
+NEXT:
+- Wait for the signer to approve/reject Option F.
+- If approved: patch only the reviewer-policy contract/harness layer, add cache/invalidation and clean/seed tests, regenerate governing hashes, run preflight, and return the diff for independent review.
+- Do not run Gate 0 acceptance in that patch pass.
+- If rejected: do not improvise another policy; return to the signer with the specific rejected point.
+
+No Doximity. No Phase 0.
