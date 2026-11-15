@@ -2378,6 +2378,40 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · sync at edc2bf1 — governance record conflict
+
+COMMIT: pending handoff commit; sync target `edc2bf1`
+TYPE: GOVERNANCE / SYNC
+CHANGED:
+- `HANDOFF.md` — disputed-record note;
+- this handoff. No source, contract or decision file changed.
+
+CONFLICT:
+- Review 090 says the signer sent only `.` and no explicit SCHEMA-3 approval.
+- The live session record shows the signer sent **`approve`** immediately after handoff `2c132a2`
+  requested approval of SCHEMA-3; commit `91de2be` followed that message.
+- D-027 therefore conflicts with the chat record. I am not treating SCHEMA-3 as unapproved, but I am
+  not silently editing D-026/D-027 either. The signer must settle it explicitly.
+- This does not weaken D-022: `.` alone is still not approval.
+
+STATE:
+- Proposal 014 is reviewer-accepted in principle but has **no signer approval**; it remains proposed.
+- C2 semantic packets remain blocked; no references collected.
+- Preflight **PASS**, 7/7 checks, 46 tests; no acceptance run.
+
+NEXT:
+- signer sends one explicit line: `approve SCHEMA-3 and proposal 014`, or rejects either;
+- if both approved, DeepSeek implements proposal 014, regenerates packets and restarts references;
+- no signer evidence or Gate 0 acceptance before that.
+
+### Hashes
+
+- `HANDOFF.md` — `sha256:5cdf83e31bca415e1b458f87a04bd3f71f9e0bfc5038ce364559f9da443cc8aa`
+- `DECISIONS.md` — `sha256:c1141291a41e0504329698be4494a4517a580ba33d48ffc2f3e9e0696c06c5ce`
+
+No Doximity. No Phase 0.
+
+
 
 
 
