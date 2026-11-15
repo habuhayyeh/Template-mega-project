@@ -2371,3 +2371,44 @@ No execution artifacts were regenerated in those commits.
 Return changed-file list + counts for independent review.
 
 **Do not build scorer yet.** No Gate0 run, Doximity, or Phase0.
+
+
+## 2026-11-15 · ChatGPT · post-DC002 execution-package regeneration audit
+
+Durable:
+`architecture-reboot/reviews/chatgpt/073-post-dc002-execution-package-regeneration-audit.md`
+
+**VERDICT: REGENERATION NOT ACCEPTED. DO NOT BUILD SCORER.**
+
+This is an execution-package defect, not architecture reopening.
+
+### Hard blockers
+
+1. **Current artifacts still self-declare STALE:** schema, G0-SEEDS, top Gate0 manifest, generated/STALE.md.
+2. **Pre-DC002 S1 fields survived:** schema still has `candidate_claims` + `managed_today`; parent still has `managed_today`; generator G0-S1-05 still emits both. Use only `claim_candidates` + `management_reference_spans[]`.
+3. **Clean projection invents salience:** parent S1 has `managed_today`, while S4_INPUT_VIEW magically has `management_reference_spans=[S03]`. Projection must mechanically copy upstream.
+4. **S4_INPUT_VIEW incomplete:** from_s3 lacks rendered/use/reuse; from_ingest lacks payload+provenance+temporality; nested projection allowlist/source ownership is not frozen; fake `ORDER-1` appears despite ordering PENDING_DEPENDENCY.
+5. **Full-parent seeds break full-silence calibration.**
+   - G0-S1-05 adds C2 → a correct scorer must also fire S3-CAND-01 because C2 has no outcome.
+   - G0-S3-02 changes S3 selected rep → a correct scorer must also fire S4-REP-01.
+   Return to true **layer-specific parents** and record `parent_type`.
+6. **Compound DC-002 predicates under-calibrated.**
+   - S3-CAND-01 needs branch seeds for coverage/exclusivity/unknown-id/NOT_RENDERED reason+basis/rendered-set equality.
+   - S4-PROJ-01 needs branch seeds for schema/wrong-owner/unselected-state/invented-value/provenance-trace failures.
+7. **Identity drift:** parent says PILOT-1; generator/registry PILOT-2; manifest active set PILOT-ACTIVE-1. Freeze one coherent registry/active-set/campaign identity.
+8. **Manifest missing governing identities:** hash canonical interface + frozen program + AX-S1S2-D spec + Gate0 control plane, not only schema/predicates/seeds/generator.
+9. **schema field→predicate map omits active S3-CAND-01, S4-PROJ-01 and S4-REP-01.**
+10. **G0-SEEDS contradicts itself:** S4-REP-01 is active and seeded, but later text says it is not active.
+
+### Preserve
+- 16-predicate post-DC002 pilot concept;
+- S3-CAND/S4-PROJ additions;
+- oracle-v2 direction;
+- canonical JSON hashes;
+- harmless id-renaming variation;
+- full-silence specificity **within layer-specific scope**.
+
+### Next
+Execution-package remediation only. Rebuild schema/parents/projection/seeds/manifest, reconcile identities/counts, then retire stale markers. Return changed files + clean-parent count + active predicates + seed count by predicate + pending predicates + governing hashes.
+
+No scorer / Gate0 / Doximity / Phase0.
