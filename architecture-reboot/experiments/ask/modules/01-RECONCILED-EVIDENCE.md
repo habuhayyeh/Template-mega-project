@@ -92,6 +92,19 @@ Before merging two propositions, ask:
 
 If yes, keep them as separate FACTs.
 
+### Reference validity
+
+Every `refs:` id must appear **verbatim as a record id in the supplied Scribe packet**.
+
+Do not:
+- invent a record id;
+- transpose `T###` into `P1.###` or vice versa;
+- cite a nearby record because it discusses the same topic;
+- cite a question-only record as evidence that its answer is true;
+- cite a record that does not support the clause merely because it is in the same conversation/topic.
+
+A question-only record may support only the fact that the question was asked or that an issue remained unresolved. It cannot support the answer unless the answer is contained in that same record.
+
 ### Local reference completeness
 
 Every independently meaningful clause in a `fact:` line must be supported by at least one record id listed
@@ -101,6 +114,8 @@ Do not include a clause because it exists somewhere else in the packet unless it
 also listed here.
 
 A FACT is invalid if its wording cannot be audited from its own `refs:`.
+
+Each cited ref must support at least one clause in that item. Remove unrelated/question-only refs rather than padding the citation list.
 
 ## Reconciliation rules
 
@@ -176,6 +191,19 @@ Do not convert source reasoning into final encounter truth here.
 
 Do not create a new negative conclusion from silence. Absence of a documented causal link, diagnosis, trigger, or relationship does not itself justify a FACT saying that no such link exists. If the unresolved relationship is clinically material, preserve it as `UNRESOLVED` without deciding it.
 
+### Attribution caution
+
+For transcript records, preserve what the record actually establishes.
+
+Do not infer a stable real-world identity for `SPK0`, `SPK1`, etc. across the transcript unless the packet itself explicitly establishes that identity in the relevant record/context.
+
+When speaker identity is uncertain, prefer source-neutral wording such as:
+- "transcript reports...";
+- "collateral report...";
+- "one speaker reports...";
+
+rather than inventing "patient", "mother", "fiance", or another role.
+
 ### 7. Questions
 
 Do not create a FACT from a question alone.
@@ -186,11 +214,13 @@ uncertainty is lost.
 If an unanswered question itself represents an important unresolved issue, place it in `UNRESOLVED`
 with the source record ID.
 
+`UNRESOLVED` should describe source-level uncertainty/conflict. Do not invent a new diagnostic-classification problem unless a source explicitly states that uncertainty.
+
 ### 8. Actions
 
-Executed interventions may appear inside a FACT only when they are needed to preserve the chronology or clinical state of that subject/event.
+Executed interventions may appear inside a FACT only when the source explicitly establishes that they occurred and they are needed to preserve the chronology or clinical state of that subject/event.
 
-Do not reconcile prospective/recommended/planned actions in F1.
+Do not reconcile prospective/recommended/planned/ordered/discontinued actions in F1 unless the action state itself is the clinical fact needed for chronology. Never collapse a sequence of action states into a statement that treatment was administered.
 
 Do not generate recommendations, next steps, tests to obtain, records to retrieve, or management suggestions.
 
@@ -258,8 +288,12 @@ Before returning:
 5. no final problem/role/note decision was made;
 6. every independently meaningful clause is supported by one of that item's own refs;
 7. no FACT combines unrelated downstream decision units merely to reduce item count;
-8. no recommendation/next-step/plan field was invented;
-9. no `support:` label was added;
-10. output is a compact index/representation, not a second copy of the packet.
+8. every ref exists verbatim in the input packet;
+9. no question-only record is used as evidence for an answer;
+10. no administered/performed action is inferred from recommendation/order/discontinuation alone;
+11. transcript speaker identity is not invented from SPK labels;
+12. no recommendation/next-step/plan field was invented;
+13. no `support:` label was added;
+14. output is a compact index/representation, not a second copy of the packet.
 
 Return the handoff only.
