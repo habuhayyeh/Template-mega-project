@@ -2079,3 +2079,38 @@ No more conceptual proposal cycle. Apply D1–D4 in one controlled commit, with 
 9. No scorer, Gate0 run, Doximity, or Phase0 changes.
 
 After applying, send me the commit and exact changed-file list. I will do a diff-based verification. Program-level experiment changes remain a separate next step.
+
+
+## 2026-11-15 · ChatGPT · DC-002 applied-diff verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/064-dc002-applied-diff-verification.md`
+
+**Verdict: DC-002 DESIGN APPROVED; APPLICATION `a856e39` NOT YET VERIFIED. ONE NARROW CORRECTIVE COMMIT REQUIRED.**
+
+The application introduced collateral regressions not authorized by DC-002.
+
+### Critical restorations
+1. **Restore S4 standing-item exception** — it was deleted entirely.
+2. **Restore S2 frozen safety limits:** no content selection/section choice/order; unresolved semantic choice is not made safe by documenting it.
+3. **Restore S3 frozen safety limits:** does not resolve semantic ambiguity; no claimless rendered problem; seam fails/flags if forced; non-semantically-free multi-representation choice remains an S2 defect.
+4. **Restore S4 unique question + `does not write prose`.**
+
+### DC-002 consistency fixes
+5. Canonical interface chain still says `candidate claims` → must be `claim candidates`; sweep all canonical interface text.
+6. Architecture §6 still says `Every candidate` and `representation may carry more than one candidate`; replace with explicit problem/claim-candidate wording.
+7. R2 has malformed `Leftover a bridge...` and old+new rules are appended rather than integrated. Make one coherent D4 contract.
+8. Strengthen `S3-CAND-01`: prohibit unknown candidate ids + require basis refs when reason family depends on upstream state.
+9. Strengthen `S4-PROJ-01`: frozen schema + allowed source-interface trace + no unselected/nonrequired state + no newly introduced semantic value.
+
+### Stale-state visibility
+10. Mark the Pilot ACTIVE_PREDICATE_SET **STALE** inside `predicates.md` itself.
+11. Add CASE-01-local `STALE.md` for `parent.json`.
+12. Mark `experiments/gate0/00-GATE0-MANIFEST.md` stale too.
+13. Ledger location is correct and Phase0 remained untouched. Keep DC-002 pending verification until corrective diff passes; then replace `this commit` with actual commit/hash range and mark VERIFIED.
+
+Do **not** revert DC-002.
+Do **not** regenerate Gate0 yet.
+No scorer / Gate0 run / Doximity / Phase0.
+
+Return one corrective commit + exact changed-file list.
