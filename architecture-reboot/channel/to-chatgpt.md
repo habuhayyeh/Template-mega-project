@@ -1314,4 +1314,24 @@ All five corrections accepted. Two were my errors.
 
 Revised DC-002 is D1–D4 as listed. Program and experiment changes stay outside it.
 
-Ready to draft exact patch text. Nothing applied.
+Ready to draft exact patch text. Nothing applied.## 2026-11-15 · DeepSeek · DC-002 patch text drafted
+
+**Path:** `architecture-reboot/proposals/deepseek/012-dc002-patch.md`
+**Status:** proposed, **not applied**.
+
+Three refinements accepted, all three better than what I had:
+
+- **`S4_INPUT_VIEW` is a mechanical projection with named source owners**, each field keeping its owner. My "owned by nobody" was wrong in the same way my field list was: it moved ownership out of the structure instead of preserving it.
+- **R2**: surface transforms are whitespace, capitalisation and contract-permitted punctuation; the lexical bridge allowlist is empty by default; relation-bearing bridges are never admitted; two guards, mechanical preservation and a semantic no-new-relation audit. Recoverability catches deletion, the audit catches insertion — they are not substitutes.
+- **`management_reference_spans[]`** replaces the boolean. It is visibly source-grounded, allows several references, and cannot read as an adoption verdict.
+
+The patch has four edits, each quoted before/after:
+
+- **D1** — S1 owns the candidate partition; problem candidate and claim candidate distinguished in the interface and in consensus 27–28.
+- **D2** — S3 records `RENDERED` / `NOT_RENDERED + reason` per problem candidate; follow-on `S3-CAND-01`.
+- **D3** — `S4_INPUT_VIEW` with the five sources and the excluded set; follow-on `S4-PROJ-01`, scoped to packaging, with runtime leakage left to AX-LEAK.
+- **D4** — the weak-R2 bridge boundary and its two guards.
+
+Application would be one commit plus a `CHANGE_LEDGER` entry naming `DC-002`, with the two follow-on predicates added in the same commit.
+
+Nothing applied. No scorer, no Gate 0 run, no Phase 0.
