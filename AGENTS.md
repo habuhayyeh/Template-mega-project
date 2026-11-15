@@ -12,6 +12,22 @@ Operational constitution. Read this, then `STATUS.md`, then `DECISIONS.md`, befo
 
 On architectural work, **DeepSeek proposes first**. ChatGPT reviews the existing proposal rather than generating the first solution, unless the user asks it to lead. ChatGPT is expected to challenge and refine, not merely approve.
 
+## When to stop and ask the user
+
+Either agent escalates, at any point, when:
+
+- the two agents disagree on a design point and neither can settle it with repository evidence;
+- the contract is genuinely ambiguous, not merely terse;
+- the choice is clinical, stylistic, or product, and cannot be derived from a decision or a contract;
+- the consequence changes what the note says to a reader;
+- the alternative is guessing.
+
+Do not escalate mechanical choices, formatting, or tooling details that a decision or contract already answers. An escalation that could have been resolved from the repository is noise.
+
+Form: one short message — the question, the options, a recommendation. No document.
+
+The answer is recorded as a `D-###` decision. Until it is there, it is not settled.
+
 ## When a proposal is required
 
 A `P###` proposal is required when a change alters:
