@@ -1449,4 +1449,50 @@ Recorded in `MANIFEST.json`: canonical interface, architecture consensus, frozen
 
 Old stale package superseded and non-authoritative. **No scorer built. No Gate 0 run. No Doximity. No Phase 0.**
 
-Ready for independent review as a fresh build.
+Ready for independent review as a fresh build.## 2026-11-15 · DeepSeek · source-first execution package rebuilt
+
+**5cbf573:** `5cbf573`
+**Supersedes:** `5ee87f5`, `b96d4cf3`, `f47e47a` — all non-authoritative.
+
+### Run command
+
+```text
+python architecture-reboot/tools/make_seeds.py
+```
+
+**Second run: zero diff confirmed.** `git status --porcelain` empty after a second invocation. The generator clears `generated/*.json` and rewrites 4 parents, 27 seeds and the manifest.
+
+### Source vs generated
+
+- **Source:** `parents/S{1,2,3,4}_PARENT.json`, `fixtures/CASE-01/oracle.json`, `schema.md`, `predicates.md`, `G0-SEEDS.md`, `make_seeds.py`.
+- **Generated, never hand-edited:** `seeds/generated/PARENT-*.json`, `G0-*.json`, `MANIFEST.json`.
+
+Nothing in `generated/` is hand-edited; the old four-layer `PARENT-CLEAN.json` and `VARIATION.json` are gone because the generator no longer emits them and clears the directory first.
+
+### Counts
+
+| item | value |
+|---|---|
+| clean parents | **4** — S1_OUTPUT, S2_OUTPUT, S3_OUTPUT, S4_BLUEPRINT |
+| seeds | **27** |
+| active predicates | **16** |
+| by predicate | S1-AUTH-01 2 · S1-AUTH-02 1 · S1-CAND-01 1 · S1-CAND-02 1 · S2-ADOPT-01 1 · S2-REP-01 1 · S2-TEMP-01 1 · S3-ACCT-01 1 · **S3-CAND-01 6** · S3-INC-01 1 · S3-SEL-01 1 · S4-COMP-01 1 · S4-INC-01 2 · S4-MEM-01 1 · **S4-PROJ-01 5** · S4-REP-01 1 |
+
+### Branch coverage now complete
+
+- **S3-CAND-01** — coverage, exclusivity, unknown-id, rendered-set equality, missing reason, missing basis.
+- **S4-PROJ-01** — injected field (schema), invented member, wrong value, **fabricated payload**, **wrong-owner relation**.
+
+### Identities
+
+`PILOT-2` · `ACTIVE-PILOT-2` · `SCHEMA-2` · `ORACLE-2.0` · campaign `GATE0-C1`.
+
+### Hashes
+
+`MANIFEST.json` records governing hashes recomputed **on this run** — interface, architecture consensus, program, AX spec, schema, predicates, seed spec, generator, oracle — plus per-parent and per-seed canonical-JSON hashes.
+
+### Fixed from audit 074
+
+Generator reads layer parents (no deleted file, no layer dispatch missing); schema stripped of `managed_today`, `candidate_claims`, the legacy addendum and `ORDER-1`; seed spec regenerated from the manifest rather than hand-maintained; hashes recomputed after the doc rewrites; stale four-layer artifact removed.
+
+Confirmed: **no scorer, no Gate 0 run, no Doximity, no Phase 0.**
