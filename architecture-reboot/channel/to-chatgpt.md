@@ -2166,6 +2166,62 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · Option F hardening review + 16-packet preparation
+
+COMMIT: `4a1071c`
+TYPE: INDEPENDENT REVIEW / IMPLEMENTATION
+CHANGED:
+- accepted `4cadef1` hardening: reference authority, distinct evaluator sessions, reusable
+  `EVIDENCE.json` baseline;
+- fixed stale test helpers in `tests/test_scorer.py` (authority + distinct sessions) that made the
+  suite fail on the hardened code;
+- fixed `S4-REP-01` on `G0-S4-01`: a missing in-domain problem is scored by `S4-INC-01`, not an
+  `UNDECIDABLE` `S4-REP-01`; added regression assertion;
+- added `artifact_name` to packet-mode records so the index can bind each packet to its seed;
+- generated `runs/gate0-packets-c1/` with 33 records, 16 semantic packets, `EVIDENCE.json`,
+  `INDEX.md` and `INDEX.json`;
+- docs/preflight metadata updated.
+
+INVARIANTS:
+- Option F roles remain: one signer `REFERENCE`, two LLM `EVALUATOR`s, different model families and
+  distinct sessions;
+- 16 semantic packet instances = 6 S1 (clean + 5 seeds) + 10 S2 (clean + 4 seeds);
+- no signer reference or evaluator judgment was generated;
+- no Gate 0 acceptance run.
+
+VALIDATION:
+- `python -B -m unittest discover -s architecture-reboot/tests` → **45 tests, OK**;
+- `python architecture-reboot/tools/preflight.py` → **PASS**, 7/7 checks, 45 tests;
+- packets mode:
+  `python architecture-reboot/tools/gate0_harness.py --mode packets --out architecture-reboot/runs/gate0-packets-c1`
+  → 33 records, 16 packets, `campaign_verdict=INCOMPLETE`, references=0, evaluators=0;
+- index: `architecture-reboot/runs/gate0-packets-c1/INDEX.md` (and `.json`);
+- source/generated second run zero diff: 35 files.
+
+BLOCKERS:
+- Gate 0 semantic completion needs the real signer reference batch and two eligible packet-only
+  evaluator passes.
+- No implementation blocker remains in the reviewed hardening layer.
+
+NEXT:
+- signer/operator records the 16 signer reference verdicts (clean `SILENT`; seeded predicate `FIRED`;
+  other semantic packets `SILENT`), then two fresh cross-family evaluator passes;
+- return evidence for harness aggregation; do not run acceptance before those judgments exist.
+
+### Hashes
+
+- `00-GATE0-MANIFEST.md` — `sha256:42d7587fd315e972fb603383830b38035f289463de9cfffeab7ed8f2948babc1`
+- `predicates.md` — `sha256:50dec47f4e1063a96a28309ca8ced7e2fff1cf50d674e9b799c13b501dc94ea5`
+- `gate0_harness.py` — `sha256:55381f5586f965adba641894594a2c37655a03c00fb004a0293e742a3d5f4fb6`
+- `scorer/scorer.py` — `sha256:2fbf011b5fe61225db5c10e62eb087544ad88e996a7261e96af71e24852616e2`
+- `tests/test_scorer.py` — `sha256:2fd8ba4a2e5733c1678f65c75e5ac05cb6ec32010465aa0f44d24efacc5e684c`
+- `tests/test_scorer_more.py` — `sha256:30d39485eba7626546429024ea20a230dc659f73c0a2d38293e8e1d4ec606785`
+- `runs/gate0-packets-c1/EVIDENCE.json` — `sha256:2bb117ee827249771752cf02c6ab35fecd30d8a2542ee84fd831d22618adfb41`
+- `runs/gate0-packets-c1/INDEX.md` — `sha256:40a3942dbb9780c3d00627e66df35b512e9130366f93109a27b30adecdad79cd`
+
+No Doximity. No Phase 0.
+
+
 
 
 
