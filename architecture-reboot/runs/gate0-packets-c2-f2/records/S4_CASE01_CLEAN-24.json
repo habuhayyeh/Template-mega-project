@@ -1,0 +1,99 @@
+{
+  "artifact_hash": "sha256:9ccb3e5f44355b7d6e31e4216af3ec5c1b6dab0ba3f88b46dc929b0b01587d54",
+  "artifact_name": "G0-S4-01.json",
+  "dependency_context": [
+    {
+      "hash": "sha256:cf6b6d89980eefaf677daf42ab7f751ca176c7933bd43ef74a388a953bab5d68",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT"
+    },
+    {
+      "hash": "sha256:c128c31aa62c258e45b897f64b0ab78c4c07de901180eb23e2a4582d0f635b9c",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT"
+    },
+    {
+      "hash": "sha256:eaa8eab3a271505318b7ad6422ec3cad8e180c62339b45c7e5a6b97f8de522a9",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT"
+    }
+  ],
+  "findings": [
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-COMP-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "S4 problem set diverges from S3 rendered set",
+      "evidence": [
+        {
+          "rendered": [
+            "C1",
+            "C2"
+          ],
+          "s4_sources": []
+        }
+      ],
+      "expected": "problem sources equal from_s3.rendered ['C1', 'C2']",
+      "observed": [],
+      "owner": "S4",
+      "path": "/s4/problems",
+      "predicate_id": "S4-INC-01",
+      "status": "FIRED"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-MEM-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-PROJ-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-REP-01",
+      "status": "SILENT"
+    }
+  ],
+  "kind": "seed",
+  "packets": [],
+  "parent_id": "S4_CASE01_CLEAN",
+  "parent_type": "S4_BLUEPRINT",
+  "scorer_version": "GATE0-SCORER-1",
+  "specificity": {
+    "expected": "S4-INC-01",
+    "expected_status": "FIRED",
+    "non_silent_other": [],
+    "other_active": [
+      "S4-COMP-01",
+      "S4-MEM-01",
+      "S4-PROJ-01",
+      "S4-REP-01"
+    ],
+    "pass": true
+  },
+  "verdict": "PASS"
+}

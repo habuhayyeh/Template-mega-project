@@ -1,0 +1,79 @@
+{
+  "artifact_hash": "sha256:0010a5b391448c9cd25168b1458b753573fd879336701f07cf7b3187dc44da48",
+  "artifact_name": "G0-S1-02.json",
+  "dependency_context": [],
+  "findings": [
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S1",
+      "path": null,
+      "predicate_id": "S1-AUTH-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "selected-claim field present",
+      "evidence": [
+        {
+          "field": "selected_claim",
+          "path": "/s1/candidates/0/selected_claim"
+        }
+      ],
+      "expected": "field absent",
+      "observed": "present",
+      "owner": "S1",
+      "path": "/s1/candidates/0/selected_claim",
+      "predicate_id": "S1-AUTH-02",
+      "status": "FIRED"
+    },
+    {
+      "detail": "SIGNER_REFERENCE_MISSING",
+      "evidence": [],
+      "expected": null,
+      "human_review": {
+        "packet_kind": "S1-CAND-01",
+        "reason": "HUMAN_JUDGMENT_REQUIRED",
+        "required": true
+      },
+      "observed": null,
+      "owner": "S1",
+      "packet_id": "pkt-a507b837f8290d70e6bbc4b3",
+      "path": null,
+      "predicate_id": "S1-CAND-01",
+      "status": "UNDECIDABLE"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S1",
+      "path": null,
+      "predicate_id": "S1-CAND-02",
+      "status": "SILENT"
+    }
+  ],
+  "kind": "seed",
+  "packets": [
+    "S1-CAND-01"
+  ],
+  "parent_id": "S1_CASE01_CLEAN",
+  "parent_type": "S1_OUTPUT",
+  "scorer_version": "GATE0-SCORER-1",
+  "specificity": {
+    "expected": "S1-AUTH-02",
+    "expected_status": "FIRED",
+    "non_silent_other": [
+      "S1-CAND-01"
+    ],
+    "other_active": [
+      "S1-AUTH-01",
+      "S1-CAND-01",
+      "S1-CAND-02"
+    ],
+    "pass": false
+  },
+  "verdict": "INCOMPLETE"
+}

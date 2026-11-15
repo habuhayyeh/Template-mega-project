@@ -46,7 +46,7 @@ PREDICATES = {
         "owner": "S2",
         "parent_type": "S2_OUTPUT",
         "mode": "SIGNER_REFERENCE",
-        "assertion": "for objects the oracle names in expected.adoption, the verdict matches",
+        "assertion": "each S2 adoption verdict is supported by the supplied source/context for the current encounter",
     },
     "S3-CAND-01": {
         "owner": "S3",

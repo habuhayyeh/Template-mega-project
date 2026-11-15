@@ -1,0 +1,91 @@
+{
+  "artifact_hash": "sha256:fc75feb91964981e040818b096f14bd3543d2759d6e4631a6308f04e4e58d0ee",
+  "artifact_name": "G0-S4-05.json",
+  "dependency_context": [
+    {
+      "hash": "sha256:cf6b6d89980eefaf677daf42ab7f751ca176c7933bd43ef74a388a953bab5d68",
+      "parent_id": "S1_CASE01_CLEAN",
+      "parent_type": "S1_OUTPUT"
+    },
+    {
+      "hash": "sha256:c128c31aa62c258e45b897f64b0ab78c4c07de901180eb23e2a4582d0f635b9c",
+      "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT"
+    },
+    {
+      "hash": "sha256:eaa8eab3a271505318b7ad6422ec3cad8e180c62339b45c7e5a6b97f8de522a9",
+      "parent_id": "S3_CASE01_RENDERED_CLEAN",
+      "parent_type": "S3_OUTPUT"
+    }
+  ],
+  "findings": [
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-COMP-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-INC-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-MEM-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
+      "owner": "S4",
+      "path": null,
+      "predicate_id": "S4-PROJ-01",
+      "status": "SILENT"
+    },
+    {
+      "detail": "unit representation differs from selected_reps for C1",
+      "evidence": [],
+      "expected": "R1",
+      "observed": "R-999",
+      "owner": "S4",
+      "path": "/s4/units/0/representation",
+      "predicate_id": "S4-REP-01",
+      "status": "FIRED"
+    }
+  ],
+  "kind": "seed",
+  "packets": [],
+  "parent_id": "S4_CASE01_CLEAN",
+  "parent_type": "S4_BLUEPRINT",
+  "scorer_version": "GATE0-SCORER-1",
+  "specificity": {
+    "expected": "S4-REP-01",
+    "expected_status": "FIRED",
+    "non_silent_other": [],
+    "other_active": [
+      "S4-COMP-01",
+      "S4-INC-01",
+      "S4-MEM-01",
+      "S4-PROJ-01"
+    ],
+    "pass": true
+  },
+  "verdict": "PASS"
+}

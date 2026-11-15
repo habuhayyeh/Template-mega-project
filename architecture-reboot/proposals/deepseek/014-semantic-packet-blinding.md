@@ -1,7 +1,7 @@
 # Proposal 014 — blinded semantic packets
 
-**Status:** PROPOSED — not implemented. Review 089 is correct that the current semantic packets leak
-answer-key fields.
+**Status:** ACCEPTED under D-029 and implemented in `REVIEW-POLICY-F-2`. Review 089 found the leak; the
+correction is in the harness, predicate wording and tests.
 
 ## Problem
 

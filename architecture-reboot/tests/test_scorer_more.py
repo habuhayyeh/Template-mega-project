@@ -106,15 +106,17 @@ class AdditionalPredicateTests(unittest.TestCase):
         result = score(self.s4, self.deps_s4, self.oracle, self.rules)
         self.assertEqual(find(result, 'S4-COMP-01')['status'], FIRED)
 
-    def test_s1_cand_packet_is_minimal(self):
+    def test_s1_cand_packet_is_blinded(self):
         packet = build_packet('S1-CAND-01', self.s1, {}, self.oracle)
         self.assertEqual(packet['dependency_context'], {})
-        self.assertIn('candidate_concepts_must_exclude', packet['oracle']['expected'])
+        self.assertNotIn('expected', packet['oracle'])
+        self.assertNotIn('candidate_concepts_must_exclude', json.dumps(packet))
         self.assertNotIn('plan_items_requiring_units', json.dumps(packet))
 
-    def test_s2_adopt_packet_contains_expected_adoption(self):
+    def test_s2_adopt_packet_is_blinded(self):
         packet = build_packet('S2-ADOPT-01', self.s2, {'S1_SYN': self.s1}, self.oracle)
-        self.assertEqual(packet['oracle']['expected']['adoption'], {'O1': True})
+        self.assertNotIn('expected', packet['oracle'])
+        self.assertNotIn('expected.adoption', json.dumps(packet))
 
     def test_human_status_not_promoted_by_absence_of_judgments(self):
         result = score(self.s2, self.deps_s2, self.oracle, self.rules)

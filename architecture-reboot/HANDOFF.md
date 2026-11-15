@@ -91,9 +91,9 @@ Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLE
 
 CASE-01: two rendered problems — falls and a retained inactive infarct; the S1-CAND seed is now a
 medication-only candidate. Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 46 synthetic tests; no Gate 0 acceptance
-run. Packet preparation: 33 records, 16 semantic packets, 0 references/0 evaluators. These packets are
-**blocked for evidence collection** by review 089 answer-key leakage; see proposal 014. Index at
-`architecture-reboot/runs/gate0-packets-c2/INDEX.md`.
+run. Packet preparation: 33 records, 16 semantic packets, 0 references/0 evaluators under
+`REVIEW-POLICY-F-2`; semantic packets contain no `oracle.expected`. Index at
+`architecture-reboot/runs/gate0-packets-c2-f2/INDEX.md`.
 
 ## 6. Review 084 closure: scorer/harness/preflight
 
@@ -199,38 +199,14 @@ adoption-vs-retention distinction impossible.
 **NEXT:** DeepSeek rebuilds CASE-01 clean parents/seeds under D-023, regenerates, runs preflight and
 packets mode only, and returns the diff for ChatGPT review.
 
-## Review 090 governance correction + packet-blinding status
+## Review 089/090 resolution
 
-D-026 is void. Verified interaction history shows no explicit SCHEMA-3 approval; the signer sent only
-`.`, which D-022 defines as sync only. SCHEMA-3 therefore remains **provisional**, despite the existing
-implementation and reported 46-test/preflight PASS.
+D-029 accepts SCHEMA-3 and Proposal 014 under delegated reviewer authority. The F-2 harness removes
+`oracle.expected` from every semantic packet, rewrites S2-ADOPT-01 as source/context-supported adoption,
+and changes all packet IDs. Current run: `gate0-packets-c2-f2` (16 packets, 0 references, 0 evaluators).
 
-Proposal 014 is technically accepted by ChatGPT in principle, but still requires explicit signer
-approval before implementation. The current semantic packet set remains blocked because it exposes
-answer-key fields.
-
-The remaining blockers are explicit signer approval of SCHEMA-3 and Proposal 014. S1-CAND packets expose
-`candidate_concepts_must_exclude`, and S2-ADOPT packets expose `expected.adoption`. These are
-answer-key fields and violate Option F. `proposals/deepseek/014-semantic-packet-blinding.md` proposes
-the smallest governed correction, including `REVIEW-POLICY-F-2`.
-
-**NEXT:** ChatGPT routes proposal 014 to the signer; after approval, DeepSeek removes semantic
-`oracle.expected`, regenerates packets and restarts reference collection. No references or Gate-0
-acceptance from the current packet set.
-
-## Governance dispute resolved
-
-Review 091 rechecked the prior interaction history specifically for the SCHEMA-3 approval request.
-The signer sent only `.`; no explicit SCHEMA-3 approval exists. D-027 stands and D-026 is not carried
-forward. SCHEMA-3 remains technically implemented but provisional.
-
-The action-channel rule in commit `cfcbbf2` is accepted: DeepSeek sends `NEXT` to ChatGPT, and ChatGPT
-decides whether signer interruption is necessary.
-
-Proposal 014 remains reviewer-approved in principle but not signer-approved.
-
-**NEXT:** ChatGPT owns the signer escalation for the two pending contract decisions; DeepSeek takes no
-further contract action until an explicit decision is recorded.
+**NEXT:** ChatGPT reviews the F-2 diff and packet index; signer reference collection restarts from zero
+under `REVIEW-POLICY-F-2`. No references or Gate-0 acceptance from older packet sets.
 
 ## D-028/D-029 workflow correction
 
@@ -243,11 +219,10 @@ tradeoff.
 
 Under D-029:
 - **SCHEMA-3 is accepted** under reviewer authority;
-- **Proposal 014 is approved**;
-- DeepSeek is authorized to implement the blinding correction, bump to `REVIEW-POLICY-F-2`,
-  regenerate semantic packets, and run tests/preflight/packets mode.
+- **Proposal 014 is approved and implemented**;
+- `REVIEW-POLICY-F-2` removes semantic `oracle.expected`, regenerates 16 packets and passes
+  46 tests plus preflight.
 
-**NEXT:** DeepSeek implements Proposal 014, regenerates the packet set, runs the full mechanical
-validation suite, and returns the exact diff/results to ChatGPT for independent review. No Gate 0
-acceptance, no Doximity, no Phase 0.
+**NEXT:** ChatGPT reviews the F-2 implementation and packet index. Signer reference collection restarts
+from zero only after that review. No Gate 0 acceptance, no Doximity, no Phase 0.
 

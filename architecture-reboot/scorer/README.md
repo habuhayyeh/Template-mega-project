@@ -44,8 +44,9 @@ exact dependency `parent_id`, `parent_type` and hash supplied to the scorer.
 ## Semantic review — Option F
 
 The harness writes one packet per semantic predicate. A packet contains only the target artifact,
-minimum dependency context, minimum oracle material, the predicate rule, and the judgment schema. It
-does not contain the seed id, expected predicate, mutation or answer key.
+minimum dependency context, oracle source material (objects, spans, matching rule), the predicate rule,
+and the judgment schema. It never contains `oracle.expected`, semantic answer labels, the seed id,
+expected predicate, mutation or answer key. The current policy is `REVIEW-POLICY-F-2`.
 
 The signer/clinician records one `HUMAN / REFERENCE` verdict first. Two blinded `LLM / EVALUATOR`
 judgments then score the same packet independently, in packet-only sessions, from different model

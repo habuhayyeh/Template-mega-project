@@ -26,7 +26,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 
 | id | mode | owner | asserts | cases |
 |---|---|---|---|---|
-| `S2-ADOPT-01` | SEMANTIC | S2 | for objects the oracle names in `expected.adoption`, the verdict matches. Objects not named are not scored — an unlisted object has no adoption expectation to violate | 01,02,09 |
+| `S2-ADOPT-01` | SEMANTIC | S2 | each S2 adoption verdict is supported by the supplied source/context for the current encounter. Historical provenance alone does not forbid adoption; medication-only evidence does not establish it unless the source explicitly links it | 01,02,09 |
 | `S2-ADOPT-02` | HYBRID · `PENDING_SCHEMA` | S2 | no adoption is inferred from medication, drug class, or convention; an adoption must cite a source span. Not mechanical until explicit-link semantics are represented structurally — an adoption citing any span proves nothing | all |
 | `S2-REP-01` | SEMANTIC | S2 | every approved representation is supported by source objects, including representations assembled from relations rather than quoted claims | all |
 | `S2-REP-02` | MECHANICAL | S2 | within `representations[]` (the approved set) for one problem, at most one entry unless every entry has `selection_safe: true` | all |
@@ -102,7 +102,7 @@ or human-judged" is not an implementation.
 | predicate | mode | how it is decided |
 |---|---|---|
 | `S1-CAND-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes the reference verdict; two blinded LLM evaluators must match it; reviewer describes candidacy, not vocabulary |
-| `S2-ADOPT-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes the reference verdict from the oracle; two blinded LLM evaluators must match it; no model self-judgement |
+| `S2-ADOPT-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes the reference verdict from source/context; two blinded LLM evaluators must match it; no model self-judgement |
 | `S2-REP-01` | SEMANTIC / SIGNER_REFERENCE | signer establishes the reference verdict on semantic support; two blinded LLM evaluators must match it; real objects and refs are necessary but not sufficient |
 | `S3-SEL-01` | MECHANICAL | id membership in the approved set |
 | `S4-COMP-01` | MECHANICAL | domain S4 ∩ S3, operator class check |

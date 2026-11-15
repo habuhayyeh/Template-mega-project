@@ -15,7 +15,7 @@ run must produce **zero diff**; a run that does not is a build failure, not a wa
 rejects a seed that is a no-op copy of its parent, or that differs at more than one path. The manifest
 mutation record is the checked parent→seed diff, not a hand-written claim.
 
-**Status: SCORER/HARNESS IMPLEMENTED / SCHEMA-3 + D-023 REBUILT / SEMANTIC PACKETS BLOCKED (REVIEW 089) / GATE 0 UNRUN.** The
+**Status: SCORER/HARNESS IMPLEMENTED / SCHEMA-3 + D-023 REBUILT / F-2 PACKETS PREPARED / GATE 0 UNRUN.** The
 scorer and harness exist at `architecture-reboot/scorer/` and
 `architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 16 semantic packet
 instances. No signer reference or evaluator evidence exists yet; no Gate 0 acceptance run has been
@@ -185,9 +185,10 @@ artifacts is not a control; it is a convention. The control is that the harness 
 and holds the answer.
 
 A blinded semantic packet may include the minimum read-only dependency context needed to decide its
-predicate. It never contains the seed id, expected predicate, expected verdict, mutation metadata or
-specificity answer key. The same packet feeds one `HUMAN / REFERENCE` judgment and two independent
-`LLM / EVALUATOR` judgments; the evaluators do not see the signer reference or each other's verdict.
+predicate. It never contains `oracle.expected`, semantic answer labels, the seed id, expected predicate,
+expected verdict, mutation metadata or specificity answer key. The same packet feeds one
+`HUMAN / REFERENCE` judgment and two independent `LLM / EVALUATOR` judgments; the evaluators do not see
+the signer reference or each other's verdict. Current policy: `REVIEW-POLICY-F-2`.
 
 ## 8. What Gate 0 does not prove
 
@@ -205,7 +206,7 @@ specificity answer key. The same packet feeds one `HUMAN / REFERENCE` judgment a
 - `architecture-reboot/scorer/` — scorer implementation and predicate registry.
 - `architecture-reboot/tools/gate0_harness.py` — harness, packets, judgments and evidence.
 - `architecture-reboot/tools/preflight.py` — the D-019 mechanical preflight.
-- `architecture-reboot/runs/gate0-packets-c2/` — packets-mode preparation: 33 artifact records,
+- `architecture-reboot/runs/gate0-packets-c2-f2/` — packets-mode preparation: 33 artifact records,
   16 semantic packets, `EVIDENCE.json`, `INDEX.md` and `INDEX.json`. No acceptance verdict.
 - Per-run records: scorer version, predicate set version, control-plane version, case ids, findings,
   verdict.

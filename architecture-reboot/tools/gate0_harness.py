@@ -60,7 +60,7 @@ EXPECTED_IDENTITIES = {
     'oracle': 'ORACLE-3.0',
     'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
 }
-REVIEW_POLICY = 'REVIEW-POLICY-F-1'
+REVIEW_POLICY = 'REVIEW-POLICY-F-2'
 
 
 class InputIntegrityError(Exception):
@@ -200,19 +200,21 @@ def _dep_by_type(context, parent_type):
 def build_packet(predicate_id, target, context, oracle):
     spec = registry.PREDICATES[predicate_id]
     if predicate_id == 'S1-CAND-01':
-        packet_oracle = _subset_oracle(oracle, ['candidate_concepts_must_exclude'])
+        packet_oracle = _subset_oracle(oracle, [])
         packet_context = {}
         instructions = (
             'Decide whether every S1 candidate names a neurologic subject for which the '
             'encounter poses its own assessment question. Use only the target artifact, '
-            'the supplied oracle material and the rule. Record FIRED or SILENT.'
+            'the supplied source material and the rule. Record FIRED or SILENT.'
         )
     elif predicate_id == 'S2-ADOPT-01':
-        packet_oracle = _subset_oracle(oracle, ['adoption'])
+        packet_oracle = _subset_oracle(oracle, [])
         packet_context = {}
         instructions = (
-            'Compare S2 adoption verdicts with the oracle expected.adoption entries. '
-            'Objects not named in the oracle are not scored. Record FIRED or SILENT.'
+            'Decide whether each S2 adoption verdict is supported by the supplied source '
+            'and context for the current encounter. Historical provenance alone does not '
+            'forbid adoption, and medication-only evidence does not establish it unless the '
+            'source explicitly links it. Record FIRED or SILENT.'
         )
     elif predicate_id == 'S2-REP-01':
         packet_oracle = _subset_oracle(oracle, [])
@@ -238,6 +240,7 @@ def build_packet(predicate_id, target, context, oracle):
         'target_artifact': target,
         'dependency_context': packet_context,
         'oracle': packet_oracle,
+        'policy_version': REVIEW_POLICY,
     }
     digest = hashlib.sha256(
         json.dumps(packet_body, sort_keys=True, separators=(',', ':')).encode()
