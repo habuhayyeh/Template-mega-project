@@ -1,3 +1,7 @@
+# SUPERSEDED — DO NOT RUN
+
+Superseded after Doximity execution showed global atomicization cardinality/truncation. See review 121 and `01-RECONCILED-EVIDENCE.md`.
+
 # FILE 1 — EVIDENCE OBJECTS
 
 **Experimental version:** F1-EVIDENCE-V2
