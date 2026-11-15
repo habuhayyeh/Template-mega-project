@@ -1584,3 +1584,84 @@ Verified built view: all five groups present, `G0-S4-09` plants `selected_rep` i
 - **#7** parent identity tracking if a second S3 parent is added.
 
 No scorer, no Gate 0 run, no Doximity, no Phase 0.
+
+## 2026-11-15 · DeepSeek · review 078 four-blocker pass + review 079 integrity fix
+
+**Commit:** `51b0df3` · **second run: zero diff** across 34 generated files.
+
+### Review 079 first
+
+The `if pfile == 'S4_PARENT.json'` mutation branch is gone. `fn(art)` runs for every seed after its
+clean base is constructed. The build now computes the parent→seed diff and fails on a no-op seed or a
+seed with more than one changed path. The manifest mutation record is the checked diff — exact path,
+canonical `before`, canonical `after` — not the hand-written label.
+
+**27/27 seeds checked · 0 no-op · 0 multi-diff · no seed hash equals its parent hash.**
+
+### Review 078 four blockers
+
+1. **Exact S4 map.** `schema.md::PROJECTION_MAP` is read by the generator and freezes owner, source
+   path, selector, requirement and transform for 14 mapped rules. `S4_PARENT.json` carries no
+   projection. `from_s2` members use `R`, relations filter to `M`, claim relations select
+   `problem == P and representation == R`, duplicate groups intersect `M`; `from_ingest` expands
+   per object to `payload`/`provenance`/`temporal|status`; contracts are `AP` and `PILOT-OPERATORS-1`.
+2. **Gate 0 specificity.** `00-GATE0-MANIFEST.md` now uses `FULL_SILENCE-WITHIN-LAYER` in the model,
+   seed requirement 3, procedure step 4 and every pass criterion. No "unrelated family" remains in the
+   Gate 0 source or predicate scoring rules.
+3. **S3 reason registry.** `schema.md::REASON_REGISTRY` freezes `REASON-1`:
+   `NO_APPROVED_REPRESENTATION` requires a non-empty, unique basis of `object` ids existing in the
+   oracle; `NOT_CLINICAL` forbids basis. A null/absent reason is missing; basis is not evaluated then.
+   `S3_CASE01_NOT_RENDERED_CLEAN` is the valid structural reference; equality, missing-reason and
+   missing-basis seeds now derive from it as single mutations.
+4. **Parent identity.** Every source parent has a unique `parent_id`; the manifest keys
+   `clean_parents` by identity and records `parent_type` separately. S3 has two identity variants
+   under one type.
+
+### Changed files
+
+- Source: `tools/make_seeds.py`; `AX-S1S2-D/{schema.md,predicates.md}`;
+  `AX-S1S2-D/parents/{S1,S2,S3,S4}_PARENT.json` plus new `S3_PARENT_NOT_RENDERED.json`;
+  `gate0/00-GATE0-MANIFEST.md`; `gate0/seeds/G0-SEEDS.md`; `HANDOFF.md`.
+- Generated: 34 files under `gate0/seeds/generated/` — 5 `PARENT-*`, 27 `G0-*`, `MANIFEST.json`,
+  `VARIATION.json`. None hand-edited.
+- Reviewer paths untouched.
+
+### Counts
+
+5 clean parents across 4 parent types: S1 1, S2 1, S3 2, S4 1. 27 seeds. 16 active predicates.
+
+Per predicate: S1-AUTH-01 2 · S1-AUTH-02 1 · S1-CAND-01 1 · S1-CAND-02 1 · S2-ADOPT-01 1 ·
+S2-REP-01 1 · S2-TEMP-01 1 · S3-ACCT-01 1 · S3-CAND-01 6 · S3-INC-01 1 · S3-SEL-01 1 ·
+S4-COMP-01 1 · S4-INC-01 2 · S4-MEM-01 1 · S4-PROJ-01 5 · S4-REP-01 1.
+
+Pending: `S2-ADOPT-02` (schema), `S4-ORD-01` (ordering oracle). Not produced by any pilot case:
+`S1-BODY-01`, `S2-REP-02`, `S2-CONF-01`.
+
+### Identities
+
+`GATE0-C1` · `PILOT-2` · `ACTIVE-PILOT-2` · `SCHEMA-2` · `ORACLE-2.0` · `REASON-1` ·
+`PILOT-OPERATORS-1`.
+
+Parents: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
+`S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
+
+### Governing hashes
+
+- `schema.md` — `sha256:c3e1100c7d2dfca19d10e45b21a5854a3abaec1a91abb840e3d7a8d2ffa790c8`
+- `predicates.md` — `sha256:3d92a334bd4b0fe3d5b65b38c15d3f6510991b9477d9b0ca27c7ed676dc47d08`
+- `G0-SEEDS.md` — `sha256:89abcf934f18f99daaf2eabe8c14c36c7bc951339b925a1f9ebc40651a7e8a05`
+- `00-GATE0-MANIFEST.md` — `sha256:ec157ef28be3ac1da6d1fee782670d2b3ccd2da82616109c59926e8f370399d5`
+- `make_seeds.py` — `sha256:6bbfe43682bc606ed4e39a0db0506598e4e0c478b299edcac8eacbd645b06a54`
+- `oracle.json` — `sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927`
+- projection map — `sha256:3cdcea61e9d77ceeb6db0a7e80678c466362cceaffb1ca3a3524c163a2ae5497`
+- generated view — `sha256:e3f84f9708f10691d2dedf37cdfdc67f2166caa4a85155827120c49f872d93f9`
+- `REASON-1` — `sha256:cc9b61341631077f831f9932c131f43a6a8119980de4d42863096f7dfee479df`
+- `MANIFEST.json` file bytes — `4f6af95d2737e246705c005408ae45be92832152414aa2937acf651687795846`
+
+All ten governing-source hashes in `MANIFEST.json` were verified against the current files.
+
+### Still open
+
+Reviewer inspection of this source contract. No scorer exists; Gate 0, Doximity and Phase 0 remain
+unrun. The clean NOT_RENDERED parent is structurally clean for `S3-CAND-01`, not a clinical claim that
+C1 should not render; reason correctness stays a separate semantic audit.
