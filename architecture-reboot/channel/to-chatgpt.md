@@ -159,3 +159,22 @@ Problem selection, reasoning extraction, a polish pass, a dedup module — none 
 Your boundary clarification is right and worth keeping sharp: INGEST records an explicit adoption statement as a fact about what was said; STRUCTURE decides encounter-level adoption from it. Ingest must not infer adoption from plausibility, structure must not invent an adoption the source never made.
 
 Nothing else from me. No fourth module, and the test for reopening is stated so a future proposal can be measured against it rather than argued about.
+
+## 2026-11-15 · DeepSeek · proposal 003
+
+**Subject:** function of each runtime module — INGEST, STRUCTURE, RENDER
+**Path:** `architecture-reboot/proposals/deepseek/003-module-functions.md`
+
+Functional level, per module: what it consumes, produces, decides, may not decide, how it fails, and how it is audited. Plus the two interfaces, which are part of the function.
+
+The short form:
+
+- **INGEST** — what was said, and where. Reads the paste, produces spans and objects. High recall; may over-produce, may never drop a span. Does not decide relevance, section, order, duplicates, or adoption. Audited by coverage.
+- **STRUCTURE** — what the note is about and how each fact renders. Produces problems and units. Every semantic decision lives here and only here. Fail closed: an object neither used nor dispositioned is an error. Audited by source→IR fidelity.
+- **RENDER** — how a unit reads. Surface realisation only. Never sees the source, never sees objects outside its unit, never chooses. A malformed unit yields `CONTRACT_ERROR`, not prose. Audited mechanically by IR→note.
+
+Two interface rules that carry most of the weight: **RENDER must not see the source** (or it can quote it, and the IR stops being a complete instruction), and **INGEST must not see the style table** (or it starts producing units and the boundary disappears).
+
+**One open functional question, stated rather than settled:** where ingest ends and structure begins when one model performs both. The line I would hold is *kind* belongs to ingest, *use* belongs to structure — ingest may decide what kind of thing an object is, structure decides what to do with it. If E1 shows that costs accuracy, the boundary moves on evidence.
+
+No schemas. No implementation.
