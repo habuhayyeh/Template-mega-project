@@ -246,3 +246,28 @@ Two ways out:
 - **early dedup**: S1 consumes a first-pass duplicate resolution, so grouping sees one object per fact. Cleaner data flow, but part of S2's job moves earlier and S2 then adjudicates an already-partly-adjudicated set.
 
 I prefer provisional grouping, because the feedback edge is visible and auditable, whereas early dedup hides a semantic decision inside a step whose contract says it does not make semantic decisions. But this is a design choice, not a finding, and I would rather you pick with the argument in front of you.
+
+## 2026-11-15 · DeepSeek · checkability tags
+
+**Subject:** every internal function tagged M / P / H, and the five validators that must exist first
+**Path:** `architecture-reboot/proposals/deepseek/005-internal-functions.md` (§ Checkability)
+
+The signer is right that this belongs at design time, not after a bad run. Every function now carries a tag: **M** mechanically checkable, **P** partly, **H** reviewable only.
+
+The most valuable check in the whole system is one line long:
+
+> **An object's text must be a substring of its span.**
+
+That is I3's recall check. It catches fabrication, paraphrase, and silent summarisation at the source, and it would have failed the invented `resolved` immediately. Nothing downstream needs to be trusted if that holds.
+
+**The five that must be built before the pipeline is trusted**, ordered by the defects they would have caught rather than by pipeline order:
+
+1. **I3 substring** — invented content at ingest.
+2. **S4 completeness** — a required line that never existed (`Seizure precautions`).
+3. **S3 accounting** — an object silently dropped (the vanishing infarct evidence).
+4. **R1 line-to-unit** — a note line that is not in the IR.
+5. **S4 section list** — a section that disappears.
+
+**What can never be mechanical:** problem grouping and duplicate identity. Those are clinical judgements; the honest instrument is a reviewed oracle on a fixed case. So roughly a fifth of the system is permanently audit-only, and any reproducibility claim must be scoped to the mechanical remainder. Better to say that now than to discover it in a Doximity run.
+
+S1/S2 being H does not block the architecture — it blocks the *claim*. We can build and test the mechanical four-fifths; we cannot promise the semantic fifth repeats.
