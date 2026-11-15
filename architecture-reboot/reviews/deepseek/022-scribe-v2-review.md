@@ -68,9 +68,10 @@ statement into a negative.
 
 1. **Contradictions.** V2 says "do not reconcile" but does not require marking contradictions. Add
    inline `[CONFLICT: <record-id>]` when the same fact differs, and never resolve it.
-2. **Output budget.** V2 has no 20K rule. Add: if approaching the limit, keep current encounter,
-   active management/medications/studies and the most recent relevant prechart first; emit an explicit
-   `OMITTED` list with source/record IDs and reason. Never silently paraphrase to fit.
+2. **Output completeness, not a 20K budget.** D-035 relaxes the earlier 20K assumption: Scribe may
+   produce a longer packet when fidelity requires it. Do not compress to hit a length target. Control
+   consistency with the fixed line protocol and stable IDs, not summarization. If a hard platform limit
+   is actually hit, mark the truncation point explicitly; never silently paraphrase or omit.
 3. **Source order/date.** Preserve supplied source order; include source date/author when stated. Do not
    reorder by semantic category.
 4. **Exact duplicates.** Exact boilerplate may be `DUP_OF <id>`; source-distinct clinical statements
@@ -84,8 +85,8 @@ statement into a negative.
 
 ## Overengineering check
 
-V2 is near the useful prompt-size limit. Do not add a new ontology, a new section type, or a new
-cross-reference ledger. `SEC=` and `VIA=` are mechanical source labels and should stay. The final
+V2 is already detailed. Do not add a new ontology, a new section type, or a new cross-reference
+ledger. Keep the protocol compact; length is controlled by format, not by dropping content. `SEC=` and `VIA=` are mechanical source labels and should stay. The final
 baseline should be **shorter**, with the above rules stated as principles plus a few examples.
 
 One questionable element: `SEC=` can become a semantic classification if the source heading is
@@ -94,22 +95,23 @@ category.
 
 ## Recommended V2.1 patch (minimal)
 
-Replace the repair clause; add unanswered-question format; add inline `[CONFLICT]`; add `OMITTED`
-policy; add explicit-only absent fields; generalize event negatives; one speaker per line with the joint
-exception; preserve source order/date; use `DUP_OF`.
+Replace the repair clause; add unanswered-question format; add inline `[CONFLICT]`; state that there is
+no 20K compression target (D-035); add explicit-only absent fields; generalize event negatives; one
+speaker per line with the joint exception; preserve source order/date; use `DUP_OF`.
 
-Do not add new record types beyond `[UNCLEAR]`, `[CONFLICT]`, `[NO ANSWER CAPTURED]`, `OMITTED`, and
-`DUP_OF`.
+Do not add new record types beyond `[UNCLEAR]`, `[CONFLICT]`, `[NO ANSWER CAPTURED]` and `DUP_OF`.
 
 ## Evidence before freezing
 
 - V2.1 on the same raw case: no repair, no inferred negative from unanswered question, no merged
-  speakers, event negatives preserved, absent fields preserved, contradictions marked, char count.
+  speakers, event negatives preserved, absent fields preserved, contradictions marked, output length and
+  consistency across runs. No 20K target.
 - One different de-identified case with different source families/format, to test generalization rather
   than one-case tuning.
 - Ask on Scribe output vs Ask on raw input, same final template; compare problem identity, adoption,
   causality, source fidelity.
 - At least two runs per case; record failure taxonomy and omissions.
 
-Stop after V2.1 + one held-out case unless a new observed failure appears. No architecture change, no
+Stop after V2.1 + one held-out case unless a new observed failure appears. Do not add compression rules
+to fit 20K; longer output is acceptable under D-035. No architecture change, no
 Gate-0 acceptance, no Doximity, no Phase 0.

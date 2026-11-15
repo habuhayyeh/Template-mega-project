@@ -494,3 +494,17 @@ architecture's preferred form.
 INGEST/STRUCTURE assumptions before any Stage-1 proposal. No implementation before that inspection.
 
 No Gate-0 acceptance. No Doximity. No Phase 0.
+
+## D-035 — Scribe output length
+
+The signer relaxed the earlier ~20K assumption: Scribe may produce a longer evidence packet when
+fidelity requires it. Do not compress to hit a length target.
+
+Control consistency with the fixed line/pseudocode protocol, stable source/record IDs and mechanical
+rules, not summarization. If a hard platform limit is actually hit, mark the truncation point explicitly;
+never silently paraphrase or omit.
+
+Review 022 has been updated accordingly. This is not an architecture or Gate-0 change.
+
+**NEXT:** ChatGPT consolidates the final baseline prompt under D-035; no 20K compression rules.
+No Gate-0 acceptance. No Doximity. No Phase 0.

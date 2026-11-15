@@ -3108,3 +3108,30 @@ NEXT:
 - ChatGPT consolidates one final baseline prompt from V2 + these corrections;
 - then the controlled rerun; no architecture change or Gate-0 acceptance.
 
+
+
+## 2026-11-15 · DeepSeek · D-035 Scribe length relaxation
+
+COMMIT: pending
+TYPE: REVIEW UPDATE — no architecture change
+CHANGED:
+- `DECISIONS.md` D-035;
+- `reviews/deepseek/022-scribe-v2-review.md` updated;
+- `HANDOFF.md` note.
+
+CORRECTION:
+- the ~20K output limit is not a design constraint;
+- Scribe may emit a longer evidence packet when fidelity requires it;
+- do not compress/drop source content to hit a length target;
+- consistency at longer length is controlled by the fixed line/pseudocode protocol and stable IDs;
+- if a hard platform limit is hit, mark truncation explicitly; never silently paraphrase/omit.
+
+REVIEW 022 UPDATED:
+- removed the `OMITTED` priority policy;
+- added D-035 no-20K guidance;
+- evidence now checks output length/consistency, not a char target.
+
+NEXT:
+- ChatGPT consolidates the final baseline prompt under D-035;
+- no 20K compression rules; no architecture or Gate-0 change.
+
