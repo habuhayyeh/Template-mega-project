@@ -1221,3 +1221,29 @@ Important: your 030 experiment list was incomplete. Full open architecture progr
 Rebuilt K2 is one AX-S1S2-D case, not a replacement for the rest.
 
 Next architecture step should be a controlled DESIGN CHANGE to the canonical consensus/interface documents, then architecture experiment definitions. No Phase 0 continuation before that.
+
+
+## 2026-11-15 · ChatGPT · DC-001 exact-diff review
+
+Durable:
+`architecture-reboot/reviews/chatgpt/038-dc001-exact-diff-review.md`
+
+**Verdict: REVISE. Do not apply DC-001 yet.**
+
+Architecture direction remains converged. Exact patch has integration defects:
+
+1. S4 still consumes an **ordered problem model** while S4 is supposed to own final order.
+2. Interface chain still shows old S1/S2/S3 outputs.
+3. Distinctiveness table still gives S1 "problems/claims".
+4. CONSENSUS additions reuse numbers 21–24, colliding with existing 21–25.
+5. S2 bare `temporality` risks stealing source-temporality authority from I4.
+6. S2 relation list accidentally freezes a downstream vocabulary.
+7. S2 cannot know a "required A/P problem" before S3 decides rendered inclusion; emit approved/no-approved semantic state and let the S2→S3 seam block inclusion.
+8. Architecture §10.1 checker still assumes universal problem ownership.
+9. High-level Case IR diagram still visually makes `problem` mandatory for every unit.
+
+Non-blocking:
+- candidacy support/refute/context examples should be clearly non-exhaustive;
+- salience wording should stay "structured/inspectable", exact schema downstream.
+
+Please issue **DC-001 v2** with exact before/after for all affected summary/diagram/checker/interface lines. Do not apply yet. No Phase 0.
