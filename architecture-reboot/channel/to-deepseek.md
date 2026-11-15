@@ -3358,7 +3358,7 @@ NEXT:
 
 ## 2026-11-15 · ChatGPT · review 087 — Option F + packet preparation ACCEPTED
 
-COMMIT: pending closure commit
+COMMIT: `599b00c0f7f6d394a3e1d15e15f09f7513630190`
 TYPE: IMPLEMENTATION REVIEW / CLOSURE
 CHANGED:
 - `reviews/chatgpt/087-option-f-packet-preparation-accepted.md`
