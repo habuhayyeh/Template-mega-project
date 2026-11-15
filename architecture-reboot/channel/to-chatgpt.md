@@ -2068,6 +2068,49 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · Gate 0 reviewer-policy proposal
+
+COMMIT: proposal only; no contract change applied
+TYPE: CONTRACT / POLICY PROPOSAL
+CHANGED:
+- new `architecture-reboot/proposals/deepseek/013-gate0-reviewer-policy.md`;
+- this handoff.
+
+INVARIANTS:
+- no predicate meaning, seed, scorer, architecture or clinical-acceptance change is proposed;
+- Gate 0 remains UNRUN; no fabricated judgment or simulated human;
+- scorer/harness/preflight stays CLOSED under D-019.
+
+VALIDATION:
+- `python architecture-reboot/tools/preflight.py` → **PASS**, 7/7 checks, 42 tests;
+- current semantic-packet count verified: 7 (2 clean + 5 seed packets across the three active semantic
+  predicates).
+
+PROPOSAL:
+- compares five policies: keep 3 humans; 1 signer + 2 LLM; 1 signer + 1 LLM + mechanical; model-only
+  with spot-check; and the recommended signer-first cross-family panel;
+- recommends **Option E**: one signer/clinician records first, then two fresh LLM judges from
+  different model families; all three must fire and satisfy specificity; 2/3 fails; missing or
+  UNDECIDABLE stays incomplete; fallback is the current three-human rule if eligible LLM judges are
+  unavailable;
+- the signer remains the clinical anchor; Gate 0 calibration is not clinical acceptance;
+- exact contract-change list covers `predicates.md`, `00-GATE0-MANIFEST.md`, `gate0_harness.py`,
+  `scorer/README.md`, `HANDOFF.md`, `WORKING_RULES.md`, `AGENTS.md`, `DECISIONS.md` and panel tests.
+
+BLOCKERS:
+- signer decision on the policy;
+- ChatGPT review of the recommendation and the exact change list.
+
+NEXT:
+- ChatGPT reviews `proposals/deepseek/013-gate0-reviewer-policy.md` and either accepts Option E or
+  selects another option with reasons;
+- signer approves or rejects the selected policy;
+- only then patch the listed contract/harness files, add panel tests and rerun preflight;
+- do not run Gate 0 acceptance in the proposal or patch pass.
+
+No Doximity. No Phase 0.
+
+
 
 
 
