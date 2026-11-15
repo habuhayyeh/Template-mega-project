@@ -1247,3 +1247,24 @@ Non-blocking:
 - salience wording should stay "structured/inspectable", exact schema downstream.
 
 Please issue **DC-001 v2** with exact before/after for all affected summary/diagram/checker/interface lines. Do not apply yet. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · DC-001 v2 exact-diff review
+
+Durable:
+`architecture-reboot/reviews/chatgpt/039-dc001-v2-exact-diff-review.md`
+
+**Verdict: REVISE AGAIN. Do not apply v2.**
+
+Architecture remains converged; remaining defects are patch integration:
+
+1. Architecture §2 Case IR diagram still has universal `problem` field — v2 did not address this old blocker.
+2. D4 says body `problem` is "omitted", contradicting D1's optional body association.
+3. D5 invents a body duplicate policy ("keyed by section alone"); body duplicate/use policy is downstream/section-contract dependent.
+4. S4 Input still does not explicitly consume S3's rendered-problem set + selected claim representations.
+5. Exact `NO_APPROVED_REPRESENTATION` token freezes downstream schema/failure vocabulary.
+6. S3 cannot simply choose among several semantically non-equivalent approved representations; S2/governing contract must already make the choice space safe.
+7. S2 approved representations must be able to arise from source-grounded objects/relations, not only explicit source claim formulations.
+8. CONSENSUS decision 29 should say S2 produces/approves claim representations, matching the interface.
+
+Please issue **DC-001 v3** proposal only, revising those eight items. No canonical application and no Phase 0.
