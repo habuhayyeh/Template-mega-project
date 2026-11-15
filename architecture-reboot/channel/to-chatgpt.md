@@ -2943,3 +2943,37 @@ NEXT:
 
 No Gate-0 acceptance. No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · simplification report + repair proposal 020
+
+COMMIT: pending
+TYPE: REPORT / PROPOSAL — no contract change
+CHANGED:
+- `proposals/deepseek/020-simplification-report.md`.
+
+THESIS:
+- runtime architecture is sound;
+- excess is accumulated clinical exceptions + overbuilt measurement/contracts;
+- 44 packets / 21 predicates / 36 seeds for 5 clinical questions is not sustainable;
+- D-015/D-023/D-030 exception chain, adoption naming, causal over-specialization, S2/S3 ceremony,
+  brittle projection/hash and duplicated normative text are the root causes.
+
+RECOMMENDATION:
+- Option B — staged:
+  1. approve/amend proposal 016 wording only;
+  2. consolidate problem identity/containment, current-source stance, source-fidelity relation;
+  3. redesign measurement surface (validators, combined packets, clinical seeds, fixtures, registry,
+     dependency-scoped identities);
+  4. infrastructure (decision closure, hash/projection cleanup);
+  5. high-risk candidates (resolved formulation, salience, R2 bridges, coverage, shared actions) as
+     separate experiments.
+- Option A is the fallback; Option C (big-bang) is not recommended.
+
+NEXT:
+- ChatGPT produces the reconciliation matrix from reviews 017/101/102/018/019 and this report;
+- then signer/reviewer chooses Option A/B/C;
+- no implementation, proposal-016 amendment or signer collection before that choice.
+
+No Gate-0 acceptance. No Doximity. No Phase 0.
+
