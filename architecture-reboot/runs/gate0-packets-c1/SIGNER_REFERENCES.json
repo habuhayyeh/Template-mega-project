@@ -2,28 +2,6 @@
   "policy_version": "REVIEW-POLICY-F-1",
   "references": [
     {
-      "packet_id": "pkt-16ced7dee2e14aec98b74e97",
-      "predicate_id": "S1-CAND-01",
-      "judge_id": "signer",
-      "judge_type": "HUMAN",
-      "role": "REFERENCE",
-      "authority": "SIGNER_CLINICIAN",
-      "verdict": "SILENT",
-      "rationale": "Signer corrected the prior response: this candidate should be allowed; there is no violation of the S1 candidate rule.",
-      "policy_version": "REVIEW-POLICY-F-1"
-    },
-    {
-      "packet_id": "pkt-876bdd66fa7db9f55b3b388b",
-      "predicate_id": "S2-ADOPT-01",
-      "judge_id": "signer",
-      "judge_type": "HUMAN",
-      "role": "REFERENCE",
-      "authority": "SIGNER_CLINICIAN",
-      "verdict": "SILENT",
-      "rationale": "Signer answered No: the adoption states are appropriate; there is no violation.",
-      "policy_version": "REVIEW-POLICY-F-1"
-    },
-    {
       "packet_id": "pkt-6e8fc6ddcd12ae7f2f7eb917",
       "predicate_id": "S2-REP-01",
       "judge_id": "signer",
@@ -43,6 +21,28 @@
       "authority": "SIGNER_CLINICIAN",
       "verdict": "SILENT",
       "rationale": "Signer judged 'falls since June' to be a valid neurologic problem that should be assessed separately; no violation.",
+      "policy_version": "REVIEW-POLICY-F-1"
+    },
+    {
+      "packet_id": "pkt-16ced7dee2e14aec98b74e97",
+      "predicate_id": "S1-CAND-01",
+      "judge_id": "signer",
+      "judge_type": "HUMAN",
+      "role": "REFERENCE",
+      "authority": "SIGNER_CLINICIAN",
+      "verdict": "SILENT",
+      "rationale": "Signer reconfirmed that 'falls since June' should be its own neurologic problem; no violation.",
+      "policy_version": "REVIEW-POLICY-F-1"
+    },
+    {
+      "packet_id": "pkt-876bdd66fa7db9f55b3b388b",
+      "predicate_id": "S2-ADOPT-01",
+      "judge_id": "signer",
+      "judge_type": "HUMAN",
+      "role": "REFERENCE",
+      "authority": "SIGNER_CLINICIAN",
+      "verdict": "SILENT",
+      "rationale": "Signer reconfirmed that treating the remote infarct as background and the current falls as adopted makes clinical sense; no violation.",
       "policy_version": "REVIEW-POLICY-F-1"
     }
   ]
