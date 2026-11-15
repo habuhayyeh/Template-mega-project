@@ -4713,3 +4713,29 @@ NEXT:
 - run condition P = V2.2 packet + Contract V1 + final USF template;
 - run condition N = same packet + final template without Contract V1;
 - compare only the four agreed outcomes and localize failures to Scribe / Ask contract / realization.
+
+
+## 2026-11-15 · Signer workflow rule — NEXT labels
+
+TYPE: GOVERNANCE
+DECISION:
+- D-036 added to root DECISIONS.md.
+COMMIT:
+- 55836fd7862cb1d21650c6bf932cb8d374fe57cd
+
+RULE:
+Every project update must label NEXT explicitly as one of:
+- QUESTION TO USER
+- SYNC/REVIEW WITH DEEPSEEK
+- ACTION CHATGPT CAN TAKE NOW
+
+If more than one applies, list them in order.
+Do not make the signer infer who needs to act.
+
+CURRENT ASK STATE:
+- P/N run template exists;
+- Ask Contract V1 ready;
+- no Scribe reopening.
+
+NEXT — ACTION CHATGPT CAN TAKE NOW:
+- assemble the exact first-run P and N Doximity Ask packages for the signer, using the same V2.2 packet and final template, with Contract V1 included only in P.
