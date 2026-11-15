@@ -24,17 +24,17 @@
     "O01": {
       "text": "known left MCA infarct",
       "span": "S01",
-      "temporal": "2024-02 documented"
+      "temporal": "2024-02"
     },
     "O02": {
       "text": "mild residual right faciobrachial weakness",
       "span": "S01",
-      "temporal": "2024-02 documented"
+      "temporal": "2024-02"
     },
     "O03": {
       "text": "three falls since June",
       "span": "S02",
-      "temporal": "June-November"
+      "temporal": "June\u2013November"
     },
     "O04": {
       "text": "no new weakness or speech trouble",
@@ -44,23 +44,28 @@
     "O05": {
       "text": "check vitamin D",
       "span": "S03",
-      "temporal": "now"
+      "temporal": "current"
     },
     "O06": {
       "text": "refer to PT for gait training",
       "span": "S03",
-      "temporal": "now"
+      "temporal": "current"
     },
     "O07": {
       "text": "aspirin 81 daily, unchanged",
       "span": "S04",
-      "temporal": "now"
+      "temporal": "current"
     }
   },
   "expected": {
     "adoption": {
       "O01": false,
-      "O03": true
+      "O02": false,
+      "O03": true,
+      "O04": true,
+      "O05": true,
+      "O06": true,
+      "O07": false
     },
     "representations_per_problem": {
       "C1": {
@@ -80,5 +85,6 @@
       "known left MCA infarct"
     ]
   },
-  "matching": "Candidacy and subject checks compare clinical concept/object identity, not literal strings. A candidate naming the infarct by any synonym is excluded."
+  "matching": "Candidacy and subject checks compare clinical concept/object identity, not literal strings. A candidate naming the infarct by any synonym is excluded.",
+  "source_of_truth": "Temporal and text values are copied verbatim from FROZEN-SUBSTRATES.md. That file is the substrate; this oracle and parent.json must agree with it exactly, including punctuation."
 }

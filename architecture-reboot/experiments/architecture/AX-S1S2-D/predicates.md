@@ -51,7 +51,7 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 | `S4-REP-01` | MECHANICAL | S4 | every `units[].representation` equals the S3 `selected_rep` for that problem, compared by id | all |
 | `S4-ORD-01` | MECHANICAL · `PENDING_DEPENDENCY` | S4 | problem and unit order follow the ordering contract using S1 salience inputs. No frozen ordering oracle or salience value set exists yet; not scoreable until both are frozen | all |
 | `S4-MEM-01` | MECHANICAL | S4 | every unit member exists in the retained-use map | all |
-| `S4-COMP-01` | MECHANICAL | S4 | every rendered problem has a claim-bearing unit; every plan item **S3 retained** has a plan unit. S4 completeness is measured against S3's retained set, not against the source — otherwise the predicate re-decides retention and steals S3's authority | all |
+| `S4-COMP-01` | MECHANICAL | S4 | domain is **S4.problems ∩ S3.rendered** — the intersection, not either set alone. Within it, every problem has a unit whose operator is a claim-bearing operator (`FACT`, `REASONING`, `CLAIM`); every plan item S3 retained has a `PLAN` unit. S4 completeness is measured against S3's retained set, not against the source — otherwise the predicate re-decides retention and steals S3's authority | all |
 
 ---
 

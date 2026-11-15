@@ -37,13 +37,13 @@
     "adjudication": [
       {
         "object": "O01",
-        "temporal": "2024-02 documented",
+        "temporal": "2024-02",
         "adoption": false,
         "evidence": null
       },
       {
         "object": "O03",
-        "temporal": "June-November",
+        "temporal": "June\u2013November",
         "adoption": true,
         "evidence": [
           "S02"

@@ -72,13 +72,13 @@ Checks: every `P*` maps to an S3-rendered problem; no extra or missing problem; 
 
 | predicate | fields it reads |
 |---|---|
-| `S1-AUTH-01` | absence of `adopted`/`adoption`/`selected_claim` in `candidates[*]` |
-| `S1-AUTH-02` | absence of `selected_claim` |
+| `S1-AUTH-01` | absence of `adopted`/`adoption`/`adoption_verdict`/`resolved`/`status_current` in `candidates[*]` |
+| `S1-AUTH-02` | absence of `selected_claim`/`final_claim`/`chosen_claim` |
+| `S1-CAND-01` | `candidates[*]` vs `oracle.expected.candidate_concepts_must_exclude`, by concept identity |
 | `S1-CAND-02` | `candidates[*].anchors` non-empty |
 | `S2-REP-01` | `representations[*].support_refs` non-empty |
 | `S2-TEMP-01` | `adjudication[*].temporal` vs substrate |
 | `S2-ADOPT-01` | `adjudication[*].adoption` vs case expectation |
-| `S2-CONF-01` | non-selected assertion still present in `adjudication` |
 | `S3-INC-01` | `rendered[*]` where `approved_representation is null` |
 | `S3-SEL-01` | `selected_rep` ∈ S2 approved set |
 | `S3-ACCT-01` | `retained ∪ dispositions` = substrate set |

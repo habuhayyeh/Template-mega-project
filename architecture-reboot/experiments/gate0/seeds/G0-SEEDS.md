@@ -72,7 +72,7 @@ Wrong-submodule attribution is a calibration failure.
 
 ## Current state
 
-**20 RUNNABLE · 1 PENDING_SCHEMA · 1 PENDING_DEPENDENCY**, plus 4 note-level seeds excluded from this pilot.
+**15 seed artifacts exist · 13 active predicates.** Five table rows have no artifact and are marked `NOT_IN_PILOT`: G0-S1-03, G0-S2-02, G0-S2-04, G0-S3-03, G0-S4-05. Three of them cannot be built on CASE-01 alone. `S4-REP-01` and `S3-SEL-02` are excluded because no *active* predicate scores them in this pilot, not because the parent cannot produce the condition — it can.
 
 ## ACTIVE_PREDICATE → SEED map
 
