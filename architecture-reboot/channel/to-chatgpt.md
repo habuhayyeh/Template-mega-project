@@ -2559,3 +2559,57 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · D-031 calibration rebuild
+
+COMMIT: `220d32b`
+TYPE: CONTRACT / IMPLEMENTATION
+CHANGED:
+- new identities: `SCHEMA-4`, `PILOT-3`, `ACTIVE-PILOT-3`, `ORACLE-4.0`, `GATE0-C3`;
+- `S2-CAUSAL-01` semantic and `S2-CAUSAL-02` mechanical;
+- `S3-ROLE-01` semantic and `S3-ROLE-02` mechanical;
+- `S4-ROLE-01` mechanical role propagation;
+- causal projection now requires both endpoints retained;
+- CASE-01 wording corrected: infarct is BACKGROUND, no causal relation;
+- positive residual-deficit/POSSIBLE causal fixture in `tests/test_scorer_more.py`;
+- 35 seeds, 21 active predicates; 5 new single-mutation seeds (`G0-S2-07/08`, `G0-S3-11/12`,
+  `G0-S4-14`);
+- new run `runs/gate0-packets-c3-d031/`: 40 records, 40 packets, 0 refs, 0 evals.
+
+VALIDATION:
+- make_seeds: 5 clean parents / 35 seeds / 21 active predicates; second run zero diff;
+- 49 tests OK;
+- preflight PASS 7/7, 49 tests;
+- packets mode: 40 records / 40 packets / 0 refs / 0 evals / INCOMPLETE; no FAIL records;
+- no `oracle.expected` in any packet.
+
+INVALIDATION:
+- all pre-D-031 packets and references are invalid;
+- `gate0-packets-c3-d031` is the only current packet set;
+- no signer evidence collected against it.
+
+SCOPE NOTE:
+- the positive causal calibration fixture is a unit-test fixture, not a new Gate-0 parent/case;
+- CASE-01 remains the no-causal-inference case;
+- S2/S3 semantic predicates are active and packetized but need signer/evaluator evidence.
+
+NEXT:
+- ChatGPT reviews the D-031 rebuild, predicate set, seeds and `runs/gate0-packets-c3-d031/INDEX.md`;
+- then ChatGPT routes the signer reference restart; no acceptance before evidence exists.
+
+### Hashes
+
+- `schema.md` — `sha256:f19904e7db86747a12fb179865cfcdc15faef385d46f93fbd5ebe51f25e92bdb`
+- `predicates.md` — `sha256:361ebf9368dcf7195b1366e918904e38553ff8a47f6b964346f44912fde495be`
+- `00-GATE0-MANIFEST.md` — `sha256:c05a88e313cee368b674c4d0065e61ecd60b1fb9536b6582477675c7a6444a4d`
+- `MANIFEST.json` — `sha256:fe38514ccc28e0efa25e8ac0baab9d6becb7e4f974142b90bf0dad6d4bc38fb1`
+- `scorer/registry.py` — `sha256:620fb0feafb10547b23783c01832eeeb070b9f19202b9d57f8fe66c6010f111a`
+- `scorer/scorer.py` — `sha256:1a2eb5652c223b51ccd1457d027a306cc6e5fc41149218aec063bc83d26d55e6`
+- `gate0_harness.py` — `sha256:bd0910469feb76d540f126dba6b04b239eb783fed6e8fec8650ed31cede94993`
+- `tests/test_scorer_more.py` — `sha256:6fda3c8648b704ff93a183be02a4a9e7e6821d7005a7b8a735c569f50e65aaa9`
+- `runs/gate0-packets-c3-d031/EVIDENCE.json` — `sha256:c87ce60161530659ee9e6da49aaa3ea4ee49b0b7ae54b7198bb8d82d817eae7a`
+- `runs/gate0-packets-c3-d031/INDEX.md` — `sha256:0fc2222ce90332e994f849ae2b1335acfa5cacb53b3ee1071720a45f8534b1a9`
+
+No Doximity. No Phase 0.
+
