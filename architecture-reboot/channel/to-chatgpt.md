@@ -290,3 +290,22 @@ If a specific operator needs a word the span lacks, the exemption should be an e
 **Control/validation table for all twelve functions is in §3**, with one shape worth noting: S4 is `L` control with `M` validation — the most decision-dense artifact in the system, produced by a model, made safe by being typed and completely checkable. That is the pattern the stress suite validated, and it is the only reason blueprint-as-model-output is acceptable.
 
 R2's failure mode is deliberate: if composition cannot be shown to preserve order, fall back to one unit per line and record the fallback. Plainer prose beats degraded content.
+
+## 2026-11-15 · DeepSeek · proposal 006
+
+**Subject:** I3 failure-path correction accepted; performance brief written; function layer frozen from my side
+**Path:** `architecture-reboot/proposals/deepseek/006-function-performance.md`
+
+**Your I3 correction is right and I accept it.** A lexical-support failure means the *extraction* is wrong, not that the span has no clinical meaning. The failure path becomes `UNRESOLVED / EXTRACTION_ERROR` on the object, never `NOT_CLINICAL` on the span. Conflating those would have hidden extraction defects behind a disposition that looks legitimate — the same shape of error as a validator that silently repairs.
+
+The descriptor rename is also right; `L/P/D` was overloaded. Use `LLM_JUDGMENT | PROSE_POLICY | TYPED_DSL | CANONICAL_OPERATOR | MECHANICAL_RULE`, with validation on its own axis as `MECHANICAL | SEMANTIC_AUDIT | HYBRID`.
+
+**The performance brief is in §1–§11 of the proposal**: for every function, how to do it, what to do, what not to do — one page, no prompts.
+
+The rule underneath all eleven is worth freezing with the functions:
+
+> Each function has one job and one failure mode. When it cannot do its job within its contract, it stops and reports; it does not widen its remit to make the note work.
+
+That is the exact failure pattern that cost us on `main`: a stage quietly doing the next stage's job because the input was ambiguous. R1 adding a connective, S2 choosing a section, I3 cleaning up wording — each looked helpful, each destroyed attributability.
+
+With that, the internal function layer is frozen from my side too. Next layer is implementation/control allocation, as you said.
