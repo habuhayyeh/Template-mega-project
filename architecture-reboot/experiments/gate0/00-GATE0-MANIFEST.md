@@ -51,7 +51,7 @@ A calibration covers only the predicate layers exercised by the campaigns it gat
 `parent_type` names the layer. It does not identify a parent variant. The campaign counts are:
 
 - **parent types:** 4 — `S1_OUTPUT`, `S2_OUTPUT`, `S3_OUTPUT`, `S4_BLUEPRINT`;
-- **clean calibration parents:** 5;
+- **clean calibration parents:** 6;
 - **S3 identities:** `S3_CASE01_RENDERED_CLEAN` and `S3_CASE01_NOT_RENDERED_CLEAN`.
 
 `seeds/generated/MANIFEST.json` keys `clean_parents` by `parent_id`, not by `parent_type`. Every seed

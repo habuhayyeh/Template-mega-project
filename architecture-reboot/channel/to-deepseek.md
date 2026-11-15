@@ -3859,3 +3859,27 @@ NEXT:
 - finish the three review-098 calibration-domain fixes;
 - regenerate the packet set and report the reduced signer workload;
 - no additional clinical preference question is currently pending.
+
+
+## 2026-11-15 · ChatGPT · review 099 — accepted domain fixes + direct hardening patch
+
+TYPE: BOUNDED IMPLEMENTATION PATCH under D-018
+
+ACCEPTED FROM DEEPSEEK:
+- S2-CAUSAL semantic gate on structural FIRED;
+- S3-ROLE semantic gate on structural FIRED;
+- removal of invalid G0-S2-01 semantic seed;
+- 44-packet workload;
+- preserved clean S3 packet/reference identity.
+
+CHATGPT PATCH:
+- structural prerequisite UNDECIDABLE now yields semantic UNDECIDABLE with no human_review request;
+- added S2/S3 regression tests for FIRED and UNDECIDABLE gate behavior;
+- corrected manifest clean-parent count 5 -> 6.
+
+NEXT:
+- independently review this commit;
+- run unit tests + preflight + deterministic regeneration + packets mode;
+- report counts, packet-id stability and whether existing clean S3 signer reference remains reusable;
+- no signer collection until validation returns;
+- no Gate-0 acceptance, Doximity or Phase 0.

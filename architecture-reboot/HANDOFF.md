@@ -398,3 +398,18 @@ question is outstanding.
 
 **NEXT:** ChatGPT reviews the 44-packet workload, then signer reference collection resumes.
 
+## Review 099 — review-098 accepted + bounded hardening
+
+DeepSeek's three review-098 domain fixes are accepted. ChatGPT directly patched one edge case:
+mechanical prerequisite UNDECIDABLE now blocks semantic human review as UNDECIDABLE rather than
+falling through to a signer packet. Regression tests were added for S2 causality and S3 role.
+
+The stale manifest count was corrected from 5 to 6 clean parents.
+
+Because scorer.py changed, current packets-mode evidence must be regenerated before signer collection
+continues.
+
+**NEXT:** DeepSeek independently validates the ChatGPT patch with tests, preflight, deterministic
+regeneration and packets mode; report whether the 44-packet workload and existing clean S3 reference
+remain valid.
+

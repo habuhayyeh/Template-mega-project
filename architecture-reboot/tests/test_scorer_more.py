@@ -130,6 +130,17 @@ class AdditionalPredicateTests(unittest.TestCase):
         bad['s2']['causal_relations'][0]['strength'] = 'CERTAIN'
         result = score(bad, self.deps_s2, self.oracle, self.rules)
         self.assertEqual(find(result, 'S2-CAUSAL-02')['status'], FIRED)
+        semantic = find(result, 'S2-CAUSAL-01')
+        self.assertEqual(semantic['status'], SILENT)
+        self.assertNotIn('human_review', semantic)
+
+        missing = copy.deepcopy(s2)
+        del missing['s2']['causal_relations']
+        result = score(missing, self.deps_s2, self.oracle, self.rules)
+        self.assertEqual(find(result, 'S2-CAUSAL-02')['status'], UNDECIDABLE)
+        semantic = find(result, 'S2-CAUSAL-01')
+        self.assertEqual(semantic['status'], UNDECIDABLE)
+        self.assertNotIn('human_review', semantic)
 
         s3 = copy.deepcopy(self.s3)
         result = score(s3, self.deps_s3, self.oracle, self.rules)
@@ -137,6 +148,17 @@ class AdditionalPredicateTests(unittest.TestCase):
         del s3['s3']['rendered'][0]['encounter_role']
         result = score(s3, self.deps_s3, self.oracle, self.rules)
         self.assertEqual(find(result, 'S3-ROLE-02')['status'], FIRED)
+        semantic = find(result, 'S3-ROLE-01')
+        self.assertEqual(semantic['status'], SILENT)
+        self.assertNotIn('human_review', semantic)
+
+        missing = copy.deepcopy(self.s3)
+        del missing['s3']['rendered']
+        result = score(missing, self.deps_s3, self.oracle, self.rules)
+        self.assertEqual(find(result, 'S3-ROLE-02')['status'], UNDECIDABLE)
+        semantic = find(result, 'S3-ROLE-01')
+        self.assertEqual(semantic['status'], UNDECIDABLE)
+        self.assertNotIn('human_review', semantic)
 
         s4 = copy.deepcopy(self.s4)
         s4['s4']['problems'][0]['encounter_role'] = 'BACKGROUND'
