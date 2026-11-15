@@ -1665,3 +1665,67 @@ All ten governing-source hashes in `MANIFEST.json` were verified against the cur
 Reviewer inspection of this source contract. No scorer exists; Gate 0, Doximity and Phase 0 remain
 unrun. The clean NOT_RENDERED parent is structurally clean for `S3-CAND-01`, not a clinical claim that
 C1 should not render; reason correctness stays a separate semantic audit.
+
+## 2026-11-15 · DeepSeek · review 080 source pass
+
+**Commit:** `1a0b5f7` · **second run: zero diff** across 35 generated files.
+
+### Review 080 fixes
+
+1. **Projection map has one executable authority.** `OP_CONTRACTS` in `make_seeds.py` freezes the only
+   valid metadata for each op. Every `PROJECTION_MAP` rule is compared exactly on destination, owner,
+   source, source path, condition, requirement, transform and `expands`; a mismatch fails the build.
+   Negative test: changing `s2_relations.source_path` now fails with
+   `does not match op contract`.
+2. **HUMAN_REVIEW calibration is one policy.** Gate 0 requires **three independent blinded human
+   judgments**. All three must detect the seeded defect and all three must satisfy
+   `FULL_SILENCE-WITHIN-LAYER`; 2/3 fails. A single judge repeating is `1 judge × 3 passes`. A
+   mechanical pre-filter may prepare evidence but is not a judgment and cannot substitute for one; if
+   it fully decides the branch, the branch is mechanical and must be reclassified.
+3. **S2-REP-01 now tests semantic support.** The instruction judges whether members and relations
+   support the problem's claim, not merely id/ref existence. New `G0-S2-02` keeps every id and support
+   ref valid but adds aspirin object `O07` to the falls representation, so the representation is
+   unsupported by its members. `G0-S2-01` remains the structural empty-`support_refs` branch.
+4. **S4-PROJ summary corrected.** `G0-S4-09` is the wrong-owner-group seed; `G0-S4-11` is a valid-field
+   fabricated duplicate group, not a wrong-owner relation.
+
+### Counts
+
+5 clean parents across 4 parent types: S1 1, S2 1, S3 2, S4 1. **28 seeds**, 16 active predicates.
+
+Per predicate: S1-AUTH-01 2 · S1-AUTH-02 1 · S1-CAND-01 1 · S1-CAND-02 1 · S2-ADOPT-01 1 ·
+S2-REP-01 2 · S2-TEMP-01 1 · S3-ACCT-01 1 · S3-CAND-01 6 · S3-INC-01 1 · S3-SEL-01 1 ·
+S4-COMP-01 1 · S4-INC-01 2 · S4-MEM-01 1 · S4-PROJ-01 5 · S4-REP-01 1.
+
+Seed mutations: **28/28 checked · 0 no-op · 0 multi-diff · no seed hash equals its parent hash.**
+
+### Changed files
+
+- `architecture-reboot/tools/make_seeds.py` — `OP_CONTRACTS` binding and semantic seed.
+- `AX-S1S2-D/schema.md`, `AX-S1S2-D/predicates.md` — map authority, semantic support, HUMAN_REVIEW.
+- `experiments/gate0/00-GATE0-MANIFEST.md`, `seeds/G0-SEEDS.md` — three-judge policy, counts and
+  corrected S4-PROJ branch labels.
+- `gate0/seeds/generated/G0-S2-02.json` (new) and `MANIFEST.json` (regenerated).
+- `HANDOFF.md`.
+- Reviewer paths untouched.
+
+### Governing hashes
+
+- `schema.md` — `sha256:47d8afd3fe4380016dc618ccad30665536343f142820955bfa5687dbfc25f5c3`
+- `predicates.md` — `sha256:f6fd7174ade7678d531d2f6c04461fe6618a2e3c9ed2d550b7a208d6e30b2639`
+- `G0-SEEDS.md` — `sha256:620479896710d7575fbc94e7a2a6317d9fbcacf883ae25875abb6f1d922ae8c5`
+- `00-GATE0-MANIFEST.md` — `sha256:fe51e5ecf3db87a50a90318a5dc1c89e54e7e13d5fa7ee4c50efe05021d4d018`
+- `make_seeds.py` — `sha256:eb9f7988354b7903a228ba59ab20d4f399f51a43d6e86617e97cb296183cc194`
+- `oracle.json` — `sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927`
+- projection map — `sha256:3cdcea61e9d77ceeb6db0a7e80678c466362cceaffb1ca3a3524c163a2ae5497`
+- generated view — `sha256:e3f84f9708f10691d2dedf37cdfdc67f2166caa4a85155827120c49f872d93f9`
+- `REASON-1` — `sha256:cc9b61341631077f831f9932c131f43a6a8119980de4d42863096f7dfee479df`
+- `MANIFEST.json` file bytes — `8424a541232a7af5e9fcd782fc205005c22b3008de150b4932360bd3bdd6b8ee`
+
+All ten governing-source hashes in `MANIFEST.json` were verified against the current files.
+
+### Still open
+
+Reviewer inspection of this source contract. No scorer exists; Gate 0, Doximity and Phase 0 remain
+unrun. `S2-REP-01` now has a semantic-support seed, but the reviewer must confirm that adding `O07` is
+the intended semantic defect and that the three-judge policy is acceptable for Gate 0.
