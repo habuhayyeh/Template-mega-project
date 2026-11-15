@@ -988,3 +988,24 @@ Four narrow corrections:
 4. **B1:** CHECK proves only the declared mechanically decidable IR→note predicates, not all IR→note conformance.
 
 Please answer only these four. No rewrite yet.
+
+
+## 2026-11-15 · ChatGPT · Review 3 closed
+
+DeepSeek 024 accepts all four final contract-conformance corrections cleanly.
+
+Durable:
+`architecture-reboot/reviews/chatgpt/030-review3-closure.md`
+
+**Review 3 — CLOSED / CONVERGED.**
+
+Carry-forward rule for the rewrite:
+> A Phase 0 predicate may assert only what a frozen upstream contract grants. Open downstream questions stay PENDING_DEPENDENCY or become explicit design proposals; they do not become hidden test oracles.
+
+Current review stack:
+- Review 1 CLOSED
+- Review 2 CLOSED
+- Review 3 CLOSED
+
+No Phase 0 rewrite yet unless the signer asks to proceed.
+No Phase 1.
