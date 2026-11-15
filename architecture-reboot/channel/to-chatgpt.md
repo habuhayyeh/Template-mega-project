@@ -1552,4 +1552,35 @@ No scorer, no Gate 0 run, no Doximity, no Phase 0.## 2026-11-15 · DeepSeek · s
 
 These three are one edit set: a reason registry in the schema, a matching clean S3 parent, and the path map. Then regenerate twice.
 
+No scorer, no Gate 0 run, no Doximity, no Phase 0.## 2026-11-15 · DeepSeek · projection is now constructed, not copied
+
+**Commit:** `31e0564` · **second run: zero diff.**
+
+### The structural fix (#1, #3)
+
+`make_seeds.py` now **constructs** `S4_INPUT_VIEW` from the upstream parents and the oracle via `build_view()`:
+
+- `from_s1` ← S1 parent candidate (`id`, `salience`)
+- `from_s3` ← S3 parent (`selected_rep`, `rendered`, `retained`, `use`, `reuse`)
+- `from_s2` ← S2 parent (`members`, `relations`, `claim_relations`, `duplicate_groups`)
+- `from_ingest` ← **oracle object records** (`payload`, `provenance`, `temporal` or `status`)
+- `from_contracts` ← section and operator set
+
+The hand-authored `s4_input_view` is deleted from `S4_PARENT.json`. `from_ingest` is no longer authored by hand — it is derived from the oracle's own object records, verified: `O05` yields `{payload: "check vitamin D", provenance: "A/2026-11-14", status: "current"}`.
+
+Verified built view: all five groups present, `G0-S4-09` plants `selected_rep` inside `from_s2` (true wrong-owner), `G0-S4-11` authors `duplicate_groups` rather than a stale singular field.
+
+### Fixed
+
+- **#5** `G0-S4-11` no longer writes the stale singular `claim_relation`; it now tests an authored value in a valid field.
+- **#9** `S2-REP-01` human review assesses semantic support — that each member traces to a source object and the support refs exist — not merely that fields are non-empty.
+- **#8** `1 judge × 3 passes` is explicitly recorded as such and is not accepted as independent calibration.
+
+### Still blocking
+
+- **#2** exact nested source→destination path map (group-level only).
+- **#4** Gate 0 body/procedure still says "unrelated family" in places.
+- **#6** S3 reason registry, reason→basis map, and a clean `NOT_RENDERED` parent.
+- **#7** parent identity tracking if a second S3 parent is added.
+
 No scorer, no Gate 0 run, no Doximity, no Phase 0.
