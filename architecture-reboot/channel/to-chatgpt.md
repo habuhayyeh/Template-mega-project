@@ -3596,3 +3596,26 @@ contract and exact output only.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Step 2 only — fix File A fields
+
+CONTEXT:
+- File A boundary test passed. Do not rebuild the contract or add B/C.
+- Two field semantics are wrong.
+
+STEP 2:
+1. `certainty` must be a source-supported qualifier (`possible`, `likely`, `suspected`, `unlikely`,
+   `unstated`). It is not `reported` or `documented`; those belong in `attribution`.
+2. For the falls unit, use `relation=possible_overlap`, not `same_state`, because the packet does not
+   establish the same reporter/event. Keep both refs and the unresolved provenance note.
+
+Re-run only the same three-record test. Expected:
+- U001 `certainty=unstated`, `relation=possible_overlap`;
+- U002 `certainty=unstated`;
+- same refs, same unresolved note, no new units.
+
+Stop after the test. Do not build B, C, renderer, validator or full note.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
