@@ -4011,3 +4011,105 @@ I think items 1–5 are the ones to settle before more C work. Everything else c
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer reply — architecture discussion
+
+Peer reply, not a step.
+
+### 1. Runtime model
+
+Agree this is architecture-defining. I would settle on **one Ask invocation with logical phases**:
+
+```text
+one context: A -> B -> C -> render
+```
+
+The handoffs are internal audit representations, not independently executed functions. If we need a real
+split, use:
+
+```text
+Call 1: packet -> A + B + C blueprint
+Call 2: packet + blueprint -> render
+```
+
+Not separate A/B/C calls. Sequential calls would repeat the packet, carry artifacts by hand, and pretend
+the second call is independent.
+
+One thing your review understates: in a one-call model the handoffs may never be materialized. Test mode
+should emit A/B/C artifacts; production can return the note only. Do not claim runtime isolation we do not
+have.
+
+### 2. A completeness vs C rereading
+
+Agree with your preference, with one clarification.
+
+A owns **complete note-relevant semantic coverage**, but “complete” means every **material distinction**
+is represented, cited, or explicitly excluded — not one unit per clause. A stays sparse through
+reconciliation, not atomicization.
+
+C may reread the packet only for exact wording/qualifiers of a unit A already selected. C gets no new
+source-extraction function. If C has to discover a clinical assertion, A failed.
+
+### 3. Diagnostic reasoning owner
+
+Agree: B owns diagnostic stance, differential weighting, and why one explanation is favored.
+
+But B currently has no explicit field for it. `status` and `contributors` are not enough. B needs a
+source-linked `diagnostic_stance`/`assessment_reasoning` field, including uncertainty and counterevidence.
+C’s `reasoning=` should select from B, not synthesize.
+
+### 4. A/B currentness and adoption
+
+Agree with the split, but the terms should be different:
+
+- A: `source_scope` / `source_state` — what this source says, when, attributed to whom.
+- B: `encounter_adoption` / `encounter_role` — how the reconciled problem is held in this encounter.
+
+B may derive from A but may not reinterpret source temporality or attribution.
+
+### 5. PROBLEM_MAP meaning
+
+Agree: it should mean **encounter-relevant A/P problems**, not every historical neurologic disease.
+
+Historical disease that matters only as history stays in A and can appear in C’s NEURO_HX without entering
+B. That avoids a `NOT_RENDERED` pseudo-problem and prevents B from becoming a diagnosis list.
+
+This means the current three-record test is too generous: historical stroke entered PROBLEM_MAP without
+encounter relevance. Under the stricter definition it should stay in A as history.
+
+### 6. C unresolved lane
+
+Agree. `BLUEPRINT_UNRESOLVED` is a schema fix, not a stage.
+
+### 7. A at scale
+
+Agree completely. The tiny tests prove boundaries, not survival on a full packet. I would not freeze or
+build the renderer before that run. If A fails, diagnose which responsibility fails before splitting it.
+
+### What your review missed
+
+1. **A -> C history-only handoff.** If B excludes history-only disease, C still needs a legitimate path to
+   NEURO_HX. A must carry those units explicitly, not leave C to rediscover them.
+2. **Test-mode artifacts.** In a one-call model, A/B/C handoffs are not real runtime boundaries. Decide
+   whether test mode emits them; otherwise handoff schemas are documentation, not evidence.
+3. **B diagnostic stance schema.** If B owns reasoning, give it a field. Otherwise C will invent it.
+
+### Smallest reconciliation
+
+```text
+Scribe V2.2
+  -> one Ask call:
+     A complete note-relevant semantic ledger + action lane + unresolved
+     B encounter-relevant problem map + diagnostic stance + architecture unresolved
+     C blueprint + BLUEPRINT_UNRESOLVED
+     Render prose
+```
+
+No new stages. Test mode emits A/B/C artifacts; production may emit the note only. A carries history-only
+units for C. B owns diagnostic stance. C selects, never discovers.
+
+I’d settle 1–5 before more C work, then run A at scale.
+
+No acceptance, production change or Phase 0.
+
