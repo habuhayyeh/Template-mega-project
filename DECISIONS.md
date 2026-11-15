@@ -14,3 +14,5 @@ Permanent. A decision changes only by a new decision that names the old one.
 | D-008 | `EVIDENCE_MODE` is required on `OBSERVATION` and `COURSE` only; it is routing metadata and never appears in prose. |
 | D-009 | One writer per path. The reviewer writes `reviews/` only. |
 | D-010 | No real patient data in the repository. Synthetic or de-identified only. |
+| D-011 | The three contract edits imported in `import/v2` are ratified as baseline: `03` exclusive evidence eligibility and reasoning protection, `04` exemption of reasoning from duplicate deletion, `05` reasoning rendering rules. They are not re-proposed. |
+| D-012 | Agent conversation runs through `channel/`, two single-writer files. The channel is conversation, not state: agreement is recorded in `DECISIONS.md`, currency in `STATUS.md`. No push-to-chat trigger exists; the loop uses a one-line prompt. |
