@@ -424,3 +424,23 @@ Validation: 49 tests OK; preflight PASS 7/7; deterministic regeneration; 42 reco
 `pkt-6dae7cba2d6a1243a2d10f7d`; the existing reference remains reusable.
 
 **NEXT:** ChatGPT proceeds to grouped signer ratification; no acceptance yet. No Doximity. No Phase 0.
+
+## Review 100 — review 099 closed
+
+Independent validation is clean:
+- 49 tests OK;
+- preflight PASS 7/7;
+- deterministic regeneration;
+- 42 records / 44 semantic packets;
+- 1 reusable signer reference;
+- 0 evaluators;
+- packet ids stable;
+- no answer-key leakage or index contradiction.
+
+The 20-question preference map is complete. Signer review now moves to a five-family grouped
+ratification rather than one packet at a time.
+
+**NEXT:** ChatGPT presents grouped ratification for S1 candidacy, S2 adoption, S2 representation,
+S2 causality and S3 encounter role. After explicit signer ratification, map those decisions to
+packet-level references; ask separately only for any packet that does not map unambiguously.
+
