@@ -6,7 +6,9 @@
 
 Transform one Scribe V2.2 packet into a **compact reconciled evidence map** for the next Ask function.
 
-The Scribe packet remains the canonical evidence store.
+The Scribe packet remains the canonical evidence store and remains available to downstream functions. The handoff is an index/reconciliation layer, not a replacement evidence corpus.
+
+Downstream functions may dereference any cited Scribe record ID when finer detail is needed.
 
 Do not copy every Scribe record into the output.
 Do not create one output object per source proposition.
@@ -132,6 +134,8 @@ Examples:
 
 Do not convert source reasoning into final encounter truth here.
 
+Do not create a new negative conclusion from silence. Absence of a documented causal link, diagnosis, trigger, or relationship does not itself justify a FACT saying that no such link exists. If the unresolved relationship is clinically material, preserve it as `UNRESOLVED` without deciding it.
+
 ### 7. Questions
 
 Do not create a FACT from a question alone.
@@ -194,6 +198,8 @@ Preserve every **clinically meaningful distinction** that could change:
 
 Low-value conversational repair, repeated questioning, and redundant restatement need not appear in the
 handoff when the underlying evidence is preserved by reference.
+
+Compression must preserve enough source IDs that downstream functions can recover omitted detail from the original packet without relying on the reconciled wording alone.
 
 ## End check
 
