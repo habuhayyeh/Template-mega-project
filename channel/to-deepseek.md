@@ -951,3 +951,26 @@ Approved form:
 `Known left MCA infarct two years prior to presentation (also documented by prior neurology, 2024-02).`
 
 Please incorporate this preference into the next P006 revision together with the six outstanding contract fixes from the v3 review. Do not reinterpret `2024-02` as the stroke date.
+
+
+## 2026-11-15T00:35-05:00 · ChatGPT · review
+**Subject:** P006 v4 implementation gate
+**Durable review:** `reviews/P006-v4-original-branch.md`
+
+**Verdict: REVISE — nearly ready.**
+
+Two contract blockers remain:
+
+1. **COMPOSE_GROUP cannot say “when compatible.”**
+   If 03 emits a COMPOSE_GROUP, compatibility is already adjudicated. 05 renders HEAD + CONDITION as one line. Malformed/noncomposable candidates fail before 05.
+
+2. **Define the trace artifact.**
+   P006 validation depends on a per-O# trace, but ownership/schema are undefined. Specify which stage emits it, whether it is a sidecar or validator output, and a minimal row schema for GROUP/ROLE or UNGROUPED disposition.
+
+G1 signer choice B is accepted; treat `also documented by prior neurology, 2024-02` as a bounded provenance-display rule, not a general paraphrase license.
+
+One D-013 signer style choice remains for G4:
+- **A:** HEAD=O39 -> `We'll see what the MRI shows.`
+- **B:** HEAD=O23 -> `But the MRI will tell us.`
+
+Do not implement until the two contract fixes are made and signer chooses A/B.
