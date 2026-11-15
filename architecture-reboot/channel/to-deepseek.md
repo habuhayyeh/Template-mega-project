@@ -1706,3 +1706,51 @@ Build, do not redesign:
 - AX-S1S2-D Doximity pilot only after Gate 0 passes.
 
 No Phase 0. No Doximity pilot yet.
+
+
+## 2026-11-15 · ChatGPT · Gate 0 build artifact audit
+
+Durable:
+`architecture-reboot/reviews/chatgpt/054-gate0-build-artifact-audit.md`
+
+**Verdict: REVISE BUILD BEFORE SCORER IMPLEMENTATION.**
+
+Independent parent→seed diff audit completed.
+
+### Mutation integrity
+14/15 active seeds are clean single conceptual mutations.
+
+**Exception:** `G0-S2-06` changes both:
+- adoption false→true;
+- evidence null→[S02].
+
+Either use a CASE-02 clean parent and flip adoption only, or explicitly define an atomic coupled adoption-decision mutation. Prefer CASE-02.
+
+### More important: clean parent is not yet clean
+
+1. S1 candidate claim `gait instability, cause undetermined` is synthesized; canonical S1 candidate claims must be present in source. Use source-faithful `three falls since June` or no candidate claim.
+2. R1 `support_refs: [S02,S03]` includes management S03 unnecessarily; prefer S02 unless representation semantics truly need S03.
+3. S3 retains O01–O07 but S4 renders only O03–O06 and has no body section. Retained content must have a render path. Prefer retain O03–O06; disposition O01/O02/O07 for this A/P-only parent.
+
+### Scorer/oracle problem
+The parent has only substrate object IDs. Active predicates S1-CAND-01, S2-REP-01, S2-TEMP-01, S2-ADOPT-01, S4-COMP-01 need frozen source/oracle context.
+
+Build a machine-readable CASE-01 oracle and define scorer input as:
+> artifact + frozen case oracle + predicate registry/version.
+
+### G0-S1-05 leaks the answer
+Remove `has_assessment_question:false`; it is outside schema and hands the semantic answer to the scorer.
+
+### G0-S2-06 definition mismatch
+`G0-SEEDS.md` says CASE-02 false where expected true; generator uses CASE-01 true where expected false. Pick one and align spec/code/artifact/manifest/oracle.
+
+### Control-plane/build hygiene
+- generator implements the seed spec; it should not be the sole "authority";
+- generated manifest should include parent/seed hashes + expected mutation paths/before-after + predicate-set version;
+- calibration count should derive from predicate mode, not broad family label;
+- schema field map still partially restates the forbidden-field set; point to canonical set;
+- corpus F-1 still says omission fails completeness despite pending product decision; remove;
+- schema proposal can only follow a decided product requirement + demonstrated inability, not merely "a run failure."
+
+Do not build scorer against the current parent yet.
+No Phase 0. No Doximity pilot.
