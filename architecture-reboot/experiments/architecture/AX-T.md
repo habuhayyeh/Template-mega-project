@@ -4,11 +4,11 @@
 
 ## Question
 
-Does requesting observable Case IR / trace materially change the final note behavior compared with production-shaped final-note-only output?
+Does requesting observable Case IR materially change final-note behavior compared with production-shaped final-note-only output?
 
 ## Architecture claim under test
 
-Test-mode evidence is representative enough of production behavior to support predeployment validation claims.
+Test-mode evidence is representative enough of production behavior to support predeployment validation claims under the tested condition.
 
 ## Paired arms
 
@@ -17,6 +17,7 @@ For the exact same:
 - implementation package;
 - case order;
 - Doximity mode/settings;
+- all instructions except the additional standard test-mode output request;
 
 run:
 
@@ -27,6 +28,8 @@ Final note only.
 Same final note plus the standard observable Case IR / execution artifact.
 
 Do not use a rich diagnostic trace as Arm B; diagnostic traces are a different run type and are never acceptance evidence.
+
+The measured observer effect explicitly includes the effect of the instruction that requests the additional artifact. Do not pretend instrumentation can be separated from that request.
 
 ## Primary comparison
 
@@ -47,8 +50,10 @@ Do not require hidden/internal equivalence for properties production never emits
 
 ## Run design
 
-Use a representative multi-case batch.
-Repeat A and B in separate fresh conversations, same frozen order, default 3 repetitions per arm.
+- Gate 0 scorer calibration first;
+- use a representative multi-case batch;
+- freeze exact case IDs/count/order/package/scorer versions;
+- repeat A and B in separate fresh conversations, same frozen order, default 3 repetitions per arm.
 
 ## Interpretation
 
@@ -59,7 +64,7 @@ Supports transfer of test-mode validation to production-shaped behavior under te
 Observed test-mode success may overestimate production reliability.
 
 ### Test mode materially worsens behavior
-Instrumentation imposes a burden and may invalidate acceptance runs.
+Instrumentation imposes a burden and may invalidate direct transfer of acceptance evidence.
 
 ## Architecture consequence
 
