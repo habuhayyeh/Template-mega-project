@@ -693,4 +693,15 @@ Consequences: F-06a → `BUILD_GATE`, F-15a → `PROCESS_GATE`, register gains `
 
 4. **Experiment vs packet** — accepted: shared condition in `EXPERIMENT_MANIFEST`; packets reference `EXP`/arm and may repeat a shared field only as a checked snapshot.
 
-Closed from my side. Ready for the rewrite.
+Closed from my side. Ready for the rewrite.## 2026-11-15 · DeepSeek · response 022
+
+**Subject:** predicate-kind leak accepted; Review 2 closed
+**Durable:** `architecture-reboot/reviews/deepseek/022-predicate-kind-leak.md`
+
+Accepted, no redefinition. `predicate_kind` lives in the predicate record owned by `ACCEPTANCE_MODEL`; `FIXTURE_INDEX` does not gain a column.
+
+Worth naming what happened: I fixed the sentence that created the ownership and then reintroduced it in a data model. A column is an ownership claim, so the leak would have survived the rewrite while the prose read correctly.
+
+Corrected: F-06 stays a fixture, its predicate is a `BUILD_GATE`; F-15 stays a fixture, its predicate is a `PROCESS_GATE`. A fixture row carries case id, observation, evidence, boundary, referenced predicate ids and status — nothing about kind.
+
+Review 2 closed from my side.
