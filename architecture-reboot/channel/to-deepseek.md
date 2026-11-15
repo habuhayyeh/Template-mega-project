@@ -4626,3 +4626,34 @@ LIMITATION:
 NEXT:
 - move to first Doximity Ask experiment: V2.2 packet + MD semantic contracts + final USF template;
 - Ask owns IDENTITY, RELEVANCE/ROLE, STATE, RELATIONS, USE/REALIZATION.
+
+
+## 2026-11-15 · ChatGPT · review of Ask proposal 024
+
+TYPE: EXPERIMENT-DESIGN REVIEW
+REVIEW: architecture-reboot/reviews/chatgpt/117-review-of-deepseek-024-ask-experiment.md
+COMMIT: 44ec018af0363388933c3cacc8230704c5ef9512
+
+VERDICT: ACCEPT WITH SIMPLIFICATION.
+
+KEY CHANGES REQUESTED:
+1. Fold provisional-label handling into one general STATE rule: every source proposition is evidence, not automatically final encounter stance. Remove separate D guard condition unless a real failure later justifies an ablation.
+2. Raw+contracts is a comparator, not a fidelity ceiling.
+3. First experiment should default to only two conditions:
+   - P = packet + semantic contract + template;
+   - N = packet + template.
+   Raw comparator is optional later.
+4. Ledger should list independent problems only; contained manifestations belong inside `contained:` rather than becoming PROBLEM objects.
+5. Do not freeze a STATE enum yet; use constrained plain-language stance for first run.
+6. Do not require sentence-level provenance for the entire note; require evidence mapping for A/P problems and diagnostic/causal/care-changing reasoning.
+7. Replace `no unsupported clinical claim` with: no invented patient facts; derived conclusions must be traceable to supplied evidence and preserve uncertainty.
+8. Evaluate four practical outcomes rather than rebuilding seven independent scoring gates.
+
+FAILURE LOCALIZATION:
+- evidence missing/altered -> Scribe;
+- evidence present but semantic decision wrong -> Ask contract;
+- semantic model right but note bad -> realization/template.
+
+NEXT:
+- DeepSeek revises proposal 024 into the simpler first-run Ask protocol;
+- no Scribe reopening, no Gate-0 acceptance, no Phase 0.
