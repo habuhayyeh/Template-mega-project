@@ -23,10 +23,12 @@ S4 can remain one top-level submodule while internally freezing:
 Hold identical:
 - S1 candidates + salience inputs;
 - S2 adjudicated relations/adoption + approved claim representations;
-- S3 rendered-problem set + selected representations + retained-use map;
+- S3 rendered-problem set + exactly one selected representation per rendered A/P problem + retained-use map;
 - section/style/operator contracts.
 
 No raw-source ambiguity should be needed to make the tested S4 decisions.
+
+This is an S4 ceiling test under fixed upstream substrate, not a claim about production end-to-end behavior.
 
 ## Fixture families
 
@@ -40,7 +42,10 @@ Include cases stressing:
 7. explicit reuse;
 8. standing item;
 9. differential claim representation;
-10. shared-action case may be excluded here and tested separately in AX-SHARED unless its representation is already frozen.
+10. S2 had multiple semantically selection-safe representations, S3 selected exactly one, and S4 must honor that exact selected representation without revisiting alternatives;
+11. shared-action case may be excluded here and tested separately in AX-SHARED unless its representation is already frozen.
+
+A fixture that hands S4 two unselected representations is malformed upstream structure, not a valid ambiguity stress case.
 
 ## Scored dimensions
 
@@ -53,20 +58,23 @@ Score independently:
 - final problem order;
 - unit order;
 - reuse accounting;
-- completeness/accounting validity.
+- completeness/accounting validity;
+- fidelity to S3's selected claim representation.
 
 Do not collapse into one S4 pass percentage.
 
 ## Run design
 
-Artifact-level S4 batch only.
-Repeat exact same frozen batch/order in 3 fresh conversations.
-If any family is unstable, run a diagnostic single-case trace and then a targeted S4-only confirmation.
+- Gate 0 scorer calibration first;
+- artifact-level S4 batch only;
+- freeze exact case IDs/count/order/package/scorer versions;
+- repeat exact same frozen batch/order in 3 fresh conversations;
+- if any family is unstable, use a diagnostic single-case trace and then a targeted S4-only confirmation.
 
 ## Interpretation
 
 ### Stable and correct
-Supports keeping S4 as one architectural submodule.
+Supports keeping S4 as one architectural submodule under the tested fixed-substrate condition.
 
 ### Stable and wrong
 Contract/schema/representation defect, not stochasticity.
