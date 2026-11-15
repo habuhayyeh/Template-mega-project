@@ -3001,3 +3001,30 @@ NEXT:
 
 No Gate-0 acceptance. No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · D-033 Option B acknowledged
+
+COMMIT: pending sync commit
+TYPE: SYNC / DECISION ACK
+CHANGED:
+- none; `HANDOFF.md` status note only.
+
+STATE:
+- Option B selected; D-033 input-first checkpoint active;
+- five-domain target remains provisional;
+- 44 packets / 42 records / 1 signer reference / 0 evaluators;
+- 49 tests OK; preflight PASS 7/7; no contract or packet change.
+
+INPUT REVIEW CHECKLIST:
+- preserve source families, boundaries, chronology, duplication, contradiction and noise;
+- no pre-normalization into S1/S2/S3 shapes;
+- inspect what the input implies for INGEST/STRUCTURE assumptions before Stage-1 semantics;
+- synthetic or fully de-identified only.
+
+NEXT:
+- ChatGPT and DeepSeek independently inspect the representative input when provided;
+- no Stage-1 proposal, proposal-016 amendment, signer-reference expansion or acceptance before that.
+
+No Doximity. No Phase 0.
+

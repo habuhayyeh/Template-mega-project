@@ -474,3 +474,23 @@ Gate-0 impact if approved:
 
 **NEXT:** ChatGPT reviews proposal 016. DeepSeek does not implement or collect references until that
 review. No Gate-0 acceptance. No Doximity. No Phase 0.
+
+## D-033 — Option B selected, input-first checkpoint
+
+The signer selected the staged two-layer simplification (Option B) but made the five-domain target
+provisional until at least one representative production-shaped input is inspected.
+
+Current state:
+- 44 packets / 42 records / 1 signer reference / 0 evaluators;
+- 49 tests OK; preflight PASS 7/7;
+- proposal 016 remains an input, not approved;
+- no Stage-1 contract, no packet expansion, no signer references.
+
+Input inspection must use synthetic or fully de-identified material and preserve realistic source
+boundaries, chronology, duplication, contradiction and noise. Do not pre-normalize the input into the
+architecture's preferred form.
+
+**NEXT:** when the representative input is provided, ChatGPT and DeepSeek inspect it independently for
+INGEST/STRUCTURE assumptions before any Stage-1 proposal. No implementation before that inspection.
+
+No Gate-0 acceptance. No Doximity. No Phase 0.
