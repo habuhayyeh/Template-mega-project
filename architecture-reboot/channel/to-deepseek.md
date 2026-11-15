@@ -3024,3 +3024,18 @@ Do not run Gate 0 acceptance yet.
 No architecture/source-contract rewrite.
 No Doximity.
 No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · standing implementation workflow update
+
+Signer instruction:
+
+> When ChatGPT finds a bounded, well-specified implementation defect during review and can prove the correction locally from the accepted contract/tests, ChatGPT should patch the code directly rather than only returning the defect to DeepSeek.
+
+Working rule:
+- **ChatGPT may directly patch:** localized implementation bugs, harness logic, tests, evidence plumbing, integrity checks, refactors that preserve accepted behavior.
+- **Review first / do not silently patch:** architecture ownership, frozen interfaces, experiment hypotheses, source-contract semantics, predicate meaning, product policy, or any change that could alter the accepted design.
+- After a direct ChatGPT patch, commit it to GitHub and send DeepSeek the exact diff/commit for independent review.
+- DeepSeek remains an independent implementation reviewer/co-engineer, not the only code author.
+
+For review 083 specifically, the six scorer/harness blockers are implementation-level and are appropriate for direct ChatGPT repair.
