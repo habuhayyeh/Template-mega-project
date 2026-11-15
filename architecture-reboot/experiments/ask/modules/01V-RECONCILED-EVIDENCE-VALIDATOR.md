@@ -1,6 +1,6 @@
 # FILE 1V — RECONCILED EVIDENCE VALIDATOR
 
-**Experimental version:** F1V-RECONCILE-V1
+**Experimental version:** F1V-RECONCILE-V2
 
 ## Function
 
@@ -24,6 +24,39 @@ Provide all three:
 1. the unchanged `SCRIBE_EVIDENCE_V2_2` packet;
 2. the current canonical `01-RECONCILED-EVIDENCE.md`;
 3. the exact File-1 output to validate.
+
+## Required execution pattern
+
+Do not jump directly to `STATUS=PASS`.
+
+First perform an explicit compact audit of **every** File-1 item.
+
+For each FACT / SOURCE_REASONING / UNRESOLVED item, emit exactly one line:
+
+```text
+VERIFY <item id> :: REF=<PASS|FAIL> :: SUPPORT=<PASS|FAIL> :: QUESTION=<PASS|FAIL|NA> :: ACTION=<PASS|FAIL|NA> :: ATTR=<PASS|FAIL|NA> :: BOUNDARY=<PASS|FAIL> :: SEPARABILITY=<PASS|FAIL>
+```
+
+Definitions:
+
+- `REF` — every cited id exists verbatim in the Scribe packet.
+- `SUPPORT` — every meaningful clause is supported by at least one cited ref, and every cited ref is relevant to at least one clause.
+- `QUESTION` — no question-only record is being used as evidence for an answer.
+- `ACTION` — no action state was upgraded beyond the source.
+- `ATTR` — no speaker/person role was invented beyond the source.
+- `BOUNDARY` — FACT / SOURCE_REASONING / UNRESOLVED placement is correct and no downstream plan/classification was invented.
+- `SEPARABILITY` — the item is one downstream-usable subject/event/state/trajectory rather than an omnibus bundle.
+
+A validator run is invalid if any File-1 item is omitted from the VERIFY ledger.
+
+A validator may return `STATUS=PASS` only if **every** applicable VERIFY field is PASS/NA.
+
+If any field is FAIL:
+1. repair the item from source when directly determined;
+2. re-check the repaired item;
+3. return the complete corrected F1 handoff.
+
+Do not hide failures merely because the overall handoff looks clinically plausible.
 
 ## Validation checks
 
@@ -168,10 +201,13 @@ When the source does not determine the correction:
 
 ## Output
 
-If no material violations are found:
+Always begin with the complete VERIFY ledger.
+
+If no material violations are found after the ledger:
 
 ```text
-@@VALIDATION F1V_RECONCILE_V1
+@@VALIDATION F1V_RECONCILE_V2
+<VERIFY lines for every F1 item>
 STATUS=PASS
 @@END
 ```
@@ -179,7 +215,8 @@ STATUS=PASS
 If violations are found and can be repaired, return:
 
 ```text
-@@VALIDATION F1V_RECONCILE_V1
+@@VALIDATION F1V_RECONCILE_V2
+<VERIFY lines for every original F1 item>
 STATUS=REPAIRED
 
 <complete corrected F1 handoff, beginning with @@HANDOFF F1_RECONCILE_V1 and ending with @@END>
@@ -192,7 +229,8 @@ Return the **complete corrected handoff**, not a patch list.
 If a material issue cannot be safely repaired from the source:
 
 ```text
-@@VALIDATION F1V_RECONCILE_V1
+@@VALIDATION F1V_RECONCILE_V2
+<VERIFY lines completed up to the blocking item>
 STATUS=BLOCKED
 ITEM=<Fxxx/Rxxx/Uxxx>
 ISSUE=<brief reason>
@@ -204,6 +242,8 @@ ISSUE=<brief reason>
 This validator is a runtime reliability aid.
 
 Its PASS is **not acceptance evidence** and does not replace external engineering review, scorer calibration, or Phase-0 audit.
+
+This validator is intended to run as a **separate companion file after File 1**, even when both execute sequentially in the same Ask call. Do not merge F1 and F1V into one prompt file for the active experiment.
 
 The validator may repair only File-1 contract violations.
 
