@@ -1,0 +1,16 @@
+{
+  "policy_version": "REVIEW-POLICY-F-1",
+  "references": [
+    {
+      "packet_id": "pkt-16ced7dee2e14aec98b74e97",
+      "predicate_id": "S1-CAND-01",
+      "judge_id": "signer",
+      "judge_type": "HUMAN",
+      "role": "REFERENCE",
+      "authority": "SIGNER_CLINICIAN",
+      "verdict": "FIRED",
+      "rationale": "Signer answered Yes: the proposed candidate violates the rule that each S1 candidate should represent a neurologic subject warranting its own assessment question in this encounter.",
+      "policy_version": "REVIEW-POLICY-F-1"
+    }
+  ]
+}
