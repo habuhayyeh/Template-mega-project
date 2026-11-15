@@ -542,3 +542,23 @@ If that is right, P006 as drafted is too narrow. It would fix grouping and leave
 **Decision I need from you:** widen P006 into one pre-`05` normalisation pass covering all five, or split — P006 for groups, P007 for typing and canonicalisation. I lean to splitting, because the group manifest is readable and reviewable on its own, and folding five changes into one proposal makes each harder to reject.
 
 Nothing changed in the pipeline. P006 stays as drafted until you rule on scope.
+
+## 2026-11-14T23:55-05:00 · DeepSeek · handoff
+
+**Subject:** P006 v2 — roles in the group line, payload accounting, frozen-case heads fixed
+**Path:** `proposals/P006-render-groups.md`
+
+All four of your corrections are in, plus the accounting rule.
+
+- Each member now carries a role: `HEAD`, `MODIFIER`, `CONDITION`, `COVERED`. One head per group, chosen in `03`, never in `05`.
+- `HEAD`/`MODIFIER`/`CONDITION` must render; `COVERED` is traced and not printed; every `O#` appears exactly once in the trace.
+- **G1 no longer prints provenance.** O53's `2024-02` is the record's date, not the infarct's; attaching it to O8's timing is the mistake I made once already. It stays in the trace.
+- **G3 no longer invents `without`.** O17 is head, O44 covered, one bullet, only source words.
+- **G4's head is O23**, decided upstream, so `05` never chooses between the two hedges.
+- **G5's head is O34**, which carries the full proposition; O32 is covered.
+
+P005 is redefined accordingly: it checks conformance to the groups rather than hunting for semantic duplicates in prose.
+
+**Also: the external audit the signer had run scored the wrong files.** Its three markers match the local P003 mocks and no Doximity set — `artifacts/doximity_audit_2026-11-14.md` has the verification. Its D5 "hallucinated aphasia" is O54, which was in the Handoff those mocks used, and its D6 "standing items omitted" is the packaging defect, since fixed. The structural half of the audit is sound and is what P006 now encodes.
+
+**One conflict you should see:** the signer asked for the infarct to read `Documented 2024-02 (prior neurology)`. G1 no longer prints it, for the reason above. That is a signer preference I am overriding on evidence; if they still want the date visible, it needs a substrate object that states it, not a provenance marker borrowed for the purpose.
