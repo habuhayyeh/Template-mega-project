@@ -1777,4 +1777,80 @@ and `S4-PROJ-01` is the least attractive option because it weakens accepted pred
 Stopped here per review 081 §6 / implementation brief: do not silently compensate in scorer code. No
 scorer, no Gate 0, no Doximity, no Phase 0.
 
+## 2026-11-15 · DeepSeek · review 082 scorer and harness implemented
+
+**Commit:** `1aaf4be` · **second build run: zero diff** across 35 generated files · **35 synthetic tests
+pass** · **no Gate 0 acceptance run**.
+
+### Input boundary correction
+
+Adopted review 082:
+
+> scorer input = target artifact + read-only dependency context + oracle + frozen predicate/contract
+> rules.
+
+`00-GATE0-MANIFEST.md` now freezes the dependency matrix. `MANIFEST.json` records the hash-pinned,
+seed-independent contexts:
+
+- S1 — none
+- S2 — clean S1
+- S3 — clean S1 + clean S2
+- S4 — clean S1 + clean S2 + clean rendered S3
+
+The scorer evaluates only the target `parent_type`. The harness rejects an unexpected dependency hash.
+Seed id, expected predicate, mutation metadata and the specificity answer key stay harness-only.
+
+### Implementation paths
+
+- `architecture-reboot/scorer/registry.py` — frozen 16-predicate registry.
+- `architecture-reboot/scorer/scorer.py` — 13 mechanical predicates; 3 human predicates return
+  `UNDECIDABLE` until judged.
+- `architecture-reboot/scorer/projection.py` — executes `PROJECTION_MAP` against dependency context.
+- `architecture-reboot/tools/gate0_harness.py` — answer key, packets, judgments, specificity, evidence.
+- `architecture-reboot/scorer/README.md` — input boundary and packet lifecycle.
+- `architecture-reboot/tests/test_scorer.py`, `test_scorer_more.py`.
+
+### Tests covering the review-082 negatives
+
+- scorer runs with `builtins.open` patched to raise; it cannot read the manifest;
+- `S3-SEL-01` uses the S2 approved set, not `selected_rep == approved_representation`;
+- `S3-CAND-01` coverage uses the S1 candidate set;
+- `S4-PROJ-01` rejects a projection that disagrees with the S1/S2/S3 context;
+- `S2-REP-01` packet contains the S1 claim context;
+- answer-key-shaped metadata does not change scorer findings;
+- a dependency-context hash mismatch raises `InputIntegrityError`;
+- three human judges are required; 2/3, disagreement and missing judgments stay `UNDECIDABLE`.
+
+`python -B -m unittest discover -s architecture-reboot/tests` → **35 tests, OK**. The harness packets-mode
+test uses a temporary synthetic fixture and writes `EVIDENCE.json` + packets there. No real campaign
+seed was scored and no `acceptance` mode was invoked.
+
+### Counts
+
+5 clean parents across 4 parent types · 28 seeds · 16 active predicates. 28/28 seed mutations checked;
+28/28 seed hashes differ from parent hashes.
+
+### Governing hashes
+
+- `schema.md` — `sha256:47d8afd3fe4380016dc618ccad30665536343f142820955bfa5687dbfc25f5c3`
+- `predicates.md` — `sha256:f6fd7174ade7678d531d2f6c04461fe6618a2e3c9ed2d550b7a208d6e30b2639`
+- `G0-SEEDS.md` — `sha256:620479896710d7575fbc94e7a2a6317d9fbcacf883ae25875abb6f1d922ae8c5`
+- `00-GATE0-MANIFEST.md` — `sha256:0c92fbf4aa0e4f53ad09302c8687f9f296dc85de053ab8eb3174f6b062fe6805`
+- `make_seeds.py` — `sha256:04672ce6cf9c5856f6710e5c5e760ebdbc989d047984b659f2a131dc5fb99c7a`
+- `oracle.json` — `sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927`
+- projection map — `sha256:3cdcea61e9d77ceeb6db0a7e80678c466362cceaffb1ca3a3524c163a2ae5497`
+- generated view — `sha256:e3f84f9708f10691d2dedf37cdfdc67f2166caa4a85155827120c49f872d93f9`
+- `REASON-1` — `sha256:cc9b61341631077f831f9932c131f43a6a8119980de4d42863096f7dfee479df`
+- `MANIFEST.json` file bytes — `1c452dfe875b25542c1988b78e7d38073bf991f6d489c7419b6fafa19431cc7f`
+- `scorer/scorer.py` — `sha256:e9c957928c9d26b7db5f27cfc8e1d7320e35e1c604b979dfd38175484178122b`
+- `tools/gate0_harness.py` — `sha256:4c5e73f9773b033af7d49e1a4d03f11716bdff10c4cc233b6c78eb4a52966af4`
+
+### Still open
+
+Review of the scorer/harness implementation. Gate 0 remains **UNRUN**; the three-independent-human-review
+prerequisite is outstanding. The `acceptance` mode was not executed and no human judgment was fabricated.
+
+No Doximity. No Phase 0.
+
+
 
