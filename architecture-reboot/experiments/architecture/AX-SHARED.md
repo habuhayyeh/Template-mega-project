@@ -102,3 +102,9 @@ If all reasonable one-owner representations either duplicate the action or lose 
 > reopen the one-owner assumption for shared actions.
 
 This is a focused schema/architecture boundary test, not a general multi-problem test.
+
+## Pending product decision
+
+Whether a shared action renders once, or once under its primary problem with a terse reference from the second, is a **product decision, PENDING_SIGNER**.
+
+One-owner A/P semantics entail one *owner*, not one *mention*. This experiment must not freeze either policy as required behaviour; it measures which representations are constructible and what each preserves, and the signer chooses among them.
