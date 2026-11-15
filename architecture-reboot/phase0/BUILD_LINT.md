@@ -1,5 +1,7 @@
 # BUILD_LINT — what the compiler refuses
 
+**State: SPEC.** No lint is implemented. §7 is the M0 manual gate that stands in until it is.
+
 The deployment package is assembled from many files. The lint runs on every build and fails the build on any violation below. It is the only instrument that can see contradiction between contract statements.
 
 ## 1. What the lint governs
@@ -27,7 +29,15 @@ The record above is illustrative. The syntax is not frozen; what is frozen is th
 
 ### L1 — Contradictory rules
 
-Two rules with the same `decision` whose `normative` fields are comparable and differ.
+Two rules with the same **atomic** decision, **overlapping applicability**, and modal outcomes that a declared compatibility relation marks exclusive.
+
+The machine does not infer incompatibility. It checks three conditions against the decision registry:
+
+1. same decision id, and the decision is atomic;
+2. `applies_when` clauses overlap;
+3. the pair (modality_a, modality_b) appears in the compatibility table as EXCLUSIVE.
+
+If 1 holds but 3 has no entry for the pair, the rule set fails as **L1c unresolved**, not as a contradiction. Claiming contradiction without a declared relation would be the machine pretending to understand prose.
 
 Comparable means they describe the same subject and object in a way where both cannot hold — for example `MUST_FIRST reasoning / facts` against `MUST_AFTER reasoning / facts`.
 
@@ -51,7 +61,9 @@ A decision that appears in rules but has no owning contract, or whose owning con
 
 ### L3 — Out-of-scope rule
 
-A rule whose statement governs behaviour outside its declared `scope`.
+A rule whose declared `scope` is not in its decision's `allowed_scopes` in the decision registry.
+
+This is a registry containment check, not a semantic judgement. A rule that governs content selection but declares `scope: RENDER` is caught only if the decision it references is not allowed in RENDER — which is why every rule must reference a decision.
 
 Examples: a `RENDER` rule that selects content; an `INGEST` rule that assigns sections.
 
@@ -108,6 +120,25 @@ The report names rule ids, the decision, the contracts, and the file each rule w
 - It does not repair, suggest, or downgrade.
 - It does not scan prose. A statement not written as a rule record is documentation, and documentation is not compiled.
 
-## 6. When it runs
+## 7. M0 manual gate
+
+Until an instrument exists, the equivalent check is performed by a reviewer against this checklist, and the signed result is recorded in the packet:
+
+```text
+M0-LINT  case/package: ______   reviewer: ______   date: ______
+[ ] every rule has decision, owner_contract, scope, normative
+[ ] every decision referenced exists and is not WITHDRAWN
+[ ] no decision has two rules with overlapping applicability and exclusive modes
+[ ] every decision's owning contract matches the registry
+[ ] every rule's scope is allowed by its decision
+[ ] every rule has an ACTIVE assertion
+[ ] no dangling references
+[ ] no rule payload differs from its hash
+RESULT: ______
+```
+
+M0 is a gate, not a formality. A package that has not passed M0 is not a valid artifact.
+
+## 8. When it runs
 
 Every commit touching a contract file, every packaging run, and as a precondition of acceptance. A package that fails lint is not a valid artifact, regardless of its output.

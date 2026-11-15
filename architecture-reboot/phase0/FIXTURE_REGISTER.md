@@ -1,6 +1,18 @@
-# FIXTURE_REGISTER — the failures that reached output
+# FIXTURE_REGISTER — evidence-grounded reference cases
 
-Each fixture records a defect, its evidence path, and its **assertions**. Every assertion has exactly one owner: if a property spans two submodules, it is two assertions.
+This is an **index**. Case evidence, baselines and assertion sets live in per-case packets (`PACKET.md`); this file holds the summary, the status and the pointer.
+
+Each entry carries seven parts, and the split matters because merging them lets a symptom become an invented diagnosis:
+
+1. **OBSERVATION** — what was seen;
+2. **EVIDENCE** — the immutable path;
+3. **BOUNDARY** — what the evidence does *not* establish;
+4. **ASSERTIONS** — guards inspired by the observation;
+5. **PREREQUISITES** — contracts needed before an assertion is executable;
+6. **SEVERITY** — CRITICAL / MATERIAL / COSMETIC;
+7. **STATUS** — ACTIVE / PROVISIONAL / WITHDRAWN / PENDING_DEPENDENCY.
+
+Every assertion has exactly one owner.
 
 ## 1. Failure classes
 
@@ -70,7 +82,9 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 **Evidence:** `runs/2026-11-14-p003-doximity/set2/run1.txt`, `set2/run2.txt`, `set2/run3.txt`, and their validation records — not the oracle alone.
 **Assertions:**
 
-- A-11a `SEMANTIC_AUDIT` — a prior recommendation does not render in the plan without an adoption statement. Owner: **S2**.
+- A-11a `SEMANTIC_AUDIT` — a prior recommendation is not treated as adopted unless a statement supports it. Owner: **S2**.
+- A-11b `MECHANICAL` — a `HISTORICAL` object does not appear in a plan unit. Owner: **S4**.
+- A-11c `MECHANICAL` — a plan unit's members are all `CURRENT` or `PROPOSED`. Owner: **S3**.
 
 ### F-12 — voice
 
@@ -89,13 +103,11 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 
 - A-C01a `MECHANICAL` — the build fails when two rules govern one decision with incompatible normative fields. Owner: **BUILD**.
 
-### C-02 — non-local regression
+### C-02 — withdrawn as the non-local exemplar
 
-**Defect:** the prior-record-result rule (`NEURO_HISTORY`) conflicted with the historical-study rule (`WORKUP`) for rule 38, and the `O51` statement moved as an unrelated effect.
-**Evidence:** `artifacts/06_doximity_run3.md`.
-**Assertions:**
-
-- A-C02a `MEASURED` — after any contract change, the frozen case is re-run and the IR diffed. Owner: **process**.
+**Observation:** adding a clause for prior-record results moved the `O51` statement.
+**Why withdrawn:** `O51` is a prior MMSE, and the added clause governed prior-record results. The move was a **direct** consequence of the change, not a non-local one. Using it as evidence for C14 was wrong.
+**Consequence:** C14 has **no mandatory fixture**. That is the honest state; it is recorded in `OBLIGATIONS.md` O-10 and O-06 as an obligation to demonstrate, not a defect with evidence.
 
 ### C-12 — faithful but clinically empty
 
@@ -106,6 +118,30 @@ Both are needed: the old duplicates had different object ids, so the id rule alo
 
 - A-C12a `MECHANICAL` — the operator's required semantic roles are all present in the unit. Owner: **S4**.
 - A-C12b `MECHANICAL` — the renderer neither infers nor supplies a missing semantic role; a unit lacking a required role fails closed. Owner: **R1**.
+
+### F-14 — conditional plan composition
+
+**Observation:** apixaban hold and resume-condition rendered as two separate bullets in two runs and as one conditional line in the third.
+**Evidence:** `runs/2026-11-14-p003-doximity/set3/validation.txt`.
+**Boundary:** this is the same-condition family as F-02, but a different decision — composition, not duplication.
+**Assertions:**
+
+- A-14a `MECHANICAL` — a plan unit with a `CONDITION` member produces one line, not two. Owner: **S4**.
+- A-14b `SEMANTIC_AUDIT` — the condition is attached to the action it modifies. Owner: **S2**.
+
+**Severity:** MATERIAL. **Status:** ACTIVE.
+
+### F-15 — instability
+
+**Observation:** within one set under identical conditions, the same input produced different acceptance-relevant structures across three runs.
+**Evidence:** `runs/2026-11-14-p003-doximity/set3/run1.txt`, `set3/run2.txt`, `set3/run3.txt`.
+**Boundary:** three runs establish that the structure varies; they do **not** establish a failure rate. No population claim is made.
+**Assertions:**
+
+- A-15a `MECHANICAL` — the acceptance-relevant structure of three same-condition runs is identical. Owner: **PROCESS**.
+- A-15b `SEMANTIC_AUDIT` — where they differ, the difference is recorded by decision id, not by prose. Owner: **PROCESS**.
+
+**Severity:** CRITICAL. **Status:** ACTIVE.
 
 ## 3. Provisional — path required
 

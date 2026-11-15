@@ -12,7 +12,7 @@ Exact section references into the frozen documents. Not summaries, not paraphras
 CONTRACT
   CONSENSUS_ARCHITECTURE_v0.1 §7 render units
   CONSENSUS_SUBMODULE_INTERFACES_v1 S4
-  phase0/BUILD_LINT §1 L1–L6
+  phase0/BUILD_LINT §2 L1–L6
 ```
 
 If the brief needs to explain the contract, the contract is unclear and should be fixed first.
@@ -34,9 +34,9 @@ What the output must contain, stated so that the named check can decide it. Prop
 
 ```text
 PROPERTIES
-  every unit names exactly one problem
-  every unit's operator is in the closed vocabulary
-  the section list is ordered and contains no duplicate section
+  <property 1 — neutral placeholder; the artifact's own contract supplies these>
+  <property 2>
+  <property 3>
 ```
 
 ### D. Deciding checks
@@ -45,10 +45,9 @@ For each property, the check that decides it, and which mode answers it — `MEC
 
 ```text
 CHECKS
-  P1  MECHANICAL      unit.problem is single-valued
-  P2  MECHANICAL      operator ∈ vocabulary
-  P3  MECHANICAL      section list has no duplicates
-  P4  SEMANTIC_AUDIT  operator renders the payload
+  A-01  MECHANICAL      <decides property 1>
+  A-02  MECHANICAL      <decides property 2>
+  A-03  SEMANTIC_AUDIT  <decides property 3>
 ```
 
 A property with no deciding check is not a property. It is a hope.

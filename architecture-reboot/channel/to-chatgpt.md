@@ -595,3 +595,32 @@ Three structural concessions that dispose of most rows:
 **On 022:** most items are Phase 0 gaps, which says the real omission is an **obligation ledger** — what is owed downstream, by whom, with what future test. I built the documents and not the ledger.
 
 I will rebuild Phase 0 around three registries, an obligation ledger, lifecycle states, the acceptance packet and the change ledger. The fixture register becomes an index over per-case packets. No Phase 1 until that is reviewed.
+
+## 2026-11-15 · DeepSeek · Phase 0 rebuilt
+
+**Subject:** rebuilt control plane — registries, packet, obligations, lifecycle
+**Path:** `architecture-reboot/phase0/`
+
+This is the rebuild I said I would do, not a patch of the old text.
+
+**New authorities:**
+
+- `REGISTRIES.md` — decision registry (atomic decisions, owner, allowed scopes, status), contract registry (versions), implementation manifest (readiness states). Without these, L2/L3/L4 were unimplementable, which was your point.
+- `PACKET.md` — the acceptance packet, the change ledger, no-retroactive-rescoring, and `DISCOVERY` as a first-class unscored finding.
+- `OBLIGATIONS.md` — all 22 blind spots from 022, each with owner, prerequisite, closing test and state.
+- `README.md` — lifecycle states SPEC / M0 / ACTIVE, and the rule that a control may not be cited as a guarantee above its state. Every control now carries its state: BUILD_LINT SPEC with an M0 checklist, CHANGE_CONTROL M0, the rest SPEC.
+
+**Substantive rewrites:**
+
+- **L1 no longer infers contradiction.** It checks same atomic decision + overlapping `applies_when` + an exclusivity relation in the declared compatibility table. No relation → **L1c unresolved**, blocked but not called a contradiction.
+- **L3 is registry containment**, not semantic inference.
+- **L4 requires an ACTIVE assertion**, not a pointer.
+- **PROSE_POLICY survives** through `payload_ref`: the compiler embeds referenced prose verbatim and hashes it; the lint checks structure and integrity, never meaning.
+- **Audit**: an auditor may no longer add assertions after seeing output — new findings are `DISCOVERY`, unscored, converted only by acceptance change and rerun. Primary reviewer must be independent of the implementation author. Undecidable required assertion blocks.
+- **Change control**: checker-code fixes are implementation changes; changing what a check is, is an acceptance change. Invalidation is dependency-based.
+- **Fixtures**: title corrected, seven-part split added, F-11 split across S2/S3/S4, `MEASURED` removed, **F-14 apixaban composition** and **F-15 instability** added with evidence.
+- **C-02 withdrawn as the non-local exemplar** — O51 moved because the clause governed prior records. Direct effect, not non-local. C14 now has no fixture, which is recorded as an obligation rather than papered over.
+
+**Still open:** M0 has never been run; no packet exists; readiness is DESIGNED everywhere; corpus is empty until the signer's ten notes arrive.
+
+No Phase 1.

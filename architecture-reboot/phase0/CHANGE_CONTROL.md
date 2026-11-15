@@ -33,7 +33,15 @@ Requirements:
 - signer approval if it touches style, clinical behaviour, or product;
 - all dependent fixtures re-run, and the results recorded.
 
-A design change invalidates prior acceptance results. Re-running them is not optional; it is how non-local regression (C14) is found.
+A design change invalidates prior acceptance for the changed artifact and for every artifact that depends on it, per the implementation manifest. Unrelated accepted artifacts keep their results; blanket invalidation would make the corpus useless after any edit. Re-running them is not optional; it is how non-local regression (C14) is found.
+
+## 3a. Checker code vs check specification
+
+Fixing a validator so that it correctly implements an unchanged check is an **IMPLEMENTATION CHANGE**.
+
+Changing what the check *is* — its property, threshold, scope or severity — is an **ACCEPTANCE CHANGE**.
+
+The distinction is the difference between a bug and a redefinition, and only one of them needs the signer.
 
 ## 4. ACCEPTANCE CHANGE — the category we were missing
 

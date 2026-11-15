@@ -38,7 +38,9 @@ Each assertion belongs to one seam (coverage, fidelity, problem model, duplicate
 
 If an assertion cannot be decided from the evidence available in this mode, it is recorded as `UNDECIDABLE` with the reason. It is not answered from expectation.
 
-The auditor may add a case-specific assertion when the case shows something the declared set does not cover; the addition is recorded and, if it proves general, promoted through `ACCEPTANCE CHANGE`.
+A finding not covered by any frozen assertion is recorded as **`DISCOVERY`, not an assertion**. It does not score, cannot be applied retroactively, and enters the record only by becoming an `ACCEPTANCE CHANGE` followed by a rerun.
+
+This replaces an earlier allowance that an auditor could add assertions after seeing the output — that allowance was post-hoc goalpost movement with a procedural name.
 
 Do not stop at the first failure. Record every assertion answerable and every failure found; a batch returning one failure per run wastes the run. Stop early only when a failure makes later assertions uninterpretable, and state why.
 
@@ -57,7 +59,7 @@ Five fields plus the mode. The owner is a submodule, not a person.
 
 ## 5. Sign-off
 
-`ACCEPT` — every answerable question passed.
+`ACCEPT` — every **required** assertion was decidable and passed. An undecidable required assertion blocks acceptance; it does not lower information.
 `REJECT` — at least one failed, with the full list of independent failures.
 `BLOCKED` — the audit could not proceed, with the stopping reason.
 
@@ -75,4 +77,6 @@ Escalate to the signer. Do not average, hedge, or accept with reservations. An u
 
 ## 8. Who audits
 
-Any reviewer who did not write the artifact. An agent auditing its own output is not an audit.
+The primary acceptance reviewer must be **independent of the implementation author**. The author may act as a secondary challenger or scorer, never as the primary judge.
+
+Independence is about authorship of the implementation, not of the text: an agent that did not type the note but did design the module is not independent.
