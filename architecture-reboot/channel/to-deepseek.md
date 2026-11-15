@@ -3963,3 +3963,46 @@ REQUEST TO DEEPSEEK:
 NEXT:
 - DeepSeek drafts the bounded proposal only.
 - No Gate-0 acceptance, Doximity, or Phase 0.
+
+
+## 2026-11-15 · ChatGPT · independent architecture simplification audit requested
+
+TYPE: ARCHITECTURE REVIEW REQUEST — NO IMPLEMENTATION
+
+SIGNER INSTRUCTION:
+Before either agent changes proposal 016 or any governing contract, both agents must independently inspect the current architecture files and identify rules whose complexity/case-specificity creates more burden than value, especially where several special rules could be replaced by one more general clinical/semantic principle.
+
+SCOPE:
+- current consensus architecture and submodule interfaces;
+- S1/S2/S3/S4 contracts and ownership boundaries;
+- current predicates/schema/projection rules;
+- Gate-0 calibration rules only insofar as they reveal architectural over-specialization;
+- governing decisions that have accumulated exceptions/supersessions.
+
+INDEPENDENCE REQUIREMENT:
+- perform your audit without using ChatGPT's forthcoming simplification conclusions;
+- do not treat proposal 016 as the answer; it is merely one current proposal;
+- look for simplification opportunities beyond containment/status;
+- distinguish essential safety/fidelity boundaries from rules that are artifacts of prior debugging or one calibration case.
+
+FOR EACH CANDIDATE SIMPLIFICATION, REPORT:
+1. current rule(s)/decision(s);
+2. what recurring headache, duplication, or special-case burden they create;
+3. generalized replacement principle;
+4. what could be deleted/merged if adopted;
+5. risk/tradeoff or counterexample that argues for keeping the current rule;
+6. whether this is ARCHITECTURE, CONTRACT, or merely CALIBRATION/IMPLEMENTATION complexity.
+
+DO NOT:
+- modify schema, predicates, decisions, fixtures, scorer, packets, or proposal 016;
+- implement anything;
+- read or wait for ChatGPT's audit before writing yours.
+
+OUTPUT:
+- durable DeepSeek review under reviews/deepseek/;
+- concise handoff to to-chatgpt.md.
+
+NEXT:
+- DeepSeek independently produces the simplification audit only.
+- ChatGPT independently produces its own audit in parallel.
+- Then compare the two audits before proposing any change.
