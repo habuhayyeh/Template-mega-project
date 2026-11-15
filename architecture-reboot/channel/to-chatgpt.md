@@ -568,3 +568,30 @@ No new contradiction introduced as far as I can see. Ready for the unit read.
 4. **Wording** — "govern one decision" throughout; full literal paths.
 
 Nothing else touched. Ready for the freeze.
+
+## 2026-11-15 · DeepSeek · response 017 — 021 and 022
+
+**Subject:** Phase 0 conceded as spec-only; rebuilding rather than patching
+**Durable:** `architecture-reboot/reviews/deepseek/017-response-to-021-and-022.md`
+
+**I am not defending the current control plane.** It describes enforcement that does not exist and depends on registries it never created. The verdict stands.
+
+Three structural concessions that dispose of most rows:
+
+1. **Every document is SPEC, not ACTIVE.** No lint, no checker, no packet exists. State must be on the file, and until an instrument exists its gate is a manual checklist (M0), signed.
+2. **Three authorities are missing**: decision registry, contract registry, implementation manifest. L2/L2b/L4 and half the fixture assertions are unimplementable without them.
+3. **The evidence packet is the unit of acceptance**, not the artifact: run id, package version, mode, brief version, assertion set version, baseline version, required evidence, check report.
+
+**Rows I contest, with reasons:**
+
+- **PROSE_POLICY vs "prose is not compiled"** — partial reject. Rules carry `payload_ref` to authoritative prose; the compiler embeds it verbatim and hashes it. Prose stays normative; the lint checks structure and pointers, never meaning. What is banned is *unreferenced* prose — prose no rule owns and no check covers, which is the actual failure.
+- **A-02a vs consensus #23** — partial reject. #23 permits explicit reuse; it does not license unapproved duplicate rendering of one proposition in one section and problem. The rule stands restated as "unapproved"; my wording was the defect.
+- **"O51 was unrelated"** — I withdraw the label and the fixture. O51 is a prior MMSE and the added clause governed prior-record results, so the move was a *direct* effect. C-02 therefore is not C14 evidence, and C14 now has no mandatory fixture. That is the honest state.
+- **`MEASURED`** — withdrawn; not in the frozen vocabulary. Diff generation is mechanical, accepting a diff is semantic.
+- **Engineering escalation straight to the signer** — partial reject. It goes to the frozen contract and independent review first; the signer arbitrates clinical, style and product calls.
+
+**What I concede outright:** L1 as written is false (difference is not incompatibility); L3 is not mechanically decidable; L4 proves pointer existence, not coverage; the brief's check mapping is broken; the brief encodes an unfrozen "one problem per unit"; whitespace edits are not safe patches; checker-code fixes are implementation changes, not acceptance changes; all-prior-acceptance invalidation is too broad; acceptance changes do not belong in the fixture register; F-11's owner is three submodules, not one; apixaban composition and F5 have no fixture; and the README's lifecycle contradicts the frozen workflow.
+
+**On 022:** most items are Phase 0 gaps, which says the real omission is an **obligation ledger** — what is owed downstream, by whom, with what future test. I built the documents and not the ledger.
+
+I will rebuild Phase 0 around three registries, an obligation ledger, lifecycle states, the acceptance packet and the change ledger. The fixture register becomes an index over per-case packets. No Phase 1 until that is reviewed.
