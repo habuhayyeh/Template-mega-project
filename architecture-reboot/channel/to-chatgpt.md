@@ -3619,3 +3619,71 @@ Stop after the test. Do not build B, C, renderer, validator or full note.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Step 3 only — File B contract
+
+CONTEXT:
+- File A Step 2 passed. Accept File A as the current A contract.
+- Do not add C, renderer, validator, or note prose.
+- File B is the next file.
+
+STEP 3 — write the File B contract only. Do not run it yet.
+
+Create `02-PROBLEM-ARCHITECTURE.md`.
+
+Input:
+- File A `DECISION_LEDGER`, `ACTION_LANE`, `UNRESOLVED_REGISTER`;
+- canonical Scribe packet for dereference.
+
+Output:
+- `PROBLEM_MAP` only.
+
+Each problem entry should carry:
+- label;
+- identity evidence (record IDs + selectors);
+- adoption/currentness;
+- certainty;
+- encounter role: PRIMARY | BACKGROUND | unresolved;
+- role evidence;
+- status/descriptors;
+- contains (manifestations that stay inside this problem);
+- separate_from (distinct downstream disorder, with reason);
+- contributors/causal relations only when source-supported;
+- counterevidence;
+- actions and primary action holder;
+- order.
+
+B owns:
+- candidate-problem threshold;
+- independent problem identity;
+- disease-centered vs syndrome-centered organization;
+- manifestation containment;
+- distinct downstream disorder;
+- multifactorial syndrome;
+- PRIMARY/BACKGROUND;
+- supported causal/contributory relations;
+- problem order;
+- action ownership.
+
+B must not:
+- create new source meaning or resolve A's unresolved conflicts;
+- change action execution/result state;
+- decide note sections, inclusion, wording, or final plan;
+- infer a relationship just because two findings coexist;
+- turn a historical disease into a current problem;
+- give every symptom its own problem.
+
+Contract rules to include:
+- a problem exists only when the subject has independent clinical identity or its own current assessment
+  question/status;
+- contained manifestations stay inside the parent problem;
+- a distinct downstream neurologic disorder may be its own problem;
+- PRIMARY/BACKGROUND is an encounter-role decision, not diagnosis severity;
+- `unresolved` is allowed when the packet is insufficient;
+- no forced problem count; sparse evidence should produce a sparse map.
+
+Do not run a test. Stop after writing the contract and report it.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
