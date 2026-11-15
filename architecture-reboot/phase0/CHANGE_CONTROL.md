@@ -25,7 +25,7 @@ Requirements:
 
 ## 3. DESIGN CHANGE
 
-Any change to the architecture, a submodule's goal or interface, a shared contract, or a decision that affects more than one module.
+Any change to a decision's owner, authority scope, value semantics, or governing contract; any change to a submodule's goal or interface; any shared-contract change — regardless of how many modules are visibly affected.
 
 Requirements:
 - written proposal with the problem it solves;
@@ -53,7 +53,7 @@ This is the most dangerous category, because it makes a failing test pass withou
 
 Requirements:
 - the change, and why the old expectation was wrong — not why it was inconvenient;
-- explicit approval from the reviewer who wrote the original expectation;
+- explicit approval from the **current independent acceptance owner**, not necessarily the person who wrote the original expectation;
 - the old and new expectation both recorded in the fixture register with a date;
 - if the change was prompted by a failing implementation, it is **still** an acceptance change — but it must show, from evidence, that the old expectation was wrong. If the correction implies an architectural change, a separate linked `DESIGN CHANGE` is recorded; the two are not merged and neither substitutes for the other.
 
@@ -66,7 +66,7 @@ A pattern of acceptance changes against the same fixture is evidence the archite
 | PATCH | may proceed | none | none |
 | IMPLEMENTATION CHANGE | may proceed | confirms invariance, runs regression | none |
 | DESIGN CHANGE | proposes | reviews | approves if clinical/style/product |
-| ACCEPTANCE CHANGE | may not self-approve | approves | **approves** when it alters a clinical baseline expectation |
+| ACCEPTANCE CHANGE | may not self-approve | approves | **approves** when it alters a clinical, style or product baseline |
 
 The engineer may never approve an acceptance change alone. That rule exists because the engineer is the party most motivated to make the test pass.
 

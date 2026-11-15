@@ -1,51 +1,53 @@
-# Phase 0 — Control Plane (rebuilt)
+# Phase 0 — Control Plane
 
-Phase 0 defines what correct means and how correctness is established. It contains no runtime behaviour.
+Phase 0 defines what correct means and how correctness is established. No runtime behaviour.
 
-## Lifecycle state
+**Control-plane version: 2** — the first version written after the review stack, with registries rather than a single file.
 
-Every control has one state. The state is part of the control, not a note about it.
-
-| State | Meaning | Who enforces |
-|---|---|---|
-| **SPEC** | written, no instrument exists | nobody; it is a design obligation |
-| **M0** | enforced by a manual checklist a reviewer signs | the reviewer |
-| **ACTIVE** | enforced by an instrument that fails closed | the instrument |
-
-A control may not be cited as a guarantee above its state. Citing a SPEC control as if it prevented something is the error that made the last review necessary.
+---
 
 ## Authorities
 
-| Authority | Owns | File |
+| file | owns | state |
 |---|---|---|
-| Decision registry | who owns each semantic decision, its allowed scopes, its status | `REGISTRIES.md` §1 |
-| Contract registry | contract identity and version | `REGISTRIES.md` §2 |
-| Implementation manifest | artifacts, versions, dependencies, readiness | `REGISTRIES.md` §3 |
-| Acceptance packet | the unit of acceptance | `PACKET.md` §1 |
-| Change ledger | every governed change | `PACKET.md` §2 |
-| Obligation ledger | downstream duties that must not vanish | `OBLIGATIONS.md` |
-| Fixture register | reference cases and their assertions | `FIXTURE_REGISTER.md` |
+| `AUTHORITY_REGISTRY.md` | who owns each decision, under which contract, at which version | M0 |
+| `IMPLEMENTATION_MANIFEST.md` | what exists, readiness, control state, dependency edges | M0 |
+| `ACCEPTANCE_MODEL.md` | what a predicate is, what a packet carries, what a verdict means | SPEC |
+| `FIXTURE_INDEX.md` | which cases exist, their evidence, their references | SPEC |
+| `COVERAGE_LEDGER.md` | what is owed downstream, where the corpus is thin | M0 |
+| `BUILD_SPEC.md` | what the build refuses | SPEC (M0 checklist §7) |
+| `AUDIT_PROTOCOL.md` | how a verdict is reached | SPEC |
+| `CHANGE_CONTROL.md` | how an edit is classified and approved | M0 |
+| `CHANGE_LEDGER.md` | the record of governed changes | M0 |
 
-## Controls
+Supporting records, not authorities: `templates/ACCEPTANCE_BRIEF.md`, `templates/EXPERIMENT_MANIFEST.md`.
 
-| Control | State | Purpose |
+---
+
+## Lifecycle states
+
+| state | meaning | who enforces |
 |---|---|---|
-| `BUILD_LINT.md` | **SPEC** (M0 checklist in §7) | contradictory or unowned rules cannot ship |
-| `AUDIT_PROTOCOL.md` | **SPEC** | semantic correctness is judged by procedure, not expectation |
-| `ACCEPTANCE_BRIEF_TEMPLATE.md` | **SPEC** | implementation starts from a stated definition of correct |
-| `CHANGE_CONTROL.md` | **M0** | edits are classified by effect, and the definition of success cannot drift |
-| `FIXTURE_REGISTER.md` | **SPEC** (index only) | evidence-grounded reference cases |
-| `PACKET.md` | **SPEC** | what a scored run must carry |
-| `OBLIGATIONS.md` | **M0** | downstream duties have an owner and a future test |
+| **SPEC** | written, no instrument | nobody; it is an obligation |
+| **M0** | manual checklist a reviewer signs | the reviewer |
+| **ACTIVE** | an instrument fails closed | the instrument |
 
-## The rule that governs Phase 0 itself
+Canonical control state lives in `IMPLEMENTATION_MANIFEST.md` §3. The table above is a derived copy; a mismatch is a manifest error.
 
-Phase 0 is not exempt. Any change to a Phase 0 control is governed by `CHANGE_CONTROL.md`, and any change to what counts as correct is an `ACCEPTANCE CHANGE`.
+**A control may not be cited as a guarantee above its state.** That sentence is why this section exists.
 
-That includes this file.
+---
 
-## What Phase 0 does not do
+## The rule for claims
 
-- It does not implement. All instruments are downstream.
-- It does not restate the architecture. Contracts are referenced by version, not summarised.
-- It does not promise reproducibility outside the mechanical subset. That limit is recorded in `OBLIGATIONS.md` O-21.
+> Every claim names the contract that grants it, or it is marked as a design proposal.
+
+A predicate may assert only what a frozen contract states. A question the architecture left open becomes `PENDING_DEPENDENCY`, never a hidden test oracle.
+
+---
+
+## Where things stand
+
+- Nine authorities, two templates, thirteen decisions registered, twelve cases indexed, twenty-one obligations open.
+- All artifacts `DESIGNED`. No packets. No experiments. No acceptance.
+- The largest open gap: only one of three seams has any case at all.

@@ -4,7 +4,7 @@ This is a procedure. It says who looks at what, in what order they look, and wha
 
 ## 1. Why this exists
 
-The mechanical checker can prove the note matches the Case IR. It cannot prove the IR matches the encounter. That gap is audited by a reviewer, and the procedure is fixed in advance so the criteria do not drift toward whatever got built.
+The mechanical checker proves the **declared mechanically decidable** predicates on IR→note conformance. It does not prove all conformance, and it cannot prove the IR matches the encounter. Both gaps are this protocol's job. That gap is audited by a reviewer, and the procedure is fixed in advance so the criteria do not drift toward whatever got built.
 
 ## 2. Two audit modes
 
