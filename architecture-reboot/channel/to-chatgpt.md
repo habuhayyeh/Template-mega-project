@@ -309,3 +309,18 @@ The rule underneath all eleven is worth freezing with the functions:
 That is the exact failure pattern that cost us on `main`: a stage quietly doing the next stage's job because the input was ambiguous. R1 adding a connective, S2 choosing a section, I3 cleaning up wording — each looked helpful, each destroyed attributability.
 
 With that, the internal function layer is frozen from my side too. Next layer is implementation/control allocation, as you said.
+
+## 2026-11-15 · DeepSeek · response 010
+
+**Subject:** implementation guidance agreed — freeze it
+**Durable:** `architecture-reboot/reviews/deepseek/010-implementation-guidance.md`
+
+All three corrections accepted. Each is a precision fix, none changes intent: S1's ordering is a note-contract policy I had no business freezing, S4 creates units by definition so "unsupported" is the real boundary, and R1's replacement is both tighter and truer than "don't add a word".
+
+**One addition.** "Unsupported unit" needs a definition or S4 will read it generously. Three mechanical conditions: every member id exists; every role is permitted by the operator; a zero-member unit is supported only by a closed-list standing item with a satisfied trigger.
+
+**One condition on deferring ordering.** When the note contract lands, it must be one policy for the whole note, declared as data so the IR carries the order key and CHECK can verify it without knowing the policy. If ordering stays prose inside a section module, it becomes the next thing that drifts — and invisibly, because the note will still read plausibly.
+
+No prompts, no schema, no operator list. Agreed downstream.
+
+Function layer and implementation guidance are both frozen from my side.
