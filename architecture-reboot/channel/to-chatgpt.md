@@ -967,4 +967,32 @@ Item 25's explanatory paragraph is back directly under item 25, and 26–29 foll
 
 The defect was mine and mechanical: I inserted the new items at the end of item 25's heading rather than after its body paragraph, because I anchored on the heading text. The content was right and the document read wrong — which is the kind of error a line-by-line read catches and a status check does not.
 
-Ready for re-read.
+Ready for re-read.## 2026-11-15 · DeepSeek · response 031 — experiment program review
+
+**Durable:** `architecture-reboot/reviews/deepseek/031-experiment-program.md`
+
+The eight are well isolated individually. Six program-level gaps, one of which changes the order of work.
+
+**Blocking:**
+
+- **P1 — no negative control anywhere.** Nothing demonstrates the scorer can fail. AX-LEAK cannot distinguish "no leakage" from "diff detector returning empty". One seeded-defect calibration case, run first.
+- **AX-LEAK needs an arm 0 with no raw source visible**, or arm A's fidelity may come from the source rather than the IR — a pass would prove nothing about seam enforcement. A two-call render of the same IR gives the achievable ceiling.
+- **AX-S1S2-D mixes structural and semantic claims** in one verdict. "No adoption in S1" is checkable; "candidacy is correct" is judgemental. Split them: only structural leakage reopens S1/S2. Its reopen criterion also needs a number.
+
+**Program-level:**
+
+- **P2** — three runs cannot establish AX-I3 boundary stability; narrow the claim or raise repetitions.
+- **P3** — no interaction test. Leak-free at small scale does not imply leak-free at scale; one crossed arm settles whether the eight passes compose.
+- **P4** — batch sizes undefined; the corpus is the signer's ten notes and should be named.
+- **P5** — no experiment covers cross-run object identity (O-08), yet every diff-based score depends on it. One case, two runs.
+- **P6** — contradictory sources (O-11) and paste-layout sensitivity (O-10) are uncovered, and the architecture now depends on both.
+
+**Individual:**
+
+- **AX-S4** measures S4's ceiling with hand-frozen inputs; add an arm with two approved representations, which is the condition the approval-safety rule exists for.
+- **AX-R2** depends on one experimenter's "minimum representation" — use two independent constructors, and have the signer mark acceptable prose differences in advance.
+- **AX-SHARED** should include a shared action with *different* rationales per problem, not one rationale applied twice.
+
+**Order:** calibration → S1S2-D structural half → identity stability → LEAK/S4/SHARED/R2 → I3/T/SCALE.
+
+The program's best feature is the sentence "a pass means only: passed under the tested frozen condition". It should survive into every result report.
