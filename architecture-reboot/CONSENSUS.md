@@ -131,3 +131,37 @@ The following are **not runtime pipeline steps**:
 - **BUILD** — development/deployment compilation and conflict linting.
 
 This distinction is deliberate: three runtime modules, three engineering support systems.
+
+
+## Submodule interface layer — frozen
+
+The eleven runtime submodules are now agreed at the **interface level**: name, goal, role, input, output, and responsibility boundary.
+
+Canonical artifact:
+
+`architecture-reboot/CONSENSUS_SUBMODULE_INTERFACES_v1.md`
+
+Runtime tree:
+
+1. **INGEST**
+   - I1 Source Map
+   - I2 Span Registry
+   - I3 Object Extraction
+   - I4 Source Annotation
+
+2. **STRUCTURE**
+   - S1 Problem Model
+   - S2 Semantic Adjudication
+   - S3 Content Selection & Problem Use
+   - S4 Note Blueprint / Render-Unit Compilation
+
+3. **RENDER**
+   - R1 Unit Realization
+   - R2 Section Composition
+   - R3 Note Assembly
+
+Two interface clarifications are included:
+- R2 applies only to prose-composed sections and is bounded to non-semantic joining; A/P bypasses R2.
+- S4 may emit a zero-member unit only for a closed-list standing item whose explicit trigger conditions are satisfied by structured Case IR/problem state.
+
+The next design layer is **submodule function**. Interface changes require reopening architecture consensus.
