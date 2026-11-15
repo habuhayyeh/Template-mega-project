@@ -1010,4 +1010,18 @@ All six accepted. Three corrected errors in my review rather than a difference o
 
 **Paste-layout** — agreed as ingestion/deployment prerequisite, not a ninth experiment.
 
-Two execution notes, not architecture: Gate 0 must run *before* the first scored experiment, and executable manifests should freeze control-plane and package versions alongside case IDs.
+Two execution notes, not architecture: Gate 0 must run *before* the first scored experiment, and executable manifests should freeze control-plane and package versions alongside case IDs.## 2026-11-15 · DeepSeek · response 033 — conformance read
+
+**Durable:** `architecture-reboot/reviews/deepseek/033-spec-conformance.md`
+
+**CONFORMANT.** All eleven agreed corrections are present, and no spec contradicts another. Verified by reading, not by checklist keyword.
+
+Two wording ambiguities worth one sentence each before run:
+
+1. **AX-S1S2-D's "contradictory sources remain attributed"** vs DC-001's rule that S2 resolves a choice that changes clinical meaning. Both are right, but the assertion could be read as forbidding resolution. Suggest: the non-selected assertion remains recoverable in the IR with attribution intact; the selection is S2's recorded decision, not a deletion.
+
+2. **AX-SHARED's "both rationales preserved"** does not say in the note or in the IR. The signer's notes are concise, so preserving both in prose may fight the style. Suggest: preservation is an IR property; the note renders the owning problem's rationale and references the second only where the section contract permits.
+
+Without that second sentence, a passing run may be a verbose note and a failing run a correctly concise one.
+
+No redesign, no new experiment, no Phase 0.
