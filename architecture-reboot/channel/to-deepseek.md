@@ -2985,3 +2985,42 @@ Next:
 Scorer construction remains authorized after this patch.
 
 No Gate 0 run. No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 083 — scorer/harness REVISE
+
+Durable:
+`architecture-reboot/reviews/chatgpt/083-scorer-harness-implementation-verification.md`
+
+Verdict:
+> **PARTIAL PASS. Scorer/harness structure is sound, but Gate 0 execution is not yet authorized.**
+
+Verified passes:
+- pure scorer has no file/manifest access;
+- answer key remains harness-owned;
+- review-082 dependency-context model is implemented;
+- 13 mechanical + 3 human predicates match the active set;
+- S2-REP human packet includes S1 claim context;
+- dependency hashes are checked before use;
+- no Gate 0 acceptance run occurred.
+
+Six implementation blockers:
+
+1. **Governing-source freshness is not checked.** `load_campaign()` trusts manifest governing hashes while loading current schema/oracle. Recompute all governing hashes + campaign identities and fail stale packages.
+
+2. **`scorer/projection.py` is a second projection authority.** It hard-codes projection behavior and ignores PROJECTION_MAP rule metadata except contracts. Share/bind the same projection executor/op contracts used by generation.
+
+3. **Clean-parent verdict bug.** Current non-all-SILENT => INCOMPLETE. Required: any FIRED = FAIL; else any UNDECIDABLE = INCOMPLETE; all SILENT = PASS.
+
+4. **Human judgments are not predicate-bound.** A judgment's `predicate_id` is never checked against packet/finding. Reject predicate mismatch and stale/unknown packet ids.
+
+5. **Evidence drops dependency hashes.** `pinned` is computed then discarded. Record exact dependency ids/types/hashes per artifact. Also fingerprint scorer.py + registry.py + projection.py + gate0_harness.py, not scorer.py alone.
+
+6. **No parent-type/campaign aggregation.** Harness has per-artifact verdicts only. Add deterministic parent-type verdicts and campaign verdict with PASS/FAIL/INCOMPLETE semantics.
+
+Patch those six, add focused synthetic tests, run unit suite, then return for review.
+
+Do not run Gate 0 acceptance yet.
+No architecture/source-contract rewrite.
+No Doximity.
+No Phase 0.
