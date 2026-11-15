@@ -5,10 +5,8 @@
   "s3": {
     "candidate_outcomes": [
       {
-        "basis": [],
         "candidate": "C1",
-        "outcome": "NOT_RENDERED",
-        "reason": "NO_PROPOSAL"
+        "outcome": "RENDERED"
       }
     ],
     "dispositions": [

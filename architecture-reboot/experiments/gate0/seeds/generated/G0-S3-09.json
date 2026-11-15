@@ -7,10 +7,6 @@
       {
         "candidate": "C1",
         "outcome": "RENDERED"
-      },
-      {
-        "candidate": "C1",
-        "outcome": "NOT_RENDERED"
       }
     ],
     "dispositions": [

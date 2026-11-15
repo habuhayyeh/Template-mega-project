@@ -43,6 +43,35 @@ def load(name):
     return json.load(io.open(os.path.join(PAR, name), encoding='utf-8'))
 
 
+def build_view(s1p, s2p, s3p, oracle):
+    """Construct S4_INPUT_VIEW from upstream artifacts. Copies only; authors nothing."""
+    cand = s1p['s1']['candidates'][0]
+    rep = s2p['s2']['representations'][0]
+    s3 = s3p['s3']
+    sel = s3['rendered'][0]['selected_rep']
+    members = [o for o in rep['members']]
+    ingest = {}
+    for oid in s3['retained']:
+        src = oracle['objects'][oid]
+        rec = {'payload': src['text'], 'provenance': src['provenance']}
+        if 'temporal' in src:
+            rec['temporal'] = src['temporal']
+        else:
+            rec['status'] = src.get('status')
+        ingest[oid] = rec
+    return {
+        'from_s1': {'problem': cand['id'], 'salience': cand['salience']},
+        'from_s3': {'selected_rep': sel, 'rendered': [r['problem'] for r in s3['rendered']],
+                    'retained': list(s3['retained']), 'use': dict(s3['use']),
+                    'reuse': list(s3['reuse'])},
+        'from_s2': {'members': members, 'relations': list(s2p['s2'].get('relations', [])),
+                    'claim_relations': list(s2p['s2'].get('claim_relations', [])),
+                    'duplicate_groups': list(s2p['s2'].get('duplicate_groups', []))},
+        'from_ingest': ingest,
+        'from_contracts': {'section': 'AP', 'operator_set': 'PILOT-2'},
+    }
+
+
 def s1_01(a): a['s1']['candidates'][0]['adopted'] = True
 def s1_02(a): a['s1']['candidates'][0]['selected_claim'] = 'CC1'
 def s1_04(a): a['s1']['candidates'][0]['anchors'] = []
@@ -83,9 +112,8 @@ def s4_07(a): a['s4_input_view']['adoption'] = True
 def s4_08(a): a['s4_input_view']['from_s2']['members'] = ['O03', 'O04', 'O05']
 def s4_09(a): a['s4_input_view']['from_s2']['selected_rep'] = 'R-999'
 def s4_10(a):
-    a['s4_input_view']['from_ingest']['O05'] = {'payload': 'vitamin D', 'provenance': 'A',
-                                                'temporal': None}
-def s4_11(a): a['s4_input_view']['from_s2']['claim_relation'] = 'COMPETING'
+    a['s4_input_view']['from_ingest']['O05']['payload'] = 'vitamin D'
+def s4_11(a): a['s4_input_view']['from_s2']['duplicate_groups'] = [['O03', 'O04']]
 
 
 SEEDS = [
@@ -115,7 +143,7 @@ SEEDS = [
  ('S4_PARENT.json', 'G0-S4-08', 'S4-PROJ-01', s4_08, '/s4_input_view/from_s2/members', '["O03","O04"]', 'adds O05 invented'),
  ('S4_PARENT.json', 'G0-S4-09', 'S4-PROJ-01', s4_09, '/s4_input_view/from_s2/selected_rep', '<absent>', 'S3-owned field under S2 wrong-owner group'),
  ('S4_PARENT.json', 'G0-S4-10', 'S4-PROJ-01', s4_10, '/s4_input_view/from_ingest/O05', 'S03 payload', 'fabricated payload'),
- ('S4_PARENT.json', 'G0-S4-11', 'S4-PROJ-01', s4_11, '/s4_input_view/from_s2/claim_relation', 'null', 'COMPETING wrong owner'),
+ ('S4_PARENT.json', 'G0-S4-11', 'S4-PROJ-01', s4_11, '/s4_input_view/from_s2/duplicate_groups', '[]', '[[O03,O04]] authored'),
 ]
 
 
@@ -152,14 +180,26 @@ def main():
     for f in ['S1_PARENT.json', 'S2_PARENT.json', 'S3_PARENT.json', 'S4_PARENT.json']:
         p = load(f)
         parents[f] = p
+        out_p = dict(p)
         manifest['clean_parents'][f] = {'parent_type': p['parent_type'], 'hash': canon(p)}
+        manifest.setdefault('generated_parents', {})[f] = out_p
         with io.open(os.path.join(GEN, 'PARENT-' + f), 'w', encoding='utf-8', newline='\n') as fh:
             json.dump(p, fh, indent=2, sort_keys=True)
             fh.write('\n')
 
+    s1p = parents['S1_PARENT.json']
+    s2p = parents['S2_PARENT.json']
+    s3p = parents['S3_PARENT.json']
+    oracle = json.load(io.open(os.path.join(AX, 'fixtures/CASE-01/oracle.json'), encoding='utf-8'))
+    built_view = build_view(s1p, s2p, s3p, oracle)
+
     for pfile, sid, pred, fn, path, before, after in SEEDS:
         art = copy.deepcopy(parents[pfile])
-        fn(art)
+        if pfile == 'S4_PARENT.json':
+            art = {'case': art['case'], 'parent_type': art['parent_type'],
+                   'registry': REG, 'schema': SCHEMA,
+                   's4_input_view': copy.deepcopy(built_view), 's4': copy.deepcopy(art['s4'])}
+            fn(art)
         name = sid + '.json'
         with io.open(os.path.join(GEN, name), 'w', encoding='utf-8', newline='\n') as fh:
             json.dump(art, fh, indent=2, sort_keys=True)
@@ -169,6 +209,14 @@ def main():
             'parent_type': parents[pfile]['parent_type'], 'must_fire': pred,
             'mutations': [{'path': path, 'before': before, 'after': after}],
             'hash': canon(art)})
+
+    base_s4 = dict(parents['S4_PARENT.json'])
+    clean_s4 = {'case': base_s4['case'], 'parent_type': 'S4_BLUEPRINT', 'registry': REG,
+                'schema': SCHEMA, 's4_input_view': built_view, 's4': base_s4['s4']}
+    with io.open(os.path.join(GEN, 'PARENT-S4_PARENT.json'), 'w', encoding='utf-8', newline='\n') as fh:
+        json.dump(clean_s4, fh, indent=2, sort_keys=True)
+        fh.write('\n')
+    manifest['clean_parents']['S4_PARENT.json']['hash'] = canon(clean_s4)
 
     # harmless variation: S3 parent with every id renamed consistently.
     var = copy.deepcopy(parents['S3_PARENT.json'])

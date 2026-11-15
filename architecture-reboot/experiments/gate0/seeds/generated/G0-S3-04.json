@@ -17,6 +17,10 @@
       {
         "disposition": "HISTORICAL_CONTEXT",
         "object": "O02"
+      },
+      {
+        "disposition": "MEDICATION_RECORD",
+        "object": "O07"
       }
     ],
     "rendered": [

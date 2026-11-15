@@ -5,7 +5,9 @@
   "s1": {
     "candidates": [
       {
-        "anchors": [],
+        "anchors": [
+          "S02"
+        ],
         "claim_candidates": [
           {
             "id": "CC1",

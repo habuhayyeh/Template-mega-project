@@ -3,7 +3,12 @@
   "parent_type": "S3_OUTPUT",
   "registry": "PILOT-2",
   "s3": {
-    "candidate_outcomes": [],
+    "candidate_outcomes": [
+      {
+        "candidate": "C1",
+        "outcome": "RENDERED"
+      }
+    ],
     "dispositions": [
       {
         "disposition": "HISTORICAL_CONTEXT",

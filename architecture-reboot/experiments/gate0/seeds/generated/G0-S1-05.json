@@ -25,26 +25,6 @@
           ]
         },
         "subject": "falls since June"
-      },
-      {
-        "anchors": [
-          "S01"
-        ],
-        "claim_candidates": [
-          {
-            "id": "CC2",
-            "support": [
-              "S01"
-            ],
-            "text": "known left MCA infarct"
-          }
-        ],
-        "id": "C2",
-        "salience": {
-          "acuity": "LOW",
-          "management_reference_spans": []
-        },
-        "subject": "old left MCA infarct"
       }
     ]
   },

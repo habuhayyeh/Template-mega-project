@@ -75,13 +75,13 @@
       },
       "O05": {
         "payload": "vitamin D",
-        "provenance": "A",
-        "temporal": null
+        "provenance": "A/2026-11-14",
+        "status": "current"
       },
       "O06": {
         "payload": "refer to PT for gait training",
         "provenance": "A/2026-11-14",
-        "temporal": null
+        "status": "current"
       }
     },
     "from_s1": {

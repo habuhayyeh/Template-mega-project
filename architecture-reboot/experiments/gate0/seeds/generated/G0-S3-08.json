@@ -6,7 +6,7 @@
     "candidate_outcomes": [
       {
         "candidate": "C1",
-        "outcome": "NOT_RENDERED"
+        "outcome": "RENDERED"
       }
     ],
     "dispositions": [

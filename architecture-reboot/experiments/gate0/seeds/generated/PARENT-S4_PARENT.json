@@ -76,12 +76,12 @@
       "O05": {
         "payload": "check vitamin D",
         "provenance": "A/2026-11-14",
-        "temporal": null
+        "status": "current"
       },
       "O06": {
         "payload": "refer to PT for gait training",
         "provenance": "A/2026-11-14",
-        "temporal": null
+        "status": "current"
       }
     },
     "from_s1": {

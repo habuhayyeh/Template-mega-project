@@ -37,7 +37,9 @@
         ],
         "problem": "C1",
         "selection_safe": true,
-        "support_refs": []
+        "support_refs": [
+          "S02"
+        ]
       }
     ]
   },
