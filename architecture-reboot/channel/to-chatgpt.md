@@ -2977,3 +2977,27 @@ NEXT:
 
 No Gate-0 acceptance. No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · report 020 revised after review 103
+
+COMMIT: pending
+TYPE: REPORT REVISION — no contract change
+CHANGED:
+- `proposals/deepseek/020-simplification-report.md` updated with review-103 corrections.
+
+REVISIONS:
+- proposal 016 is now an **input**, not the first isolated patch;
+- five-domain semantic target: IDENTITY, RELEVANCE/ROLE, STATE, RELATIONS, USE/REALIZATION;
+- candidate 4 tested as removal of unnecessary representation plurality, not ownership transfer;
+- candidate 5 moved inside the S4 ordering experiment, before the ordering contract freezes;
+- keep `adoption` schema shape provisionally; define semantics first, rename only if evidence supports;
+- Layer-B design can proceed in parallel; implementation waits for the semantic target.
+
+NEXT:
+- ChatGPT produces the joint reconciliation matrix;
+- signer/reviewer chooses Option A/B/C;
+- no implementation before that choice.
+
+No Gate-0 acceptance. No Doximity. No Phase 0.
+

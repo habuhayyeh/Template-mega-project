@@ -85,19 +85,20 @@ machinery before that model is settled risks optimizing around rules we may dele
 
 ### 4.1 Semantic model
 
-Use five **semantic questions**, not five predicates per field:
+The candidate semantic decomposition is now five **domains**, not five frozen predicates:
 
-1. **Problem identity/containment** — does this item have independent problem identity, or is it a
-   contained manifestation?
-2. **Current-encounter stance** — what does the current source endorse, reject, leave historical, or
-   leave unresolved at proposition/object level?
-3. **Representation support** — is the approved representation semantically supported by its members
-   and relations?
-4. **Relation fidelity** — is the causal relation the most specific relation explicitly supported by
-   the source, with correct noun, strength and direction?
-5. **Encounter role** — is the problem PRIMARY or BACKGROUND for this encounter?
+1. **IDENTITY** — is this an independent problem identity or contained information? (S1)
+2. **RELEVANCE / ROLE** — should the problem render in this encounter, and if so PRIMARY or BACKGROUND?
+   (S3)
+3. **STATE** — what does the current encounter endorse, reject, leave historical, or leave unresolved
+   at proposition/object level? (S2)
+4. **RELATIONS** — how are source-supported entities related, and is the representation/causal relation
+   faithful to the source? (S2)
+5. **USE / REALIZATION** — what content is selected, compiled and rendered? (S3/S4)
 
-These map to the existing owners; no new module is needed.
+This is a candidate decomposition, not a schema. The current five semantic predicates map onto it but
+may merge. Do not freeze a predicate count until the reconciliation matrix shows whether each existing
+rule is an instance of one domain without loss.
 
 ### 4.2 Validation model
 
@@ -152,6 +153,18 @@ One machine-readable **semantics registry**:
 Generate operational copies where possible. Keep `DECISIONS.md` as provenance history, plus a current
 index with `active/superseded/void` state.
 
+## 4.7 Post-review corrections (ChatGPT 103)
+
+- Proposal 016 is an **input**, not the destination. It was written before the broader audit and must be
+  re-evaluated against the five-domain target.
+- Candidate 4 may remove unnecessary representation plurality without moving S3 authority; test it as a
+  contract simplification, not as an ownership change.
+- Candidate 5 belongs **inside** the S4 ordering experiment; waiting until after the ordering contract
+  freezes risks freezing a case-specific salience field.
+- Keep the `adoption` schema shape provisionally; define the semantic concept first and rename only if
+  evidence shows the name materially causes errors.
+- Layer-B design can proceed in parallel, but implementation waits for the semantic target.
+
 ## 5. Options
 
 | option | scope | pros | cons |
@@ -160,7 +173,8 @@ index with `active/superseded/void` state.
 | **B. Staged two-layer** | Semantic model first, then measurement redesign | Fixes root causes; avoids optimizing harness around deleted rules; incremental | Longer; requires re-ratification of groups 2/4; packet reset |
 | **C. Big-bang rewrite** | All semantic and measurement changes at once | Maximum simplification | High risk; loses evidence; hard to attribute failures; violates incremental governance |
 
-**Recommendation: B, with A's proposal 016 as the immediate first contract patch.**
+**Recommendation: B. Proposal 016 is an input to the semantic reconciliation, not the first thing to
+approve in isolation.**
 
 ## 6. Recommended sequence
 
@@ -170,34 +184,31 @@ index with `active/superseded/void` state.
 - Signer/reviewer chooses scope: A, B, or C.
 - No implementation before that choice.
 
-### Phase 1 — immediate semantics (small)
+### Phase 1 — freeze the semantic target
 
-- Approve/amend proposal 016 wording only:
-  - S1 independent problem identity;
-  - S2 adoption as current-source proposition endorsement;
-  - S2 causal relation as most-specific source-supported entity;
-  - D-030 subject paragraph replaced.
-- No schema field; no seed change; S2-ADOPT/S2-CAUSAL packet IDs change.
-- Groups 1/3/5 survive; groups 2/4 re-ratify.
+- Define the five domains in Phase 0's matrix: identity, relevance/role, state, relations,
+  use/realization.
+- Determine whether proposal 016 maps cleanly onto that target or should be replaced.
+- Define relevance threshold for compact background problems; do not equate relevance with current
+  management.
+- Keep `adoption` schema shape provisionally; define the semantic concept first, rename only if the
+  matrix shows the name causes errors.
+- Test candidate 4 as a contract simplification, not an ownership transfer: remove unnecessary
+  representation plurality when S2 has exactly one semantically resolved formulation, while preserving
+  S3 choice when multiple clinically equivalent formulations exist.
+- Put candidate 5 (salience) inside the S4 ordering experiment, not after the ordering contract freezes.
+- Retire D-015/D-023 special-case wording where the new identity/state/relation rules now govern.
 
-### Phase 2 — semantic architecture consolidation
-
-- Merge problem identity/containment, encounter role and render depth into one current rule.
-- Retire D-015/D-023 special-case wording where D-030 now governs.
-- Decide whether resolved formulation should be the default for S2/S3; if yes, experiment first.
-- Clarify S1 salience only after S4 ordering dependency is frozen.
-- Keep coverage, R2 bridges, shared-action ownership as separate experiments.
-
-### Phase 3 — measurement redesign
+### Phase 2 — Layer-B design (parallel, implement after Phase 1)
 
 - Validators vs semantic questions.
-- One packet per artifact/layer; per-question slots.
+- One packet per artifact/layer; per-question context slices and verdict slots.
 - Seeds only for meaningful clinical failure modes.
 - Scenario vs fixture separation; remove `case_oracle`/per-parent dependency hacks.
 - Semantics registry; identity axes; active/superseded/void decision index.
 - Re-collect references under the new packet set; one-time reset.
 
-### Phase 4 — infrastructure
+### Phase 3 — infrastructure
 
 - Generic decision-closure/accounting validator.
 - Projection/hash cleanup: hash normative blocks, not prose; exact paths for semantic fields, additive
@@ -231,7 +242,8 @@ index with `active/superseded/void` state.
 Choose:
 
 - **A** — minimal wording + calibration cleanup now; defer semantic consolidation.
-- **B (recommended)** — 016 wording now, then semantic consolidation, then measurement redesign.
+- **B (recommended)** — reconcile the semantic target first, then Layer-B redesign; use 016 as an
+  input, not an isolated first patch.
 - **C** — full rewrite; not recommended.
 
 No implementation until the choice and the reconciliation matrix are recorded.
