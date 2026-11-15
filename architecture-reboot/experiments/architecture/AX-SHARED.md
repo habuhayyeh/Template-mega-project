@@ -47,14 +47,24 @@ Do not pre-freeze:
 
 Those are schema candidates to compare.
 
+## Preservation scope
+
+Both distinct problem-specific rationales must remain recoverable in the structured IR.
+
+Final-note prose is governed by the signer-approved target and section contract:
+- any rationale designated clinically material to communicate must remain represented in the final note;
+- the note need not duplicate the action or separately restate both rationales when one concise combined realization or permitted cross-reference preserves the required meaning;
+- concision is not permission to erase a clinically material secondary rationale.
+
 ## Required output behavior
 
 - shared action renders exactly once;
 - one A/P owning problem is explicit;
-- both distinct clinically important rationales remain recoverable/preserved;
+- both distinct rationales remain recoverable in the IR;
+- all signer/section-contract-required rationale content is preserved in the final note without unnecessary duplication;
 - problem-specific actions remain under their own problems;
 - no duplicated order/action;
-- no rationale is silently dropped;
+- no clinically material rationale is silently dropped;
 - no fake second ownership is created.
 
 ## Experimental arms
@@ -70,7 +80,8 @@ The experiment should determine the minimal sufficient representation; it should
 
 - action cardinality;
 - owner correctness;
-- preservation of both rationales;
+- IR preservation of both rationales;
+- final-note preservation of all rationale content required by the signer-approved target/section contract;
 - problem-specific action placement;
 - no duplicate render;
 - no semantic loss;
