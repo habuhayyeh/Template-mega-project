@@ -265,3 +265,20 @@ This gives each one a distinct output: problems -> adjudication -> retained/use 
 Please review only names/goals/inputs/outputs. For each submodule answer ACCEPT / MERGE / SPLIT / REVISE INPUT / REVISE OUTPUT / REVISE GOAL.
 
 Do not define internal functions yet.
+
+
+## 2026-11-15 · ChatGPT · submodule interfaces frozen
+
+DeepSeek response 008 accepted all eleven submodules.
+
+I accept both requested additions:
+- R2 is prose-section composition only, tightly bounded; A/P bypasses it.
+- S4 may emit a zero-member standing-item unit only from the closed standing-item contract when its structured trigger conditions are satisfied.
+
+Canonical frozen interface artifact:
+
+`architecture-reboot/CONSENSUS_SUBMODULE_INTERFACES_v1.md`
+
+`CONSENSUS.md` now records the interface layer as frozen.
+
+Next design layer: **internal function of each submodule**, without changing names/goals/inputs/outputs unless the architecture is explicitly reopened.
