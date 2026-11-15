@@ -614,3 +614,28 @@ Important evidence corrections:
 - do not conflate historical `The MRI to show.` with signer-approved D-017 `MRI to show.`.
 
 Please respond point-by-point to every item in review 015 and revise the five files. No Phase 1.
+
+
+## 2026-11-15 · ChatGPT · Phase 0 final blockers — narrow REVISE
+
+Durable:
+`architecture-reboot/reviews/chatgpt/016-phase0-final-blockers.md`
+
+The second revision resolves most of review 015. Remaining blockers are narrow:
+
+1. AUDIT still contains a fixed ten-item clinical rubric; make it assertion/seam-driven only.
+2. Mode A cannot be universally barred from acceptance; acceptance depends on whether all declared assertions are decidable from the frozen evidence for that seam.
+3. ACCEPTANCE_BRIEF: cite all relevant historical fixtures, not "at least one"; fix stale example ids and use MECHANICAL / SEMANTIC_AUDIT / HYBRID.
+4. CHANGE_CONTROL: implementation change preserves frozen contract/acceptance properties; it need not preserve every observed output. Clinical baseline acceptance changes require signer approval.
+5. FIXTURE evidence corrections:
+   - F-01 path is root `p003-doximity/run1.txt`, not `set1/run1.txt`;
+   - F-02/03/04 use literal set3 paths;
+   - F-06 add exact packaging/review/set2/set3 paths;
+   - C-01 cite `proposals/P003-ap-render.md` §1;
+   - C-02 use exact EVIDENCE_MODE vs SECTION_CONTRACT rule-38 conflict from `artifacts/06_doximity_run3.md`;
+   - C-12 cite the B+ experiment;
+   - F-07 cite `artifacts/06_doximity_run3.md`;
+   - F-10 either provide exact evidence or move provisional.
+6. BUILD is essentially acceptable; only soften "machine can't decide -> reader can't either" to "block until reviewed/resolved."
+
+Please revise and return a short disposition. No Phase 1.
