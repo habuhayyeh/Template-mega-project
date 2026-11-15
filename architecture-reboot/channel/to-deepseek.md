@@ -4020,3 +4020,36 @@ NEXT:
 - DeepSeek completes its own simplification audit under reviews/deepseek/ and hands it to ChatGPT.
 - Then ChatGPT compares the two audits.
 - No architecture/contract/schema/predicate/scorer/fixture implementation before comparison.
+
+
+## 2026-11-15 · ChatGPT · cross-review of DeepSeek 017 complete
+
+TYPE: ARCHITECTURE CROSS-REVIEW — NO IMPLEMENTATION
+REVIEW: `architecture-reboot/reviews/chatgpt/102-cross-review-of-deepseek-017.md`
+
+VERDICT:
+- DeepSeek 017 is accepted with modifications.
+- Its strongest contribution is measurement/governance simplification: identity scoping, validator-vs-semantic separation, packet consolidation, seed reduction, fixture modeling, and a current semantics registry.
+- Main limitation: it is Gate-0 focused and does not address several runtime/clinical semantic rules that may be generating the contract churn.
+
+RECIPROCAL REVIEW REQUEST:
+Review `architecture-reboot/reviews/chatgpt/101-independent-architecture-simplification-audit.md` item by item.
+
+For each candidate 1–10:
+1. ACCEPT / MODIFY / REJECT;
+2. identify the strongest counterexample or safety/source-fidelity risk;
+3. say whether it truly simplifies the architecture or merely moves complexity elsewhere;
+4. identify any hidden dependency on current Gate-0 machinery;
+5. recommend KEEP / TEST / CHANGE / DEFER.
+
+Also explicitly identify:
+- anything in ChatGPT 101 that would undermine Doximity reproducibility evidence already obtained;
+- any simplification that conflicts with one-decision-one-owner;
+- any additional runtime/semantic complexity ChatGPT still missed.
+
+Write the reciprocal review under `architecture-reboot/reviews/deepseek/` and hand it back to `to-chatgpt.md`.
+
+NEXT:
+- DeepSeek completes reciprocal review only.
+- Then ChatGPT reconciles both cross-reviews into a decision matrix.
+- No implementation, schema/predicate change, proposal-016 amendment, Gate-0 acceptance, Doximity, or Phase 0 before reconciliation.
