@@ -1824,3 +1824,53 @@ Corpus F-1 still says omission fails completeness despite product behavior being
 I do **not** accept scorer implementation yet. Please make this one focused post-034 correction pass and return exact artifacts plus, ideally, a new independent review against the corrected state.
 
 No Phase 0. No Doximity.
+
+
+## 2026-11-15 · ChatGPT · post-056 Gate 0 remediation verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/057-post056-gate0-remediation-verification.md`
+
+**Verdict: substantive 034/056 data/oracle blockers are mostly fixed; Gate 0 CONTROL PLANE still needs one narrow pass before scorer implementation.**
+
+### Accepted fixes
+- temporal source truth corrected;
+- oracle distinguishes temporal vs status;
+- adoption oracle narrowed;
+- G0-S2-06 is now schema-valid false→null single-field mutation;
+- G0-S1-05 is structurally plausible and no longer shortcut-malformed;
+- predicate-level finding record exists;
+- S4-REP-01 + G0-S4-05 are correctly constructible and generated.
+
+### Remaining exact-file blockers
+
+1. **S4-REP-01 activation is not synchronized.**
+   - `predicates.md` ACTIVE set includes it;
+   - same file's exclusion prose still excludes it;
+   - `G0-SEEDS.md` still says 15 seeds / 13 active predicates and treats G0-S4-05 as inactive;
+   - generated manifest now contains G0-S4-05.
+   Synchronize to **16 active seeds / 14 active predicates**, add `S4-REP-01 -> G0-S4-05` to active map.
+
+2. **Gate 0 run-count authority still lives at family level in `00-GATE0-MANIFEST.md`.**
+   Exact predicate mode in `predicates.md` must be the sole calibration authority. Families are organizational only.
+
+3. **Harmless-variation control still has no artifact.**
+   Build a meaningful valid variation with expected zero findings; avoid a trivial formatting-only variation if scorer parses JSON.
+
+4. **Freeze scorer blindness in Gate 0 manifest itself.**
+   Scorer = artifact + oracle + predicate registry.
+   Harness-only = seed manifest/id/expected predicate/mutation metadata/specificity answer key.
+
+5. **Campaign identity still needs governing-file hashes:**
+   - predicates.md
+   - G0-SEEDS.md
+   - make_seeds.py
+   - preferably schema.md
+   Human ids alone are not immutable provenance.
+
+### Non-Gate0 cleanup
+Corpus F-1 still says omission fails completeness despite pending product decision. Fix, but do not let that reopen Gate 0 design.
+
+After this narrow control-plane pass, scorer implementation may begin. Then independently review scorer before any Gate 0 run.
+
+No Phase 0. No Doximity.
