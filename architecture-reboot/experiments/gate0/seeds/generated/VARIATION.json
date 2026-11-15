@@ -1,0 +1,144 @@
+{
+  "case": "CASE-01",
+  "predicate_set": "PILOT-1",
+  "s1": {
+    "candidates": [
+      {
+        "anchors": [
+          "S02"
+        ],
+        "candidate_claims": [
+          {
+            "id": "CCX",
+            "support": [
+              "S02"
+            ],
+            "text": "three falls since June"
+          }
+        ],
+        "id": "CX",
+        "salience": {
+          "acuity": "MODERATE",
+          "managed_today": true
+        },
+        "subject": "falls since June"
+      }
+    ]
+  },
+  "s2": {
+    "adjudication": [
+      {
+        "adoption": false,
+        "evidence": null,
+        "object": "O01",
+        "temporal": "2024-02 documented"
+      },
+      {
+        "adoption": true,
+        "evidence": [
+          "S02"
+        ],
+        "object": "O03",
+        "temporal": "June\u2013November"
+      }
+    ],
+    "representations": [
+      {
+        "id": "RX",
+        "members": [
+          "O03",
+          "O04"
+        ],
+        "problem": "CX",
+        "selection_safe": true,
+        "support_refs": [
+          "S02"
+        ]
+      }
+    ]
+  },
+  "s3": {
+    "dispositions": [
+      {
+        "disposition": "HISTORICAL_CONTEXT",
+        "object": "O01"
+      },
+      {
+        "disposition": "HISTORICAL_CONTEXT",
+        "object": "O02"
+      },
+      {
+        "disposition": "MEDICATION_RECORD",
+        "object": "O07"
+      }
+    ],
+    "rendered": [
+      {
+        "approved_representation": "RX",
+        "problem": "CX",
+        "selected_rep": "RX"
+      }
+    ],
+    "retained": [
+      "O03",
+      "O04",
+      "O05",
+      "O06"
+    ]
+  },
+  "s4": {
+    "problems": [
+      {
+        "id": "PX",
+        "order": 1,
+        "source": "CX"
+      }
+    ],
+    "sections": [
+      "AP"
+    ],
+    "units": [
+      {
+        "id": "UX1",
+        "members": [
+          "O03",
+          "O04"
+        ],
+        "operator": "FACT",
+        "order": 10,
+        "problem": "PX",
+        "representation": "RX"
+      },
+      {
+        "id": "UX2",
+        "members": [
+          "O05"
+        ],
+        "operator": "PLAN",
+        "order": 20,
+        "problem": "PX",
+        "representation": "RX"
+      },
+      {
+        "id": "UX3",
+        "members": [
+          "O06"
+        ],
+        "operator": "PLAN",
+        "order": 30,
+        "problem": "PX",
+        "representation": "RX"
+      }
+    ]
+  },
+  "status": "DERIVED_PARENT",
+  "substrate_objects": [
+    "O01",
+    "O02",
+    "O03",
+    "O04",
+    "O05",
+    "O06",
+    "O07"
+  ]
+}

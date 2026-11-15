@@ -14,14 +14,16 @@ A scorer that passes everything is indistinguishable from a working system. Gate
 
 Gate 0 calibrates the predicates that the campaigns in scope will use. It is scoped to a **predicate family**, not to the whole scorer:
 
-| family | layer | run count | used by |
+Run count is set **solely** by each predicate's `mode` in `AX-S1S2-D/predicates.md`. The table below is organisational; its layer column is descriptive and does not set counts.
+
+| family | layer | used by |
 |---|---|---|---|
-| S1 authority (candidacy, adoption leakage, claim leakage) | semantic | 3 | AX-S1S2-D |
-| S2 representation (source grounding, approval safety) | semantic | 3 | AX-S1S2-D, AX-SHARED |
-| S3 selection (approved-only, no synthesis, inclusion blocking) | semantic | 3 | AX-S1S2-D |
-| S4 blueprint (inclusion/claim immutability, order, typing) | mechanical + semantic | 1 + 3 | AX-S1S2-D, AX-S4 |
-| generic fidelity (fabricated content, duplication, omission) | mechanical | 1 | all |
-| voice / section style | mechanical | 1 | all |
+| S1 authority (candidacy, adoption leakage, claim leakage) | semantic | AX-S1S2-D |
+| S2 representation (source grounding, approval safety) | semantic | AX-S1S2-D, AX-SHARED |
+| S3 selection (approved-only, no synthesis, inclusion blocking) | semantic | AX-S1S2-D |
+| S4 blueprint (inclusion/claim immutability, order, typing) | mechanical + semantic | AX-S1S2-D, AX-S4 |
+| generic fidelity (fabricated content, duplication, omission) | mechanical | all |
+| voice / section style | mechanical | all |
 
 A calibration covers only the families exercised by the campaigns it gates. Running Gate 0 for families nobody will score is waste.
 
@@ -97,6 +99,12 @@ It fails if any of those is false, including "detected but misattributed" — a 
 - a real defect is discovered that the scorer did not flag — that becomes a new seed, and Gate 0 is re-run for that family.
 
 The last trigger matters most: every miss in production should become a seed, so the calibration corpus grows from experience.
+
+## 7a. Scorer blindness
+
+The scorer receives **artifact + case oracle + predicate registry only**.
+
+Harness-only, never passed to the scorer: the seed manifest, the seed id, the expected predicate, mutation metadata, and the specificity answer key. Keeping the answer key in the same directory as the artifacts is not a control; it is a convention. The control is that the harness selects the artifact and holds the answer.
 
 ## 8. What Gate 0 does not prove
 

@@ -25,6 +25,11 @@ def load():
         return json.load(fh)
 
 
+def file_sha(path):
+    with open(path, "rb") as fh:
+        return "sha256:" + hashlib.sha256(fh.read()).hexdigest()
+
+
 def sha(obj):
     # Canonical JSON: sorted keys, fixed separators. Hashing bytes would make
     # the digest depend on formatting; hashing canonical JSON makes it depend
@@ -151,7 +156,16 @@ def main():
     parent = load()
     with open(os.path.join(CASE, "oracle.json"), encoding="utf-8") as fh:
         oracle = json.load(fh)
+    base = os.path.join(HERE, "..", "experiments", "architecture", "AX-S1S2-D")
+    spec = os.path.join(HERE, "..", "experiments", "gate0", "seeds", "G0-SEEDS.md")
     manifest = {
+        "governing_hashes": {
+            "predicates.md": file_sha(os.path.join(base, "predicates.md")),
+            "schema.md": file_sha(os.path.join(base, "schema.md")),
+            "G0-SEEDS.md": file_sha(spec),
+            "make_seeds.py": file_sha(os.path.abspath(__file__)),
+        },
+        "governing_hash_method": "sha256 over file bytes (source text, not JSON)",
         "case": parent["case"],
         "predicate_registry": {"id": PREDICATE_SET, "version": "1"},
         "active_set": "PILOT-ACTIVE-1",
@@ -179,6 +193,17 @@ def main():
             "mutations": [{"path": p, "before": b, "after": a} for p, b, a in mutations],
             "hash": sha(art),
         })
+
+    # Harmless variation: identical semantics, every id renamed consistently.
+    text = json.dumps(parent, sort_keys=True)
+    for a, b in (('"C1"', '"CX"'), ('"R1"', '"RX"'), ('"P1"', '"PX"'),
+                 ('"U1"', '"UX1"'), ('"U2"', '"UX2"'), ('"U3"', '"UX3"'),
+                 ('"CC1"', '"CCX"')):
+        text = text.replace(a, b)
+    with open(os.path.join(OUT, "VARIATION.json"), "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(json.dumps(json.loads(text), indent=2))
+    manifest["variation"] = {"artifact": "VARIATION.json", "expect": "zero findings",
+                             "basis": "identical semantics, all ids renamed"}
 
     with open(os.path.join(OUT, "MANIFEST.json"), "w",
               encoding="utf-8", newline="\n") as fh:

@@ -72,7 +72,7 @@ Wrong-submodule attribution is a calibration failure.
 
 ## Current state
 
-**15 seed artifacts exist · 13 active predicates.** Five table rows have no artifact and are marked `NOT_IN_PILOT`: G0-S1-03, G0-S2-02, G0-S2-04, G0-S3-03, G0-S4-05. Three of them cannot be built on CASE-01 alone. `S4-REP-01` and `S3-SEL-02` are excluded because no *active* predicate scores them in this pilot, not because the parent cannot produce the condition — it can.
+**16 seed artifacts exist · 14 active predicates.** Four table rows have no artifact and are marked `NOT_IN_PILOT`: G0-S1-03, G0-S2-02, G0-S2-04, G0-S3-03. Three of them cannot be built on CASE-01 alone. `S4-REP-01` and `S3-SEL-02` are excluded because no *active* predicate scores them in this pilot, not because the parent cannot produce the condition — it can.
 
 ## ACTIVE_PREDICATE → SEED map
 
@@ -93,8 +93,9 @@ Every active predicate has at least one seed. A predicate in the active set with
 | `S4-INC-01` | G0-S4-01, G0-S4-02 |
 | `S4-MEM-01` | G0-S4-04 |
 | `S4-COMP-01` | G0-S4-06 |
+| `S4-REP-01` | G0-S4-05 |
 
-**15 seeds calibrate 13 active predicates** for CASE-01/02/09.
+**16 seeds calibrate 14 active predicates** for CASE-01/02/09.
 
 `S1-AUTH-01` has two seeds because one mutation proves one forbidden field is detected, not that the forbidden set is. The set itself is closed and versioned in `predicates.md`.
 
