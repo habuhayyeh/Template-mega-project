@@ -56,10 +56,10 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 
 - **Execution package:** source contract accepted after review 081; review 082 corrected only the
   scorer-input boundary. The package is source-first and regenerable.
-- **Scorer:** implemented at `architecture-reboot/scorer/` with harness at
-  `architecture-reboot/tools/gate0_harness.py`. **Pending review.** **Gate 0:** unrun; the
-  three-independent-human-review prerequisite is outstanding. **Doximity:** unrun. **Phase 0:**
-  untouched and stale.
+- **Scorer/harness/preflight:** implemented and **CLOSED under D-019** after independent review.
+  `python architecture-reboot/tools/preflight.py` passes with 7/7 checks and 42 tests.
+  **Gate 0:** unrun; the three-independent-human-review prerequisite is outstanding.
+  **Doximity:** unrun. **Phase 0:** untouched and stale.
 
 ## 5. Exact position
 
@@ -142,5 +142,11 @@ or acceptance. Human/semantic prerequisites block semantic acceptance, not safe 
 
 ## 8. Next
 
-The reviewer inspects the scorer implementation and Gate 0 harness before Gate 0 is run. Do not run
-Gate 0 acceptance, fabricate human judgments, or touch Doximity/Phase 0 in this pass.
+The scorer/harness/preflight implementation layer is closed. Do **not** reopen it without new evidence
+(a failing test, counterexample, implementation result, or genuine contradiction).
+
+Gate 0 acceptance remains blocked by the requirement for three independent blinded human judgments.
+Safe mechanical preparation, including blinded packet generation, may proceed if authorized, but no
+acceptance verdict may be claimed without the required human judgments.
+
+No Doximity or Phase 0 work is authorized by this closure.

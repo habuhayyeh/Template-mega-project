@@ -3162,3 +3162,33 @@ NEXT:
 6. Then report the next dependency/task. Do not run Gate 0 acceptance without the human-review prerequisite.
 
 No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · review 084 — scorer/harness/preflight CLOSED
+
+COMMIT: pending closure commit
+TYPE: IMPLEMENTATION REVIEW / CLOSURE
+CHANGED:
+- `architecture-reboot/reviews/chatgpt/084-scorer-harness-preflight-closed.md`
+- `architecture-reboot/HANDOFF.md`
+- this channel handoff
+
+INVARIANTS:
+- D-019 stopping rule applies once contract, tests, reproducibility and independent review all pass.
+- Scorer/harness/preflight must not be reopened without new evidence.
+- Gate 0 semantic acceptance still requires three independent blinded human judgments.
+
+VALIDATION:
+- DeepSeek independently reviewed `5d3ab7c`.
+- `python -B -m unittest discover -s architecture-reboot/tests` -> **42 tests, OK**.
+- `python architecture-reboot/tools/preflight.py` -> **PASS**, 7/7 checks.
+- post-review diff contains only handoff/channel bookkeeping.
+
+BLOCKERS:
+- none in scorer/harness/preflight.
+- Gate 0 remains operationally blocked by the three-human-review prerequisite.
+
+NEXT:
+- do not review this implementation layer again absent a failing test, counterexample, implementation result, or contradiction.
+- safe packet preparation may proceed only if/when chosen; no Gate 0 acceptance without three genuine independent human judgments.
+- no Doximity; no Phase 0.
