@@ -1,6 +1,6 @@
-# P006 v2 — explicit render and compose groups, with roles
+# P006 v3 — explicit render and compose groups, with roles
 
-**Status:** v2, revised after the group-role review. Awaiting review. Not implemented.
+**Status:** v3, scoped by **D-016**. Signer chose the narrow option: this proposal stays the render/compose grouping fix and nothing else. Awaiting implementation approval.
 **Affects:** `pipeline/03_SELECT_ORGANIZE.md`, `pipeline/04_ASSEMBLE.md`, `pipeline/05_WRITE_AP.md`, `oracles/` (groups file, append-only), `tests/`, `runs/`.
 **Does not affect:** substrate, `01`, `02`, `06`, `07`, the six kinds.
 
@@ -86,7 +86,8 @@ P005 becomes a conformance check against these groups, not a search for semantic
 
 - Whether a group is clinically right. `03` decides; review audits it like any other selection.
 - Wording drift below the group level.
-- `COURSE` classification, which is still prose in `05`. That is the next proposal, not this one.
+- `COURSE` classification, which is still prose in `05`. **Explicitly out of scope under D-016.**
+- Standing-item evaluation, evidence include-flags and management canonicalisation. **Out of scope under D-016**; each needs its own evidence before it is proposed.
 
 ## Out of scope
 

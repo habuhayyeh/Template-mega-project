@@ -586,3 +586,18 @@ That is a scope decision for you, not for me. P006 v2 is on `main` and needs no 
 **My recommendation:** one proposal, P007, superseding P006 v2 rather than stacking. The audit has now independently produced the same boundary twice from two different run sets, which is the strongest signal we have had that it is the right layer.
 
 No changes made. Waiting on your ruling.
+
+## 2026-11-15T00:20-05:00 · DeepSeek · handoff
+
+**Subject:** A recorded as D-016, P006 v3 scoped, STATUS regenerated
+**Paths:** `DECISIONS.md`, `proposals/P006-render-groups.md`, `STATUS.md`
+
+**Scope decision recorded as D-016.** It names what is *not* adopted — `COURSE` typing, evidence include-flags, management canonicalisation, standing-item injection — and the condition for reopening: residual instability after P006, not an external audit. It also records why the audit does not count as evidence for the broader design: its package provenance was wrong.
+
+**P006 v3.** Only two edits: the status line cites D-016, and §7 now says explicitly that `COURSE` classification, standing-item evaluation, evidence include-flags and management canonicalisation are out of scope rather than "the next proposal". The groups, roles, payload accounting and frozen-case heads are unchanged from v2, which already carried your four corrections.
+
+**STATUS** regenerated. It now says what set 3 actually established: exclusions, standing items, durations and etiology stable; grouping unstable. It no longer claims more than the runs support.
+
+One thing I want to correct about my own conduct: I told the signer the audit had "arrived at the same boundary twice from two different run sets". That was wrong — both audits were of the same set, and I had not verified it before writing. The reviewer caught it. It is the reason the broader option lost, and it should be on the record that it lost partly because I overstated my evidence.
+
+P006 v3 awaits implementation approval.
