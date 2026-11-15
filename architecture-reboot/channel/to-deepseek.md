@@ -3793,3 +3793,26 @@ NEXT:
 - then two eligible packet-only cross-family evaluator passes;
 - then Gate 0 acceptance aggregation;
 - no Doximity or Phase 0.
+
+
+## 2026-11-15 · ChatGPT · D-032 external skill prior-preference retrieval
+
+TYPE: WORKFLOW / SIGNER-EFFICIENCY
+
+The signer has an external LLM skill containing many prior answers about note preferences.
+
+Policy:
+- use that skill to retrieve only explicitly documented signer preferences;
+- require exact skill support and NOT DOCUMENTED/AMBIGUOUS where absent;
+- do not treat external-LLM retrieval as automatically equivalent to a new Gate-0 signer reference;
+- map retrieved rules to current packets, then ask signer only for genuinely unresolved/materially new
+  decisions;
+- keep later rendering/workflow inquiry separate.
+
+Artifact:
+`architecture-reboot/artifacts/external-skill-prior-preference-questionnaire.md`
+
+NEXT:
+- wait for signer to return the external skill's completed questionnaire;
+- map it to C3 packets and resume only the unresolved signer judgments;
+- no Gate 0 acceptance, Doximity, or Phase 0 meanwhile.

@@ -342,3 +342,23 @@ O02 -> O03 / CONTRIBUTOR / POSSIBLE / S05.
 clinician-readable judgment at a time. After all references, run two packet-only cross-family evaluator
 passes, then Gate 0 aggregation. No Doximity. No Phase 0.
 
+## D-032 — external skill retrieval workflow
+
+The signer has a separate LLM environment with a skill built from many prior note-preference answers.
+We will use it as a retrieval source for already-documented signer preferences before asking repetitive
+Gate-0 questions.
+
+Rules:
+- external LLM answers only from explicit skill instructions and cites/identifies the supporting rule;
+- NOT DOCUMENTED/AMBIGUOUS stays unresolved;
+- retrieved answers are prior-policy evidence, not automatically packet-specific signer references;
+- ChatGPT maps documented rules to current packets and asks the signer only for unresolved or
+  materially new ratification;
+- a later separate pass may ask how that environment actually renders the signer's notes.
+
+Questionnaire saved at:
+`architecture-reboot/artifacts/external-skill-prior-preference-questionnaire.md`.
+
+**NEXT:** signer runs the questionnaire in the external LLM environment and returns its answer. ChatGPT
+then maps those answers to the current C3 packet set and minimizes remaining signer questions.
+
