@@ -1852,5 +1852,72 @@ prerequisite is outstanding. The `acceptance` mode was not executed and no human
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · review 083 fixes applied
+
+**Commit:** `7e432fa` · **second build run: zero diff** across 35 generated files · **41 synthetic tests
+pass** · **no Gate 0 acceptance run**.
+
+Rebased over the governance commits `27499a7` and `e5e4cb2`; no governance file was changed by this
+pass.
+
+### Six review-083 fixes
+
+1. **Governing-source freshness.** `load_campaign()` now recomputes every `MANIFEST.json`
+   governing-source hash, checks `GATE0-C1` / `PILOT-2` / `ACTIVE-PILOT-2` / `SCHEMA-2` / `ORACLE-2.0`
+   / `FULL_SILENCE-WITHIN-LAYER`, and checks the scorer registry against the accepted active set. A
+   stale or mixed package raises `InputIntegrityError`.
+2. **One projection authority.** `architecture-reboot/projection_contract.py` now holds the op registry,
+   exact `OP_CONTRACTS`, map validation and executor. Both `make_seeds.py` and the scorer call it. A
+   changed map `source_path`/`condition`/`transform` fails before scoring; test:
+   `test_projection_map_drift_fails`.
+3. **Clean-parent semantics.** `clean_verdict()` is exactly: any `FIRED` -> `FAIL`; else any
+   `UNDECIDABLE` -> `INCOMPLETE`; all `SILENT` -> `PASS`. All three branches are tested.
+4. **Judgment binding.** Judgments are validated against known packets and the packet predicate id
+   before aggregation. Unknown/stale packet ids and predicate mismatches raise `ValueError`;
+   `test_judgment_predicate_binding`.
+5. **Evidence fidelity.** Each record now carries the dependency context actually supplied:
+   `parent_id`, `parent_type`, hash. `EVIDENCE.json` fingerprints `projection_contract.py`,
+   `scorer.py`, `registry.py`, `projection.py` and `gate0_harness.py`.
+6. **Parent-type and campaign aggregation.** `EVIDENCE.json` now writes `parent_type_verdicts` and
+   `campaign_verdict`, with deterministic `FAIL` > `INCOMPLETE` > `PASS` aggregation. Synthetic tests
+   cover PASS, FAIL and INCOMPLETE.
+
+### Changed files
+
+- New: `architecture-reboot/projection_contract.py`.
+- `tools/make_seeds.py` — imports the shared map executor; no local projection copy.
+- `tools/gate0_harness.py` — source integrity, judgment binding, clean/campaign verdicts, evidence.
+- `scorer/projection.py` — thin adapter over the shared contract.
+- `scorer/README.md`, `tests/test_scorer_more.py`, `HANDOFF.md`.
+- `00-GATE0-MANIFEST.md` — status/review-083 note.
+- `seeds/generated/MANIFEST.json` — regenerated governing hashes.
+
+### Counts
+
+5 clean parents across 4 parent types · 28 seeds · 16 active predicates · 28/28 seed mutations checked.
+
+### Governing / implementation hashes
+
+- `00-GATE0-MANIFEST.md` — `sha256:a1ae23e6cd57b2bd2e17e1c3d188ca403693e1e54a411f286b4e5e4e8a34546d`
+- `make_seeds.py` — `sha256:4296932a2ece936d808f21429e779ec5ce09363b04c8a3df195dc114816b4e4f`
+- `schema.md` — `sha256:47d8afd3fe4380016dc618ccad30665536343f142820955bfa5687dbfc25f5c3`
+- `predicates.md` — `sha256:f6fd7174ade7678d531d2f6c04461fe6618a2e3c9ed2d550b7a208d6e30b2639`
+- `G0-SEEDS.md` — `sha256:620479896710d7575fbc94e7a2a6317d9fbcacf883ae25875abb6f1d922ae8c5`
+- `oracle.json` — `sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927`
+- `projection_contract.py` — `sha256:ebe2cab075e980f61f0c1aa7db1225f407a78ee092423ec26a6c6c21c64f5875`
+- `scorer/scorer.py` — `sha256:e9c957928c9d26b7db5f27cfc8e1d7320e35e1c604b979dfd38175484178122b`
+- `scorer/registry.py` — `sha256:763d8fe76e467553dbf31a38baee1370c8706b69394e846df3bcc48dd8f65eb4`
+- `scorer/projection.py` — `sha256:2867510a74184ebd9137c1242c4f4cb64d119e17b3f76f10a9bf7ccd0aa481d8`
+- `tools/gate0_harness.py` — `sha256:a6d7c1b7abed1ebc90ffe1006aca503a59c6d7761084c2e423f23b291365df5e`
+- `MANIFEST.json` file bytes — `1d6a60a1bcb5b0d60a2480d5f82afbb087af10effe6138691487dfbe67c0d3e4`
+
+### Still open
+
+Independent review of the review-083 patch. Gate 0 remains **UNRUN**; the three-independent-human-review
+prerequisite is outstanding. No `acceptance` mode invocation and no fabricated judgments.
+
+No Doximity. No Phase 0.
+
+
 
 
