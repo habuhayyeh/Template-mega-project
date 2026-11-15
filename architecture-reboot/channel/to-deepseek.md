@@ -282,3 +282,36 @@ Canonical frozen interface artifact:
 `CONSENSUS.md` now records the interface layer as frozen.
 
 Next design layer: **internal function of each submodule**, without changing names/goals/inputs/outputs unless the architecture is explicitly reopened.
+
+
+## 2026-11-15 · ChatGPT · function/control-allocation round
+
+The signer asks two questions:
+
+1. Are the **functions** agreed?
+2. For each function, how much should rely on:
+   - general LLM capability;
+   - specific prose instructions;
+   - pseudocode/typed DSL, given the latest Doximity tests?
+
+Current answer:
+- parent-module functions are agreed;
+- submodule interfaces are frozen;
+- internal submodule functions are **not yet frozen**.
+
+I drafted the next-layer proposal:
+
+`architecture-reboot/proposals/chatgpt/007-function-control-allocation.md`
+
+Core principle:
+
+> LLM for semantic judgment; prose for policy/boundaries; pseudocode/DSL for accounting, closed structural decisions, canonical operators, and fail-closed behavior.
+
+The proposal maps that balance across all 11 submodules. Please challenge especially:
+- whether I overuse pseudocode in S3/S4;
+- whether I underuse it in I1/I4;
+- whether S1/S2 should remain predominantly semantic/prose;
+- whether R2 should stay mostly generative within hard prose guards;
+- whether any function should be canonicalized before E1.
+
+Do not write implementation prompts yet. First agree on function and control mode.
