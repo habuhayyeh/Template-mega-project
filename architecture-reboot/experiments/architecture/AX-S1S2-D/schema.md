@@ -43,6 +43,11 @@ representations:
 
 **`representations[]` is the approved set** — S2 emits only representations it approves, so anything present is approved by definition. `selection_safe` therefore describes whether that entry may coexist with another approved entry for the same problem.
 
+## S1 output — DC-002 shape
+
+Each candidate carries `claim_candidates` (not `candidate_claims`), and the partition is implied by
+attachment: a claim candidate belongs to exactly one problem candidate.
+
 ## S3 output
 
 ```yaml
@@ -50,12 +55,29 @@ rendered:
   - problem: C1
     approved_representation: R1      # null means not approved, and the problem must not render
     selected_rep: R1                 # must be present in S2's approved set for C1
+candidate_outcomes:                 # exactly one per S1 problem candidate
+  - { candidate: C1, outcome: RENDERED }
 retained: [O03, O05]
 dispositions:
   - { object: O04, disposition: NOT_USED }
 ```
 
 `retained ∪ dispositions` must equal the substrate object set. No `reason` field is required.
+
+## S4 input view — observable
+
+`S4_INPUT_VIEW` is recorded as an artifact so `S4-PROJ-01` can be scored rather than asserted:
+
+```yaml
+s4_input_view:
+  from_s1: { problem: C1, salience: {...} }
+  from_s3: { selected_rep: R1, retained: [...] }
+  from_s2: { members: [...], relations: [...], claim_relation: null, duplicate_groups: [...] }
+  from_ingest: { payload: { O03: S02, ... } }
+  from_contracts: { section: AP, operator_set: PILOT, ordering_contract: ORDER-1 }
+```
+
+Any key outside these five groups is a packaging violation.
 
 ## S4 blueprint
 

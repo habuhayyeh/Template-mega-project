@@ -1,5 +1,6 @@
 {
   "case": "CASE-01",
+  "dc": "DC-002",
   "predicate_set": "PILOT-1",
   "s1": {
     "candidates": [
@@ -7,7 +8,7 @@
         "anchors": [
           "S02"
         ],
-        "candidate_claims": [
+        "claim_candidates": [
           {
             "id": "CCX",
             "support": [
@@ -58,6 +59,12 @@
     ]
   },
   "s3": {
+    "candidate_outcomes": [
+      {
+        "candidate": "CX",
+        "outcome": "RENDERED"
+      }
+    ],
     "dispositions": [
       {
         "disposition": "HISTORICAL_CONTEXT",
@@ -130,6 +137,54 @@
         "representation": "RX"
       }
     ]
+  },
+  "s4_input_view": {
+    "from_contracts": {
+      "operator_set": "PILOT",
+      "ordering_contract": "ORDER-1",
+      "section": "AP"
+    },
+    "from_ingest": {
+      "payload": {
+        "O03": "S02",
+        "O04": "S02",
+        "O05": "S03",
+        "O06": "S03"
+      }
+    },
+    "from_s1": {
+      "problem": "CX",
+      "salience": {
+        "acuity": "MODERATE",
+        "management_reference_spans": [
+          "S03"
+        ]
+      }
+    },
+    "from_s2": {
+      "claim_relation": null,
+      "duplicate_groups": [],
+      "members": [
+        "O03",
+        "O04"
+      ],
+      "relations": [
+        {
+          "from": "O04",
+          "to": "O03",
+          "type": "SUPPORTS"
+        }
+      ]
+    },
+    "from_s3": {
+      "retained": [
+        "O03",
+        "O04",
+        "O05",
+        "O06"
+      ],
+      "selected_rep": "RX"
+    }
   },
   "status": "DERIVED_PARENT",
   "substrate_objects": [

@@ -23,7 +23,7 @@
           "acuity": "MODERATE",
           "managed_today": true
         },
-        "candidate_claims": [
+        "claim_candidates": [
           {
             "id": "CC1",
             "text": "three falls since June",
@@ -94,6 +94,12 @@
         "object": "O07",
         "disposition": "MEDICATION_RECORD"
       }
+    ],
+    "candidate_outcomes": [
+      {
+        "candidate": "C1",
+        "outcome": "RENDERED"
+      }
     ]
   },
   "s4": {
@@ -140,5 +146,54 @@
         "order": 30
       }
     ]
+  },
+  "dc": "DC-002",
+  "s4_input_view": {
+    "from_s1": {
+      "problem": "C1",
+      "salience": {
+        "acuity": "MODERATE",
+        "management_reference_spans": [
+          "S03"
+        ]
+      }
+    },
+    "from_s3": {
+      "selected_rep": "R1",
+      "retained": [
+        "O03",
+        "O04",
+        "O05",
+        "O06"
+      ]
+    },
+    "from_s2": {
+      "members": [
+        "O03",
+        "O04"
+      ],
+      "relations": [
+        {
+          "type": "SUPPORTS",
+          "from": "O04",
+          "to": "O03"
+        }
+      ],
+      "claim_relation": null,
+      "duplicate_groups": []
+    },
+    "from_ingest": {
+      "payload": {
+        "O03": "S02",
+        "O04": "S02",
+        "O05": "S03",
+        "O06": "S03"
+      }
+    },
+    "from_contracts": {
+      "section": "AP",
+      "operator_set": "PILOT",
+      "ordering_contract": "ORDER-1"
+    }
   }
 }

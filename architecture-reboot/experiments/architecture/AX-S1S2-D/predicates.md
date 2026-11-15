@@ -67,22 +67,20 @@ All are calibrated by Gate 0 before use. A predicate that has no Gate 0 seed is 
 
 These three cases exist to separate "adoption from evidence" from "adoption from convenience". A run that gets `CASE-02` right and `CASE-01` wrong has inferred adoption rather than found it.
 
-## Pilot ACTIVE_PREDICATE_SET
-
-**STALE — PILOT ACTIVE SET.** DC-002 added `S3-CAND-01` and `S4-PROJ-01`. This set, the seed corpus, the CASE-01 parent and all campaign hashes predate that change and must be regenerated before any Gate 0 run.
-
-Only these predicates are calibrated and scored in the three-case pilot. They are the ones the pilot cases can actually exercise.
+## Pilot ACTIVE_PREDICATE_SET (PILOT-2, post-DC-002)
 
 ```text
 S1-CAND-01, S1-CAND-02, S1-AUTH-01, S1-AUTH-02
 S2-REP-01, S2-TEMP-01, S2-ADOPT-01
-S3-INC-01, S3-SEL-01, S3-ACCT-01
-S4-INC-01, S4-MEM-01, S4-COMP-01, S4-REP-01
+S3-CAND-01, S3-INC-01, S3-SEL-01, S3-ACCT-01
+S4-INC-01, S4-MEM-01, S4-COMP-01, S4-REP-01, S4-PROJ-01
 ```
 
-`S1-BODY-01` (body-only subject) and `S2-CONF-01` (contradictory sources) are **not** active: the pilot cases do not exercise them. They belong to CASE-07/08/10 and CASE-11.
+Sixteen predicates. `S3-CAND-01` and `S4-PROJ-01` are new under DC-002; both are mechanical and both
+have seeds in this pilot.
 
-**Excluded from the pilot verdict**, and not counted as unmet: `S2-ADOPT-02` (PENDING_SCHEMA), `S4-ORD-01` (PENDING_DEPENDENCY), and the predicates whose condition no pilot case produces — `S2-REP-02` (two approved representations), `S1-BODY-01` and `S2-CONF-01`. `S4-REP-01` is **active**: the parent already carries representation ids on both sides of the comparison.
+Not active: `S1-BODY-01`, `S2-REP-02`, `S2-CONF-01` (no pilot case produces the condition),
+`S2-ADOPT-02` (PENDING_SCHEMA), `S4-ORD-01` (PENDING_DEPENDENCY — no ordering oracle).
 
 ## Scoring rules
 

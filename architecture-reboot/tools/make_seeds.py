@@ -17,7 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CASE = os.path.join(HERE, "..", "experiments", "architecture",
                     "AX-S1S2-D", "fixtures", "CASE-01")
 OUT = os.path.join(HERE, "..", "experiments", "gate0", "seeds", "generated")
-PREDICATE_SET = "PILOT-1"
+PREDICATE_SET = "PILOT-2"
 
 
 def load():
@@ -99,6 +99,12 @@ def m_s3_02(a):
     return [("/s3/rendered/0/selected_rep", "R1", "R-999")]
 
 
+def m_s3_05(a):
+    a["s3"]["candidate_outcomes"] = [x for x in a["s3"]["candidate_outcomes"]
+                                     if x["candidate"] != "C1"]
+    return [("/s3/candidate_outcomes", "C1 RENDERED", "C1 outcome absent")]
+
+
 def m_s3_04(a):
     a["s3"]["dispositions"] = [d for d in a["s3"]["dispositions"]
                               if d["object"] != "O07"]
@@ -126,6 +132,11 @@ def m_s4_05(a):
     return [("/s4/units/0/representation", "R1", "R-999 against S3 selected_rep R1")]
 
 
+def m_s4_07(a):
+    a["s4_input_view"]["adoption"] = True
+    return [("/s4_input_view/-", "<absent>", "adoption: true injected")]
+
+
 def m_s4_06(a):
     a["s4"]["units"] = [u for u in a["s4"]["units"] if u["id"] != "U2"]
     return [("/s4/units", "U2 present", "U2 removed for retained O05")]
@@ -147,6 +158,8 @@ SEEDS = [
     ("G0-S4-02", "S4-INC-01", m_s4_02),
     ("G0-S4-04", "S4-MEM-01", m_s4_04),
     ("G0-S4-06", "S4-COMP-01", m_s4_06),
+    ("G0-S3-05", "S3-CAND-01", m_s3_05),
+    ("G0-S4-07", "S4-PROJ-01", m_s4_07),
     ("G0-S4-05", "S4-REP-01", m_s4_05),
 ]
 

@@ -1,6 +1,6 @@
 {
   "case": "CASE-01",
-  "version": "ORACLE-1.0",
+  "version": "ORACLE-2.0",
   "note": "Frozen expectations for scoring. The scorer receives artifact + this oracle + predicate registry version; it never sees the parent's own labels.",
   "spans": {
     "S01": {
@@ -79,8 +79,19 @@
       "old left MCA infarct",
       "known left MCA infarct"
     ],
-    "adoption_note": "Only objects named here are scored by S2-ADOPT-01. O07 is a medication fact and cannot adopt anything; that is a property of the case, not an adoption verdict."
+    "adoption_note": "Only objects named here are scored by S2-ADOPT-01. O07 is a medication fact and cannot adopt anything; that is a property of the case, not an adoption verdict.",
+    "candidate_outcomes": {
+      "C1": "RENDERED"
+    },
+    "s4_input_view_fields": [
+      "from_s1",
+      "from_s3",
+      "from_s2",
+      "from_ingest",
+      "from_contracts"
+    ]
   },
   "matching": "Candidacy and subject checks compare clinical concept/object identity, not literal strings. A candidate naming the infarct by any synonym is excluded.",
-  "source_of_truth": "Temporal and text values are copied verbatim from FROZEN-SUBSTRATES.md. That file is the substrate; this oracle and parent.json must agree with it exactly, including punctuation."
+  "source_of_truth": "Temporal and text values are copied verbatim from FROZEN-SUBSTRATES.md. That file is the substrate; this oracle and parent.json must agree with it exactly, including punctuation.",
+  "dc": "DC-002"
 }
