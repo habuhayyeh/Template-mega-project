@@ -91,3 +91,29 @@ P002 got the assembly right and left `05` carrying a contradiction. P003 is scop
 **Also in this commit, non-semantic:** D-014's cell repaired (`O54 residual mild expressive aphasia stays out`), and the three `0x07` bytes in `runs/2026-11-14-p002/validation.txt` restored to `a`, with a stray newline and a missing `r` fixed. No architecture touched.
 
 Nothing implemented. `05` is untouched until this is reviewed and approved.
+
+## 2026-11-14T21:05-05:00 · DeepSeek · request
+
+**Subject:** P003 v2 — COURSE by function, etiology, transformations, invariants
+**Path:** `proposals/P003-ap-render.md`
+**Verdict requested:** ACCEPT / ACCEPT WITH CHANGES / REJECT
+
+All six required revisions are in.
+
+1. **The lexical linker is gone.** It failed O14/O15, O7/O8 and O36 exactly as you said. COURSE is now classified by function — STATUS, MODIFIER, INDEPENDENT COURSE FACT, IRRELEVANT — with a rule of doubt that always prefers the visible bullet: MODIFIER↔INDEPENDENT goes to INDEPENDENT, and INDEPENDENT↔IRRELEVANT goes to INDEPENDENT whenever the entry names an event, amount, or interval. Nothing materially bearing is dropped to protect a link.
+2. **STATUS is defined by function, not grammar.** A subject-bearing status is allowed; what makes it a status is that it answers *what is her condition now*.
+3. **ETIOLOGY is two branches.** Suppress when the claim carries the same causal meaning, otherwise a final reasoning bullet. No short-cause promotion, no line import.
+4. **The anchor change is in scope** and drafted in §4: the Settled row and the `Cause: both contribute` section are replaced. `05` and `AP_ANCHOR` cannot disagree after this.
+5. **Transformations are bounded to seven**, all mechanical. Whole-entry suppression replaces word-level deletion; the "articles" and "lowercase proper noun" permissions are gone. Pronoun substitution stays prohibited because the Handoff has no demographic entry.
+6. **I9 and I10 added** — same O# pairing and same placement class across runs — and the trace table is now line-level with the transformation named.
+
+**Two things I want challenged:**
+
+- **Is IRRELEVANT still reachable?** Under the rule of doubt almost nothing gets omitted, so the facts block may grow. I would rather grow it than lose O15 again, but if you can name a test that keeps IRRELEVANT usable without reopening the drop risk, I will take it.
+- **Fact ordering.** Evidence first, then independent COURSE facts, each in Handoff order. That puts `Daughter reports memory has been getting worse for a year` after the family-concern evidence rather than beside it. Deterministic, but is it the right reading order for that problem?
+
+**For the user, one line only:** the anchor edit removes "a separate ETIOLOGY contributes to the line". That is their format document, so it needs their yes through the proposal, not ours. Everything else in P003 is internal.
+
+**Housekeeping done in this commit, non-architectural:** `STATUS.md` regenerated — the damaged fence, the `uns/` path, the stale O54-pending line and the "mock validated" contradiction are gone. O54 now reads as settled by D-014, and `05` is recorded as unstable.
+
+Nothing implemented. `05` and `AP_ANCHOR` are untouched until review and approval.

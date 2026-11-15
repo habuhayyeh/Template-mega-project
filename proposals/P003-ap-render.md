@@ -1,124 +1,130 @@
-# P003 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
+# P003 v2 — `05_WRITE_AP`: COURSE by function, one render order, one etiology rule, reproducible acceptance
 
-**Status:** draft, awaiting review. Not implemented.
-**Supersedes:** nothing. Extends P002.
-**Affects:** `pipeline/05_WRITE_AP.md`, `tests/acceptance/`, `runs/`, `STATUS.md`, `CHANGELOG.md`.
-**Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, the A/P oracle, the section oracle.
+**Status:** v2, revised after `reviews/P003-original-branch.md`. Awaiting review. Not implemented.
+**Supersedes:** P003 v1 in this file's history.
+**Affects:** `pipeline/05_WRITE_AP.md`, `pipeline/AP_ANCHOR.md`, `tests/acceptance/`, `runs/`, `CHANGELOG.md`, `DECISIONS.md` (one new entry after approval).
+**Does not affect:** substrate, `01`, `02`, `03` semantics, `04`, `06`, `07`, the six kinds, either oracle.
 
 ---
 
 ## 1. What P002 exposed
 
-Three separate defects, from the same frozen Handoff:
+1. **Unstable selection.** Two runs of `05` on one Handoff produced different regressions. Run 2 re-added O54, unmerged the apixaban hold from its resume condition, dropped `Seizure precautions`, and dropped the infarct and encephalomalacia evidence.
+2. **COURSE payload never renders.** O4 `about two minutes`, O6 `lasting an hour`, O15 `now 131 after fluid restriction` are in the Handoff and absent from the A/P. `05` reads only `CLAIM_QUALIFIER` and `EVIDENCE` for bullets and uses `COURSE` only for line status.
+3. **Internal contradictions.** `05` says bullets come from `CLAIM_QUALIFIER` then `EVIDENCE`, and also that reasoning renders last; it says `ETIOLOGY` may join the line and also that it survives as a reasoning bullet; and it says "formatting, not writing" while requiring attribution and normalisation decisions.
 
-1. **Unstable selection.** Two runs of `05` produced different regressions. Run 2 re-added O54 as a bullet, unmerged the apixaban hold from its resume condition, dropped `Seizure precautions`, and dropped the infarct and encephalomalacia evidence — the entries that establish the substrate the claim names.
-2. **COURSE payload never renders.** The Handoff carries durations and a trend that the A/P does not: O4 `about two minutes`, O6 `lasting an hour`, O15 `now 131 after fluid restriction`. `05` reads only `CLAIM_QUALIFIER` and `EVIDENCE` for bullets and uses `COURSE` only for line status. The anchor's own first bullet carries `~90 seconds` and `~20 minutes`, so this is not optional detail.
-3. **Internal contradictions.** `05` says bullets come "from `CLAIM_QUALIFIER`, then `EVIDENCE`" and also that reasoning renders last; it says `ETIOLOGY` may join the line and also that it survives as a reasoning bullet; and it says "formatting, not writing" while requiring attribution and normalisation decisions.
-
-The instability is not separable from 3. A stage that is told two different orders will produce different orders.
+v1 of this proposal tried to solve 2 with a lexical subject test. It fails O14/O15 (`128` is not in `now 131`), O7/O8 (`known` appears only in the evidence entry) and O36 (no shared subject), so it would have dropped exactly the payload it was written to rescue. That heuristic is withdrawn.
 
 ---
 
 ## 2. COURSE by function
 
-`COURSE` is not one thing. `05` classifies each retained `COURSE` entry by what it does to a retained fact, using only the Handoff.
+Each retained `COURSE` entry is classified by what it does for the problem, not by its grammar.
 
-### 2.1 Link test
+| Class | Definition | Rendering |
+|---|---|---|
+| **STATUS** | Describes the patient's or the problem's condition as a whole: `returned to baseline`, `improved`, `resolved`, `unchanged`, `worse`. Carries no duration, quantity, or trend. May be subject-bearing (`aphasia improved`). | May supply the line status. At most one. |
+| **MODIFIER** | Names the same event or finding as a retained factual bullet and adds duration, tempo, quantity, evolution, or trend. | Folded into that bullet: the fact, then the added words. |
+| **INDEPENDENT COURSE FACT** | Bears materially on the problem, but attaching it to one factual bullet would require an inference the Handoff does not make. | Its own factual bullet, in the facts block. |
+| **IRRELEVANT** | Names nothing that bears on the claim. | Omitted. |
 
-Normalise both texts: lowercase, strip punctuation, collapse whitespace. For a `COURSE` entry C and an `EVIDENCE` entry E in the same problem:
+**Do not use "has no subject" as the test for STATUS.** A status may be subject-bearing; what distinguishes it is that it answers *what is her condition now*, not *how long did the event last*.
 
-1. **Shared subject.** If E's subject phrase — its leading content words up to the first verb or preposition — appears in C, then C carries the same subject and step 2 applies. Otherwise step 3.
-2. **Modifier.** If C adds timing, quantity, or trend material to that subject — a duration, an interval, a change verb, a delta — C is a **modifier** of E. Render one bullet: E's text, then the added material from C with the repeated subject removed.
+**Rule of doubt.** Between MODIFIER and INDEPENDENT, choose INDEPENDENT. Between INDEPENDENT and IRRELEVANT, choose INDEPENDENT whenever the entry names a clinical event, amount, or interval. IRRELEVANT is reserved for entries that name neither. A visible extra bullet is correctable; a silently dropped fact is not.
 
-   ```text
-   E  witnessed generalized tonic-clonic seizure at home
-   C  witnessed generalized tonic-clonic seizure about two minutes
-   →  Witnessed generalized tonic-clonic seizure at home, about two minutes.
+**Folding is permitted only when the relationship is clear from the Handoff** — the modifier's own words name the same event or finding as the bullet. No anchor is inferred from adjacency, from a shared source letter, or from clinical plausibility.
 
-   E  sodium 128 on admission
-   C  sodium now 131 after fluid restriction
-   →  Sodium 128 on admission, now 131 after fluid restriction.
-   ```
+### Worked classification, frozen acceptance case
 
-3. **Status.** If C has no factual subject — a pure state phrase such as `returned to baseline`, `improved`, `resolved`, `unchanged`, `worse` — C is a **status candidate** for the problem line. At most one is used. If there is none, the line ends at the claim.
-4. **Unlinked.** If C has a subject that no retained `EVIDENCE` entry shares, C is **not rendered**. No anchor is inferred, no subject is borrowed from another problem, and nothing is added to make the sentence work.
+| Entries | Class | Rendering |
+|---|---|---|
+| O3 + O4 | MODIFIER | `Witnessed generalized tonic-clonic seizure at home, about two minutes.` |
+| O5 + O6 | MODIFIER | `Postictal confusion lasting about an hour.` |
+| O7 + O8 | MODIFIER | `Known left MCA infarct, two years ago.` |
+| O14 + O15 | MODIFIER (trend) | `Sodium 128 on admission, now 131 after fluid restriction.` |
+| O36 | INDEPENDENT | `Daughter reports memory has been getting worse for a year.` |
+| O2 `admitted 11/12` | INDEPENDENT or IRRELEVANT | Renders only if it bears on the seizure problem; the admission date alone does not. |
 
-The linkage is therefore never invented: either the subject phrase is literally present in both entries, or the entry is not rendered. The test is lexical containment plus an explicit timing or change marker. A judge who reads the Handoff can check every link by eye.
-
-### 2.2 What does not change
-
-`01` keeps splitting event from duration (D-001 and split-before-classify stand). The merge happens at rendering, in `05`, exactly as the apixaban hold is merged with its resume condition.
-
-### 2.3 Duplicates
-
-One bullet per fact. If two `EVIDENCE` entries state the same fact — O3 and O43, O14 and O45, O17 and O44 — the first is rendered and the second is suppressed. If a modifier has already been folded into its evidence bullet, it is not rendered a second time.
+Where a fold is rejected, the course entry renders on its own rather than disappearing. That is the whole difference from v1.
 
 ---
 
 ## 3. One render order
 
-Per problem, in this order and no other:
+Per problem, and no other:
 
-1. **Factual evidence** — `EVIDENCE` entries, each with its `COURSE` modifier folded in, in Handoff order.
-2. **Clinician reasoning** — `CLAIM_QUALIFIER` entries, then `ETIOLOGY` when it renders as reasoning (§4), in Handoff order. Distinct propositions stay distinct; two reasoning propositions are two bullets.
-3. **`Plan:`** — the four buckets, as today.
+1. **Facts** — `EVIDENCE` entries with their folded modifiers, then independent `COURSE` facts, each block in Handoff order.
+2. **Reasoning** — `CLAIM_QUALIFIER`, then a rendered `ETIOLOGY`, in Handoff order. Distinct propositions stay distinct.
+3. **`Plan:`** — the buckets, unchanged.
 
-The sentence "From `CLAIM_QUALIFIER`, then `EVIDENCE`" is deleted. It is the direct cause of the contradiction.
-
-A reasoning bullet is never placed above a factual one, and factual bullets are never reordered to make a narrative.
+The sentence "From `CLAIM_QUALIFIER`, then `EVIDENCE`" is deleted.
 
 ---
 
-## 4. One ETIOLOGY rule
+## 4. One etiology rule, and the anchor change it requires
 
-For a retained `ETIOLOGY` entry E and the problem's claim X:
+Two branches only:
 
-1. **Suppressed.** If X already names the same cause — the claim contains a causal construction (`from`, `due to`, `secondary to`, `related to`, `after`) and E names that same cause — E is suppressed entirely. It appears neither on the line nor as a bullet.
-2. **On the line.** If X names no cause and E is a short causal phrase (eight words or fewer), E is appended to the line before the status, and is not repeated as a bullet.
-3. **As a bullet.** Otherwise E renders as the final reasoning bullet, after `CLAIM_QUALIFIER`, and does not touch the line.
+1. **Suppressed** — the claim already expresses the same causal meaning.
+2. **Reasoning bullet** — otherwise, rendered last among the bullets, in the clinician's words.
 
-Never both. When the same-cause test is genuinely uncertain, prefer branch 3: a visible bullet is correctable, an unexplained line element is not.
+**A separate `ETIOLOGY` entry never reaches the problem line.** The line's only causal wording is what the claim itself states. No length threshold, no import.
 
-Worked case: X `post-stroke seizure from the old left MCA scar rather than a new lesion`; E `scar from your old stroke is the most likely cause of the seizure`. X names the cause; E names the same cause → suppressed. The current output renders both, which is the duplication this rule removes.
+`pipeline/AP_ANCHOR.md` currently contradicts this and must change with it. Proposed edit:
+
+- Settled-table row `| Cause — both sources | … both contribute to the line |` becomes
+  `| Cause | only the cause inside CLAIM reaches the line; a separate ETIOLOGY renders as the final reasoning bullet |`.
+- The section `## Cause: both contribute` is replaced by:
+
+```text
+## Cause
+
+The line carries only the cause the claim itself states. A separate ETIOLOGY entry is not imported
+into the line — it renders as the final reasoning bullet, in the clinician's own words. Where the
+claim already states the same cause, the etiology is suppressed rather than repeated.
+```
+
+Worked case: claim `post-stroke seizure from the old left MCA scar rather than a new lesion`; etiology `scar from your old stroke is the most likely cause of the seizure`. Same cause → suppressed. P002 rendered both; this removes the duplicate.
 
 ---
 
 ## 5. Surface rendering versus clinical content
 
-"Formatting, not writing" stays. What changes is that the permitted transformations are enumerated, so the stage is not asked to decide what counts as formatting.
+"Formatting, not writing" stays. The permitted list is now bounded and mechanical.
 
-### Permitted — surface rendering only
+### Permitted
 
-1. Capitalise the first word after `//` and the first word of a sentence.
-2. Delete redundant words: articles, repeated subjects, a repeated fact.
-3. Fold a `COURSE` modifier into its evidence entry, and fold a state into its action (`apixaban held, to resume once MRI excludes hemorrhage`), when both parts are already in the Handoff.
-4. Strip structural speaker prefixes — `clinician:`, `daughter:`, `patient:` — while keeping material attribution already in the text (`per family`, `daughter reports`).
-5. Render a provenance marker as a parenthetical using its name and date only: `(prior neurology, 2025-06)`.
-6. Normalise a date for reading: `2025-06` → `June 2025`. The marker itself is not altered upstream; this is display only.
-7. Lowercase a mid-sentence proper noun only where the source already does.
+1. Capitalisation and terminal punctuation.
+2. Folding a verified MODIFIER into its fact, removing only the repeated subject.
+3. Suppressing a whole duplicate entry — never deleting words from inside a clinically meaningful phrase.
+4. Stripping structural speaker prefixes (`clinician:`, `daughter:`, `patient:`) while retaining material attribution already present (`per family`, `daughter reports`).
+5. Rendering a provenance marker as a parenthetical using its name and date only: `(prior neurology, 2025-06)`.
+6. Date display normalisation: `2025-06` → `June 2025`.
+7. Combining compatible fragments already present — a held drug with its resume condition, one action stated twice — without adding a clinical word.
 
-Pronoun substitution is **not** permitted: the Handoff contains no demographic entry, so a pronoun the Handoff does not carry would be an addition.
+### Prohibited
 
-### Prohibited — new clinical content
+No new noun, verb, number, quantity, negation, modality, causal connective, or inference. No etiology that is not an `ETIOLOGY` entry. No status that is not a `COURSE` entry. No plan item that is not a `MANAGEMENT` entry or a `STANDING_ITEMS` trigger. **No pronoun substitution**: the Handoff carries no demographic entry, so a pronoun it does not contain would be an addition.
 
-No new noun, verb, number, quantity, negation, modality, causal connective, or inference. No etiology that is not an `ETIOLOGY` entry. No status that is not a `COURSE` entry. No plan item that is not a `MANAGEMENT` entry or a `STANDING_ITEMS` trigger.
-
-**Test:** every word in the output is either in the Handoff or produced by one of the seven transformations above. A word that is neither is a defect.
+**Test:** every word of the output is either in the Handoff or produced by transformations 1–7. Anything else is a defect.
 
 ---
 
 ## 6. Reproducibility acceptance
 
-One good run proves nothing; P002 already produced two different ones. `05` is accepted only when repeated runs on the same frozen Handoff agree on what the A/P says.
-
 ### Protocol
 
-1. Fixed input: `substrate/acceptance_v2.txt` + `oracles/ap_ledger_v3.txt` → one Handoff, recorded once and reused byte-identically.
-2. Three independent runs of `05`, fresh context each, same contract, same Handoff. No hand editing between runs.
-3. Each run scored against the invariant set below by a reader who has the Handoff open.
-4. A trace table per run: every rendered bullet maps to a Handoff `O#`. Any bullet that maps to nothing is a failure.
+1. Fixed input: one Handoff from `substrate/acceptance_v2.txt` + `oracles/ap_ledger_v3.txt`, recorded once and reused byte-identically.
+2. Three independent runs of `05`, fresh context, same contract. No hand editing between runs.
+3. Each run scored by a reader holding the Handoff, with a line-level trace table:
 
-### Invariants — must be identical across all three runs
+   ```text
+   output line | source O# (one or a set) | transformation(s) | omitted retained O# + reason
+   ```
+
+   Every bullet maps to at least one `O#`. A bullet that maps to nothing fails I8.
+
+### Invariants — identical across all three runs
 
 | # | Invariant |
 |---|---|
@@ -129,85 +135,58 @@ One good run proves nothing; P002 already produced two different ones. `05` is a
 | I5 | set of plan decisions |
 | I6 | state and conditionality of each plan decision |
 | I7 | historical attributions present |
-| I8 | zero words outside the Handoff and the seven transformations |
+| I8 | zero words outside the Handoff and transformations 1–7 |
+| I9 | the same `O#` pairing — entries merged in one run are merged in all |
+| I10 | the same placement class for every `O#`: line, factual bullet, reasoning bullet, or plan |
 
-### Pass criteria
+### Pass
 
-- **PASS:** I1–I8 identical in all three runs. Wording may differ only in ways the seven transformations allow; if it does, the run set is recorded as textually unstable but semantically stable.
-- **FAIL:** any invariant differs, or any run contains a word that fails I8, or any bullet maps to no `O#`.
+All ten invariants identical across three runs. Wording may vary only within transformations 1–7; if it does, the set is recorded as textually unstable and semantically stable, and that variance is reported, not hidden.
 
-A single run is never the acceptance artifact. The artifact is the three-run set plus the invariant table; if they agree, the run set *is* the output and no reviewed rewrite is needed.
-
----
-
-## 7. Acceptance target for the acceptance case
-
-Must be present after P003:
-
-- witnessed generalized tonic-clonic seizure, `~2 mins`;
-- postictal confusion, `~1 hr`;
-- no prior seizures;
-- known left MCA infarct, old left MCA encephalomalacia;
-- CT head without hemorrhage or new focal lesion;
-- sodium 128 → 131 after fluid restriction;
-- distinct clinician reasoning: confusion is postictal, not dementia; MRI will adjudicate;
-- MRI and EEG;
-- apixaban held, resume once MRI excludes hemorrhage;
-- no antiseizure medication unless another event;
-- driving restriction;
-- current plan items (amlodipine, atorvastatin, fluid restriction, seizure precautions);
-- probable vascular dementia attributed to prior neurology 2025-06;
-- family-reported memory decline.
-
-Must remain absent:
-
-- O54 as a seizure bullet;
-- duplicate seizure, sodium, or CT statements;
-- duplicate reasoning;
-- O52 `no further workup` promoted into today's plan;
-- any invented linkage, etiology, or status.
+A single run is never the acceptance artifact. The artifact is the three-run set plus the invariant table.
 
 ---
 
-## 8. State and housekeeping
+## 7. Acceptance target
 
-After implementation, not before:
+Present after P003: witnessed seizure with `~2 mins`; postictal confusion with `~1 hr`; no prior seizures; known left MCA infarct and encephalomalacia; CT without hemorrhage or new lesion; sodium 128 → 131 after fluid restriction; distinct reasoning (postictal, not dementia; MRI adjudicates); MRI and EEG; apixaban held with resume condition; no antiseizure medication unless another event; driving restriction; amlodipine, atorvastatin, fluid restriction, seizure precautions; probable vascular dementia attributed to prior neurology 2025-06; daughter-reported memory decline over a year.
 
-1. `STATUS.md` — `05` is recorded as **unstable pending P003**, not `engineering/mock validated`; the stale "signer decision pending on O54" line is removed because D-014 settles it; `Doximity acceptance: PENDING` and `Canonical acceptance: NOT YET ESTABLISHED` stay.
-2. `CHANGELOG.md` — P003 entry.
-3. A `D-015` recording the COURSE-by-function rule and the three-branch etiology rule once approved.
+Absent: O54 as a seizure bullet; duplicate seizure, sodium, or CT statements; duplicate reasoning; O52 promoted into today's plan; invented linkage, etiology, or status.
 
-Already repaired in this commit, non-semantic:
+---
 
-- `DECISIONS.md` D-014 cell: `O54 esidual … aphasia\ stays out` → `O54 residual mild expressive aphasia stays out`.
-- `runs/2026-11-14-p002/validation.txt`: three `0x07` bytes restored to `a` (`ap_run1.txt`, `ap_run2.txt`, `ap_reviewed.txt`), a stray newline removed, and the missing `r` restored.
+## 8. Housekeeping
+
+Corruption repaired in this commit: `DECISIONS.md` D-014 cell; `runs/2026-11-14-p002/validation.txt` three `0x07` bytes, stray newline, missing `r`; `STATUS.md` regenerated — the damaged fence, the `uns/` path, the stale O54-pending line and the "mock validated" contradiction are gone.
+
+After implementation: `CHANGELOG.md` entry, and a `D-015` recording the COURSE classes and the two-branch etiology rule.
 
 ---
 
 ## 9. Validation plan
 
 ```text
-1. tools/allocate.py substrate/acceptance_v2.txt            → runs/<date>-p003/allocation.txt
-2. tools/check_ledger.py allocation.txt oracles/ap_ledger_v3.txt   → exit 0
-3. 04 on substrate + ledger                                 → runs/<date>-p003/handoff.txt  (must equal P002's)
-4. 05 ×3 on that Handoff                                    → ap_run1..3.txt
-5. trace table + invariant score                            → runs/<date>-p003/validation.txt
-6. STATUS update after the invariant table, never before
+1. tools/allocate.py substrate/acceptance_v2.txt                    → runs/<date>-p003/allocation.txt
+2. tools/check_ledger.py allocation.txt oracles/ap_ledger_v3.txt    → exit 0
+3. 04 on substrate + ledger                                         → handoff.txt  (must equal P002's)
+4. 05 ×3 on that Handoff                                            → ap_run1..3.txt
+5. line-level trace table + ten invariants                          → validation.txt
+6. STATUS update after the invariant table
 ```
 
-Executed locally by an LLM. This is an engineering mock; it does not speak to Doximity behaviour.
+Local execution by an LLM. Engineering mock; says nothing about Doximity.
 
 ---
 
 ## 10. Risks
 
-- **COURSE folding may duplicate text.** Mitigated by the shared-subject test and by I3: a modifier that rendered inside a bullet must not appear again.
-- **Etiology suppression may hide a distinct cause.** Mitigated by branch 3's bias: uncertain cases render as a bullet.
-- **Three runs may not agree.** That is a finding, not a failure of the protocol. If they do not, the stage is not acceptance-ready and no fourth run rescues it.
-- **The A/P now says more than it did.** Durations and the sodium delta become visible. That is a change in what the note tells a reader and is flagged for the user.
+- **Folding duplicates text.** Mitigated by I3 and I9: a folded modifier may not appear again, and pairing must be stable.
+- **INDEPENDENT becomes a dumping ground.** Mitigated by I3 and I8: each independent bullet must map to its own `O#` and use only its words.
+- **Three runs disagree.** That is the finding, not a protocol failure; no fourth run rescues it.
+- **The anchor change is a format change.** It touches the signer's document. Approved by proposal, not by edit.
 
 ---
 
 ## Out of scope
 
-`01`, `02`, `04`, `06`, `07`, the substrate, the six kinds, the oracles, O54's status, the body note, and any new tool.
+`01`, `02`, `04`, `06`, `07`, the substrate, the six kinds, the oracles, O54, the body note, and any new tool.
