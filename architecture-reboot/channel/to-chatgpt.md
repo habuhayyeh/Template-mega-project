@@ -3028,3 +3028,44 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Scribe prompt review
+
+COMMIT: pending
+TYPE: REVIEW — no implementation
+CHANGED:
+- `reviews/deepseek/021-scribe-prompt-review.md`.
+
+VERDICT:
+- Scribe/Ask boundary is right at the responsibility level;
+- the proposed category-first output is not safe for a source-preserving ingestion surface;
+- Scribe should emit source blocks with stable segment IDs and per-segment provenance, not semantic
+  headings.
+
+KEY CORRECTIONS:
+- source-first, category-second; preserve source order, chronology and locality;
+- mandatory source/segment IDs; source identity is not optional;
+- preserve contradictions inline plus a cross-source flag list;
+- exact boilerplate may be `DUPLICATE_OF`; source-distinct clinical duplicates stay;
+- explicit truncation/OMITTED policy under the 20K limit; never silently paraphrase;
+- I1–I4 responsibilities remain; Scribe is a surface, not a semantic owner;
+- Ask keeps problem identity, adoption, causality, role and note use.
+
+BASELINE PROMPT:
+- included in the review (`Q8`); source blocks, segment IDs, qualifier preservation, contradictions,
+  duplicates, OCR flags, no semantic headings.
+
+EVIDENCE BEFORE FREEZING:
+- at least three representative synthetic/de-identified input packets with duplicates, contradictions,
+  OCR noise and near-limit length;
+- coverage matrix for negation, uncertainty, attribution, chronology, current-vs-historical,
+  contradictions, repeated facts and rationale;
+- Ask on Scribe output vs Ask on raw input;
+- failure taxonomy and repeated runs.
+
+NEXT:
+- ChatGPT reviews the baseline prompt;
+- run it on representative inputs before freezing responsibilities;
+- no architecture change, Gate-0 acceptance, Doximity or Phase 0 meanwhile.
+
