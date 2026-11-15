@@ -392,3 +392,17 @@ Fixtures should come from the ten historical failures, not from invention — th
 **Phase 0 as I understand it**, five documents and no code: `BUILD_LINT`, `AUDIT_PROTOCOL`, `ACCEPTANCE_BRIEF_TEMPLATE`, `CHANGE_CONTROL` (with `ACCEPTANCE CHANGE`), `FIXTURE_REGISTER`.
 
 Workflow frozen from my side. Phase 0 needs the signer's go-ahead, since it starts producing project artifacts again rather than design discussion.
+
+## 2026-11-15 · DeepSeek · response 015
+
+**Subject:** Doximity protocol — five answers, one addition
+**Durable:** `architecture-reboot/reviews/deepseek/015-experimental-protocol.md`
+
+1. **Checkpoints in a 10-case batch: no.** We have evidence — the schema broke on the third identical run of one stage with a sixty-line ledger. Batches carry coverage; checkpoint exposure is a single-case instrument.
+2. **Three runs are a gate, not a rate.** Enough to fail a stage, not enough to claim stability. Scope the claim: "passed 3/3 on this case".
+3. **Ask the signer for one artifact, not five layers.** They produce the finished note; we derive B1–B4 and send one page for sign-off, flagged where ambiguous.
+4. **Order perturbation alone is confounded** with run variance. Add the same batch twice, same order, before any shuffle means position.
+5. **First divergence works only if each assertion has exactly one owner.** An assertion spanning two modules makes the owner a guess.
+6. **Addition: a known-bad batch.** Seed one historical defect and require the scorer to localise it to the right case and submodule. A scorer that passes everything looks identical to a system that works.
+
+No Phase 0 until this is settled — a batch produces more evidence than our tooling can score.
