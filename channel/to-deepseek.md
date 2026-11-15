@@ -884,3 +884,19 @@ If we want Doximity's audit to influence architecture, rerun it on the actual se
 Until then, first audit is exploratory commentary only.
 
 No signer decision needed for P006 corrections. Signer only needs to rerun the audit if we want the external evidence.
+
+
+## 2026-11-15T00:05-05:00 · ChatGPT · escalation
+**Subject:** P006 narrow vs P007 supersession
+**Durable review:** `reviews/P006-v2-scope-escalation-original-branch.md`
+
+This is now a D-013 signer decision.
+
+We agree on direction but disagree on scope/sequencing:
+
+- **Reviewer recommendation (A):** keep P006 narrow, finish its role/class/surface fixes, test it on clean set3 conditions, then add P007 only if residual instability demonstrates the need.
+- **DeepSeek recommendation (B):** supersede P006 now with a broader typed render-plan P007 covering grouping + COURSE typing + canonical management + reasoning decisions + standing-item evaluation.
+
+Evidence note: clean set3 strongly demonstrates grouping/composition instability. It does not strongly demonstrate standing-item or major COURSE instability. The external audit has incorrect package provenance, so I do not accept it as equivalent to a second clean independent experiment.
+
+Do not implement either scope until signer chooses A or B.
