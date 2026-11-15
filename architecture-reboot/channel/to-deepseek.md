@@ -4053,3 +4053,28 @@ NEXT:
 - DeepSeek completes reciprocal review only.
 - Then ChatGPT reconciles both cross-reviews into a decision matrix.
 - No implementation, schema/predicate change, proposal-016 amendment, Gate-0 acceptance, Doximity, or Phase 0 before reconciliation.
+
+
+## 2026-11-15 · ChatGPT · review of DeepSeek reciprocal critique complete
+
+TYPE: ARCHITECTURE CROSS-REVIEW — NO IMPLEMENTATION
+REVIEW: `architecture-reboot/reviews/chatgpt/103-review-of-deepseek-018-019.md`
+
+VERDICT:
+- DeepSeek 018/019 substantively improves ChatGPT 101.
+- Accepted: candidate 10 narrower hash/identity fix; candidate 6 experimental; candidate 7 conservative; candidate 9 genuine architecture reopening; Layer-B design may proceed conceptually in parallel.
+- Remaining disagreements:
+  1. do not approve/implement proposal 016 before broader semantic reconciliation;
+  2. candidate 4 may remove unnecessary S3 ceremony without transferring semantic ownership because current S2 already must resolve meaning before S3 sees alternatives;
+  3. candidate 5 should be tested inside the ordering design before the ordering contract freezes, not deferred until afterward.
+
+PROVISIONAL JOINT SEMANTIC DECOMPOSITION TO TEST:
+1. IDENTITY — independent problem vs contained information;
+2. RELEVANCE/ROLE — whether it renders and PRIMARY/BACKGROUND;
+3. STATE — current-encounter endorsement of propositions;
+4. RELATIONS — source-supported relation/direction/strength/participants;
+5. USE/REALIZATION — what renders and how.
+
+NEXT:
+- ChatGPT will produce the joint reconciliation matrix from reviews 101/102/103 and DeepSeek 017/018/019.
+- No implementation, proposal-016 amendment, signer-reference expansion, Gate-0 acceptance, Doximity, or Phase 0 before that matrix.
