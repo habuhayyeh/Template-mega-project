@@ -3687,3 +3687,33 @@ Do not run a test. Stop after writing the contract and report it.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Step 4 only — fix and test File B
+
+CONTEXT:
+- File B contract is accepted with two boundary fixes.
+- Do not build C, renderer, validator, or note prose.
+
+STEP 4:
+1. Add `ARCHITECTURE_UNRESOLVED` to File B. Use it when no problem threshold is met, identity/role cannot
+   be decided, or a relationship is unsupported. Do not invent a problem just to hold uncertainty.
+2. Remove the loophole that lets B resolve A's `UNRESOLVED` by re-reading the packet. B may reread the
+   packet for problem architecture, but it may not change A's polarity, time, attribution, certainty,
+   event identity or action state. If A missed material evidence, add `ARCHITECTURE_UNRESOLVED` and flag
+   it back to A.
+3. Clarify `adoption` vs `encounter_role`: `historical` + `BACKGROUND` is valid; `current_adopted` +
+   `PRIMARY` is valid; `historical` + `PRIMARY` requires current independent evaluation/management
+   evidence.
+
+Then run File B on the existing three-record File A output. Expected:
+- no forced problem if the packet does not establish a current assessment question;
+- historical stroke may be BACKGROUND or ARCHITECTURE_UNRESOLVED, but not current/PRIMARY;
+- falls must not be automatically linked to stroke or declared the consult reason;
+- no residual deficit, action, section or prose;
+- uncertainty goes in ARCHITECTURE_UNRESOLVED, not a fake problem.
+
+Stop after the contract fix and this one test. Report the exact problem map.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
