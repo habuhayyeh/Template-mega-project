@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:066a6e628360024a1cef3b5049a2763236e950012b76839a23637d9a4439d6a7",
-  "artifact_name": "G0-S4-09.json",
+  "artifact_hash": "sha256:4d745d916c1d45bb7dcc7788361348b534d0279c9b632bb9c9cbc1791436bfb5",
+  "artifact_name": "G0-S4-06.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -20,14 +20,18 @@
   ],
   "findings": [
     {
-      "detail": "no violation",
-      "evidence": [],
-      "expected": null,
-      "observed": null,
+      "detail": "retained plan item has no PLAN unit",
+      "evidence": [
+        {
+          "plan_item": "O05"
+        }
+      ],
+      "expected": "PLAN unit for retained plan item O05",
+      "observed": "absent",
       "owner": "S4",
-      "path": null,
+      "path": "/s4/units",
       "predicate_id": "S4-COMP-01",
-      "status": "SILENT"
+      "status": "FIRED"
     },
     {
       "detail": "no violation",
@@ -50,18 +54,14 @@
       "status": "SILENT"
     },
     {
-      "detail": "S4 input view does not match the mapped source projection",
-      "evidence": [
-        {
-          "first_diff": "/from_s2/selected_rep"
-        }
-      ],
-      "expected": "<absent>",
-      "observed": "R-999",
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
       "owner": "S4",
-      "path": "/s4_input_view/from_s2/selected_rep",
+      "path": null,
       "predicate_id": "S4-PROJ-01",
-      "status": "FIRED"
+      "status": "SILENT"
     },
     {
       "detail": "no violation",
@@ -90,13 +90,13 @@
   "parent_type": "S4_BLUEPRINT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S4-PROJ-01",
+    "expected": "S4-COMP-01",
     "expected_status": "FIRED",
     "non_silent_other": [],
     "other_active": [
-      "S4-COMP-01",
       "S4-INC-01",
       "S4-MEM-01",
+      "S4-PROJ-01",
       "S4-REP-01",
       "S4-ROLE-01"
     ],

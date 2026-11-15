@@ -37,7 +37,7 @@ The authoritative inventory is `seeds/generated/MANIFEST.json`. This table is a 
 | `S4-REP-01` | `G0-S4-05` |
 | `S4-ROLE-01` | `G0-S4-14` |
 
-**Counts:** 5 clean parents across 4 parent types · 35 seeds · 21 active predicates.
+**Counts:** 6 clean parents across 4 parent types · 37 seeds · 21 active predicates.
 
 Clean parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.

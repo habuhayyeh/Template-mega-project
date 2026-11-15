@@ -43,6 +43,7 @@ CAMPAIGN = 'GATE0-C3'
 PARENT_FILES = [
     'S1_PARENT.json',
     'S2_PARENT.json',
+    'S2_CASE10_CAUSAL.json',
     'S3_PARENT.json',
     'S3_PARENT_NOT_RENDERED.json',
     'S4_PARENT.json',
@@ -289,6 +290,10 @@ def s2_08(a):
     a['s2']['causal_relations'] = [{
         'from': 'O02', 'to': 'O03', 'relation': 'CONTRIBUTOR',
         'strength': 'CERTAIN', 'support': ['S01', 'S02']}]
+def s2_09(a):
+    a['s2']['causal_relations'][0]['from'] = 'O01'
+def s2_10(a):
+    a['s2']['causal_relations'][0]['strength'] = 'LIKELY'
 
 def s3_01(a): a['s3']['rendered'][0]['approved_representation'] = None
 def s3_02(a): a['s3']['rendered'][0]['selected_rep'] = 'R-999'
@@ -345,6 +350,8 @@ SEEDS = [
  ('S2_PARENT.json', 'G0-S2-06', 'S2-ADOPT-01', s2_06, '/s2/adjudication/0/adoption', 'false', 'null'),
  ('S2_PARENT.json', 'G0-S2-07', 'S2-CAUSAL-01', s2_07, '/s2/causal_relations', '[]', 'history-only causal relation'),
  ('S2_PARENT.json', 'G0-S2-08', 'S2-CAUSAL-02', s2_08, '/s2/causal_relations', '[]', 'invalid strength'),
+ ('S2_CASE10_CAUSAL.json', 'G0-S2-09', 'S2-CAUSAL-01', s2_09, '/s2/causal_relations/0/from', 'O02', 'O01 historical stroke subject'),
+ ('S2_CASE10_CAUSAL.json', 'G0-S2-10', 'S2-CAUSAL-01', s2_10, '/s2/causal_relations/0/strength', 'POSSIBLE', 'LIKELY'),
  ('S3_PARENT.json', 'G0-S3-01', 'S3-INC-01', s3_01, '/s3/rendered/0/approved_representation', 'R1', 'null'),
  ('S3_PARENT.json', 'G0-S3-02', 'S3-SEL-01', s3_02, '/s3/rendered/0/selected_rep', 'R1', 'R-999'),
  ('S3_PARENT.json', 'G0-S3-04', 'S3-ACCT-01', s3_04, '/s3/dispositions', 'O07 recorded', 'O07 unaccounted'),
@@ -506,6 +513,7 @@ def main():
         'S4_BLUEPRINT': ['S1_PARENT.json', 'S2_PARENT.json', 'S3_PARENT.json'],
     }
     manifest['dependency_context'] = {}
+    manifest['dependency_context_by_parent'] = {'S2_CASE10_CAUSAL': []}
     for target, files in dependency_files.items():
         manifest['dependency_context'][target] = [
             {

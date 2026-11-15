@@ -1,22 +1,17 @@
 {
-  "artifact_hash": "sha256:3e6f02f0914760e7352b1a4bf4c3c9eb7c9f2a20e36e337704e9cbf9c44403eb",
-  "artifact_name": "G0-S1-06.json",
+  "artifact_hash": "sha256:82d5b779e052af66e3b05779dda8a0153518d8a094268cdb4f46806dc071cb94",
+  "artifact_name": "G0-S1-05.json",
   "dependency_context": [],
   "findings": [
     {
-      "detail": "adoption/final-state field present",
-      "evidence": [
-        {
-          "field": "status_current",
-          "path": "/s1/candidates/0/status_current"
-        }
-      ],
-      "expected": "field absent",
-      "observed": "present",
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
       "owner": "S1",
-      "path": "/s1/candidates/0/status_current",
+      "path": null,
       "predicate_id": "S1-AUTH-01",
-      "status": "FIRED"
+      "status": "SILENT"
     },
     {
       "detail": "no violation",
@@ -39,7 +34,7 @@
       },
       "observed": null,
       "owner": "S1",
-      "packet_id": "pkt-63a66d986a06536d85f2edfd",
+      "packet_id": "pkt-39b3a055c23a59f53be1a459",
       "path": null,
       "predicate_id": "S1-CAND-01",
       "status": "UNDECIDABLE"
@@ -63,14 +58,12 @@
   "parent_type": "S1_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S1-AUTH-01",
-    "expected_status": "FIRED",
-    "non_silent_other": [
-      "S1-CAND-01"
-    ],
+    "expected": "S1-CAND-01",
+    "expected_status": "UNDECIDABLE",
+    "non_silent_other": [],
     "other_active": [
+      "S1-AUTH-01",
       "S1-AUTH-02",
-      "S1-CAND-01",
       "S1-CAND-02"
     ],
     "pass": false

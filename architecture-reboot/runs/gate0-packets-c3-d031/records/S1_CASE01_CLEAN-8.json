@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:f8e0a5096b327a5c4d4e9c0aed8092d9fcc2a9c03666401edf8ea1f53b1a2a2c",
-  "artifact_name": "G0-S1-04.json",
+  "artifact_hash": "sha256:72344cff12fc1dddc88d8377d586af1f65aeb111d5820148979156924190c62c",
+  "artifact_name": "G0-S1-02.json",
   "dependency_context": [],
   "findings": [
     {
@@ -14,14 +14,19 @@
       "status": "SILENT"
     },
     {
-      "detail": "no violation",
-      "evidence": [],
-      "expected": null,
-      "observed": null,
+      "detail": "selected-claim field present",
+      "evidence": [
+        {
+          "field": "selected_claim",
+          "path": "/s1/candidates/0/selected_claim"
+        }
+      ],
+      "expected": "field absent",
+      "observed": "present",
       "owner": "S1",
-      "path": null,
+      "path": "/s1/candidates/0/selected_claim",
       "predicate_id": "S1-AUTH-02",
-      "status": "SILENT"
+      "status": "FIRED"
     },
     {
       "detail": "SIGNER_REFERENCE_MISSING",
@@ -34,25 +39,20 @@
       },
       "observed": null,
       "owner": "S1",
-      "packet_id": "pkt-4983f345d0d01b8a0ee95a39",
+      "packet_id": "pkt-244512aabc47f650636b0746",
       "path": null,
       "predicate_id": "S1-CAND-01",
       "status": "UNDECIDABLE"
     },
     {
-      "detail": "candidate has no source anchor",
-      "evidence": [
-        {
-          "candidate": "C1",
-          "path": "/s1/candidates/0/anchors"
-        }
-      ],
-      "expected": "at least one anchor",
-      "observed": "[]",
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
       "owner": "S1",
-      "path": "/s1/candidates/0/anchors",
+      "path": null,
       "predicate_id": "S1-CAND-02",
-      "status": "FIRED"
+      "status": "SILENT"
     }
   ],
   "kind": "seed",
@@ -63,15 +63,15 @@
   "parent_type": "S1_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S1-CAND-02",
+    "expected": "S1-AUTH-02",
     "expected_status": "FIRED",
     "non_silent_other": [
       "S1-CAND-01"
     ],
     "other_active": [
       "S1-AUTH-01",
-      "S1-AUTH-02",
-      "S1-CAND-01"
+      "S1-CAND-01",
+      "S1-CAND-02"
     ],
     "pass": false
   },

@@ -16,6 +16,13 @@
       "parent_id": "S2_CASE01_CLEAN",
       "parent_type": "S2_OUTPUT"
     },
+    "S2_CASE10_CAUSAL": {
+      "artifact": "PARENT-S2_CASE10_CAUSAL.json",
+      "file": "S2_CASE10_CAUSAL.json",
+      "hash": "sha256:6ff8572deb65e5a439d193cc56ab3af100e091b0e46f8142e7917c21bb2e797f",
+      "parent_id": "S2_CASE10_CAUSAL",
+      "parent_type": "S2_OUTPUT"
+    },
     "S3_CASE01_NOT_RENDERED_CLEAN": {
       "artifact": "PARENT-S3_PARENT_NOT_RENDERED.json",
       "file": "S3_PARENT_NOT_RENDERED.json",
@@ -46,7 +53,7 @@
       "S1-CAND-01": 1,
       "S1-CAND-02": 1,
       "S2-ADOPT-01": 1,
-      "S2-CAUSAL-01": 1,
+      "S2-CAUSAL-01": 3,
       "S2-CAUSAL-02": 1,
       "S2-REP-01": 2,
       "S2-TEMP-01": 1,
@@ -63,14 +70,14 @@
       "S4-REP-01": 1,
       "S4-ROLE-01": 1
     },
-    "clean_parents": 5,
+    "clean_parents": 6,
     "parent_types": 4,
     "pending_predicates": [
       "S2-ADOPT-02",
       "S4-ORD-01"
     ],
-    "seed_mutations_checked": 35,
-    "seeds": 35
+    "seed_mutations_checked": 37,
+    "seeds": 37
   },
   "dependency_context": {
     "S1_OUTPUT": [],
@@ -117,14 +124,17 @@
       }
     ]
   },
+  "dependency_context_by_parent": {
+    "S2_CASE10_CAUSAL": []
+  },
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:c05a88e313cee368b674c4d0065e61ecd60b1fb9536b6582477675c7a6444a4d",
+    "00-GATE0-MANIFEST.md": "sha256:d59aaec0ea476f58320a59e3886ceea2991e451f71bb5747dbd1cdd04ea6afc1",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
-    "G0-SEEDS.md": "sha256:ae4b1c81f3ca73f9b13f87c1a13a5e4a86f594d35615d1dd7c6b219d61a059c5",
-    "make_seeds.py": "sha256:254b787a4369d314c45b0dc9c35e0c5c2c8392ba4cf78a6d55e003abaeca0d8b",
+    "G0-SEEDS.md": "sha256:df1615f06a314b34ef2fc9a12cdebc09b342cfdb73202cbb5700d653c35ed9ec",
+    "make_seeds.py": "sha256:bfac53d0608d16fd97ecec9757d2ba43b8e8c605d20a6e12c5c3b128269cd405",
     "oracle.json": "sha256:de909199d517ab900b2ee28c134c8cc566dea6d924567b5e44303a19bc78db34",
     "predicates.md": "sha256:361ebf9368dcf7195b1366e918904e38553ff8a47f6b964346f44912fde495be",
     "schema.md": "sha256:f19904e7db86747a12fb179865cfcdc15faef385d46f93fbd5ebe51f25e92bdb"
@@ -135,7 +145,7 @@
   },
   "oracle": "ORACLE-4.0",
   "parent_model": {
-    "clean_parents": 5,
+    "clean_parents": 6,
     "parent_types": [
       "S1_OUTPUT",
       "S2_OUTPUT",
@@ -186,7 +196,7 @@
   "registry": "PILOT-3",
   "schema": "SCHEMA-4",
   "seed_integrity": {
-    "checked": 35,
+    "checked": 37,
     "multi_diff": 0,
     "noop": 0,
     "rule": "each seed differs from its parent at exactly the declared path; manifest values are the checked diff"
@@ -366,6 +376,38 @@
       ],
       "parent": "PARENT-S2_PARENT.json",
       "parent_id": "S2_CASE01_CLEAN",
+      "parent_type": "S2_OUTPUT"
+    },
+    {
+      "artifact": "G0-S2-09.json",
+      "hash": "sha256:ea61fea8f795f13d6af14de117ee028319dd31abb3c5f1ef4ad413809bc74969",
+      "must_fire": "S2-CAUSAL-01",
+      "mutations": [
+        {
+          "after": "\"O01\"",
+          "before": "\"O02\"",
+          "label": "O02 -> O01 historical stroke subject",
+          "path": "/s2/causal_relations/0/from"
+        }
+      ],
+      "parent": "PARENT-S2_CASE10_CAUSAL.json",
+      "parent_id": "S2_CASE10_CAUSAL",
+      "parent_type": "S2_OUTPUT"
+    },
+    {
+      "artifact": "G0-S2-10.json",
+      "hash": "sha256:ce0ab1f6c6e5725a3f18ad8ae0ed728082e11c2b16a006a7557a594a5001439b",
+      "must_fire": "S2-CAUSAL-01",
+      "mutations": [
+        {
+          "after": "\"LIKELY\"",
+          "before": "\"POSSIBLE\"",
+          "label": "POSSIBLE -> LIKELY",
+          "path": "/s2/causal_relations/0/strength"
+        }
+      ],
+      "parent": "PARENT-S2_CASE10_CAUSAL.json",
+      "parent_id": "S2_CASE10_CAUSAL",
       "parent_type": "S2_OUTPUT"
     },
     {

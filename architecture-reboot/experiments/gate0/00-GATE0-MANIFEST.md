@@ -2,8 +2,8 @@
 
 **Campaign:** `GATE0-C3` · **registry** `PILOT-3` · **active set** `ACTIVE-PILOT-3` · **schema** `SCHEMA-4` · **oracle** `ORACLE-4.0`
 
-**Model:** **five clean calibration parents across four parent types.** `S1_OUTPUT`
-(`S1_CASE01_CLEAN`), `S2_OUTPUT` (`S2_CASE01_CLEAN`), `S3_OUTPUT` (`S3_CASE01_RENDERED_CLEAN`,
+**Model:** **six clean calibration parents across four parent types.** `S1_OUTPUT`
+(`S1_CASE01_CLEAN`), `S2_OUTPUT` (`S2_CASE01_CLEAN`, `S2_CASE10_CAUSAL`), `S3_OUTPUT` (`S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`), `S4_BLUEPRINT` (`S4_CASE01_CLEAN`). A seed mutates one field of its
 own parent. Specificity is `FULL_SILENCE-WITHIN-LAYER`: for every seed, every other ACTIVE predicate
 whose `parent_type` equals the seed's `parent_type` must be silent. A four-layer artifact is not a
@@ -17,7 +17,7 @@ mutation record is the checked parent→seed diff, not a hand-written claim.
 
 **Status: SCORER/HARNESS IMPLEMENTED / SCHEMA-4 + D-023 + D-030 + D-031 REBUILT / F-2 PACKETS PREPARED / GATE 0 UNRUN.** The
 scorer and harness exist at `architecture-reboot/scorer/` and
-`architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 40 semantic packet
+`architecture-reboot/tools/gate0_harness.py`; packet-mode preparation produced 49 semantic packet
 instances. No signer reference or evaluator evidence exists yet; no Gate 0 acceptance run has been
 executed.
 
@@ -206,8 +206,8 @@ the signer reference or each other's verdict. Current policy: `REVIEW-POLICY-F-2
 - `architecture-reboot/scorer/` — scorer implementation and predicate registry.
 - `architecture-reboot/tools/gate0_harness.py` — harness, packets, judgments and evidence.
 - `architecture-reboot/tools/preflight.py` — the D-019 mechanical preflight.
-- `architecture-reboot/runs/gate0-packets-c3-d031/` — packets-mode preparation: 40 artifact records,
-  40 semantic packets, `EVIDENCE.json`, `INDEX.md` and `INDEX.json`. No acceptance verdict.
+- `architecture-reboot/runs/gate0-packets-c3-d031/` — packets-mode preparation: 43 artifact records,
+  49 semantic packets, `EVIDENCE.json`, `INDEX.md` and `INDEX.json`. No acceptance verdict.
 - Per-run records: scorer version, predicate set version, control-plane version, case ids, findings,
   verdict.
 

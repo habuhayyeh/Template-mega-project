@@ -1,0 +1,105 @@
+{
+  "case": "CASE-10",
+  "case_oracle": {
+    "case": "CASE-10",
+    "matching": "Concept identity, not literal strings.",
+    "objects": {
+      "O01": {
+        "provenance": "B/2024-02",
+        "temporal": "2024-02",
+        "text": "prior left MCA stroke"
+      },
+      "O02": {
+        "provenance": "A/2026-11-14",
+        "temporal": "chronic",
+        "text": "chronic right-sided weakness from prior stroke"
+      },
+      "O03": {
+        "provenance": "A/2026-11-14",
+        "temporal": "June\u2013November",
+        "text": "three falls since June"
+      },
+      "O04": {
+        "provenance": "A/2026-11-14",
+        "temporal": "now",
+        "text": "no new weakness or speech trouble"
+      }
+    },
+    "spans": {
+      "S01": {
+        "source": "B prior neurology 2024-02",
+        "text": "Known left MCA infarct with mild residual right faciobrachial weakness."
+      },
+      "S02": {
+        "source": "A transcript 2026-11-14",
+        "text": "Three falls since June. No new weakness or speech trouble."
+      },
+      "S05": {
+        "source": "A transcript 2026-11-14",
+        "text": "Her chronic right-sided weakness from the prior stroke may contribute to the falls."
+      }
+    }
+  },
+  "parent_id": "S2_CASE10_CAUSAL",
+  "parent_type": "S2_OUTPUT",
+  "registry": "PILOT-3",
+  "s2": {
+    "adjudication": [
+      {
+        "adoption": false,
+        "evidence": null,
+        "object": "O01",
+        "temporal": "2024-02"
+      },
+      {
+        "adoption": false,
+        "evidence": null,
+        "object": "O02",
+        "temporal": "chronic"
+      },
+      {
+        "adoption": true,
+        "evidence": [
+          "S02"
+        ],
+        "object": "O03",
+        "temporal": "June\u2013November"
+      }
+    ],
+    "causal_relations": [
+      {
+        "from": "O02",
+        "relation": "CONTRIBUTOR",
+        "strength": "LIKELY",
+        "support": [
+          "S05"
+        ],
+        "to": "O03"
+      }
+    ],
+    "claim_relations": [],
+    "duplicate_groups": [],
+    "relations": [
+      {
+        "from": "O04",
+        "to": "O03",
+        "type": "SUPPORTS"
+      }
+    ],
+    "representations": [
+      {
+        "id": "R1",
+        "members": [
+          "O03",
+          "O04"
+        ],
+        "problem": "C1",
+        "selection_safe": true,
+        "support_refs": [
+          "S02"
+        ]
+      }
+    ]
+  },
+  "schema": "SCHEMA-4"
+}

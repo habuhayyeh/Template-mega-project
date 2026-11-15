@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:a64e2a46bc840d42cb6949a2f012e4eccb38f6007301bcd99cc9d6f12f27481f",
-  "artifact_name": "G0-S4-10.json",
+  "artifact_hash": "sha256:f0174dcdafc1d410f707a7c31909ac6269b1cd3ab206859343bb618a67ec0381",
+  "artifact_name": "G0-S4-07.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -53,13 +53,13 @@
       "detail": "S4 input view does not match the mapped source projection",
       "evidence": [
         {
-          "first_diff": "/from_ingest/O05/payload"
+          "first_diff": "/adoption"
         }
       ],
-      "expected": "check vitamin D",
-      "observed": "vitamin D",
+      "expected": "<absent>",
+      "observed": true,
       "owner": "S4",
-      "path": "/s4_input_view/from_ingest/O05/payload",
+      "path": "/s4_input_view/adoption",
       "predicate_id": "S4-PROJ-01",
       "status": "FIRED"
     },

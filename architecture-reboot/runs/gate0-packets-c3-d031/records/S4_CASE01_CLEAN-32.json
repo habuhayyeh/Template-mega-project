@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:4d745d916c1d45bb7dcc7788361348b534d0279c9b632bb9c9cbc1791436bfb5",
-  "artifact_name": "G0-S4-06.json",
+  "artifact_hash": "sha256:6f5d575e7a64814be4abf4ccca1c1f17479173140839cf0b29213afb8ff5c03f",
+  "artifact_name": "G0-S4-02.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -20,28 +20,40 @@
   ],
   "findings": [
     {
-      "detail": "retained plan item has no PLAN unit",
-      "evidence": [
-        {
-          "plan_item": "O05"
-        }
-      ],
-      "expected": "PLAN unit for retained plan item O05",
-      "observed": "absent",
-      "owner": "S4",
-      "path": "/s4/units",
-      "predicate_id": "S4-COMP-01",
-      "status": "FIRED"
-    },
-    {
       "detail": "no violation",
       "evidence": [],
       "expected": null,
       "observed": null,
       "owner": "S4",
       "path": null,
-      "predicate_id": "S4-INC-01",
+      "predicate_id": "S4-COMP-01",
       "status": "SILENT"
+    },
+    {
+      "detail": "S4 problem set diverges from S3 rendered set",
+      "evidence": [
+        {
+          "rendered": [
+            "C1",
+            "C2"
+          ],
+          "s4_sources": [
+            "C1",
+            "C2",
+            "C9"
+          ]
+        }
+      ],
+      "expected": "problem sources equal from_s3.rendered ['C1', 'C2']",
+      "observed": [
+        "C1",
+        "C2",
+        "C9"
+      ],
+      "owner": "S4",
+      "path": "/s4/problems",
+      "predicate_id": "S4-INC-01",
+      "status": "FIRED"
     },
     {
       "detail": "no violation",
@@ -90,11 +102,11 @@
   "parent_type": "S4_BLUEPRINT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S4-COMP-01",
+    "expected": "S4-INC-01",
     "expected_status": "FIRED",
     "non_silent_other": [],
     "other_active": [
-      "S4-INC-01",
+      "S4-COMP-01",
       "S4-MEM-01",
       "S4-PROJ-01",
       "S4-REP-01",

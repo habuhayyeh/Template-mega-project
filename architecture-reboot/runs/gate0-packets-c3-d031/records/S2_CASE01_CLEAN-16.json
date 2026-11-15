@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:c5ce4b1f5f52774b2c169db13950679d9e50b3db68119fe6f9bd50f3c83cef52",
-  "artifact_name": "G0-S2-08.json",
+  "artifact_hash": "sha256:a7dcdb61c7e7b60a235d1c0b2ed63f765d253f08342015485513033758041c25",
+  "artifact_name": "G0-S2-07.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -20,7 +20,7 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-610460f4d65e8d3a51df7c43",
+      "packet_id": "pkt-2e9932412b961f11a8dcf804",
       "path": null,
       "predicate_id": "S2-ADOPT-01",
       "status": "UNDECIDABLE"
@@ -36,24 +36,20 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-1abf288d40eb11102b1a3183",
+      "packet_id": "pkt-0b54e5ed007bbe894259eb54",
       "path": null,
       "predicate_id": "S2-CAUSAL-01",
       "status": "UNDECIDABLE"
     },
     {
-      "detail": "causal strength is outside the closed set",
+      "detail": "no violation",
       "evidence": [],
-      "expected": [
-        "LIKELY",
-        "POSSIBLE",
-        "UNLIKELY"
-      ],
-      "observed": "CERTAIN",
+      "expected": null,
+      "observed": null,
       "owner": "S2",
-      "path": "/s2/causal_relations/0/strength",
+      "path": null,
       "predicate_id": "S2-CAUSAL-02",
-      "status": "FIRED"
+      "status": "SILENT"
     },
     {
       "detail": "SIGNER_REFERENCE_MISSING",
@@ -66,7 +62,7 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-6d86dcbd164dc132f44834e7",
+      "packet_id": "pkt-3595781258eac2b8661405da",
       "path": null,
       "predicate_id": "S2-REP-01",
       "status": "UNDECIDABLE"
@@ -92,16 +88,15 @@
   "parent_type": "S2_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S2-CAUSAL-02",
-    "expected_status": "FIRED",
+    "expected": "S2-CAUSAL-01",
+    "expected_status": "UNDECIDABLE",
     "non_silent_other": [
       "S2-ADOPT-01",
-      "S2-CAUSAL-01",
       "S2-REP-01"
     ],
     "other_active": [
       "S2-ADOPT-01",
-      "S2-CAUSAL-01",
+      "S2-CAUSAL-02",
       "S2-REP-01",
       "S2-TEMP-01"
     ],

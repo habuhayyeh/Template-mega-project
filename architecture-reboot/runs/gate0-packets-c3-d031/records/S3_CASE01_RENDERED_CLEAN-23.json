@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:ac71ba2720d07841461cd9f8a675dc479decada2c394b044955280ccdf88ef70",
-  "artifact_name": "G0-S3-02.json",
+  "artifact_hash": "sha256:dde07d82000dbfddf0e5874d8b526720ce731d79e334d84fb69cd87b31c9ac67",
+  "artifact_name": "G0-S3-05.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -25,14 +25,32 @@
       "status": "SILENT"
     },
     {
-      "detail": "no violation",
-      "evidence": [],
-      "expected": null,
-      "observed": null,
+      "detail": "2 S3-CAND-01 violation(s)",
+      "evidence": [
+        {
+          "kind": "COVERAGE",
+          "missing": [
+            "C1",
+            "C2"
+          ],
+          "path": "/s3/candidate_outcomes"
+        },
+        {
+          "from_outcomes": [],
+          "kind": "RENDERED_SET_EQUALITY",
+          "path": "/s3/rendered",
+          "rendered": [
+            "C1",
+            "C2"
+          ]
+        }
+      ],
+      "expected": "S3-CAND-01 constraints satisfied",
+      "observed": "COVERAGE",
       "owner": "S3",
-      "path": null,
+      "path": "/s3/candidate_outcomes",
       "predicate_id": "S3-CAND-01",
-      "status": "SILENT"
+      "status": "FIRED"
     },
     {
       "detail": "no violation",
@@ -55,7 +73,7 @@
       },
       "observed": null,
       "owner": "S3",
-      "packet_id": "pkt-f78762b079d5c552a3ea898a",
+      "packet_id": "pkt-85ed041f9228be9e29423fc2",
       "path": null,
       "predicate_id": "S3-ROLE-01",
       "status": "UNDECIDABLE"
@@ -71,21 +89,14 @@
       "status": "SILENT"
     },
     {
-      "detail": "selected representation is not in S2's approved set for C1",
-      "evidence": [
-        {
-          "approved_ids": [
-            "R1"
-          ],
-          "problem": "C1"
-        }
-      ],
-      "expected": "selected_rep in S2 approved set ['R1']",
-      "observed": "R-999",
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
       "owner": "S3",
-      "path": "/s3/rendered/0/selected_rep",
+      "path": null,
       "predicate_id": "S3-SEL-01",
-      "status": "FIRED"
+      "status": "SILENT"
     }
   ],
   "kind": "seed",
@@ -96,17 +107,17 @@
   "parent_type": "S3_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S3-SEL-01",
+    "expected": "S3-CAND-01",
     "expected_status": "FIRED",
     "non_silent_other": [
       "S3-ROLE-01"
     ],
     "other_active": [
       "S3-ACCT-01",
-      "S3-CAND-01",
       "S3-INC-01",
       "S3-ROLE-01",
-      "S3-ROLE-02"
+      "S3-ROLE-02",
+      "S3-SEL-01"
     ],
     "pass": false
   },

@@ -71,9 +71,9 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 HEAD at handoff: see `git log -1`. Last substantive commit: CASE-01 SCHEMA-4 rebuild under D-023/D-024.
 
 `python architecture-reboot/tools/make_seeds.py` builds:
-5 clean parents across 4 parent types → 35 seeds → `MANIFEST.json`. **A second run must produce zero
+6 clean parents across 4 parent types → 37 seeds → `MANIFEST.json`. **A second run must produce zero
 diff**; that is a build failure condition, not a warning. The build also checks every seed is a real
-non-noop mutation and differs from its parent at exactly one declared path; 35/35 are checked, with 0
+non-noop mutation and differs from its parent at exactly one declared path; 37/37 are checked, with 0
 no-op and 0 multi-diff seeds. The manifest records the checked before/after values and the
 dependency-context map.
 
@@ -82,7 +82,7 @@ architecture/Phase-0 drift, source/generated freshness and determinism, governin
 identities, active registry, dependency-context integrity, seed mutation integrity, stale source
 markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 46 tests.
 
-Current counts: 5 clean calibration parents · 4 parent types · 35 seeds · 21 active predicates ·
+Current counts: 6 clean calibration parents · 4 parent types · 37 seeds · 21 active predicates ·
 campaign `GATE0-C3` · registry `PILOT-3` · active set `ACTIVE-PILOT-3` · schema `SCHEMA-4` · oracle
 `ORACLE-4.0` · reason registry `REASON-1` · operator set `PILOT-OPERATORS-1`.
 
@@ -90,8 +90,8 @@ Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLE
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
 CASE-01: two rendered problems — falls and a retained inactive infarct; the S1-CAND seed is now a
-medication-only candidate. Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 46 synthetic tests; no Gate 0 acceptance
-run. Packet preparation: 40 records, 40 semantic packets, 0 references/0 evaluators under
+medication-only candidate. CASE-10 is the positive causal fixture: chronic weakness -> falls, CONTRIBUTOR/POSSIBLE. Scorer: 16 mechanical predicates + 5 semantic signer-reference predicates; 49 synthetic tests; no Gate 0 acceptance
+run. Packet preparation: 43 records, 49 semantic packets, 0 references/0 evaluators under
 `REVIEW-POLICY-F-2` plus D-030; semantic packets contain no `oracle.expected`. Index at
 `architecture-reboot/runs/gate0-packets-c3-d031/INDEX.md`.
 
@@ -280,9 +280,9 @@ Added:
 - causal projection now requires both endpoints retained;
 - CASE-01 wording corrected to BACKGROUND; CASE-01 has no causal relation;
 - a separate positive causal fixture in tests (residual-deficit subject, POSSIBLE strength);
-- 35 seeds, 21 active predicates, 40 semantic packets.
+- 37 seeds, 21 active predicates, 49 semantic packets.
 
-Validation: 49 tests OK; preflight PASS 7/7; packets mode 40 records / 40 packets / 0 refs /
+Validation: 49 tests OK; preflight PASS 7/7; packets mode 43 records / 49 packets / 0 refs /
 0 evals; no FAIL. No Gate 0 acceptance and no signer references from this set.
 
 **NEXT:** ChatGPT reviews the D-031 rebuild and the 40-packet index. No signer references until that

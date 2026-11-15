@@ -156,13 +156,15 @@ def load_campaign():
     return manifest, clean, oracle, rules
 
 
-def dependency_context(manifest, clean, target_type):
+def dependency_context(manifest, clean, target_type, parent_id=None):
     """Return hash-checked, seed-independent upstream context for a target type."""
     if target_type not in manifest['dependency_context']:
         raise InputIntegrityError('no dependency matrix for %s' % target_type)
+    overrides = manifest.get('dependency_context_by_parent', {})
+    entries = overrides[parent_id] if parent_id in overrides else manifest['dependency_context'][target_type]
     context = {}
     pinned = []
-    for entry in manifest['dependency_context'][target_type]:
+    for entry in entries:
         parent_id = entry['parent_id']
         if parent_id not in clean:
             raise InputIntegrityError('dependency %s is absent' % parent_id)
@@ -559,7 +561,7 @@ def verdict_for(target_type, findings, expected):
     return ('PASS' if spec['pass'] else 'FAIL'), spec
 
 
-def _artifact_rows(manifest, clean):
+def _artifact_rows(manifest, clean, oracle):
     rows = []
     for parent_id, rec in manifest['clean_parents'].items():
         rows.append({
@@ -569,6 +571,7 @@ def _artifact_rows(manifest, clean):
             'parent_type': rec['parent_type'],
             'parent_id': parent_id,
             'expected': None,
+            'oracle': clean[parent_id].get('case_oracle', oracle),
         })
     for seed in manifest['seeds']:
         artifact = load_json(os.path.join(GEN, seed['artifact']))
@@ -581,6 +584,7 @@ def _artifact_rows(manifest, clean):
             'parent_type': seed['parent_type'],
             'parent_id': seed['parent_id'],
             'expected': seed['must_fire'],
+            'oracle': artifact.get('case_oracle', oracle),
         })
     return rows
 
@@ -609,15 +613,16 @@ def run(mode, out_dir, evidence_path=None, baseline_path=None, limit=None):
     manifest, clean, oracle, rules = load_campaign()
     current = load_review_evidence(evidence_path)
     baseline = load_review_evidence(baseline_path)
-    rows = _artifact_rows(manifest, clean)
+    rows = _artifact_rows(manifest, clean, oracle)
     if limit:
         rows = rows[:limit]
     packets_dir = os.path.join(out_dir, 'packets')
 
     prepared = []
     for row in rows:
-        context, pinned = dependency_context(manifest, clean, row['parent_type'])
-        result = prepare_artifact(row['artifact'], context, oracle, rules,
+        context, pinned = dependency_context(manifest, clean, row['parent_type'],
+                                             row['parent_id'])
+        result = prepare_artifact(row['artifact'], context, row['oracle'], rules,
                                   packet_dir=packets_dir)
         prepared.append({'row': row, 'result': result, 'pinned': pinned})
 

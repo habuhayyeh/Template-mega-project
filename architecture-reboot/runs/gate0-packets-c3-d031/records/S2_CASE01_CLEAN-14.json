@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:37ff4c3765508a6ef6f3f4fbbac5779d9c23bf4363b64e8d7e5fec36c50df81b",
-  "artifact_name": "G0-S2-06.json",
+  "artifact_hash": "sha256:59030c674057428e81e7ec76a6862035ae53c187eebbffa90d075fd31c949d41",
+  "artifact_name": "G0-S2-03.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -20,7 +20,7 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-154e85054d5744a08f4c6770",
+      "packet_id": "pkt-3cd127947ff9d2656295368e",
       "path": null,
       "predicate_id": "S2-ADOPT-01",
       "status": "UNDECIDABLE"
@@ -36,7 +36,7 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-0d4d6b552e4a4a8bcf91dece",
+      "packet_id": "pkt-28c34b3fa981df66c9223ac2",
       "path": null,
       "predicate_id": "S2-CAUSAL-01",
       "status": "UNDECIDABLE"
@@ -62,20 +62,24 @@
       },
       "observed": null,
       "owner": "S2",
-      "packet_id": "pkt-67198a82d18dcd4cb887050b",
+      "packet_id": "pkt-7095a6085459cd0c46915721",
       "path": null,
       "predicate_id": "S2-REP-01",
       "status": "UNDECIDABLE"
     },
     {
-      "detail": "no violation",
-      "evidence": [],
-      "expected": null,
-      "observed": null,
+      "detail": "S2 altered substrate temporality for O01",
+      "evidence": [
+        {
+          "object": "O01"
+        }
+      ],
+      "expected": "2024-02 documented",
+      "observed": "now",
       "owner": "S2",
-      "path": null,
+      "path": "/s2/adjudication/0/temporal",
       "predicate_id": "S2-TEMP-01",
-      "status": "SILENT"
+      "status": "FIRED"
     }
   ],
   "kind": "seed",
@@ -88,17 +92,18 @@
   "parent_type": "S2_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S2-ADOPT-01",
-    "expected_status": "UNDECIDABLE",
+    "expected": "S2-TEMP-01",
+    "expected_status": "FIRED",
     "non_silent_other": [
+      "S2-ADOPT-01",
       "S2-CAUSAL-01",
       "S2-REP-01"
     ],
     "other_active": [
+      "S2-ADOPT-01",
       "S2-CAUSAL-01",
       "S2-CAUSAL-02",
-      "S2-REP-01",
-      "S2-TEMP-01"
+      "S2-REP-01"
     ],
     "pass": false
   },

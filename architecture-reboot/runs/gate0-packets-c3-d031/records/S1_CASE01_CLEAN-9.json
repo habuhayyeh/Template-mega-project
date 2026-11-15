@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:82d5b779e052af66e3b05779dda8a0153518d8a094268cdb4f46806dc071cb94",
-  "artifact_name": "G0-S1-05.json",
+  "artifact_hash": "sha256:f8e0a5096b327a5c4d4e9c0aed8092d9fcc2a9c03666401edf8ea1f53b1a2a2c",
+  "artifact_name": "G0-S1-04.json",
   "dependency_context": [],
   "findings": [
     {
@@ -34,20 +34,25 @@
       },
       "observed": null,
       "owner": "S1",
-      "packet_id": "pkt-39b3a055c23a59f53be1a459",
+      "packet_id": "pkt-4983f345d0d01b8a0ee95a39",
       "path": null,
       "predicate_id": "S1-CAND-01",
       "status": "UNDECIDABLE"
     },
     {
-      "detail": "no violation",
-      "evidence": [],
-      "expected": null,
-      "observed": null,
+      "detail": "candidate has no source anchor",
+      "evidence": [
+        {
+          "candidate": "C1",
+          "path": "/s1/candidates/0/anchors"
+        }
+      ],
+      "expected": "at least one anchor",
+      "observed": "[]",
       "owner": "S1",
-      "path": null,
+      "path": "/s1/candidates/0/anchors",
       "predicate_id": "S1-CAND-02",
-      "status": "SILENT"
+      "status": "FIRED"
     }
   ],
   "kind": "seed",
@@ -58,13 +63,15 @@
   "parent_type": "S1_OUTPUT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S1-CAND-01",
-    "expected_status": "UNDECIDABLE",
-    "non_silent_other": [],
+    "expected": "S1-CAND-02",
+    "expected_status": "FIRED",
+    "non_silent_other": [
+      "S1-CAND-01"
+    ],
     "other_active": [
       "S1-AUTH-01",
       "S1-AUTH-02",
-      "S1-CAND-02"
+      "S1-CAND-01"
     ],
     "pass": false
   },

@@ -1,20 +1,20 @@
 {
-  "artifact_hash": "sha256:3a0626272fe761d90fe08574424fdc922c7937fcadc609a00686b897ee5b61d3",
-  "artifact_name": "G0-S1-01.json",
+  "artifact_hash": "sha256:3e6f02f0914760e7352b1a4bf4c3c9eb7c9f2a20e36e337704e9cbf9c44403eb",
+  "artifact_name": "G0-S1-06.json",
   "dependency_context": [],
   "findings": [
     {
       "detail": "adoption/final-state field present",
       "evidence": [
         {
-          "field": "adopted",
-          "path": "/s1/candidates/0/adopted"
+          "field": "status_current",
+          "path": "/s1/candidates/0/status_current"
         }
       ],
       "expected": "field absent",
       "observed": "present",
       "owner": "S1",
-      "path": "/s1/candidates/0/adopted",
+      "path": "/s1/candidates/0/status_current",
       "predicate_id": "S1-AUTH-01",
       "status": "FIRED"
     },
@@ -39,7 +39,7 @@
       },
       "observed": null,
       "owner": "S1",
-      "packet_id": "pkt-d38a0b056db32b7e7384a5ce",
+      "packet_id": "pkt-63a66d986a06536d85f2edfd",
       "path": null,
       "predicate_id": "S1-CAND-01",
       "status": "UNDECIDABLE"

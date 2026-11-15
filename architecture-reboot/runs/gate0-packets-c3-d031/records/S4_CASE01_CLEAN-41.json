@@ -1,6 +1,6 @@
 {
-  "artifact_hash": "sha256:34a871b12fa8b8fb64396530ffae308b888c2c1da3b545d7671ca4a34eef76ae",
-  "artifact_name": "G0-S4-01.json",
+  "artifact_hash": "sha256:aeb9db99bf31707d032a0c32dc29b81007cade15c778ad01507887e540702950",
+  "artifact_name": "G0-S4-12.json",
   "dependency_context": [
     {
       "hash": "sha256:ac8d0b6b6960f3cd041ebd3578713996efcefb5c6316abcdef11d8af184d53c3",
@@ -30,22 +30,14 @@
       "status": "SILENT"
     },
     {
-      "detail": "S4 problem set diverges from S3 rendered set",
-      "evidence": [
-        {
-          "rendered": [
-            "C1",
-            "C2"
-          ],
-          "s4_sources": []
-        }
-      ],
-      "expected": "problem sources equal from_s3.rendered ['C1', 'C2']",
-      "observed": [],
+      "detail": "no violation",
+      "evidence": [],
+      "expected": null,
+      "observed": null,
       "owner": "S4",
-      "path": "/s4/problems",
+      "path": null,
       "predicate_id": "S4-INC-01",
-      "status": "FIRED"
+      "status": "SILENT"
     },
     {
       "detail": "no violation",
@@ -58,14 +50,18 @@
       "status": "SILENT"
     },
     {
-      "detail": "no violation",
-      "evidence": [],
-      "expected": null,
-      "observed": null,
+      "detail": "S4 input view does not match the mapped source projection",
+      "evidence": [
+        {
+          "first_diff": "/from_s3/selected_roles/C9"
+        }
+      ],
+      "expected": "<absent>",
+      "observed": "BACKGROUND",
       "owner": "S4",
-      "path": null,
+      "path": "/s4_input_view/from_s3/selected_roles/C9",
       "predicate_id": "S4-PROJ-01",
-      "status": "SILENT"
+      "status": "FIRED"
     },
     {
       "detail": "no violation",
@@ -94,13 +90,13 @@
   "parent_type": "S4_BLUEPRINT",
   "scorer_version": "GATE0-SCORER-1",
   "specificity": {
-    "expected": "S4-INC-01",
+    "expected": "S4-PROJ-01",
     "expected_status": "FIRED",
     "non_silent_other": [],
     "other_active": [
       "S4-COMP-01",
+      "S4-INC-01",
       "S4-MEM-01",
-      "S4-PROJ-01",
       "S4-REP-01",
       "S4-ROLE-01"
     ],
