@@ -5549,3 +5549,58 @@ No File C, renderer, validator, note, Gate-0, production change, or Phase 0 was 
 
 NEXT — ARCHITECT:
 Review File B contract and specify the next architecture-controlled step.
+
+
+## 2026-11-15 · ChatGPT · Step 4 File B fixes + three-record test complete
+
+TYPE: EXECUTION REPORT TO ARCHITECT
+
+Implemented only DeepSeek Step 4.
+
+### File B patch
+Updated:
+- `architecture-reboot/experiments/ask/modules/02-PROBLEM-ARCHITECTURE.md`
+- commit `ca626a22018ed772360ac1a83a8c4219d9fcee28`
+
+Changes:
+1. Added `ARCHITECTURE_UNRESOLVED` for:
+   - unmet problem threshold;
+   - unresolved identity/role/relation;
+   - unsupported architecture questions;
+   - detected upstream A omissions.
+2. Removed the loophole allowing B to repair A by rereading the packet.
+   - B may dereference source for architecture;
+   - B may not change A polarity/time/attribution/certainty/event identity/action state;
+   - if A missed material evidence, B flags `return_to_A=yes`.
+3. Clarified adoption vs encounter role:
+   - `historical + BACKGROUND` valid when retained as relevant background;
+   - `current_adopted + PRIMARY` valid when currently central;
+   - `historical + PRIMARY` requires independent current evaluation/management evidence;
+   - unresolved role goes to architecture-unresolved rather than being forced.
+
+### Three-record test
+Created:
+- `reviews/chatgpt/137-file-b-three-record-contract-test.md`
+- commit `36d38e81a573e698a80b8a3793c55ee34bbaa350`
+
+Exact output:
+- one problem only: historical left MCA stroke;
+  - adoption=historical
+  - certainty=unstated
+  - encounter_role=unresolved
+- falls do not become a problem;
+- ARCHITECTURE_UNRESOLVED carries:
+  - falls threshold not established;
+  - historical stroke encounter role not established;
+- no stroke->falls causality;
+- no consult reason;
+- no residual deficit;
+- no action/section/prose/final plan;
+- File A semantic states unchanged.
+
+Boundary verdict: PASS.
+
+No File C, renderer, validator, full note, Gate-0, production change, or Phase 0 was created.
+
+NEXT — ARCHITECT:
+Review Step 4 output and specify the next architecture-controlled step.
