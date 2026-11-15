@@ -189,3 +189,68 @@ Additional frozen rules:
 - ordering is governed by one centralized structured ordering contract, which may contain section-scoped rules; S4 writes the resulting order into the Case IR, and RENDER may not recalculate it.
 
 Exact prompts, DSL syntax, schemas, operator vocabulary, ordering policy details, normalization tables, standing-item catalog, and error taxonomy remain downstream.
+
+
+## Two-LLM engineering workflow — frozen
+
+The implementation process is now agreed.
+
+Roles:
+- **DeepSeek** = primary implementation engineer and author of runtime implementation artifacts.
+- **ChatGPT** = architecture custodian, thin acceptance-brief author, regression-obligation owner, and independent implementation reviewer.
+- **Signer** = clinical/product authority and actual Doximity runtime operator.
+
+Core process invariants:
+- no implementation artifact is finally accepted by the same LLM that authored it;
+- no implementation begins before its acceptance obligations are defined;
+- BUILD conflict lint begins in Phase 0;
+- CHECK is created as soon as the schema/contract it validates exists, before downstream consumers rely on it;
+- semantic AUDIT procedure exists from Phase 0, while artifact-specific audit fixtures/oracles mature alongside implementation;
+- fixtures/checks/expected properties are controlled artifacts and changes to them are classified as **ACCEPTANCE CHANGE**;
+- historical regressions are mandatory baseline fixtures; derived fixtures are allowed only for new invariants and must name the invariant and related historical failure class;
+- a minimal vertical slice is tested after shared contracts and before full runtime expansion.
+
+Canonical workflow review:
+`architecture-reboot/reviews/chatgpt/012-two-llm-workflow-convergence.md`
+
+DeepSeek confirmation:
+`architecture-reboot/reviews/deepseek/014-workflow-freeze.md`
+
+
+## Doximity experimental protocol — frozen
+
+Doximity testing uses distinct experiment types rather than one universal test format.
+
+### Artifact-level batch
+Many independent cases test the same artifact/seam in one fresh conversation. The optimization target is:
+> maximize predefined assertions per returned artifact, not checkpoints per case.
+
+### Replicated batch
+The exact same frozen batch, same order, is repeated in fresh conversations. Three fresh runs are the default **gate**, not an estimate of a population stability rate. Claims are scoped as "passed 3/3 under this frozen condition."
+
+### Diagnostic single-case trace
+A failed/ambiguous case may be rerun with richer checkpoint visibility to localize a candidate first divergence. Because trace output changes the requested task, **trace runs are diagnostic only and can never satisfy an acceptance criterion.**
+
+### Robustness/batching test
+After same-order variance is characterized, test:
+- fixed order permutations;
+- selected single-case controls;
+- early/middle/late position effects.
+
+Additional frozen rules:
+- Doximity does not self-grade with PASS/CORRECT; external CHECK/AUDIT scores outputs;
+- if runtime failure output is needed, use a single generic `CONTRACT_ERROR` rather than a nuanced model-generated taxonomy;
+- every scored assertion has exactly one owning submodule; if a property spans modules, split it into separate assertions;
+- realistic reference cases consist of source package + signer-approved target note; structured assertions are derived by the agents and only ambiguous semantic points are escalated to the signer;
+- scorer negative controls are offline mutated artifacts; runtime invalid probes are separate Doximity tests of fail-closed behavior;
+- batch-size/output limits are empirical, not fixed by an arbitrary byte threshold;
+- raw Doximity outputs are immutable evidence.
+
+Canonical protocol:
+`architecture-reboot/proposals/chatgpt/009-doximity-experimental-protocol.md`
+
+Convergence review:
+`architecture-reboot/reviews/chatgpt/013-doximity-protocol-convergence.md`
+
+DeepSeek confirmation:
+`architecture-reboot/reviews/deepseek/016-protocol-freeze.md`
