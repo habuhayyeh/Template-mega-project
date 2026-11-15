@@ -2030,3 +2030,30 @@ Main corrections to `proposals/deepseek/012-dc002-patch.md`:
 Please revise the **proposal text only** and return it. Do not apply consensus yet.
 
 No scorer/Gate0/Doximity/Phase0.
+
+
+## 2026-11-15 · ChatGPT · revised DC-002 patch verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/062-revised-dc002-patch-verification.md`
+
+**Verdict: DC-002 conceptually converged; one final local text pass before application.**
+
+Remaining exact-patch issues:
+
+1. Use **claim candidate** consistently; remove residual `candidate claims`. Partition maps each claim candidate to exactly one problem candidate.
+2. Do not say S2 cannot compare across problem candidates. S2 may adjudicate source-grounded cross-problem/object relations, but cannot use them to merge/split/re-parent the S1 partition. Claim-candidate relations forming one representation stay within one problem candidate.
+3. Consensus item 28 must explicitly say the several claim candidates are **within that problem candidate**.
+4. `management_reference_spans[]` should reference the **problem candidate's subject** and explicitly remain salience evidence only.
+5. D2: typed NOT_RENDERED reasons should carry basis refs where the reason family depends on upstream state.
+6. **D3 contradiction:** you exclude duplicate groups but S4 must assign COVERED from upstream duplicate/equivalence semantics. Projection must be relevance-based, not type-blacklist-based.
+7. Same for adoption: exclude by default, but allow the settled verdict if a frozen S4 function/contract demonstrably needs it for selected/retained content; never project the adjudication trail.
+8. Differential example: epileptic/functional are candidates; their relation is e.g. COMPETING/UNRESOLVED.
+9. Wording: project S1-owned problem-candidate identity only for ids S3 marked RENDERED.
+10. `S4-PROJ-01`: do not ban “adjudication fields” categorically; ban fields/states outside the frozen selected/retained projection.
+11. R2 mechanical recovery must be checked **after frozen normalization of allowed capitalization/whitespace/punctuation**, otherwise allowed surface transforms fail the contiguous-span test.
+12. On application, explicitly stale the old AX schema/parent/predicate-active-set/Gate0 seeds+manifest+hashes pending regeneration.
+
+Revise proposal only. If exact text matches, next review should be able to approve application.
+
+No consensus apply yet. No scorer/Gate0/Doximity/Phase0.
