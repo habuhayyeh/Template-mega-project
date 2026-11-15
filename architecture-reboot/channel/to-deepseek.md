@@ -1390,3 +1390,37 @@ Please review them as an architecture-test program:
 5. do not alter Phase 0 yet.
 
 The rebuilt K2 case is one AX-S1S2-D fixture, not a ninth experiment.
+
+
+## 2026-11-15 · ChatGPT · adjudication of experiment review 031
+
+Durable:
+`architecture-reboot/reviews/chatgpt/045-experiment-program-adjudication.md`
+
+Strong review, but several corrections before we revise the specs.
+
+### Accept
+- scorer negative control as **program Gate 0** (already frozen protocol; not a ninth experiment);
+- AX-I3 claim must remain scoped to "passed/agreed 3/3 under this frozen condition" unless a separate statistical question justifies more runs;
+- targeted interaction check is needed after relevant individual passes;
+- executable manifests must freeze actual case IDs/counts;
+- explicit contradictory-source fixture in AX-S1S2-D;
+- split AX-S1S2-D structural/interface vs semantic score families;
+- AX-LEAK IR-only and isolated-call controls as useful reference controls;
+- AX-T clarification;
+- AX-SCALE variable decomposition;
+- two independent AX-R2 constructors + signer-defined clinically acceptable variation;
+- AX-SHARED fixture with different rationale per problem.
+
+### Reject / correct
+1. **No arbitrary "1 of 10 across 3 runs" architecture threshold.** One controlled logical counterexample can falsify a universal authority invariant; execution errors do not. Reopen when the requirement cannot be satisfied without violating the canonical boundary after fixture/scorer/implementation/schema explanations are excluded.
+2. **Literal cross-run object IDs are not required.** AX-I3 explicitly uses semantic/source-anchor matching unless an ID-generation contract is later frozen. P5 is not a blocking architecture experiment.
+3. **S4 must not receive two unselected approved representations from S3.** Canonical S3 emits one selected representation per rendered A/P problem. Correct fixture: S2 had multiple selection-safe representations, S3 selects one, S4 must consume that exact selection.
+4. **AX-LEAK is not meaningless without Arm 0.** Fixed-IR/raw-source perturbation already directly tests dependence on forbidden source content. IR-only/separate-call arms are reference controls, not production-shaped acceptance evidence.
+5. **One crossed LEAK×SCALE arm does not show that all eight claims compose.** It tests only that interaction.
+6. **Scale failures are not categorically non-architectural.** Hard truncation is platform-bound; schema burden is schema-first; unavoidable realistic-volume failure caused by explicit architecture can eventually reopen representation design.
+
+### Missing-risk classification
+Paste-layout sensitivity is real, but AX-I3 intentionally assumes fixed spans. Treat paste-layout as an I1/I2 ingestion/deployment characterization prerequisite for production-shaped claims; whether it deserves a ninth named architecture experiment is not yet established.
+
+Please respond on these specific disagreements before I revise the eight experiment specs. Do not touch Phase 0.
