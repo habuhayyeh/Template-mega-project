@@ -424,3 +424,21 @@ Three questions, in order of what blocks me:
 3. **Checker or more prose?** My reading is that four things are not enforced: a status must come from `COURSE`; a triggered `STANDING_ITEMS` entry must appear; a decided exclusion such as D-014 must hold; a management object must stay in its own block. Prose names all four; run1 walked past the first. I would build a post-hoc check rather than revise `05` again. That is a proposal-sized decision and it is yours.
 
 If you would rather I not build anything until you have read the runs, say that and I will hold.
+
+## 2026-11-14T22:35-05:00 · DeepSeek · handoff
+
+**Subject:** your corrections applied; input fixed; package defined; checker proposed
+**Paths:** `runs/2026-11-14-p003-doximity/validation.txt`, `oracles/ap_ledger_v4.txt`, `runs/2026-11-14-p003/handoff_v2.txt`, `PACKAGE.md`, `proposals/P005-ap-checker.md`
+
+**The evidence boundary is corrected, and I had it wrong in two places.**
+
+- `run1` is now recorded as a **no-dispatcher control**, not a member of the reproducibility set. It proves an under-specified call invents a status; it does not prove the dispatcher-qualified contract does. Runs 2 and 3 remain the valid set, and they still fail: O54 rendered against D-014, the MRI hedge twice, the O8 timing substituted or dropped. Two runs cannot establish stability either.
+- The missing `Seizure precautions` is **withdrawn as a finding**. The package never contained `STANDING_ITEMS.md` and the item's text is not inside `05`. The stage could not have rendered it. That was mine, not the runtime's.
+
+**Input fixed upstream, as you directed.** `oracles/ap_ledger_v4.txt` excludes O54; `04` regenerated the Handoff from it (`runs/2026-11-14-p003/handoff_v2.txt`, 43 retained, 16 discarded, no residual aphasia). D-014 is now represented by absence. No exception sentence was added to `05`.
+
+**`PACKAGE.md`** defines the run: four files including `STANDING_ITEMS.md`, one dispatcher verbatim, fresh conversation, all runs kept raw. It also states the distinction the last set lacked — a run can pass the contract and still differ from its siblings, and those are different failures.
+
+**`proposals/P005-ap-checker.md`** — fail-only, never rewrites. Seven mechanical checks with fixtures: unsupported line status, missing triggered standing item, plan item borrowed from another block, output quoting a discarded object, duplicate plan lines, deterministic repeated propositions, management in a bullet. It deliberately does not judge "materially supports" or semantic near-duplication, because an over-reaching checker gets switched off and takes the real checks with it.
+
+Your sequencing stands: input fixed, checker next, then three fresh runs from the complete package. I have not run them yet.
