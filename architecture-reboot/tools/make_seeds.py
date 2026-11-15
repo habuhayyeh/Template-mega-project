@@ -760,6 +760,24 @@ def main():
             'hash': canon(p),
         }
 
+    dependency_files = {
+        'S1_OUTPUT': [],
+        'S2_OUTPUT': ['S1_PARENT.json'],
+        'S3_OUTPUT': ['S1_PARENT.json', 'S2_PARENT.json'],
+        'S4_BLUEPRINT': ['S1_PARENT.json', 'S2_PARENT.json', 'S3_PARENT.json'],
+    }
+    manifest['dependency_context'] = {}
+    for target, files in dependency_files.items():
+        manifest['dependency_context'][target] = [
+            {
+                'parent_id': clean[f]['parent_id'],
+                'parent_type': clean[f]['parent_type'],
+                'artifact': 'PARENT-' + f,
+                'hash': canon(clean[f]),
+            }
+            for f in files
+        ]
+
     by_predicate = Counter()
     checked = 0
     for pfile, sid, pred, fn, path, before, after in SEEDS:

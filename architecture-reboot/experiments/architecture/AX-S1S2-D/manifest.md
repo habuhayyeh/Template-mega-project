@@ -91,7 +91,11 @@ A pass here says the STRUCTURE interfaces can be honoured. It does not say the s
 
 ## 8. Blinding and independence
 
-**The scorer receives three things and nothing else:** the artifact, the case oracle, and the predicate registry (id + version). It does not receive the seed manifest, the expected predicate, or any mutation metadata — those belong to the harness, which selects the artifact and records which predicate *should* fire.
+**The scorer receives four things and nothing else:** the target artifact, the read-only dependency
+context required by the frozen dependency graph, the case oracle, and the frozen predicate/contract
+rules. It does not receive the seed manifest, the expected predicate, mutation metadata, or the
+specificity answer key — those belong to the harness, which selects the artifact and records which
+predicate *should* fire. The scorer evaluates only the target artifact's `parent_type`.
 
 A scorer that can see the expected answer is not a scorer; it is a lookup.
 

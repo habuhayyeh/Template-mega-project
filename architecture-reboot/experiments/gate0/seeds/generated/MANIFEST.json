@@ -67,14 +67,59 @@
     "seed_mutations_checked": 28,
     "seeds": 28
   },
+  "dependency_context": {
+    "S1_OUTPUT": [],
+    "S2_OUTPUT": [
+      {
+        "artifact": "PARENT-S1_PARENT.json",
+        "hash": "sha256:dc361b6fbdb56ebacf78184ca4be0d6b6dfea3bac5d6a579f1c65676233ad038",
+        "parent_id": "S1_CASE01_CLEAN",
+        "parent_type": "S1_OUTPUT"
+      }
+    ],
+    "S3_OUTPUT": [
+      {
+        "artifact": "PARENT-S1_PARENT.json",
+        "hash": "sha256:dc361b6fbdb56ebacf78184ca4be0d6b6dfea3bac5d6a579f1c65676233ad038",
+        "parent_id": "S1_CASE01_CLEAN",
+        "parent_type": "S1_OUTPUT"
+      },
+      {
+        "artifact": "PARENT-S2_PARENT.json",
+        "hash": "sha256:7a9dc00baaa148d30520d40f59159a23623336c22a5463aef104c059d09d18d3",
+        "parent_id": "S2_CASE01_CLEAN",
+        "parent_type": "S2_OUTPUT"
+      }
+    ],
+    "S4_BLUEPRINT": [
+      {
+        "artifact": "PARENT-S1_PARENT.json",
+        "hash": "sha256:dc361b6fbdb56ebacf78184ca4be0d6b6dfea3bac5d6a579f1c65676233ad038",
+        "parent_id": "S1_CASE01_CLEAN",
+        "parent_type": "S1_OUTPUT"
+      },
+      {
+        "artifact": "PARENT-S2_PARENT.json",
+        "hash": "sha256:7a9dc00baaa148d30520d40f59159a23623336c22a5463aef104c059d09d18d3",
+        "parent_id": "S2_CASE01_CLEAN",
+        "parent_type": "S2_OUTPUT"
+      },
+      {
+        "artifact": "PARENT-S3_PARENT.json",
+        "hash": "sha256:0d2cbeb0443d51e9ea4bde381071a7f46cdd1402930cc22b77f0ee2e6948d784",
+        "parent_id": "S3_CASE01_RENDERED_CLEAN",
+        "parent_type": "S3_OUTPUT"
+      }
+    ]
+  },
   "governing_hashes": {
     "00-ARCHITECTURE-EXPERIMENT-PROGRAM.md": "sha256:2b039aa2ef3cf8f29279a7fc3d919f0a7e27c0e7588a4759424a10a3f99f6b94",
-    "00-GATE0-MANIFEST.md": "sha256:fe51e5ecf3db87a50a90318a5dc1c89e54e7e13d5fa7ee4c50efe05021d4d018",
+    "00-GATE0-MANIFEST.md": "sha256:0c92fbf4aa0e4f53ad09302c8687f9f296dc85de053ab8eb3174f6b062fe6805",
     "AX-S1S2-D.md": "sha256:d3f0e095ce616d9fa1d5042aacfbbdd3cbebe458485e19df787ed97648a81dd6",
     "CONSENSUS_ARCHITECTURE_v0.1.md": "sha256:05ef82f8161aba0386cf2a2ba90c65fb93355af2e47e650cd9aefe134e407932",
     "CONSENSUS_SUBMODULE_INTERFACES_v1.md": "sha256:fcb7f91801056556aab247a6203705bcc2a59419866712d9c437dab09b97a592",
     "G0-SEEDS.md": "sha256:620479896710d7575fbc94e7a2a6317d9fbcacf883ae25875abb6f1d922ae8c5",
-    "make_seeds.py": "sha256:eb9f7988354b7903a228ba59ab20d4f399f51a43d6e86617e97cb296183cc194",
+    "make_seeds.py": "sha256:04672ce6cf9c5856f6710e5c5e760ebdbc989d047984b659f2a131dc5fb99c7a",
     "oracle.json": "sha256:df806a9643b9a3cfd558a77653e295c84d43457386a6807d8d4f2c031c820927",
     "predicates.md": "sha256:f6fd7174ade7678d531d2f6c04461fe6618a2e3c9ed2d550b7a208d6e30b2639",
     "schema.md": "sha256:47d8afd3fe4380016dc618ccad30665536343f142820955bfa5687dbfc25f5c3"

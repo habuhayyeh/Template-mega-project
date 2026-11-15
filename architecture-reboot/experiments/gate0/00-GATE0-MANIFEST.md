@@ -15,8 +15,9 @@ run must produce **zero diff**; a run that does not is a build failure, not a wa
 rejects a seed that is a no-op copy of its parent, or that differs at more than one path. The manifest
 mutation record is the checked parent→seed diff, not a hand-written claim.
 
-**Status: AUTHORED / UNRUN.** No scorer exists yet; this defines what one must do to earn the right to
-score architecture experiments.
+**Status: SCORER IMPLEMENTED / GATE 0 UNRUN.** The scorer and harness exist at
+`architecture-reboot/scorer/` and `architecture-reboot/tools/gate0_harness.py`; they are not yet
+reviewed. No Gate 0 acceptance run has been executed.
 
 ---
 
@@ -136,11 +137,39 @@ It fails if any of those is false, including "detected but misattributed" — a 
 
 The last trigger matters most: every miss in production should become a seed, so the calibration corpus grows from experience.
 
-## 7a. Scorer blindness
+## 7a. Scorer blindness and dependency context
 
-The scorer receives **artifact + case oracle + predicate registry only**.
+The scorer receives **target artifact + read-only dependency context + case oracle + frozen
+predicate/contract rules**. The dependency context is evidence, not another target.
 
-Harness-only, never passed to the scorer: the seed manifest, the seed id, the expected predicate, mutation metadata, and the specificity answer key. Keeping the answer key in the same directory as the artifacts is not a control; it is a convention. The control is that the harness selects the artifact and holds the answer.
+The dependency-context matrix is fixed for `GATE0-C1`:
+
+| target | read-only dependency context |
+|---|---|
+| `S1_OUTPUT` | none |
+| `S2_OUTPUT` | clean S1 output for the case |
+| `S3_OUTPUT` | clean S1 + clean S2 outputs for the case |
+| `S4_BLUEPRINT` | clean S1 + clean S2 + clean **rendered** S3 output for the case |
+
+For every target lineage, only the target artifact is mutated. Its dependency context is unmutated,
+hash-pinned, identical for the clean target parent and every seed in that lineage, and independent of
+which seed is being scored. The harness fails on an unexpected dependency-context hash.
+
+The scorer evaluates predicates owned by the **target artifact's `parent_type` only**. It must not emit
+upstream-layer findings, treat an upstream defect as a target defect, mutate or repair the context, or
+infer the expected answer from filenames or harness metadata.
+
+The scorer may receive the frozen rule material a predicate explicitly references: `REASON-1`,
+`PROJECTION_MAP`, and the contract constants inside it.
+
+Harness-only, never passed to the scorer: the seed manifest, seed id, expected predicate, mutation
+metadata, and the specificity answer key. Keeping the answer key in the same directory as the
+artifacts is not a control; it is a convention. The control is that the harness selects the artifact
+and holds the answer.
+
+A blinded human-review packet may include the minimum read-only dependency context needed to decide its
+predicate. It never contains the seed id, expected predicate, expected verdict, mutation metadata or
+specificity answer key.
 
 ## 8. What Gate 0 does not prove
 
@@ -153,8 +182,10 @@ Harness-only, never passed to the scorer: the seed manifest, the seed id, the ex
 - `AX-S1S2-D/parents/S1_PARENT.json`, `S2_PARENT.json`, `S3_PARENT.json`,
   `S3_PARENT_NOT_RENDERED.json`, `S4_PARENT.json` — clean source parents.
 - `seeds/G0-SEEDS.md` — the seed corpus and expected outcomes.
-- `seeds/generated/MANIFEST.json` — the authoritative inventory, keyed by `parent_id`, with counts and
-  hashes.
+- `seeds/generated/MANIFEST.json` — the authoritative inventory, keyed by `parent_id`, with counts,
+  dependency-context hashes and artifact hashes.
+- `architecture-reboot/scorer/` — scorer implementation and predicate registry.
+- `architecture-reboot/tools/gate0_harness.py` — harness, packets, judgments and evidence.
 - Per-run records: scorer version, predicate set version, control-plane version, case ids, findings,
   verdict.
 

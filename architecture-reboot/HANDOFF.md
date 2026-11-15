@@ -46,20 +46,23 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 
 ## 4. What is stale / unbuilt
 
-- **Execution package:** source-first rebuild now carries an executable projection map, a frozen
-  experiment-local reason registry, and a clean NOT_RENDERED S3 parent. The source contract is
-  **pending independent review**; do not call it accepted.
-- **Scorer:** not built. **Gate 0:** unrun. **Doximity:** unrun. **Phase 0:** untouched and stale.
+- **Execution package:** source contract accepted after review 081; review 082 corrected only the
+  scorer-input boundary. The package is source-first and regenerable.
+- **Scorer:** implemented at `architecture-reboot/scorer/` with harness at
+  `architecture-reboot/tools/gate0_harness.py`. **Pending review.** **Gate 0:** unrun; the
+  three-independent-human-review prerequisite is outstanding. **Doximity:** unrun. **Phase 0:**
+  untouched and stale.
 
 ## 5. Exact position
 
-HEAD at handoff: see `git log -1`. Last substantive commit: review-080 source-contract pass.
+HEAD at handoff: see `git log -1`. Last substantive commit: review-082 scorer implementation.
 
 `python architecture-reboot/tools/make_seeds.py` builds:
 5 clean parents across 4 parent types → 28 seeds → `MANIFEST.json`. **A second run must produce zero
 diff**; that is a build failure condition, not a warning. The build also checks every seed is a real
 non-noop mutation and differs from its parent at exactly one declared path; 28/28 are checked, with 0
-no-op and 0 multi-diff seeds. The manifest records the checked before/after values.
+no-op and 0 multi-diff seeds. The manifest records the checked before/after values and the
+dependency-context map.
 
 Current counts: 5 clean calibration parents · 4 parent types · 28 seeds · 16 active predicates ·
 campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
@@ -68,31 +71,25 @@ campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · sche
 Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-## 6. Review 080 source pass — addressed, pending review
+Scorer: 13 mechanical predicates + 3 human-review predicates; 35 synthetic tests; no Gate 0 acceptance
+run.
 
-**Review 079 generator integrity is closed.** The mutation function runs for every parent type; the
-build rejects a no-op copy and any seed whose actual diff does not match exactly one declared path. The
-manifest mutation record is derived from the checked diff. 28/28 seeds are checked.
+## 6. Review 082 scorer-input correction and scorer implementation
 
-Review 080 items:
+**Input boundary corrected.** Scorer input is now target artifact + read-only dependency context +
+oracle + frozen predicate/contract rules. `00-GATE0-MANIFEST.md` fixes the dependency matrix; the
+manifest hash-pins the clean, seed-independent context. The scorer evaluates only the target
+`parent_type`.
 
-1. **Projection map is bound to executable ops.** `make_seeds.py::OP_CONTRACTS` freezes the only valid
-   metadata for each op. Every `PROJECTION_MAP` rule is compared exactly on destination, owner, source,
-   source path, condition, requirement and transform; any mismatch fails the build.
-2. **HUMAN_REVIEW policy is coherent.** Gate 0 requires three independent blinded human judgments. All
-   three must detect the seeded defect and all three must satisfy `FULL_SILENCE-WITHIN-LAYER`. Two of
-   three fails; a mechanical pre-filter is not a judgment and cannot substitute for one.
-3. **S2-REP-01 tests semantic support.** The instruction judges whether members and relations support
-   the problem's claim, not merely whether ids/refs exist. `G0-S2-02` adds aspirin object `O07` to the
-   falls representation while keeping every id and support ref valid; `G0-S2-01` remains the structural
-   empty-refs branch.
-4. **S4-PROJ wording corrected.** `G0-S4-09` is the wrong-owner-group seed; `G0-S4-11` is a valid-field
-   fabricated duplicate group, not a wrong-owner relation.
+**Scorer/harness implemented.** `architecture-reboot/scorer/` contains the pure scorer, predicate
+registry and projection verifier. `architecture-reboot/tools/gate0_harness.py` owns the answer key,
+packet generation, specificity, human-judgment aggregation and immutable evidence. The scorer does not
+open files or read the manifest; a test patches `builtins.open` to prove it.
 
-Review 078 items are retained: exact S4 source map, uniform within-layer specificity, `REASON-1` plus
-clean NOT_RENDERED parent, and parent identity separate from parent type.
+**Gate 0 remains unrun.** 35 synthetic tests pass. No `acceptance` harness run was executed, no
+judgments were fabricated, and the three-independent-human-review prerequisite is outstanding.
 
-No scorer, no Gate 0 run, no Doximity, no Phase 0.
+No Doximity, no Phase 0.
 
 ## 7. Working rules that matter
 
@@ -112,5 +109,5 @@ No scorer, no Gate 0 run, no Doximity, no Phase 0.
 
 ## 8. Next
 
-The reviewer inspects the source contract before any scorer is written. Do not build the scorer, run
-Gate 0, or touch Doximity/Phase 0 in this pass.
+The reviewer inspects the scorer implementation and Gate 0 harness before Gate 0 is run. Do not run
+Gate 0 acceptance, fabricate human judgments, or touch Doximity/Phase 0 in this pass.
