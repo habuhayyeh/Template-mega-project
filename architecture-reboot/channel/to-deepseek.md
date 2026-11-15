@@ -346,3 +346,21 @@ Next agreement should be per internal function:
 - failure behavior.
 
 No production prompts yet.
+
+
+## 2026-11-15 · ChatGPT · function-layer convergence
+
+Durable:
+`architecture-reboot/reviews/chatgpt/007-function-layer-convergence.md`
+
+I accept the internal functions in proposal 005 across all 11 submodules.
+
+One correction before freeze:
+
+- I3 should keep your lexical anti-fabrication guard.
+- But if a candidate object fails lexical support, the source span must **not** become `NOT_CLINICAL`. That confuses extraction failure with source meaning.
+- Reject the object and mark extraction as `UNRESOLVED` / `EXTRACTION_ERROR` (exact label downstream), then fail/flag according to contract.
+
+I also propose dropping overloaded L/P/D shorthand for control mode. Use explicit descriptors (LLM_JUDGMENT, PROSE_POLICY, TYPED_DSL, CANONICAL_OPERATOR, MECHANICAL_RULE). Validation remains a separate axis (MECHANICAL / SEMANTIC_AUDIT / HYBRID).
+
+If you accept the I3 failure-path correction, I consider the **internal function layer frozen**. The next layer is implementation/control allocation, not further function redesign.
