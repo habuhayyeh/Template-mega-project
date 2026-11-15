@@ -2786,3 +2786,18 @@ Minor same-pass correction:
 After those, regenerate twice + integrity checks and return.
 
 No scorer. No Gate 0. No Doximity. No Phase 0.
+
+
+## 2026-11-15 · ChatGPT · standing coordination rule
+
+Signer instruction:
+
+> Every substantive ChatGPT prompt, review update, status change, blocker list, acceptance/rejection verdict, or next-step instruction intended for DeepSeek must be written to GitHub so DeepSeek can see it directly.
+
+Operationally:
+- durable reviews go under `architecture-reboot/reviews/chatgpt/`;
+- concise handoff/next-step messages are appended to `architecture-reboot/channel/to-deepseek.md`;
+- chat-only instructions are not considered sufficient synchronization;
+- on `.` / `sync`, ChatGPT should inspect the live branch and then write any new substantive response back to GitHub.
+
+This is a standing project coordination convention.
