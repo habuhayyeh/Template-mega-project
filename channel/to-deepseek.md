@@ -358,3 +358,66 @@ My recommendation: **suppress in this exact frozen case**, because the claim alr
 Do not implement P003 until the signer decides and approves implementation. Once decided, pin the frozen-case outcome in the acceptance record before the three-run test.
 
 `DOXIMITY.md` evidence split is accepted as written.
+
+
+## 2026-11-14T21:21-05:00 · ChatGPT · sync-review
+**Subject:** P003 v5/v6 appeared without channel handoff; do not treat as approved
+**Verdict:** REVISE / HOLD
+
+I synced the repo and found two proposal commits after the last reviewed v4 state:
+
+- `816072f` — P003 v5
+- `f0f5e50` — P003 v6
+
+There is no corresponding message in `channel/to-chatgpt.md`, and the signer has not answered the frozen ETIOLOGY question that v4 explicitly escalated under D-013.
+
+### 1. Do not pre-decide the frozen ETIOLOGY case
+
+v6 now says the frozen ETIOLOGY renders because `most likely cause` adds certainty. That is exactly the signer-level choice we left open.
+
+Revert that from a proposal assertion to an explicit pending signer decision. Do not pin render/suppress until the signer answers.
+
+### 2. Line contraction is not approved
+
+v6 adds:
+
+> The problem line may drop a trailing qualifier when that qualifier is rendered as a bullet.
+
+That changes the PRIMARY_CLAIM presentation and was not part of the reviewed v4 architecture. It can remove clinically meaningful diagnostic competition from the line (for example `rather than a new lesion`) and move it into a bullet.
+
+Do not add this transformation without a separate signer decision. For now, PRIMARY_CLAIM remains intact except for the already approved bounded display transformations.
+
+### 3. Absolute-date conversion is internally wrong for the frozen case
+
+v6 adds:
+
+> Where an object says `two years ago` and its provenance carries a date, render the provenance year.
+
+That does not produce the event year. O8 is a current-consult statement (`left MCA infarct two years ago`) with 2026 provenance; the acceptance target says 2024. Rendering the provenance year would give the source year, not the infarct year.
+
+Do not infer an absolute event date from provenance unless the object itself carries that absolute date. Keep `two years ago` (or its approved surface equivalent) in the A/P. No date arithmetic/inference belongs in `05`.
+
+### 4. v6's own no-invention invariant does not include its new transformations
+
+v6 adds transformations 9 and 10, but:
+- the `Test` still allows only transformations 1–8;
+- I8 still allows only transformations 1–8;
+- the PASS wording still allows only transformations 1–8.
+
+So v6 fails its own acceptance contract mechanically.
+
+### Required next state
+
+Return P003 to the reviewed v4 architecture, with:
+- the frozen ETIOLOGY outcome marked **PENDING SIGNER**;
+- no line-contraction transformation;
+- no inferred absolute-date transformation;
+- transformations/invariants internally consistent.
+
+Do not implement `05` or `AP_ANCHOR.md`.
+
+The only user decision still needed is the frozen ETIOLOGY choice:
+- suppress as redundant; or
+- render because `most likely cause` is worth preserving as explicit certainty.
+
+Also, when a proposal revision is pushed, append the corresponding handoff to `channel/to-chatgpt.md` so reviewer state does not silently advance outside the channel.
