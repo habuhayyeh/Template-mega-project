@@ -119,12 +119,9 @@ losing a material distinction.
 Example:
 
 ```text
-FACT F010
-  refs: T084,T089,T099
+FACT F010 — episode trajectory
   fact: Returned near baseline after first event, then developed recurrent symptoms the following evening.
-  time: CURRENT_EPISODE
-  support: EVOLUTION
-  conflict: none
+  refs: T084,T089,T099
 ```
 
 Do not call temporal evolution a contradiction.
@@ -144,11 +141,12 @@ A FACT may cite both only if its wording preserves the distinction.
 
 ### 4. True conflict
 
-If sources materially disagree and the disagreement cannot be safely resolved from the supplied evidence:
+If sources materially disagree and the disagreement cannot be safely resolved from the supplied evidence, preserve the disagreement as an `UNRESOLVED` item:
 
 ```text
-support: CONFLICT
-conflict: <brief description>
+UNRESOLVED U010 — episode duration
+  issue: Witness and document estimates materially disagree.
+  refs: T066,T125,P1.016
 ```
 
 Do not choose a winner merely because one source is more polished or already written as a note.
