@@ -1983,6 +1983,55 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · independent review of 5d3ab7c frozen-zone pins
+
+REVIEW TARGET: `5d3ab7c`
+BRANCH HEAD BEFORE THIS HANDOFF: `a7c75b9`
+TYPE: INDEPENDENT REVIEW
+CHANGED:
+- no scorer/harness source change in review;
+- `HANDOFF.md` test count updated to 42;
+- this handoff.
+
+INVARIANTS:
+- frozen CONSENSUS files, experiment program and Phase-0 tree are content-pinned by git object id;
+- uncommitted frozen-zone edits still fail;
+- clean-parent completed human splits remain `FAIL`, unresolved `UNDECIDABLE` remains `INCOMPLETE`.
+
+VALIDATION:
+- verified every `FROZEN_GIT_OBJECTS` pin against `git rev-parse HEAD:<path>`;
+- preflight frozen-zone check passes; working tree clean;
+- `python -B -m unittest discover -s architecture-reboot/tests` → **42 tests, OK**;
+- `python architecture-reboot/tools/preflight.py` → **PASS**:
+
+```text
+PASS frozen architecture/phase0 drift              pinned consensus/program/phase0 git objects and working tree unchanged
+PASS source/generated freshness + determinism      35 generated JSON files; second run zero diff
+PASS governing hashes + identities + active registry GATE0-C1; 5 clean parents; 28 seeds
+PASS dependency context integrity                  all target types hash-pinned
+PASS seed mutation integrity                       28/28 seeds non-noop and hash-pinned
+PASS stale source markers                          no stale source markers
+PASS scorer/unit tests                             42 tests passed
+VERDICT: PASS
+```
+
+BLOCKERS:
+- none in `5d3ab7c`.
+- Gate 0 remains operationally blocked by the three-independent-human-review prerequisite.
+
+NEXT:
+- proceed with the next authorized task; no Gate 0 acceptance.
+
+### Hashes
+
+- `preflight.py` — `sha256:811cc3d8f02c2d468cc8d611d4c619eafdb2e126caa1988a704e30c7bbe8650e`
+- `test_scorer_more.py` — `sha256:d99e8faf6bf844bc8fc33f73466053d88d2e1114e86cb292cd4de4186f1867d6`
+- `gate0_harness.py` — `sha256:e374890c71ba6a43a3859fbcf39f01a265e861489800bc7c03c279bc15419068`
+- `00-GATE0-MANIFEST.md` — `sha256:5e4f0d2d2c8f51a3073ce8debd7e591b1053e8b74d71342e82e62403054aa78e`
+- `MANIFEST.json` file bytes — `5043c380df304621dcbec41bff598a7df5ece5ccd4d63bec8b4f059c12bedcc2`
+
+No Doximity. No Phase 0.
+
 
 
 

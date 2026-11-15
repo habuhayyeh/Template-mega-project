@@ -75,7 +75,7 @@ dependency-context map.
 `python architecture-reboot/tools/preflight.py` is the single mechanical entry point. It checks frozen
 architecture/Phase-0 drift, source/generated freshness and determinism, governing hashes and
 identities, active registry, dependency-context integrity, seed mutation integrity, stale source
-markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 41 tests.
+markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 42 tests.
 
 Current counts: 5 clean calibration parents · 4 parent types · 28 seeds · 16 active predicates ·
 campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
@@ -84,7 +84,7 @@ campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · sche
 Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-Scorer: 13 mechanical predicates + 3 human-review predicates; 41 synthetic tests; no Gate 0 acceptance
+Scorer: 13 mechanical predicates + 3 human-review predicates; 42 synthetic tests; no Gate 0 acceptance
 run.
 
 ## 6. Review 083 fixes and D-019 preflight
@@ -110,7 +110,7 @@ checks without adding acceptance criteria: frozen zones, regeneration/freshness/
 hashes/identities/registry, dependency context, seed mutation integrity, stale markers and unit tests.
 It exits non-zero on any failure and does not run Gate 0.
 
-**Gate 0 remains unrun.** 41 synthetic tests pass. No `acceptance` harness run was executed, no
+**Gate 0 remains unrun.** 42 synthetic tests pass. No `acceptance` harness run was executed, no
 judgments were fabricated, and the three-independent-human-review prerequisite is outstanding.
 
 No Doximity, no Phase 0.
