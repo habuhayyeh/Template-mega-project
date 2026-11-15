@@ -54,11 +54,50 @@ Use only sections that contain entries.
 
 ## Goal
 
-Produce the **smallest source-faithful fact map that preserves distinctions needed for later neurologic reasoning**.
+Produce a **compact source-faithful fact map that preserves distinctions needed for later neurologic reasoning and note construction**.
 
 Prefer references over copied prose.
 
-The output should be materially smaller than the Scribe packet.
+Do not minimize FACT count at the expense of downstream separability. A somewhat larger complete handoff is better than a smaller handoff that bundles unrelated clinical subjects.
+
+The output should remain materially smaller than the Scribe packet.
+
+## Reconciliation-unit invariant
+
+Each `FACT` must describe **one clinical subject/event/state or one coherent longitudinal trajectory**.
+
+Multiple records may be combined only when they are:
+- duplicate/corroborating statements about that same subject;
+- different observations of the same event;
+- or a meaningful evolution of that same subject over time.
+
+Do not create omnibus FACTs that combine unrelated domains merely because they belong to the same patient or
+the same note section.
+
+Examples of content that normally stays separate unless one directly modifies the other:
+- current neurologic presentation vs past medical history;
+- family history vs unrelated gynecologic history;
+- medication/supplement regimen vs employment/residence;
+- examination findings vs allergy/PCP/admin state.
+
+### Downstream-separability test
+
+Before merging two propositions, ask:
+
+> Could a later function reasonably need to give these different problem membership, temporal stance,
+> section placement, inclusion/disposition, or action handling?
+
+If yes, keep them as separate FACTs.
+
+### Local reference completeness
+
+Every independently meaningful clause in a `fact:` line must be supported by at least one record id listed
+in that same FACT's `refs:`.
+
+Do not include a clause because it exists somewhere else in the packet unless its supporting record id is
+also listed here.
+
+A FACT is invalid if its wording cannot be audited from its own `refs:`.
 
 ## Reconciliation rules
 
@@ -160,11 +199,16 @@ A Scribe record may contain several propositions.
 
 Do **not** automatically split all of them.
 
-Split/restate only when separate handling is required to preserve:
+Split/restate when separate handling is required to preserve:
+- different clinical subjects/events;
 - different fact times;
 - different polarity/certainty;
 - a true conflict;
+- different likely problem membership;
+- different likely note-section/use decisions;
 - materially different downstream meaning.
+
+Do not keep propositions together solely to reduce output length.
 
 Otherwise keep them together in one compact reconciled fact.
 
@@ -209,6 +253,8 @@ Before returning:
 3. no source conflict was silently resolved;
 4. no historical status became current;
 5. no final problem/role/note decision was made;
-6. output is a compact index/representation, not a second copy of the packet.
+6. every independently meaningful clause is supported by one of that item's own refs;
+7. no FACT combines unrelated downstream decision units merely to reduce item count;
+8. output is a compact index/representation, not a second copy of the packet.
 
 Return the handoff only.
