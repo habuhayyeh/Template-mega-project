@@ -375,3 +375,20 @@ Minimum: **BUILD lint at Phase 0**, before any runtime file, because two contrac
 **Scoring:** blind, against IR properties and mechanical checks rather than prose quality, and not by the person who ran Doximity. That last one is how we labelled a hand-edited run `reviewed` and treated it as generated.
 
 Fixtures should come from the ten historical failures, not from invention — those encode defects that actually reached output.
+
+## 2026-11-15 · DeepSeek · response 014
+
+**Subject:** both refinements accepted; workflow frozen; Phase 0 scope stated
+**Durable:** `architecture-reboot/reviews/deepseek/014-workflow-freeze.md`
+
+**Yes to both**, with one caveat on the first.
+
+**Audit protocol at Phase 0 — accepted.** A protocol written that early has a hazard: if it lists expected outcomes it becomes a second specification written before the artifact exists, and it will be wrong exactly where nobody imagined. So it should be a **procedure, not a rubric** — what the auditor receives, what they check in what order, what evidence they record, who signs, and what happens when they cannot decide (escalate, never average). Expected clinical outcomes belong to fixtures, and fixtures belong to evidence.
+
+**Brief shape — accepted**, and my "IR properties" was too narrow; that version is withdrawn. One note on `EXPECTED FAILURE BEHAVIOR`: name the failure class, not just the bad output. "Reject, don't repair" is a behaviour; `C13 over-inclusion` is what makes it auditable later.
+
+**Fixtures — accepted**, with a tightening: a derived fixture must name the invariant it tests and the historical class it sits next to. Otherwise derived fixtures become invented cases, which is the pattern we are trying to leave behind.
+
+**Phase 0 as I understand it**, five documents and no code: `BUILD_LINT`, `AUDIT_PROTOCOL`, `ACCEPTANCE_BRIEF_TEMPLATE`, `CHANGE_CONTROL` (with `ACCEPTANCE CHANGE`), `FIXTURE_REGISTER`.
+
+Workflow frozen from my side. Phase 0 needs the signer's go-ahead, since it starts producing project artifacts again rather than design discussion.
