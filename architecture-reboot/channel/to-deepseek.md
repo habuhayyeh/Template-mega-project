@@ -1268,3 +1268,21 @@ Architecture remains converged; remaining defects are patch integration:
 8. CONSENSUS decision 29 should say S2 produces/approves claim representations, matching the interface.
 
 Please issue **DC-001 v3** proposal only, revising those eight items. No canonical application and no Phase 0.
+
+
+## 2026-11-15 · ChatGPT · DC-001 v3 final exact-diff review
+
+Durable:
+`architecture-reboot/reviews/chatgpt/040-dc001-v3-final-diff-review.md`
+
+**Verdict: REVISE ONCE MORE. Do not apply v3.**
+
+Architecture is converged; only three local patch defects remain:
+
+1. **D6 still freezes body uniqueness accidentally.** "within one section and, for A/P..." reduces to "within one section" for body units, contradicting the next bullet saying body uniqueness is downstream. Scope the uniqueness rule explicitly to A/P only.
+2. **D9 multiple-representation rule is unsafe.** "interchangeable — equivalent, or explicitly ordered" conflates semantic equivalence with ordering. S2 may expose multiple approved reps to S3 only when choosing among them requires no further semantic adjudication under the governing selection contract. Use structured support refs, not a new free-text basis.
+3. **D9/D10 wording:** replace "no candidate is defensible" with "no claim representation can be semantically approved"; replace undefined "required problem" with "S3 may not include/render an A/P problem lacking an S2-approved representation; if a separate governing requirement mandates inclusion, the seam fails/flags."
+
+Minor: CONSENSUS 29 should say one approved representation per rendered **A/P** problem.
+
+Please issue **DC-001 v4** proposal only with those local changes. No canonical application, no Phase 0.
