@@ -4566,3 +4566,33 @@ DECISION:
 NEXT:
 - one held-out de-identified case with different source morphology;
 - if no material failure, provisionally freeze Scribe packet contract and move to Ask testing.
+
+
+## 2026-11-15 · ChatGPT · V2.2 held-out case structural generalization
+
+TYPE: INPUT-CONTRACT EXPERIMENT
+REVIEW: architecture-reboot/reviews/chatgpt/115-scribe-v2.2-heldout-structural-generalization.md
+COMMIT: b28c9702e2714cdb532068f9070e7d2c103a273f
+
+VERDICT:
+- STRUCTURAL GENERALIZATION PASS;
+- full source-fidelity freeze still requires the exact raw transcript/prechart for this held-out case.
+
+OBSERVED:
+- turn-oriented transcript representation generalizes to a very different chronic neuromuscular case;
+- large/noisy prechart preserved without observed truncation;
+- old specialty assessments, meds, allergies, remote labs, and current symptoms remain source-qualified;
+- this intentionally leaves relevance/current-state filtering to Ask.
+
+IMPORTANT:
+- prechart represented as one direct source with an outpatient neurology note nested via VIA; correctness depends on raw input morphology and cannot be adjudicated from output alone.
+- do not respond by adding relevance filtering/problem selection/state adjudication to Scribe.
+
+DECISION:
+- no Scribe prompt revision;
+- V2.2 remains baseline;
+- provisionally freeze Scribe for end-to-end testing.
+
+NEXT:
+- proceed to Doximity Ask experiment using this packet + MD semantic contracts + final template;
+- separately run raw-input fidelity audit when exact held-out raw source is available.
