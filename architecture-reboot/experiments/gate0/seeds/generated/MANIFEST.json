@@ -1,6 +1,6 @@
 {
   "governing_hashes": {
-    "predicates.md": "sha256:fe5255ac29d900eec604d3109aa156e5195f4819a8a0386146f047a2dc5ff9db",
+    "predicates.md": "sha256:c52c3141856228758629c26e9c436b3c350bb9ec78a936e2acda36ab0e7b15a0",
     "schema.md": "sha256:e7d8b05678890ef459b0ce71dce600762bb183897f10c76efb0f849c14df3b1d",
     "G0-SEEDS.md": "sha256:23270832440581ce241e84754a3ef0b4e58c99f90d242dbe797137353e09a73e",
     "make_seeds.py": "sha256:514de3a4a7bc0619d3a6b8086382332ac3161297b5c076aa6c31a39184b1825f"

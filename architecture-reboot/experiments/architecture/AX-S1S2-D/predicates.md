@@ -78,7 +78,7 @@ S4-INC-01, S4-MEM-01, S4-COMP-01, S4-REP-01
 
 `S1-BODY-01` (body-only subject) and `S2-CONF-01` (contradictory sources) are **not** active: the pilot cases do not exercise them. They belong to CASE-07/08/10 and CASE-11.
 
-**Excluded from the pilot verdict**, and not counted as unmet: `S2-ADOPT-02` (PENDING_SCHEMA), `S4-ORD-01` (PENDING_DEPENDENCY), and three predicates whose condition no pilot case produces — `S2-REP-02` (two approved representations), `S4-REP-01` (representation-id mismatch, scored once CASE-05/06 exist), `S1-BODY-01` and `S2-CONF-01`. Their schemas are defined now so they activate without a schema change later.
+**Excluded from the pilot verdict**, and not counted as unmet: `S2-ADOPT-02` (PENDING_SCHEMA), `S4-ORD-01` (PENDING_DEPENDENCY), and the predicates whose condition no pilot case produces — `S2-REP-02` (two approved representations), `S1-BODY-01` and `S2-CONF-01`. `S4-REP-01` is **active**: the parent already carries representation ids on both sides of the comparison.
 
 ## Scoring rules
 
