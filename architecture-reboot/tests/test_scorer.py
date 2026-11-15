@@ -321,6 +321,18 @@ class HarnessTests(unittest.TestCase):
                  dict(base, judge_id='j3', verdict=SILENT)]
         aggregate_human(result, packets, mixed)
         self.assertEqual(finding['status'], UNDECIDABLE)
+        self.assertTrue(finding['calibration_failure'])
+        verdict, _ = verdict_for('S2_OUTPUT', result['findings'], 'S2-REP-01')
+        self.assertEqual(verdict, 'FAIL')
+
+        unresolved = [dict(base, judge_id='j1'), dict(base, judge_id='j2'),
+                      dict(base, judge_id='j3', verdict=UNDECIDABLE)]
+        aggregate_human(result, packets, unresolved)
+        self.assertEqual(finding['status'], UNDECIDABLE)
+        self.assertEqual(finding['detail'], 'HUMAN_JUDGMENT_UNDECIDABLE')
+        self.assertNotIn('calibration_failure', finding)
+        verdict, _ = verdict_for('S2_OUTPUT', result['findings'], 'S2-REP-01')
+        self.assertEqual(verdict, 'INCOMPLETE')
 
     def test_dependency_hash_mismatch_fails(self):
         manifest = {

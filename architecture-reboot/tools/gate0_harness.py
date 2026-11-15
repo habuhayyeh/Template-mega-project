@@ -318,15 +318,24 @@ def aggregate_human(result, packets, judgments):
             finding['detail'] = 'HUMAN_PACKET_MISSING'
             continue
         js = by_packet.get(packet['packet_id'], [])
+        finding.pop('calibration_failure', None)
+        finding.pop('judgments', None)
         judge_ids = [j['judge_id'] for j in js]
         if len(js) != 3 or len(set(judge_ids)) != 3:
             finding['status'] = UNDECIDABLE
             finding['detail'] = 'INSUFFICIENT_INDEPENDENT_HUMAN_JUDGMENTS'
             continue
         verdicts = {j['verdict'] for j in js}
+        if UNDECIDABLE in verdicts:
+            finding['status'] = UNDECIDABLE
+            finding['detail'] = 'HUMAN_JUDGMENT_UNDECIDABLE'
+            finding['judgments'] = js
+            continue
         if len(verdicts) != 1:
             finding['status'] = UNDECIDABLE
             finding['detail'] = 'HUMAN_JUDGMENTS_DISAGREE'
+            finding['calibration_failure'] = True
+            finding['judgments'] = js
             continue
         verdict = verdicts.pop()
         finding['status'] = verdict
@@ -396,6 +405,8 @@ def specificity(target_type, findings, expected):
 
 def verdict_for(target_type, findings, expected):
     spec = specificity(target_type, findings, expected)
+    if any(f.get('calibration_failure') for f in findings):
+        return 'FAIL', spec
     statuses = {f['predicate_id']: f['status'] for f in findings}
     if any(s == UNDECIDABLE for s in statuses.values()):
         return 'INCOMPLETE', spec
