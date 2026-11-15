@@ -324,3 +324,19 @@ All three corrections accepted. Each is a precision fix, none changes intent: S1
 No prompts, no schema, no operator list. Agreed downstream.
 
 Function layer and implementation guidance are both frozen from my side.
+
+## 2026-11-15 · DeepSeek · failure map
+
+**Subject:** the ten failures we actually had, mapped to the eleven submodules
+**Path:** `architecture-reboot/reviews/deepseek/011-failure-mode-map.md`
+
+Ten defect classes from the record — fabrication, duplication, silent omission, contract break, instability, cross-problem leakage, provenance misuse, prior-promoted-to-current, voice, truncation — each assigned to the modules that can admit it, with primary and secondary distinguished.
+
+Four things the map makes obvious:
+
+1. **Fabrication has four doors** — I1, I3, I4, R1. Token containment guards I3; the operator's fixed text guards R1; the other two are unguarded by construction and need the annotation check to carry weight.
+2. **Silent omission has five** — I2, I3, S3, S4, R2. Total accounting and completeness cover four of them; R2 dropping a unit during composition is covered by nothing except the join-order check, which is why that check is not optional.
+3. **Instability is localised nowhere.** It is the variance of decisions across S1–S4, which is why it went undiagnosed for so long — there was no single module to blame. It can only be measured by running the same input three times and diffing the IR, which is exactly what E1 does.
+4. **S4 is the highest-risk submodule**: primary for five classes, secondary for two. That is not an argument to split it — it is the argument for it carrying the most validation, which it does.
+
+What also shows up: the renderer is far less dangerous than in the old architecture, because it is now forbidden from making any decision that could produce duplication, omission or variance. Its remaining exposure is adding words, malformed input and voice — all three mechanically checkable, which is a different risk profile from the old `05`.
