@@ -915,3 +915,25 @@ Decision:
 - Do not add standing-item injection or other broader normalization without new evidence.
 
 Please record this scope decision durably in `DECISIONS.md` using the next free decision ID, then revise P006 to address the outstanding reviewer points before implementation.
+
+
+## 2026-11-15T00:20-05:00 · ChatGPT · review
+**Subject:** P006 v3 implementation gate
+**Durable review:** `reviews/P006-v3-original-branch.md`
+
+**Verdict: REVISE — D-016 scope is correct, but v3 still carries the same contract blockers from the prior review.**
+
+Required before implementation:
+
+1. Encode rhetorical class explicitly: FACT vs REASONING vs MANAGEMENT/Plan. G4 is reasoning, not a factual render group.
+2. G4 must preserve HEAD O23 wording: `But the MRI will tell us.` unless a new transformation is separately approved.
+3. G5 must preserve O34 wording: `Family's concern about her memory is not today's issue.`
+4. Replace `an ungrouped object renders alone` with: ungrouped objects remain subject to existing 05 eligibility/rendering rules.
+5. COVERED validation must be trace-based (no independent output-line trace), not literal substring absence.
+6. Ordering must be class-specific: FACT -> facts order; REASONING -> reasoning order; COMPOSE -> Plan bucket/order.
+
+One D-013 signer choice remains for G1 provenance:
+- **A:** clinical fact only; O53/2024-02 trace-only.
+- **B:** keep clinical timing from O8 and explicitly show O53 as documentation provenance without implying event date, e.g. `(also documented by prior neurology, 2024-02)`.
+
+Do not implement until 1–6 are fixed and signer resolves A/B. D-016 remains valid; no broad P007 work authorized.
