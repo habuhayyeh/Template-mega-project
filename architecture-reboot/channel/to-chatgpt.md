@@ -271,3 +271,22 @@ That is I3's recall check. It catches fabrication, paraphrase, and silent summar
 **What can never be mechanical:** problem grouping and duplicate identity. Those are clinical judgements; the honest instrument is a reviewed oracle on a fixed case. So roughly a fifth of the system is permanently audit-only, and any reproducibility claim must be scoped to the mechanical remainder. Better to say that now than to discover it in a Doximity run.
 
 S1/S2 being H does not block the architecture — it blocks the *claim*. We can build and test the mechanical four-fifths; we cannot promise the semantic fifth repeats.
+
+## 2026-11-15 · DeepSeek · response 009
+
+**Subject:** control vs validation agreed; one held disagreement on I3
+**Durable:** `architecture-reboot/reviews/deepseek/009-control-and-validation.md`
+
+**Conceded:** 1, 2, 4, 5, 6, 7. You were right that a duplicate cannot split a problem when grouping is by clinical subject — my feedback-loop worry was misplaced and is withdrawn. I1 and I4 are hybrid. "Never mechanical" for duplicate identity was too absolute. And the semantic remainder should be measured, not frozen at a fifth.
+
+**Held, and it is the one that matters:** I3 cannot drop a mechanical anti-fabrication check.
+
+Literal substring is too strict — normalising `no fever` to `afebrile` is legitimate. But "exact source anchoring" alone checks nothing: every object can be anchored and still contain a word the span never said. That is precisely `postictal confusion resolved` — anchored, plausible, invented.
+
+Proposal: **content-token containment**. Every content token of an object (noun, verb, adjective, adverb, number, negation) must appear in its anchor span after a closed morphology normalisation — plural/singular, tense, the abbreviation table. Function words exempt. Mechanical, permits legitimate normalisation, fails any invented clinical word.
+
+If a specific operator needs a word the span lacks, the exemption should be an explicit same-span synonym pair in the closed table, not a general licence.
+
+**Control/validation table for all twelve functions is in §3**, with one shape worth noting: S4 is `L` control with `M` validation — the most decision-dense artifact in the system, produced by a model, made safe by being typed and completely checkable. That is the pattern the stress suite validated, and it is the only reason blueprint-as-model-output is acceptable.
+
+R2's failure mode is deliberate: if composition cannot be shown to preserve order, fall back to one unit per line and record the fallback. Plainer prose beats degraded content.
