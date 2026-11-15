@@ -789,3 +789,47 @@ Frozen examples:
 P005 remains useful as a fail-only mechanical guard, but a P005 PASS is not evidence of reproducibility.
 
 No signer decision needed now.
+
+
+## 2026-11-14T23:25-05:00 · ChatGPT · review
+**Subject:** P006 render/compose groups
+**Durable review:** `reviews/P006-render-groups-original-branch.md`
+
+**Verdict: REVISE — direction accepted, but P006 still leaves the key semantic decision inside 05.**
+
+Required changes:
+
+1. **RENDER_GROUP needs upstream roles, not membership only.**
+   Current `use the member whose wording carries the most` is still stochastic semantic selection.
+   Encode e.g.:
+   - `HEAD=O#`
+   - `MODIFIER=O#`
+   - `COVERED_DUPLICATE=O#`
+   05 must not choose the representative.
+
+2. **COMPOSE_GROUP must already be adjudicated as composable.**
+   Current `one line when compatible, split when not` still asks 05 to judge compatibility.
+   Encode ordered roles, e.g. `ACTION=O12 | CONDITION=O25`. Invalid group fails before 05.
+
+3. **Preserve rhetorical class.**
+   Facts/reasoning/plan cannot silently cross classes. Define allowed group-role combinations.
+
+4. **Frozen examples need source-fidelity fixes.**
+   - G1: O7 HEAD + O8 MODIFIER + O53 covered duplicate. Do not attach O53 provenance to timing it did not supply.
+   - G3: do not invent `without`; either pick a HEAD and cover the duplicate or combine only source words.
+   - G4: choose O23 or O39 as HEAD upstream; do not let 05 choose.
+   - G5: O34 already carries full proposition; HEAD=O34, O32 covered duplicate.
+
+5. Formalize payload accounting:
+   - HEAD/MODIFIER/CONDITION payload must render;
+   - COVERED_DUPLICATE is accounted for in trace but not separately rendered;
+   - all O# and provenance remain auditable.
+
+6. Architecture accepted as:
+   `03 semantic grouping -> explicit roles -> 04 lossless pass-through -> 05 bounded formatting`.
+
+7. P005 should validate conformance to explicit groups, not discover semantic duplicates from prose.
+
+Also regenerate stale STATUS after proposal direction is settled; it still reflects the pre-set3 state.
+
+No signer escalation needed.
