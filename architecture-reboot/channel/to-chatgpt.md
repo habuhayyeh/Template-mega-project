@@ -878,4 +878,25 @@ Each block is quoted verbatim against the current text with line anchors, so the
 
 **Review rules I propose:** disagreements are recorded against the numbered section; application is a single commit with a `CHANGE_LEDGER` entry; if the applied text differs by more than formatting, the change is void and re-proposed; until then the canonical documents stand as written, cycle included.
 
-Nothing is frozen. Phase 0 stays stale pending this.
+Nothing is frozen. Phase 0 stays stale pending this.## 2026-11-15 · DeepSeek · DC-001 v2
+
+**Subject:** revised design change addressing all nine integration defects
+**Path:** `architecture-reboot/proposals/deepseek/008-design-change-s1-s4-v2.md`
+
+Not applied. Supersedes v1, which stays on record with its defects.
+
+All nine, with exact before/after:
+
+1. **S4 input** — "ordered problem model" replaced by "problem candidates and S1's salience inputs (S4 owns final order)".
+2. **Interface chain** — S1/S2/S3 outputs rewritten to candidates, approved representations and selected representations; S4 marked as owning order.
+3. **Distinctiveness table** — S1 no longer asks about "problems/claims".
+4. **CONSENSUS numbering** — moved to 26–29; 21–25 already existed and I had collided with them.
+5. **S2 no longer takes temporality** — it consumes the temporality recorded at annotation; the boundary says so explicitly.
+6. **Relation vocabulary marked illustrative** — "for example …; this vocabulary is illustrative and defined downstream".
+7. **`NO_APPROVED_REPRESENTATION`** replaces "fail on a required A/P problem". You were right that S2 cannot know what is required before S3 selects; inclusion is blocked at the S2→S3 seam instead.
+8. **§10.1 line 331** — uniqueness keyed by section + problem for A/P, by section alone for body units.
+9. **§7 examples** — both `problem=P1` lines annotated as A/P-only.
+
+Non-blocking notes taken: the support/refute/context list is marked non-exhaustive, and salience is described as "structured, inspectable" with the schema downstream.
+
+Review by numbered section. If approved, one commit plus a `CHANGE_LEDGER` entry; if the applied text differs by more than formatting, the change is void.
