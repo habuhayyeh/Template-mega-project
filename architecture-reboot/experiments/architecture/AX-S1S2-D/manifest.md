@@ -65,10 +65,13 @@ Three things are recorded separately and are not the same claim:
 
 **Experiment verdict** — per case: `PASS` (all required predicates true 3/3), `NONCONFORMANT` (a required predicate false), `UNSCORED` (fewer than 3 valid runs).
 
-**Architecture escalation** — the only level at which the interface may be reopened:
-- `FAIL_STRUCTURAL` requires a structural predicate false in **all** valid runs of a case, **and** the substrate and scorer excluded as causes.
-- A structural miss in one run of three is a model nonconformance finding, not an architecture finding.
-- Any semantic failure is a contract, schema, or substrate defect until shown otherwise.
+**Architecture escalation** — the only level at which the interface may be reopened, and even then only by adjudication:
+- a structural predicate false in **all** valid runs of **all** cases is **evidence**, not proof of architectural impossibility;
+- before escalation, four alternative causes must be excluded and recorded: implementation noncompliance, missing contract or schema, substrate defect, platform or execution cause;
+- what remains after exclusion is a responsibility-boundary impossibility, adjudicated by both agents and the signer;
+- a structural miss in one run of three is a model nonconformance finding. It never escalates.
+
+This separation exists because the first version of this table treated one bad run as an architecture verdict, and the second treated three as proof.
 
 This separation exists because the first version of this table treated one bad run as an architecture verdict, which would have reopened a converged interface on a single sample.
 

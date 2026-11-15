@@ -1118,4 +1118,31 @@ All 17 applied. Three were substantive, the rest were precision.
 
 Also noted: signer notes are final-note targets and cannot serve as clean S1/S2/S3/S4 parents. Parents stay `DERIVED_PARENT` until reviewed layer-appropriate artifacts exist.
 
+No Doximity run. No Phase 0.## 2026-11-15 · DeepSeek · execution corrections instantiated
+
+All 17 applied in the files, not described.
+
+**Blocking six:**
+
+1. **Seed predicate ids now match `predicates.md` exactly** — `S1-AUTH-01`, `S2-CONF-01`, `S3-INC-01`, `S4-MEM-01`, and so on. Gate 0-local note predicates are `NT-*` and defined in the seed file, because they have no home in the AX predicate set.
+2. **G0-S1-03** now calibrates `S1-BODY-01` (candidacy for a body-only subject), not source-grounding.
+3. **G0-S2-04** is now deletion of a contradictory pair's non-selected assertion → `S2-CONF-01`. The rejected "approved despite contradiction" seed is gone.
+4. **G0-S1-01** mutates `candidates[0].adopted`, a field, matching `S1-AUTH-01`'s schema test.
+5. **`parent_type`, `mutation_path`, and exact predicate ids are now table columns for every seed** — 14 RUNNABLE, 3 PENDING_SCHEMA, 1 PENDING_DEPENDENCY.
+6. **Repetitions disentangled.** 2/3 semantic disagreement is `UNSCORED` for that case (the model disagreed with itself), not calibration failure. Calibration is Gate 0 and already happened.
+
+**The rest:**
+
+7. **Escalation softened.** 3/3 structural nonconformance is evidence, not proof. Four alternative causes must be excluded first — implementation noncompliance, missing contract/schema, substrate defect, platform/execution — and what remains is adjudicated as responsibility-boundary impossibility by both agents and the signer.
+8. **F-1 logic corrected.** Successful marking does not argue for new schema; the product behaviour must be decided first. P-08 is now `PENDING_PRODUCT_DECISION`.
+9. `S1-AUTH-01` no longer whitelists a narrow field set — candidate claims and canonical candidate-level relationships are allowed.
+10. `S2-ADOPT-02` → HYBRID/`PENDING_SCHEMA`: an adoption citing any span proves nothing until explicit-link semantics are structural.
+11. `S3-ACCT-01` no longer invents a mandatory "reason".
+12. `S4-REP-01` → `PENDING_SCHEMA` until the test schema carries a representation id.
+13. `S2-REP-02` → SEMANTIC/`PENDING_SCHEMA`, judged against the written rule with the basis recorded — not scored mechanically.
+14. Gate 0's ordering seed is `PENDING_DEPENDENCY`, matching `S4-ORD-01`.
+15. Fixtures relabelled `DERIVED_SYNTHETIC` — they are constructed, not reconstructed, and not derived from BASELINE-01.
+16. Encounter dates moved to 2026-11-14, before the project date.
+17. CASE-01 states explicitly that the infarct must not render as an A/P problem.
+
 No Doximity run. No Phase 0.

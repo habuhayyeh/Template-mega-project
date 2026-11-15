@@ -47,7 +47,7 @@ From four notes, these hold in all of them and are checkable now:
 | P-05 | explicit negatives preserved as bullets, not summarised away | semantic |
 | P-06 | plan bullets are actions, not narrative | semantic |
 | P-07 | hedging preserved ("likely", "highly suggestive of", "concern for") | semantic |
-| P-08 | unknown values render as slots, never invented | mechanical once F-1 exists |
+| P-08 | unknown values are never invented — the note either omits them or marks the gap, **per a product decision not yet made** | `PENDING_PRODUCT_DECISION` |
 | P-09 | one proposition appears once per problem block | mechanical |
 | P-10 | labs summarised honestly ("otherwise without significant abnormality") rather than omitted or invented | semantic |
 

@@ -1,6 +1,6 @@
 # AX-S1S2-D — frozen substrates
 
-Three cases, one patient. All marked **DERIVED**: the substrate is reconstructed from the signer's material, not captured from a live encounter. They exist to separate adoption-from-evidence from adoption-from-convenience.
+Three cases, one patient. All marked **DERIVED_SYNTHETIC**: these are constructed architecture fixtures, not reconstructions of a real encounter and not derived from any supplied baseline. They exist to separate adoption-from-evidence from adoption-from-convenience, and nothing else. Encounter date is set before the project date to avoid a temporality confound.
 
 Format:
 
@@ -19,24 +19,24 @@ OBJ   <id> | <kind> | "<text>" | prov <source/date> | temporal <when> | span <re
 
 ```text
 SPAN S01 | source B prior neurology 2024-02 | "Known left MCA infarct with mild residual right faciobrachial weakness."
-SPAN S02 | source A transcript 2026-11-16 | "Three falls since June. No new weakness or speech trouble."
-SPAN S03 | source A transcript 2026-11-16 | "We should check her vitamin D and refer to PT for gait training."
-SPAN S04 | source A transcript 2026-11-16 | "Aspirin 81 daily, unchanged."
+SPAN S02 | source A transcript 2026-11-14 | "Three falls since June. No new weakness or speech trouble."
+SPAN S03 | source A transcript 2026-11-14 | "We should check her vitamin D and refer to PT for gait training."
+SPAN S04 | source A transcript 2026-11-14 | "Aspirin 81 daily, unchanged."
 
 OBJ O01 | FACT      | "known left MCA infarct" | prov B/2024-02 | temporal 2024-02 documented | span S01
 OBJ O02 | FACT      | "mild residual right faciobrachial weakness" | prov B/2024-02 | temporal 2024-02 | span S01
-OBJ O03 | FACT      | "three falls since June" | prov A/2026-11-16 | temporal June–November | span S02
-OBJ O04 | FACT      | "no new weakness or speech trouble" | prov A/2026-11-16 | temporal now | span S02
-OBJ O05 | PLAN      | "check vitamin D" | prov A/2026-11-16 | status current | span S03
-OBJ O06 | PLAN      | "refer to PT for gait training" | prov A/2026-11-16 | status current | span S03
-OBJ O07 | MEDICATION| "aspirin 81 daily, unchanged" | prov A/2026-11-16 | status current | span S04
+OBJ O03 | FACT      | "three falls since June" | prov A/2026-11-14 | temporal June–November | span S02
+OBJ O04 | FACT      | "no new weakness or speech trouble" | prov A/2026-11-14 | temporal now | span S02
+OBJ O05 | PLAN      | "check vitamin D" | prov A/2026-11-14 | status current | span S03
+OBJ O06 | PLAN      | "refer to PT for gait training" | prov A/2026-11-14 | status current | span S03
+OBJ O07 | MEDICATION| "aspirin 81 daily, unchanged" | prov A/2026-11-14 | status current | span S04
 ```
 
 **Frozen expectation**
 
 - exactly one A/P problem: the falls, claim asserted today;
 - `O01`/`O02` are **not** adopted: no assessment question is posed for them today;
-- `O01` may appear as body/history context with attribution, never as a rendered A/P claim;
+- the infarct must **not** render as an A/P problem; it may appear only as attributed body/history context if S3 selects it;
 - `O07` is a medication fact, not a management decision, and cannot adopt anything;
 - if a run renders a "prior infarct" A/P problem, that is `S1-CAND-01` failing, not a defensible variant.
 
@@ -48,13 +48,13 @@ OBJ O07 | MEDICATION| "aspirin 81 daily, unchanged" | prov A/2026-11-16 | status
 
 ```text
 SPAN S01 | source B prior neurology 2024-02 | "Known left MCA infarct with mild residual right faciobrachial weakness."
-SPAN S02 | source A transcript 2026-11-16 | "She had a first focal seizure this week. We think this is post-stroke epilepsy from the old left MCA infarct."
-SPAN S03 | source A transcript 2026-11-16 | "Start levetiracetam 500 mg BID."
+SPAN S02 | source A transcript 2026-11-14 | "She had a first focal seizure this week. We think this is post-stroke epilepsy from the old left MCA infarct."
+SPAN S03 | source A transcript 2026-11-14 | "Start levetiracetam 500 mg BID."
 
 OBJ O01 | FACT      | "known left MCA infarct" | prov B/2024-02 | temporal 2024-02 | span S01
-OBJ O02 | FACT      | "first focal seizure this week" | prov A/2026-11-16 | temporal this week | span S02
-OBJ O03 | REASONING | "post-stroke epilepsy from the old left MCA infarct" | prov A/2026-11-16 | role claim | span S02
-OBJ O04 | PLAN      | "start levetiracetam 500 mg BID" | prov A/2026-11-16 | status current | span S03
+OBJ O02 | FACT      | "first focal seizure this week" | prov A/2026-11-14 | temporal this week | span S02
+OBJ O03 | REASONING | "post-stroke epilepsy from the old left MCA infarct" | prov A/2026-11-14 | role claim | span S02
+OBJ O04 | PLAN      | "start levetiracetam 500 mg BID" | prov A/2026-11-14 | status current | span S03
 ```
 
 **Frozen expectation**
@@ -72,12 +72,12 @@ OBJ O04 | PLAN      | "start levetiracetam 500 mg BID" | prov A/2026-11-16 | sta
 
 ```text
 SPAN S01 | source B prior neurology 2024-02 | "Known left MCA infarct."
-SPAN S02 | source A transcript 2026-11-16 | "We will continue aspirin 81 daily for secondary prevention of the left MCA infarct."
-SPAN S03 | source A transcript 2026-11-16 | "No new deficits. She is otherwise doing well."
+SPAN S02 | source A transcript 2026-11-14 | "We will continue aspirin 81 daily for secondary prevention of the left MCA infarct."
+SPAN S03 | source A transcript 2026-11-14 | "No new deficits. She is otherwise doing well."
 
 OBJ O01 | FACT | "known left MCA infarct" | prov B/2024-02 | temporal 2024-02 | span S01
-OBJ O02 | PLAN | "continue aspirin 81 daily for secondary prevention of the left MCA infarct" | prov A/2026-11-16 | status current | span S02
-OBJ O03 | FACT | "no new deficits" | prov A/2026-11-16 | temporal now | span S03
+OBJ O02 | PLAN | "continue aspirin 81 daily for secondary prevention of the left MCA infarct" | prov A/2026-11-14 | status current | span S02
+OBJ O03 | FACT | "no new deficits" | prov A/2026-11-14 | temporal now | span S03
 ```
 
 **Frozen expectation**
