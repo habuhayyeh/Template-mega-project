@@ -14,7 +14,9 @@ If a "patch" changes any word that governs behaviour, it is not a patch.
 
 A change inside an existing module that does not alter its interface, its scope, or any other module's behaviour.
 
-Examples: rewriting an internal routine, improving error messages inside the module, adding a test.
+Examples: rewriting an internal routine, improving error messages inside the module, refactoring internals.
+
+Adding, removing, or altering a check or assertion is **not** an implementation change. See §4.
 
 Requirements:
 - the module's acceptance brief still passes;
@@ -35,7 +37,9 @@ A design change invalidates prior acceptance results. Re-running them is not opt
 
 ## 4. ACCEPTANCE CHANGE — the category we were missing
 
-Any change to a fixture, an expected property, a deciding check, or a threshold.
+Any change to a fixture, an expected property, a deciding check, a threshold — **or the addition or removal of a check or assertion**.
+
+Adding a test changes what is measured, and a test added after an implementation exists is a test shaped by that implementation.
 
 This is the most dangerous category, because it makes a failing test pass without fixing anything.
 

@@ -6,9 +6,15 @@ The deployment package is assembled from many small files. The lint runs on ever
 
 ### L1 — Contradictory rules (class C11)
 
-Two rules govern the same decision and prescribe different outcomes.
+Two rules govern the same decision and prescribe outcomes that cannot both hold.
 
-How it is detected: every rule declares the decision it governs, using a stable `DECISION_ID`. Two rules with the same decision id and different normative text (must / must not / order / threshold) are a violation.
+How it is detected — deliberately narrow, because the lint does not judge prose:
+
+1. each rule's normative content is reduced to a tuple `(modality, order, threshold)` — for example `MUST_FIRST`, `MUST_AFTER`, `COUNT>=2`;
+2. two rules with the same `DECISION_ID` whose tuples are **comparable and differ** are a contradiction (L1);
+3. two rules with the same `DECISION_ID` whose tuples are **not comparable** are reported as **L1b ambiguous authority** — not an automatic failure, but they must be merged into one rule or given distinct ids.
+
+Two rules saying the same thing in different words are not a contradiction. A lint that treated differing prose as disagreement would flag every rephrasing and would stop being used.
 
 Example that motivated it: one section of the old writer said reasoning precedes facts, another said it follows them. Both were in the package. The writer obeyed a different one per run.
 
@@ -63,6 +69,7 @@ The lint emits a report:
 BUILD_LINT
   files: 14   rules: 96   decisions: 71
   L1 contradictory ............ 0
+  L1b ambiguous authority ..... 0
   L2 duplicate authority ...... 0
   L3 out of scope ............. 0
   L4 untested ................. 3   ← fail

@@ -2,6 +2,8 @@
 
 Five documents, no runtime code. Each one exists because we hit the failure it prevents.
 
+**Status: draft under review.** The signer approved authoring ("go" in reply to a direct offer to start Phase 0). The review came back REVISE; these are the revised drafts, not yet frozen.
+
 | File | Prevents |
 |---|---|
 | `BUILD_LINT.md` | contradictory contract rules shipping in one compiled package (C11) |

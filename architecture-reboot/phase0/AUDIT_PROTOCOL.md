@@ -13,13 +13,24 @@ The auditor receives exactly these, and nothing else:
 1. the source package as the signer pasted it;
 2. the Case IR (test mode);
 3. the final note;
-4. the check report.
+4. the check report;
+5. the frozen fixture assertions for this case — **properties only, never expected prose**.
+
+The auditor is not always given source, IR and note. For artifact-level batches the audit works from the returned artifact plus the frozen assertions. What is never given is the implementer's rationale.
 
 The auditor does not receive the implementer's rationale, the brief, or the design discussion. Those make an auditor agree with the author.
 
 ## 3. Order of checks
 
-Fixed order. Stop at the first failure and record it; do not continue to build a fuller picture, because the first failure is the one that gets fixed.
+Fixed order, but **do not stop at the first failure**. Record every check that fails and can still be interpreted independently.
+
+The batch is expensive and its value is the failure picture; an audit that returns one failure per run wastes the run. Order matters for attribution, not for stopping: the earliest failed check names the owning submodule.
+
+Stop early only when a failure makes later checks uninterpretable, and state the reason:
+
+- coverage wrong → fidelity cannot be assessed;
+- IR malformed → operator fit is meaningless;
+- source package incomplete → nothing downstream is trustworthy.
 
 1. **Coverage** — every source span has a disposition; every object traces to a span.
 2. **Fidelity** — every object's content is supported by its span. Any word not supported is a finding, regardless of plausibility.
@@ -49,8 +60,10 @@ Five fields: check, result, evidence, span, owner. The owner is the submodule, n
 A case is audited when every check has a result and every failure has an owner and evidence. "Signed" means the auditor states one of:
 
 - `ACCEPT` — every check passed;
-- `REJECT` — at least one check failed, with evidence;
-- `BLOCKED` — the auditor cannot decide, with the reason.
+- `REJECT` — at least one check failed, with the full list of independent failures;
+- `BLOCKED` — the audit could not proceed, with the stopping reason.
+
+A `REJECT` lists every independent failure, not the first one.
 
 ## 6. When the auditor cannot decide
 
