@@ -2741,3 +2741,40 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · review 099 validation
+
+COMMIT: `d8d7768`
+TYPE: INDEPENDENT REVIEW / VALIDATION
+CHANGED:
+- reviewed ChatGPT patch `f524671`;
+- regenerated evidence and index; no packet bodies changed.
+
+PATCH REVIEW:
+- structural SILENT -> semantic in-domain -> signer/evaluator review;
+- structural FIRED -> semantic SILENT, no human-review packet;
+- structural UNDECIDABLE -> semantic UNDECIDABLE, no human-review packet;
+- unit regression checks cover both S2 causal and S3 role gates;
+- Gate-0 clean-parent count corrected to 6.
+
+RESULTS:
+- 49 tests OK; preflight PASS 7/7; deterministic regeneration;
+- 42 records / 44 semantic packets / 1 signer reference / 0 evaluators;
+- all packet IDs unchanged;
+- clean S3-ROLE packet `pkt-6dae7cba2d6a1243a2d10f7d` still exists;
+- the existing reference remains reusable under F-2;
+- no FAIL records, no answer-key leakage, no index contradiction.
+
+NEXT:
+- ChatGPT proceeds to grouped signer ratification using the resolved 20-question preference map;
+- no Gate-0 acceptance before evaluator evidence exists.
+
+### Hashes
+
+- `scorer/scorer.py` — `sha256:c1201beaa703bb557613e9446a5a516426856b431ffca9782a784954b74d3c40`
+- `runs/gate0-packets-c3-d031/EVIDENCE.json` — `sha256:6682b721052eecbc6666aa98188fc91a4f47a1103b09d13c4b0f71731b395754`
+- `runs/gate0-packets-c3-d031/INDEX.md` — `sha256:555bb11a52ca2fe73941fd126b38ea9e01c3e33044d7b833d8efbe3ac7c8c74f`
+
+No Doximity. No Phase 0.
+
