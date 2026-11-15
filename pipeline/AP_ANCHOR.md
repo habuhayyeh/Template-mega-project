@@ -101,11 +101,14 @@ A negative decision stays in its bucket: `MRI B not indicated` is an investigati
 | Reasoning | a bullet, same form as evidence, last among bullets |
 | Follow-up | last plan bucket, present only when the encounter has one |
 | Descriptor provenance | from `CLAIM` only — never imported from `EVIDENCE` |
-| Cause — both sources | `CLAIM`'s own cause and a separate `ETIOLOGY` both contribute to the line |
+| Cause | the line carries the cause stated inside `CLAIM`; a separate `ETIOLOGY` renders as the final reasoning bullet when it adds anything the line does not say |
+| Line contraction | a trailing qualifier may leave the line when it is rendered as a bullet under the same problem |
 
-## Cause: both contribute
+## Cause
 
-The claim's own short cause stays where the claim states it. The `ETIOLOGY` content is appended before the status. Where the `ETIOLOGY` is the fuller statement of a cause already named in the claim, the line carries the fuller form once — the phrase is not repeated twice in one line.
+The line carries the cause the claim itself states, shortened if the claim allows it. A separate `ETIOLOGY` entry renders as the final reasoning bullet — the mechanism, the date, the certainty, the rationale — whenever it adds something the line does not say. It is suppressed only when it adds nothing, that is, when it repeats the bare cause.
+
+An etiology belongs to the problem it explains, not to the noun it mentions.
 
 If literal repetition of the same cause is wanted, say so; that is not what this rule produces.
 
