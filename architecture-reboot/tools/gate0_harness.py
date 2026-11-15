@@ -250,8 +250,9 @@ def build_packet(predicate_id, target, context, oracle):
         'judge_types': ['HUMAN', 'LLM'],
         'roles': ['REFERENCE', 'EVALUATOR'],
         'verdict_values': [FIRED, SILENT, UNDECIDABLE],
-        'reference': 'one HUMAN / REFERENCE judgment',
-        'evaluators': 'two independent LLM / EVALUATOR judgments, different model families',
+        'reference': 'one HUMAN / REFERENCE judgment with authority SIGNER_CLINICIAN',
+        'reference_authority': 'SIGNER_CLINICIAN',
+        'evaluators': 'two independent LLM / EVALUATOR judgments, different model families and sessions',
         'policy_version': REVIEW_POLICY,
     }
     return packet
@@ -288,6 +289,8 @@ def _validate_review_record(record, index):
     if record['role'] == 'REFERENCE':
         if record['judge_type'] != 'HUMAN':
             raise ValueError('reference record %d must be HUMAN' % index)
+        if record.get('authority') != 'SIGNER_CLINICIAN':
+            raise ValueError('reference record %d must declare SIGNER_CLINICIAN authority' % index)
     else:
         if record['judge_type'] != 'LLM':
             raise ValueError('evaluator record %d must be LLM' % index)
@@ -413,6 +416,10 @@ def aggregate_semantic(result, packets, references, evaluators, expected_by_pid)
         if len({e['model_family'] for e in evals}) != 2:
             finding['status'] = UNDECIDABLE
             finding['detail'] = 'EVALUATOR_MODEL_FAMILIES_NOT_INDEPENDENT'
+            continue
+        if len({e['session_id'] for e in evals}) != 2:
+            finding['status'] = UNDECIDABLE
+            finding['detail'] = 'EVALUATOR_SESSIONS_NOT_INDEPENDENT'
             continue
         expected = expected_by_pid.get(pid, SILENT)
         if reference['verdict'] == UNDECIDABLE:
@@ -670,6 +677,8 @@ def run(mode, out_dir, evidence_path=None, baseline_path=None, limit=None):
         'scorer_version': registry.SCORER_VERSION,
         'implementation_hashes': implementation_hashes,
         'governing_hashes': manifest['governing_hashes'],
+        'references': merged['references'],
+        'evaluators': merged['evaluators'],
         'reference_count': len(merged['references']),
         'evaluator_count': len(merged['evaluators']),
         'parent_type_verdicts': parent_type_verdicts,

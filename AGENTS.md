@@ -123,6 +123,12 @@ NEXT:
 Automate recurring mechanical checks. The architecture-reboot implementation should maintain one preflight entry point that checks, where applicable: source/generated freshness, governing hashes, deterministic regeneration, seed mutation integrity, active-predicate/registry consistency, dependency-context integrity, scorer/unit tests, stale markers, and forbidden architecture/Phase-0 drift. Once that preflight exists, run it before broad implementation review or acceptance work. Human/semantic prerequisites block semantic acceptance, not independent mechanical preparation that can safely proceed.
 
 
+## Sync shorthand
+
+A user message consisting of `.` or `sync` means synchronize the live repository/channel state and
+continue already-authorized work. It does not itself approve a pending proposal or policy change.
+Approval must be explicit elsewhere in the authorized interaction.
+
 ## No status-only updates
 
 Every substantive sync, review, closure, handoff, or user-facing project update must include an explicit

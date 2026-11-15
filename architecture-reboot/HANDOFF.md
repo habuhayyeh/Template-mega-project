@@ -126,6 +126,9 @@ No Doximity, no Phase 0.
 
 ## 7. Working rules that matter
 
+**Sync shorthand.** `.` / `sync` means refresh live state and continue already-authorized work; it
+does not itself approve a pending proposal. Option F is separately and explicitly signer-approved.
+
 **No status-only updates.** Every sync, review, closure, handoff, and user-facing project update must
 end with a concrete `NEXT`: the next task/decision, responsible actor when relevant, and—if blocked—
 the exact unblock action. Even when no new work landed, state the next authorized action. Closing one

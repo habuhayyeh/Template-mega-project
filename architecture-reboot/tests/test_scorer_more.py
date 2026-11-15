@@ -41,17 +41,19 @@ def ref_record(packet_id, predicate_id, verdict=FIRED):
     return {
         'packet_id': packet_id, 'predicate_id': predicate_id,
         'judge_id': 'signer', 'judge_type': 'HUMAN', 'role': 'REFERENCE',
+        'authority': 'SIGNER_CLINICIAN',
         'verdict': verdict, 'rationale': 'x', 'policy_version': REVIEW_POLICY,
     }
 
 
 def eval_record(packet_id, predicate_id, judge_id, family, version='1',
-                verdict=FIRED):
+                verdict=FIRED, session_id=None):
     return {
         'packet_id': packet_id, 'predicate_id': predicate_id,
         'judge_id': judge_id, 'judge_type': 'LLM', 'role': 'EVALUATOR',
         'verdict': verdict, 'rationale': 'x', 'policy_version': REVIEW_POLICY,
-        'model_family': family, 'model_version': version, 'session_id': 's1',
+        'model_family': family, 'model_version': version,
+        'session_id': session_id or ('session-' + judge_id),
         'context_scope': 'PACKET_ONLY', 'project_context_agent': False,
     }
 
@@ -243,8 +245,11 @@ class AdditionalPredicateTests(unittest.TestCase):
                 self.assertEqual(evidence['campaign_verdict'], 'PASS')
                 self.assertEqual(evidence['reference_count'], 2)
                 self.assertEqual(evidence['evaluator_count'], 4)
-                reused = gate0_harness.run('acceptance', out_baseline,
-                                           baseline_path=evidence_path)
+                self.assertEqual(len(evidence['references']), 2)
+                self.assertEqual(len(evidence['evaluators']), 4)
+                reused = gate0_harness.run(
+                    'acceptance', out_baseline,
+                    baseline_path=os.path.join(out, 'EVIDENCE.json'))
                 self.assertEqual(reused['campaign_verdict'], 'PASS')
                 self.assertEqual(reused['reference_count'], 2)
                 self.assertEqual(reused['evaluator_count'], 4)
@@ -367,6 +372,16 @@ class AdditionalPredicateTests(unittest.TestCase):
              if e['judge_id'] == 'b'],
             ['2'])
 
+        # The two evaluators must also be separate sessions.
+        same_session_ev2 = dict(ev2, session_id=ev1['session_id'])
+        result = score(self.s2, {'S1_SYN': self.s1}, self.oracle, self.rules)
+        finding = find(result, 'S2-REP-01')
+        finding['packet_id'] = pid
+        aggregate_semantic(result, by_pid, [ref], [ev1, same_session_ev2],
+                           {'S2-REP-01': FIRED})
+        self.assertEqual(finding['status'], UNDECIDABLE)
+        self.assertEqual(finding['detail'], 'EVALUATOR_SESSIONS_NOT_INDEPENDENT')
+
         # Duplicate/missing judgments stay incomplete, not pass.
         result = score(self.s2, {'S1_SYN': self.s1}, self.oracle, self.rules)
         finding = find(result, 'S2-REP-01')
@@ -374,6 +389,21 @@ class AdditionalPredicateTests(unittest.TestCase):
         aggregate_semantic(result, by_pid, [ref], [ev1], {'S2-REP-01': FIRED})
         self.assertEqual(finding['status'], UNDECIDABLE)
         self.assertEqual(finding['detail'], 'TWO_EVALUATOR_JUDGMENTS_REQUIRED')
+
+    def test_reference_requires_signer_clinician_authority(self):
+        ref = ref_record('pkt-x', 'S2-REP-01', FIRED)
+        bad = dict(ref)
+        bad.pop('authority')
+        data = {'policy_version': REVIEW_POLICY, 'references': [bad],
+                'evaluators': []}
+        with tempfile.NamedTemporaryFile('w', delete=False, suffix='.json') as fh:
+            json.dump(data, fh)
+            path = fh.name
+        try:
+            with self.assertRaises(ValueError):
+                load_review_evidence(path)
+        finally:
+            os.unlink(path)
 
     def test_evaluator_eligibility_metadata_required(self):
         ev = eval_record('pkt-x', 'S2-REP-01', 'a', 'famA', FIRED)

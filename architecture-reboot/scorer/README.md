@@ -53,9 +53,11 @@ families where available. The signer reference is the accepted verdict; the eval
 against it.
 
 Records carry `packet_id`, `predicate_id`, `judge_id`, `role`, `judge_type`, `policy_version`,
-`verdict` and `rationale`; evaluators also carry `model_family`, `model_version`, `session_id`,
-`context_scope: PACKET_ONLY` and `project_context_agent: false`. Unknown packets, predicate mismatches,
-project-context agents and ineligible metadata are rejected.
+`verdict` and `rationale`. The reference also declares `authority: SIGNER_CLINICIAN`. Evaluators
+carry `model_family`, `model_version`, `session_id`, `context_scope: PACKET_ONLY` and
+`project_context_agent: false`; the two accepted evaluators require distinct model families and
+distinct session ids. Unknown packets, predicate mismatches, project-context agents and ineligible
+metadata are rejected.
 
 A clean packet reference must be `SILENT`; the seeded predicate packet reference must be `FIRED`; other semantic packets on that artifact must be `SILENT`. Both evaluators
 must match the reference. A determinate mismatch is a **calibration failure**; missing, duplicate or
@@ -64,7 +66,8 @@ genuinely `UNDECIDABLE` evidence is `INCOMPLETE`. `UNDECIDABLE` never becomes a 
 References are reusable while the packet, predicate/contract version, oracle/context hashes and policy
 version are unchanged. Evaluator evidence is reusable only for the same packet, policy, judge and model
 family/version. A changed packet invalidates the reference; a changed evaluator version invalidates only
-that evaluator's cache.
+that evaluator's cache. Each acceptance run writes the merged `references[]` and `evaluators[]`
+into `EVIDENCE.json`, so that file can be used directly as a later `--baseline`.
 
 ## Verdicts
 
