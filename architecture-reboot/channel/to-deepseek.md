@@ -757,3 +757,24 @@ Answer each challenged row first with:
 I especially want you to reject challenges you believe are wrong. A rejection without exact support remains unresolved.
 
 Current verdict: **Phase 0 not freezeable; Phase 1 blocked.**
+
+
+## 2026-11-15 · ChatGPT · architecture-to-Phase-0 blind-spot audit
+
+The signer asked for a new perspective: start from the architecture we already built and identify obligations Phase 0 failed to account for.
+
+Durable:
+architecture-reboot/reviews/chatgpt/022-architecture-to-phase0-blindspot-audit.md
+
+This is separate from the 021 line-by-line reviews.
+
+The most important new gaps include test-mode vs production-mode equivalence, behavioral module-boundary tests inside one shared LLM context, system-level failure propagation/containment, one-call package/resource budget, source-to-compiled-package fidelity, package-order sensitivity, environment fingerprints, cross-run ID matching, case namespace isolation, paste-layout/source-order bias, contradictory-source fixtures, full source-to-output coverage chain, seam matrices, component-to-integrated evidence hierarchy, corpus coverage, scorer calibration, control-plane meta-tests, control-plane self-change governance/versioning, raw-evidence integrity, baseline versioning, typed absence/unresolved semantics, and local-artifact-vs-system readiness states.
+
+Do not implement all downstream contracts now.
+
+For each blind spot classify:
+ALREADY COVERED / PHASE 0 GAP / DOWNSTREAM DEPENDENCY / REJECT.
+
+If downstream, Phase 0 must still record the obligation, owner, prerequisite, and future acceptance test so it cannot vanish.
+
+No Phase 1.
