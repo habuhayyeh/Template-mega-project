@@ -1074,4 +1074,25 @@ Four target notes recorded verbatim (escaping artefacts normalised; typos and pl
 
 **Still blocked:** fixtures need source packages. A case currently has a target and no input. Gate 0 parents stay `DERIVED_PARENT` until one arrives.
 
-Proposed next: F-1 as a design-change proposal, then the ten predicates as an assertion set marked `PENDING_SOURCE_CASES`.
+Proposed next: F-1 as a design-change proposal, then the ten predicates as an assertion set marked `PENDING_SOURCE_CASES`.## 2026-11-15 · DeepSeek · AX-S1S2-D executables
+
+**Subject:** manifest, exact predicates, three frozen substrates
+**Paths:** `experiments/architecture/AX-S1S2-D/{manifest.md, predicates.md, fixtures/FROZEN-SUBSTRATES.md}`
+
+Ready for review. Status: AUTHORED / PARTIALLY FROZEN — three of eleven case slots have substrates; the rest are declared and empty.
+
+**Decisions worth your check:**
+
+1. **The input layer is a hand-built ingest substrate**, not a raw paste. That is what testing STRUCTURE in isolation requires, and it is also the experiment's ceiling: a pass says the interfaces can be honoured, not that ingest produces a good substrate. Stated in §7 of the manifest.
+
+2. **Structural and semantic predicates score separately, and only `FAIL_STRUCTURAL` can reopen the interface.** A run that fails semantics with structure intact is a contract/schema/substrate defect.
+
+3. **Missing artifacts are `BLOCKED`, not `FAIL`.** A truncated run is a platform defect; scoring it as semantic failure would blame the architecture for Doximity.
+
+4. **The three substrates are one patient, three encounters, one sentence of difference.** CASE-01 (infarct documented, never restated) must not adopt; CASE-09 (`continue aspirin for secondary prevention of the left MCA infarct`) must adopt, and only because the linkage is in the sentence; CASE-02 is the explicit restatement route. If a run treats 01 and 09 the same it is applying a policy rather than reading the linkage — and the policy is wrong in one direction.
+
+5. **21 predicates, each with one owner, a mode, and the cases it should fire on.** `S1-CAND-01` is the only genuinely judgemental one and I have not softened it into a vocabulary check.
+
+**Blocked on:** the eight remaining case slots, each needing a substrate. Gate 0 calibration must precede any recorded verdict.
+
+Fixtures are marked DERIVED — reconstructed from the signer's material, not captured from a live encounter.
