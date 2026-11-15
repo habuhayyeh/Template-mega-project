@@ -58,12 +58,12 @@ Final-note prose is governed by the signer-approved target and section contract:
 
 ## Required output behavior
 
-- shared action renders exactly once;
+- the shared action has one identity and one owner;
 - one A/P owning problem is explicit;
 - both distinct rationales remain recoverable in the IR;
 - all signer/section-contract-required rationale content is preserved in the final note without unnecessary duplication;
 - problem-specific actions remain under their own problems;
-- no duplicated order/action;
+- no duplicated action identity;
 - no clinically material rationale is silently dropped;
 - no fake second ownership is created.
 
@@ -78,12 +78,12 @@ The experiment should determine the minimal sufficient representation; it should
 
 ## Scoring
 
-- action cardinality;
+- action identity count (one), not textual occurrence;
 - owner correctness;
 - IR preservation of both rationales;
 - final-note preservation of all rationale content required by the signer-approved target/section contract;
 - problem-specific action placement;
-- no duplicate render;
+- no duplicate action identity;
 - no semantic loss;
 - reproducibility across fresh runs.
 
@@ -95,7 +95,7 @@ The experiment should determine the minimal sufficient representation; it should
 
 ## Architecture consequence
 
-If a minimal downstream schema solves the case reproducibly:
+If a minimal downstream schema preserves one action identity, one owner and both rationales reproducibly:
 > keep one-owner A/P architecture.
 
 If all reasonable one-owner representations either duplicate the action or lose clinically necessary linkage:

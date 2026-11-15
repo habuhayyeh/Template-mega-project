@@ -56,7 +56,7 @@ Score independently:
 - rhetorical class;
 - operator selection;
 - final problem order — **PENDING_DEPENDENCY** until the ordering contract, salience values and oracle exist;
-- unit order;
+- unit order — **PENDING_DEPENDENCY** until the ordering contract and oracle exist;
 - reuse accounting;
 - completeness/accounting validity;
 - fidelity to S3's selected claim representation.

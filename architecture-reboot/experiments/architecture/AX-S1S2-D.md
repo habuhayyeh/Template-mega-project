@@ -146,3 +146,19 @@ A run may pass one axis and fail the other; reporting them as one score hides wh
 
 Scope split: **AX-LEAK** covers raw-source → RENDER. **These probes** cover logical-owner → downstream
 owner.
+
+### Consumer arms require conflicting authoritative state
+
+A leakage probe is only meaningful if the legitimate owner's state is frozen and contradicts the
+planted cue. Each probe therefore carries:
+
+- the **planted illicit cue**, in the consuming module's input;
+- the **frozen authoritative state**, from the owning module, saying something different;
+- the requirement that the downstream artefact follow the authoritative state.
+
+Without the conflicting state, "the consumer obeyed the cue" and "the cue was the only information
+available" are indistinguishable.
+
+**Separate control:** a clean-producer / consumer-reconstruction case — correct owner state, no planted
+cue — must reproduce the expected downstream artefact. If it does not, the consumer arm cannot
+distinguish leakage from ordinary failure, and the probe's result is void.

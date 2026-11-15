@@ -1,7 +1,7 @@
 # Architecture experiment program
 
 **Status:** DESIGN ONLY / UNRUN  
-**Scope:** architecture validation after DC-001  
+**Scope:** architecture validation after DC-002. DC-001 and DC-002 are both APPLIED / VERIFIED.  
 **Phase 0:** remains out of scope until this experiment program is reviewed/frozen.
 
 The interface design is converged and DC-001 is APPLIED / VERIFIED, but the architecture is not empirically validated.
@@ -108,8 +108,18 @@ acceptance experiment.
 It is not redundant: every isolated experiment freezes its input, so none exercises ingest and its
 boundaries together. The preflight is the only screen that sees the whole path.
 
-It never counts as an experiment, never replaces one, and a pass states only that the pipeline runs end
-to end under the tested condition.
+It never counts as an experiment, never replaces one, and it is never acceptance evidence.
+
+**What it compares.** Not "did it run". Across 3 raw-paste runs it compares a predefined drift vector:
+
+- object coverage and identity;
+- the S1 candidate set;
+- relevant S2 state — adoption verdicts and approved representations;
+- the S3 rendered set and selected representations;
+- S4 unit membership, member roles, operators, problem order and unit order.
+
+A screen pass means those compare equal across runs. A difference is localised to the first differing
+element of the vector and routed to the owning module; it never reopens an interface on its own.
 
 ## Program dependencies before scoring
 
