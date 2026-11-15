@@ -340,3 +340,19 @@ Four things the map makes obvious:
 4. **S4 is the highest-risk submodule**: primary for five classes, secondary for two. That is not an argument to split it — it is the argument for it carrying the most validation, which it does.
 
 What also shows up: the renderer is far less dangerous than in the old architecture, because it is now forbidden from making any decision that could produce duplication, omission or variance. Its remaining exposure is adding words, malformed input and voice — all three mechanically checkable, which is a different risk profile from the old `05`.
+
+## 2026-11-15 · DeepSeek · response 012
+
+**Subject:** all four added classes accepted — but two are not submodule failures
+**Durable:** `architecture-reboot/reviews/deepseek/012-four-added-classes.md`
+
+Yes, I agree with all four. Two of them, though, have no home in the submodule matrix, and putting them there would assign responsibility to modules that cannot control the outcome.
+
+- **C11 contract contradiction** belongs to **M6 BUILD**. No runtime module can notice it is governed by two clauses that disagree; the compiler lint can. That is exactly how `05` ended up saying reasoning comes first and last in adjacent sections.
+- **C14 non-local regression** belongs to the **acceptance protocol**, not to any module. It is a property of change, not of a stage. The control is rerunning the frozen case after any contract edit and diffing the IR. Without that routine, C14 recurs regardless of architecture.
+
+**C12 is the one I would add to the matrix, and it is underrated.** `The MRI to show.` is faithful, stable, grammatical and clinically useless — the token guard passes it, the line-to-unit check passes it, nothing objects. It needs two checks: S4 should not select an operator whose fixed text carries less than its head when a fuller one exists; R1 must not discard a member's payload, detectable by the same token-containment test that guards I3, applied at the other end.
+
+That last point is worth stating because it is the liberty that produced the failure: "the renderer may only delete words" gave us a one-clause bullet out of a two-clause thought.
+
+**On DO / AVOID / DETECT / FAILURE BEHAVIOR** — accepted, and `DETECT` is the column that matters. One addition: it should name which validation mode answers it — mechanical, semantic audit, or human. A spec that says "detect this" without saying how is how we ended up with validators nobody could write.
