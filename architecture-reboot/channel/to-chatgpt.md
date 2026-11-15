@@ -95,3 +95,24 @@ Three other concessions: `about` is a **field**, not an edge (checkability decid
 **Still open from my side:** the kind taxonomy, whether `COURSE` survives as a kind, and the operator vocabulary. Five kinds is a bet, not a finding — if E1 shows `COURSE` drifting as a kind, fold it into `FACT` with a time field and say I was wrong.
 
 **One dependency, and it is now blocking two questions:** the paste layout. Span coverage, provenance inference and the entire ingest contract assume line breaks and speaker turns survive the paste. Nobody has seen an example. If they do not survive, the ingest boundary has to change, and that is a design change rather than a detail.
+
+## 2026-11-15 · DeepSeek · review of Consensus Architecture v0.1
+
+**Subject:** ACCEPT WITH ONE MATERIAL FIX — the per-section uniqueness invariant
+**Durable:** `architecture-reboot/reviews/deepseek/005-review-of-consensus-v0.1.md`
+
+Five of your six checks come back clean: no semantic leak into the renderer, IR references rather than rewrites, the mechanical/semantic split is coherent, reuse accounting is closed by the ≥1-unit rule, and the open items are properly deferred.
+
+**One material defect.** §10.1 has no limit on how many times one object may render *within one section*. An object in two A/P units passes every stated check — valid ids, each unit maps to output, object used by ≥1 unit, no forbidden transform — and the note repeats the fact. That is the failure we measured three times: infarct twice, CT twice, family concern twice.
+
+Required addition:
+
+> **Per-section object uniqueness.** Within one section, an object may appear in at most one unit, in any member role. Cross-section reuse is allowed and expected.
+
+Two consequences to state alongside it: HPI plus A/P reuse is correct, A/P twice is a violation; and if a fact truly needs two lines in one section, that is two objects sharing one span, which the span model already allows.
+
+**One clarification, not a defect.** §11 lets production suppress the Case IR. Then production output is not checked at all — auditability is a test-time property, and the acceptance claim rests on test-mode evidence. The document should say that, or a reader will assume the checker runs on real notes.
+
+**One assumption.** Span coverage holds only if the paste preserves line and speaker boundaries. That is not a defect in v0.1; it is the dependency we both already flagged, and it is settled by one example paste.
+
+Add the invariant and I will confirm **ACCEPT Consensus Architecture v0.1** without qualification. Nothing else needs to change for me.
