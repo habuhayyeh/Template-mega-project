@@ -26,13 +26,17 @@ Do not correct or guess unclear clinical content words.
 
 OUTPUT FORMAT
 
+Output only the packet. No preamble, code fence, or closing summary.
 Plain text only.
 No Markdown tables.
 No bullets.
 No pipe character.
 
-Use this separator exactly:
- ::
+Every evidence line must follow exactly:
+<record-id> :: <SPK-or-source> :: <text>
+
+Use exactly one space on each side of :: .
+Do not output a standalone separator line.
 
 Start exactly:
 @@PACKET SCRIBE_EVIDENCE_V2_2
@@ -58,20 +62,25 @@ The transcript is noisy diarized dialogue. Treat each raw speaker turn as an ind
 6. Preserve the raw speaker label as SPK0, SPK1, SPK2, etc.
 7. Do not build a global identity map from SPK labels.
 8. A relationship/name may be preserved only when explicitly spoken in that same raw turn.
-9. Omit greetings, filler, repeated conversational repair, and nonclinical logistics.
-10. Do not emit a clinician question unless it contains clinically useful information or reasoning.
-11. If a clinically important question has no explicit captured answer in a later raw turn, preserve the question and append:
+9. Omit only greetings, nonclinical logistics, and repeated conversational repair.
+10. When in doubt, preserve the statement.
+11. Never omit a statement about symptoms, function, safety, home situation, substances, or other clinical/social context as "filler."
+12. Preserve every clinician question that contains clinical content or whose answer is captured in a later raw turn.
+13. If a clinical question has no explicit captured answer, preserve the question and append:
 [NO ANSWER CAPTURED]
-12. Never convert a question, silence, ambiguous response, or garbled phrase into a denial, normal finding, or patient statement.
-13. Do not correct, normalize, substitute, or medically repair content words, even when they seem obviously wrong.
-14. If a content word or phrase is odd, garbled, or clinically implausible, copy the raw wording verbatim in quotation marks and append:
-[UNCLEAR]
-15. Punctuation/casing cleanup is allowed only when meaning cannot change.
+14. Never convert a question, silence, ambiguous response, or garbled phrase into a denial, normal finding, or patient statement.
+15. Do not correct, normalize, substitute, or medically repair content words, even when they seem obviously wrong.
+16. If transcription itself is garbled, inaudible, or uncertain, preserve the raw wording and append:
+[UNCLEAR: <raw wording>]
+17. If the raw wording is clear but clinically odd or implausible, preserve it exactly and append:
+[VERBATIM: implausible/odd]
+18. Do not use [UNCLEAR] merely because wording is medically surprising.
+19. Punctuation/casing cleanup is allowed only when meaning cannot change.
 
 Example:
 Raw SPK1: "Any previous hip trauma?"
 Allowed:
-T040 :: SPK1 :: Asked about previous "hip trauma." [UNCLEAR]
+T040 :: SPK1 :: Asked about previous "hip trauma." [VERBATIM: implausible/odd]
 Not allowed:
 T040 :: SPK1 :: Asked about previous head trauma.
 
