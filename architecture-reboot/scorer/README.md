@@ -33,7 +33,7 @@ exact dependency `parent_id`, `parent_type` and hash supplied to the scorer.
 ## Files
 
 - `registry.py` — frozen predicate ids, owners, parent types and modes.
-- `scorer.py` — mechanical predicates; semantic predicates are `UNDECIDABLE` until human judgment.
+- `scorer.py` — mechanical predicates; semantic predicates are `UNDECIDABLE` until Option F reference/evaluator evidence.
 - `projection.py` — scorer adapter for the shared projection contract.
 - `../projection_contract.py` — the single executable `PROJECTION_MAP` implementation, used by both the
   generator and the scorer.
@@ -41,26 +41,37 @@ exact dependency `parent_id`, `parent_type` and hash supplied to the scorer.
   implementation fingerprints and evidence.
 - `../tests/test_scorer.py`, `../tests/test_scorer_more.py` — synthetic tests; no campaign acceptance run.
 
-## Human review
+## Semantic review — Option F
 
 The harness writes one packet per semantic predicate. A packet contains only the target artifact,
 minimum dependency context, minimum oracle material, the predicate rule, and the judgment schema. It
 does not contain the seed id, expected predicate, mutation or answer key.
 
-A judgment record carries `packet_id`, `predicate_id`, `judge_id`, `judge_type: HUMAN`, `verdict` and
-`rationale`. The harness rejects unknown packet ids and a `predicate_id` that does not match the packet.
-Aggregation requires exactly three unique human judges. Three matching `FIRED` or `SILENT`
-judgments resolve the predicate to that verdict. A completed FIRED/SILENT split is a **calibration
-failure** and makes the artifact fail Gate 0; fewer/duplicate judges or any genuinely `UNDECIDABLE`
-judgment remain `INCOMPLETE`. `UNDECIDABLE` never becomes a pass.
+The signer/clinician records one `HUMAN / REFERENCE` verdict first. Two blinded `LLM / EVALUATOR`
+judgments then score the same packet independently, in packet-only sessions, from different model
+families where available. The signer reference is the accepted verdict; the evaluators are calibrated
+against it.
+
+Records carry `packet_id`, `predicate_id`, `judge_id`, `role`, `judge_type`, `policy_version`,
+`verdict` and `rationale`; evaluators also carry `model_family`, `model_version`, `session_id`,
+`context_scope: PACKET_ONLY` and `project_context_agent: false`. Unknown packets, predicate mismatches,
+project-context agents and ineligible metadata are rejected.
+
+A clean packet reference must be `SILENT`; the seeded predicate packet reference must be `FIRED`; other semantic packets on that artifact must be `SILENT`. Both evaluators
+must match the reference. A determinate mismatch is a **calibration failure**; missing, duplicate or
+genuinely `UNDECIDABLE` evidence is `INCOMPLETE`. `UNDECIDABLE` never becomes a pass.
+
+References are reusable while the packet, predicate/contract version, oracle/context hashes and policy
+version are unchanged. Evaluator evidence is reusable only for the same packet, policy, judge and model
+family/version. A changed packet invalidates the reference; a changed evaluator version invalidates only
+that evaluator's cache.
 
 ## Verdicts
 
-Clean parents are `FAIL` on any `FIRED` **or completed human calibration split**,
-`INCOMPLETE` on unresolved `UNDECIDABLE`, otherwise `PASS`. Parent types aggregate their clean and
-seed records: any `FAIL` -> `FAIL`; otherwise any `INCOMPLETE` -> `INCOMPLETE`; all `PASS` ->
-`PASS`. The campaign aggregates the four required parent types the same way. Both objects are written
-to `EVIDENCE.json`.
+Clean parents are `FAIL` on any `FIRED` **or calibration failure**, `INCOMPLETE` on unresolved
+`UNDECIDABLE`, otherwise `PASS`. Parent types aggregate their clean and seed records: any `FAIL` ->
+`FAIL`; otherwise any `INCOMPLETE` -> `INCOMPLETE`; all `PASS` -> `PASS`. The campaign aggregates the
+four required parent types the same way. Both objects are written to `EVIDENCE.json`.
 
 ## Run
 

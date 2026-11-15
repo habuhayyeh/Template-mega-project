@@ -9,7 +9,7 @@ PREDICATES = {
     "S1-CAND-01": {
         "owner": "S1",
         "parent_type": "S1_OUTPUT",
-        "mode": "HUMAN_REVIEW",
+        "mode": "SIGNER_REFERENCE",
         "assertion": "every candidate names a neurologic subject for which the encounter poses its own assessment question",
     },
     "S1-CAND-02": {
@@ -33,7 +33,7 @@ PREDICATES = {
     "S2-REP-01": {
         "owner": "S2",
         "parent_type": "S2_OUTPUT",
-        "mode": "HUMAN_REVIEW",
+        "mode": "SIGNER_REFERENCE",
         "assertion": "every approved representation is semantically supported by source objects and relations, not merely by reference existence",
     },
     "S2-TEMP-01": {
@@ -45,7 +45,7 @@ PREDICATES = {
     "S2-ADOPT-01": {
         "owner": "S2",
         "parent_type": "S2_OUTPUT",
-        "mode": "HUMAN_REVIEW",
+        "mode": "SIGNER_REFERENCE",
         "assertion": "for objects the oracle names in expected.adoption, the verdict matches",
     },
     "S3-CAND-01": {
@@ -110,7 +110,7 @@ for _pid, _spec in PREDICATES.items():
 for _layer in ACTIVE_BY_LAYER:
     ACTIVE_BY_LAYER[_layer].sort()
 
-HUMAN_PREDICATES = {pid for pid, spec in PREDICATES.items() if spec["mode"] == "HUMAN_REVIEW"}
+SEMANTIC_PREDICATES = {pid for pid, spec in PREDICATES.items() if spec["mode"] == "SIGNER_REFERENCE"}
 
 
 def predicates_for(parent_type):

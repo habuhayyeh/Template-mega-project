@@ -629,7 +629,7 @@ def score(target, dependencies, oracle, rules):
 
     findings = []
     for pred_id in registry.predicates_for(parent_type):
-        if pred_id in registry.HUMAN_PREDICATES:
+        if pred_id in registry.SEMANTIC_PREDICATES:
             findings.append(_human(pred_id))
             continue
         try:

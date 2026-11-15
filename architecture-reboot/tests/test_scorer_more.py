@@ -20,17 +20,40 @@ import gate0_harness  # noqa: E402
 import preflight  # noqa: E402
 from gate0_harness import (  # noqa: E402
     InputIntegrityError,
+    REVIEW_POLICY,
     aggregate_campaign,
-    aggregate_human,
     aggregate_parent_type,
+    aggregate_semantic,
     build_packet,
     canon,
     clean_verdict,
     dependency_context,
-    validate_judgments,
+    filter_baseline_evidence,
+    load_review_evidence,
+    merge_review_evidence,
+    validate_review_evidence,
     verify_governing_hashes,
 )
 from test_scorer import base_fixtures, find  # noqa: E402
+
+
+def ref_record(packet_id, predicate_id, verdict=FIRED):
+    return {
+        'packet_id': packet_id, 'predicate_id': predicate_id,
+        'judge_id': 'signer', 'judge_type': 'HUMAN', 'role': 'REFERENCE',
+        'verdict': verdict, 'rationale': 'x', 'policy_version': REVIEW_POLICY,
+    }
+
+
+def eval_record(packet_id, predicate_id, judge_id, family, version='1',
+                verdict=FIRED):
+    return {
+        'packet_id': packet_id, 'predicate_id': predicate_id,
+        'judge_id': judge_id, 'judge_type': 'LLM', 'role': 'EVALUATOR',
+        'verdict': verdict, 'rationale': 'x', 'policy_version': REVIEW_POLICY,
+        'model_family': family, 'model_version': version, 'session_id': 's1',
+        'context_scope': 'PACKET_ONLY', 'project_context_agent': False,
+    }
 
 
 class AdditionalPredicateTests(unittest.TestCase):
@@ -155,6 +178,77 @@ class AdditionalPredicateTests(unittest.TestCase):
                 self.assertIn('dependency_context', record)
             self.assertIn('implementation_hashes', evidence)
 
+    def test_option_f_acceptance_and_reference_reuse(self):
+        s1 = copy.deepcopy(self.s1)
+        seed = copy.deepcopy(self.s1)
+        seed['s1']['candidates'][0]['adopted'] = True
+        manifest = {
+            'campaign': 'SYN-CAMPAIGN',
+            'registry': 'PILOT-2',
+            'active_set': 'ACTIVE-PILOT-2',
+            'schema': 'SCHEMA-2',
+            'oracle': 'ORACLE-2.0',
+            'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
+            'governing_hashes': {},
+            'clean_parents': {
+                'S1_SYN': {'artifact': 'PARENT-S1.json', 'parent_id': 'S1_SYN',
+                           'parent_type': 'S1_OUTPUT', 'hash': canon(s1)},
+            },
+            'dependency_context': {'S1_OUTPUT': []},
+            'parent_model': {'parent_types': ['S1_OUTPUT']},
+            'seeds': [{
+                'artifact': 'G0-S1-01.json', 'hash': canon(seed),
+                'parent_id': 'S1_SYN', 'parent_type': 'S1_OUTPUT',
+                'must_fire': 'S1-AUTH-01',
+            }],
+        }
+        clean_packet = build_packet('S1-CAND-01', s1, {}, self.oracle)
+        seed_packet = build_packet('S1-CAND-01', seed, {}, self.oracle)
+        refs = [
+            ref_record(clean_packet['packet_id'], 'S1-CAND-01', SILENT),
+            ref_record(seed_packet['packet_id'], 'S1-CAND-01', SILENT),
+        ]
+        evals = [
+            eval_record(clean_packet['packet_id'], 'S1-CAND-01', 'a', 'famA', '1', SILENT),
+            eval_record(clean_packet['packet_id'], 'S1-CAND-01', 'b', 'famB', '1', SILENT),
+            eval_record(seed_packet['packet_id'], 'S1-CAND-01', 'a', 'famA', '1', SILENT),
+            eval_record(seed_packet['packet_id'], 'S1-CAND-01', 'b', 'famB', '1', SILENT),
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            gen = os.path.join(tmp, 'generated')
+            out = os.path.join(tmp, 'run')
+            out_baseline = os.path.join(tmp, 'run-baseline')
+            os.makedirs(gen)
+            with open(os.path.join(gen, 'MANIFEST.json'), 'w', encoding='utf-8') as fh:
+                json.dump(manifest, fh)
+            with open(os.path.join(gen, 'PARENT-S1.json'), 'w', encoding='utf-8') as fh:
+                json.dump(s1, fh)
+            with open(os.path.join(gen, 'G0-S1-01.json'), 'w', encoding='utf-8') as fh:
+                json.dump(seed, fh)
+            oracle_path = os.path.join(tmp, 'oracle.json')
+            with open(oracle_path, 'w', encoding='utf-8') as fh:
+                json.dump(self.oracle, fh)
+            evidence_path = os.path.join(tmp, 'evidence.json')
+            with open(evidence_path, 'w', encoding='utf-8') as fh:
+                json.dump({'policy_version': REVIEW_POLICY, 'references': refs,
+                           'evaluators': evals}, fh)
+            with mock.patch.object(gate0_harness, 'GEN', gen), \
+                    mock.patch.object(gate0_harness, 'MANIFEST',
+                                      os.path.join(gen, 'MANIFEST.json')), \
+                    mock.patch.object(gate0_harness, 'ORACLE', oracle_path), \
+                    mock.patch.object(gate0_harness, 'verify_campaign_contract',
+                                      lambda manifest: None):
+                evidence = gate0_harness.run('acceptance', out,
+                                              evidence_path=evidence_path)
+                self.assertEqual(evidence['campaign_verdict'], 'PASS')
+                self.assertEqual(evidence['reference_count'], 2)
+                self.assertEqual(evidence['evaluator_count'], 4)
+                reused = gate0_harness.run('acceptance', out_baseline,
+                                           baseline_path=evidence_path)
+                self.assertEqual(reused['campaign_verdict'], 'PASS')
+                self.assertEqual(reused['reference_count'], 2)
+                self.assertEqual(reused['evaluator_count'], 4)
+
     def test_registry_matches_accepted_active_set(self):
         path = os.path.join(BASE, 'experiments/architecture/AX-S1S2-D/predicates.md')
         with open(path, encoding='utf-8') as fh:
@@ -163,10 +257,10 @@ class AdditionalPredicateTests(unittest.TestCase):
             r'## Pilot ACTIVE_PREDICATE_SET.*?```text\s*(.*?)```', text, re.S)
         active = {p.strip() for p in re.split(r'[,\n]', match.group(1)) if p.strip()}
         self.assertEqual(active, set(registry.PREDICATES))
-        for pid in registry.HUMAN_PREDICATES:
+        for pid in registry.SEMANTIC_PREDICATES:
             self.assertRegex(
                 text,
-                r'\|\s*`' + re.escape(pid) + r'`\s*\|\s*SEMANTIC / HUMAN_REVIEW\s*\|')
+                r'\|\s*`' + re.escape(pid) + r'`\s*\|\s*SEMANTIC / SIGNER_REFERENCE\s*\|')
 
 
     def test_frozen_zone_pin_detects_committed_drift(self):
@@ -220,26 +314,92 @@ class AdditionalPredicateTests(unittest.TestCase):
             {'status': UNDECIDABLE, 'calibration_failure': True},
         ]), 'FAIL')
 
-    def test_judgment_predicate_binding(self):
+    def test_review_evidence_binding_and_reuse(self):
         packet = build_packet('S2-REP-01', self.s2, {'S1_SYN': self.s1}, self.oracle)
+        pid = packet['packet_id']
+        by_pid = {'S2-REP-01': packet}
+        global_packets = {pid: packet}
+        ref = ref_record(pid, 'S2-REP-01', FIRED)
+        ev1 = eval_record(pid, 'S2-REP-01', 'a', 'famA', FIRED)
+        ev2 = eval_record(pid, 'S2-REP-01', 'b', 'famB', FIRED)
+
+        with self.assertRaises(ValueError):
+            validate_review_evidence(
+                global_packets, [dict(ref, predicate_id='S2-ADOPT-01')], [ev1, ev2])
+        with self.assertRaises(ValueError):
+            validate_review_evidence(
+                global_packets, [ref],
+                [ev1, dict(ev2, predicate_id='S2-ADOPT-01')])
+
+        baseline = {'policy_version': REVIEW_POLICY, 'references': [ref],
+                    'evaluators': [ev1, ev2]}
+        empty = {'policy_version': REVIEW_POLICY, 'references': [],
+                 'evaluators': []}
+        filtered = filter_baseline_evidence(baseline, empty, global_packets)
+        merged = merge_review_evidence(filtered, empty)
+        self.assertEqual(len(merged['references']), 1)
+        self.assertEqual(len(merged['evaluators']), 2)
+
+        # A changed signer reference for the same packet is a conflict, not a
+        # silent override.
+        conflict = {'policy_version': REVIEW_POLICY,
+                    'references': [dict(ref, verdict=SILENT)],
+                    'evaluators': []}
+        filtered = filter_baseline_evidence(baseline, conflict, global_packets)
+        with self.assertRaises(ValueError):
+            merge_review_evidence(filtered, conflict)
+
+        # A changed packet is not the same packet: the old baseline is dropped.
+        other_packets = {'pkt-other': packet}
+        filtered = filter_baseline_evidence(baseline, empty, other_packets)
+        self.assertEqual(filtered['references'], [])
+        self.assertEqual(filtered['evaluators'], [])
+
+        # A changed evaluator model/version invalidates only that judge's cache.
+        new_ev2 = eval_record(pid, 'S2-REP-01', 'b', 'famB', '2', FIRED)
+        current = {'policy_version': REVIEW_POLICY, 'references': [],
+                   'evaluators': [new_ev2]}
+        filtered = filter_baseline_evidence(baseline, current, global_packets)
+        merged = merge_review_evidence(filtered, current)
+        self.assertEqual(len(merged['evaluators']), 2)
+        self.assertEqual(
+            [e['model_version'] for e in merged['evaluators']
+             if e['judge_id'] == 'b'],
+            ['2'])
+
+        # Duplicate/missing judgments stay incomplete, not pass.
         result = score(self.s2, {'S1_SYN': self.s1}, self.oracle, self.rules)
         finding = find(result, 'S2-REP-01')
-        finding['packet_id'] = packet['packet_id']
-        packets = {'S2-REP-01': packet}
-        wrong = [{
-            'packet_id': packet['packet_id'], 'predicate_id': 'S2-ADOPT-01',
-            'judge_id': 'j1', 'judge_type': 'HUMAN', 'verdict': FIRED,
-            'rationale': 'x',
-        }]
-        with self.assertRaises(ValueError):
-            aggregate_human(result, packets, wrong)
-        stale = [{
-            'packet_id': 'pkt-unknown', 'predicate_id': 'S2-REP-01',
-            'judge_id': 'j1', 'judge_type': 'HUMAN', 'verdict': FIRED,
-            'rationale': 'x',
-        }]
-        with self.assertRaises(ValueError):
-            validate_judgments(stale, {packet['packet_id']: packet})
+        finding['packet_id'] = pid
+        aggregate_semantic(result, by_pid, [ref], [ev1], {'S2-REP-01': FIRED})
+        self.assertEqual(finding['status'], UNDECIDABLE)
+        self.assertEqual(finding['detail'], 'TWO_EVALUATOR_JUDGMENTS_REQUIRED')
+
+    def test_evaluator_eligibility_metadata_required(self):
+        ev = eval_record('pkt-x', 'S2-REP-01', 'a', 'famA', FIRED)
+        bad = dict(ev, project_context_agent=True)
+        data = {'policy_version': REVIEW_POLICY, 'references': [],
+                'evaluators': [bad]}
+        with tempfile.NamedTemporaryFile('w', delete=False, suffix='.json') as fh:
+            json.dump(data, fh)
+            path = fh.name
+        try:
+            with self.assertRaises(ValueError):
+                load_review_evidence(path)
+        finally:
+            os.unlink(path)
+
+        missing = {k: v for k, v in ev.items() if k != 'model_family'}
+        data = {'policy_version': REVIEW_POLICY, 'references': [],
+                'evaluators': [missing]}
+        with tempfile.NamedTemporaryFile('w', delete=False, suffix='.json') as fh:
+            json.dump(data, fh)
+            path = fh.name
+        try:
+            with self.assertRaises(ValueError):
+                load_review_evidence(path)
+        finally:
+            os.unlink(path)
 
     def test_parent_type_and_campaign_aggregation(self):
         self.assertEqual(aggregate_parent_type([{'verdict': 'PASS'}]), 'PASS')

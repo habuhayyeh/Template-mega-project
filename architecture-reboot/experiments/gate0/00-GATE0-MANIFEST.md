@@ -15,9 +15,10 @@ run must produce **zero diff**; a run that does not is a build failure, not a wa
 rejects a seed that is a no-op copy of its parent, or that differs at more than one path. The manifest
 mutation record is the checked parent→seed diff, not a hand-written claim.
 
-**Status: SCORER/HARNESS IMPLEMENTED / PREFLIGHT PASS / GATE 0 UNRUN.** The scorer and harness exist at
-`architecture-reboot/scorer/` and `architecture-reboot/tools/gate0_harness.py`; they are not yet
-re-reviewed. No Gate 0 acceptance run has been executed.
+**Status: SCORER/HARNESS IMPLEMENTED / OPTION F POLICY APPLIED / PREFLIGHT PASS / GATE 0 UNRUN.** The
+scorer and harness exist at `architecture-reboot/scorer/` and
+`architecture-reboot/tools/gate0_harness.py`; the policy patch is not yet re-reviewed. No Gate 0
+acceptance run has been executed.
 
 ---
 
@@ -60,12 +61,20 @@ fifth type.
 
 **Mechanical predicates** are deterministic. One run. A failure to fire is a scorer bug, not variance.
 
-**Semantic predicates** are human-judged. Gate 0 requires **three independent blinded human
-judgments** per seed, each seeing artifact + case oracle + predicate rule only. Calibration passes only
-if all three detect the seeded defect **and** all three satisfy `FULL_SILENCE-WITHIN-LAYER`; two of
-three is a calibration failure. A single judge repeating is `1 judge × 3 passes`, not evidence. A
-mechanical pre-filter may prepare evidence but is not a judgment and cannot substitute for any of the
-three; if it fully decides the branch, that branch is mechanical and must be reclassified.
+**Semantic predicates** use the signer-anchored Option F procedure. For each **new or semantically
+changed** packet, the signer/clinician records a blinded reference first: clean packet `SILENT`; the
+seeded predicate packet `FIRED`; other semantic packets on the same artifact `SILENT`. Two blinded LLM
+evaluators then judge the packet independently in separate packet-only sessions, from different model
+families where available. Both evaluators must exactly match
+the signer reference and satisfy `FULL_SILENCE-WITHIN-LAYER`. A determinate evaluator mismatch is a
+calibration **failure**; missing, duplicate or genuinely `UNDECIDABLE` evidence is `INCOMPLETE`. There is
+no majority pass. Project-context agents are not fresh evaluators. A mechanical pre-filter may prepare
+evidence but cannot substitute for the reference or evaluator.
+
+**Reuse.** The signer reference is reused while the packet, predicate/contract version, oracle/context
+hashes and policy version are unchanged. Evaluator evidence is reused only for the same packet, policy,
+judge and model family/version. Changed packet content invalidates the reference; a changed evaluator
+model/version invalidates only that evaluator's evidence.
 
 ## 4. Seed requirements
 
@@ -112,7 +121,7 @@ For each parent type under test:
   2. run the scorer on each seed of that type          -> expect the named predicate to fire
   3. check attribution                                 -> expect the owning submodule
   4. check specificity                                 -> every other ACTIVE predicate in the seed's parent_type is SILENT
-  5. semantic HUMAN_REVIEW: three independent blinded judges each 2-4 -> detection 3/3 and specificity 3/3
+  5. semantic Option F: signer reference 2-4, then two blinded evaluator sessions each 2-4 -> branch-correct reference and both evaluators match; specificity 3/3
 ```
 
 Steps 1 and 4 are the ones usually skipped, and they are the ones that make a pass meaningful.
@@ -121,10 +130,17 @@ Steps 1 and 4 are the ones usually skipped, and they are the ones that make a pa
 
 Gate 0 passes for a parent type when:
 
-- every seed of that type is detected; mechanical one run, semantic 3/3 independent blinded judges;
+- every seed of that type is detected; mechanical one run, semantic signer reference + 2/2 blinded
+  evaluator match;
 - every seed is attributed to the owning submodule;
+- for every semantic packet, the signer reference is branch-correct and both evaluator judgments match
+  it;
 - under every judgment, **every other ACTIVE predicate in the seed's `parent_type` is silent**;
 - every clean parent of that type scores zero.
+
+A semantic reference that contradicts the clean/seed branch is a calibration failure, not missing
+evidence. A determinate evaluator mismatch is a calibration failure. Missing, duplicate or genuinely
+`UNDECIDABLE` evidence is `INCOMPLETE`.
 
 It fails if any of those is false, including "detected but misattributed" — a finding attached to the wrong module sends the fix to the wrong place, which is worse than no finding. A single extra finding on another active predicate in the same layer is also a failure, not a warning.
 
@@ -167,9 +183,10 @@ metadata, and the specificity answer key. Keeping the answer key in the same dir
 artifacts is not a control; it is a convention. The control is that the harness selects the artifact
 and holds the answer.
 
-A blinded human-review packet may include the minimum read-only dependency context needed to decide its
+A blinded semantic packet may include the minimum read-only dependency context needed to decide its
 predicate. It never contains the seed id, expected predicate, expected verdict, mutation metadata or
-specificity answer key.
+specificity answer key. The same packet feeds one `HUMAN / REFERENCE` judgment and two independent
+`LLM / EVALUATOR` judgments; the evaluators do not see the signer reference or each other's verdict.
 
 ## 8. What Gate 0 does not prove
 

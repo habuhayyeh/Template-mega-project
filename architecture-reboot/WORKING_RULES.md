@@ -133,7 +133,7 @@ Examples:
 
 ```text
 NEXT: DeepSeek runs preflight on <commit> and reviews only the three-file diff.
-NEXT: Signer chooses whether to keep the three-human Gate 0 rule; recommendation: <x>.
+NEXT: Signer decides whether to approve the proposed reviewer policy; recommendation: <x>.
 NEXT: ChatGPT patches the bounded harness bug, adds regression tests, commits, then DeepSeek reviews.
 ```
 

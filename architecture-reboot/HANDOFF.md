@@ -57,13 +57,13 @@ approves claim representations; S3 selects and accounts; S4 compiles the bluepri
 - **Execution package:** source contract accepted after review 081; review 082 corrected only the
   scorer-input boundary. The package is source-first and regenerable.
 - **Scorer/harness/preflight:** implemented and **CLOSED under D-019** after independent review.
-  `python architecture-reboot/tools/preflight.py` passes with 7/7 checks and 42 tests.
-  **Gate 0:** unrun; the three-independent-human-review prerequisite is outstanding.
+  `python architecture-reboot/tools/preflight.py` passes with 7/7 checks and 44 tests.
+  **Gate 0:** unrun; the signer reference + two blinded evaluator judgments have not been executed.
   **Doximity:** unrun. **Phase 0:** untouched and stale.
 
 ## 5. Exact position
 
-HEAD at handoff: see `git log -1`. Last substantive commit: review-083 fixes plus the D-019 preflight.
+HEAD at handoff: see `git log -1`. Last substantive commit: Option F semantic calibration policy implementation.
 
 `python architecture-reboot/tools/make_seeds.py` builds:
 5 clean parents across 4 parent types → 28 seeds → `MANIFEST.json`. **A second run must produce zero
@@ -75,7 +75,7 @@ dependency-context map.
 `python architecture-reboot/tools/preflight.py` is the single mechanical entry point. It checks frozen
 architecture/Phase-0 drift, source/generated freshness and determinism, governing hashes and
 identities, active registry, dependency-context integrity, seed mutation integrity, stale source
-markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 42 tests.
+markers and the scorer/unit tests. Current result: **PASS**, 7 checks, 44 tests.
 
 Current counts: 5 clean calibration parents · 4 parent types · 28 seeds · 16 active predicates ·
 campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · schema `SCHEMA-2` · oracle
@@ -84,13 +84,19 @@ campaign `GATE0-C1` · registry `PILOT-2` · active set `ACTIVE-PILOT-2` · sche
 Parent identities: `S1_CASE01_CLEAN`, `S2_CASE01_CLEAN`, `S3_CASE01_RENDERED_CLEAN`,
 `S3_CASE01_NOT_RENDERED_CLEAN`, `S4_CASE01_CLEAN`.
 
-Scorer: 13 mechanical predicates + 3 human-review predicates; 42 synthetic tests; no Gate 0 acceptance
+Scorer: 13 mechanical predicates + 3 semantic signer-reference predicates; 44 synthetic tests; no Gate 0 acceptance
 run.
 
 ## 6. Review 084 closure: scorer/harness/preflight
 
 **Review 084 closes the implementation layer under D-019.** No implementation blocker remains. Do not
 reopen it without a failing test, counterexample, implementation result or genuine contradiction.
+
+**Option F policy (signer-approved D-021).** Semantic Gate 0 uses one signer/clinician reference
+judgment followed by two blinded LLM evaluator judgments. The signer reference is the accepted verdict;
+both evaluators must match it and within-layer specificity. Mismatch is FAIL; missing, duplicate or UNDECIDABLE evidence is INCOMPLETE. References are reusable while packet/policy/oracle/context identity is
+unchanged; evaluator evidence is reusable only for the same model family/version. Project-context agents
+are ineligible. The harness records `REFERENCE` and `EVALUATOR` roles separately.
 
 **Input boundary.** Scorer input is target artifact + read-only dependency context + oracle + frozen
 predicate/contract rules. `00-GATE0-MANIFEST.md` fixes the dependency matrix; the manifest hash-pins the
@@ -113,8 +119,8 @@ checks without adding acceptance criteria: frozen zones, regeneration/freshness/
 hashes/identities/registry, dependency context, seed mutation integrity, stale markers and unit tests.
 It exits non-zero on any failure and does not run Gate 0.
 
-**Gate 0 remains unrun.** 42 synthetic tests pass. No `acceptance` harness run was executed, no
-judgments were fabricated, and the three-independent-human-review prerequisite is outstanding.
+**Gate 0 remains unrun.** 44 synthetic tests pass. No `acceptance` harness run was executed, no
+judgments were fabricated, and the signer reference + two blinded evaluator judgments have not been executed.
 
 No Doximity, no Phase 0.
 
@@ -154,8 +160,8 @@ or acceptance. Human/semantic prerequisites block semantic acceptance, not safe 
 The scorer/harness/preflight implementation layer is closed. Do **not** reopen it without new evidence
 (a failing test, counterexample, implementation result, or genuine contradiction).
 
-Gate 0 acceptance remains blocked by the requirement for three independent blinded human judgments.
+Gate 0 acceptance requires one signer/clinician reference and two blinded LLM evaluator judgments under Option F.
 Safe mechanical preparation, including blinded packet generation, may proceed if authorized, but no
-acceptance verdict may be claimed without the required human judgments.
+acceptance verdict may be claimed without the required reference and evaluator evidence.
 
 No Doximity or Phase 0 work is authorized by this closure.

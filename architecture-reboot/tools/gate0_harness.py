@@ -4,8 +4,8 @@
 The harness owns the answer key. The scorer does not.
 
 Modes:
-  packets     build blinded human-review packets and per-artifact scorer evidence
-  acceptance  aggregate three independent human judgments and evaluate Gate 0
+  packets     build blinded semantic packets and per-artifact scorer evidence
+  acceptance  aggregate one signer reference + two LLM evaluators and evaluate Gate 0
 
 The acceptance mode is intentionally not run by the build or tests. Building the
 scorer is not Gate 0 execution.
@@ -60,6 +60,7 @@ EXPECTED_IDENTITIES = {
     'oracle': 'ORACLE-2.0',
     'specificity_policy': 'FULL_SILENCE-WITHIN-LAYER',
 }
+REVIEW_POLICY = 'REVIEW-POLICY-F-1'
 
 
 class InputIntegrityError(Exception):
@@ -224,7 +225,7 @@ def build_packet(predicate_id, target, context, oracle):
             'claim being supported. Record FIRED or SILENT.'
         )
     else:
-        raise ValueError('no human packet defined for %s' % predicate_id)
+        raise ValueError('no semantic packet defined for %s' % predicate_id)
 
     packet_body = {
         'predicate': {
@@ -245,10 +246,13 @@ def build_packet(predicate_id, target, context, oracle):
     packet['packet_id'] = 'pkt-' + digest[:24]
     packet['judgment_schema'] = {
         'required': ['packet_id', 'predicate_id', 'judge_id', 'judge_type',
-                     'verdict', 'rationale'],
-        'judge_type': 'HUMAN',
+                     'role', 'verdict', 'rationale', 'policy_version'],
+        'judge_types': ['HUMAN', 'LLM'],
+        'roles': ['REFERENCE', 'EVALUATOR'],
         'verdict_values': [FIRED, SILENT, UNDECIDABLE],
-        'independent_judgments_required': 3,
+        'reference': 'one HUMAN / REFERENCE judgment',
+        'evaluators': 'two independent LLM / EVALUATOR judgments, different model families',
+        'policy_version': REVIEW_POLICY,
     }
     return packet
 
@@ -267,80 +271,180 @@ def attach_packets(result, context, oracle, packet_dir=None):
     return packets
 
 
-def load_judgments(path):
+def _validate_review_record(record, index):
+    if not isinstance(record, dict):
+        raise ValueError('review record %d is not an object' % index)
+    for key in ('packet_id', 'predicate_id', 'judge_id', 'judge_type',
+                'role', 'verdict', 'rationale', 'policy_version'):
+        if key not in record:
+            raise ValueError('review record %d is missing %s' % (index, key))
+    if record['policy_version'] != REVIEW_POLICY:
+        raise ValueError('review record %d has policy %r, expected %r'
+                         % (index, record['policy_version'], REVIEW_POLICY))
+    if record['role'] not in ('REFERENCE', 'EVALUATOR'):
+        raise ValueError('review record %d has invalid role' % index)
+    if record['verdict'] not in (FIRED, SILENT, UNDECIDABLE):
+        raise ValueError('review record %d has invalid verdict' % index)
+    if record['role'] == 'REFERENCE':
+        if record['judge_type'] != 'HUMAN':
+            raise ValueError('reference record %d must be HUMAN' % index)
+    else:
+        if record['judge_type'] != 'LLM':
+            raise ValueError('evaluator record %d must be LLM' % index)
+        for key in ('model_family', 'model_version', 'session_id'):
+            if not record.get(key):
+                raise ValueError('evaluator record %d is missing %s' % (index, key))
+        if record.get('context_scope') != 'PACKET_ONLY':
+            raise ValueError('evaluator record %d is not packet-only' % index)
+        if record.get('project_context_agent') is not False:
+            raise ValueError('evaluator record %d is a project-context agent' % index)
+
+
+def load_review_evidence(path):
     if not path:
-        return []
+        return {'policy_version': REVIEW_POLICY, 'references': [], 'evaluators': []}
     data = load_json(path)
-    if isinstance(data, dict):
-        data = data.get('judgments', [])
-    if not isinstance(data, list):
-        raise ValueError('judgments must be a list')
-    out = []
-    for i, j in enumerate(data):
-        if not isinstance(j, dict):
-            raise ValueError('judgment %d is not an object' % i)
-        for key in ('packet_id', 'predicate_id', 'judge_id', 'judge_type',
-                    'verdict', 'rationale'):
-            if key not in j:
-                raise ValueError('judgment %d is missing %s' % (i, key))
-        if j['judge_type'] != 'HUMAN':
-            raise ValueError('judge %s is not HUMAN' % j.get('judge_id'))
-        if j['verdict'] not in (FIRED, SILENT, UNDECIDABLE):
-            raise ValueError('judge %s has invalid verdict' % j.get('judge_id'))
-        out.append(j)
-    return out
+    if isinstance(data, list):
+        records = data
+    elif isinstance(data, dict):
+        if data.get('policy_version') not in (None, REVIEW_POLICY):
+            raise ValueError('review evidence policy version is not %s' % REVIEW_POLICY)
+        records = list(data.get('references', [])) + list(data.get('evaluators', []))
+    else:
+        raise ValueError('review evidence must be a list or object')
+    references, evaluators = [], []
+    for i, record in enumerate(records):
+        _validate_review_record(record, i)
+        (references if record['role'] == 'REFERENCE' else evaluators).append(record)
+    return {
+        'policy_version': REVIEW_POLICY,
+        'references': references,
+        'evaluators': evaluators,
+    }
 
 
-def validate_judgments(judgments, packets_by_id):
-    for j in judgments:
-        packet = packets_by_id.get(j.get('packet_id'))
+def _reference_key(record):
+    return (record['packet_id'], record['predicate_id'], record['policy_version'])
+
+
+def _evaluator_key(record):
+    return (record['packet_id'], record['predicate_id'], record['policy_version'],
+            record['judge_id'], record['model_family'], record['model_version'])
+
+
+def merge_review_evidence(baseline, current):
+    out_refs, out_evals = {}, {}
+    for source in (baseline, current):
+        for record in source.get('references', []):
+            key = _reference_key(record)
+            if key in out_refs and out_refs[key]['verdict'] != record['verdict']:
+                raise ValueError('conflicting reference verdict for %s' % (key,))
+            out_refs[key] = record
+        for record in source.get('evaluators', []):
+            key = _evaluator_key(record)
+            if key in out_evals and out_evals[key]['verdict'] != record['verdict']:
+                raise ValueError('conflicting evaluator verdict for %s' % (key,))
+            out_evals[key] = record
+    return {
+        'policy_version': REVIEW_POLICY,
+        'references': list(out_refs.values()),
+        'evaluators': list(out_evals.values()),
+    }
+
+
+def validate_review_evidence(packets_by_id, references, evaluators):
+    ref_by_packet = {}
+    eval_judges = {}
+    for record in list(references) + list(evaluators):
+        packet = packets_by_id.get(record.get('packet_id'))
         if packet is None:
-            raise ValueError('judgment references unknown packet %r' % j.get('packet_id'))
-        if j.get('predicate_id') != packet['predicate']['id']:
+            raise ValueError('review evidence references unknown packet %r'
+                             % record.get('packet_id'))
+        if record.get('predicate_id') != packet['predicate']['id']:
             raise ValueError(
-                'judgment predicate %r does not match packet predicate %r'
-                % (j.get('predicate_id'), packet['predicate']['id']))
+                'review predicate %r does not match packet predicate %r'
+                % (record.get('predicate_id'), packet['predicate']['id']))
+        if packet['predicate']['id'] not in registry.SEMANTIC_PREDICATES:
+            raise ValueError('review evidence targets a non-semantic predicate %s'
+                             % packet['predicate']['id'])
+        if record['role'] == 'REFERENCE':
+            if record['packet_id'] in ref_by_packet:
+                raise ValueError('multiple reference records for packet %s'
+                                 % record['packet_id'])
+            ref_by_packet[record['packet_id']] = record
+        else:
+            seen = eval_judges.setdefault(record['packet_id'], set())
+            if record['judge_id'] in seen:
+                raise ValueError('duplicate evaluator judge for packet %s'
+                                 % record['packet_id'])
+            seen.add(record['judge_id'])
 
 
-def aggregate_human(result, packets, judgments):
+def aggregate_semantic(result, packets, references, evaluators, expected_by_pid):
     packets_by_id = {p['packet_id']: p for p in packets.values()}
-    validate_judgments(judgments, packets_by_id)
-    by_packet = {}
-    for j in judgments:
-        by_packet.setdefault(j['packet_id'], []).append(j)
+    validate_review_evidence(packets_by_id, references, evaluators)
+    ref_by_packet = {r['packet_id']: r for r in references}
+    eval_by_packet = {}
+    for r in evaluators:
+        eval_by_packet.setdefault(r['packet_id'], []).append(r)
+
     for finding in result['findings']:
         pid = finding['predicate_id']
         if not finding.get('human_review'):
             continue
+        finding.pop('calibration_failure', None)
+        finding.pop('reference', None)
+        finding.pop('evaluators', None)
         packet = packets.get(pid)
         if packet is None:
             finding['status'] = UNDECIDABLE
-            finding['detail'] = 'HUMAN_PACKET_MISSING'
+            finding['detail'] = 'SEMANTIC_PACKET_MISSING'
             continue
-        js = by_packet.get(packet['packet_id'], [])
-        finding.pop('calibration_failure', None)
-        finding.pop('judgments', None)
-        judge_ids = [j['judge_id'] for j in js]
-        if len(js) != 3 or len(set(judge_ids)) != 3:
+        reference = ref_by_packet.get(packet['packet_id'])
+        if reference is None:
             finding['status'] = UNDECIDABLE
-            finding['detail'] = 'INSUFFICIENT_INDEPENDENT_HUMAN_JUDGMENTS'
+            finding['detail'] = 'SIGNER_REFERENCE_MISSING'
             continue
-        verdicts = {j['verdict'] for j in js}
-        if UNDECIDABLE in verdicts:
+        evals = eval_by_packet.get(packet['packet_id'], [])
+        if len(evals) != 2 or len({e['judge_id'] for e in evals}) != 2:
             finding['status'] = UNDECIDABLE
-            finding['detail'] = 'HUMAN_JUDGMENT_UNDECIDABLE'
-            finding['judgments'] = js
+            finding['detail'] = 'TWO_EVALUATOR_JUDGMENTS_REQUIRED'
             continue
-        if len(verdicts) != 1:
+        if len({e['model_family'] for e in evals}) != 2:
             finding['status'] = UNDECIDABLE
-            finding['detail'] = 'HUMAN_JUDGMENTS_DISAGREE'
+            finding['detail'] = 'EVALUATOR_MODEL_FAMILIES_NOT_INDEPENDENT'
+            continue
+        expected = expected_by_pid.get(pid, SILENT)
+        if reference['verdict'] == UNDECIDABLE:
+            finding['status'] = UNDECIDABLE
+            finding['detail'] = 'SIGNER_REFERENCE_UNDECIDABLE'
+            finding['reference'] = reference
+            finding['evaluators'] = evals
+            continue
+        if reference['verdict'] != expected:
+            finding['status'] = UNDECIDABLE
+            finding['detail'] = 'SIGNER_REFERENCE_MISMATCH'
             finding['calibration_failure'] = True
-            finding['judgments'] = js
+            finding['reference'] = reference
+            finding['evaluators'] = evals
             continue
-        verdict = verdicts.pop()
-        finding['status'] = verdict
-        finding['detail'] = '3/3 independent human judgments: %s' % verdict
-        finding['judgments'] = js
+        if any(e['verdict'] == UNDECIDABLE for e in evals):
+            finding['status'] = UNDECIDABLE
+            finding['detail'] = 'EVALUATOR_UNDECIDABLE'
+            finding['reference'] = reference
+            finding['evaluators'] = evals
+            continue
+        if any(e['verdict'] != reference['verdict'] for e in evals):
+            finding['status'] = UNDECIDABLE
+            finding['detail'] = 'EVALUATOR_MISMATCH'
+            finding['calibration_failure'] = True
+            finding['reference'] = reference
+            finding['evaluators'] = evals
+            continue
+        finding['status'] = reference['verdict']
+        finding['detail'] = 'signer reference + 2/2 evaluator match: %s' % reference['verdict']
+        finding['reference'] = reference
+        finding['evaluators'] = evals
     return result
 
 
@@ -355,10 +459,12 @@ def prepare_artifact(target, context, oracle, rules, packet_dir=None):
     return result
 
 
-def evaluate_artifact(target, context, oracle, rules, judgments=None, packet_dir=None):
-    """Run the scorer, attach packets, and aggregate judgments for this artifact."""
+def evaluate_artifact(target, context, oracle, rules, references=None,
+                      evaluators=None, expected_by_pid=None, packet_dir=None):
+    """Run the scorer, attach packets, and aggregate Option-F evidence."""
     result = prepare_artifact(target, context, oracle, rules, packet_dir=packet_dir)
-    aggregate_human(result, result['packets'], judgments or [])
+    aggregate_semantic(result, result['packets'], references or [], evaluators or [],
+                       expected_by_pid or {})
     return result
 
 
@@ -439,13 +545,30 @@ def _artifact_rows(manifest, clean):
     return rows
 
 
-def run(mode, out_dir, judgments_path=None, limit=None):
+def filter_baseline_evidence(baseline, current, global_packets):
+    """Drop baseline evidence whose packet or evaluator identity is stale."""
+    current_eval_keys = {(r['packet_id'], r['judge_id'])
+                         for r in current['evaluators']}
+    return {
+        'policy_version': REVIEW_POLICY,
+        'references': [
+            r for r in baseline['references']
+            if r['packet_id'] in global_packets
+        ],
+        'evaluators': [
+            r for r in baseline['evaluators']
+            if r['packet_id'] in global_packets
+            and (r['packet_id'], r['judge_id']) not in current_eval_keys
+        ],
+    }
+
+
+def run(mode, out_dir, evidence_path=None, baseline_path=None, limit=None):
     if mode not in ('packets', 'acceptance'):
         raise ValueError('unsupported mode %s' % mode)
     manifest, clean, oracle, rules = load_campaign()
-    judgments = load_judgments(judgments_path)
-    if mode == 'acceptance' and not judgments:
-        raise ValueError('acceptance requires human judgments')
+    current = load_review_evidence(evidence_path)
+    baseline = load_review_evidence(baseline_path)
     rows = _artifact_rows(manifest, clean)
     if limit:
         rows = rows[:limit]
@@ -462,15 +585,34 @@ def run(mode, out_dir, judgments_path=None, limit=None):
     for item in prepared:
         for packet in item['result']['packets'].values():
             global_packets[packet['packet_id']] = packet
-    validate_judgments(judgments, global_packets)
+
+    # Current evidence must bind to known packets. Baseline evidence for old
+    # packet versions is discarded rather than becoming a hidden mutation.
+    validate_review_evidence(global_packets, current['references'],
+                             current['evaluators'])
+    baseline = filter_baseline_evidence(baseline, current, global_packets)
+    merged = merge_review_evidence(baseline, current)
+    validate_review_evidence(global_packets, merged['references'],
+                             merged['evaluators'])
 
     records = []
     for item in prepared:
         row = item['row']
         result = item['result']
-        local_packet_ids = {p['packet_id'] for p in result['packets'].values()}
-        local_judgments = [j for j in judgments if j['packet_id'] in local_packet_ids]
-        aggregate_human(result, result['packets'], local_judgments)
+        semantic_pids = [p for p in registry.predicates_for(row['parent_type'])
+                         if p in registry.SEMANTIC_PREDICATES]
+        if row['kind'] == 'clean':
+            expected_by_pid = {p: SILENT for p in semantic_pids}
+        else:
+            expected_by_pid = {
+                p: (FIRED if p == row['expected'] else SILENT)
+                for p in semantic_pids
+            }
+        local_ids = {p['packet_id'] for p in result['packets'].values()}
+        local_refs = [r for r in merged['references'] if r['packet_id'] in local_ids]
+        local_evals = [r for r in merged['evaluators'] if r['packet_id'] in local_ids]
+        aggregate_semantic(result, result['packets'], local_refs, local_evals,
+                           expected_by_pid)
         if row['kind'] == 'clean':
             verdict = clean_verdict(result['findings'])
             spec = None
@@ -517,6 +659,7 @@ def run(mode, out_dir, judgments_path=None, limit=None):
         'run_id': datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ') + '-' +
                   canon(records)[-8:],
         'campaign': manifest['campaign'],
+        'review_policy': REVIEW_POLICY,
         'identities': {
             'registry': manifest['registry'],
             'active_set': manifest['active_set'],
@@ -527,6 +670,8 @@ def run(mode, out_dir, judgments_path=None, limit=None):
         'scorer_version': registry.SCORER_VERSION,
         'implementation_hashes': implementation_hashes,
         'governing_hashes': manifest['governing_hashes'],
+        'reference_count': len(merged['references']),
+        'evaluator_count': len(merged['evaluators']),
         'parent_type_verdicts': parent_type_verdicts,
         'campaign_verdict': campaign_verdict,
         'records': records,
@@ -539,10 +684,11 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description='Gate 0 harness')
     parser.add_argument('--mode', choices=['packets', 'acceptance'], required=True)
     parser.add_argument('--out', required=True)
-    parser.add_argument('--judgments')
+    parser.add_argument('--evidence', '--judgments', dest='evidence')
+    parser.add_argument('--baseline')
     parser.add_argument('--limit', type=int)
     args = parser.parse_args(argv)
-    evidence = run(args.mode, args.out, args.judgments, args.limit)
+    evidence = run(args.mode, args.out, args.evidence, args.baseline, args.limit)
     print('mode:', evidence['mode'])
     print('run_id:', evidence['run_id'])
     print('records:', len(evidence['records']))

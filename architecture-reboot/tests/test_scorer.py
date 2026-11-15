@@ -13,7 +13,8 @@ from scorer import FIRED, SILENT, UNDECIDABLE, score  # noqa: E402
 from scorer import projection  # noqa: E402
 from gate0_harness import (  # noqa: E402
     InputIntegrityError,
-    aggregate_human,
+    REVIEW_POLICY,
+    aggregate_semantic,
     build_packet,
     dependency_context,
     evaluate_artifact,
@@ -248,7 +249,7 @@ class ScorerTests(unittest.TestCase):
         result = score(self.s4, self.deps_s4, self.oracle, self.rules)
         self.assertEqual(find(result, 'S4-PROJ-01')['status'], FIRED)
 
-    def test_human_predicates_are_undecidable_not_fired(self):
+    def test_semantic_predicates_are_undecidable_not_fired(self):
         result = score(self.s1, {}, self.oracle, self.rules)
         self.assertEqual(find(result, 'S1-CAND-01')['status'], UNDECIDABLE)
         result = score(self.s2, self.deps_s2, self.oracle, self.rules)
@@ -302,37 +303,63 @@ class HarnessTests(unittest.TestCase):
         self.assertNotIn('G0-S', dumped)
         self.assertNotIn('must_fire', dumped)
 
-    def test_aggregate_human_three_judgments(self):
+    def test_aggregate_semantic_option_f(self):
         packet = build_packet('S2-REP-01', self.s2, {'S1_SYN': self.s1}, self.oracle)
         result = score(self.s2, {'S1_SYN': self.s1}, self.oracle, self.rules)
         finding = find(result, 'S2-REP-01')
         finding['packet_id'] = packet['packet_id']
         packets = {'S2-REP-01': packet}
         base = {'packet_id': packet['packet_id'], 'predicate_id': 'S2-REP-01',
-                'judge_type': 'HUMAN', 'verdict': FIRED, 'rationale': 'x'}
-        aggregate_human(result, packets, [dict(base, judge_id='j1'),
-                                          dict(base, judge_id='j2')])
-        self.assertEqual(finding['status'], UNDECIDABLE)
-        aggregate_human(result, packets, [dict(base, judge_id='j1'),
-                                          dict(base, judge_id='j2'),
-                                          dict(base, judge_id='j3')])
+                'rationale': 'x', 'policy_version': REVIEW_POLICY}
+
+        def ref(verdict):
+            return dict(base, judge_id='signer', judge_type='HUMAN',
+                        role='REFERENCE', verdict=verdict)
+
+        def ev(judge, family, verdict, version='1'):
+            return dict(base, judge_id=judge, judge_type='LLM',
+                        role='EVALUATOR', verdict=verdict, model_family=family,
+                        model_version=version, session_id='s1',
+                        context_scope='PACKET_ONLY',
+                        project_context_agent=False)
+
+        aggregate_semantic(result, packets, [ref(FIRED)],
+                           [ev('a', 'famA', FIRED), ev('b', 'famB', FIRED)],
+                           {'S2-REP-01': FIRED})
         self.assertEqual(finding['status'], FIRED)
-        mixed = [dict(base, judge_id='j1'), dict(base, judge_id='j2'),
-                 dict(base, judge_id='j3', verdict=SILENT)]
-        aggregate_human(result, packets, mixed)
+
+        aggregate_semantic(result, packets, [ref(SILENT)],
+                           [ev('a', 'famA', SILENT), ev('b', 'famB', SILENT)],
+                           {'S2-REP-01': SILENT})
+        self.assertEqual(finding['status'], SILENT)
+
+        aggregate_semantic(result, packets, [ref(SILENT)],
+                           [ev('a', 'famA', SILENT), ev('b', 'famB', SILENT)],
+                           {'S2-REP-01': FIRED})
+        self.assertEqual(finding['status'], UNDECIDABLE)
+        self.assertEqual(finding['detail'], 'SIGNER_REFERENCE_MISMATCH')
+        self.assertTrue(finding['calibration_failure'])
+
+        aggregate_semantic(result, packets, [ref(FIRED)],
+                           [ev('a', 'famA', FIRED), ev('b', 'famB', SILENT)],
+                           {'S2-REP-01': FIRED})
         self.assertEqual(finding['status'], UNDECIDABLE)
         self.assertTrue(finding['calibration_failure'])
         verdict, _ = verdict_for('S2_OUTPUT', result['findings'], 'S2-REP-01')
         self.assertEqual(verdict, 'FAIL')
 
-        unresolved = [dict(base, judge_id='j1'), dict(base, judge_id='j2'),
-                      dict(base, judge_id='j3', verdict=UNDECIDABLE)]
-        aggregate_human(result, packets, unresolved)
+        aggregate_semantic(result, packets, [ref(UNDECIDABLE)],
+                           [ev('a', 'famA', FIRED), ev('b', 'famB', FIRED)],
+                           {'S2-REP-01': FIRED})
         self.assertEqual(finding['status'], UNDECIDABLE)
-        self.assertEqual(finding['detail'], 'HUMAN_JUDGMENT_UNDECIDABLE')
+        self.assertEqual(finding['detail'], 'SIGNER_REFERENCE_UNDECIDABLE')
         self.assertNotIn('calibration_failure', finding)
-        verdict, _ = verdict_for('S2_OUTPUT', result['findings'], 'S2-REP-01')
-        self.assertEqual(verdict, 'INCOMPLETE')
+
+        aggregate_semantic(result, packets, [ref(FIRED)],
+                           [ev('a', 'same', FIRED), ev('b', 'same', FIRED)],
+                           {'S2-REP-01': FIRED})
+        self.assertEqual(finding['status'], UNDECIDABLE)
+        self.assertEqual(finding['detail'], 'EVALUATOR_MODEL_FAMILIES_NOT_INDEPENDENT')
 
     def test_dependency_hash_mismatch_fails(self):
         manifest = {
