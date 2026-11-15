@@ -22,35 +22,38 @@ Use its record IDs as stable evidence references.
 
 ## Output
 
-Return only:
+Return a compact handoff with three optional record families:
 
 ```text
 @@HANDOFF F1_RECONCILE_V1
-STATUS=VALID
 
-FACT F001
-  refs: <comma-separated Scribe record ids>
+FACT F001 — <short subject label>
   fact: <compact source-supported representation>
-  time: <CURRENT_EPISODE | ONGOING | HISTORICAL | CURRENT | UNKNOWN>
-  support: <AGREES | EVOLUTION | SINGLE_SOURCE | CONFLICT>
-  conflict: <none or short unresolved conflict>
+  refs: <Scribe record ids>
 
-FACT F002
-  ...
+SOURCE_REASONING R001 — <short subject label>
+  reasoning: <reasoning explicitly stated by a source>
+  refs: <Scribe record ids>
 
-SOURCE_REASONING R001
-  refs: <record ids>
-  statement: <reasoning explicitly stated by a source>
-  stance: <source-qualified wording>
-
-UNRESOLVED U001
-  refs: <record ids>
-  issue: <what cannot safely be reconciled>
+UNRESOLVED U001 — <short subject label>
+  issue: <material conflict/uncertainty that cannot be safely reconciled>
+  refs: <Scribe record ids>
 
 @@END
 ```
 
-Use only sections that contain entries.
+Use only record families that contain entries.
+
+The exact punctuation/heading style is not clinically important. The semantic fields are.
+
+Do **not** add extra fields such as:
+- `support:`;
+- `next_step:`;
+- `recommendation:`;
+- `plan:`;
+- `action:`.
+
+F1 is an evidence-reconciliation handoff, not a planning module.
 
 ## Goal
 
@@ -187,11 +190,13 @@ with the source record ID.
 
 ### 8. Actions
 
-Do not perform full action-state adjudication here.
+Executed interventions may appear inside a FACT only when they are needed to preserve the chronology or clinical state of that subject/event.
 
-You may preserve an action mention only when needed to understand factual chronology.
+Do not reconcile prospective/recommended/planned actions in F1.
 
-File 2 owns source-level action-state reconciliation.
+Do not generate recommendations, next steps, tests to obtain, records to retrieve, or management suggestions.
+
+File 2 owns source-level action-state reconciliation. Final encounter plan/adoption remains downstream.
 
 ### 9. Lazy splitting
 
@@ -255,6 +260,8 @@ Before returning:
 5. no final problem/role/note decision was made;
 6. every independently meaningful clause is supported by one of that item's own refs;
 7. no FACT combines unrelated downstream decision units merely to reduce item count;
-8. output is a compact index/representation, not a second copy of the packet.
+8. no recommendation/next-step/plan field was invented;
+9. no `support:` label was added;
+10. output is a compact index/representation, not a second copy of the packet.
 
 Return the handoff only.
