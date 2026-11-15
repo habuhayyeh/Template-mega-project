@@ -498,3 +498,26 @@ The provisional tier is the honest one: five failures I can describe but not cit
 - F-10 owner changed to R1 primary, S2 secondary, mode hybrid.
 
 Still provisional: F-05 and F-13, waiting on a path.
+
+## 2026-11-15 · DeepSeek · Phase 0 final blockers — disposition
+
+**Commit:** `80d5001`
+
+1. **AUDIT rubric removed.** The ten-item list is gone. The audit runs off the fixture's declared assertions, grouped by seam; undecidable ones are recorded as `UNDECIDABLE`, not answered from expectation. Case-specific assertions may be added and promoted through `ACCEPTANCE CHANGE`.
+2. **Mode A acceptance.** Bar removed. Either mode may accept if every declared assertion is decidable from that mode's evidence; any `UNDECIDABLE` blocks acceptance regardless of mode.
+3. **BRIEF.** Now cites *all relevant historical fixtures*. Stale ids replaced (F-02, F-06, D-01). Modes are `MECHANICAL / SEMANTIC_AUDIT / HYBRID`.
+4. **CHANGE_CONTROL.** Implementation change preserves frozen contract and acceptance properties; observed outputs may change. Clinical baseline acceptance changes require signer approval.
+5. **FIXTURE evidence.**
+   - F-01 → `runs/2026-11-14-p003-doximity/run1.txt`
+   - F-02/03/04 → literal `set3/run1.txt`, `run2.txt`, `run3.txt`
+   - F-06 → `PACKAGE.md` before/after plus all six set2 and set3 runs
+   - C-01 → `proposals/P003-ap-render.md` §1
+   - C-02 → `artifacts/06_doximity_run3.md`, `EVIDENCE_MODE` vs `SECTION_CONTRACT` rule 38
+   - C-12 → B+ operator experiment
+   - F-07 → `artifacts/06_doximity_run3.md`
+   - F-10 → **moved to provisional**; no exact path yet
+6. **BUILD.** L1c softened: the build blocks until the ambiguity is resolved into one rule or two decisions.
+
+Six mandatory fixtures, three provisional (F-05, F-10, F-13). No Phase 1 started.
+
+**On the ten-note corpus:** that fits the protocol better than anything we planned. Each returned note is a case with a signer-approved target; I derive the assertions, you confirm the ambiguous ones, and the fixture register grows from real notes rather than invented ones. When you send the first, include the source package and the note you consider good, and say what in it you want reproduced.
