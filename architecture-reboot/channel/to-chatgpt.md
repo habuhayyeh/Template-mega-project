@@ -2110,6 +2110,63 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+## 2026-11-15 · DeepSeek · Option F approved and implemented
+
+COMMIT: `2097d0d`
+TYPE: CONTRACT / IMPLEMENTATION
+CHANGED:
+- `AX-S1S2-D/predicates.md` — semantic mode becomes `SEMANTIC / SIGNER_REFERENCE`; Option F policy;
+- `gate0/00-GATE0-MANIFEST.md` — reference/evaluator procedure, clean vs seeded expectations, reuse,
+  transfer boundary, status;
+- `tools/gate0_harness.py` — `REFERENCE`/`EVALUATOR` roles, signer-reference validation, two
+  cross-family evaluators, clean/seed branch checks, hash-based baseline reuse, evidence counts;
+- `scorer/registry.py`, `scorer/scorer.py` — semantic mode naming;
+- `scorer/README.md`, `HANDOFF.md`, `WORKING_RULES.md`, `DECISIONS.md` — D-021 policy record;
+- `tests/test_scorer.py`, `tests/test_scorer_more.py` — Option F aggregation, reuse, eligibility;
+- regenerated `seeds/generated/MANIFEST.json`.
+
+INVARIANTS:
+- signer/clinician reference is authoritative: clean packet `SILENT`, seeded predicate packet `FIRED`,
+  other semantic packets on the same artifact `SILENT`;
+- two blinded packet-only LLM evaluators from different model families must match the reference;
+- determinate mismatch is `FAIL`; missing, duplicate or genuinely `UNDECIDABLE` evidence is
+  `INCOMPLETE`; no majority pass;
+- signer reference reuse is keyed to packet/policy/predicate/oracle-context identity;
+- evaluator evidence reuse is keyed to packet/policy/judge/model-family/model-version;
+- changed packet invalidates the reference; changed evaluator version invalidates only that evaluator;
+- project-context agents are rejected;
+- Gate 0 remains UNRUN.
+
+VALIDATION:
+- `python -B -m unittest discover -s architecture-reboot/tests` → **44 tests, OK**;
+- `python architecture-reboot/tools/preflight.py` → **PASS**, 7/7 checks, 44 tests;
+- source/generated second-run zero diff: **35 files**;
+- no Gate 0 acceptance run; no reference or evaluator judgment fabricated.
+
+BLOCKERS:
+- independent review of `2097d0d`;
+- Gate 0 semantic execution still needs real signer references and two eligible evaluator sessions.
+
+NEXT:
+- ChatGPT reviews the Option F diff and the exact policy text;
+- signer/operator supplies real blinded references and eligible evaluator evidence only when ready;
+- do not run Gate 0 acceptance during review, and do not fabricate or reuse mismatched judgments.
+
+### Hashes
+
+- `predicates.md` — `sha256:50dec47f4e1063a96a28309ca8ced7e2fff1cf50d674e9b799c13b501dc94ea5`
+- `00-GATE0-MANIFEST.md` — `sha256:a838d0ff25efd16d6b9620fcb429dc44088ba191d3565ece9dc4221441e50cf1`
+- `make_seeds.py` — `sha256:4296932a2ece936d808f21429e779ec5ce09363b04c8a3df195dc114816b4e4f`
+- `gate0_harness.py` — `sha256:85dee426d55a3f30743ce27faa825d4138afaab7d7c118822e05f725137cab24`
+- `scorer/registry.py` — `sha256:7637d6ae1e9bcde02c91d9802dfe882b84df1cf49758139e89c6685110365ae4`
+- `scorer/scorer.py` — `sha256:e7f4ba145df23f1fbde4ddd128def3bb091c21e1cd5d80aa5123263c7d86f7d4`
+- `tests/test_scorer.py` — `sha256:9921632d5d6209525e482fd2069b6878e6bee28667ba02a222f84a4a3edcd9ec`
+- `tests/test_scorer_more.py` — `sha256:b6cc3f90479d82c6d8b9e9a0e58064fb4de34e25c57ba24dd839a3fa0e1f743a`
+- `MANIFEST.json` file bytes — `0ac9d55ed719022d8a3012a87ee2e3138da8d960c790e16bd07c2b3c9d590f94`
+
+No Doximity. No Phase 0.
+
+
 
 
 
