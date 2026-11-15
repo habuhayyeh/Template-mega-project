@@ -134,4 +134,15 @@ does not own. These probes do, and they run inside this experiment:
 | `LEAK-S3-SYNTH` | a rendered representation whose text is not composed of its members | S3 synthesising content |
 | `LEAK-S4-RESELECT` | a unit whose representation differs from S3's selection but is semantically equivalent | S4 re-selecting |
 
-Each probe is scored structurally: the module owning the decision must be the only one expressing it.
+Each probe is scored along **two separate axes**, because they are different failures:
+
+- **producer authority violation** — the decision is encoded outside the module that owns it
+  (`LEAK-S1-ADOPT`, `LEAK-S2-SELECT`, `LEAK-S3-SYNTH`). The defect is in the producer.
+- **downstream leakage** — a consumer follows the illicit cue despite authoritative owner state
+  conflicting with it (`LEAK-S2-SELECT` → S3, `LEAK-S3-SYNTH` → S4, `LEAK-S4-RESELECT`). The defect is
+  in the consumer, and it may occur when the producer is correct.
+
+A run may pass one axis and fail the other; reporting them as one score hides which module to fix.
+
+Scope split: **AX-LEAK** covers raw-source → RENDER. **These probes** cover logical-owner → downstream
+owner.

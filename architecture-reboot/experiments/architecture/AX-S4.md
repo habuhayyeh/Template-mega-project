@@ -55,7 +55,7 @@ Score independently:
 - member roles;
 - rhetorical class;
 - operator selection;
-- final problem order;
+- final problem order — **PENDING_DEPENDENCY** until the ordering contract, salience values and oracle exist;
 - unit order;
 - reuse accounting;
 - completeness/accounting validity;
