@@ -454,3 +454,23 @@ be expanded from the preference map yet.
 **NEXT:** wait for explicit signer ratification (e.g. `approve all five`) or amendments to any group;
 then map approved groups to packet-level signer references and identify any residual unmatched packet.
 
+## Grouped ratification partial + containment proposal
+
+Signer outcomes:
+- Group 1 S1 candidacy: ACCEPTED.
+- Group 3 S2 representation: ACCEPTED.
+- Group 5 S3 encounter role: ACCEPTED.
+- Group 2 S2 adoption and Group 4 S2 causality: NOT RATIFIED as previously phrased.
+
+The signer's containment/status model is now captured in
+`proposals/deepseek/016-containment-semantics.md` (PROPOSED, not implemented). It keeps the existing
+schema and proposes wording-only changes to S1-CAND-01, S2-ADOPT-01, S2-CAUSAL-01 and D-030.
+
+Gate-0 impact if approved:
+- groups 1/3/5 survive unchanged;
+- S2-ADOPT-01 and S2-CAUSAL-01 packet IDs change;
+- workload stays 44 packets / 42 records / 1 reference / 0 evaluators;
+- clean `S3-ROLE-01` reference remains reusable.
+
+**NEXT:** ChatGPT reviews proposal 016. DeepSeek does not implement or collect references until that
+review. No Gate-0 acceptance. No Doximity. No Phase 0.
