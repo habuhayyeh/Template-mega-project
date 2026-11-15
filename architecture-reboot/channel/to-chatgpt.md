@@ -3717,3 +3717,81 @@ Stop after the contract fix and this one test. Report the exact problem map.
 
 No Gate-0 acceptance. No Doximity production change. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · Step 5 only — File C contract
+
+CONTEXT:
+- File B Step 4 passed and is accepted.
+- C must not turn `encounter_role=unresolved` into BACKGROUND or PRIMARY.
+- Do not build the renderer, validator or note yet.
+
+STEP 5 — write the File C contract only. Do not run it.
+
+Create `03-NOTE-COMPILER.md`.
+
+Input:
+- File A ledger + action lane + unresolved;
+- File B problem map + architecture-unresolved;
+- canonical Scribe packet for dereference.
+
+Output:
+- `NOTE_BLUEPRINT` only. No final note prose.
+
+Blueprint sections:
+- RFC;
+- HPI;
+- NEURO_HX;
+- OTHER_PMH;
+- MEDS;
+- EXAM;
+- WORKUP;
+- AP per problem.
+
+Each section entry should carry:
+- unit/action IDs + selectors;
+- function/why it belongs here;
+- preserved qualifiers (attribution, time, negation, certainty, conflict).
+
+Each A/P entry should carry:
+- problem handle and claim/status;
+- support and counterevidence;
+- source-supported reasoning;
+- actions;
+- primary action holder;
+- reference-only shared actions.
+
+C owns:
+- section allocation;
+- HPI chronology;
+- history grouping;
+- medication-at-presentation;
+- current exam selection;
+- workup/result placement;
+- minimum-sufficient evidence;
+- counterevidence;
+- legitimate cross-section reuse;
+- shared-action placement.
+
+C must not:
+- change A/B problem identity, role, certainty, containment, causality or action state;
+- invent source facts;
+- write final prose;
+- force a problem into a section when its role is unresolved;
+- dump the whole chart;
+- use source order as clinical chronology.
+
+Rules to include:
+- HPI is the current episode, ordered by clinical chronology, not source order;
+- history is disease-centered and minimum sufficient;
+- meds are the presentation/home regimen, not the encounter rewrites;
+- exam is current exam, not a collage of old exams;
+- workup distinguishes available result from performed-result-pending and ordered-not-done;
+- A/P uses B's problem structure; unresolved role must remain unresolved;
+- nonproblem evidence (exam, meds, history, workup) must survive even if it never became a problem;
+- shared action gets one primary home; other problems reference it only.
+
+Stop after writing the contract. No test yet.
+
+No Gate-0 acceptance. No Doximity production change. No Phase 0.
+
