@@ -197,6 +197,10 @@ during annotation and only consumed here.
 only when choosing among them requires no further semantic adjudication. Where the choice would change
 clinical meaning, S2 resolves it and records structured support before exposing the set to S3.
 
+
+S2 answers **"what do these objects mean here, and which claim formulations are defensible?"**
+It does not select content, choose sections, or order. Documenting an unresolved semantic choice does
+not make it safe.
 ---
 
 ## S3 — Content Selection & Problem Use
@@ -230,6 +234,12 @@ representations. S3 may not include or render an A/P problem that lacks an appro
 accounts for candidates as well as objects: a candidate that renders nothing leaves a record, not a
 silence.
 
+
+**It does not resolve semantic ambiguity.** S3 may not include or render an A/P problem that lacks an
+S2-approved representation. If a separate governing requirement mandates inclusion, the seam fails or
+flags rather than rendering a claimless problem. If S2's approved set for an included problem holds more
+than one representation and the choice among them is not semantically free, that is an S2 defect, not
+an S3 choice.
 ---
 
 ## S4 — Note Blueprint / Render-Unit Compilation
@@ -271,6 +281,13 @@ non-leakage at runtime.
 S2 supplies the relations; S4 supplies the member roles. Neither may do the other's part. S4 owns the
 final problem and unit order; S1's salience inputs feed that ordering and are not an order.
 
+
+**Standing-item exception.** A render unit may have zero source-object members only for a closed-list
+standing item whose explicit trigger conditions are satisfied by the structured Case IR. Such units
+participate in the same completeness accounting as any other.
+
+S4 answers **"exactly what must render, where, in what unit, with which operator, and in what order?"**
+It does not write prose.
 ---
 
 # 3. RENDER
@@ -343,7 +360,7 @@ R2 answers **"how do already-rendered units read together as prose?"**
 It does not perform semantic synthesis.
 
 
-**Weak-R2 bridge boundary.** R2 may add whitespace, capitalisation and contract-permitted punctuation. Punctuation is a surface transform, not a lexical bridge. The lexical bridge allowlist is empty by default and admits no relation-bearing word (`therefore`, `then`, `because`, `despite`, `but`, `however`). Leftover a bridge must be licensed by an upstream relation plus the contract.
+**Weak-R2 contract.** R2 may add whitespace, capitalisation and contract-permitted punctuation. Punctuation is a surface transform, not a lexical bridge. The lexical bridge allowlist is empty by default: R2 adds no lexical bridge tokens at all, and no relation-bearing word (`therefore`, `then`, `because`, `despite`, `but`, `however`) may ever be admitted. A bridge is licensed only by an upstream relation plus the frozen contract.
 
 Two guards: **mechanical preservation** — after frozen normalisation of permitted capitalisation, whitespace and punctuation, each unit's text appears as a contiguous span in unit order; and a **semantic no-new-relation audit** — no causal, temporal, contrastive, conditional, attributive, certainty, negation or scope relation appears unless a unit contains it.
 ---
@@ -394,7 +411,7 @@ I4 SOURCE ANNOTATION
    |
    v
 S1 PROBLEM MODEL
-   -> problem candidates + candidate claims + salience inputs
+   -> problem candidates + claim candidates + salience inputs
    |
    v
 S2 SEMANTIC ADJUDICATION

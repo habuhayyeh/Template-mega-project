@@ -184,11 +184,11 @@ A problem candidate exists only when the neurologic subject requires its own cur
 
 A subject that supports, refutes, or contextualises another problem remains evidence or context unless it is independently assessed. These are examples, not an exhaustive list.
 
-Every candidate must be source-grounded: a subject the model infers but the encounter never addresses cannot become a problem.
+Every problem candidate must be source-grounded: a subject the model infers but the encounter never addresses cannot become a problem.
 
 A **problem candidate** is a subject that needs its own assessment question. A **claim candidate** is a source formulation that may become, or contribute to, a claim. S1 owns the partition between them, and downstream modules may not merge, split or re-parent it.
 
-A problem's claim is a **representation**, not a single object reference. A representation may carry more than one candidate together with the relation among them. The kinds of representation and their fields are defined downstream.
+A problem's claim is a **representation**, not a single object reference. A representation may carry more than one claim candidate, belonging to that problem candidate, together with the relation among them. The kinds of representation and their fields are defined downstream.
 
 A source object may be reused by units belonging to different problems when that reuse is clinically justified.
 

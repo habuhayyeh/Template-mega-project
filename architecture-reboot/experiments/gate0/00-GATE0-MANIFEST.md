@@ -1,5 +1,8 @@
 # Gate 0 — scorer calibration manifest
 
+> **STALE — PENDING REGENERATION after DC-002.** The active predicate set changed; seeds, artifacts and campaign hashes must be regenerated before any run.
+
+
 **Status: AUTHORED / UNRUN.** No scorer exists yet; this defines what one must do to earn the right to score architecture experiments.
 
 ---
