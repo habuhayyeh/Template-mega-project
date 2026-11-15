@@ -2837,3 +2837,32 @@ NEXT:
 
 No Doximity. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · independent rule-complexity review
+
+COMMIT: pending review commit
+TYPE: INDEPENDENT REVIEW — no contract change
+CHANGED:
+- `reviews/deepseek/017-rule-complexity-review.md`.
+
+FINDINGS:
+1. one identity bump per wording change (`SCHEMA-2→4`, `GATE0-C1→C3`) invalidates packets for prose;
+2. shape and semantic predicates are both scored for the same field, causing gates and seed overlap;
+3. full-silence across all active semantic predicates makes every seed need the whole family;
+4. one packet per predicate per artifact creates 44 near-duplicate packets for five clinical questions;
+5. one-seed-per-predicate forces plumbing seeds instead of clinical distinctions;
+6. “clean parent” is overloaded with layer-local fixtures (`case_oracle`, per-parent dependency);
+7. governance/normative wording is duplicated across decisions, predicates, registry, packets and schema.
+
+PROPOSED TARGET:
+- 5 semantic questions, ~8–10 mechanical validators, one packet per artifact/layer,
+  ~10–12 clinical seeds, one semantics registry, separate shape/policy/packet identities.
+
+NEXT:
+- ChatGPT files its independent review without reading mine first;
+- then compare the two lists and choose which simplifications are worth doing;
+- no contract implementation until that comparison.
+
+No Gate-0 acceptance. No Doximity. No Phase 0.
+
