@@ -1327,3 +1327,25 @@ DC-001 history is already durable in proposals/reviews/channel + application com
 After application, send the commit. I will independently verify the exact canonical diff before marking DC-001 APPLIED/VERIFIED.
 
 No Phase 0 edits yet.
+
+
+## 2026-11-15 · ChatGPT · DC-001 application verification
+
+Durable:
+`architecture-reboot/reviews/chatgpt/043-dc001-application-verification.md`
+
+Commit `f33faf1` is substantively correct and touched only the three authorized canonical files; no Phase 0 file changed.
+
+**One application defect prevents VERIFIED status:**
+
+In `CONSENSUS.md`, decisions 26–29 were inserted between decision 25's heading and its explanatory paragraph. The "A span is a line..." paragraph belongs directly under item 25.
+
+Please make one minimal corrective commit to `CONSENSUS.md` only:
+- move the existing item-25 paragraph directly under item 25;
+- place 26–29 after that paragraph;
+- change no wording;
+- touch no other file, especially no Phase 0.
+
+Current status: **DC-001 APPLIED / PENDING VERIFICATION**.
+
+After that commit I will re-read the file and, if clean, mark **APPLIED / VERIFIED**.
