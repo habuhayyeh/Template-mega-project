@@ -1,0 +1,32 @@
+{
+  "case": "CASE-01",
+  "parent_type": "S1_OUTPUT",
+  "registry": "PILOT-2",
+  "s1": {
+    "candidates": [
+      {
+        "anchors": [
+          "S02"
+        ],
+        "claim_candidates": [
+          {
+            "id": "CC1",
+            "support": [
+              "S02"
+            ],
+            "text": "three falls since June"
+          }
+        ],
+        "id": "C1",
+        "salience": {
+          "acuity": "MODERATE",
+          "management_reference_spans": [
+            "S03"
+          ]
+        },
+        "subject": "falls since June"
+      }
+    ]
+  },
+  "schema": "SCHEMA-2"
+}

@@ -1,0 +1,38 @@
+{
+  "case": "CASE-01",
+  "parent_type": "S2_OUTPUT",
+  "registry": "PILOT-2",
+  "s2": {
+    "adjudication": [
+      {
+        "adoption": false,
+        "evidence": null,
+        "object": "O01",
+        "temporal": "2024-02 documented"
+      },
+      {
+        "adoption": true,
+        "evidence": [
+          "S02"
+        ],
+        "object": "O03",
+        "temporal": "June\u2013November"
+      }
+    ],
+    "representations": [
+      {
+        "id": "R1",
+        "members": [
+          "O03",
+          "O04"
+        ],
+        "problem": "C1",
+        "selection_safe": true,
+        "support_refs": [
+          "S02"
+        ]
+      }
+    ]
+  },
+  "schema": "SCHEMA-2"
+}

@@ -1,148 +1,83 @@
 {
   "case": "CASE-01",
-  "status": "DERIVED_PARENT",
-  "predicate_set": "PILOT-1",
-  "substrate_objects": [
-    "O01",
-    "O02",
-    "O03",
-    "O04",
-    "O05",
-    "O06",
-    "O07"
-  ],
-  "s1": {
-    "candidates": [
-      {
-        "id": "C1",
-        "subject": "falls since June",
-        "anchors": [
-          "S02"
-        ],
-        "salience": {
-          "acuity": "MODERATE",
-          "managed_today": true
-        },
-        "claim_candidates": [
-          {
-            "id": "CC1",
-            "text": "three falls since June",
-            "support": [
-              "S02"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "s2": {
-    "adjudication": [
-      {
-        "object": "O01",
-        "temporal": "2024-02 documented",
-        "adoption": false,
-        "evidence": null
-      },
-      {
-        "object": "O03",
-        "temporal": "June\u2013November",
-        "adoption": true,
-        "evidence": [
-          "S02"
-        ]
-      }
-    ],
-    "representations": [
-      {
-        "id": "R1",
-        "problem": "C1",
-        "members": [
-          "O03",
-          "O04"
-        ],
-        "support_refs": [
-          "S02"
-        ],
-        "selection_safe": true
-      }
-    ]
-  },
-  "s3": {
-    "rendered": [
-      {
-        "problem": "C1",
-        "approved_representation": "R1",
-        "selected_rep": "R1"
-      }
-    ],
-    "retained": [
-      "O03",
-      "O04",
-      "O05",
-      "O06"
-    ],
-    "dispositions": [
-      {
-        "object": "O01",
-        "disposition": "HISTORICAL_CONTEXT"
-      },
-      {
-        "object": "O02",
-        "disposition": "HISTORICAL_CONTEXT"
-      },
-      {
-        "object": "O07",
-        "disposition": "MEDICATION_RECORD"
-      }
-    ],
-    "candidate_outcomes": [
-      {
-        "candidate": "C1",
-        "outcome": "RENDERED"
-      }
-    ]
-  },
+  "parent_type": "S4_BLUEPRINT",
+  "registry": "PILOT-2",
   "s4": {
+    "problems": [],
     "sections": [
       "AP"
     ],
-    "problems": [],
     "units": [
       {
         "id": "U1",
-        "problem": "P1",
-        "representation": "R1",
         "members": [
           "O03",
           "O04"
         ],
         "operator": "FACT",
-        "order": 10
+        "order": 10,
+        "problem": "P1",
+        "representation": "R1",
+        "roles": {
+          "O03": "HEAD",
+          "O04": "MODIFIER"
+        }
       },
       {
         "id": "U2",
-        "problem": "P1",
-        "representation": "R1",
         "members": [
           "O05"
         ],
         "operator": "PLAN",
-        "order": 20
+        "order": 20,
+        "problem": "P1",
+        "representation": "R1",
+        "roles": {
+          "O05": "HEAD"
+        }
       },
       {
         "id": "U3",
-        "problem": "P1",
-        "representation": "R1",
         "members": [
           "O06"
         ],
         "operator": "PLAN",
-        "order": 30
+        "order": 30,
+        "problem": "P1",
+        "representation": "R1",
+        "roles": {
+          "O06": "HEAD"
+        }
       }
     ]
   },
-  "dc": "DC-002",
   "s4_input_view": {
+    "from_contracts": {
+      "operator_set": "PILOT-2",
+      "section": "AP"
+    },
+    "from_ingest": {
+      "O03": {
+        "payload": "three falls since June",
+        "provenance": "A/2026-11-14",
+        "temporal": "June\u2013November"
+      },
+      "O04": {
+        "payload": "no new weakness or speech trouble",
+        "provenance": "A/2026-11-14",
+        "temporal": "now"
+      },
+      "O05": {
+        "payload": "check vitamin D",
+        "provenance": "A/2026-11-14",
+        "temporal": null
+      },
+      "O06": {
+        "payload": "refer to PT for gait training",
+        "provenance": "A/2026-11-14",
+        "temporal": null
+      }
+    },
     "from_s1": {
       "problem": "C1",
       "salience": {
@@ -152,42 +87,40 @@
         ]
       }
     },
-    "from_s3": {
-      "selected_rep": "R1",
-      "retained": [
-        "O03",
-        "O04",
-        "O05",
-        "O06"
-      ]
-    },
     "from_s2": {
+      "claim_relation": null,
+      "duplicate_groups": [],
       "members": [
         "O03",
         "O04"
       ],
       "relations": [
         {
-          "type": "SUPPORTS",
           "from": "O04",
-          "to": "O03"
+          "to": "O03",
+          "type": "SUPPORTS"
         }
+      ]
+    },
+    "from_s3": {
+      "rendered": [
+        "C1"
       ],
-      "claim_relation": null,
-      "duplicate_groups": []
-    },
-    "from_ingest": {
-      "payload": {
-        "O03": "S02",
-        "O04": "S02",
-        "O05": "S03",
-        "O06": "S03"
+      "retained": [
+        "O03",
+        "O04",
+        "O05",
+        "O06"
+      ],
+      "reuse": [],
+      "selected_rep": "R1",
+      "use": {
+        "O03": "C1",
+        "O04": "C1",
+        "O05": "C1",
+        "O06": "C1"
       }
-    },
-    "from_contracts": {
-      "section": "AP",
-      "operator_set": "PILOT",
-      "ordering_contract": "ORDER-1"
     }
-  }
+  },
+  "schema": "SCHEMA-2"
 }
