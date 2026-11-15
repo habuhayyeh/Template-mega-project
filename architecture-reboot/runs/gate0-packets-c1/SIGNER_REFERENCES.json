@@ -8,8 +8,8 @@
       "judge_type": "HUMAN",
       "role": "REFERENCE",
       "authority": "SIGNER_CLINICIAN",
-      "verdict": "FIRED",
-      "rationale": "Signer answered Yes: the proposed candidate violates the rule that each S1 candidate should represent a neurologic subject warranting its own assessment question in this encounter.",
+      "verdict": "SILENT",
+      "rationale": "Signer corrected the prior response: this candidate should be allowed; there is no violation of the S1 candidate rule.",
       "policy_version": "REVIEW-POLICY-F-1"
     }
   ]
