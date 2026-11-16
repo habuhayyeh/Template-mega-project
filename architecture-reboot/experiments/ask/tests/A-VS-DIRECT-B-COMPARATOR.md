@@ -253,7 +253,8 @@ This dimension is nonblocking by itself, but matters when clinical fidelity is e
 
 **Both** direct-B runs:
 - pass every blocking dimension;
-- have no more hidden semantic errors than **either** A->B run;
+- each has a hidden semantic-error count less than or equal to the **better A->B run**:
+  `direct_errors <= min(A1_errors, A2_errors)`;
 - have equal or better normalized action/provenance coverage than both A->B runs;
 - produce equivalent or better problem architecture/diagnostic stance than both A->B runs;
 - materially reduce intermediate representation burden.
