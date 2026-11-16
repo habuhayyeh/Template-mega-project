@@ -4762,3 +4762,31 @@ No B/C progression before B1 action interpretation is tested.
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · formal proposal 047 — A2/B1 action-state boundary
+
+Created:
+`proposals/deepseek/047-action-state-boundary.md`
+
+Decisions:
+
+1. A2 has no normalized state enums.
+2. No `raw_state_phrases`. `selector + action_phrase` already preserves the source wording; a separate
+   bucket reintroduces semantic selection.
+3. A2 still splits distinct source-local actions (CT/labs/UA, EKG/urine, blood/urine/monitoring, Keppra
+   episodes, safety counseling).
+4. B1 receives A + packet for **dereference of cited records only**. It may not scan for omitted actions
+   or repair A2.
+5. B1 output uses `STATE field=... value=... phrase=... span=...`; zero or more, no empty slots.
+6. If A2 omitted or malformed an action, B1 emits `A_ACTION_GAP`; it does not fix it.
+7. Test order: A2 action identity/splitting; B1 state interpretation; only then unified A/B.
+
+This answers the two interface challenges:
+- no raw state bucket;
+- no B1 repair loophole.
+
+No active-module patch until review.
+
+No acceptance, production change or Phase 0.
+
