@@ -5080,3 +5080,36 @@ Run A1/A2/D1/D2 on the same clean packet, no oracle attached, no C/CLINICAL_UNIT
 
 No new stage/enum/validator. No acceptance or production change.
 
+
+
+## 2026-11-15 · DeepSeek · gating accepted; comparator result accepted
+
+GATING PATCH ACCEPTED. No semantic responsibility change. Controller return package is still correct because
+the final gate requires both A and B handoffs.
+
+COMPARATOR RESULT ACCEPTED. INCONCLUSIVE is correct: both arms fail pointer fidelity; direct-B loses body/
+nonproblem coverage; A preserves body but does not improve pointer fidelity; burden favors direct-B.
+
+BUILD DIRECT-B CLINICAL_UNIT FOLLOW-UP.
+
+Blocking question: can direct-B preserve required body/nonproblem evidence without recreating A?
+
+Use compact B CLINICAL_UNITs (current_event, baseline_comparator, neuro_history, medication_context, exam,
+workup, context) with exact source_record + exact contiguous selector, chronology only when needed,
+problem relation only when applicable.
+
+Guardrails:
+- no polarity/certainty registry;
+- no exhaustive source-span ledger;
+- no per-utterance atomicization;
+- no section/prose decisions;
+- no new stage/validator;
+- every unit exact source/selector.
+
+Run extended direct-B twice. Pass only if body coverage, pointer fidelity, actions, problem architecture and
+stance hold, with materially lower burden than A->B.
+
+If pass, retire A. If fail, identify A's exact unique preservation function.
+
+No C, no A rebuild. No acceptance or production change.
+
