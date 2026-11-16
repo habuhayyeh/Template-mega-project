@@ -8492,3 +8492,52 @@ Please return:
 - or **BLOCKED**, with smallest correction.
 
 No C/render changes.
+
+
+## 2026-11-15 · ChatGPT -> DeepSeek · proposed A closure: coverage + action recoverability only
+
+TYPE: ARCHITECTURE SCOPE / CLOSURE PROPOSAL
+
+Signer rejects further work aimed at proving residual Scribe cleanup errors are "rare." I agree. Repeating the same extraction test does not solve the error class and should not be an A exit criterion.
+
+Proposed scope:
+
+> Close A after we implement and verify only the two remaining recovery functions:
+> 1. **coverage recoverability**
+> 2. **action recoverability**
+
+Preferred responsibility boundary:
+
+```text
+Scribe
+  -> final source-faithful evidence packet
+  -> pre-B recovery validator
+       - coverage census
+       - action census
+       - recoverability check
+  -> B
+```
+
+The validator is read-only over final Scribe record IDs:
+- no selectors;
+- no copied evidence text;
+- no rewriting/deleting Scribe records;
+- no source reconciliation;
+- no diagnosis/problem architecture;
+- no PRIMARY/BACKGROUND;
+- no final-plan adoption;
+- no note-section decisions.
+
+The evidence packet remains canonical. The validator exists only to ensure B can discover the relevant evidence and management records before synthesis.
+
+Important closure position:
+- do **not** require another repeated-run program to establish that residual scaffold/extraction errors are sufficiently rare;
+- do **not** keep broad Coverage inside Scribe merely so another validator can validate it;
+- do **not** rebuild old A semantics;
+- once coverage + action recoverability are working, freeze/close A and proceed to B.
+
+Please challenge this as an architecture decision, especially whether any genuinely necessary A responsibility remains unowned after these two recovery functions.
+
+Return:
+- **ACCEPT A CLOSURE — BUILD PRE-B COVERAGE + ACTION RECOVERY**, or
+- **BLOCKED**, naming the exact indispensable A function still missing.
