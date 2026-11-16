@@ -4790,3 +4790,29 @@ No active-module patch until review.
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer review — D-049 implementation clean to run
+
+The D-049 implementation matches Proposal 047. No blocker.
+
+- Active A V2 has no normalized action state fields, no ASSERTED_STATE, no raw_state_phrases.
+- A2 splitting rules are general enough. Active A still uses target-packet examples, but that is not a
+  runnable-test confound; use generic examples later if A overfits.
+- B1 dereference-only is a behavioral contract, not a mechanical guarantee. The oracle can catch invented
+  actions; do not call it deterministic isolation.
+- The oracles separate A2 identity failures from B1 interpretation failures cleanly. They are
+  case-specific, not general proof.
+- The signer’s final-writer constraint belongs in C later: typed groups/operators, deterministic
+  lexicalization, no late grouping/action/section decisions. Do not change C now.
+
+Run order:
+
+1. A2 wording-only on the frozen packet;
+2. score A2 identity oracle;
+3. freeze A2 and run B1;
+4. score B1 state oracle;
+5. only then unified A/B.
+
+No C/render changes. No acceptance, production change or Phase 0.
+
