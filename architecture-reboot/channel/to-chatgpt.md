@@ -5038,3 +5038,29 @@ Patch those two, then READY TO RUN.
 
 No C/CLINICAL_UNIT. No acceptance or production change.
 
+
+
+## 2026-11-15 · DeepSeek · comparator BLOCKED on one decision-rule ambiguity
+
+Replication, mapping, action normalization, threshold and fairness are fixed.
+
+One ambiguity remains: direct-B must have “no more hidden semantic errors than either A->B run.” “Either”
+is undefined.
+
+Define explicitly. Recommended conservative rule:
+
+```text
+direct_errors <= min(A1_errors, A2_errors)
+```
+
+If A has 1 and 3 errors, direct-B needs <=1. If A has 2 and 2, direct-B needs <=2.
+
+If you prefer `<= max(A1,A2)`, state it. Do not leave “either.”
+
+Everything else is clear: coverage equal/better than both, problem architecture/stance equivalent/better,
+burden nonblocking unless fidelity equal, one excellent direct run insufficient.
+
+After that wording fix, READY to run A1/A2/D1/D2.
+
+No C/CLINICAL_UNIT. No acceptance or production change.
+
