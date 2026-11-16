@@ -1,0 +1,121 @@
+# Scribe Quirks
+
+## Purpose
+
+This folder is the working handbook for writing prompts and execution contracts for the Doximity GPT-4o engine used in this project.
+
+It records **observed engine behavior**, not general LLM folklore.
+
+Use it when designing or revising:
+
+- Scribe ingestion prompts;
+- Ask semantic modules;
+- compiler/blueprint contracts;
+- render operators;
+- internal logical phases within one Ask invocation;
+- Doximity experiments.
+
+Do not treat every rule here as a universal model law. Each rule is tagged by the evidence that produced it.
+
+## Core operating model
+
+The strongest evidence supports this division:
+
+```text
+SOURCE-LOCAL FUNCTIONS
+  preserve boundaries
+  de-noise
+  split source-local complexity
+  preserve source-supported state
+        |
+        v
+WHOLE-PACKET FUNCTIONS
+  coverage census
+  action census
+  completeness audit
+        |
+        v
+CLINICAL SYNTHESIS
+  reconcile sources
+  build problems
+  decide diagnostic stance
+  reconcile actions
+        |
+        v
+COMPILER
+  choose typed groups
+  assign rhetorical class
+  assign roles
+  assign canonical operator
+  assign order
+        |
+        v
+RENDERER
+  execute operator
+  fail closed on malformed input
+```
+
+The engine performs best when each layer receives a **decision-complete input for the function it owns**.
+
+## Highest-confidence engine rules
+
+1. Put a hard **read-all / no-emission gate** at the beginning of long prompts.
+2. Write functions as **short atomic imperatives**, not long explanatory prose.
+3. Separate **READ -> EXTRACT -> DECIDE -> CHECK -> EMIT**.
+4. Do not let the model draft while still reading instructions.
+5. Make later semantic decisions explicit upstream rather than asking a later writer to rediscover them.
+6. Avoid schemas that invite the model to fill unsupported slots.
+7. Exact copied selectors are unreliable during simultaneous synthesis; prefer stable source record IDs where possible.
+8. Same-context LLM validation can execute visibly and still false-pass obvious semantic errors.
+9. Do not use the same model to generate a semantic claim and then trust it to independently validate that claim in the same context.
+10. Typed groups + canonical render operators can be highly reproducible when the semantic payload is complete.
+11. Stable bad output is usually a **contract/input defect**, not stochasticity.
+12. Malformed render structures should fail closed; the renderer should not repair them.
+13. Error-label taxonomy matters less than preserving the valid/invalid boundary.
+14. Coverage enumeration and synthesis compete. If synthesis repeatedly omits material evidence, perform a dedicated coverage census before synthesis.
+15. The useful unit of modularity is a **function boundary**, not necessarily a separate file or separate model call.
+
+## Files
+
+- [01-PROMPT-WRITING-STYLE.md](01-PROMPT-WRITING-STYLE.md)  
+  Canonical prompt-writing style for Doximity.
+
+- [02-BPLUS-RENDER-RULES.md](02-BPLUS-RENDER-RULES.md)  
+  Preserved B+ typed-group/operator rules and the important bugs they exposed.
+
+- [03-EXPERIMENT-TO-RULE-LEDGER.md](03-EXPERIMENT-TO-RULE-LEDGER.md)  
+  Test-by-test evidence ledger and the rule derived from each experiment.
+
+- [04-FUNCTION-PLACEMENT.md](04-FUNCTION-PLACEMENT.md)  
+  Which functions must be source-local, which belong to a whole-packet pass, and which must remain downstream.
+
+- [05-DOXIMITY-CONTRACT-CHECKLIST.md](05-DOXIMITY-CONTRACT-CHECKLIST.md)  
+  Compact checklist for writing or reviewing a new Doximity module.
+
+## Evidence classes
+
+### REPRODUCED
+
+Observed in repeated fresh Doximity conversations or across multiple independent experiments.
+
+### OBSERVED
+
+Observed in at least one valid Doximity execution.
+
+### DESIGN CONSEQUENCE
+
+An architecture choice supported by observed behavior but not itself directly tested.
+
+### REJECTED PATTERN
+
+A pattern that produced repeated material failures.
+
+## Scope rule
+
+Only promote a quirk into a durable rule when:
+
+- it was directly observed;
+- or multiple experiments converge on the same mechanism;
+- or a controlled comparison isolates the behavior.
+
+Do not turn one malformed run, stale prompt execution, or invalid control condition into an engine rule.
