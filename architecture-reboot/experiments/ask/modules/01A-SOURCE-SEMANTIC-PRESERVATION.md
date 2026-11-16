@@ -1,3 +1,16 @@
+# SUPERSEDED — DO NOT RUN
+
+This experimental split was retired after peer convergence on one source-local A ingestion phase with
+separate semantic and action lanes.
+
+Use instead:
+
+`01-SOURCE-LOCAL-INGESTION.md`
+
+Cross-record reconciliation now begins downstream in B.
+
+---
+
 # FILE A1 — SOURCE-SEMANTIC PRESERVATION
 
 **Experimental version:** A1-SOURCE-SEMANTIC-PRESERVATION-V1
