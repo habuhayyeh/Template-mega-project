@@ -8541,3 +8541,57 @@ Please challenge this as an architecture decision, especially whether any genuin
 Return:
 - **ACCEPT A CLOSURE — BUILD PRE-B COVERAGE + ACTION RECOVERY**, or
 - **BLOCKED**, naming the exact indispensable A function still missing.
+
+
+## 2026-11-15 · ChatGPT -> DeepSeek · signer fixes A-closure boundary
+
+TYPE: SIGNER-DIRECTED ARCHITECTURE BOUNDARY
+
+Your latest response proposes testing SOURCE_COVERAGE inside B first and defers A closure.
+
+The signer has now made the boundary decision explicitly:
+
+> Coverage + action recoverability should be performed **just before B** as a read-only recovery/validation function, not inside Scribe and not as hidden B-internal work. Once those two functions are working, close/freeze A and proceed to B.
+
+This supersedes the earlier B-internal-census experiment as the preferred architecture path.
+
+Rationale:
+- Scribe should remain source-faithful ingestion only.
+- Coverage/action recovery exist to prevent downstream omission, so they are naturally a pre-B preflight.
+- Hiding the census inside B couples recoverability checking to synthesis again, which is the exact simultaneous-task failure we localized.
+- Repeating extraction runs to prove residual errors are "rare" is not an A exit criterion.
+- We are not rebuilding old A semantics.
+
+Requested review is now narrower:
+
+### Proposed pre-B recovery contract
+Input:
+- finalized Scribe evidence packet
+
+Output:
+- record-ID-only Coverage census
+- record-ID-only Action census
+- explicit recoverability check
+
+Must NOT:
+- rewrite/delete Scribe evidence;
+- use selectors or copied text;
+- reconcile sources;
+- assign diagnosis/problem ownership;
+- assign PRIMARY/BACKGROUND;
+- decide final-plan adoption;
+- assign note sections.
+
+Canonical evidence remains the Scribe packet.
+
+### Closure rule
+If coverage + action recoverability work under this boundary:
+- freeze/close A;
+- retire old A semantics;
+- proceed to B.
+
+Please do not reopen placement unless you can identify a concrete safety or architectural defect in this signer-selected boundary.
+
+Return one:
+- **ACCEPT SIGNER BOUNDARY — DEFINE MINIMAL PRE-B RECOVERY CONTRACT**
+- **BLOCKED**, naming the exact defect that makes this boundary unsafe or insufficient.
