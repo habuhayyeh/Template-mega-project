@@ -1,7 +1,7 @@
 # A2-ONLY TEST — CURRENT SLOT SCHEMA
 
 **Experimental condition:** A2-CURRENT-SLOT-V1  
-**Purpose:** isolate the current action-lane representation from the semantic lane.
+**Purpose:** A2-only action-lane extraction condition.
 
 ## Input
 
