@@ -1,0 +1,477 @@
+# FILE A — SOURCE-LOCAL INGESTION
+
+**Experimental version:** A-SOURCE-LOCAL-INGESTION-V1
+
+## Purpose
+
+Transform one complete canonical `SCRIBE_EVIDENCE_V2_2` packet into a **source-local ingestion handoff**
+that preserves every material clinical assertion and action without cross-record reconciliation.
+
+A is ingestion only.
+
+It answers:
+
+> What does each source record actually say, locally, with what exact source pointer and explicit state?
+
+A does **not** decide whether different records describe:
+- the same event;
+- the same state;
+- evolution;
+- conflict;
+- duplicate/corroboration;
+- one action trajectory;
+- one problem.
+
+Those decisions begin in downstream clinical synthesis.
+
+## Runtime packaging
+
+A is one logical ingestion phase with three lanes:
+
+```text
+A0 source registry — mechanical metadata already present in Scribe
+A1 semantic spans — source-local non-action assertions
+A2 action spans — source-local action assertions
+```
+
+A0 is not a separate model pass.
+
+Use the Scribe packet's existing:
+- record IDs;
+- source boundaries;
+- section labels;
+- raw speaker labels;
+- nested provenance markers;
+- source order.
+
+Do not create a new global speaker map or source index.
+
+## Input
+
+One complete canonical `SCRIBE_EVIDENCE_V2_2` packet only.
+
+## Output
+
+```text
+@@HANDOFF A_SOURCE_LOCAL_INGESTION_V1
+
+SEMANTIC_SPANS
+
+SPAN S001
+  source_record=<exact record ID>
+  selector=<literal substring from that exact record>
+  assertion_type=<statement|question|observation|result|diagnosis|reasoning>
+  material_role=<current_episode|neuro_history|other_history|medication|exam|workup|safety_function|reasoning|context>
+  speaker_source=<raw SPK/source label>
+  local_identity=<only if explicitly established by this source-local record>
+  provenance=<explicit nested provenance if stated in this record>
+  time=<explicit source-local time if stated>
+  polarity=<affirmed|negated|unresolved>
+  certainty=<possible|likely|suspected|unlikely|unstated>
+  unresolved=<source-local ambiguity/garble/limitation>
+
+ACTION_SPANS
+
+ACTION_SPAN A001
+  source_record=<exact record ID>
+  selector=<literal substring from that exact record>
+  target=<source-local target>
+  operation=<source-local action wording>
+  speaker_source=<raw SPK/source label>
+  local_identity=<only if explicitly established by this source-local record>
+  provenance=<explicit nested provenance if stated in this record>
+  setting=<explicit source-local setting if stated>
+  time=<explicit source-local time if stated>
+  decision=<considered|planned|recommended|continue|discontinue|hold|not_indicated|deferred>
+  execution=<not_started|ordered|reported_performed|performed|held|resumed|stopped|canceled>
+  response=<agrees|declines|undecided|prefers_alternative>
+  result=<unavailable|pending|preliminary|final>
+  condition=<explicit source-local condition if stated>
+  unresolved=<source-local ambiguity/garble/limitation>
+
+@@END
+```
+
+Use only supported fields.
+Unknown fields stay absent.
+
+---
+
+# A0 — source registry
+
+A0 is the Scribe packet itself.
+
+Do not generate a second registry.
+
+Treat as authoritative:
+- exact record IDs;
+- source boundaries;
+- section labels;
+- raw speaker labels;
+- explicit nested provenance;
+- source-local chronology/order.
+
+Do not:
+- globally map SPK labels to people;
+- infer patient/family/clinician/witness roles;
+- create cross-record event IDs;
+- create SAME_EVENT_AS/PART_OF/SUPERSEDES/SOURCE_VIEW_OF relations.
+
+If one source record explicitly names a local identity, that identity may be carried only for that span.
+
+---
+
+# A1 — semantic spans
+
+## Inclusion rule
+
+A1 is a preservation lane.
+
+Include every source-local assertion that could materially affect:
+- current neurologic episode;
+- neurologic history;
+- other history relevant to neurologic interpretation/management;
+- medication-at-presentation;
+- current examination;
+- workup/result state;
+- safety/function;
+- diagnostic/problem-relevant reasoning;
+- a material uncertainty downstream may need.
+
+If uncertain whether a clinical assertion matters, **include it**.
+
+Exclude only:
+- greetings;
+- empty acknowledgements;
+- conversational repair with no usable assertion;
+- clearly nonclinical logistics;
+- exact repetition within the same source record when no distinction would be lost.
+
+Do not use:
+- candidate-problem status;
+- perceived importance;
+- likely final note placement;
+
+as an inclusion gate.
+
+## One span = one source-local material assertion
+
+Every SEMANTIC_SPAN must contain:
+
+```text
+source_record=<one exact record ID>
+selector=<literal substring from that same record>
+```
+
+Hard rule:
+
+> The selector must be text that actually appears inside the cited source record.
+
+Do not:
+- combine text from adjacent records;
+- paraphrase several turns into one selector;
+- attach a synthesized assertion to one record;
+- move a selector to a nearby record.
+
+If one record contains multiple materially distinct assertions, create multiple spans from that same record.
+
+Examples requiring a split when clinically relevant:
+- question + answer-like statement in one record;
+- result + management action;
+- several different historical referents;
+- several action targets;
+- separate current exam domains when downstream use differs materially.
+
+This is not global atomicization.
+Split only when failing to split would lose a clinically meaningful distinction.
+
+## Assertion type
+
+Use only:
+- `statement`
+- `question`
+- `observation`
+- `result`
+- `diagnosis`
+- `reasoning`
+
+Questions remain questions.
+
+A question never supplies the answer to a later span.
+
+## Speaker/source
+
+Always preserve the raw source label.
+
+Examples:
+- `SPK0`
+- `SPK3`
+- `P1`
+
+Populate `local_identity` only when the same source-local record explicitly establishes it.
+
+Do not globally map SPK labels across the transcript.
+
+Do not infer:
+- patient;
+- mother;
+- fiance;
+- clinician;
+- witness;
+
+from conversational context alone.
+
+## Provenance
+
+Preserve explicit source-local nested provenance only.
+
+Examples:
+- `EMS report`
+- `ship paperwork via ED note`
+- `family report of another witness`
+
+Do not promote mediated report to objective finding.
+
+## Time
+
+Preserve only time stated locally in that source record.
+
+Examples:
+- Wednesday;
+- 18:55;
+- two days ago;
+- prior;
+- tonight/tomorrow.
+
+Do not create cross-record chronology in A.
+
+Do not emit:
+- BEFORE/AFTER edges;
+- SAME_EVENT_AS;
+- evolution;
+- conflict.
+
+Those belong to B1 reconciliation.
+
+## Polarity
+
+Use:
+- `affirmed`
+- `negated`
+- `unresolved`
+
+Rules:
+- question != negative;
+- silence != negative;
+- `not on file` != negative;
+- `not documented` != negative;
+- garbled source remains unresolved.
+
+## Certainty
+
+Use only explicit/source-stated epistemic certainty:
+
+- `possible`
+- `likely`
+- `suspected`
+- `unlikely`
+- `unstated`
+
+Do not strengthen certainty from:
+- section title;
+- repetition;
+- management intensity;
+- clinical plausibility.
+
+## Material role
+
+`material_role` is a preservation class only.
+
+Use:
+- `current_episode`
+- `neuro_history`
+- `other_history`
+- `medication`
+- `exam`
+- `workup`
+- `safety_function`
+- `reasoning`
+- `context`
+
+It does not determine:
+- final note section;
+- problem eligibility;
+- PRIMARY/BACKGROUND;
+- containment;
+- final inclusion.
+
+---
+
+# A2 — action spans
+
+A2 is a lane inside the same A handoff.
+
+It preserves each **source-local action assertion** separately.
+
+A2 does not consume or rewrite A1.
+
+## One action span = one source-local action assertion
+
+Every ACTION_SPAN must point to exactly one source record and one literal selector.
+
+If one source record contains multiple materially distinct actions, create separate ACTION_SPAN entries.
+
+Example:
+
+```text
+Plan: CT head, basic labs, urinalysis; consult neurology; likely admission for EEG
+```
+
+should be split into separate action spans when downstream action identity differs:
+- CT plan;
+- labs plan;
+- UA plan;
+- neurology consult plan/action;
+- admission/EEG plan.
+
+Do not combine them merely because they are in one source sentence.
+
+## Action fields
+
+Preserve only the state explicitly supported by the local source wording.
+
+### decision
+- `considered`
+- `planned`
+- `recommended`
+- `continue`
+- `discontinue`
+- `hold`
+- `not_indicated`
+- `deferred`
+
+### execution
+- `not_started`
+- `ordered`
+- `reported_performed`
+- `performed`
+- `held`
+- `resumed`
+- `stopped`
+- `canceled`
+
+### response
+- `agrees`
+- `declines`
+- `undecided`
+- `prefers_alternative`
+
+### result
+- `unavailable`
+- `pending`
+- `preliminary`
+- `final`
+
+Unknown fields remain absent.
+
+Do not fill a template.
+
+## Hard action invariants
+
+- `plan` does not imply `ordered`;
+- `recommended` does not imply `ordered`;
+- `ordered` does not imply `performed`;
+- `started on drip` in a report supports `reported_performed`;
+- a test not yet started does not automatically have a pending result;
+- `discontinued` for one local action does not establish prior administration;
+- `continue Keppra` is a local decision action;
+- no cross-record action episode grouping occurs in A.
+
+If exact state is ambiguous:
+- preserve the literal selector;
+- omit the uncertain state field;
+- explain in `unresolved`.
+
+Do not force an enum.
+
+---
+
+# Coverage floor
+
+Before returning, specifically verify that A has preserved source-local spans for every material occurrence of:
+
+1. current neurologic examination;
+2. material general exam qualifiers affecting neurologic interpretation;
+3. current medications/supplements relevant to the encounter;
+4. explicit prior neurologic history;
+5. patient seizure-history questions/answers;
+6. family seizure-history questions/answers;
+7. current and outside workup/results;
+8. management actions;
+9. seizure/safety precautions;
+10. driving/activity counseling;
+11. diagnostic reasoning/differential statements;
+12. material non-neurologic context that changes neurologic interpretation or management.
+
+This is a preservation checklist, not a final-note checklist.
+
+---
+
+# What A must not do
+
+A must not:
+- reconcile records;
+- decide duplicate/corroboration;
+- decide same event/state;
+- decide evolution/conflict;
+- create cross-source chronology;
+- group action episodes across records;
+- globally map speaker identities;
+- decide candidate-problem status;
+- decide problem identity;
+- decide PRIMARY/BACKGROUND;
+- decide containment;
+- decide causal/contributory relationships;
+- decide final note sections;
+- write final note prose.
+
+All cross-record clinical synthesis begins in B.
+
+---
+
+# Mechanical source-fidelity invariant
+
+Development-time invariant:
+
+```text
+for every SEMANTIC_SPAN and ACTION_SPAN:
+  source_record must exist in the Scribe packet
+  selector must be a literal substring of that exact source_record
+```
+
+Failure of this invariant means the A handoff is invalid.
+
+This is mechanically checkable and does not require a semantic validator.
+
+---
+
+# Structural checks
+
+Before returning:
+
+1. every entry has one exact `source_record`;
+2. every selector is a literal substring of that exact record;
+3. no entry contains text synthesized from adjacent records;
+4. questions remain questions;
+5. raw speaker/source labels are preserved;
+6. no global SPK identity mapping appears;
+7. `not on file` / `not documented` is never converted to negation;
+8. action spans contain only source-local action state;
+9. unknown action state fields remain absent;
+10. materially distinct actions in one record are split;
+11. current exam/workup/meds/history/safety/reasoning are preserved when material;
+12. no cross-record relationship is asserted;
+13. no problem/role/section/prose decision appears;
+14. output ends with `@@END`.
+
+Return the handoff only.
