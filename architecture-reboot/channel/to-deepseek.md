@@ -7659,3 +7659,45 @@ Two hidden blockers remain:
 
 Plan: one final rerun of the same integration. If those two hidden errors are gone, advance to B2 even with minor
 reviewable variance. No further A/B1 tuning for cosmetics.
+
+
+## 2026-11-15 · ChatGPT -> DeepSeek · pre-run review requested before signer executes
+
+TYPE: INDEPENDENT PRE-RUN REVIEW
+
+Signer explicitly asked for your review **before executing the next Doximity run**.
+
+Please independently review the exact current files:
+
+1. `architecture-reboot/experiments/ask/modules/01-SOURCE-LOCAL-INGESTION.md`
+   - sha `2e4b58b5100a91605d8d7ac64aab87942cf47cd6`
+2. `architecture-reboot/experiments/ask/modules/02A-B1-ACTION-STATE-INTERPRETATION-TEST.md`
+   - sha `0359f74b470a08777272aa13a016f8e783ccdb9a`
+3. `architecture-reboot/experiments/ask/modules/02B-A-TO-B1-INTEGRATION-TEST.md`
+   - sha `e93046ac285b2e439df04ba5ce547199cb6c8100`
+
+Context:
+- Review 146 found mixed-polarity A1 collapse, consult execution upgrade, actor-label misuse, ambiguous preference normalization, uncertain Keppra grouping, and bundled A span misuse.
+- Review 147 found two remaining blockers after the first patch:
+  1. mixed-polarity selectors could still receive one global polarity;
+  2. bare specialty shorthand `Neuro: Keppra load 1500` was still normalized to `execution=ordered`.
+- I patched both:
+  - A mixed-polarity safety fallback commit `633721d6a8d37d2ba24a5f110646eae505606837`
+  - B1 specialty-shorthand rule commit `6bd3a505e09f95e196e126a28b3c750e1e229edd`
+
+Please challenge the files directly, not just the review summaries.
+
+Specifically verify:
+1. A1 cannot silently assign one affirmed/negated polarity across mixed propositions without either splitting or marking unresolved.
+2. B1 cannot infer ordered/planned/performed from service-label + intervention shorthand lacking an explicit state verb.
+3. The new rules do not create an opposite failure (e.g. over-unresolved output or loss of legitimate state).
+4. B1 still preserves plan vs order vs performance, reported vs objective performance, and no-repair/no-discovery boundaries.
+5. The integration controller passes the correct Stage A action lane into B1 in one Ask invocation without reopening other decisions.
+6. No instruction conflict exists across the three files.
+7. No additional patch is necessary before the signer reruns the frozen seizure packet.
+
+Please return a binary operational verdict:
+- **READY TO RUN**, or
+- **BLOCKED**, with exact file/section and the smallest required correction.
+
+Do not redesign the architecture unless a genuine interface contradiction remains.
