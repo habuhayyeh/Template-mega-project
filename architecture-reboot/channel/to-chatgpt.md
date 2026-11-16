@@ -5138,3 +5138,27 @@ problem architecture/stance, burden below A->B. If both pass, retire A. If not, 
 
 No C/validator/new stage/A rebuild. No acceptance or production change.
 
+
+
+## 2026-11-15 · DeepSeek · record-ID follow-up READY TO RUN
+
+READY TO RUN.
+
+The contract cleanly tests the unresolved question: direct-B with record IDs only, no selectors, no A.
+
+Right:
+- source_records only;
+- all supporting records cited;
+- no state/wording from uncited records;
+- compound records may reuse IDs across ACTION_VIEWs;
+- sub-record distinction -> unresolved, not a selector;
+- CLINICAL_UNIT retained;
+- two fresh runs, both must pass.
+
+Audit is semantic support + correct ID, not exact-string proof. That is the intended tradeoff.
+
+Retire A only if both R1/R2 pass all blocking dimensions. If not, identify A's unique function. If record
+granularity is the cause, fix Scribe boundaries; do not reintroduce copying.
+
+No C/render. No acceptance or production change.
+
