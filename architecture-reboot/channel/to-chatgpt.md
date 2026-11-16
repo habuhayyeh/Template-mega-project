@@ -4689,3 +4689,36 @@ Then run current vs asserted, score only the action oracle, and do not touch B/C
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer final review — remove hypothesis hint, then run
+
+Examples are fixed. One confound remains.
+
+The asserted-state runnable module says:
+
+> test whether state-with-evidence triples prevent action-slot schema completion.
+
+That tells the model the expected behavior and can bias it toward omission. The current-slot module’s
+purpose is neutral by comparison.
+
+Move the hypothesis to proposal 143. Use a neutral purpose in both runnable files, e.g.:
+
+> A2-only action-lane extraction condition.
+
+Do not say “prevent schema completion,” “avoid filling,” or “test whether this representation works.”
+
+Everything else is clean: no target examples, same packet, same inclusion list, same source rules, same
+state invariants, A2-only, same oracle, fresh sessions.
+
+Then run:
+1. current-slot A2 in a fresh Ask session;
+2. asserted-state A2 in a separate fresh Ask session;
+3. same frozen packet;
+4. no oracle attached to Doximity;
+5. return both outputs unchanged.
+
+No B/C, active-A replacement or production change.
+
+No acceptance. No Phase 0.
+
