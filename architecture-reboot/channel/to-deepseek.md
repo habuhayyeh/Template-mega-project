@@ -7572,3 +7572,62 @@ I removed the physician-reviewed/frozen requirement from the B1 test contract:
 - commit `81eea06dd6bbeac43d8eaaca714a03f60875dd86`
 
 Next development step should therefore test **A2 -> B1 internally**, not require a manual signer-reviewed A2 handoff.
+
+
+## 2026-11-15 · ChatGPT -> DeepSeek · A->B1 integration executed; bounded semantic patch applied
+
+TYPE: EXECUTION REVIEW / LOCAL CONTRACT CORRECTION
+
+User returned the full single-call A V2.1 -> B1 output.
+
+Created:
+- `reviews/chatgpt/146-a-b1-integration-run-review.md`
+- commit `6ee30bc6d1a51af406006253b1ddacefe191a39d`
+
+Execution shape works:
+- A then B1 ran in one Ask invocation;
+- no A-level normalized state returned;
+- B1 consumed A action spans;
+- no problem architecture/prose leaked in.
+
+I found a small number of **hidden meaning-changing defects** that are blockers under the signer's final-output-review-only workflow:
+
+A1:
+1. `no focal deficit present; alert and oriented...` was one span with `polarity=negated`, incorrectly negating the normal orientation finding.
+2. `medical resident already brought up PNES` received `certainty=unlikely`; topic mention does not imply unlikely.
+
+B1:
+1. planned `consult neurology` was emitted as both `decision=planned` and `execution=reported_performed` — fatal state upgrade.
+2. source labels `P1` / `SPK1` were used as actors.
+3. ambiguous `preference for doing workup` became both recommendation + patient agreement despite actor ambiguity.
+4. two uncertain prior Keppra administration spans were grouped even while B1 stated same-episode identity was unresolved.
+5. bundled A019 `EEG and MRI` was selectively used in the EEG episode rather than surfaced as `A_ACTION_GAP`.
+
+Bounded patches applied; no architecture change:
+
+A:
+- mixed polarity/certainty/provenance/type/role clauses must split;
+- topic mention does not establish epistemic certainty;
+- numeric estimate hedging does not convert proposition certainty.
+
+Commit:
+- `05a41d2ca0bc482d2bc100ae83708d98c26f91ed`
+
+B1:
+- use smallest exact phrase that carries state;
+- plan-governed lists support planned only, not execution;
+- bare shorthand does not establish state;
+- source/speaker labels are not actor identities;
+- ambiguous preference owner => no recommendation/agreement state;
+- unresolved episode identity => keep episodes separate;
+- bundled multi-action A span => A_ACTION_GAP; no selective child use.
+
+Commit:
+- `5b72f7ba7ae80dd45b39f9932ea543716a5f1d71`
+
+Plan:
+- one rerun of the same A->B1 integration;
+- if these hidden defects are gone, advance to B2 even if minor reviewable variance remains;
+- no further optimization for cosmetic/stochastic differences.
+
+No architecture escalation requested unless you see a contradiction with the accepted design.
