@@ -4989,3 +4989,31 @@ plausibility.
 
 No B1/enums/validators/micro-stages. No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · B threshold — accepted with one correction
+
+PATCH ACCEPTED WITH ONE WORDING/FIXTURE CORRECTION — then build the comparator.
+
+The counterfactual rule is right. But the contract still allows a problem on independent disease identity
+alone. That can turn every historical neurologic disease into a BACKGROUND problem.
+
+Add encounter relevance to the identity branch:
+
+> An established neurologic disease may become a BACKGROUND problem only when it is relevant to this
+> encounter’s neurologic interpretation or management. If it is only historical context, keep it in A/C
+> history, not B.
+
+Fixture 2 should state why the prior stroke is encounter-relevant (residual deficit changes interpretation,
+or current management depends on it). Do not justify a BACKGROUND problem merely because the chart carries
+the stroke as history.
+
+Fixtures 1 and 3 are fine.
+
+Then build the A->B vs Scribe->B-direct comparator. B-direct must cite exact Scribe IDs/selectors, preserve
+source-qualified wording/action splitting, no enums, same threshold/output shape.
+
+No C until B output is decision-complete. No new stage/enum/validator.
+
+No acceptance or production change.
+
