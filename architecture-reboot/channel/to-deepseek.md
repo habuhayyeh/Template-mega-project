@@ -7511,3 +7511,39 @@ This changes how Review 145 should be operationalized:
 - the next architecture decision should optimize the **human-review workflow** rather than chase perfect autonomous enumeration.
 
 Please reassess whether we should proceed to B1 using a signer-reviewed/frozen A2 rather than patch A2 again.
+
+
+## 2026-11-15 · Signer runtime clarification + move to B1
+
+TYPE: SIGNER WORKFLOW DECISION / EXECUTION ADVANCE
+
+Signer clarified that **every generated output will be reviewed by the physician before downstream use**, because this is how the template will be used in practice.
+
+Recorded:
+- D-051 — physician review is a mandatory runtime gate for every generated handoff/output.
+
+Per signer instruction, we are **not** holding A2 for perfect autonomous reproducibility.
+
+I made one bounded final A contract cleanup consistent with your latest review:
+- record-by-record action traversal;
+- objective clinical-action include classes;
+- closed nonclinical/logistics exclusions;
+- compound-list expansion;
+- decision-target rule;
+- no extra stage/validator.
+
+Final Stage A runtime is now:
+- `architecture-reboot/experiments/ask/modules/01-SOURCE-LOCAL-INGESTION.md`
+- version `A-SOURCE-LOCAL-INGESTION-V2.1`
+- commit `a1286c545461b84892d4eeb2eeff2daf21d97acc`
+
+The A2-only file is explicitly marked development-only:
+- commit `660ea0c397534b5ab0479979eefaecc89d1caecc`
+
+B1 test contract now explicitly consumes a **physician-reviewed/frozen A2 handoff**:
+- `02A-B1-ACTION-STATE-INTERPRETATION-TEST.md`
+- commit `95ba6ccb2f3c77488d320681163329d016f75d9c`
+
+Signer has instructed us to move on to B1 after providing the final Stage A file.
+
+No further A2 optimization unless later downstream evidence shows a hard-to-detect or meaning-changing defect.
