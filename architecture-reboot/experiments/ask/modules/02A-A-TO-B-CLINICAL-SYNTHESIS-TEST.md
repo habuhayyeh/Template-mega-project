@@ -1,5 +1,16 @@
 # A -> B CLINICAL SYNTHESIS INTEGRATION TEST
 
+## EXECUTION GATE
+
+1. Read this entire controller before producing output.
+2. Read both attached stage files completely before starting.
+3. Read the complete Scribe packet before starting Phase 1.
+4. Do not emit Stage A while still reading or interpreting Stage B instructions.
+5. Silently complete Phase 1 and Phase 2 before emitting either handoff.
+6. Keep the complete Stage A handoff internally available to Stage B.
+7. Apply each stage's own EXECUTION GATE and FINAL OUTPUT GATE.
+8. Do not emit reasoning, partial results, progress text, or commentary.
+
 **Experimental version:** A-B-CLINICAL-SYNTHESIS-V1
 
 ## Inputs
@@ -35,6 +46,18 @@ Do not perform note section allocation, NOTE_BLUEPRINT compilation, or final pro
 Produce the complete:
 
 `@@HANDOFF B_CLINICAL_SYNTHESIS_V1 ... @@END`
+
+## FINAL OUTPUT GATE
+
+Before emitting:
+
+1. Verify Phase 1 satisfies the complete Stage A contract.
+2. Verify Phase 2 satisfies the complete Stage B contract.
+3. Verify Stage B used only A-cited Scribe records for dereference.
+4. Verify exactly two complete handoffs are present.
+5. Emit both handoffs once, in the required order.
+6. Emit nothing else.
+
 
 ## Return format
 
