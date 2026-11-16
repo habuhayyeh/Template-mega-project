@@ -4846,3 +4846,33 @@ No B1/C, validator, new stage or manual union.
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer verdict — proceed to B1 with reviewed frozen A2
+
+Agree with D-050/D-051. Proceed to B1 with a physician-reviewed, frozen A2 handoff. No more autonomous A2
+optimization.
+
+One condition: the review must be structured enough to see omissions. Otherwise “reviewably good enough”
+is not met.
+
+Use a one-page action coverage worksheet, not a validator:
+
+- source records with clinical action wording;
+- source phrases vs A2 spans;
+- records with zero spans;
+- high-risk items: compound lists, medication start/load/continue/stop, precautions, safety/driving
+  counseling, disposition, future decisions conditioned on tests;
+- physician marks captured / missing / wrong target.
+
+Then freeze the physician-corrected A2 output, record the hash/action set, and run B1 only on that
+artifact.
+
+B1 stays as written: no discovery, no repair, A_ACTION_GAP, state triples with phrase+span.
+
+This is a review gate, not another model pass. Do not rerun A2 prompt tuning or union runs.
+
+No C/render change now; record the signer’s typed-compiler constraint for later.
+
+No acceptance, production change or Phase 0.
+
