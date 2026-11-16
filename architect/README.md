@@ -21,7 +21,8 @@ a Gate-0 artifact, and not an implementation branch.
 - `recommendations/001-ingestion-evidence-ledger.md` — ingestion boundary and Evidence Ledger contract.
 - `recommendations/002-a-contract-repair.md` — repair A; source registry, assertion domain, evidence
   state and action lane.
-- `recommendations/003-next-structural-step.md` — patch B threshold, defer A polarity, gate C.
+- `recommendations/003-next-structural-step.md` — earlier decision; superseded on A polarity.
+- `recommendations/004-revised-next-step.md` — patch B threshold, quarantine A polarity, gate C.
 
 ## Status
 
