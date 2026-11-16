@@ -1,6 +1,6 @@
 # FILE A — SOURCE-LOCAL INGESTION
 
-**Experimental version:** A-SOURCE-LOCAL-INGESTION-V1
+**Experimental version:** A-SOURCE-LOCAL-INGESTION-V2
 
 ## Purpose
 
@@ -11,7 +11,7 @@ A is ingestion only.
 
 It answers:
 
-> What does each source record actually say, locally, with what exact source pointer and explicit state?
+> What does each source record actually say, locally, with what exact source pointer and source-local wording?
 
 A does **not** decide whether different records describe:
 - the same event;
@@ -53,7 +53,7 @@ One complete canonical `SCRIBE_EVIDENCE_V2_2` packet only.
 ## Output
 
 ```text
-@@HANDOFF A_SOURCE_LOCAL_INGESTION_V1
+@@HANDOFF A_SOURCE_LOCAL_INGESTION_V2
 
 SEMANTIC_SPANS
 
@@ -77,17 +77,14 @@ ACTION_SPAN A001
   selector=<literal substring from that exact record>
   target=<source-local target>
   operation=<source-local action wording>
+  action_phrase=<exact substring of selector expressing this action>
   speaker_source=<raw SPK/source label>
   local_identity=<only if explicitly established by this source-local record>
   provenance=<explicit nested provenance if stated in this record>
   setting=<explicit source-local setting if stated>
   time=<explicit source-local time if stated>
-  decision=<considered|planned|recommended|continue|discontinue|hold|not_indicated|deferred>
-  execution=<not_started|ordered|reported_performed|performed|held|resumed|stopped|canceled>
-  response=<agrees|declines|undecided|prefers_alternative>
-  result=<unavailable|pending|preliminary|final>
   condition=<explicit source-local condition if stated>
-  unresolved=<source-local ambiguity/garble/limitation>
+  unresolved=<source-local action identity/wording ambiguity>
 
 @@END
 ```
@@ -336,63 +333,47 @@ should be split into separate action spans when downstream action identity diffe
 
 Do not combine them merely because they are in one source sentence.
 
-## Action fields
+## Action wording only — no normalized state in A
 
-Preserve only the state explicitly supported by the local source wording.
+A2 preserves the source-local action identity and wording. It does **not** classify that wording into
+decision/execution/response/result state.
 
-### decision
-- `considered`
-- `planned`
-- `recommended`
-- `continue`
-- `discontinue`
-- `hold`
-- `not_indicated`
-- `deferred`
+Required action wording fields:
+- `selector` — exact source substring containing the action;
+- `target` — source-local action target;
+- `operation` — source-local action wording;
+- `action_phrase` — exact substring of `selector` expressing this one action.
 
-### execution
-- `not_started`
-- `ordered`
-- `reported_performed`
-- `performed`
-- `held`
-- `resumed`
-- `stopped`
-- `canceled`
+Do not emit:
+- `decision=`;
+- `execution=`;
+- `response=`;
+- `result=`;
+- `raw_state_phrases=`;
+- any equivalent normalized action-state field.
 
-### response
-- `agrees`
-- `declines`
-- `undecided`
-- `prefers_alternative`
+Words such as `plan`, `need`, `recommend`, `started`, `continue`, `hold`, `stop`, or
+`discontinue` remain source wording inside `selector` / `action_phrase`. A does not map them to a
+state category.
 
-### result
-- `unavailable`
-- `pending`
-- `preliminary`
-- `final`
+If the source-local action identity or wording is ambiguous:
+- preserve the exact selector and action phrase when possible;
+- describe only that source-local ambiguity in `unresolved`;
+- do not resolve it through a state enum.
 
-Unknown fields remain absent.
-
-Do not fill a template.
+Normalized action-state interpretation and cross-record action episode grouping belong to B1.
 
 ## Hard action invariants
 
-- `plan` does not imply `ordered`;
-- `recommended` does not imply `ordered`;
-- `ordered` does not imply `performed`;
-- `started on drip` in a report supports `reported_performed`;
-- a test not yet started does not automatically have a pending result;
-- `discontinued` for one local action does not establish prior administration;
-- `continue Keppra` is a local decision action;
+- one ACTION_SPAN = one source-local action identity;
+- materially distinct targets/actions in one record must be split;
+- CT, labs, and urinalysis are separate actions when all are present;
+- EKG and urine testing are separate actions when both are present;
+- blood testing, urine testing, and monitoring are separate actions when all are present;
+- medication administration, current load, continuation, hold, and discontinuation remain separate source-local actions when separately stated;
+- safety/driving/activity counseling is action content and belongs in A2 rather than being duplicated as a non-action semantic span;
+- `action_phrase` must be an exact contiguous substring of `selector`;
 - no cross-record action episode grouping occurs in A.
-
-If exact state is ambiguous:
-- preserve the literal selector;
-- omit the uncertain state field;
-- explain in `unresolved`.
-
-Do not force an enum.
 
 ---
 
@@ -466,8 +447,8 @@ Before returning:
 5. raw speaker/source labels are preserved;
 6. no global SPK identity mapping appears;
 7. `not on file` / `not documented` is never converted to negation;
-8. action spans contain only source-local action state;
-9. unknown action state fields remain absent;
+8. action spans contain source-local action identity/wording only and no normalized state enums;
+9. every action_phrase is a literal substring of its selector;
 10. materially distinct actions in one record are split;
 11. current exam/workup/meds/history/safety/reasoning are preserved when material;
 12. no cross-record relationship is asserted;
