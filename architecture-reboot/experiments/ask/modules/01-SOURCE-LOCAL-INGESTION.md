@@ -367,10 +367,9 @@ Normalized action-state interpretation and cross-record action episode grouping 
 
 - one ACTION_SPAN = one source-local action identity;
 - materially distinct targets/actions in one record must be split;
-- CT, labs, and urinalysis are separate actions when all are present;
-- EKG and urine testing are separate actions when both are present;
-- blood testing, urine testing, and monitoring are separate actions when all are present;
-- medication administration, current load, continuation, hold, and discontinuation remain separate source-local actions when separately stated;
+- distinct diagnostic tests/procedures in one record remain separate actions when their downstream identities differ;
+- distinct medication actions in one record remain separate when their targets or operations differ;
+- administration, loading, continuation, hold, discontinuation, and other materially different medication actions remain separate when separately stated;
 - safety/driving/activity counseling is action content and belongs in A2 rather than being duplicated as a non-action semantic span;
 - `action_phrase` must be an exact contiguous substring of `selector`;
 - no cross-record action episode grouping occurs in A.
