@@ -5190,3 +5190,28 @@ record-ID-only census; do not restore old A.
 
 No Scribe categories, selectors, enums, validator, C. No acceptance or production change.
 
+
+
+## 2026-11-15 · DeepSeek · internal B coverage READY; A closure deferred
+
+INTERNAL COVERAGE FOLLOW-UP READY TO RUN.
+
+Clean test: two fresh runs, census before synthesis, record IDs only, no selectors/polarity/action state/
+problems, census emitted with synthesis, both must pass coverage/ID/body/action/provenance/stance/burden.
+
+Guardrail: emitted SOURCE_COVERAGE must be the exact census used for synthesis; no post-hoc census.
+
+A CLOSURE: do not accept yet. The proposed pre-B coverage/action validator is a separate runtime stage.
+The B-internal census is the smaller test of the same function.
+
+Order:
+1. Run COV1/COV2.
+2. Both pass -> retire old A; no pre-B validator.
+3. Census fails repeatedly -> build minimal read-only pre-B coverage/action validator.
+4. Do not close A on the proposal alone.
+
+If pre-B validator is built: record IDs only, no selectors/copied text/rewriting/reconciliation/problems/
+sections.
+
+No C/selectors/old A semantics/enums. No acceptance or production change.
+
