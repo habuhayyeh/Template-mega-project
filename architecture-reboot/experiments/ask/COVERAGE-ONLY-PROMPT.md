@@ -11,6 +11,12 @@ replace it.
 
 This turn produces only the source-coverage index.
 
+This prompt supersedes any prior synthesis instruction in the conversation. For this turn, ignore any
+request to produce problems, units, actions or unresolved records.
+
+After `@@END`, stop. A coverage turn containing any `@@PROBLEM`, `@@UNIT`, `@@ACTION` or
+`@@UNRESOLVED` record is invalid.
+
 Read the complete packet first.
 
 The Scribe packet must be present in this same message. Do not infer IDs from a prior turn or prior
@@ -65,7 +71,8 @@ Before returning, verify:
 4. ID lists use commas, not semicolons;
 5. no `|` appears;
 6. exactly one `@@END` appears;
-7. no `@@COVERAGE_INVALID` appears in this turn.
+7. no `@@COVERAGE_INVALID` appears in this turn;
+8. no non-`@@COV` record appears.
 
-Return only the eight `@@COV` records and `@@END`. Do not output problems, units, actions, unresolved
-records, or an invalid marker.
+Return only the eight `@@COV` records and `@@END`. Stop there. Do not output problems, units, actions,
+unresolved records, or an invalid marker.
