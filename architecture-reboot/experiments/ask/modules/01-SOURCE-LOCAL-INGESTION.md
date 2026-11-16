@@ -172,15 +172,26 @@ Do not:
 
 If one record contains multiple materially distinct assertions, create multiple spans from that same record.
 
+A split is **required** when clauses would need different:
+- polarity;
+- certainty;
+- attribution/provenance;
+- assertion type;
+- material role.
+
+Do not assign one polarity/certainty/provenance field across a selector containing clauses with different
+values.
+
 Examples requiring a split when clinically relevant:
 - question + answer-like statement in one record;
+- a negated finding + a separate affirmed finding;
 - result + management action;
 - several different historical referents;
 - several action targets;
 - separate current exam domains when downstream use differs materially.
 
 This is not global atomicization.
-Split only when failing to split would lose a clinically meaningful distinction.
+Split only when failing to split would lose or invert a clinically meaningful distinction.
 
 ## Assertion type
 
@@ -278,7 +289,15 @@ Do not strengthen certainty from:
 - section title;
 - repetition;
 - management intensity;
-- clinical plausibility.
+- clinical plausibility;
+- the fact that a diagnosis/topic was mentioned, discussed, or "brought up."
+
+A topic mention without an epistemic qualifier has `certainty=unstated`.
+
+Hedging a quantity or duration (for example "maybe 1-2 minutes," "about," "roughly") does not by itself
+make the underlying clinical assertion `possible`; preserve the estimate wording and keep epistemic
+certainty `unstated` unless the speaker separately qualifies whether the event/diagnosis itself is
+possible/likely/suspected/unlikely.
 
 ## Material role
 
