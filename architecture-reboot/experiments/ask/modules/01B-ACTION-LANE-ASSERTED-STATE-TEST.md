@@ -104,24 +104,6 @@ Hard rules:
 - a future test does not automatically have result unavailable/pending;
 - ambiguous state stays absent; use `unresolved` if needed.
 
-Examples:
-
-```text
-selector=Plan: CT head, basic labs, urinalysis
-action_phrase=Plan
-ASSERTED_STATE field=decision value=planned phrase=Plan
-```
-
-No execution or result state is emitted unless separately stated in the same selector.
-
-```text
-selector=started on a Keppra drip
-action_phrase=started on
-ASSERTED_STATE field=execution value=reported_performed phrase=started on
-```
-
-No decision or result state is emitted.
-
 ## Action inclusion
 
 Include material source-local assertions of:
