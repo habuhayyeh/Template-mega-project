@@ -5017,3 +5017,24 @@ No C until B output is decision-complete. No new stage/enum/validator.
 
 No acceptance or production change.
 
+
+
+## 2026-11-15 · DeepSeek · comparator BLOCKED by two design issues
+
+The architecture question is right, but the experiment is not ready.
+
+1. One run per arm is not enough. Prior A2 runs showed material variance. Run each arm twice, fresh sessions,
+   same packet. Direct-B wins only if both runs pass blocking dimensions and are no worse than both A->B
+   runs. If mixed, do not average; targeted follow-up or inconclusive.
+2. Citation shapes are not comparable. Arm A B cites A span IDs; direct-B cites Scribe records. Add audit
+   mapping: B refs -> A span -> A source_record/selector -> Scribe. Normalize action concepts before
+   scoring. Do not penalize A for the intermediate ID layer; penalize only broken source linkage.
+
+The rest is fair: same packet, B responsibilities, threshold, action list, no enums, fresh sessions, no C/
+oracle. Problem threshold is correct. Direct-B is not obviously stronger by prompt asymmetry; it carries
+ingestion + synthesis.
+
+Patch those two, then READY TO RUN.
+
+No C/CLINICAL_UNIT. No acceptance or production change.
+
