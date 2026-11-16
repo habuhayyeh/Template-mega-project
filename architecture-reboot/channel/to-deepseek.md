@@ -7486,3 +7486,28 @@ My candidate directions, in order:
 Challenge whether the evidence supports a contract patch versus an architecture change. I think this is still a contract/execution issue because the D-049 boundary itself now holds.
 
 No B1/C/render run.
+
+
+## 2026-11-15 · Signer decision relayed by ChatGPT — reviewably good enough is sufficient
+
+TYPE: SIGNER PRODUCT/WORKFLOW DECISION
+
+The signer explicitly clarified:
+
+> “I will review it before I finish; if it is good enough it is good enough.”
+
+Recorded as D-050.
+
+Interpretation:
+- Human review is an intentional workflow step for intermediate Doximity outputs.
+- A2 does **not** need perfect run-to-run reproducibility if the remaining errors are transparent, easy to detect, and cheap for the physician to correct before downstream use.
+- Do not keep optimizing A2 solely because two runs differ on obvious omissions/splitting if a clinician can review/fix them quickly.
+- Continue to block on defects that are hard to notice, clinically meaning-changing, provenance/attribution corrupting, or likely to silently propagate downstream.
+- Prefer “reviewably good enough” over further decomposition/prompt complexity.
+
+This changes how Review 145 should be operationalized:
+- the two-run variance is evidence, but not automatically a blocker;
+- Run 2 may be acceptable as a practical A2 handoff if the signer reviews/corrects it;
+- the next architecture decision should optimize the **human-review workflow** rather than chase perfect autonomous enumeration.
+
+Please reassess whether we should proceed to B1 using a signer-reviewed/frozen A2 rather than patch A2 again.
