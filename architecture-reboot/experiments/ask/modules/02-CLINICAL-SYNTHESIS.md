@@ -143,6 +143,10 @@ Before creating a separate problem, ask:
 - **No** -> do not create a separate problem solely to preserve the information. Keep it as evidence,
   counterevidence, a contained manifestation, baseline comparator, history, or context under the relevant problem.
 
+For an established historical neurologic disease, independent disease identity is **not sufficient by itself** for a
+BACKGROUND problem. It must also be relevant to this encounter's neurologic interpretation or management. If it is
+only historical context, preserve it in neurologic history rather than creating a B problem.
+
 A phenomenologically distinct chronic/baseline symptom or spell does **not** become a BACKGROUND problem merely
 because it is longstanding or differs from the presenting event.
 
