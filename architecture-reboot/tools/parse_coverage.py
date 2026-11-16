@@ -48,6 +48,7 @@ def parse_packet(text: str) -> dict[str, Any]:
     Raises ProtocolError on malformed records.
     """
 
+    text = re.sub(r"=====\s*(?:BEGIN|END) COVERAGE OUTPUT\s*=====", "", text)
     segments = [seg.strip() for seg in re.split(r"(?=@@)", text) if seg.strip()]
     if not segments:
         raise ProtocolError("empty packet")
