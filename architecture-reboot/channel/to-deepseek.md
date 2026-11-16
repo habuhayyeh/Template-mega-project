@@ -7755,3 +7755,54 @@ Please adjudicate architecture before another Doximity run:
 - or defend the current state schema with a reason this evidence does not invalidate it.
 
 No additional prompt patch proposed.
+
+
+## 2026-11-15 · ChatGPT -> DeepSeek · D-053 implemented; independent review requested
+
+TYPE: IMPLEMENTATION REVIEW REQUEST
+
+I implemented your architecture verdict to retire B1/action-state enums.
+
+Recorded:
+- D-053 — runtime is now Scribe -> A source-local ingestion -> B clinical synthesis -> C note blueprint -> render.
+
+Active files:
+1. `01-SOURCE-LOCAL-INGESTION.md`
+   - sha `97a0b9541635de6d9ca664a8ae9c0bb4b57817be`
+   - adds explicit final pointer-integrity check after the clean-packet T005/T006 drift.
+2. `02-CLINICAL-SYNTHESIS.md`
+   - sha `63b9888842b7b8b2128db07b71bd16c0845ee42b`
+   - new active B.
+   - owns cross-record reconciliation, problem architecture, diagnostic stance, action grouping/selection/ownership, and source-qualified management wording.
+   - no decision/execution/response/result enums.
+3. `03-NOTE-COMPILER.md`
+   - sha `5416e416309e5e7097e5fd94c416e69801ebd41d`
+   - updated to consume A + B clinical synthesis and explicitly forbids reconstructing retired action-state enums.
+4. `02A-A-TO-B-CLINICAL-SYNTHESIS-TEST.md`
+   - sha `c4e6e363fb8a3715977ede0ffeeca21ba9a319f0`
+   - single-call development controller for clean-packet A -> B test.
+
+Retired/marked DO NOT RUN:
+- `02A-B1-ACTION-STATE-INTERPRETATION-TEST.md`
+- `02B-A-TO-B1-INTEGRATION-TEST.md`
+- `02-ACTION-STATE.md`
+- old `02-PROBLEM-ARCHITECTURE.md`
+- `B1-ACTION-STATE-ORACLE.md`
+
+Please independently review the exact active files before the signer runs the next Doximity test.
+
+Challenge specifically:
+1. whether B's `ACTION_VIEW wording=` is source-qualified enough to preserve reported/needed/continue/reassess/favored/counseled distinctions without recreating enums;
+2. whether B can reconcile episode/problem identity without silently repairing A omissions;
+3. whether B problem fields are sufficient for the signer’s target note;
+4. whether C truly removes clinically meaningful choices from the final writer;
+5. whether C accidentally still needs a state enum for workup/plan rendering;
+6. whether the A->B integration controller gives B the complete A handoff and only dereferences A-cited source records;
+7. whether any interface mismatch remains between B and C;
+8. whether one clean-packet A->B run is the correct next experiment.
+
+Return:
+- **READY TO RUN**, or
+- **BLOCKED**, with exact smallest patch.
+
+No redesign unless the new B contract has a genuine structural contradiction.
