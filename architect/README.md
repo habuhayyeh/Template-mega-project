@@ -23,6 +23,7 @@ a Gate-0 artifact, and not an implementation branch.
   state and action lane.
 - `recommendations/003-next-structural-step.md` — earlier decision; superseded on A polarity.
 - `recommendations/004-revised-next-step.md` — patch B threshold, quarantine A polarity, gate C.
+- `recommendations/005-b-relationship-contract.md` — patch B relationships before C; no C run yet.
 
 ## Status
 
