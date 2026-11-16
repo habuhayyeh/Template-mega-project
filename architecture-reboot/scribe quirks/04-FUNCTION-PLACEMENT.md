@@ -337,30 +337,38 @@ A pre-synthesis coverage census gives B a recovery map without recreating the ol
 
 # 7. Where the coverage census should live
 
-Current preferred hypothesis:
+**Current test order — architecture adjudication, not yet empirical proof:**
+
+First test the census as an internal Phase 1 of B:
 
 ```text
 SCRIBE
-  source-local evidence records
-  +
-  packet-level coverage census
-  +
-  packet-level action census
-        |
-        v
+   |
+   v
 B
+  Phase 1: SOURCE_COVERAGE census
+  Phase 2: clinical synthesis
+   |
+   v
+C
 ```
 
-This is preferable to restoring old A if Scribe can emit the census reliably.
+Why test B first:
 
-Reason:
+- it adds no new runtime call;
+- it isolates enumeration from synthesis inside one invocation;
+- it does not add clinical/note-function categories to Scribe before they are proven necessary there;
+- it tests the smallest explanation of the record-ID-only direct-B failures.
 
-- Scribe already owns record boundaries;
-- the census is nonreconciliatory;
-- it can be performed after extraction in the same invocation;
-- it avoids another generative pass.
+If B's internal census still fails reproducibly, the next candidate is a minimal record-ID-only coverage pass.
 
-This remains an architecture hypothesis until directly tested.
+Do **not** restore old A.
+
+Do **not** move the census into Scribe merely because Scribe owns source boundaries.
+
+Scribe integration remains a possible later design if evidence shows that coverage enumeration must occur during ingestion.
+
+The placement question is therefore **under active experiment**, not settled.
 
 ---
 
