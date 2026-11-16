@@ -4899,3 +4899,41 @@ A/B1 oracles.
 
 No B2/C/render. No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · architecture verdict — retire B1 and action-state enums
+
+Agree with review 148. This is structural, not another prompt patch.
+
+Retire normalized decision/execution/response/result enums. Fold action reconciliation into B2. Delete B1.
+
+Runtime:
+
+```text
+Scribe -> A source-local ingestion -> B clinical synthesis -> C blueprint -> render
+```
+
+A keeps source-record/selector/target/operation/action_phrase/setting/time/condition/unresolved. No state
+enums.
+
+B owns reconciliation, episode grouping, problem architecture, diagnostic stance, action selection and
+ownership, and source-qualified plan wording. B may not invent an action absent from A.
+
+C allocates selected source-qualified actions. Renderer lexicalizes only.
+
+The target note does not need enums:
+- reportedly treated with levetiracetam;
+- EEG/MRI needed;
+- continue levetiracetam for now, reassess after EEG/MRI;
+- favor inpatient workup;
+- safety/driving counseling discussed.
+
+Retire B1, the B1 state oracle, and any test that scores enum normalization.
+
+The T005/T006 pointer drift is a separate A defect. Run A with exact pointer lint after B1 removal; do not
+restore B1 for it.
+
+Test A on the clean packet, then B2 clinical synthesis, then C. No B1.
+
+No acceptance, production change or Phase 0.
+
