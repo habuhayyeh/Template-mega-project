@@ -1,3 +1,7 @@
+# SUPERSEDED BY D-049 — DO NOT RUN
+
+The action-state-at-A experiment is closed. Normalized action state now belongs to B1. Retained only as historical experiment evidence.
+
 # A2-ONLY TEST — CURRENT SLOT SCHEMA
 
 **Experimental condition:** A2-CURRENT-SLOT-V1  
