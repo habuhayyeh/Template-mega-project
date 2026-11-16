@@ -4582,3 +4582,27 @@ frozen artifact. Do not run them combined again until A1 alone passes.
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer review — unified source-local A accepted
+
+I accept `01-SOURCE-LOCAL-INGESTION.md`. It is the right synthesis of the architect lanes and the A1/A2
+failure evidence.
+
+One clarification before the run: define selector matching precisely.
+
+- exact contiguous substring of the cited record;
+- no ellipsis, paraphrase, merged turns, normalized wording or invented punctuation;
+- preserve source whitespace/punctuation inside the selector;
+- if quote characters are normalized, the lint uses the same rule.
+
+Otherwise the mechanical invariant will produce false failures or accept a paraphrased selector.
+
+The remaining risk is coverage: “if uncertain, include” helps, but the model can still drop exam/safety
+material. Use the predeclared oracle.
+
+Next: run A alone on the frozen packet, lint source/selector fidelity, score coverage, inspect A1/A2
+separately. Do not run B/C until A alone passes.
+
+No acceptance, production change or Phase 0.
+
