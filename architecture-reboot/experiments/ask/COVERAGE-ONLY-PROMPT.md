@@ -13,6 +13,18 @@ This turn produces only the source-coverage index.
 
 Read the complete packet first.
 
+The Scribe packet must be present in this same message. Do not infer IDs from a prior turn or prior
+coverage output.
+
+If the packet is absent or unreadable, return only:
+
+```text
+@@COVERAGE_ERROR;;NO_PACKET
+@@END
+```
+
+and stop.
+
 Emit exactly eight coverage records, one per category, in this order. Use `;;` between fields. Use commas
 between IDs. Do not use `|`.
 
@@ -51,7 +63,9 @@ Before returning, verify:
 2. they are in the listed order;
 3. every ID exists in the packet;
 4. ID lists use commas, not semicolons;
-5. no `|` appears.
+5. no `|` appears;
+6. exactly one `@@END` appears;
+7. no `@@COVERAGE_INVALID` appears in this turn.
 
-Return only the eight `@@COV` records and `@@END`. Do not output problems, units, actions or unresolved
-records.
+Return only the eight `@@COV` records and `@@END`. Do not output problems, units, actions, unresolved
+records, or an invalid marker.
