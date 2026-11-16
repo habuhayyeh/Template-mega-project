@@ -28,11 +28,13 @@ Input concepts:
 - current transient episodes are being evaluated as the primary problem;
 - patient also has an established prior ischemic stroke with persistent residual hemiparesis;
 - the stroke is an independently established neurologic disease identity;
-- current notes carry the stroke as relevant neurologic history even though it is not the reason for consultation.
+- the residual deficit materially changes interpretation of the current examination/functional baseline, so the prior
+  stroke is relevant to this encounter rather than merely historical context.
 
 Expected architecture:
 - primary problem for the current transient episodes;
-- separate BACKGROUND problem for established prior ischemic stroke;
+- separate BACKGROUND problem for established prior ischemic stroke because it has both independent disease identity
+  and current encounter relevance;
 - residual hemiparesis remains contained under the stroke unless it has its own independent current assessment question.
 
 Failure:
