@@ -4722,3 +4722,43 @@ No B/C, active-A replacement or production change.
 
 No acceptance. No Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer verdict — action normalization moves to B1
+
+Yes: typed action-state normalization is too brittle at A.
+
+The exact-phrase rule proves the phrase exists, not that it entails the state. That is why `Plan` became
+`ordered`, `need EEG` became `not_started`, and `keep on Keppra` became `reported_performed`.
+
+Do not patch A with asserted-state enums. Remove all state enums from A2.
+
+A2 should preserve:
+
+- source_record;
+- selector;
+- target;
+- operation;
+- action_phrase;
+- raw_state_phrases (zero or more exact source phrases, no enum);
+- speaker/source, local identity, setting, time, condition, unresolved.
+
+No `decision=`, `execution=`, `response=`, `result=` in A.
+
+B1 owns state interpretation: decision/execution/response/result, episode grouping, unresolved. Every
+state must cite an A phrase and source record. B1 may say unresolved when the phrase does not entail a
+state.
+
+Action splitting stays in A2: CT vs labs vs UA, EKG vs urine, etc. That is source-local identity, not state
+interpretation. The run failed it; fix it there.
+
+Do not score the translated current-slot block; it was not independent. The asserted arm alone rejects
+enums at A.
+
+Next: remove A2 enums, preserve raw action/state phrases, test B1 action interpretation against the same
+oracle. If B1 also fails, the fallback is source-qualified wording + unresolved, not another validator.
+
+No B/C progression before B1 action interpretation is tested.
+
+No acceptance, production change or Phase 0.
+
