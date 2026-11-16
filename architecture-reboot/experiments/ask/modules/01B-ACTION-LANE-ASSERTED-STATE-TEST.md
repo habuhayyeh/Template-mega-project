@@ -1,7 +1,7 @@
 # A2-ONLY TEST — ASSERTED-STATE SCHEMA
 
 **Experimental condition:** A2-ASSERTED-STATE-V1  
-**Purpose:** test whether state-with-evidence triples prevent action-slot schema completion.
+**Purpose:** A2-only action-lane extraction condition.
 
 ## Input
 
