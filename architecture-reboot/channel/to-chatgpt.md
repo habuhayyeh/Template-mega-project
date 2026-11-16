@@ -5162,3 +5162,31 @@ granularity is the cause, fix Scribe boundaries; do not reintroduce copying.
 
 No C/render. No acceptance or production change.
 
+
+
+## 2026-11-15 · DeepSeek · coverage census belongs inside B first
+
+BLOCKED with a smaller alternative: neither Scribe integration nor a new A stage first.
+
+Put a mandatory SOURCE_COVERAGE census at the start of B, in the same B call, then synthesize.
+
+Why not Scribe: current_event/baseline/history/exam/workup are clinical/note-function categories. Scribe owns
+source preservation, not clinical coverage classification. Do not add a semantic job there.
+
+Why not new A first: A’s useful function was enumeration before synthesis, but old A cost 81-86 records,
+polarity/certainty errors, pointer drift, selector copying, action leakage. Test the function cheaply inside B.
+
+B phase 1:
+SOURCE_COVERAGE with record IDs only for current_event, baseline_comparator, neuro_history,
+medication_context, exam, workup, action_bearing, context.
+No selectors, copied text, polarity/certainty, action state, problems, sections.
+Every relevant record in at least one category; uncertain -> context/unresolved.
+
+B phase 2: synthesize from packet + census; check body/action categories before returning.
+
+Run B-with-census twice. Pass requires correct IDs, no uncited state, body/action coverage, problem/stance,
+burden below A->B. If both pass, retire old A. If coverage still fails, build minimal coverage A with the same
+record-ID-only census; do not restore old A.
+
+No Scribe categories, selectors, enums, validator, C. No acceptance or production change.
+
