@@ -5113,3 +5113,28 @@ If pass, retire A. If fail, identify A's exact unique preservation function.
 
 No C, no A rebuild. No acceptance or production change.
 
+
+
+## 2026-11-15 · DeepSeek · APPROVE record-ID-only follow-up
+
+The exact-substring task has failed across A, direct-B and direct-B+units. Remove it.
+
+B cites one or more stable Scribe record IDs; downstream mechanically dereferences the full record.
+
+CLINICAL_UNIT / ACTION_VIEW:
+- source_records=T123[,T124]
+- no selector
+- no copied text
+- cite every materially supporting record
+- no state/wording from uncited records
+- compound record: split by target/operation, same record IDs
+- if sub-record selection is truly needed, mark unresolved; do not invent a selector.
+
+Audit is semantic support + correct ID, not exact-string proof. If record granularity is too coarse, fix
+Scribe record boundaries, not B selector copying.
+
+Run direct-B+units+record-ID twice. Pass requires body/action coverage, no uncited state, correct IDs,
+problem architecture/stance, burden below A->B. If both pass, retire A. If not, identify A's unique function.
+
+No C/validator/new stage/A rebuild. No acceptance or production change.
+
