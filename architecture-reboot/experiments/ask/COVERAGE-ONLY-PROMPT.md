@@ -34,6 +34,15 @@ and stop.
 Emit exactly eight coverage records, one per category, in this order. Use `;;` between fields. Use commas
 between IDs. Do not use `|`.
 
+The first output line must be:
+
+```text
+@@COV;;current_event_records;;<IDs or NONE>
+```
+
+If the packet contains any current event, episode, spell, collapse, or recurrent-event records,
+`current_event_records` must not be NONE.
+
 ```text
 @@COV;;current_event_records;;<IDs or NONE>
 @@COV;;baseline_comparator_records;;<IDs or NONE>
@@ -54,7 +63,8 @@ Rules:
 - medications/supplements go under medication_context;
 - tests, results and result availability go under workup;
 - only management actions go under action_bearing: tests, treatments, consults, disposition, precautions,
-  counseling;
+  counseling; include a record there even when it also belongs under workup or medication_context;
+- include current treatment/continuation records under medication_context as well as action_bearing;
 - exclude records containing only reasoning, assessment statements, or result/status descriptions;
 - if uncertain whether a record contains a management action, include it in action_bearing and context;
 - if uncertain between other categories, include it in context;
