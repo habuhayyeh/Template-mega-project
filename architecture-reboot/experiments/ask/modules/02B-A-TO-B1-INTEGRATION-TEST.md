@@ -1,3 +1,7 @@
+# SUPERSEDED BY D-053 — DO NOT RUN
+
+Normalized action-state/B1 architecture is retired. Active path: `01-SOURCE-LOCAL-INGESTION.md` -> `02-CLINICAL-SYNTHESIS.md` -> `03-NOTE-COMPILER.md`.
+
 # A -> B1 INTEGRATION TEST
 
 **Experimental version:** A-B1-INTEGRATION-V1  
