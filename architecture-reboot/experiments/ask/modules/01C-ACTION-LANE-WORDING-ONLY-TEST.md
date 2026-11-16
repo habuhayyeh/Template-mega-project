@@ -1,3 +1,7 @@
+# DEVELOPMENT ISOLATION TEST — NOT THE FINAL STAGE A RUNTIME FILE
+
+Use `01-SOURCE-LOCAL-INGESTION.md` for the full Stage A runtime. This file remains only for isolated A2 diagnostics.
+
 # A2-ONLY TEST — SOURCE-LOCAL ACTION WORDING
 
 **Experimental condition:** A2-ACTION-WORDING-V1  
