@@ -63,7 +63,8 @@ def parse_packet(text: str) -> dict[str, Any]:
         if not segment.startswith("@@"):
             raise ProtocolError(f"record does not start with @@: {segment[:80]!r}")
 
-        fields = [field.strip() for field in segment.split("|")]
+        separator = ";;" if ";;" in segment else "|"
+        fields = [field.strip() for field in segment.split(separator)]
         marker = fields[0][2:]
         if marker not in RECORD_TYPES:
             raise ProtocolError(f"unknown record marker: {fields[0]!r}")
