@@ -32,14 +32,91 @@ Return the direct-B handoff unchanged.
 
 ## Execution control
 
+Run **each arm twice**:
+
+- Arm A1 — current A->B in a fresh Ask conversation;
+- Arm A2 — current A->B in a second fresh Ask conversation;
+- Arm B1 — direct-B in a fresh Ask conversation;
+- Arm B2 — direct-B in a second fresh Ask conversation.
+
 Use:
-- the exact same clean Scribe packet in both arms;
-- separate fresh Doximity Ask conversations;
-- no prior arm output in the other conversation;
+- the exact same clean Scribe packet in all four runs;
+- a fresh Doximity Ask conversation for every run;
+- identical files/prompt within each arm;
+- no prior run output in any later conversation;
 - no comparator/oracle attached to Doximity;
 - no C/compiler/render files.
 
-Do not manually correct either output before comparison.
+Do not manually correct any output before comparison.
+
+The two runs per arm are the reproducibility axis. Do not average away material failures.
+
+## Audit normalization before scoring
+
+The two arms use different internal reference shapes. Normalize them to the same canonical evidence layer before
+comparing fidelity.
+
+### Arm A mapping
+
+Arm A B-output may cite A span/action IDs.
+
+For every clinically meaningful B reference:
+
+```text
+B reference
+  -> A SPAN/ACTION_SPAN ID
+  -> A source_record
+  -> A selector/action_phrase
+  -> exact Scribe record
+```
+
+Score the final Scribe linkage, not the presence of the intermediate A ID.
+
+Do **not** penalize Arm A merely for using an intermediate handle.
+
+Penalize Arm A only when:
+- the A handle is missing;
+- the A handle points to the wrong source record;
+- selector/action phrase does not belong to that record;
+- B cites an A handle whose source meaning does not support the B claim/action;
+- a clinically material source item was lost before B.
+
+### Direct-B mapping
+
+For every clinically meaningful direct-B reference:
+
+```text
+B reference
+  -> source_record
+  -> exact selector
+  -> exact Scribe record
+```
+
+Apply the same source-support standard.
+
+### Canonical action-concept normalization
+
+Compare action coverage by **clinical action concept**, not generated IDs or exact wording.
+
+Normalize each arm to these concepts before scoring:
+
+- ship blood testing;
+- additional ship testing;
+- ship levetiracetam treatment;
+- EEG evaluation;
+- MRI brain evaluation;
+- CT head completion/result-availability status;
+- current levetiracetam continuation with reassessment after EEG/MRI;
+- inpatient-vs-outpatient evaluation with inpatient preference;
+- seizure/LOC safety counseling;
+- driving restriction counseling.
+
+Equivalent source-faithful wording counts as the same action concept.
+
+Do not reward or penalize an arm for:
+- ACTION_SPAN vs ACTION_VIEW numbering;
+- one lexical target label versus an equivalent one;
+- harmless ordering differences.
 
 ## Scoring dimensions
 
@@ -174,18 +251,21 @@ This dimension is nonblocking by itself, but matters when clinical fidelity is e
 
 ### Prefer direct-B and retire A if:
 
-Direct-B:
-- passes every blocking dimension;
-- has no more hidden semantic errors than A->B;
-- has equal or better action/provenance coverage;
-- produces equivalent or better problem architecture/diagnostic stance;
-- materially reduces intermediate representation burden.
+**Both** direct-B runs:
+- pass every blocking dimension;
+- have no more hidden semantic errors than **either** A->B run;
+- have equal or better normalized action/provenance coverage than both A->B runs;
+- produce equivalent or better problem architecture/diagnostic stance than both A->B runs;
+- materially reduce intermediate representation burden.
+
+A single excellent direct-B run is insufficient if the second has a material failure.
 
 ### Keep A if:
 
-A->B demonstrates a concrete fidelity advantage that direct-B cannot match, especially:
-- better action coverage;
-- better source/provenance fidelity;
+Both A->B runs pass the blocking dimensions and demonstrate a reproducible fidelity advantage that direct-B cannot
+match, especially:
+- better normalized action coverage;
+- better source/provenance linkage;
 - safer separation of clinically distinct source assertions;
 - fewer hidden meaning-changing synthesis errors.
 
@@ -193,8 +273,15 @@ Do **not** keep A merely because it is more structured.
 
 ### Inconclusive
 
-If each arm has different material failures, do not average them. Identify the exact responsibility causing the
-difference and run the smallest targeted follow-up.
+The result is **inconclusive** if:
+- one run within an arm passes and the other has a material blocking failure;
+- each arm has different material failures;
+- direct-B is better on burden but worse on any blocking fidelity dimension;
+- A is better on one material dimension but worse on another.
+
+Do not average material failures into a score.
+
+When inconclusive, identify the exact responsibility causing the difference and run the smallest targeted follow-up.
 
 ## Important
 
