@@ -1,404 +1,256 @@
 # FILE C — NOTE COMPILER
 
-**Experimental version:** C-NOTE-COMPILER-V1
+**Experimental version:** C-NOTE-COMPILER-V2
 
 ## Purpose
 
-Compile the supported semantic state from File A and the problem structure from File B into a complete
-**NOTE_BLUEPRINT** before any final note prose is written.
+Compile the already-decided clinical content from File A and File B into a complete **NOTE_BLUEPRINT**
+before final prose is written.
 
-File C decides **what belongs where, in what order, and with which qualifiers preserved**.
+C decides **where supported content belongs and in what order**.
 
-File C does not reinterpret the source, rebuild problem architecture, or write the final note.
+C must not reopen clinical interpretation, diagnostic stance, action meaning, action ownership, or problem
+architecture.
 
 ## Inputs
 
-Provide all three:
+Provide:
 
-1. File A handoff:
-   - `DECISION_LEDGER`
-   - `ACTION_LANE`
-   - `UNRESOLVED_REGISTER`
+1. complete `A_SOURCE_LOCAL_INGESTION_V2_1`;
+2. complete `B_CLINICAL_SYNTHESIS_V1`;
+3. the canonical `SCRIBE_EVIDENCE_V2_2` packet only for dereference of cited A/B records/selectors.
 
-2. File B handoff:
-   - `PROBLEM_MAP`
-   - `ARCHITECTURE_UNRESOLVED`
+A is authoritative for source-local semantic/action wording and provenance.
 
-3. canonical `SCRIBE_EVIDENCE_V2_2` packet for direct dereference of cited records/selectors.
-
-File A remains authoritative for reconciled source meaning and action state.
-
-File B remains authoritative for problem identity, containment, adoption/currentness, certainty,
-encounter role, causal/contributory relations, problem order, and action ownership.
+B is authoritative for:
+- reconciled clinical interpretation;
+- problem identity and order;
+- diagnostic stance;
+- clinically meaningful counterevidence;
+- action grouping;
+- source-qualified action wording;
+- action ownership.
 
 ## Output
 
 Return `NOTE_BLUEPRINT` only.
 
-Do not write final note prose.
-
 ```text
-@@HANDOFF C_NOTE_BLUEPRINT_V1
+@@HANDOFF C_NOTE_BLUEPRINT_V2
 
 NOTE_BLUEPRINT
 
 SECTION RFC
   ENTRY R001
-    content=<UNIT/ACTION/problem handle + selector>
-    function=<why this belongs in RFC>
-    preserve=<attribution/time/negation/certainty/conflict qualifiers>
+    content=<A/B handles + cited wording>
+    function=<reason Neurology is involved>
+    preserve=<attribution/time/negation/certainty qualifiers>
 
 SECTION HPI
   ENTRY H001
-    content=<UNIT/ACTION IDs + selectors>
+    content=<A semantic spans / B synthesis handles>
     function=<role in current-episode chronology>
-    preserve=<attribution/time/negation/certainty/conflict qualifiers>
+    preserve=<attribution/time/negation/certainty qualifiers>
 
 SECTION NEURO_HX
   ENTRY N001
-    content=<UNIT/ACTION IDs + selectors>
-    function=<why this belongs in neurologic history>
+    content=<A/B handles>
+    function=<neurologic history role>
     preserve=<qualifiers>
 
 SECTION OTHER_PMH
   ENTRY O001
-    content=<UNIT IDs + selectors>
-    function=<why this belongs in other history>
+    content=<A handles>
+    function=<relevant non-neurologic context>
     preserve=<qualifiers>
 
 SECTION MEDS
   ENTRY M001
-    content=<UNIT/ACTION IDs + selectors>
+    content=<A handles>
     function=<presentation/home medication role>
     preserve=<qualifiers>
 
 SECTION EXAM
   ENTRY E001
-    content=<UNIT IDs + selectors>
+    content=<A semantic spans>
     function=<current examination role>
     preserve=<qualifiers>
 
 SECTION WORKUP
   ENTRY W001
-    content=<UNIT/ACTION IDs + selectors>
-    function=<test/workup role>
-    preserve=<performed/result/pending/ordered qualifiers>
+    content=<A semantic/action spans or B ACTION_VIEW>
+    function=<workup role>
+    preserve=<source-qualified status wording>
 
 AP P001
-  problem=<File B problem handle>
-  claim=<File B label + permitted supported status>
-  support=<UNIT IDs / record IDs + selectors>
-  counter=<UNIT IDs / record IDs + selectors>
-  reasoning=<source-supported reasoning handles or none>
-  actions=<ACTION IDs>
-  primary_action_holder=<ACTION IDs>
-  references_only=<shared ACTION IDs rendered elsewhere>
+  problem=<B problem handle>
+  claim=<B problem label + diagnostic stance>
+  support=<A/B evidence handles>
+  counter=<B counterevidence handles>
+  actions=<B ACTION_VIEW handles>
+  preserve=<source-qualified management wording exactly enough to retain meaning>
 
 @@END
 ```
 
-Use only sections and entries supported by the inputs.
-
+Use only supported sections and entries.
 Do not create empty filler entries.
 
 ## Core ownership
 
-File C owns:
-
+C owns:
 - section allocation;
-- reason-for-consult placement;
 - HPI chronology;
-- neurologic-history grouping;
-- other-PMH grouping;
-- medication-at-presentation selection;
-- current-exam selection;
-- workup/result placement;
 - minimum-sufficient evidence selection;
-- counterevidence placement;
-- legitimate cross-section reuse;
-- shared-action placement;
-- A/P composition from already-resolved File B problems.
+- body-section grouping;
+- problem order as already supplied by B;
+- blueprint-level reuse without duplication.
 
-File C does **not** own clinical reinterpretation.
+C does **not** own:
+- new diagnosis;
+- new diagnostic stance;
+- problem identity;
+- PRIMARY/BACKGROUND logic beyond B;
+- action interpretation;
+- action grouping;
+- action ownership;
+- action-state normalization;
+- final prose wording beyond the blueprint's supported content.
 
-## What File C must not do
+## No action-state reconstruction
 
-File C must not:
+The retired decision/execution/response/result enum schema must not reappear.
 
-- change File A polarity, certainty, temporality, attribution, event identity, or action state;
-- change File B problem identity;
-- change File B adoption/currentness;
-- change File B certainty;
-- change File B PRIMARY/BACKGROUND/unresolved role;
-- change containment;
-- create or alter causal/contributory relations;
-- create a new problem;
-- resolve File B `ARCHITECTURE_UNRESOLVED`;
-- convert `encounter_role=unresolved` into PRIMARY or BACKGROUND;
-- infer a final diagnosis from placement;
-- invent source facts;
-- write final prose;
-- rewrite or upgrade a management action.
+Do not convert B source-qualified wording into:
+- ordered;
+- pending;
+- not started;
+- unavailable;
+- performed;
 
-If C detects a missing upstream semantic or architecture decision needed for safe placement, preserve the
-gap rather than silently repairing A or B.
+unless that wording itself is directly supported and already preserved by A/B.
+
+In particular, do not infer:
+- nonperformance from future wording;
+- result pending from lack of review;
+- an order from a recommendation or need;
+- objective administration from a reported administration.
 
 ## RFC
 
-RFC is the source-supported reason Neurology is involved in the encounter.
+RFC is the source-supported reason Neurology is involved.
 
-Use RFC only when the source or resolved architecture actually establishes the reason for consult/service
-involvement.
-
-Do not infer RFC from:
-- the first charted symptom;
-- the most severe historical diagnosis;
-- the first PRIMARY-looking problem;
-- ED chief complaint alone unless it actually represents the neurologic consult reason.
-
-If RFC is not established, omit RFC or preserve the unresolved gap. Do not invent one.
+Do not infer RFC from chart order or severity alone.
 
 ## HPI
 
-HPI represents the **current episode or current neurologic presentation** in clinical chronology.
+HPI should represent the current neurologic presentation in clinical chronology.
 
-Rules:
+Use the minimum sufficient sequence that preserves:
+- onset/context;
+- event evolution;
+- important semiology;
+- awareness/responsiveness;
+- recurrence/clustering;
+- meaningful negative features;
+- source attribution;
+- distinction from baseline phenomena.
 
-- order by event chronology, not source-document order;
-- use the smallest sufficient sequence that preserves clinically meaningful evolution;
-- preserve attribution when events are patient/collateral/outside-report based;
-- preserve uncertainty and conflict;
-- do not insert chronic background merely because it appeared during the interview;
-- do not convert source reasoning into event fact;
-- do not show a planned action as if it occurred.
-
-HPI may legitimately reuse material that also supports A/P when the functions differ.
-
-Cross-section reuse must be purposeful, not duplication by default.
+Do not turn source reasoning into event fact.
 
 ## NEURO_HX
 
-NEURO_HX is disease-centered longitudinal neurologic history.
+Use for relevant longitudinal neurologic history, including prior neurologic diseases or baseline phenomena
+that are distinct from the current HPI chronology.
 
-Use it for established or historically relevant neurologic disease/state not required in the current HPI
-chronology.
-
-Preserve:
-- historical/current distinction;
-- longitudinal status;
-- established consequences when source-supported.
-
-Do not create a separate history item for every manifestation already adequately represented under an
-established neurologic disease.
+Do not create a separate history item for every manifestation.
 
 ## OTHER_PMH
 
-OTHER_PMH carries non-neurologic history that remains relevant to the note but does not belong in
-neurologic history.
-
-Do not promote non-neurologic history into neurologic problem structure merely because it may contextualize
-the encounter.
+Include only non-neurologic material that supports, refutes, contextualizes, or changes interpretation or management
+of the neurologic presentation, or is otherwise required for the note.
 
 ## MEDS
 
-MEDS represents the medication regimen **at presentation / home baseline**, plus only those source-supported
-qualifiers needed to interpret it.
+Represent the medication regimen at presentation/home baseline.
 
-Do not rewrite the presentation medication list based on encounter changes.
-
-Keep distinct:
-- home/presentation medication;
-- recommended change;
-- ordered change;
-- administered treatment;
-- discontinued/held treatment.
-
-Encounter actions belong to A/P/workup placement through File A ACTION IDs, not by rewriting the baseline
-medication section.
+Encounter treatment or plan belongs in A/P through B `ACTION_VIEW` entries, not by rewriting home medications.
 
 ## EXAM
 
-EXAM represents the **current examination** for this encounter.
-
-Rules:
-
-- use current exam findings only;
-- preserve source attribution when exam findings come from an outside source;
-- do not collage old examinations into the current exam;
-- do not convert absence of documentation into a normal finding;
-- do not convert patient report into objective examination.
+Use only current examination findings.
+Preserve source attribution.
+Do not convert patient/collateral report into objective exam.
 
 ## WORKUP
 
-WORKUP must preserve test state.
+Preserve source-qualified wording.
 
-Distinguish:
+Examples of distinctions C must keep intact:
+- outside test reportedly normal;
+- test completed but result not available to Neurology;
+- test needed for further evaluation.
 
-- result available;
-- test performed but result pending/unavailable;
-- test ordered/planned but not performed;
-- outside result reported by source;
-- no result available.
+Do not force these into a state enum.
 
-Never render:
+## A/P
 
-```text
-ordered -> performed
-performed -> resulted
-```
+Each A/P entry must map to an existing B problem.
 
-without File A support.
-
-Workup placement must preserve the action/result distinction from File A.
-
-## Nonproblem evidence must survive
-
-File C must consider File A material that never became a problem, including:
-
-- exam;
-- medications;
-- history;
-- workup;
-- functional/safety context;
-- clinically relevant non-neurologic context.
-
-Do not drop such content merely because File B did not place it in `PROBLEM_MAP`.
-
-File B determines problem architecture, not total note coverage.
-
-## A/P compilation
-
-Each A/P blueprint entry must be based on an existing File B problem handle.
-
-Use File B exactly for:
+Use B exactly for:
 - problem label;
-- adoption/currentness;
-- certainty;
-- encounter role;
-- status/descriptors;
-- containment;
-- causal/contributory relations;
-- problem order;
-- action ownership.
+- diagnostic stance;
+- counterevidence;
+- action ownership;
+- source-qualified management wording;
+- problem order.
 
-C may select the minimum-sufficient evidence and reasoning needed to support the already-resolved problem,
-but may not alter the problem's semantics.
-
-### A/P fields
-
-`claim`
-- use the File B label plus only status/descriptors already supported by A/B.
-
-`support`
-- cite supporting UNIT/record selectors needed for the note.
-
-`counter`
-- retain clinically meaningful counterevidence when it changes interpretation.
-
-`reasoning`
-- include only reasoning supported by A/source material and consistent with B.
-- do not invent a new mechanism or rationale.
-
-`actions`
-- use existing File A ACTION IDs.
-
-`primary_action_holder`
-- follow File B action ownership.
-
-`references_only`
-- use when an action is relevant to another problem but is rendered under its primary home.
-
-## Unresolved encounter role
-
-If File B has:
-
-```text
-encounter_role=unresolved
-```
-
-C may not silently place that problem as PRIMARY or BACKGROUND.
-
-C may:
-
-- preserve the problem in an unresolved A/P blueprint area if the note architecture requires retention;
-- leave its final A/P placement unresolved;
-- carry an explicit upstream architecture gap.
-
-C may not resolve the role itself.
+C may compress but may not strengthen or change meaning.
 
 ## Shared actions
 
-One shared action may relate to multiple problems.
+If one B ACTION_VIEW is relevant to multiple problems, render it under its B-designated owner and reference it
+elsewhere only when necessary.
 
-When a single rendering home is needed:
+Do not duplicate the full action across multiple problem plans.
 
-1. use File B's `primary_action_holder`;
-2. render the action once at its primary home;
-3. use `references_only` for other relevant problems;
-4. do not duplicate the full action plan across multiple problems.
+## Minimum sufficient selection
 
-Shared relevance does not create multiple action executions.
+Select enough content to support a concise neurologic note like the signer’s intended target:
+- current episode chronology;
+- neurologically relevant baseline history;
+- current exam;
+- relevant workup;
+- problem-oriented assessment;
+- management actions.
 
-## Minimum-sufficient selection
+Do not dump the full A handoff into the note.
 
-Select enough material to preserve:
+## Final-writer constraint
 
-- defining features;
-- meaningful chronology;
-- current/historical distinction;
-- attribution;
-- certainty;
-- counterevidence;
-- workup state;
-- management state;
-- functional/safety information that changes care.
+C is the last stage allowed to choose placement/order.
 
-Do not copy the entire chart merely because the evidence is available.
+The renderer must receive an already-decided blueprint and must not reopen:
+- grouping;
+- section ownership;
+- problem identity;
+- diagnostic stance;
+- action interpretation;
+- action ownership;
+- plan adoption.
 
-Do not remove a clinically meaningful distinction solely for compression.
+## Structural checks
 
-## Source order vs clinical order
+Before returning:
 
-Source order is not note order.
-
-C may reorder already-supported units for:
-
-- clinical chronology;
-- disease-centered history;
-- coherent workup presentation;
-- problem-oriented A/P structure.
-
-Reordering may not change meaning, attribution, time, or certainty.
-
-## Cross-section reuse
-
-Reuse is allowed only when the same evidence legitimately serves different note functions.
-
-Examples:
-- an event detail may appear in HPI and support A/P;
-- a historical diagnosis may appear in NEURO_HX and as BACKGROUND A/P when File B supports that problem;
-- a workup result may appear in WORKUP and support A/P.
-
-Do not repeat material merely because it is important.
-
-## Blueprint completeness
-
-Before returning, check:
-
-1. HPI follows current-episode chronology, not source order;
-2. neurologic history is disease-centered and minimum sufficient;
-3. OTHER_PMH contains relevant non-neurologic history without creating neurologic problems;
-4. MEDS reflects presentation/home regimen rather than encounter rewrites;
-5. EXAM reflects the current exam only;
-6. WORKUP preserves ordered/performed/result distinctions;
-7. every A/P entry maps to an existing File B problem;
-8. File B role/certainty/currentness/containment/causality are unchanged;
-9. unresolved problem role remains unresolved;
-10. nonproblem evidence needed for the note survives;
-11. clinically meaningful counterevidence is retained;
-12. shared actions have one primary home;
-13. the whole chart is not dumped into sections;
-14. no final note prose appears;
-15. output begins with `@@HANDOFF C_NOTE_BLUEPRINT_V1` and ends with `@@END`.
+1. every A/P entry maps to a B problem;
+2. every management item maps to a B ACTION_VIEW;
+3. no action-state enum is reconstructed;
+4. HPI follows clinical chronology;
+5. current vs baseline phenomena remain distinct;
+6. source-qualified outside workup remains qualified;
+7. nonproblem evidence needed for body sections survives;
+8. no new clinical decision is introduced;
+9. output begins with `@@HANDOFF C_NOTE_BLUEPRINT_V2` and ends with `@@END`.
 
 Return the blueprint only.
