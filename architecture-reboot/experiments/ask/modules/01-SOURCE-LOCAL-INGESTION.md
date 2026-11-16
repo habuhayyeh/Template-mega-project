@@ -1,6 +1,6 @@
 # FILE A — SOURCE-LOCAL INGESTION
 
-**Experimental version:** A-SOURCE-LOCAL-INGESTION-V2
+**Experimental version:** A-SOURCE-LOCAL-INGESTION-V2.1
 
 ## Purpose
 
@@ -53,7 +53,7 @@ One complete canonical `SCRIBE_EVIDENCE_V2_2` packet only.
 ## Output
 
 ```text
-@@HANDOFF A_SOURCE_LOCAL_INGESTION_V2
+@@HANDOFF A_SOURCE_LOCAL_INGESTION_V2_1
 
 SEMANTIC_SPANS
 
@@ -308,15 +308,41 @@ It does not determine:
 
 A2 is a lane inside the same A handoff.
 
-It preserves each **source-local action assertion** separately.
+It preserves each **source-local clinical action assertion** separately.
 
 A2 does not consume or rewrite A1.
 
+### Action inclusion gate
+
+Include source-local clinical actions in these classes:
+- diagnostic/workup tests and procedures;
+- medication/treatment actions;
+- consultations;
+- admission/disposition decisions or actions;
+- precautions and safety restrictions;
+- driving/activity counseling;
+- other clinical management actions.
+
+Exclude only clearly nonclinical transport/logistics, administrative coordination, social coordination,
+and conversational repair with no clinical management content.
+
+Do not use subjective "materiality" to skip an action within the include classes.
+
+If uncertain whether a source-local action is clinical management rather than logistics, include it and
+use `unresolved`.
+
 ## One action span = one source-local action assertion
+
+Traverse the Scribe packet **record by record, in source order**.
+
+For every record containing clinical action wording, enumerate each distinct source-local action target /
+operation before moving to the next record.
+
+Do not skip an action-bearing record because another action elsewhere appears more important.
 
 Every ACTION_SPAN must point to exactly one source record and one literal selector.
 
-If one source record contains multiple materially distinct actions, create separate ACTION_SPAN entries.
+If one source record contains multiple distinct clinical actions, create separate ACTION_SPAN entries.
 
 Example:
 
@@ -366,10 +392,12 @@ Normalized action-state interpretation and cross-record action episode grouping 
 ## Hard action invariants
 
 - one ACTION_SPAN = one source-local action identity;
-- materially distinct targets/actions in one record must be split;
+- distinct targets/actions in one record must be split before advancing to the next record;
+- a shared verb governing a coordinate list of distinct tests/procedures/targets must yield one ACTION_SPAN per target;
 - distinct diagnostic tests/procedures in one record remain separate actions when their downstream identities differ;
 - distinct medication actions in one record remain separate when their targets or operations differ;
 - administration, loading, continuation, hold, discontinuation, and other materially different medication actions remain separate when separately stated;
+- when a source says a future medication decision depends on tests, the action target is the medication decision and the tests belong in `condition`, not as the action target;
 - safety/driving/activity counseling is action content and belongs in A2 rather than being duplicated as a non-action semantic span;
 - `action_phrase` must be an exact contiguous substring of `selector`;
 - no cross-record action episode grouping occurs in A.
