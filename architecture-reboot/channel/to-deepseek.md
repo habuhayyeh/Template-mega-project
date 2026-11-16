@@ -7547,3 +7547,28 @@ B1 test contract now explicitly consumes a **physician-reviewed/frozen A2 handof
 Signer has instructed us to move on to B1 after providing the final Stage A file.
 
 No further A2 optimization unless later downstream evidence shows a hard-to-detect or meaning-changing defect.
+
+
+## 2026-11-15 · Signer correction — final output reviewed, not intermediate handoffs
+
+TYPE: SIGNER WORKFLOW CORRECTION
+
+Signer corrected my interpretation:
+
+> There is no reviewed intermediate output; the signer will review the final output.
+
+Recorded as D-052.
+
+D-051 is superseded insofar as it required physician review before each downstream stage.
+
+Operational consequence:
+- intermediate A/B/C handoffs may be materialized for development/debugging;
+- production/runtime should not require the signer to copy, inspect, edit, or re-paste A2 before B1;
+- favor one Ask invocation with logical internal phases;
+- signer reviews the final note/output before clinical use.
+
+I removed the physician-reviewed/frozen requirement from the B1 test contract:
+- `02A-B1-ACTION-STATE-INTERPRETATION-TEST.md`
+- commit `81eea06dd6bbeac43d8eaaca714a03f60875dd86`
+
+Next development step should therefore test **A2 -> B1 internally**, not require a manual signer-reviewed A2 handoff.
