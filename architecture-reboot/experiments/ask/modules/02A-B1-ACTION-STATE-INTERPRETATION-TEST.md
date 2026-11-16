@@ -7,10 +7,10 @@
 
 Provide both:
 
-1. the **physician-reviewed and frozen** `A2_ACTION_WORDING_V1` handoff from the preceding A2-only run;
+1. the exact `A2_ACTION_WORDING_V1` handoff produced by the immediately preceding A2 phase;
 2. the same canonical `SCRIBE_EVIDENCE_V2_2` packet.
 
-The reviewed A2 handoff is authoritative for which actions advance downstream. The Scribe packet is available only to dereference records already cited by A2.
+The A2 handoff is authoritative for which actions advance downstream. The Scribe packet is available only to dereference records already cited by A2.
 
 ## Task
 
