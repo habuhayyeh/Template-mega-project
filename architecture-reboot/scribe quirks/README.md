@@ -74,6 +74,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 13. Error-label taxonomy matters less than preserving the valid/invalid boundary.
 14. Coverage enumeration and synthesis compete. If synthesis repeatedly omits material evidence, perform a dedicated coverage census before synthesis.
 15. The useful unit of modularity is a **function boundary**, not necessarily a separate file or separate model call.
+16. Use **JSON** for model-authored structured handoffs. Do not use custom `@@` output records.
+17. Do not use `|` as a delimiter. Doximity renders pipe-delimited records as Markdown tables.
+18. `@@PACKET` / `@@SOURCE` / `@@END` in the Scribe input packet are input framing, not an output format to copy downstream.
 
 ## Files
 
@@ -91,6 +94,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [05-DOXIMITY-CONTRACT-CHECKLIST.md](05-DOXIMITY-CONTRACT-CHECKLIST.md)  
   Compact checklist for writing or reviewing a new Doximity module.
+
+- [06-SERIALIZATION-AND-SENTINELS.md](06-SERIALIZATION-AND-SENTINELS.md)  
+  Reproduced finding: custom `@@` output records collapse/truncate; JSON handoffs work; pipes become tables.
 
 ## Evidence classes
 

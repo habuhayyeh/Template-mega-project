@@ -51,6 +51,17 @@ Use this before running a new Doximity prompt/module.
 
 ---
 
+# D1. Serialization
+
+- [ ] Model-authored handoff is one JSON object.
+- [ ] No prose, Markdown, or code fence around the JSON.
+- [ ] No custom `@@` output records.
+- [ ] No pipe delimiter.
+- [ ] Scribe `@@PACKET` / `@@SOURCE` / `@@END` markers are treated as input framing, not copied downstream.
+- [ ] JSON keys and array types are validated mechanically; malformed output fails closed.
+
+---
+
 # E. Coverage
 
 - [ ] The stage has a defined coverage responsibility.

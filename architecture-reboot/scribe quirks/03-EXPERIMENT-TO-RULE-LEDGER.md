@@ -211,6 +211,20 @@ Malformed semantic structures should not be repaired by the final writer.
 
 ---
 
+## RULE 9 — Use JSON, not custom `@@` output records
+
+A plain-text input check and a JSON input check both worked on the same packet. A custom `@@CHECK` record
+returned only `@@END`.
+
+Synthesis with `@@PROBLEM` / `@@UNIT` / `@@ACTION` repeatedly truncated fields. `;;`-delimited simple
+coverage lines worked, but complex records still truncated. Pipe-delimited records rendered as Markdown
+tables.
+
+Use one JSON object for model-authored handoffs. Do not copy Scribe's `@@PACKET` / `@@SOURCE` / `@@END`
+framing into downstream output.
+
+---
+
 # I. Invalid tests / evidence limitations
 
 Do not derive new engine rules from:
