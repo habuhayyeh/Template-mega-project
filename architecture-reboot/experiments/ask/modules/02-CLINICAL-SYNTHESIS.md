@@ -131,6 +131,32 @@ Prefer:
 
 Do not create separate problems for every symptom, exam finding, historical detail, or action.
 
+### Counterfactual independence test
+
+Before creating a separate problem, ask:
+
+> If the primary presenting problem were removed from this encounter, would this item still justify its own
+> neurologic assessment/problem block because of an independent disease identity, separate current assessment
+> question, or separate current management?
+
+- **Yes** -> it may qualify as a separate problem if supported.
+- **No** -> do not create a separate problem solely to preserve the information. Keep it as evidence,
+  counterevidence, a contained manifestation, baseline comparator, history, or context under the relevant problem.
+
+A phenomenologically distinct chronic/baseline symptom or spell does **not** become a BACKGROUND problem merely
+because it is longstanding or differs from the presenting event.
+
+When such a baseline phenomenon:
+- lacks an independent neurologic disease identity;
+- has no separate current assessment question; and
+- has no separate current management,
+
+preserve it as baseline/comparison evidence within the relevant current problem rather than creating another A/P
+problem.
+
+Conversely, do not collapse an independently established neurologic disease or a distinct current neurologic
+assessment question merely because it also supplies context for the primary problem.
+
 ## Diagnostic stance
 
 `diagnostic_stance` should express the encounter's actual supported clinical position, including uncertainty.
