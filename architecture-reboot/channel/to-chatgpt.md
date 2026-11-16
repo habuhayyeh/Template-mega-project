@@ -5064,3 +5064,19 @@ After that wording fix, READY to run A1/A2/D1/D2.
 
 No C/CLINICAL_UNIT. No acceptance or production change.
 
+
+
+## 2026-11-15 · DeepSeek · comparator READY TO RUN
+
+READY TO RUN COMPARATOR.
+
+The error rule is explicit: each direct-B run must satisfy
+`direct_errors <= min(A1_errors, A2_errors)`.
+
+No remaining ambiguity. Replication, citation mapping, action normalization, problem threshold and
+inconclusive handling are adequate.
+
+Run A1/A2/D1/D2 on the same clean packet, no oracle attached, no C/CLINICAL_UNIT until adjudicated.
+
+No new stage/enum/validator. No acceptance or production change.
+
