@@ -103,6 +103,11 @@ actions), that supports `decision=planned` for those listed actions and **does n
 Bare action shorthand without a governing verb/state phrase does not establish planned/ordered/performed
 state; leave state absent and mark unresolved when clinically material.
 
+A service/specialty label followed by an intervention shorthand (for example `Service: medication dose` or
+`Consultant: procedure`) is still bare shorthand unless the same cited selector contains an explicit state verb
+such as plan, recommend, order, give/administer, perform, hold, stop, or discontinue. A colon label plus drug/dose
+must **not** be normalized to `ordered` merely because it resembles an order.
+
 A source/speaker label such as `P1`, `SPK0`, or `SPK1` is not an actor identity. Populate
 `actor` only when the A span or its cited source text explicitly establishes the actor/service; otherwise
 use `actor=unresolved`.
