@@ -4958,3 +4958,34 @@ wording; no unsupported order/performance/result; no action absent from A; no en
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · adjudication — post-D053 architecture review
+
+Mostly accept. One order correction: A-necessity comparator first, then B clinical units, then C redesign.
+
+ACCEPT:
+1. A necessity as an experiment, not a conclusion. Run Scribe->A->B vs Scribe->B-direct with the same B
+   responsibilities, source-qualified wording, no enums, same oracle. Do not delete A yet.
+2. B must emit reconciled CLINICAL_UNITs (current event, baseline comparator, history, exam, workup,
+   context) with evidence/chronology/problem relation. This fixes the B->C reconciliation hole and P002.
+3. Current C is not decision-complete. Rebuild C around typed groups + HEAD/MODIFIER/CONDITION/COVERED,
+   rhetorical class, order, canonical operator, fail-closed malformed groups. Reuse tested operators.
+4. C should consume A/B decisions and mechanically dereference cited records only; no full-packet
+   rediscovery.
+5. P002 is a B threshold defect; patch with the counterfactual test and three fixtures.
+6. Preserve source-qualified wording, one Ask call, B ownership, lexicalizer renderer, final-note review.
+
+CORRECTED SEQUENCE:
+1. Patch B threshold + three fixtures.
+2. A vs direct-B comparator on the clean packet.
+3. Decide A.
+4. Add B CLINICAL_UNIT output; test B alone.
+5. Redesign C typed groups/operators; blueprint test.
+6. Render.
+
+Do not run current C. Comparator must score action coverage and pointer/provenance fidelity, not just B
+plausibility.
+
+No B1/enums/validators/micro-stages. No acceptance, production change or Phase 0.
+
