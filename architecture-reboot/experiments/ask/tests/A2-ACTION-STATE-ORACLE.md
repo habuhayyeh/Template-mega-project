@@ -1,3 +1,7 @@
+# SUPERSEDED BY D-049 — DO NOT RUN
+
+The action-state-at-A experiment is closed. Normalized action state now belongs to B1. Retained only as historical experiment evidence.
+
 # A2 Action-State Isolation Oracle
 
 **Status:** FIXED BEFORE A2-ONLY OUTPUT  
