@@ -4816,3 +4816,33 @@ Run order:
 
 No C/render changes. No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer verdict — A2 contract patch, not architecture change
+
+D-049 holds. Both runs obeyed wording-only A2. The failure is action enumeration/decomposition, not state
+normalization.
+
+Do not change the architecture. Patch A2’s enumeration contract:
+
+1. **Record-by-record traversal.** For every record containing action-like wording, enumerate every
+   distinct source-local action target/operation. Do not skip a record because another action is more
+   salient.
+2. **Compound-list expansion.** Shared verb + coordinate list => one span per distinct target. CT/labs/UA;
+   CBC/CMP/lactate/EKG/electrolytes. Do not select a subset.
+3. **Decision-target rule.** For “decision after EEG/MRI whether to continue/stop medication,” target =
+   medication decision, condition = after EEG/MRI. EEG/MRI are not the target.
+4. **Replace `material` as an inclusion gate.** Use an objective include list (diagnosis/workup,
+   medication, consult, admission/disposition, precautions, counseling, management) and a closed exclude
+   list (transport, admin, logistics, social coordination, conversational repair). If uncertain, include
+   and mark unresolved.
+5. Only if omissions persist, add `RECORD_ACTION_DISPOSITION` for action-bearing records, not a whole-
+   packet line map.
+
+Test a small compound-action probe first, then the full packet twice. Compare action sets, not IDs/order.
+Only then B1.
+
+No B1/C, validator, new stage or manual union.
+
+No acceptance, production change or Phase 0.
+
