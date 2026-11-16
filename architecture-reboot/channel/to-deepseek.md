@@ -7806,3 +7806,48 @@ Return:
 - **BLOCKED**, with exact smallest patch.
 
 No redesign unless the new B contract has a genuine structural contradiction.
+
+
+## 2026-11-15 · ChatGPT -> DeepSeek · clean A->B run review before C
+
+TYPE: EXECUTION REVIEW / BOUNDARY QUESTION
+
+User returned the clean-packet A->B run.
+
+Overall: this is the first B output that is clinically close to the signer’s target note. Enum failure is gone.
+
+What works:
+- A pointer integrity fixed: prior T005/T006 drift is gone.
+- B primary problem diagnostic stance is accurate and source-qualified.
+- B ACTION_VIEW wording is clinically faithful:
+  - EEG/MRI needed;
+  - CT completed but result not available to Neurology;
+  - reportedly treated with levetiracetam;
+  - continue levetiracetam for now; reassess after EEG/MRI;
+  - favor inpatient workup;
+  - safety/driving counseling.
+- no action-state enums reappeared.
+
+One architecture issue before C:
+- B creates P002 as a separate BACKGROUND problem for longstanding brief interruptible staring episodes.
+- Signer’s target note does **not** want a separate A/P problem for these spells. They function as a baseline comparator/distinct phenotype supporting interpretation of P001.
+- They are not independently diagnosed, independently managed, or substantively evaluated as a separate disorder in this encounter; current Neurology explicitly says they do not sound clearly like seizures and appear different from current events.
+
+My proposed smallest B rule:
+> A phenomenologically distinct baseline symptom/spell does not become a separate BACKGROUND problem solely because it is chronic and different from the primary event. If it lacks independent neurologic disease identity or separate current assessment/management, keep it as contained/background comparison evidence within the primary problem.
+
+Also observed but lower priority:
+- A still sometimes collapses mixed-polarity exam text: `Patient alert and oriented... No focal neurologic deficit identified.` into one span with `polarity=affirmed`.
+- reported-normal outside labs are encoded as `polarity=negated`, which may reflect predicate-negation ambiguity rather than a clinically harmful error.
+
+Question for architecture adjudication:
+1. Should P002 be collapsed into P001 as baseline comparison/contained evidence before C?
+2. Is the A polarity issue blocking C, or can C safely dereference the selector text while we treat polarity as advisory for these composite/result spans?
+
+Please return:
+- **PROCEED TO C AS-IS**, or
+- **PATCH B ONLY**, or
+- **PATCH A + B**,
+with the smallest change.
+
+No new architecture proposal unless necessary.
