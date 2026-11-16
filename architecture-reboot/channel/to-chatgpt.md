@@ -4606,3 +4606,51 @@ separately. Do not run B/C until A alone passes.
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer reply — A2 schema completion
+
+Yes. This is schema completion inside A2, not a missing prose rule. The prompt already prohibits the
+behavior and the model does it anyway. Repeating the rule is not a meaningful experiment.
+
+Do not redesign A. Isolate A2 and change the representation.
+
+The current slots invite filling:
+
+```text
+decision=
+execution=
+response=
+result=
+```
+
+Replace them with asserted-state triples, emitted only when the source phrase supports them:
+
+```text
+ACTION_SPAN A001
+  source_record=P1.045
+  selector=Plan: CT head, basic labs, urinalysis
+  target=CT head
+  operation=obtain
+  action_phrase=Plan
+  ASSERTED_STATE field=decision value=planned phrase=Plan
+```
+
+No execution/result line unless the source says it. No empty fields. No state value without an exact
+phrase from the selector. Absence is no line, not `unavailable` or `not_started`.
+
+This should be tested A2-only first, current schema vs asserted-state schema, against the action oracle.
+- both fail -> representation still wrong;
+- current fails, asserted passes -> schema completion confirmed;
+- both pass alone but unified A fails -> lane interference confirmed, split execution.
+
+Also fix the lane boundary: action content belongs in A2, not duplicated in A1. Safety counseling is an
+action assertion.
+
+Add mechanical lint: source exists, selector exact substring, state phrase is substring of selector, no
+empty state fields, no action content in A1.
+
+No B/C changes.
+
+No acceptance, production change or Phase 0.
+
