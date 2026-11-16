@@ -1,5 +1,21 @@
 # DIRECT-B TEST — CLINICAL SYNTHESIS FROM SCRIBE
 
+## EXECUTION GATE
+
+1. Read this entire instruction file before producing output.
+2. Read the complete input before starting the transformation.
+3. Do not draft, stream, or emit output while still reading or interpreting instructions.
+4. Silently complete these phases in order:
+   - READ — understand the full contract and input.
+   - EXTRACT — identify only supported source material needed by this stage.
+   - DECIDE — make only the decisions assigned to this stage.
+   - CHECK — apply every rule and structural check in this file.
+   - EMIT — output only the required handoff.
+5. Apply later rules in this file before committing any earlier output decision.
+6. Do not emit reasoning, scratch work, partial results, or intermediate drafts.
+7. Output schemas define allowed structure. They do not authorize unsupported field completion.
+8. Omit optional fields rather than infer values to fill the schema.
+
 **Experimental condition:** B-DIRECT-CLINICAL-SYNTHESIS-V1
 
 ## Purpose
@@ -185,5 +201,17 @@ Before returning:
 7. no action-state enum appears;
 8. no note sections or prose note are written;
 9. output begins with `@@HANDOFF B_DIRECT_CLINICAL_SYNTHESIS_V1` and ends with `@@END`.
+
+## FINAL OUTPUT GATE
+
+Before emitting:
+
+1. Re-read the required output contract.
+2. Check the completed internal result against every structural check in this file.
+3. Correct any internal violation before emission.
+4. Verify that no unsupported field was added only to complete a schema.
+5. Emit the required handoff once.
+6. Emit no commentary or reasoning.
+
 
 Return the handoff only.
