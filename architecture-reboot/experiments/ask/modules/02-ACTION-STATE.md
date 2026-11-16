@@ -1,3 +1,7 @@
+# SUPERSEDED BY D-053 — DO NOT RUN
+
+Normalized action-state/B1 architecture is retired. Active path: `01-SOURCE-LOCAL-INGESTION.md` -> `02-CLINICAL-SYNTHESIS.md` -> `03-NOTE-COMPILER.md`.
+
 # SUPERSEDED — DO NOT RUN
 
 DeepSeek architecture verdict 032 places action state as a typed lane inside File A by default. Do not run a separate action-state pass unless later empirical evidence reopens that split.
