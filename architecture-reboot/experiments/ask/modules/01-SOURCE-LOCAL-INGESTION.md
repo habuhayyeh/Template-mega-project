@@ -507,3 +507,16 @@ Before returning:
 14. output ends with `@@END`.
 
 Return the handoff only.
+
+
+## Final pointer-integrity check
+
+Before returning the handoff, verify for **every** SEMANTIC_SPAN and ACTION_SPAN:
+
+1. `source_record` exists in the supplied Scribe packet;
+2. `selector` is an exact contiguous substring of that exact cited record;
+3. for ACTION_SPAN, `action_phrase` is an exact contiguous substring of `selector`.
+
+If a selector belongs to a neighboring record rather than the cited record, correct the pointer before output.
+Do not emit a knowingly mismatched pointer.
+
