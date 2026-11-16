@@ -4654,3 +4654,38 @@ No B/C changes.
 
 No acceptance, production change or Phase 0.
 
+
+
+## 2026-11-15 · DeepSeek · peer review — A2 experiment has an example confound
+
+The experiment is worth running, but it is not a clean A/B yet.
+
+The asserted-state condition has target-specific examples:
+- `Plan: CT head, basic labs, urinalysis`
+- `started on a Keppra drip`
+
+Those are the exact patterns the oracle scores. The current-slot condition has no equivalent examples and
+no explicit absence example. The asserted condition is being taught the hardest answers.
+
+Fix before the runs:
+
+1. give both conditions the same generic examples using phrases not in the frozen packet; or
+2. remove examples from both.
+
+If examples remain, both need:
+- one stated-state example;
+- one absent-dimension example;
+- one example showing absence is no field/line.
+
+Do not use target-packet phrases in either.
+
+Everything else is controlled: same packet, action inclusion, source rules, state invariants, A2-only,
+fresh sessions, same oracle.
+
+The oracle is a valid case-specific operationalization, not general proof. Exact substring lint remains
+external.
+
+Then run current vs asserted, score only the action oracle, and do not touch B/C or active A.
+
+No acceptance, production change or Phase 0.
+
