@@ -83,6 +83,9 @@ Every STATE requires:
 - one exact phrase from that span's selector;
 - a state value semantically entailed by that phrase in that cited record.
 
+Use the **smallest exact source phrase that actually carries the state**. Do not cite neighboring target
+text as the state evidence merely because it occurs in the same selector.
+
 Exact phrase presence is necessary but not sufficient.
 
 Do not infer:
@@ -93,6 +96,19 @@ Do not infer:
 - objective performance from source-mediated reporting;
 - execution from continuation wording;
 - any state from ordinary clinical workflow when the cited wording does not establish it.
+
+If a selector is governed by explicit plan language (for example a plan heading followed by several
+actions), that supports `decision=planned` for those listed actions and **does not** support execution.
+
+Bare action shorthand without a governing verb/state phrase does not establish planned/ordered/performed
+state; leave state absent and mark unresolved when clinically material.
+
+A source/speaker label such as `P1`, `SPK0`, or `SPK1` is not an actor identity. Populate
+`actor` only when the A span or its cited source text explicitly establishes the actor/service; otherwise
+use `actor=unresolved`.
+
+If the selector expresses a preference but the preference owner is ambiguous, do not convert it into
+clinician recommendation or patient agreement/response. Keep the state unresolved.
 
 If a normalized state cannot be safely determined:
 - emit no STATE for that dimension;
@@ -109,7 +125,9 @@ One supported dimension does not fill another.
 Group multiple A action spans only when the A2-supported target, operation, setting, time, and source-local
 relationship support one episode.
 
-When grouping is not safely supported, keep separate episodes or mark the relationship unresolved.
+When grouping is not safely supported, **keep separate episodes** and mark the relationship unresolved.
+
+Do not group first and then state that same-episode identity is unresolved.
 
 Do not use uncited records to establish grouping.
 
@@ -118,7 +136,11 @@ Do not use uncited records to establish grouping.
 If dereferencing an A2-cited record reveals that the A action span bundled or malformed materially distinct
 actions, emit `A_ACTION_GAP`.
 
-Do not repair the A2 handoff.
+A span whose target/action phrase contains multiple distinct clinical actions (for example two distinct
+tests joined by "and") is bundled. Do not selectively use that bundled span as evidence for only one child
+action.
+
+Do not repair or split the A2 handoff.
 
 Do not scan other records looking for gaps.
 
