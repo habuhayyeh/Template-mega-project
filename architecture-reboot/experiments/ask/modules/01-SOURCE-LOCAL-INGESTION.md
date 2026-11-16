@@ -182,6 +182,11 @@ A split is **required** when clauses would need different:
 Do not assign one polarity/certainty/provenance field across a selector containing clauses with different
 values.
 
+**Safety fallback:** if a selector still contains multiple propositions with different polarity and you have
+not split them, set `polarity=unresolved` and explain the mixed propositions in `unresolved`. Never assign
+one global `affirmed` or `negated` value across a selector that contains both a negated finding and a separate
+affirmed finding.
+
 Examples requiring a split when clinically relevant:
 - question + answer-like statement in one record;
 - a negated finding + a separate affirmed finding;
