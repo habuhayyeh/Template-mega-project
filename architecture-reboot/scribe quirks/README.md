@@ -79,6 +79,7 @@ The engine performs best when each layer receives a **decision-complete input fo
 18. `@@PACKET` / `@@SOURCE` / `@@END` in the Scribe input packet are input framing, not an output format to copy downstream.
 19. JSON is canonical for structured handoffs. CSV is acceptable for the flat coverage census or review export, not as the synthesis source of truth. YAML is not recommended for nested handoffs.
 20. Doximity Ask does not execute code. Put all executable logic outside the model.
+21. Clinical reference checks run after synthesis, not during coverage. They are not packet evidence and cannot add patient facts.
 
 ## Files
 
@@ -105,6 +106,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [08-NO-CODE-EXECUTION.md](08-NO-CODE-EXECUTION.md)  
   Reproduced finding: Ask does not run code; executable logic stays outside.
+
+- [09-CLINICAL-REFERENCE-CHECK.md](09-CLINICAL-REFERENCE-CHECK.md)  
+  Post-synthesis drug monograph and literature checks, with example prompts.
 
 ## Evidence classes
 

@@ -72,6 +72,17 @@ Use this before running a new Doximity prompt/module.
 
 ---
 
+# D3. Clinical reference checks
+
+- [ ] Run after synthesis, not during coverage.
+- [ ] Inputs are deidentified.
+- [ ] Output is JSON with a verdict and citation.
+- [ ] No citation means `unverified`.
+- [ ] Unsupported/unverified claims go back to synthesis; they are not silently rewritten.
+- [ ] Reference output is not packet evidence and does not enter the coverage census.
+
+---
+
 # E. Coverage
 
 - [ ] The stage has a defined coverage responsibility.
