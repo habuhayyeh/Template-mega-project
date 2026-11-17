@@ -87,6 +87,7 @@ The engine performs best when each layer receives a **decision-complete input fo
 26. Attach the Scribe packet for attachment tests; Doximity can read it.
 27. In-prompt handoff requires a fixed Stage A schema, full payload, a sentinel, and a Stage B ban on rereading source facts.
 28. Keep a negative-results log. A handbook of passes alone overstates reliability.
+29. Every test entry must reference the exact prompt file and state the run count. If either is missing, mark it unverified.
 
 ## Files
 
@@ -125,6 +126,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [12-NEGATIVE-RESULTS.md](12-NEGATIVE-RESULTS.md)  
   Failed runs, invalid tests and test-design bugs kept alongside the passes.
+
+- [13-TEST-PROMPT-TRACEABILITY.md](13-TEST-PROMPT-TRACEABILITY.md)  
+  Test-to-prompt map with run counts, observed results and unverified items.
 
 ## Evidence classes
 

@@ -175,6 +175,8 @@ Use this before running a new Doximity prompt/module.
 - [ ] Blocking failures are not averaged away.
 - [ ] Do not manually union multiple runs and call that model capability.
 - [ ] Failed runs and invalid tests are recorded, not only passes.
+- [ ] Each test entry links the exact prompt file and states the run count.
+- [ ] Missing prompt version or run count is marked unverified.
 - [ ] Stable wrong output is investigated as a contract/payload bug.
 - [ ] Unstable semantic output is investigated as an upstream decision gap.
 
@@ -217,4 +219,5 @@ When an experiment fails:
 # M. One-line rule
 
 > Make every Doximity stage decision-complete for its owned function and decision-incomplete for every other function.
+
 
