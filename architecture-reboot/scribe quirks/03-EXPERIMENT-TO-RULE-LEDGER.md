@@ -252,6 +252,20 @@ Test free synthesis by invariants. Run D-S/D-T only on a frozen facts JSON.
 
 ---
 
+## RULE 12 — In-prompt handoff needs a sentinel and a no-fallback rule
+
+The first handoff test was inconclusive: Stage B was allowed to reread `FACTS`, and Stage A had no fixed
+schema.
+
+The strict test required Stage A to carry every field plus `sentinel: "[A]"`, and Stage B to use only Stage A.
+Three runs produced identical Stage A JSON and Stage B lines, all carrying `[A]`.
+
+Use a fixed Stage A schema, full payload, sentinel, and a Stage B ban on rereading source facts.
+
+The test expected order must follow Stage A `order`; one expected block was wrong and was corrected.
+
+---
+
 # I. Invalid tests / evidence limitations
 
 Do not derive new engine rules from:

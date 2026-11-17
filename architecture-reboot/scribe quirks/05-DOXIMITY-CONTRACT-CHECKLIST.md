@@ -95,6 +95,17 @@ Use this before running a new Doximity prompt/module.
 
 ---
 
+# D5. In-prompt handoff
+
+- [ ] Stage A has a fixed JSON schema.
+- [ ] Stage A carries every field Stage B needs.
+- [ ] Stage A includes a sentinel.
+- [ ] Stage B may use only Stage A and returns `HANDOFF_ERROR` if a field is missing.
+- [ ] Stage B order follows Stage A `order`.
+- [ ] Test expected output follows the same handoff contract.
+
+---
+
 # E. Coverage
 
 - [ ] The stage has a defined coverage responsibility.
