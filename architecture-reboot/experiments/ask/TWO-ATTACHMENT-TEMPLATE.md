@@ -1,4 +1,4 @@
-# TWO-ATTACHMENT TEMPLATE — function library + call script
+﻿# TWO-ATTACHMENT TEMPLATE â€” function library + call script
 
 Paste this as the prompt. Attach both files.
 
@@ -16,8 +16,8 @@ READ GATE
 1. Read both attachments completely before producing output.
 2. Do not execute anything while reading.
 3. Identify the files by their content markers, not by attachment order:
-   - `FILE A — FUNCTION LIBRARY`
-   - `FILE B — CALL SCRIPT`
+   - `FILE A â€” FUNCTION LIBRARY`
+   - `FILE B â€” CALL SCRIPT`
 4. Do not execute the illustration lines in File A.
 5. Do not call F_UNUSED or F_UNUSED2.
 6. Execute exactly C1 through C12, once each, in order.
@@ -167,7 +167,7 @@ END TWO-ATTACHMENT TEST
 
 ---
 
-# Expected — do not paste into Doximity
+# Expected â€” do not paste into Doximity
 
 ```json
 {
@@ -237,7 +237,7 @@ END TWO-ATTACHMENT TEST
         "A2",
         "B2"
       ],
-      "wrapped": "<done>",
+      "wrapped": "[done]",
       "joined": null,
       "length": null,
       "pair": null
@@ -252,7 +252,7 @@ END TWO-ATTACHMENT TEST
         "B2",
         "C1"
       ],
-      "wrapped": "<done>",
+      "wrapped": "[done]",
       "joined": null,
       "length": null,
       "pair": null
@@ -268,7 +268,7 @@ END TWO-ATTACHMENT TEST
         "C1",
         "C2"
       ],
-      "wrapped": "<done>",
+      "wrapped": "[done]",
       "joined": null,
       "length": null,
       "pair": null
@@ -285,7 +285,7 @@ END TWO-ATTACHMENT TEST
         "C2",
         "C3"
       ],
-      "wrapped": "<done>",
+      "wrapped": "[done]",
       "joined": null,
       "length": null,
       "pair": null
@@ -302,7 +302,7 @@ END TWO-ATTACHMENT TEST
         "C2",
         "C3"
       ],
-      "wrapped": "<done>",
+      "wrapped": "[done]",
       "joined": "A1|B1|A2|B2|C1|C2|C3",
       "length": null,
       "pair": null
@@ -319,7 +319,7 @@ END TWO-ATTACHMENT TEST
         "C2",
         "C3"
       ],
-      "wrapped": "<done>",
+      "wrapped": "[done]",
       "joined": "A1|B1|A2|B2|C1|C2|C3",
       "length": 7,
       "pair": null
@@ -336,7 +336,7 @@ END TWO-ATTACHMENT TEST
         "C2",
         "C3"
       ],
-      "wrapped": "<done>",
+      "wrapped": "[done]",
       "joined": "A1|B1|A2|B2|C1|C2|C3",
       "length": 7,
       "pair": [
@@ -357,7 +357,7 @@ END TWO-ATTACHMENT TEST
         "C3",
         "C4"
       ],
-      "wrapped": "<done>",
+      "wrapped": "[done]",
       "joined": "A1|B1|A2|B2|C1|C2|C3",
       "length": 7,
       "pair": [
@@ -378,7 +378,7 @@ END TWO-ATTACHMENT TEST
       "C3",
       "C4"
     ],
-    "wrapped": "<done>",
+    "wrapped": "[done]",
     "joined": "A1|B1|A2|B2|C1|C2|C3",
     "length": 7,
     "pair": [
@@ -390,3 +390,4 @@ END TWO-ATTACHMENT TEST
 ```
 
 Run three times. Any extra call, missing function, illustration execution, or wrong value fails.
+

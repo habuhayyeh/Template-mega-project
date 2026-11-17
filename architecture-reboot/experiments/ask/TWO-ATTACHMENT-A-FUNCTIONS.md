@@ -1,4 +1,4 @@
-# FILE A — FUNCTION LIBRARY
+﻿# FILE A â€” FUNCTION LIBRARY
 
 DO NOT EXECUTE THIS FILE.
 
@@ -12,7 +12,7 @@ F_DOUBLE(x) => x * 2
 
 F_APPEND(history, token) => history with token appended at the end
 
-F_WRAP(text) => "<" + text + ">"
+F_WRAP(text) => "[" + text + "]"
 
 F_SUB3(x) => x - 3
 
@@ -39,3 +39,4 @@ F_JOIN(["x", "y"], "-") => "x-y"
 F_SUB3(10) => 7
 
 END FUNCTION LIBRARY
+
