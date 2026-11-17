@@ -225,6 +225,18 @@ framing into downstream output.
 
 ---
 
+## RULE 10 — JSON canonical; no code execution in Ask
+
+JSON coverage and synthesis handoffs worked. CSV worked for the flat coverage table but is not the
+canonical synthesis format. YAML lost nesting.
+
+Code tests in Python, Node, PowerShell, Bash, R, Go and others produced `NO_RUNTIME`, refusals, or code
+explanations. None produced the fixed SHA-256 hash.
+
+Use JSON as the handoff. Keep all executable logic outside Ask.
+
+---
+
 # I. Invalid tests / evidence limitations
 
 Do not derive new engine rules from:

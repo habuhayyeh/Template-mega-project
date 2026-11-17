@@ -77,6 +77,8 @@ The engine performs best when each layer receives a **decision-complete input fo
 16. Use **JSON** for model-authored structured handoffs. Do not use custom `@@` output records.
 17. Do not use `|` as a delimiter. Doximity renders pipe-delimited records as Markdown tables.
 18. `@@PACKET` / `@@SOURCE` / `@@END` in the Scribe input packet are input framing, not an output format to copy downstream.
+19. JSON is canonical for structured handoffs. CSV is acceptable for the flat coverage census or review export, not as the synthesis source of truth. YAML is not recommended for nested handoffs.
+20. Doximity Ask does not execute code. Put all executable logic outside the model.
 
 ## Files
 
@@ -97,6 +99,12 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [06-SERIALIZATION-AND-SENTINELS.md](06-SERIALIZATION-AND-SENTINELS.md)  
   Reproduced finding: custom `@@` output records collapse/truncate; JSON handoffs work; pipes become tables.
+
+- [07-STRUCTURED-FORMATS.md](07-STRUCTURED-FORMATS.md)  
+  JSON vs CSV vs YAML for coverage and synthesis handoffs.
+
+- [08-NO-CODE-EXECUTION.md](08-NO-CODE-EXECUTION.md)  
+  Reproduced finding: Ask does not run code; executable logic stays outside.
 
 ## Evidence classes
 

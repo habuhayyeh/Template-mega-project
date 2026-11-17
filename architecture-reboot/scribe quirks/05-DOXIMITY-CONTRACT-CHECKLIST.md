@@ -59,6 +59,16 @@ Use this before running a new Doximity prompt/module.
 - [ ] No pipe delimiter.
 - [ ] Scribe `@@PACKET` / `@@SOURCE` / `@@END` markers are treated as input framing, not copied downstream.
 - [ ] JSON keys and array types are validated mechanically; malformed output fails closed.
+- [ ] JSON is the canonical handoff; CSV is used only for flat coverage or review export.
+- [ ] YAML is not used for nested handoffs.
+
+---
+
+# D2. Execution boundary
+
+- [ ] No stage requires Doximity Ask to execute code.
+- [ ] Parsing, validation, retries, state and rendering run outside the model.
+- [ ] A code-shaped prompt is not treated as execution.
 
 ---
 
