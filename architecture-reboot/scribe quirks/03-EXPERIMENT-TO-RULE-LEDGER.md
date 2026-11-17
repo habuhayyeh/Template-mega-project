@@ -266,6 +266,21 @@ The test expected order must follow Stage A `order`; one expected block was wron
 
 ---
 
+## RULE 13 — Two attachments can define functions and calls, but output sentinels matter
+
+A function-library attachment plus a call-script attachment worked: the model reported 12 functions, 12 calls,
+executed C1–C12, and skipped unused functions and illustrations.
+
+`F_WRAP` with `<done>` returned an empty string in 3/3 runs. With `[done]`, one first batch had 1/3 empty;
+a later batch was 4/4 correct. Bracket form is safer than angle brackets but not proven byte-stable.
+
+JSON whitespace varied between runs; parsed values were identical.
+
+Use content markers to identify attachments. Avoid `<...>` output sentinels; treat `[...]` as risky. Compare
+JSON semantically.
+
+---
+
 # I. Invalid tests / evidence limitations
 
 Do not derive new engine rules from:

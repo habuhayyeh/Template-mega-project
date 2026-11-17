@@ -106,6 +106,17 @@ Use this before running a new Doximity prompt/module.
 
 ---
 
+# D6. Attachments and serialization
+
+- [ ] Attachments are identified by content marker, not order.
+- [ ] One attachment defines functions; the other contains calls.
+- [ ] Read-all gate comes before execution.
+- [ ] Illustrations and unused functions are explicitly excluded.
+- [ ] No `<...>` output sentinel; `[...]` is treated as risky.
+- [ ] JSON equality is semantic; whitespace variation is not a data failure.
+
+---
+
 # E. Coverage
 
 - [ ] The stage has a defined coverage responsibility.

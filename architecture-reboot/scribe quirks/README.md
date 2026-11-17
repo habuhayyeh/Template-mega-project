@@ -88,6 +88,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 27. In-prompt handoff requires a fixed Stage A schema, full payload, a sentinel, and a Stage B ban on rereading source facts.
 28. Keep a negative-results log. A handbook of passes alone overstates reliability.
 29. Every test entry must reference the exact prompt file and state the run count. If either is missing, mark it unverified.
+30. With two attachments, identify each by content marker, not attachment order. One file defines functions; the other contains calls.
+31. Avoid `<...>` in model output; it can be stripped as HTML. Treat `[...]` as risky too.
+32. JSON determinism is semantic, not byte-level. Whitespace varies between runs.
 
 ## Files
 
@@ -129,6 +132,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [13-TEST-PROMPT-TRACEABILITY.md](13-TEST-PROMPT-TRACEABILITY.md)  
   Test-to-prompt map with run counts, observed results and unverified items.
+
+- [14-TWO-ATTACHMENT-HANDOFF.md](14-TWO-ATTACHMENT-HANDOFF.md)  
+  Function-library and call-script attachments: what worked, bracket stripping and JSON whitespace.
 
 ## Evidence classes
 
