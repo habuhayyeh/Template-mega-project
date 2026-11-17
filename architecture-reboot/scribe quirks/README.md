@@ -91,6 +91,7 @@ The engine performs best when each layer receives a **decision-complete input fo
 30. With two attachments, identify each by content marker, not attachment order. One file defines functions; the other contains calls.
 31. Avoid `<...>` in model output; it can be stripped as HTML. Treat `[...]` as risky too.
 32. JSON determinism is semantic, not byte-level. Whitespace varies between runs.
+33. Diagnose a spec defect before a model failure: exact shape, gold, field count, fallback rule, sentinel, order and run count.
 
 ## Files
 
@@ -135,6 +136,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [14-TWO-ATTACHMENT-HANDOFF.md](14-TWO-ATTACHMENT-HANDOFF.md)  
   Function-library and call-script attachments: what worked, bracket stripping and JSON whitespace.
+
+- [15-FAILURE-MODES.md](15-FAILURE-MODES.md)  
+  Eight recurring failure modes: how they happened, why, diagnosis and prevention.
 
 ## Evidence classes
 

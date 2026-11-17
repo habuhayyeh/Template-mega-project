@@ -188,6 +188,8 @@ Use this before running a new Doximity prompt/module.
 - [ ] Failed runs and invalid tests are recorded, not only passes.
 - [ ] Each test entry links the exact prompt file and states the run count.
 - [ ] Missing prompt version or run count is marked unverified.
+- [ ] Failure is classified as a spec defect before a model defect.
+- [ ] Exact shape, gold, field count, order and fallback rule are defined before the run.
 - [ ] Stable wrong output is investigated as a contract/payload bug.
 - [ ] Unstable semantic output is investigated as an upstream decision gap.
 
@@ -230,5 +232,6 @@ When an experiment fails:
 # M. One-line rule
 
 > Make every Doximity stage decision-complete for its owned function and decision-incomplete for every other function.
+
 
 
