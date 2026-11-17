@@ -6,7 +6,7 @@ Exact match is required. One drift fails the test.
 
 ---
 
-# Test 5 â€” multi-section routing
+# Test 5 — multi-section routing
 
 ## Prompt
 
@@ -17,23 +17,23 @@ Input JSON:
 
 {
   "problems": [
-    {"id": "P001", "role": "PRIMARY", "label": "seizure-like events"},
-    {"id": "P002", "role": "BACKGROUND", "label": "baseline staring spells"}
+    {"id": "P001", "role": "PRIMARY", "label": "seizure-like events", "order": 1},
+    {"id": "P002", "role": "BACKGROUND", "label": "baseline staring spells", "order": 2}
   ],
   "units": [
-    {"id": "CU001", "type": "current_event", "label": "Thursday cluster", "problem": "P001"},
-    {"id": "CU002", "type": "baseline_comparator", "label": "longstanding staring", "problem": "P002"},
-    {"id": "CU003", "type": "medication_context", "label": "levetiracetam", "problem": "P001"},
-    {"id": "CU004", "type": "exam", "label": "no focal deficit", "problem": "nonproblem"},
-    {"id": "CU005", "type": "workup", "label": "EEG pending", "problem": "P001"},
-    {"id": "CU006", "type": "reasoning", "label": "PNES considered", "problem": "P001"}
+    {"id": "CU001", "type": "current_event", "label": "Thursday cluster", "problem": "P001", "order": 3},
+    {"id": "CU002", "type": "baseline_comparator", "label": "longstanding staring", "problem": "P002", "order": 4},
+    {"id": "CU003", "type": "medication_context", "label": "levetiracetam", "problem": "P001", "order": 5},
+    {"id": "CU004", "type": "exam", "label": "no focal deficit", "problem": "nonproblem", "order": 6},
+    {"id": "CU005", "type": "workup", "label": "EEG pending", "problem": "P001", "order": 7},
+    {"id": "CU006", "type": "reasoning", "label": "PNES considered", "problem": "P001", "order": 8}
   ],
   "actions": [
-    {"id": "AV001", "target": "EEG and MRI", "owner": "P001", "unresolved": false},
-    {"id": "AV002", "target": "driving counseling", "owner": "nonproblem", "unresolved": false}
+    {"id": "AV001", "target": "EEG and MRI", "owner": "P001", "unresolved": false, "order": 9},
+    {"id": "AV002", "target": "driving counseling", "owner": "nonproblem", "unresolved": false, "order": 10}
   ],
   "unresolved": [
-    {"id": "X001", "topic": "CT result"}
+    {"id": "X001", "topic": "CT result", "order": 11}
   ]
 }
 
@@ -48,7 +48,8 @@ Fixed routing:
 - actions -> Plan
 - unresolved -> Plan
 
-Preserve input order within each section.
+Sort each section by numeric `order` ascending. Do not use array position across different source arrays as
+the order.
 
 Return only:
 
@@ -63,7 +64,7 @@ Return only:
 
 ## Pass
 
-Three identical outputs. Exact section keys and order.
+Three identical outputs. Exact section keys and order, sorted by `order`.
 
 ---
 
