@@ -1,4 +1,4 @@
-# D-S → D-T handoff test V2 — strict contract
+﻿# D-S â†’ D-T handoff test V2 â€” strict contract
 
 This fixes the previous test.
 
@@ -29,7 +29,7 @@ FACTS:
   ]
 }
 
-STAGE A — ROUTE AND CARRY
+STAGE A â€” ROUTE AND CARRY
 
 Create one JSON object with a single key `items`, an array in ascending `order`.
 
@@ -59,7 +59,7 @@ Output exactly one line:
 
 STAGE_A=<items JSON>
 
-STAGE B — TRANSFORM
+STAGE B â€” TRANSFORM
 
 Use only STAGE_A. Do not read FACTS. If a value is missing, output `HANDOFF_ERROR`; do not fill it from memory.
 
@@ -91,10 +91,10 @@ END HANDOFF TEST
 # Expected Stage B
 
 ```text
+Assessment: new recurrent seizure-like events [A].
 HPI: Wednesday evening, Wednesday collapse [A].
 HPI: Baseline: longstanding staring [A].
 Exam: no focal deficit [A].
-Assessment: new recurrent seizure-like events [A].
 Plan: EEG and MRI [A].
 Plan: Unresolved: CT result [A].
 ```
@@ -104,3 +104,4 @@ Run three times.
 - Stage A shape differs: fail.
 - Any Stage B line lacks `[A]`: Stage B reread FACTS; fail.
 - Both exact all three: handoff passes.
+
