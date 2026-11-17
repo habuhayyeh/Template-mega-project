@@ -1,0 +1,12 @@
+{
+  "coverage": {
+    "current_event_records": ["T004", "T005", "T006", "T007", "T009", "T010", "T011", "T012", "T013", "T014", "P1.001"],
+    "background_records": ["T002", "T003", "T016", "P1.002"],
+    "medication_records": ["T015", "T022", "T025", "P1.005"],
+    "exam_records": ["P1.003"],
+    "workup_records": ["T008", "T020", "T021", "P1.004", "P1.006"],
+    "reasoning_records": ["T017", "T018", "T019"],
+    "action_records": ["T001", "T008", "T015", "T020", "T022", "T023", "T024"],
+    "baseline_comparator_records": ["T016", "T017"]
+  }
+}
