@@ -80,6 +80,11 @@ The engine performs best when each layer receives a **decision-complete input fo
 19. JSON is canonical for structured handoffs. CSV is acceptable for the flat coverage census or review export, not as the synthesis source of truth. YAML is not recommended for nested handoffs.
 20. Doximity Ask does not execute code. Put all executable logic outside the model.
 21. Clinical reference checks run after synthesis, not during coverage. They are not packet evidence and cannot add patient facts.
+22. Free semantic synthesis is not deterministic. Test fixed invariants or a frozen JSON, not exact labels.
+23. D-S/D-T are deterministic only on a frozen facts JSON with explicit `order` and fixed templates.
+24. A baseline/prior pattern is never a separate problem; it is a `baseline_comparator` unit under the problem it informs.
+25. `contains` and `separate_from` are problem handles only and stay empty when no separate problem exists.
+26. Attach the Scribe packet for attachment tests; Doximity can read it.
 
 ## Files
 
@@ -109,6 +114,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [09-CLINICAL-REFERENCE-CHECK.md](09-CLINICAL-REFERENCE-CHECK.md)  
   Post-synthesis drug monograph and literature checks, with example prompts.
+
+- [10-SYNTHESIS-AND-DSDT.md](10-SYNTHESIS-AND-DSDT.md)  
+  Why free synthesis drifts; constrained invariants; D-S/D-T determinism; attachment results.
 
 ## Evidence classes
 

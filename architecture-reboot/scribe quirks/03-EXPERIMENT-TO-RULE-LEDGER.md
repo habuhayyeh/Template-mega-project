@@ -237,6 +237,21 @@ Use JSON as the handoff. Keep all executable logic outside Ask.
 
 ---
 
+## RULE 11 — Free synthesis needs invariants; D-S/D-T needs frozen JSON
+
+Free synthesis with the same packet produced 12/14/12 units, 5/6/7 actions and 0/5/3 unresolved entries. It
+also kept creating a separate baseline problem.
+
+A constrained invariant prompt produced 3/3 identical structure: one problem, 13 units, 7 actions, 2
+unresolved, order 1–23.
+
+D-S/D-T produced 3/3 identical output on fixed JSON with explicit `order` and templates, including a 19-line
+mega test. Attachment ingestion worked.
+
+Test free synthesis by invariants. Run D-S/D-T only on a frozen facts JSON.
+
+---
+
 # I. Invalid tests / evidence limitations
 
 Do not derive new engine rules from:

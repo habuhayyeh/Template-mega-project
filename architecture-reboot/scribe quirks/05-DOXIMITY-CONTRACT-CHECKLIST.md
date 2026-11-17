@@ -83,6 +83,18 @@ Use this before running a new Doximity prompt/module.
 
 ---
 
+# D4. Synthesis and determinism
+
+- [ ] Free synthesis is tested with invariants or a frozen JSON, not exact labels.
+- [ ] Exactly one problem where baseline is not a separate problem.
+- [ ] `contains` and `separate_from` are problem handles only, or empty.
+- [ ] Unit map, action set and unresolved set are fixed before calling the test valid.
+- [ ] Every routed item has an explicit numeric `order`.
+- [ ] D-S/D-T run only on a frozen facts JSON.
+- [ ] Packet is attached or pasted in the same message.
+
+---
+
 # E. Coverage
 
 - [ ] The stage has a defined coverage responsibility.
