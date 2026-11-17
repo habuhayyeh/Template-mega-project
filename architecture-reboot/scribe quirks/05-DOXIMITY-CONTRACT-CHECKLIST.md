@@ -1,4 +1,4 @@
-# Doximity Contract Checklist
+﻿# Doximity Contract Checklist
 
 Use this before running a new Doximity prompt/module.
 
@@ -174,6 +174,7 @@ Use this before running a new Doximity prompt/module.
 - [ ] A translated or inherited control is not treated as independent.
 - [ ] Blocking failures are not averaged away.
 - [ ] Do not manually union multiple runs and call that model capability.
+- [ ] Failed runs and invalid tests are recorded, not only passes.
 - [ ] Stable wrong output is investigated as a contract/payload bug.
 - [ ] Unstable semantic output is investigated as an upstream decision gap.
 
@@ -216,3 +217,4 @@ When an experiment fails:
 # M. One-line rule
 
 > Make every Doximity stage decision-complete for its owned function and decision-incomplete for every other function.
+

@@ -86,6 +86,7 @@ The engine performs best when each layer receives a **decision-complete input fo
 25. `contains` and `separate_from` are problem handles only and stay empty when no separate problem exists.
 26. Attach the Scribe packet for attachment tests; Doximity can read it.
 27. In-prompt handoff requires a fixed Stage A schema, full payload, a sentinel, and a Stage B ban on rereading source facts.
+28. Keep a negative-results log. A handbook of passes alone overstates reliability.
 
 ## Files
 
@@ -121,6 +122,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [11-IN-PROMPT-HANDOFF.md](11-IN-PROMPT-HANDOFF.md)  
   Strict Stage A -> Stage B handoff with sentinel and no source fallback.
+
+- [12-NEGATIVE-RESULTS.md](12-NEGATIVE-RESULTS.md)  
+  Failed runs, invalid tests and test-design bugs kept alongside the passes.
 
 ## Evidence classes
 
