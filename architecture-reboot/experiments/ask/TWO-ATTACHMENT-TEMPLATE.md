@@ -19,7 +19,8 @@ READ GATE
    - `FILE A — FUNCTION LIBRARY`
    - `FILE B — CALL SCRIPT`
 4. Do not execute the illustration lines in File A.
-5. Do not call any function that File B does not call.
+5. Do not call F_UNUSED or F_UNUSED2.
+6. Execute exactly C1 through C12, once each, in order.
 
 If either attachment is missing or unreadable, return only:
 
@@ -27,28 +28,140 @@ If either attachment is missing or unreadable, return only:
 
 EXECUTION
 
-Simulate the File B calls in order. Do not use code. Do not invent functions.
+Simulate the File B calls. Do not use code. Do not invent functions.
 
-Return exactly one JSON object:
+Return exactly one JSON object with this shape:
 
 {
   "read": {
     "file_a": "FUNCTION LIBRARY",
     "file_b": "CALL SCRIPT",
-    "functions": 5,
-    "calls": 5
+    "functions": 12,
+    "calls": 12
   },
   "trace": [
-    {"call": "C1", "value": 0, "history": []},
-    {"call": "C2", "value": 0, "history": []},
-    {"call": "C3", "value": 0, "history": []},
-    {"call": "C4", "value": 0, "history": []},
-    {"call": "C5", "value": 0, "history": []}
+    {
+      "call": "C1",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C2",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C3",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C4",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C5",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C6",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C7",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C8",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C9",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C10",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C11",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C12",
+      "value": 0,
+      "history": [],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    }
   ],
-  "wrapped": "<done>"
+  "final": {
+    "value": 0,
+    "history": [],
+    "wrapped": null,
+    "joined": null,
+    "length": null,
+    "pair": null
+  }
 }
 
-No prose. No code fence. No extra calls. No `F_UNUSED`.
+Replace the values. Keep exactly 12 trace entries and one final object.
+
+No prose. No code fence. No extra calls.
 
 END TWO-ATTACHMENT TEST
 
@@ -61,17 +174,218 @@ END TWO-ATTACHMENT TEST
   "read": {
     "file_a": "FUNCTION LIBRARY",
     "file_b": "CALL SCRIPT",
-    "functions": 5,
-    "calls": 5
+    "functions": 12,
+    "calls": 12
   },
   "trace": [
-    {"call": "C1", "value": 2, "history": ["A1"]},
-    {"call": "C2", "value": 4, "history": ["A1", "B1"]},
-    {"call": "C3", "value": 5, "history": ["A1", "B1", "A2"]},
-    {"call": "C4", "value": 10, "history": ["A1", "B1", "A2", "B2"]},
-    {"call": "C5", "value": 10, "history": ["A1", "B1", "A2", "B2"]}
+    {
+      "call": "C1",
+      "value": 2,
+      "history": [
+        "A1"
+      ],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C2",
+      "value": 4,
+      "history": [
+        "A1",
+        "B1"
+      ],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C3",
+      "value": 5,
+      "history": [
+        "A1",
+        "B1",
+        "A2"
+      ],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C4",
+      "value": 10,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2"
+      ],
+      "wrapped": null,
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C5",
+      "value": 10,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2"
+      ],
+      "wrapped": "<done>",
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C6",
+      "value": 7,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2",
+        "C1"
+      ],
+      "wrapped": "<done>",
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C7",
+      "value": 8,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "wrapped": "<done>",
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C8",
+      "value": 10,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2",
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "wrapped": "<done>",
+      "joined": null,
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C9",
+      "value": 10,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2",
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "wrapped": "<done>",
+      "joined": "A1|B1|A2|B2|C1|C2|C3",
+      "length": null,
+      "pair": null
+    },
+    {
+      "call": "C10",
+      "value": 10,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2",
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "wrapped": "<done>",
+      "joined": "A1|B1|A2|B2|C1|C2|C3",
+      "length": 7,
+      "pair": null
+    },
+    {
+      "call": "C11",
+      "value": 10,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2",
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "wrapped": "<done>",
+      "joined": "A1|B1|A2|B2|C1|C2|C3",
+      "length": 7,
+      "pair": [
+        7,
+        10
+      ]
+    },
+    {
+      "call": "C12",
+      "value": 11,
+      "history": [
+        "A1",
+        "B1",
+        "A2",
+        "B2",
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "wrapped": "<done>",
+      "joined": "A1|B1|A2|B2|C1|C2|C3",
+      "length": 7,
+      "pair": [
+        7,
+        10
+      ]
+    }
   ],
-  "wrapped": "<done>"
+  "final": {
+    "value": 11,
+    "history": [
+      "A1",
+      "B1",
+      "A2",
+      "B2",
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "wrapped": "<done>",
+    "joined": "A1|B1|A2|B2|C1|C2|C3",
+    "length": 7,
+    "pair": [
+      7,
+      10
+    ]
+  }
 }
 ```
 

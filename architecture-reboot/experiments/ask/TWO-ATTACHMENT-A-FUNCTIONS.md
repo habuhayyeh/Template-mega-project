@@ -14,12 +14,28 @@ F_APPEND(history, token) => history with token appended at the end
 
 F_WRAP(text) => "<" + text + ">"
 
+F_SUB3(x) => x - 3
+
+F_MAX(x, y) => the larger of x and y
+
+F_IF_POS(x, a, b) => a if x is greater than 0, otherwise b
+
+F_JOIN(history, separator) => the history strings joined by separator
+
+F_LEN(list) => the number of items in the list
+
+F_PAIR(x, y) => [y, x]
+
 F_UNUSED(x) => x - 1
 
-## Illustration only
+F_UNUSED2(x) => x * 100
 
-F_ADD1(10) => 11
+## Illustrations only
 
-F_DOUBLE(3) => 6
+F_MAX(2, 3) => 3
+
+F_JOIN(["x", "y"], "-") => "x-y"
+
+F_SUB3(10) => 7
 
 END FUNCTION LIBRARY
