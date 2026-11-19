@@ -23,3 +23,8 @@ Review accepted the O54 outcome and both must-changes. The ETIOLOGY bullet and t
 ## 2026-11-14 — Doximity limitations recorded
 
 `DOXIMITY.md` added: what the runtime is, the five observed limitations with their evidence paths, and the design consequences. No pipeline change. Written because both agents work locally and neither can run the runtime that decides acceptance.
+
+## 2026-11-19 — D-018 V3 targeted testing plan
+
+User-approved controlled comparison of source-first, meaning-first, and assessment-guided extraction recorded in `reviews/V3_TARGETED_TESTING_PLAN.md`.
+Branch navigation and status updated; existing runtime contracts and acceptance artifacts unchanged. No new Doximity runs or method-selection results.
