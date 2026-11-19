@@ -2,6 +2,8 @@
 
 Doximity neurology note-generation system: source-faithful body, concise neurologic A/P, one shared semantic substrate.
 
+V3 test workspace: [Packets, prompts, references, and runs](tests/v3/README.md).
+
 V3 development direction: [Approved targeted testing plan](reviews/V3_TARGETED_TESTING_PLAN.md) (D-018). Compare extraction approaches under controlled tests before selecting or refining a production method.
 
 Read in this order:

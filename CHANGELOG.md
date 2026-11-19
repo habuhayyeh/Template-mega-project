@@ -28,3 +28,8 @@ Review accepted the O54 outcome and both must-changes. The ETIOLOGY bullet and t
 
 User-approved controlled comparison of source-first, meaning-first, and assessment-guided extraction recorded in `reviews/V3_TARGETED_TESTING_PLAN.md`.
 Branch navigation and status updated; existing runtime contracts and acceptance artifacts unchanged. No new Doximity runs or method-selection results.
+
+## 2026-11-19 — D-019 V3 test workspace
+
+Created `tests/v3/` for packets, prompts, shared requirements, reference answers, raw runs, and failure records.
+Recorded the agreed 24-output initial screen; all slots are planned and materials remain to be authored. Linked the workspace from project/test navigation.

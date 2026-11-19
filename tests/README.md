@@ -1,6 +1,8 @@
 # Tests
 
-Two different things live here.
+Test areas:
+
+[v3/](v3/README.md) — targeted extraction experiments: synthetic packets, method prompts, shared requirements, reference answers, and raw results. The workspace is scaffolded; test content and runs are pending.
 
 `acceptance/seizure_case/` — the reproducible input for the acceptance case: the section-routing payload and the A/P handoff input.
 

@@ -3,14 +3,15 @@
 Current state for `third-version`; historical results remain in git and the run artifacts.
 
 ```text
-Direction       D-018: approved V3 targeted testing plan
+Direction       D-018/D-019: approved targeted testing strategy and initial pilot
 Plan            reviews/V3_TARGETED_TESTING_PLAN.md
+Workspace       tests/v3/README.md; scaffold created
+Pilot           4 packets × 3 methods × 2 repetitions; 24 slots planned
+Next            author baseline packet and semantic reference for clinician review
 Target          one Doximity prompt: extraction + reconciliation + problem architecture
-Review          fixed six-section worksheet; exact approved content precedes rendering
-Next            synthesize comparable A/B/C prompts and targeted synthetic test packets
-Candidates      source-first / meaning-first / assessment-guided; none selected
-Execution       no new prompts, fixtures, or Doximity runs created by plan adoption
-Legacy          P003 implemented; Doximity grouping unstable; P006 v3 awaiting approval
+Review          fixed six-section worksheet; approved content precedes rendering
+Materials       packets, prompts, shared instruction text, and keys not yet authored
+Runs            none performed; no method selected
+Legacy          P003 implemented; grouping unstable; P006 v3 awaiting approval
 Production 06   unresolved; historical Doximity acceptance FAILED
-Contracts       existing pipeline, substrate, and oracles unchanged
 ```
