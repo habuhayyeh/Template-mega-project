@@ -1,0 +1,294 @@
+NEUROLOGY_REVIEW_WORKSHEET_V1_CANDIDATE
+
+PURPOSE
+
+Build a physician-review worksheet for a neurologic assessment and plan from:
+- A source-organized packet.
+- My current assessment/examination/plan, when supplied.
+- Original source documents, when available.
+
+The worksheet must expose the proposed problems, selected evidence, supplied interpretation, and management for my review.
+
+These instructions are self-contained. Do not rely on an external skill or prior conversation.
+
+This is a proposed worksheet—not a completed note, clinical verification, or approved management plan.
+
+1. USE THE SOURCES WITHOUT REWRITING THEIR AUTHORITY
+
+Read the complete packet before organizing problems.
+
+Use passage IDs to find and cite supporting content.
+Navigation headings are organizational aids—not evidence that a diagnosis, causal relationship, or action state is established.
+
+The source packet is not a replacement for the original documents.
+If an original source is available, consult it when a passage is incomplete, ambiguous, or appears to omit material needed for the worksheet.
+
+If the original source is unavailable, identify the specific limitation when it affects an assertion. Do not imply that unavailable material was reviewed.
+
+Do not repeat Step 1 or generate another extraction ledger.
+
+Every clinical assertion must be supported by supplied material.
+A citation must support the actual wording, not merely discuss the same topic.
+
+2. START WITH MY FORMULATION
+
+Use my separately supplied current assessment as the starting point for problem organization.
+
+My clearly attributable current assessment statements in the transcript may also establish my formulation.
+
+Distinguish:
+- Diagnosis adopted or favored.
+- Diagnosis discussed as an option or explanation.
+- Patient-reported diagnosis.
+- Outside-service assessment.
+- Historical neurologic diagnosis.
+
+Do not assume a discussed diagnosis is adopted.
+
+If my current formulation is absent or ambiguous, use a supported presenting syndrome rather than inventing a disease diagnosis. Flag a specific adoption decision only when needed.
+
+My formulation does not erase conflicting objective findings or relevant unexplained symptoms.
+
+Separately check the remaining sources for meaningful neurologic problems, material counterevidence, and management that my formulation did not address.
+
+3. DECIDE WHAT DESERVES A PROBLEM
+
+Create a problem for:
+- A current adopted or favored neurologic disease.
+- A presenting neurologic syndrome substantively under evaluation when no disease is favored.
+- A meaningful established longitudinal neurologic disease or historical event.
+- An established distinct downstream neurologic disorder.
+
+Do not create a problem merely because a topic is mentioned, a test is abnormal, a medication is listed, or counseling occurs.
+
+Stressors, exposures, non-neurologic conditions, and isolated findings may belong within neurologic evidence, interpretation, or management without receiving separate neurologic blocks.
+
+When a disease is adopted or favored, organize around it and preserve certainty.
+When no disease is favored, organize around the presenting syndrome.
+
+Keep less-favored alternatives within the same problem.
+Do not create separate speculative disease blocks.
+
+Keep an established manifestation within its parent disease.
+Separate treatment alone does not establish independent problem identity.
+Keep an established distinct downstream neurologic disorder separate.
+
+Do not force unexplained symptoms into the main diagnosis.
+Placing a finding within a problem does not establish that the disease caused it.
+When independence or relationship is materially uncertain, preserve the item and state the decision needed.
+
+Create a separate multifactorial presenting-syndrome block only when the supplied formulation identifies multiple likely additive contributors. Retain applicable independent primary neurologic disease blocks. Possible contributors alone are insufficient.
+
+4. ASSIGN ROLE AFTER PROBLEM ELIGIBILITY
+
+Primary:
+A problem central to the presentation, substantively evaluated or managed, actively changing, or itself an active likely contributor.
+
+Background:
+Meaningful longitudinal neurologic disease/history without that substantive current activity.
+
+Routine continuation, stable documentation, routine follow-up, or surveillance alone does not make a problem Primary.
+
+An old neurologic event does not become active solely because its established consequence contributes to the current presentation.
+
+If role cannot be determined without a material physician decision, write “Needs decision” and identify why. Do not force a classification.
+
+5. BUILD THE SIX REVIEW SECTIONS
+
+PROBLEM HEADING AND ROLE
+
+Write a concise proposed final problem heading beginning with //.
+
+Preserve supported certainty, disease identity, and eligible qualifiers such as adopted etiology, subtype, localization, course, or event phenotype.
+
+Do not fill the heading with tests, medications, management decisions, or the entire symptom history.
+
+Use “Hx of” for an event/process that is no longer active—not merely for a controlled chronic disease.
+
+Include supported status in the heading only when useful.
+
+STATUS
+
+Describe current condition, control, trajectory, or established ongoing consequences.
+
+Do not infer stability from silence.
+Do not carry historical control or examination forward as current.
+Treatment, pending tests, and recommendations are not clinical status.
+
+This section makes status reviewable. It is not an instruction to duplicate the same wording later.
+
+EVIDENCE
+
+Select the minimum sufficient facts that:
+- Define the presentation.
+- Support the adopted formulation.
+- Address a meaningful alternative.
+- Establish severity, course, or consequence.
+- Make supplied reasoning understandable.
+- Establish a state affecting assessment and management.
+
+Retain material counterevidence and meaningful earlier observations.
+Do not include every source detail or every abnormal result.
+
+Group compatible facts by assessment function.
+Preserve attribution, dates, laterality, and qualifications when they affect meaning.
+
+Selection does not authorize new reasoning.
+Do not add “supports,” “excludes,” “localizes to,” or “due to” unless that relationship is supplied.
+
+INTERPRETATION
+
+Preserve my supplied synthesis, differential, causal formulation, or uncertainty.
+
+Keep outside-service reasoning attributed unless adopted.
+Use at most one concise, nonredundant interpretation bullet per problem.
+
+Omit when the heading and evidence already capture the supplied reasoning.
+
+Do not generate diagnostic or causal reasoning from raw findings.
+
+A historical note, normal test, stressor, or treatment response does not independently authorize a broader conclusion.
+
+ACTIONS
+
+Write concise proposed final Plan wording for material current management.
+
+Preserve:
+- What was considered, indicated, recommended, planned, deferred, or judged unnecessary.
+- What was ordered, scheduled, started, performed, or completed.
+- Actual owner, timing, setting, conditions, and meaningful patient response.
+- Important transitions and dependencies.
+
+Do not convert recommendations into orders, preferences into refusals, instructions into completed care, or anticipated approval into clearance.
+
+A completed investigation does not establish that its result is available.
+Home medication use does not establish a current continuation decision.
+Old recommendations do not automatically remain active.
+
+Retain meaningful coordination, negative decisions, completed counseling, and conditional pathways when relevant.
+
+Do not add standard tests, treatments, counseling, referrals, or follow-up merely because they would usually accompany the diagnosis.
+
+Give shared actions one full primary holder. Use concise cross-references elsewhere only when useful.
+
+Default order:
+Level of care; investigations; treatment; precautions/therapy/counseling/coordination; follow-up.
+
+Preserve explicit dependencies even when they require another order.
+
+NEEDS REVIEW
+
+List specific unresolved issues that materially affect the heading, certainty, role, status, interpretation, action wording, or safety.
+
+State the exact clarification or decision needed.
+
+Before calling findings contradictory, consider differences in time, assertion type, source, and action state.
+Earlier reported weakness and a later normal examination are not automatically incompatible.
+
+Do not create review questions for every missing detail or incidental abnormality.
+
+If supplied content is materially unsafe or misleading, preserve the documented history but flag the affected proposed wording for physician review. Do not turn it into an endorsed directive or silently invent corrected care.
+
+6. SHOW MEANINGFUL UNASSIGNED MATERIAL
+
+Use one encounter-level UNASSIGNED / NEEDS REVIEW section for:
+- Relevant unexplained symptoms whose problem identity remains uncertain.
+- Material findings or outside assessments without a confident home.
+- Meaningful management whose intended holder is unclear.
+
+Provide the source and specific placement/adoption decision needed.
+
+Do not use this section as a dump of all omitted source content.
+Material appropriately retained only in history, examination, or workup does not require a review flag simply because it is absent from the A/P.
+
+7. OUTPUT FORMAT
+
+Begin:
+NEUROLOGY_REVIEW_WORKSHEET_V1_CANDIDATE
+
+Use this pattern for each problem:
+
+PROBLEM P1 — //Proposed final heading.
+Role: Primary / Background / Needs decision
+Heading source: [Supporting passage references]
+
+STATUS
+Supported status wording. [Source]
+
+EVIDENCE
+- Selected proposed evidence wording. [Source]
+- Material additional evidence or counterevidence. [Source]
+
+INTERPRETATION
+- Supplied, nonredundant interpretation. [Source]
+
+ACTIONS
+- Proposed final action wording. [Source]
+  Relevant details: Include only supplied modifiers not already clear in the wording.
+
+NEEDS REVIEW
+- Specific issue; affected wording; decision needed. [Sources]
+
+REVIEW STATUS
+Unreviewed
+
+Repeat with P2, P3, etc.
+
+Then, only when needed:
+
+UNASSIGNED / NEEDS REVIEW
+- Relevant item; specific unresolved decision. [Source]
+
+FORMAT RULES
+
+Omit unsupported or empty Status, Evidence, Interpretation, and Actions sections.
+Omit Needs review when there is no material issue.
+Do not write “None stated” merely to fill a section.
+
+Keep the same worksheet structure for background problems, but make them compact.
+Do not generate extra content to make them resemble Primary problems.
+
+Use compact source references such as [S1-P008] or [S2-P010; pre-chart].
+For original-source content absent from the packet, cite the original document and available locator. Do not invent a packet ID.
+
+Keep references separate from proposed clinical wording.
+Do not reproduce long source passages unless necessary to show a specific ambiguity.
+
+Use impersonal, concise clinical wording.
+Do not add a separate problem map, extraction ledger, confidence scores, approval claims, or a final A/P.
+
+Order problems:
+- Supported multifactorial presenting syndrome, when applicable.
+- Central Primary neurologic problems.
+- Other independent Primary neurologic problems.
+- Background neurologic problems.
+
+All problems begin Unreviewed.
+Only my subsequent review can approve their wording and organization.
+
+FINAL CHECK
+
+Confirm:
+- Problems follow supplied clinical formulations, not merely mentioned topics.
+- No outside or historical formulation became current Neurology adoption without support.
+- No unexplained symptom was silently made a manifestation.
+- Material counterevidence and actions remain visible.
+- Dates, source boundaries, uncertainty, and action states survived compression.
+- Shared actions are not fully duplicated.
+- Review questions identify actual decisions rather than requesting automatic plan completion.
+
+STOP
+
+Return only the proposed review worksheet.
+Do not render or freeze the final A/P.
+
+INPUTS FOLLOW
+
+SOURCE-ORGANIZED PACKET:
+Paste or attach.
+
+MY CURRENT ASSESSMENT / EXAM / PLAN:
+Paste or attach if not already included in the packet.
+
+ORIGINAL SOURCES:
+Attach when available, with their labels and dates.

@@ -93,6 +93,10 @@ The engine performs best when each layer receives a **decision-complete input fo
 32. JSON determinism is semantic, not byte-level. Whitespace varies between runs.
 33. Diagnose a spec defect before a model failure: exact shape, gold, field count, fallback rule, sentinel, order and run count.
 
+## Current neurology worksheet development baseline
+
+[16-SOURCE-PACKET-AND-REVIEW-WORKSHEET.md](16-SOURCE-PACKET-AND-REVIEW-WORKSHEET.md) records the staged physician-review workflow, Step 1 V2 development freeze, and Step 2 V1 candidate. These are project decisions, not new reproduced engine findings. A frozen prompt/interface does not certify each generated packet. Human-readable worksheets are not machine handoff contracts. The exact Step 1 prompt is not archived in this update; the full Step 2 candidate is archived with its unvalidated status.
+
 ## Files
 
 - [01-PROMPT-WRITING-STYLE.md](01-PROMPT-WRITING-STYLE.md)  
@@ -139,6 +143,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [15-FAILURE-MODES.md](15-FAILURE-MODES.md)  
   Eight recurring failure modes: how they happened, why, diagnosis and prevention.
+
+- [16-SOURCE-PACKET-AND-REVIEW-WORKSHEET.md](16-SOURCE-PACKET-AND-REVIEW-WORKSHEET.md)  
+  Source-preserving packets, six-section physician review, freeze boundaries, source-access rules, and candidate prompt archive; no new determinism claim.
 
 ## Evidence classes
 

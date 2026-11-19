@@ -40,3 +40,14 @@ not in the repo. â€œOne runâ€ is not determinism.
 Every future test entry must link the exact prompt file and state the run count. If either is missing, mark
 it unverified.
 
+
+## November 18, 2026: source-packet / worksheet development record
+
+These entries preserve project status; they do not extend the empirical pass table above.
+
+| ID | Component | Exact prompt artifact | Runs established in this update | Status |
+|---|---|---|---|---|
+| N01 | Step 1 V2 source-preserving packet | Not archived: exact prompt was not recoverable during this update; identifier NEUROLOGY_SOURCE_PACKET_V2_CANDIDATE | Exact per-version total not established | Development baseline frozen by agreement; observed output structure only; fidelity, completeness, and reproducibility not certified |
+| N02 | Step 2 V1 physician-review worksheet | [Full candidate prompt](prompts/NEUROLOGY_REVIEW_WORKSHEET_V1_CANDIDATE.txt) | No execution of this exact candidate established | CANDIDATE / UNVERIFIED; not approved, frozen, or deterministically validated |
+
+See [16-SOURCE-PACKET-AND-REVIEW-WORKSHEET.md](16-SOURCE-PACKET-AND-REVIEW-WORKSHEET.md) for the agreed boundaries and open items. Raw patient material is intentionally excluded.
