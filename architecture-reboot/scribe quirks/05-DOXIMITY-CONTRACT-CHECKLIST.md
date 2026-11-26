@@ -53,6 +53,8 @@ Use this before running a new Doximity prompt/module.
 
 # D1. Serialization
 
+The JSON-only items in this section apply to machine-only handoffs. The separate V3 combined worksheet/JSON package has an explicit outer framing contract; see [17-V3-SCRIBE-TEMPLATE-LESSONS.md](17-V3-SCRIBE-TEMPLATE-LESSONS.md). Do not apply the no-Markdown rule to its clinician editing surface. This scope note does not change the earlier Ask test contracts.
+
 - [ ] Model-authored handoff is one JSON object.
 - [ ] No prose, Markdown, or code fence around the JSON.
 - [ ] No custom `@@` output records.
@@ -122,6 +124,8 @@ Use this before running a new Doximity prompt/module.
 - [ ] The stage has a defined coverage responsibility.
 - [ ] Material body evidence has a stable home.
 - [ ] Material actions have a stable home.
+- [ ] Where worksheet and supporting reserve are generated together, each has its own inclusion threshold; useful later-note history/results survive worksheet compression.
+- [ ] Important findings/history appear in usable record content, not only in source labels or locators.
 - [ ] Compound records are split only when downstream recoverability requires it.
 - [ ] Coverage enumeration is not silently mixed with clinical synthesis unless tested.
 - [ ] No "better run" is being selected after a paired run omitted material content.
@@ -133,6 +137,7 @@ Use this before running a new Doximity prompt/module.
 - [ ] Prefer stable record IDs over copied selectors during synthesis.
 - [ ] Every cited record exists.
 - [ ] Every cited record materially supports the associated output.
+- [ ] Support matches target, assertion type, reporter, time and qualifier; reported treatment benefit is not a current continuation instruction.
 - [ ] No output state comes from an uncited record.
 - [ ] If exact source text is needed, dereference mechanically rather than asking a reasoning stage to recopy it.
 
@@ -169,6 +174,8 @@ Use this before running a new Doximity prompt/module.
 # I. Validation
 
 - [ ] Mechanical checks are truly mechanical.
+- [ ] For a snapshot package, unchanged passage text and complete anchors are checked separately from semantic support and source retention.
+- [ ] Formatting tolerance is explicit and narrow; it does not silently normalize source text or revise historical results.
 - [ ] Semantic safety does not depend on same-context self-validation.
 - [ ] A visible PASS ledger is not treated as proof of semantic correctness.
 - [ ] Error taxonomy is small or has deterministic precedence.
@@ -180,12 +187,14 @@ Use this before running a new Doximity prompt/module.
 
 - [ ] Repeated-run axis uses fresh conversations when reproducibility matters.
 - [ ] Same packet/input is used across compared arms.
+- [ ] Bundled prompt changes are not presented as proof that any single helper, style or simplification caused improvement.
 - [ ] No prior outputs/oracle leak into the test session unless intentionally testing that condition.
 - [ ] A stale/incorrect prompt execution is rejected as invalid evidence.
 - [ ] A translated or inherited control is not treated as independent.
 - [ ] Blocking failures are not averaged away.
 - [ ] Do not manually union multiple runs and call that model capability.
 - [ ] Failed runs and invalid tests are recorded, not only passes.
+- [ ] Materiality is defined before judging outputs; harmless presentation variation alone does not restart prompt tuning.
 - [ ] Each test entry links the exact prompt file and states the run count.
 - [ ] Missing prompt version or run count is marked unverified.
 - [ ] Failure is classified as a spec defect before a model defect.

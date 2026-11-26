@@ -292,3 +292,18 @@ Do not derive new engine rules from:
 - manually unioned outputs from multiple runs.
 
 These can inform hypotheses, not capability claims.
+
+---
+
+# J. Later V3 Scribe packaging observations
+
+See [17-V3-SCRIBE-TEMPLATE-LESSONS.md](17-V3-SCRIBE-TEMPLATE-LESSONS.md) for exact prompt/review links, run counts, the documentation gap audit and evidence limits. This is a separate project's evidence; the historical architecture and earlier pass tables are unchanged.
+
+| Evidence | Observed behavior | Bounded lesson |
+|---|---|---|
+| D2.1, three submitted packages | Snapshot wording changed in one; substantive anchors were missing in two. | A snapshot must copy the original worksheet, not paraphrase it. Check passage coverage separately from reference existence. |
+| D2.2, three submitted packages | Matching snapshot wording and complete passage anchors after shared-passage construction was introduced; two files added one terminal LF. Important historical content and semantic links remained uneven. | Shared construction is a useful design discipline, not an isolated causal finding or proof of content fidelity. |
+| D2.3, three submitted packages plus fresh-context AI review | Mechanical structure passed; timing/availability meaning and claim-to-record associations still drifted. | Inspect qualifiers and actual supporting meaning across representations. A valid record ID and matching anchor map are insufficient. |
+| D2.4, three inline submissions manually reviewed | Final worksheet management was consistent; reserve history/results and a current-action record remained incomplete in different submissions. | A concise usable worksheet does not establish a complete reserve. Selecting one working example supports development, not repeatability. |
+
+Original audio and exact runtime metadata were not independently inspected. Earlier batches have archived raw files; D2.4 does not have a byte-identical raw archive or automated structure certification. Successive revisions bundled changes, so no individual instruction has an isolated measured effect. No new execution or full-note validation is claimed.
