@@ -99,6 +99,8 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 ## Files
 
+For the later V3 Scribe template-writing audit, see [17-V3-SCRIBE-TEMPLATE-LESSONS.md](17-V3-SCRIBE-TEMPLATE-LESSONS.md). It identifies what was already documented, adds direct worksheet-plus-supporting-package observations, and separates observed improvements from untested explanations. It does not import V3's architecture into this branch or supersede the historical contracts below.
+
 - [01-PROMPT-WRITING-STYLE.md](01-PROMPT-WRITING-STYLE.md)  
   Canonical prompt-writing style for Doximity.
 
@@ -146,6 +148,9 @@ The engine performs best when each layer receives a **decision-complete input fo
 
 - [16-SOURCE-PACKET-AND-REVIEW-WORKSHEET.md](16-SOURCE-PACKET-AND-REVIEW-WORKSHEET.md)  
   Source-preserving packets, six-section physician review, freeze boundaries, source-access rules, and candidate prompt archive; no new determinism claim.
+
+- [17-V3-SCRIBE-TEMPLATE-LESSONS.md](17-V3-SCRIBE-TEMPLATE-LESSONS.md)  
+  V3 gap audit and D2.1–D2.4 evidence: distinct inclusion thresholds, snapshot/anchor construction, semantic-link failures, management qualifiers, and proportionate stopping rules.
 
 ## Evidence classes
 
